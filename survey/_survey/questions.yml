@@ -1,0 +1,470 @@
+# ! JUST READ - don't change the content of this file
+# Question structure extracted from survey.html
+acquire_primary_vehicle:
+  type: select
+  label: How did you buy your primary vehicle?
+  options:
+    New: new
+    Used car from a dealer: used_dealer
+    Used car informally: used_informally
+    Received as a gift: received_gift
+    Via move-in with someone who has a car: move_in_access
+    Do not remember or do not know: do_not_remember
+vehicle_leased:
+  type: select
+  label: Is the vehicle leased?
+  options:
+    'Yes': 'yes'
+    'No': 'no'
+    Don't Know: dont_know
+vehicle_cost:
+  type: select
+  label: How much did you pay for this vehicle, to your best estimate?
+  options:
+    $4,999 or less: '4999'
+    $5,000 - $9,999: '9999'
+    $10,000 - $14,999: '14999'
+    $15,000 - $19,999: '19999'
+    $20,000 - $24,999: '24999'
+    $25,000 - $29,999: '29999'
+    $30,000 - $34,999: '34999'
+    $35,000 - $39,999: '39999'
+    $40,000 - $44,999: '44999'
+    $45,000 - $49,999: '49999'
+    $50,000 - $59,999: '59999'
+    $60,000 - $69,999: '69999'
+    $70,000 - $79,999: '79999'
+    $80,000 - $89,999: '89999'
+    $90,000 - $99,999: '99999'
+    100,000 or more: '100000'
+    Do not remember or do not know: do_not_remember
+monthly_payment:
+  type: select
+  label: What is your monthly payment?
+  options:
+    Paid all cash/no loan: '0'
+    $100 - $199: '199'
+    $200 - $299: '299'
+    $300 - $399: '399'
+    $400 - $499: '499'
+    $500 - $599: '599'
+    $600 - $699: '699'
+    $700 - $799: '799'
+    $800 - $899: '899'
+    $900 - $999: '999'
+    1,000 or more: '1000'
+    Do not remember or do not know: do_not_remember
+gas_mileage:
+  type: select
+  label: What gas mileage does your vehicle give?
+  options:
+    0 - 9.99 mpg: '0'
+    10 - 19.99 mpg: '10'
+    20 - 29.99 mpg: '20'
+    30 - 39.99 mpg: '30'
+    40 - 49.99 mpg: '40'
+    50 - 59.99 mpg: '50'
+    60 mpg and above: '60'
+    not applicable: not_applicable
+refueling:
+  type: select
+  label: How often do you refuel?
+  options:
+    once a month: '0'
+    once in two weeks: '1'
+    once a week: '2'
+    twice a week: '3'
+    three times a week: '4'
+    four times a week: '5'
+    over four times a week: '6'
+car_types:
+  type: mc_multiple
+  label: What type of cars do you have in your household? (Select all that apply)?
+  options:
+    Gasoline: Gasoline
+    Hybrid: hybrid
+    Plug-in Hybrid: plugin_hybrid
+    electric: electric
+    other: other
+parking:
+  type: mc_multiple
+  label: Where can you park at home? (Select all that apply)?
+  options:
+    Street Parking: Street_Parking
+    Driveway/ Carport: Driveway_Carport
+    Single-family garage: Single_family_garage
+    Shared parking garage: Shared_parking_garage
+    prefer not to say: prefer_not_to_say
+    other: other
+neighbor_ev_info:
+  type: select
+  label: Do any of your neighbors own/lease a plug-in hybrid or pure electric vehicle
+    (Select one)
+  options:
+    'Yes': 'yes'
+    'No': 'no'
+    I'm not sure: not_sure
+household_vehicle:
+  type: select
+  label: Your Household’s vehicle
+  options:
+    Less than once a month or never: never
+    About once a month: once_month
+    About once a week: once_week
+    2-3 times a week: 2_3_week
+    4-5 times a week: 4_5_week
+    Once a day or more: once_day
+Ride_friend:
+  type: select
+  label: Ride from a friend or family member or carpool
+  options:
+    Less than once a month or never: never
+    About once a month: once_month
+    About once a week: once_week
+    2-3 times a week: 2_3_week
+    4-5 times a week: 4_5_week
+    Once a day or more: once_day
+bicycle:
+  type: select
+  label: Walk, bicycle or your own motorcycle, scooter or moped
+  options:
+    Less than once a month or never: never
+    About once a month: once_month
+    About once a week: once_week
+    2-3 times a week: 2_3_week
+    4-5 times a week: 4_5_week
+    Once a day or more: once_day
+Taxi:
+  type: select
+  label: Public transit (bus, streetcar, subway, metro, rapid transit)
+  options:
+    Less than once a month or never: never
+    About once a month: once_month
+    About once a week: once_week
+    2-3 times a week: 2_3_week
+    4-5 times a week: 4_5_week
+    Once a day or more: once_day
+next_vehicle_purchase:
+  type: select
+  label: To your best estimate, when will you likely need to purchase another vehicle?
+  options:
+    Within 1 year: one_year
+    1-2 years into the future: two_years
+    3-5 years into the future: five_years
+    6-9 years into the future: nine_years
+    10+ years into the future: ten_years
+    I'm not sure: not_sure
+next_vehicle_type:
+  type: mc_multiple
+  label: For your next vehicle purchase, which type of vehicles would you consider
+    (select ALL that apply)?
+  options:
+    Small Sedan: Small_Sedan
+    Large Sedan: Large_Sedan
+    Sports Car: Sports_Car
+    Compact SUV: Compact_SUV
+    Large SUV: Large_SUV
+    Van: Van
+    Pick-up truck: Pick-up_truck
+    Do not know: Do_not_know
+which_market:
+  type: select
+  label: Which market will you consider buying this vehicle from?
+  options:
+    New: New
+    Used: Used
+    Both: Both
+    I'm not sure: I'm not sure
+plan_lease_buy:
+  type: select
+  label: Would you consider a Plug-in Hybrid Electric or an all-electric vehicle as
+    your next vehicle?
+  options:
+    Definitely Not: Definitely_Not
+    Probably Not: Probably_Not
+    Maybe/ Not sure: Maybe_Not_sure
+    Probably Yes: Probably_Yes
+    Definitely Yes: Definitely_Yes
+next_car_budget_range:
+  type: mc_multiple
+  label: What is your budget range for this next vehicle purchase (select ALL that
+    apply)?
+  options:
+    $4,999 or less: '4999'
+    $5,000 - $9,999: '9999'
+    $10,000 - $14,999: '14999'
+    $15,000 - $19,999: '19999'
+    $20,000 - $24,999: '24999'
+    $25,000 - $29,999: '29999'
+    $30,000 - $34,999: '34999'
+    $35,000 - $39,999: '39999'
+    $40,000 - $44,999: '44999'
+    $45,000 - $49,999: '49999'
+    $50,000 - $59,999: '59999'
+    $60,000 - $69,999: '69999'
+    $70,000 - $79,999: '79999'
+    $80,000 - $89,999: '89999'
+    $90,000 - $99,999: '99999'
+    100,000 or more: '100000'
+    I'm not sure: not_sure
+next_car_down_payment:
+  type: select
+  label: What will be your down payment for your next car?
+  options:
+    $0 - $999: '999'
+    $1,000 - $1,999: '1,999'
+    $2,000 - $2,999: '2,999'
+    $3,000 - $3,999: '3,999'
+    $4,000 - $4,999: '4,999'
+    $5,000 - $5,999: '5,999'
+    $6,000 - $6,999: '6,999'
+    $7,000 - $7,999: '7,999'
+    $8,000 - $8,999: '8,999'
+    $9,000 - $9,999: '9,999'
+    $10,000 - $10,999: '10,999'
+    $11,000 - $11,999: '11,999'
+    $12,000 - $12,999: '12,999'
+    $13,000 - $13,999: '13,999'
+    $14,000 - $14,999: '14,999'
+    $15,000 - $15,999: '15,999'
+    $16,000 - $16,999: '16,999'
+    $17,000 - $17,999: '17,999'
+    $18,000 - $18,999: '18,999'
+    $19,000 - $19,999: '19,999'
+    20,000 or more: '20,000'
+    I'm not sure: not_sure
+run_on_gasoline:
+  type: mc_multiple
+  label: 'Please select which vehicle(s) can run on gasoline: (select all that apply)'
+  options:
+    Hybrid Electric Vehicle: Hybrid_EV
+    Plug-in Hybrid Electric Vehicle: Plug_Hybrid_in_EV
+    Pure Electric Vehicle: EV
+    I’m not sure: not_sure
+plugged_in:
+  type: mc_multiple
+  label: 'Please select which vehicles can be plugged-in: (Select all that apply)'
+  options:
+    Hybrid Electric Vehicle: Hybrid_EV
+    Plug-in Hybrid Electric Vehicle: Plug_Hybrid_in_EV
+    Pure Electric Vehicle: EV
+    I’m not sure: not_sure
+know_electric_vehicle:
+  type: select
+  label: Do you know the name of a pure electric vehicle?
+  options:
+    'Yes': 'Yes'
+    'No': 'No'
+write_electric_name:
+  type: text
+  label: Write the name
+max_subsidy:
+  type: select
+  label: Do you know the current maximum subsidy available from the US federal government
+    for purchasing an electric vehicle?
+  options:
+    $1,000: $1,000
+    $2,500: $2,500
+    $5,000: $5,000
+    $7,500: $7,500
+    $10,000: $10,000
+    I'm not sure: I'm not sure
+cbc_q1:
+  type: mc_buttons
+  label: (1 of 6) If these were your only options, which would you choose?
+  options:
+    ? 'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 0 Purchase Price: 7.5
+      Operating Cost:  6 Efficiency: 40 acc time: 7 Mileage: 0'
+    : option_1
+    ? 'Option 2Vehicle Type:  ElectricRange(in miles): 150 Purchase Price: 20 Operating
+      Cost:  15 Efficiency: 25 acc time: 9 Mileage: 10'
+    : option_2
+    'Option 3Vehicle Type:  GasolineRange(in miles): 0 Purchase Price: 10 Operating Cost:  15 Efficiency: 35 acc time: 8 Mileage: 40': option_3
+cbc_q2:
+  type: mc_buttons
+  label: (2 of 6) If these were your only options, which would you choose?
+  options:
+    'Option 1Vehicle Type:  GasolineRange(in miles): 0 Purchase Price: 20 Operating Cost:  18 Efficiency: 35 acc time: 6 Mileage: 60': option_1
+    ? 'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 0 Purchase Price: 20
+      Operating Cost:  6 Efficiency: 55 acc time: 7 Mileage: 60'
+    : option_2
+    'Option 3Vehicle Type:  GasolineRange(in miles): 0 Purchase Price: 7.5 Operating Cost:  21 Efficiency: 30 acc time: 9 Mileage: 50': option_3
+cbc_q3:
+  type: mc_buttons
+  label: (3 of 6) If these were your only options, which would you choose?
+  options:
+    'Option 1Vehicle Type:  GasolineRange(in miles): 0 Purchase Price: 5 Operating Cost:  15 EEfficiency: 60 acc time: 8 Mileage: 30': option_1
+    ? 'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 0 Purchase Price: 15
+      Operating Cost:  9 Efficiency: 25 acce time: 6 Mileage: 70'
+    : option_2
+    'Option 3Vehicle Type:  ElectricRange(in miles): 150 Purchase Price: 20 Operating Cost:  6 Efficiency: 60 acc time: 6 Mileage: 10': option_3
+cbc_q4:
+  type: mc_buttons
+  label: (4 of 6) If these were your only options, which would you choose?
+  options:
+    'Option 1Vehicle Type:  ElectricRange(in miles): 0 Purchase Price: 7.5 Operating Cost:  12 Efficiency: 45 acc time: 6 Mileage: 10': option_1
+    'Option 2Vehicle Type:  GasolineRange(in miles): 0 Purchase Price: 10 Operating Cost:  6 Efficiency: 30 acc time: 8 Mileage: 60': option_2
+    ? 'Option 3Vehicle Type:  ElectricRange(in miles): 250 Purchase Price: 7.5 Operating
+      Cost:  15 Efficiency: 35 acc time: 8 Mileage: 80'
+    : option_3
+cbc_q5:
+  type: mc_buttons
+  label: (5 of 6) If these were your only options, which would you choose?
+  options:
+    'Option 1Vehicle Type:  ElectricRange(in miles): 0 Purchase Price: 10 Operating Cost:  18 Efficiency: 45 acc time: 9 Mileage: 0': option_1
+    ? 'Option 2Vehicle Type:  ElectricRange(in miles): 100 Purchase Price: 10 Operating
+      Cost:  21 Efficiency: 30 acc time: 7 Mileage: 70'
+    : option_2
+    ? 'Option 3Vehicle Type:  GasolineRange(in miles): 0 Purchase Price: 12.5 Operating
+      Cost:  15 Efficiency: 30 acc time: 6 Mileage: 100'
+    : option_3
+cbc_q6:
+  type: mc_buttons
+  label: (6 of 6) If these were your only options, which would you choose?
+  options:
+    'Option 1Vehicle Type:  ElectricRange(in miles): 0 Purchase Price: 10 Operating Cost:  18 Efficiency: 45 acc time: 9 Mileage: 0': option_1
+    ? 'Option 2Vehicle Type:  ElectricRange(in miles): 100 Purchase Price: 10 Operating
+      Cost:  21 Efficiency: 30 acc time: 7 Mileage: 70'
+    : option_2
+    ? 'Option 3Vehicle Type:  GasolineRange(in miles): 0 Purchase Price: 12.5 Operating
+      Cost:  15 Efficiency: 30 acc time: 6 Mileage: 100'
+    : option_3
+age:
+  type: numeric
+  label: What’s your age?
+gender:
+  type: select
+  label: What is your gender?
+  options:
+    Female: Female
+    Male: Male
+    Non Binary: Non_Binary
+    Transgender: Transgender
+    Gender Nonconforming: Gender_Nonconforming
+    'Other:': 'Other:'
+    Prefer not to answer: Prefer_not_to_answer
+hispanic:
+  type: select
+  label: Are you of Hispanic, Latino or Spanish origin?
+  options:
+    'Yes': 'Yes'
+    'No': 'No'
+ethnicity:
+  type: mc_multiple
+  label: 'Which race/ethnicity best describes you? :(choose all that apply):'
+  options:
+    American Indian or Alaskan Native: native_american
+    Asian: asian
+    Black or African American: African_American
+    Middle Eastern and North African (MENA): MENA
+    Native Hawaiian or Other Pacific Islander: Pacific_islander
+    White: white
+    some other race: some_other_race
+    Do not know/prefer not to answer: no_answer
+people_household:
+  type: select
+  label: How many people, in total, live in your household?
+  options:
+    '1': '1'
+    '2': '2'
+    '3': '3'
+    '4': '4'
+    '5': '5'
+    More than 5: more_than_5
+current_employment_status:
+  type: select
+  label: Which of the following categories best describes your current employment
+    status?
+  options:
+    I am a full-time student.: full_time_student
+    Employed, working 1-39 hours per week.: part_time
+    Employed, working 40 or more hours per week.: full_time
+    Not employed, looking for work.: looking_for_work
+    Not employed, NOT looking for work.: not_looking_for_work
+    Retired.: Retired
+    Disabled, not able to work.: disabled
+    Prefer not to answer: no_answer
+total_household_income:
+  type: select
+  label: Which of the following categories best represents your total household income?
+  options:
+    Less than $15,000: '15000'
+    $15,000 to less than $30,000: '30000'
+    $30,000 to less than $40,000: '40000'
+    $40,000 to less than $50,000: '50000'
+    $50,000 to less than $60,000: '60000'
+    $60,000 to less than $75,000: '75000'
+    $75,000 to less than $100,000.: '100000'
+    $100,000 to less than $125,000: '125000'
+    $125,000 to less than $150,000: '150000'
+    $150,000 to less than $175,000: '175000'
+    $175,000 to less than $200,000: '200000'
+    $200,000 to less than $250,000: '250000'
+    $250,000 or more: more_than_250000
+    Prefer not to answer: no_answer
+educational_qualification:
+  type: select
+  label: What is the last grade or level of school you have completed? If currently
+    enrolled, please use the highest degree received.
+  options:
+    Less than a high school diploma: '0'
+    High school degree or equivalent (e.g. GED): '1'
+    Some college - but less than two years of college: '2'
+    Some college - two years or more/A.A. degree: '3'
+    Technical or trade school: '4'
+    College graduate/bachelor's degree/B.A./B.S.: '5'
+    Postgraduate courses: '6'
+    Master's degree: '7'
+    M.B.A. or law degree: '8'
+    Ph.D. or M.D: '9'
+    Prefer not to answer: '10'
+current_housing:
+  type: select
+  label: In which type of housing do you currently live?
+  options:
+    Single family house not attached to any other house: '0'
+    Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.): '1'
+    A mobile home or trailer: '2'
+    Building with 2-4 apartments/condos/studios: '3'
+    Building with 5-19 apartments/condos/studios: '4'
+    Building with 20 or more apartments/condos/studios: '5'
+    Boat, RV, van, etc.: '6'
+    'Other:': '7'
+own_or_rent:
+  type: select
+  label: Do you own or rent the current place you are living in?
+  options:
+    Own: '0'
+    Rent: '1'
+    Neither: '2'
+    Do not know/prefer not to know: '3'
+electric_bill:
+  type: select
+  label: What is your monthly electricity bill on an average?
+  options:
+    $0 - $99: '0'
+    $100 - $199: '1'
+    $200 - $299: '2'
+    $300 - $399: '3'
+    $400 - $499: '4'
+    $500 or more: '5'
+political_views:
+  type: select
+  label: How would you describe your political views?
+  options:
+    Very conservative: '0'
+    Conservative: '1'
+    Moderate: '2'
+    Liberal: '3'
+    Very liberal: '4'
+    Prefer not to say: '5'
+    'Other:': '6'
+party_voting:
+  type: select
+  label: Which political party do you typically vote for?
+  options:
+    Democratic: '0'
+    Republican: '1'
+    I am independent: '2'
+    Prefer not to say: '3'
+
