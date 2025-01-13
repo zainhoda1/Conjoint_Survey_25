@@ -493,17 +493,17 @@ html_button_options <- c("option_1", "option_2", "option_3")
 names(html_button_options) <- c(
 
   "**Option 1**<br>
-   <img src='https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg' width=100><br>
-   **Type**: Fuji<br>",
+   <img src='https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_1.jpg' width=100><br>
+   **Type**: car_large_1<br>",
 
 
   "**Option 2**<br>
-   <img src='https://github.com/surveydown-dev/demos/blob/main/conjoint-buttons/images/pinkLady.jpg?raw=true' width=100><br>
-    **Type**: Pink Lady<br>",
+   <img src='https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_2.jpg' width=100><br>
+    **Type**: car_large_2<br>",
 
   "**Option 3**<br>
-    <img src='https://github.com/surveydown-dev/demos/blob/main/conjoint-buttons/images/honeycrisp.jpg?raw=true' width=100><br>
-    **Type**: Honeycrisp<br>"
+  <img src='https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_3.jpg' width=100><br>
+    **Type**: car_large_3<br>"
 )
 
 sd_question(
@@ -512,12 +512,15 @@ sd_question(
   label  = "A sample survey question using `mc_buttons`",
   option = html_button_options
 )
-```
-
-
 
 
 ```
+
+
+
+
+
+
 
 <br>
 

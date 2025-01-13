@@ -3,24 +3,24 @@
     "path": "D:/Spring 2025/Conjoint_Survey_25/survey/survey.qmd",
     "project_path": "survey/survey.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "1700806037",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1736783696285.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "515,0",
-        "scrollLine": "490"
+        "cursorPosition": "519,0",
+        "scrollLine": "499"
     },
-    "folds": "14|24|44|23|\n45|9|104|0|\n113|6|260|0|\n264|6|266|0|\n274|6|348|0|\n352|6|354|0|\n525|6|527|0|\n531|106|679|0|\n533|6|666|0|\n670|6|672|0|\n771|21|836|0|\n837|21|901|0|\n902|21|966|0|\n967|21|1031|0|\n1032|21|1093|0|\n1094|25|1314|0|\n",
-    "lastKnownWriteTime": 1736787600,
+    "folds": "14|24|44|23|\n45|9|104|0|\n113|6|260|0|\n264|6|266|0|\n274|6|348|0|\n352|6|354|0|\n360|6|487|0|\n526|6|528|0|\n532|106|680|0|\n534|6|667|0|\n671|6|673|0|\n772|21|837|0|\n838|21|902|0|\n903|21|967|0|\n968|21|1032|0|\n1033|21|1094|0|\n1095|25|1315|0|\n",
+    "lastKnownWriteTime": 1736789194,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1736788289250,
+    "last_content_update": 1736789194984,
     "read_only": false,
     "read_only_alternatives": []
 }
