@@ -377,7 +377,7 @@ sd_question(
 
 sd_question(
   type  = 'mc_multiple',
-  id    = 'next_vehicle_type',
+  id    = 'next_vehicle_type1',
   label = "For your next vehicle purchase, which type of vehicles would you consider (select ALL that apply)?",
   option = c(
     "Small Sedan" = "Small_Sedan",
@@ -388,6 +388,19 @@ sd_question(
     "Van"       = "Van",
     "Pick-up truck"        = "Pick-up_truck",
     "Do not know"     = "Do_not_know"
+  )
+)
+
+sd_question(
+  type  = 'mc',
+  id    = 'next_vehicle_type',
+  label = "For your next vehicle purchase, which type of vehicle would you consider ?",
+  option = c(
+    "Small Sedan" = "car_small_1",
+    "Mid Sedan" = "car_mid_1",
+    "Large Sedan"   = "car_large_1",
+    "Small SUV"  = "suv_small_1",
+    "Large SUV" = "suv_large_1"
   )
 )
 
@@ -484,8 +497,42 @@ sd_question(
   )
 )
 
+```
+
+
+Congratulations, your future car type is  `r sd_output("next_vehicle_type", type ="value")`!
 
 ```{r}
+
+next_car <- sd_output("next_vehicle_type", type = "value")
+url <- paste0("https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/", next_car, ".jpg", sep= "")
+
+knitr::include_graphics(url)
+```
+
+
+```{r}
+
+#next_car
+
+url = paste('https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/', next_car ,'.jpg')
+```
+
+![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_2.jpg){fig-align="left"  width=30%}
+
+![SI](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/`r next_car`.jpg){fig-align="left"  width=30%}
+
+![Sample Vehicle Image](url){fig-align="left"  width=30%}
+
+```{r}
+#next_car <- "car_mid_1"  # Your car variable
+knitr::include_graphics(paste0("https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/", next_car, ".jpg"))
+```
+
+![SI](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/`r next_car`.jpg){fig-align="left"  width=30%}
+
+```{r}
+
 # Define the option vector
 html_button_options <- c("option_1", "option_2", "option_3")
 
@@ -493,12 +540,12 @@ html_button_options <- c("option_1", "option_2", "option_3")
 names(html_button_options) <- c(
 
   "**Option 1**<br>
-   <img src='https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_1.jpg' width=100><br>
+   <img src= glue::glue('https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/{next_car}.jpg' width=100><br>
    **Type**: car_large_1<br>",
 
 
   "**Option 2**<br>
-   <img src='https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_2.jpg' width=100><br>
+   <img src= 'https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_2.jpg' width=100><br>
     **Type**: car_large_2<br>",
 
   "**Option 3**<br>
@@ -558,7 +605,7 @@ sd_question(
   )
 )
 
-
+# Conditional Question
 sd_question(
   type  = 'select',
   id    = 'know_electric_vehicle',
@@ -569,6 +616,7 @@ sd_question(
   )
 )
 
+# Target Question
 sd_question(
   type  = "text",
   id    = "write_electric_name",
@@ -706,7 +754,7 @@ sd_next(next_page = 'cbc_q1')
 
 # Conjoint Question 1
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="left"  width=30%}
+![Selected Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
 
 ```{r}
 # Define q1 choice options
@@ -772,7 +820,7 @@ sd_next(next_page = 'cbc_q2')
 
 # Conjoint Question 2
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="left"  width=30%}
+![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
 
 ```{r}
 # Define q1 choice options
@@ -838,7 +886,7 @@ sd_next(next_page = 'cbc_q3')
 
 # Conjoint Question 3
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="left"  width=30%}
+![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
 
 ```{r}
 # Define q1 choice options
@@ -903,7 +951,7 @@ sd_next(next_page = 'cbc_q4')
 
 # Conjoint Question 4
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="left"  width=30%}
+![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
 
 ```{r}
 # Define q1 choice options
@@ -968,7 +1016,7 @@ sd_next(next_page = 'cbc_q5')
 
 # Conjoint Question 5
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="left"  width=30%}
+![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
 
 ```{r}
 # Define q1 choice options
@@ -1033,7 +1081,7 @@ sd_next(next_page = 'cbc_q6')
 
 # Conjoint Question 6
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="left"  width=30%}
+![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
 
 ```{r}
 # Define q1 choice options
@@ -1093,12 +1141,13 @@ sd_next(next_page = 'page6')
 ```
 
 
-# Demographic information
+
 
 :::
 
 ::: {#page6 .sd-page}
 
+# Demographic information
 
 ## We're almost done! We'd just like to ask just a few more questions about you which we will only use for analyzing our survey data.
 
@@ -1106,9 +1155,9 @@ sd_next(next_page = 'page6')
 #code block
 
 sd_question(
-  type  = 'numeric',
-  id    = 'age',
-  label = "What's your age?"
+  type  = 'date',
+  id    = 'dob',
+  label = "What is your date of birth?"
 )
 
 sd_question(

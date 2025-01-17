@@ -28,7 +28,9 @@ server <- function(input, output, session) {
   sd_skip_if()
 
   # Define any conditional display logic here (show a question if a condition is true)
-  sd_show_if()
+  sd_show_if(
+    input$know_electric_vehicle == "Yes" ~ "write_electric_name" 
+  )
 
   # Database designation and other settings
   sd_server(
