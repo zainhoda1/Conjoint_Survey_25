@@ -112,8 +112,6 @@ sd_next(next_page = 'welcome1')
 ### Please answer to the best of your knowledge
 
 ```{r}
-
-
 sd_question(
   type  = 'select',
   id    = 'acquire_primary_vehicle',
@@ -183,7 +181,6 @@ sd_question(
     "Do not remember or do not know" = "do_not_remember"
   )
 )
-
 
 sd_question(
   type  = 'select',
@@ -359,12 +356,11 @@ sd_next(next_page = 'page3')
 ## This section asks a few questions about your future vehicle.
 
 ```{r}
-
-
-sd_output(id = "budget", type = "question")
-
-
-
+sd_question(
+  type  = 'numeric',
+  id    = 'budget',
+  label = 'What is your budget for your next vehicle?'
+)
 
 sd_question(
   type  = 'select',
@@ -379,7 +375,6 @@ sd_question(
     "I'm not sure"  = "not_sure"
   )
 )
-
 
 sd_question(
   type  = 'mc_multiple',
@@ -459,7 +454,6 @@ sd_question(
   )
 )
 
-
 sd_question(
   type  = 'select',
   id    = 'next_car_down_payment',
@@ -505,9 +499,11 @@ sd_question(
 
 ```
 
-Your chosen value is, `r sd_output("budget", type = "value")`!
+Your chosen value 1 is, `r sd_output("budget", type = "value")`!
 
-Your chosen value is, `r sd_output("cost_com")`!
+Your chosen value 2 is, `r sd_output("cost_com", type = "value")`!
+
+Multiplied value is, `r sd_output("multiplied_value", type = "value")`
 
 ```{r}
 budget_value <- sd_output("budget", type = "value")
