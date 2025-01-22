@@ -34,7 +34,7 @@ server <- function(input, output, session) {
 
   observeEvent(input$budget, {
       mult_val <- as.numeric(input$budget) * cost_com
-      sd_store_value(mult_val, "multiplied_value")
+      sd_store_value(mult_val)
   })
 
   # Define any conditional skip logic here (skip to page if a condition is true)

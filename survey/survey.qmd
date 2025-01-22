@@ -503,7 +503,7 @@ Your chosen value 1 is, `r sd_output("budget", type = "value")`!
 
 Your chosen value 2 is, `r sd_output("cost_com", type = "value")`!
 
-Multiplied value is, `r sd_output("multiplied_value", type = "value")`
+Multiplied value is, `r sd_output("mult_val", type = "value")`
 
 ```{r}
 budget_value <- sd_output("budget", type = "value")
