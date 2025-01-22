@@ -352,10 +352,13 @@ sd_next(next_page = 'page3')
 ```
 :::
 
+
+
 ::: {#page3 .sd-page}
 ## This section asks a few questions about your future vehicle.
 
 ```{r}
+
 sd_question(
   type  = 'numeric',
   id    = 'budget',
@@ -503,14 +506,18 @@ Your chosen value 1 is, `r sd_output("budget", type = "value")`!
 
 Your chosen value 2 is, `r sd_output("cost_com", type = "value")`!
 
+Your chosen value 3 is, `r sd_output("cost_array", type = "value")`!
+
 Multiplied value is, `r sd_output("mult_val", type = "value")`
 
-```{r}
-budget_value <- sd_output("budget", type = "value")
-#print(budget_value)000000000000000000000-
-numeric_vector <- as.numeric(unlist(budget_value))
-print(numeric_vector)
-```
+Multiplied value2  is, `r sd_output("mult_val2", type = "value")`
+
+Q1C1  is, `r sd_output("q1c1", type = "value")`
+
+Q1C2  is, `r sd_output("q1c2", type = "value")`
+
+Q1C3  is, `r sd_output("q1c3", type = "value")`
+
 
 
 ```{r}
@@ -718,14 +725,16 @@ q1_options <- c("option_1", "option_2", "option_3")
 # Change the names of each element to display markdown-formatted
 # text and an embedded image using html
 
-cost1 <- q1_alt1$price * numeric_vector 
-#cost2 <- as.numeric(q1_alt2$price) 
+
+q1c1_1 <- sd_output("q1c1", type = "value")
+q1c2_2 <- sd_output("q1c2", type = "value")
+q1c3_3 <- sd_output("q1c3", type = "value")
 #cost3 <- as.numeric(q1_alt3$price) 
 
 names(q1_options)[1] <- glue("**Option 1**<br>
     **Vehicle Type**:  {q1_alt1$powertrain}   
     **Range(in miles)**: {q1_alt1$range} <br>
-    **Purchase Price**: {cost1} <br>
+    **Purchase Price**: {q1c1_1} <br>
     **Operating Cost**:  {q1_alt1$operating_cost} <br> 
     **Efficiency**: {q1_alt1$gas_efficiency} <br>
     **acc time**: {q1_alt1$accelTime} <br>
@@ -734,7 +743,7 @@ names(q1_options)[1] <- glue("**Option 1**<br>
 names(q1_options)[2] <-glue("**Option 2**<br>
     **Vehicle Type**:  {q1_alt2$powertrain}   
     **Range(in miles)**: {q1_alt2$range} <br>
-    **Purchase Price**: {q1_alt2$price} <br>
+    **Purchase Price**: {q1c2_2} <br>
     **Operating Cost**:  {q1_alt2$operating_cost} <br> 
     **Efficiency**: {q1_alt2$gas_efficiency} <br>
     **acc time**: {q1_alt2$accelTime} <br>
@@ -743,7 +752,7 @@ names(q1_options)[2] <-glue("**Option 2**<br>
 names(q1_options)[3] <- glue("**Option 3**<br>
     **Vehicle Type**:  {q1_alt3$powertrain}   
     **Range(in miles)**: {q1_alt3$range} <br>
-    **Purchase Price**: {q1_alt3$price} <br>
+    **Purchase Price**: {q1c3_3} <br>
     **Operating Cost**:  {q1_alt3$operating_cost} <br> 
     **Efficiency**: {q1_alt3$gas_efficiency} <br>
     **acc time**: {q1_alt3$accelTime} <br>
@@ -785,13 +794,17 @@ q2_alt3 <- q2_alts %>% filter(altID == 3)
 
 q2_options <- c("option_1", "option_2", "option_3")
 
+q2c1_1 <- sd_output("q2c1", type = "value")
+q2c2_2 <- sd_output("q2c2", type = "value")
+q2c3_3 <- sd_output("q2c3", type = "value")
+
 # Change the names of each element to display markdown-formatted
 # text and an embedded image using html
 
 names(q2_options)[1] <- glue("**Option 1**<br>
     **Vehicle Type**:  {q2_alt1$powertrain}   
     **Range(in miles)**: {q2_alt1$range} <br>
-    **Purchase Price**: {q2_alt1$price} <br>
+    **Purchase Price**: {q2c1_1} <br>
     **Operating Cost**:  {q2_alt1$operating_cost} <br> 
     **Efficiency**: {q2_alt1$gas_efficiency} <br>
     **acc time**: {q2_alt1$accelTime} <br>
@@ -800,7 +813,7 @@ names(q2_options)[1] <- glue("**Option 1**<br>
 names(q2_options)[2] <-glue("**Option 2**<br>
     **Vehicle Type**:  {q2_alt2$powertrain}   
     **Range(in miles)**: {q2_alt2$range} <br>
-    **Purchase Price**: {q2_alt2$price} <br>
+    **Purchase Price**: {q2c2_2} <br>
     **Operating Cost**:  {q2_alt2$operating_cost} <br> 
     **Efficiency**: {q2_alt2$gas_efficiency} <br>
     **acc time**: {q2_alt2$accelTime} <br>
@@ -809,7 +822,7 @@ names(q2_options)[2] <-glue("**Option 2**<br>
 names(q2_options)[3] <- glue("**Option 3**<br>
     **Vehicle Type**:  {q2_alt3$powertrain}   
     **Range(in miles)**: {q2_alt3$range} <br>
-    **Purchase Price**: {q2_alt3$price} <br>
+    **Purchase Price**: {q2c3_3} <br>
     **Operating Cost**:  {q2_alt3$operating_cost} <br> 
     **Efficiency**: {q2_alt3$gas_efficiency} <br>
     **acc time**: {q2_alt3$accelTime} <br>

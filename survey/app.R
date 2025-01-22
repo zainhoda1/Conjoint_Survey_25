@@ -28,14 +28,44 @@ server <- function(input, output, session) {
   q1_alt1 <- q1_alts %>% filter(altID == 1)
   q1_alt2 <- q1_alts %>% filter(altID == 2)
   q1_alt3 <- q1_alts %>% filter(altID == 3)
+  
+  q1_alts2 <- df %>% filter(qID == 2)
+  q1_alt1_2 <- q1_alts2 %>% filter(altID == 1)
+  q1_alt2_2 <- q1_alts2 %>% filter(altID == 2)
+  q1_alt3_2 <- q1_alts2 %>% filter(altID == 3)
 
-  cost_com <- q1_alt1$price
+  cost_com <- q1_alt2$price
   sd_store_value(cost_com)
+  
+  
+  cost_array <- q1_alts$price
+  sd_store_value(cost_array)
+  
 
   observeEvent(input$budget, {
       mult_val <- as.numeric(input$budget) * cost_com
       sd_store_value(mult_val)
+
   })
+  
+  observeEvent(input$budget, {
+    q1c1 <- as.numeric(input$budget) * q1_alt1$price
+    sd_store_value(q1c1)
+    q1c2 <- as.numeric(input$budget) * q1_alt2$price
+    sd_store_value(q1c2)
+    q1c3 <- as.numeric(input$budget) * q1_alt3$price
+    sd_store_value(q1c3)
+    
+    q2c1 <- as.numeric(input$budget) * q1_alt1_2$price
+    sd_store_value(q2c1)
+    q2c2 <- as.numeric(input$budget) * q1_alt2_2$price
+    sd_store_value(q2c2)
+    q2c3 <- as.numeric(input$budget) * q1_alt3_2$price
+    sd_store_value(q2c3)
+
+  })
+  
+
 
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_if()
