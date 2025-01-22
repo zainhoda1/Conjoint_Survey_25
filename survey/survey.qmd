@@ -360,6 +360,12 @@ sd_next(next_page = 'page3')
 
 ```{r}
 
+
+sd_output(id = "budget", type = "question")
+
+
+
+
 sd_question(
   type  = 'select',
   id    = 'next_vehicle_purchase',
@@ -499,81 +505,22 @@ sd_question(
 
 ```
 
+Your chosen value is, `r sd_output("budget", type = "value")`!
 
-Congratulations, your future car type is  `r sd_output("next_vehicle_type", type ="value")`!
-
-```{r}
-
-next_car <- sd_output("next_vehicle_type", type = "value")
-url <- paste0("https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/", next_car, ".jpg", sep= "")
-
-knitr::include_graphics(url)
-```
-
+Your chosen value is, `r sd_output("cost_com")`!
 
 ```{r}
-
-#next_car
-
-url = paste('https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/', next_car ,'.jpg')
+budget_value <- sd_output("budget", type = "value")
+#print(budget_value)000000000000000000000-
+numeric_vector <- as.numeric(unlist(budget_value))
+print(numeric_vector)
 ```
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_2.jpg){fig-align="left"  width=30%}
-
-![SI](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/`r next_car`.jpg){fig-align="left"  width=30%}
-
-![Sample Vehicle Image](url){fig-align="left"  width=30%}
-
-```{r}
-#next_car <- "car_mid_1"  # Your car variable
-knitr::include_graphics(paste0("https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/", next_car, ".jpg"))
-```
-
-![SI](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/`r next_car`.jpg){fig-align="left"  width=30%}
-
-```{r}
-
-# Define the option vector
-html_button_options <- c("option_1", "option_2", "option_3")
-
-# Define option labels that include markdown and HTML code to embed images
-names(html_button_options) <- c(
-
-  "**Option 1**<br>
-   <img src= glue::glue('https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/{next_car}.jpg' width=100><br>
-   **Type**: car_large_1<br>",
-
-
-  "**Option 2**<br>
-   <img src= 'https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_2.jpg' width=100><br>
-    **Type**: car_large_2<br>",
-
-  "**Option 3**<br>
-  <img src='https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_3.jpg' width=100><br>
-    **Type**: car_large_3<br>"
-)
-
-sd_question(
-  type   = 'mc_buttons',
-  id     = 'html_buttons',
-  label  = "A sample survey question using `mc_buttons`",
-  option = html_button_options
-)
-
-
-```
-
-
-
-
-
-
-
-<br>
 
 ```{r}
 sd_next(next_page = 'page4')
 ```
+
 :::
 
 ::: {#page4 .sd-page}
@@ -756,13 +703,17 @@ sd_next(next_page = 'cbc_q1')
 
 ![Selected Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
 
+
 ```{r}
-# Define q1 choice options
+# Define q1 choice option
+
 
 q1_alts <- df %>% filter(qID == 1)
 q1_alt1 <- q1_alts %>% filter(altID == 1)
 q1_alt2 <- q1_alts %>% filter(altID == 2)
 q1_alt3 <- q1_alts %>% filter(altID == 3)
+
+
 
 # Define the option vector
 
@@ -771,10 +722,14 @@ q1_options <- c("option_1", "option_2", "option_3")
 # Change the names of each element to display markdown-formatted
 # text and an embedded image using html
 
+cost1 <- q1_alt1$price * numeric_vector 
+#cost2 <- as.numeric(q1_alt2$price) 
+#cost3 <- as.numeric(q1_alt3$price) 
+
 names(q1_options)[1] <- glue("**Option 1**<br>
     **Vehicle Type**:  {q1_alt1$powertrain}   
     **Range(in miles)**: {q1_alt1$range} <br>
-    **Purchase Price**: {q1_alt1$price} <br>
+    **Purchase Price**: {cost1} <br>
     **Operating Cost**:  {q1_alt1$operating_cost} <br> 
     **Efficiency**: {q1_alt1$gas_efficiency} <br>
     **acc time**: {q1_alt1$accelTime} <br>

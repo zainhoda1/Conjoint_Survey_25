@@ -14,13 +14,7 @@ library(knitr)
 
 ```
 
-
-
-
-
-
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_4.jpg){fig-align="left"  width=30%}
-
+![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/car_large_4.jpg){fig-align="left" width="30%"}
 
 ```{r}
 next_car <- "car_mid_1"  # Your car variable
@@ -32,4 +26,4 @@ knitr::include_graphics(url)
 
 ```
 
-![SI13](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/`r next_car`.jpg){fig-align="left"  width=30%}
+![SI13](https://raw.githubusercontent.com/zainhoda1/Conjoint_Survey_25/refs/heads/main/survey/images/car-images/%60r%20next_car%60.jpg){fig-align="left" width="30%"}

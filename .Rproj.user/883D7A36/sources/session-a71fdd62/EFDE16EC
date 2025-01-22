@@ -1,0 +1,26 @@
+{
+    "id": "EFDE16EC",
+    "path": "D:/Spring 2025/Conjoint_Survey_25/survey/survey.qmd",
+    "project_path": "survey/survey.qmd",
+    "type": "quarto_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1736783696285.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "5,6",
+        "scrollLine": "0"
+    },
+    "folds": "14|24|44|23|\n45|9|106|24|\n111|47|269|21|\n113|6|260|0|\n264|6|266|0|\n274|6|348|0|\n360|6|505|0|\n528|6|662|0|\n666|6|668|0|\n706|6|763|0|\n775|21|840|0|\n779|6|828|0|\n841|21|905|0|\n845|6|894|0|\n906|21|970|0|\n910|6|959|0|\n971|21|1035|0|\n975|6|1024|0|\n1036|21|1103|0|\n1040|6|1089|0|\n1104|25|1319|0|\n1108|6|1307|0|\n",
+    "lastKnownWriteTime": 1737534461,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1737534931521,
+    "read_only": false,
+    "read_only_alternatives": []
+}

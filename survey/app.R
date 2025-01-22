@@ -1,5 +1,8 @@
 # remotes::install_github("surveydown-dev/surveydown", force = TRUE)
 library(surveydown)
+library(tidyverse)
+library(here)
+library(glue)
 
 # Database setup
 
@@ -10,7 +13,7 @@ library(surveydown)
 # helpful for local testing if you don't want to record testing data in the
 # database table. See the documentation for details:
 # https://surveydown.org/store-data
-
+ 
 db <- sd_database(
   host   = "",
   dbname = "",
@@ -23,6 +26,27 @@ db <- sd_database(
 
 # Server setup
 server <- function(input, output, session) {
+  
+  survey <- read_csv(here('data', 'survey.csv'))
+  respondentID <- sample(survey$respID, 1)
+  df <- survey %>% 
+    filter(respID == respondentID) 
+  
+  q1_alts <- df %>% filter(qID == 1)
+  q1_alt1 <- q1_alts %>% filter(altID == 1)
+  q1_alt2 <- q1_alts %>% filter(altID == 2)
+  q1_alt3 <- q1_alts %>% filter(altID == 3)
+  
+  cost_com <- q1_alt1$price
+  
+  
+      sd_question(
+        type = 'numeric',
+        id = 'budget',
+        label = 'What is your budget for your next vehicle?'
+      )
+
+
 
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_if()
