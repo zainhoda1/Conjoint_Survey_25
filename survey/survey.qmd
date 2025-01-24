@@ -359,6 +359,8 @@ sd_next(next_page = 'page3')
 
 ```{r}
 
+sd_output(id = 'images', type = 'question')
+
 sd_question(
   type  = 'numeric',
   id    = 'budget',
@@ -501,23 +503,6 @@ sd_question(
 )
 
 ```
-
-Your chosen value 1 is, `r sd_output("budget", type = "value")`!
-
-Your chosen value 2 is, `r sd_output("cost_com", type = "value")`!
-
-Your chosen value 3 is, `r sd_output("cost_array", type = "value")`!
-
-Multiplied value is, `r sd_output("mult_val", type = "value")`
-
-Multiplied value2  is, `r sd_output("mult_val2", type = "value")`
-
-Q1C1  is, `r sd_output("q1c1", type = "value")`
-
-Q1C2  is, `r sd_output("q1c2", type = "value")`
-
-Q1C3  is, `r sd_output("q1c3", type = "value")`
-
 
 
 ```{r}
@@ -704,7 +689,11 @@ sd_next(next_page = 'cbc_q1')
 
 # Conjoint Question 1
 
-![Selected Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
+
+
+```{r}
+shiny::imageOutput('chosen_image')
+```
 
 
 ```{r}
@@ -780,7 +769,10 @@ sd_next(next_page = 'cbc_q2')
 
 # Conjoint Question 2
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
+```{r}
+shiny::imageOutput('chosen_image')
+```
+
 
 ```{r}
 # Define q1 choice options
@@ -850,7 +842,11 @@ sd_next(next_page = 'cbc_q3')
 
 # Conjoint Question 3
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
+```{r}
+shiny::imageOutput('chosen_image')
+```
+
+
 
 ```{r}
 # Define q1 choice options
@@ -864,13 +860,17 @@ q3_alt3 <- q3_alts %>% filter(altID == 3)
 
 q3_options <- c("option_1", "option_2", "option_3")
 
+q3c1_1 <- sd_output("q3c1", type = "value")
+q3c2_2 <- sd_output("q3c2", type = "value")
+q3c3_3 <- sd_output("q3c3", type = "value")
+
 # Change the names of each element to display markdown-formatted
 # text and an embedded image using html
 
 names(q3_options)[1] <- glue("**Option 1**<br>
     **Vehicle Type**:  {q3_alt1$powertrain}   
     **Range(in miles)**: {q3_alt1$range} <br>
-    **Purchase Price**: {q3_alt1$price} <br>
+    **Purchase Price**: {q3c1_1} <br>
     **Operating Cost**:  {q3_alt1$operating_cost} <br> 
     **EEfficiency**: {q3_alt1$gas_efficiency} <br>
     **acc time**: {q3_alt1$accelTime} <br>
@@ -879,7 +879,7 @@ names(q3_options)[1] <- glue("**Option 1**<br>
 names(q3_options)[2] <-glue("**Option 2**<br>
     **Vehicle Type**:  {q3_alt2$powertrain}   
     **Range(in miles)**: {q3_alt2$range} <br>
-    **Purchase Price**: {q3_alt2$price} <br>
+    **Purchase Price**: {q3c2_2} <br>
     **Operating Cost**:  {q3_alt2$operating_cost} <br> 
     **Efficiency**: {q3_alt2$gas_efficiency} <br>
     **acce time**: {q3_alt2$accelTime} <br>
@@ -888,7 +888,7 @@ names(q3_options)[2] <-glue("**Option 2**<br>
 names(q3_options)[3] <- glue("**Option 3**<br>
     **Vehicle Type**:  {q3_alt3$powertrain}   
     **Range(in miles)**: {q3_alt3$range} <br>
-    **Purchase Price**: {q3_alt3$price} <br>
+    **Purchase Price**: {q3c3_3} <br>
     **Operating Cost**:  {q3_alt3$operating_cost} <br> 
     **Efficiency**: {q3_alt3$gas_efficiency} <br>
     **acc time**: {q3_alt3$accelTime} <br>
@@ -915,7 +915,10 @@ sd_next(next_page = 'cbc_q4')
 
 # Conjoint Question 4
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
+```{r}
+shiny::imageOutput('chosen_image')
+```
+
 
 ```{r}
 # Define q1 choice options
@@ -929,13 +932,19 @@ q4_alt3 <- q4_alts %>% filter(altID == 3)
 
 q4_options <- c("option_1", "option_2", "option_3")
 
+q4c1_1 <- sd_output("q4c1", type = "value")
+q4c2_2 <- sd_output("q4c2", type = "value")
+q4c3_3 <- sd_output("q4c3", type = "value")
+
+
+
 # Change the names of each element to display markdown-formatted
 # text and an embedded image using html
 
 names(q4_options)[1] <- glue("**Option 1**<br>
     **Vehicle Type**:  {q4_alt1$powertrain}   
     **Range(in miles)**: {q4_alt1$range} <br>
-    **Purchase Price**: {q4_alt1$price} <br>
+    **Purchase Price**: {q4c1_1} <br>
     **Operating Cost**:  {q4_alt1$operating_cost} <br> 
     **Efficiency**: {q4_alt1$gas_efficiency} <br>
     **acc time**: {q4_alt1$accelTime} <br>
@@ -944,7 +953,7 @@ names(q4_options)[1] <- glue("**Option 1**<br>
 names(q4_options)[2] <-glue("**Option 2**<br>
     **Vehicle Type**:  {q4_alt2$powertrain}   
     **Range(in miles)**: {q4_alt2$range} <br>
-    **Purchase Price**: {q4_alt2$price} <br>
+    **Purchase Price**: {q4c2_2} <br>
     **Operating Cost**:  {q4_alt2$operating_cost} <br> 
     **Efficiency**: {q4_alt2$gas_efficiency} <br>
     **acc time**: {q4_alt2$accelTime} <br>
@@ -953,7 +962,7 @@ names(q4_options)[2] <-glue("**Option 2**<br>
 names(q4_options)[3] <- glue("**Option 3**<br>
     **Vehicle Type**:  {q4_alt3$powertrain}   
     **Range(in miles)**: {q4_alt3$range} <br>
-    **Purchase Price**: {q4_alt3$price} <br>
+    **Purchase Price**: {q4c3_3} <br>
     **Operating Cost**:  {q4_alt3$operating_cost} <br> 
     **Efficiency**: {q4_alt3$gas_efficiency} <br>
     **acc time**: {q4_alt3$accelTime} <br>
@@ -980,7 +989,10 @@ sd_next(next_page = 'cbc_q5')
 
 # Conjoint Question 5
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
+```{r}
+shiny::imageOutput('chosen_image')
+```
+
 
 ```{r}
 # Define q1 choice options
@@ -994,13 +1006,17 @@ q5_alt3 <- q5_alts %>% filter(altID == 3)
 
 q5_options <- c("option_1", "option_2", "option_3")
 
+q5c1_1 <- sd_output("q5c1", type = "value")
+q5c2_2 <- sd_output("q5c2", type = "value")
+q5c3_3 <- sd_output("q5c3", type = "value")
+
 # Change the names of each element to display markdown-formatted
 # text and an embedded image using html
 
 names(q5_options)[1] <- glue("**Option 1**<br>
     **Vehicle Type**:  {q5_alt1$powertrain}   
     **Range(in miles)**: {q5_alt1$range} <br>
-    **Purchase Price**: {q5_alt1$price} <br>
+    **Purchase Price**: {q5c1_1} <br>
     **Operating Cost**:  {q5_alt1$operating_cost} <br> 
     **Efficiency**: {q5_alt1$gas_efficiency} <br>
     **acc time**: {q5_alt1$accelTime} <br>
@@ -1009,7 +1025,7 @@ names(q5_options)[1] <- glue("**Option 1**<br>
 names(q5_options)[2] <-glue("**Option 2**<br>
     **Vehicle Type**:  {q5_alt2$powertrain}   
     **Range(in miles)**: {q5_alt2$range} <br>
-    **Purchase Price**: {q5_alt2$price} <br>
+    **Purchase Price**: {q5c2_2} <br>
     **Operating Cost**:  {q5_alt2$operating_cost} <br> 
     **Efficiency**: {q5_alt2$gas_efficiency} <br>
     **acc time**: {q5_alt2$accelTime} <br>
@@ -1018,7 +1034,7 @@ names(q5_options)[2] <-glue("**Option 2**<br>
 names(q5_options)[3] <- glue("**Option 3**<br>
     **Vehicle Type**:  {q5_alt3$powertrain}   
     **Range(in miles)**: {q5_alt3$range} <br>
-    **Purchase Price**: {q5_alt3$price} <br>
+    **Purchase Price**: {q5c3_3} <br>
     **Operating Cost**:  {q5_alt3$operating_cost} <br> 
     **Efficiency**: {q5_alt3$gas_efficiency} <br>
     **acc time**: {q5_alt3$accelTime} <br>
@@ -1045,7 +1061,10 @@ sd_next(next_page = 'cbc_q6')
 
 # Conjoint Question 6
 
-![Sample Vehicle Image](https://raw.githubusercontent.com/zainhoda1/testing_surveydown/main/test1/figs/dallE_car_image1.jpg){fig-align="centre"  width=30%}
+```{r}
+shiny::imageOutput('chosen_image')
+```
+
 
 ```{r}
 # Define q1 choice options
@@ -1059,13 +1078,17 @@ q6_alt3 <- q6_alts %>% filter(altID == 3)
 
 q6_options <- c("option_1", "option_2", "option_3")
 
+q6c1_1 <- sd_output("q6c1", type = "value")
+q6c2_2 <- sd_output("q6c2", type = "value")
+q6c3_3 <- sd_output("q6c3", type = "value")
+
 # Change the names of each element to display markdown-formatted
 # text and an embedded image using html
 
 names(q6_options)[1] <- glue("**Option 1**<br>
     **Vehicle Type**:  {q6_alt1$powertrain}   
     **Range(in miles)**: {q6_alt1$range} <br>
-    **Purchase Price**: {q6_alt1$price} <br>
+    **Purchase Price**: {q6c1_1} <br>
     **Operating Cost**:  {q6_alt1$operating_cost} <br> 
     **Efficiency**: {q6_alt1$gas_efficiency} <br>
     **acc time**: {q6_alt1$accelTime} <br>
@@ -1074,7 +1097,7 @@ names(q6_options)[1] <- glue("**Option 1**<br>
 names(q6_options)[2] <-glue("**Option 2**<br>
     **Vehicle Type**:  {q6_alt2$powertrain}   
     **Range(in miles)**: {q6_alt2$range} <br>
-    **Purchase Price**: {q6_alt2$price} <br>
+    **Purchase Price**: {q6c2_2} <br>
     **Operating Cost**:  {q6_alt2$operating_cost} <br> 
     **Efficiency**: {q6_alt2$gas_efficiency} <br>
     **acc time**: {q6_alt2$accelTime} <br>
@@ -1083,7 +1106,7 @@ names(q6_options)[2] <-glue("**Option 2**<br>
 names(q6_options)[3] <- glue("**Option 3**<br>
     **Vehicle Type**:  {q6_alt3$powertrain}   
     **Range(in miles)**: {q6_alt3$range} <br>
-    **Purchase Price**: {q6_alt3$price} <br>
+    **Purchase Price**: {q6c3_3} <br>
     **Operating Cost**:  {q6_alt3$operating_cost} <br> 
     **Efficiency**: {q6_alt3$gas_efficiency} <br>
     **acc time**: {q6_alt3$accelTime} <br>
