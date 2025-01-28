@@ -359,6 +359,19 @@ sd_next(next_page = 'page3')
 
 ```{r}
 
+# sd_question(
+#   type  = 'mc',
+#   id    = 'next_vehicle_type',
+#   label = "For your next vehicle purchase, which type of vehicle would you consider ?",
+#   option = c(
+#     "Sedan"   = "sedan_images",
+#     "SUV"  = "suv_images"
+#   )
+# )
+
+
+
+
 sd_output(id = 'images', type = 'question')
 
 sd_question(
@@ -381,34 +394,31 @@ sd_question(
   )
 )
 
-sd_question(
-  type  = 'mc_multiple',
-  id    = 'next_vehicle_type1',
-  label = "For your next vehicle purchase, which type of vehicles would you consider (select ALL that apply)?",
-  option = c(
-    "Small Sedan" = "Small_Sedan",
-    "Large Sedan"     = "Large_Sedan",
-    "Sports Car"    = "Sports_Car",
-    "Compact SUV"          = "Compact_SUV",
-    "Large SUV"         = "Large_SUV",
-    "Van"       = "Van",
-    "Pick-up truck"        = "Pick-up_truck",
-    "Do not know"     = "Do_not_know"
-  )
-)
+# sd_question(
+#   type  = 'mc_multiple',
+#   id    = 'next_vehicle_type1',
+#   label = "For your next vehicle purchase, which type of vehicles would you consider (select ALL that apply)?",
+#   option = c(
+#     "Small Sedan" = "Small_Sedan",
+#     "Large Sedan"     = "Large_Sedan",
+#     "Sports Car"    = "Sports_Car",
+#     "Compact SUV"          = "Compact_SUV",
+#     "Large SUV"         = "Large_SUV",
+#     "Van"       = "Van",
+#     "Pick-up truck"        = "Pick-up_truck",
+#     "Do not know"     = "Do_not_know"
+#   )
+# )
 
-sd_question(
-  type  = 'mc',
-  id    = 'next_vehicle_type',
-  label = "For your next vehicle purchase, which type of vehicle would you consider ?",
-  option = c(
-    "Small Sedan" = "car_small_1",
-    "Mid Sedan" = "car_mid_1",
-    "Large Sedan"   = "car_large_1",
-    "Small SUV"  = "suv_small_1",
-    "Large SUV" = "suv_large_1"
-  )
-)
+# sd_question(
+#   type  = 'mc',
+#   id    = 'next_vehicle_type',
+#   label = "For your next vehicle purchase, which type of vehicle would you consider ?",
+#   option = c(
+#     "Sedan"   = "car",
+#     "SUV"  = "suv"
+#   )
+# )
 
 sd_question(
   type  = 'select',
@@ -503,6 +513,7 @@ sd_question(
 )
 
 ```
+
 
 
 ```{r}
@@ -672,10 +683,10 @@ We will now show you 6 sets of choice questions starting on the next page.
 #| include: false
 
 # Here we prepare the data frames for choice questions, respondent ID, etc.
-survey <- read_csv(here('data', 'survey.csv'))
+survey <- read_csv(here('data', 'choice_questions.csv'))
 respondentID <- sample(survey$respID, 1)
-df <- survey %>% 
-    filter(respID == respondentID) 
+df <- survey %>%
+    filter(respID == respondentID)
 ```
 
 ```{r}
@@ -725,7 +736,6 @@ names(q1_options)[1] <- glue("**Option 1**<br>
     **Range(in miles)**: {q1_alt1$range} <br>
     **Purchase Price**: {q1c1_1} <br>
     **Operating Cost**:  {q1_alt1$operating_cost} <br> 
-    **Efficiency**: {q1_alt1$gas_efficiency} <br>
     **acc time**: {q1_alt1$accelTime} <br>
     **Mileage**: {q1_alt1$mileage} "
 )
@@ -734,7 +744,6 @@ names(q1_options)[2] <-glue("**Option 2**<br>
     **Range(in miles)**: {q1_alt2$range} <br>
     **Purchase Price**: {q1c2_2} <br>
     **Operating Cost**:  {q1_alt2$operating_cost} <br> 
-    **Efficiency**: {q1_alt2$gas_efficiency} <br>
     **acc time**: {q1_alt2$accelTime} <br>
     **Mileage**: {q1_alt2$mileage} "
 )
@@ -743,7 +752,6 @@ names(q1_options)[3] <- glue("**Option 3**<br>
     **Range(in miles)**: {q1_alt3$range} <br>
     **Purchase Price**: {q1c3_3} <br>
     **Operating Cost**:  {q1_alt3$operating_cost} <br> 
-    **Efficiency**: {q1_alt3$gas_efficiency} <br>
     **acc time**: {q1_alt3$accelTime} <br>
     **Mileage**: {q1_alt3$mileage} "
 )
@@ -798,7 +806,6 @@ names(q2_options)[1] <- glue("**Option 1**<br>
     **Range(in miles)**: {q2_alt1$range} <br>
     **Purchase Price**: {q2c1_1} <br>
     **Operating Cost**:  {q2_alt1$operating_cost} <br> 
-    **Efficiency**: {q2_alt1$gas_efficiency} <br>
     **acc time**: {q2_alt1$accelTime} <br>
     **Mileage**: {q2_alt1$mileage} "
 )
@@ -807,7 +814,6 @@ names(q2_options)[2] <-glue("**Option 2**<br>
     **Range(in miles)**: {q2_alt2$range} <br>
     **Purchase Price**: {q2c2_2} <br>
     **Operating Cost**:  {q2_alt2$operating_cost} <br> 
-    **Efficiency**: {q2_alt2$gas_efficiency} <br>
     **acc time**: {q2_alt2$accelTime} <br>
     **Mileage**: {q2_alt2$mileage} "
 )
@@ -816,7 +822,6 @@ names(q2_options)[3] <- glue("**Option 3**<br>
     **Range(in miles)**: {q2_alt3$range} <br>
     **Purchase Price**: {q2c3_3} <br>
     **Operating Cost**:  {q2_alt3$operating_cost} <br> 
-    **Efficiency**: {q2_alt3$gas_efficiency} <br>
     **acc time**: {q2_alt3$accelTime} <br>
     **Mileage**: {q2_alt3$mileage} "
 )
@@ -872,7 +877,6 @@ names(q3_options)[1] <- glue("**Option 1**<br>
     **Range(in miles)**: {q3_alt1$range} <br>
     **Purchase Price**: {q3c1_1} <br>
     **Operating Cost**:  {q3_alt1$operating_cost} <br> 
-    **EEfficiency**: {q3_alt1$gas_efficiency} <br>
     **acc time**: {q3_alt1$accelTime} <br>
     **Mileage**: {q3_alt1$mileage} "
 )
@@ -881,7 +885,6 @@ names(q3_options)[2] <-glue("**Option 2**<br>
     **Range(in miles)**: {q3_alt2$range} <br>
     **Purchase Price**: {q3c2_2} <br>
     **Operating Cost**:  {q3_alt2$operating_cost} <br> 
-    **Efficiency**: {q3_alt2$gas_efficiency} <br>
     **acce time**: {q3_alt2$accelTime} <br>
     **Mileage**: {q3_alt2$mileage} "
 )
@@ -890,7 +893,6 @@ names(q3_options)[3] <- glue("**Option 3**<br>
     **Range(in miles)**: {q3_alt3$range} <br>
     **Purchase Price**: {q3c3_3} <br>
     **Operating Cost**:  {q3_alt3$operating_cost} <br> 
-    **Efficiency**: {q3_alt3$gas_efficiency} <br>
     **acc time**: {q3_alt3$accelTime} <br>
     **Mileage**: {q3_alt3$mileage} "
 )
@@ -946,7 +948,6 @@ names(q4_options)[1] <- glue("**Option 1**<br>
     **Range(in miles)**: {q4_alt1$range} <br>
     **Purchase Price**: {q4c1_1} <br>
     **Operating Cost**:  {q4_alt1$operating_cost} <br> 
-    **Efficiency**: {q4_alt1$gas_efficiency} <br>
     **acc time**: {q4_alt1$accelTime} <br>
     **Mileage**: {q4_alt1$mileage} "
 )
@@ -955,7 +956,6 @@ names(q4_options)[2] <-glue("**Option 2**<br>
     **Range(in miles)**: {q4_alt2$range} <br>
     **Purchase Price**: {q4c2_2} <br>
     **Operating Cost**:  {q4_alt2$operating_cost} <br> 
-    **Efficiency**: {q4_alt2$gas_efficiency} <br>
     **acc time**: {q4_alt2$accelTime} <br>
     **Mileage**: {q4_alt2$mileage} "
 )
@@ -964,7 +964,6 @@ names(q4_options)[3] <- glue("**Option 3**<br>
     **Range(in miles)**: {q4_alt3$range} <br>
     **Purchase Price**: {q4c3_3} <br>
     **Operating Cost**:  {q4_alt3$operating_cost} <br> 
-    **Efficiency**: {q4_alt3$gas_efficiency} <br>
     **acc time**: {q4_alt3$accelTime} <br>
     **Mileage**: {q4_alt3$mileage} "
 )
@@ -1018,7 +1017,6 @@ names(q5_options)[1] <- glue("**Option 1**<br>
     **Range(in miles)**: {q5_alt1$range} <br>
     **Purchase Price**: {q5c1_1} <br>
     **Operating Cost**:  {q5_alt1$operating_cost} <br> 
-    **Efficiency**: {q5_alt1$gas_efficiency} <br>
     **acc time**: {q5_alt1$accelTime} <br>
     **Mileage**: {q5_alt1$mileage} "
 )
@@ -1027,7 +1025,6 @@ names(q5_options)[2] <-glue("**Option 2**<br>
     **Range(in miles)**: {q5_alt2$range} <br>
     **Purchase Price**: {q5c2_2} <br>
     **Operating Cost**:  {q5_alt2$operating_cost} <br> 
-    **Efficiency**: {q5_alt2$gas_efficiency} <br>
     **acc time**: {q5_alt2$accelTime} <br>
     **Mileage**: {q5_alt2$mileage} "
 )
@@ -1036,7 +1033,6 @@ names(q5_options)[3] <- glue("**Option 3**<br>
     **Range(in miles)**: {q5_alt3$range} <br>
     **Purchase Price**: {q5c3_3} <br>
     **Operating Cost**:  {q5_alt3$operating_cost} <br> 
-    **Efficiency**: {q5_alt3$gas_efficiency} <br>
     **acc time**: {q5_alt3$accelTime} <br>
     **Mileage**: {q5_alt3$mileage} "
 )
@@ -1090,7 +1086,6 @@ names(q6_options)[1] <- glue("**Option 1**<br>
     **Range(in miles)**: {q6_alt1$range} <br>
     **Purchase Price**: {q6c1_1} <br>
     **Operating Cost**:  {q6_alt1$operating_cost} <br> 
-    **Efficiency**: {q6_alt1$gas_efficiency} <br>
     **acc time**: {q6_alt1$accelTime} <br>
     **Mileage**: {q6_alt1$mileage} "
 )
@@ -1099,7 +1094,6 @@ names(q6_options)[2] <-glue("**Option 2**<br>
     **Range(in miles)**: {q6_alt2$range} <br>
     **Purchase Price**: {q6c2_2} <br>
     **Operating Cost**:  {q6_alt2$operating_cost} <br> 
-    **Efficiency**: {q6_alt2$gas_efficiency} <br>
     **acc time**: {q6_alt2$accelTime} <br>
     **Mileage**: {q6_alt2$mileage} "
 )
@@ -1108,7 +1102,6 @@ names(q6_options)[3] <- glue("**Option 3**<br>
     **Range(in miles)**: {q6_alt3$range} <br>
     **Purchase Price**: {q6c3_3} <br>
     **Operating Cost**:  {q6_alt3$operating_cost} <br> 
-    **Efficiency**: {q6_alt3$gas_efficiency} <br>
     **acc time**: {q6_alt3$accelTime} <br>
     **Mileage**: {q6_alt3$mileage} "
 )
@@ -1347,5 +1340,5 @@ sd_next(next_page = 'end')
 :::
 
 ::: {#end .sd-page}
-This it the last page in the survey
+This is the last page in the survey
 :::
