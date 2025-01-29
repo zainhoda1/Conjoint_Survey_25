@@ -359,17 +359,15 @@ sd_next(next_page = 'page3')
 
 ```{r}
 
-# sd_question(
-#   type  = 'mc',
-#   id    = 'next_vehicle_type',
-#   label = "For your next vehicle purchase, which type of vehicle would you consider ?",
-#   option = c(
-#     "Sedan"   = "sedan_images",
-#     "SUV"  = "suv_images"
-#   )
-# )
-
-
+sd_question(
+  type  = 'mc',
+  id    = 'next_vehicle_type',
+  label = "For your next vehicle purchase, which type of vehicle would you consider ?",
+  option = c(
+    "Sedan"   = "sedan_images",
+    "SUV"  = "suv_images"
+  )
+)
 
 
 sd_output(id = 'images', type = 'question')
@@ -443,31 +441,31 @@ sd_question(
   )
 )
 
-sd_question(
-  type  = 'mc_multiple',
-  id    = 'next_car_budget_range',
-  label = "What is your budget range for this next vehicle purchase (select ALL that apply)?",
-  option = c(
-    "$4,999 or less" = "4999",
-    "$5,000 - $9,999" = "9999",
-    "$10,000 - $14,999" = "14999",
-    "$15,000 - $19,999" = "19999",
-    "$20,000 - $24,999"= "24999",
-    "$25,000 - $29,999"= "29999",
-    "$30,000 - $34,999"= "34999",
-    "$35,000 - $39,999" = "39999",
-    "$40,000 - $44,999"= "44999",
-    "$45,000 - $49,999"= "49999",
-    "$50,000 - $59,999"= "59999",
-    "$60,000 - $69,999" = "69999",
-    "$70,000 - $79,999"= "79999",
-    "$80,000 - $89,999"= "89999",
-    "$90,000 - $99,999"= "99999",
-    "100,000 or more" = "100000",
-    "I'm not sure" = "not_sure"
-
-  )
-)
+# sd_question(
+#   type  = 'mc_multiple',
+#   id    = 'next_car_budget_range',
+#   label = "What is your budget range for this next vehicle purchase (select ALL that apply)?",
+#   option = c(
+#     "$4,999 or less" = "4999",
+#     "$5,000 - $9,999" = "9999",
+#     "$10,000 - $14,999" = "14999",
+#     "$15,000 - $19,999" = "19999",
+#     "$20,000 - $24,999"= "24999",
+#     "$25,000 - $29,999"= "29999",
+#     "$30,000 - $34,999"= "34999",
+#     "$35,000 - $39,999" = "39999",
+#     "$40,000 - $44,999"= "44999",
+#     "$45,000 - $49,999"= "49999",
+#     "$50,000 - $59,999"= "59999",
+#     "$60,000 - $69,999" = "69999",
+#     "$70,000 - $79,999"= "79999",
+#     "$80,000 - $89,999"= "89999",
+#     "$90,000 - $99,999"= "99999",
+#     "100,000 or more" = "100000",
+#     "I'm not sure" = "not_sure"
+# 
+#   )
+# )
 
 sd_question(
   type  = 'select',
@@ -584,62 +582,7 @@ sd_question(
   )
 )
 
-sd_question(
-  type  = 'mc_multiple',
-  id    = 'next_car_budget_range',
-  label = "What is your budget range for this next vehicle purchase (select ALL that apply)?",
-  option = c(
-    "$4,999 or less" = "4999",
-    "$5,000 - $9,999" = "9999",
-    "$10,000 - $14,999" = "14999",
-    "$15,000 - $19,999" = "19999",
-    "$20,000 - $24,999"= "24999",
-    "$25,000 - $29,999"= "29999",
-    "$30,000 - $34,999"= "34999",
-    "$35,000 - $39,999" = "39999",
-    "$40,000 - $44,999"= "44999",
-    "$45,000 - $49,999"= "49999",
-    "$50,000 - $59,999"= "59999",
-    "$60,000 - $69,999" = "69999",
-    "$70,000 - $79,999"= "79999",
-    "$80,000 - $89,999"= "89999",
-    "$90,000 - $99,999"= "99999",
-    "100,000 or more" = "100000",
-    "I'm not sure" = "not_sure"
 
-  )
-)
-
-
-sd_question(
-  type  = 'select',
-  id    = 'next_car_down_payment',
-  label = "  What will be your down payment for your next car?",
-  option = c(
-    "$0 - $999" = "999",
-    "$1,000 - $1,999" = "1,999",
-    "$2,000 - $2,999" = "2,999",
-    "$3,000 - $3,999" = "3,999",
-    "$4,000 - $4,999" = "4,999",
-    "$5,000 - $5,999" = "5,999",
-    "$6,000 - $6,999" = "6,999",
-    "$7,000 - $7,999" = "7,999",
-    "$8,000 - $8,999" = "8,999",
-    "$9,000 - $9,999" = "9,999",
-    "$10,000 - $10,999" = "10,999",
-    "$11,000 - $11,999" = "11,999",
-    "$12,000 - $12,999" = "12,999",
-    "$13,000 - $13,999" = "13,999",
-    "$14,000 - $14,999" = "14,999",
-    "$15,000 - $15,999" = "15,999",
-    "$16,000 - $16,999" = "16,999",
-    "$17,000 - $17,999" = "17,999",
-    "$18,000 - $18,999"= "18,999",
-    "$19,000 - $19,999"= "19,999",   
-    "20,000 or more" = "20,000",
-    "I'm not sure" = "not_sure"
-  )
-)
 
 sd_question(
   type  = 'select',
@@ -653,11 +596,6 @@ sd_question(
     "Definitely Yes"  = "Definitely_Yes"
   )
 )
-
-
-
-
-
 
 ```
 
@@ -687,6 +625,7 @@ survey <- read_csv(here('data', 'choice_questions.csv'))
 respondentID <- sample(survey$respID, 1)
 df <- survey %>%
     filter(respID == respondentID)
+
 ```
 
 ```{r}
@@ -729,7 +668,6 @@ q1_options <- c("option_1", "option_2", "option_3")
 q1c1_1 <- sd_output("q1c1", type = "value")
 q1c2_2 <- sd_output("q1c2", type = "value")
 q1c3_3 <- sd_output("q1c3", type = "value")
-#cost3 <- as.numeric(q1_alt3$price) 
 
 names(q1_options)[1] <- glue("**Option 1**<br>
     **Vehicle Type**:  {q1_alt1$powertrain}   
@@ -765,7 +703,7 @@ sd_question(
 
 ```
 
-<br>
+
 
 ```{r}
 sd_next(next_page = 'cbc_q2')

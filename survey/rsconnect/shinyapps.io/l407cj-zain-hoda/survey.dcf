@@ -1,0 +1,13 @@
+name: survey
+title: survey
+username: l407cj-zain-hoda
+account: l407cj-zain-hoda
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13847311
+bundleId: 9718961
+url: https://l407cj-zain-hoda.shinyapps.io/survey/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: data/survey_old.csv

@@ -144,6 +144,13 @@ Taxi:
     2-3 times a week: 2_3_week
     4-5 times a week: 4_5_week
     Once a day or more: once_day
+next_vehicle_type:
+  type: mc
+  label: For your next vehicle purchase, which type of vehicle would you consider
+    ?
+  options:
+    Sedan: sedan_images
+    SUV: suv_images
 images:
   type: unknown
   label: []
@@ -178,28 +185,6 @@ plan_lease_buy:
     Maybe/ Not sure: Maybe_Not_sure
     Probably Yes: Probably_Yes
     Definitely Yes: Definitely_Yes
-next_car_budget_range:
-  type: mc_multiple
-  label: What is your budget range for this next vehicle purchase (select ALL that
-    apply)?
-  options:
-    $4,999 or less: '4999'
-    $5,000 - $9,999: '9999'
-    $10,000 - $14,999: '14999'
-    $15,000 - $19,999: '19999'
-    $20,000 - $24,999: '24999'
-    $25,000 - $29,999: '29999'
-    $30,000 - $34,999: '34999'
-    $35,000 - $39,999: '39999'
-    $40,000 - $44,999: '44999'
-    $45,000 - $49,999: '49999'
-    $50,000 - $59,999: '59999'
-    $60,000 - $69,999: '69999'
-    $70,000 - $79,999: '79999'
-    $80,000 - $89,999: '89999'
-    $90,000 - $99,999: '99999'
-    100,000 or more: '100000'
-    I'm not sure: not_sure
 next_car_down_payment:
   type: select
   label: What will be your down payment for your next car?
@@ -266,44 +251,44 @@ cbc_q1:
   type: mc_buttons
   label: (1 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 75 Purchase Price:  Operating Cost:  9 acc time: 6 Mileage: 20': option_1
-    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 125 Purchase Price:  Operating Cost:  18 acc time: 6 Mileage: 45': option_2
-    'Option 3Vehicle Type:  ElectricRange(in miles): 200 Purchase Price:  Operating Cost:  15 acc time: 8 Mileage: 50': option_3
+    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 75 Purchase Price:  Operating Cost:  18 acc time: 7 Mileage: 55': option_1
+    'Option 2Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  9 acc time: 7 Mileage: 40': option_2
+    'Option 3Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  9 acc time: 6 Mileage: 40': option_3
 cbc_q2:
   type: mc_buttons
   label: (2 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 250 Purchase Price:  Operating Cost:  18 acc time: 8 Mileage: 50': option_1
-    'Option 2Vehicle Type:  ElectricRange(in miles): 150 Purchase Price:  Operating Cost:  21 acc time: 8 Mileage: 45': option_2
-    'Option 3Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  6 acc time: 8 Mileage: 40': option_3
+    'Option 1Vehicle Type:  ElectricRange(in miles): 100 Purchase Price:  Operating Cost:  6 acc time: 9 Mileage: 60': option_1
+    'Option 2Vehicle Type:  ElectricRange(in miles): 225 Purchase Price:  Operating Cost:  15 acc time: 6 Mileage: 45': option_2
+    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 125 Purchase Price:  Operating Cost:  21 acc time: 6 Mileage: 45': option_3
 cbc_q3:
   type: mc_buttons
   label: (3 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 100 Purchase Price:  Operating Cost:  18 acc time: 6 Mileage: 60': option_1
-    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 200 Purchase Price:  Operating Cost:  21 acce time: 9 Mileage: 40': option_2
-    'Option 3Vehicle Type:  ElectricRange(in miles): 250 Purchase Price:  Operating Cost:  12 acc time: 6 Mileage: 50': option_3
+    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 200 Purchase Price:  Operating Cost:  6 acc time: 9 Mileage: 30': option_1
+    'Option 2Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  21 acce time: 6 Mileage: 40': option_2
+    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 75 Purchase Price:  Operating Cost:  6 acc time: 6 Mileage: 20': option_3
 cbc_q4:
   type: mc_buttons
   label: (4 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  21 acc time: 8 Mileage: 60': option_1
-    'Option 2Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  21 acc time: 7 Mileage: 50': option_2
-    'Option 3Vehicle Type:  ElectricRange(in miles): 100 Purchase Price:  Operating Cost:  15 acc time: 7 Mileage: 60': option_3
+    'Option 1Vehicle Type:  ElectricRange(in miles): 125 Purchase Price:  Operating Cost:  6 acc time: 6 Mileage: 40': option_1
+    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 100 Purchase Price:  Operating Cost:  15 acc time: 7 Mileage: 55': option_2
+    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 225 Purchase Price:  Operating Cost:  21 acc time: 7 Mileage: 40': option_3
 cbc_q5:
   type: mc_buttons
   label: (5 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  ElectricRange(in miles): 200 Purchase Price:  Operating Cost:  12 acc time: 9 Mileage: 45': option_1
-    'Option 2Vehicle Type:  ElectricRange(in miles): 125 Purchase Price:  Operating Cost:  9 acc time: 7 Mileage: 45': option_2
-    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 250 Purchase Price:  Operating Cost:  12 acc time: 7 Mileage: 40': option_3
+    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 100 Purchase Price:  Operating Cost:  6 acc time: 7 Mileage: 30': option_1
+    'Option 2Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  21 acc time: 7 Mileage: 30': option_2
+    'Option 3Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  9 acc time: 7 Mileage: 30': option_3
 cbc_q6:
   type: mc_buttons
   label: (6 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  ElectricRange(in miles): 200 Purchase Price:  Operating Cost:  12 acc time: 9 Mileage: 45': option_1
-    'Option 2Vehicle Type:  ElectricRange(in miles): 125 Purchase Price:  Operating Cost:  9 acc time: 7 Mileage: 45': option_2
-    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 250 Purchase Price:  Operating Cost:  12 acc time: 7 Mileage: 40': option_3
+    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 100 Purchase Price:  Operating Cost:  6 acc time: 7 Mileage: 30': option_1
+    'Option 2Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  21 acc time: 7 Mileage: 30': option_2
+    'Option 3Vehicle Type:  GasolineRange(in miles): 0 Purchase Price:  Operating Cost:  9 acc time: 7 Mileage: 30': option_3
 dob:
   type: date
   label: What is your date of birth?

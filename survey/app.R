@@ -7,16 +7,16 @@ library(dplyr)
 
 # Database setup
 
-#db <- sd_db_connect()
+db <- sd_db_connect()
 
-db <- sd_database(
-  host   = "",
-  dbname = "",
-  port   = "",
-  user   = "",
-  table  = "",
-  ignore = TRUE
-)
+# db <- sd_database(
+#   host   = "",
+#   dbname = "",
+#   port   = "",
+#   user   = "",
+#   table  = "",
+#   ignore = TRUE
+# )
 
 
 # Server setup
