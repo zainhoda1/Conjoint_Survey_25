@@ -11,14 +11,23 @@ library(tidyverse)
 library(here)
 
 # Define profiles with attributes and levels
-profiles <- cbc_profiles(
-  powertrain  = c('Gasoline', 'Electric', 'Plug-in Hybrid'),
-  price     = seq(0.8,1.20,0.1),
-  range = seq(50, 250, 25),
-  mileage = seq(20, 60, 5),
-  operating_cost = seq(6, 21, 3),
-  accelTime = seq (6,9,1)
+profiles_used <- cbc_profiles(
+  powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid'),
+  price          = seq(0.8, 1.1, 0.1),
+  range          = seq(50, 250, 25),
+  mileage        = seq(20, 60, 5),
+  my             = seq(2015, 2023),
+  operating_cost = seq(6, 21, 3)
 )
+
+profiles_new <- cbc_profiles(
+  powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid'),
+  price          = seq(0.8, 1.1, 0.1),
+  range          = seq(50, 250, 25),
+  mileage        = seq(20, 60, 5),
+  operating_cost = seq(6, 21, 3)
+)
+
 
 # Make a basic survey using the full factorial of all profiles
 design <- cbc_design(
