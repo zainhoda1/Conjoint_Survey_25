@@ -4,6 +4,7 @@ library(tidyverse)
 library(here)
 library(glue)
 library(dplyr)
+library(kableExtra)
 
 # Database setup
 
@@ -62,7 +63,7 @@ server <- function(input, output, session) {
   sd_question(
     type  = 'mc_buttons',
     id    = 'images',
-    label = "Which type of car are you planning to buy?",
+    label = "Select a vehicle based on it’s segment / style that is most closely aligned with the next vehicle you are considering purchasing",
     option = chosen
   )
 
@@ -81,7 +82,7 @@ server <- function(input, output, session) {
       list(
         src = chosen_src,
         contentType = "image/jpg",
-        width = "100%"
+        width = "200px"
       )
     }, deleteFile = FALSE)
 
@@ -92,6 +93,8 @@ server <- function(input, output, session) {
   respondentID <- sample(survey$respID, 1)
   df <- survey %>%
     filter(respID == respondentID)
+
+
 
   q1_alts <- df %>% filter(qID == 1)
   q1_alt1 <- q1_alts %>% filter(altID == 1)
@@ -144,6 +147,46 @@ server <- function(input, output, session) {
     sd_store_value(q2c3)
 
   })
+
+  observe(
+    {
+
+  # Function to create the options table for a given choice question
+  make_cbc_table <- function(df) {
+    alts <- df %>%
+      # mutate (
+      #   pp = (as.numeric(input$budget)* price)
+      #     ) %>%
+      # Make nicer attribute labels
+      select(
+        `Option:` = altID,
+        `Vehicle Type:` = powertrain,
+        `Range(in miles)` = range,
+        `Purchase Price` = price,
+        `Operating Cost` = operating_cost,
+        `acc time` =  accelTime,
+        `Mileage` = mileage
+        )
+    row.names(alts) <- NULL # Drop row names
+
+    table <- kbl(t(alts), escape = FALSE) %>%
+      kable_styling(
+        bootstrap_options = c("striped", "hover", "condensed"),
+        full_width = FALSE,
+        position = "center"
+      )
+    function() { table }
+  }
+
+  output$cbc1_table <- make_cbc_table(df |> filter(qID == 1))
+  output$cbc2_table <- make_cbc_table(df |> filter(qID == 2))
+  output$cbc3_table <- make_cbc_table(df |> filter(qID == 3))
+  output$cbc4_table <- make_cbc_table(df |> filter(qID == 4))
+  output$cbc5_table <- make_cbc_table(df |> filter(qID == 5))
+  output$cbc6_table <- make_cbc_table(df |> filter(qID == 6))
+
+    }
+  )
 
   observe(
     {
@@ -204,7 +247,9 @@ server <- function(input, output, session) {
 
   # Database designation and other settings
   sd_server(
-    db = db
+    db = db,
+    required_questions = c("images", "budget"),
+    cookies = FALSE
   )
 
 }

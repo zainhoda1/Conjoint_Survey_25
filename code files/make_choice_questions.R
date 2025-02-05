@@ -51,7 +51,7 @@ head(design) # preview
 # head(design) # preview
 
 
-design$range[design$powertrain =='Gasoline']= 0
+design$range[design$powertrain =='Gasoline']= 'NA'
 
 duplicates <- design[duplicated(design[c('respID', 'qID', 'powertrain', 'price',
                                        'range', 'mileage', 'operating_cost' )]), ]
