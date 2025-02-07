@@ -249,7 +249,7 @@ server <- function(input, output, session) {
   sd_server(
     db = db,
     required_questions = c("images", "budget"),
-    cookies = FALSE
+    use_cookies = FALSE
   )
 
 }

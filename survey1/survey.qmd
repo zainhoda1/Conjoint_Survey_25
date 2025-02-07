@@ -75,6 +75,7 @@ This is another page in your survey.
 
 ```{r}
 
+shiny::imageOutput('chosen_image')
 
 
 # Define q1 choice option
@@ -106,6 +107,17 @@ acc_type1 <- sd_output("acc_type1", type = "value")
 resp_id_send <- sd_output("resp_id_send", type = "value")
 
 
+# # Pre-compute all values
+# values <- list(
+#   q1c1_1 = sd_output("q1c1", type = "value"),
+#   q1c2_2 = sd_output("q1c2", type = "value"),
+#   q1c3_3 = sd_output("q1c3", type = "value"),
+#   vehi_type1 = sd_output("vehi_type1", type = "value"),
+#   range_type1 = sd_output("range_type1", type = "value"),
+#   range_type2 = sd_output("range_type2", type = "value"),
+#   acc_type1 = sd_output("acc_type1", type = "value"),
+#   resp_id_send = sd_output("resp_id_send", type = "value")
+# )
 
 
 
@@ -161,6 +173,13 @@ respondent ID `r sd_output("resp_id_send", type = "value")`
 
 price `r sd_output("q1c1", type = "value")`
 
+```{r}
+temp_test <- sd_output("q1c1", type = "value")
+#print(temp_test)
+print(typeof(temp_test))
+print(temp_test[1])
+
+```
 
 :::
 
@@ -268,7 +287,7 @@ price `r sd_output("q1c1", type = "value")`
     </tr>
     <tr>
       <td>Range (in miles)</td>
-      <td> `r range_type1` </td>
+      <td> q1c1_1 </td>
       <td> <div class="cell-output">`r range_type2`</div></td>  </td>
       <td> `r sd_output("range_type2", type = "value")`</td>
     </tr>
