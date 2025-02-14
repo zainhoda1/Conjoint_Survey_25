@@ -105,9 +105,80 @@ sd_next(next_page = 'welcome1', label = 'I Agree')
 
 
 ::: {#welcome1 .sd-page}
+
 # Welcome to our survey!
 
-## Below are some basic questions about your primary vehicle
+## Below are some basic questions about your household!
+
+### Please answer to the best of your knowledge
+
+```{r}
+
+
+
+
+sd_question(
+  type  = 'matrix',
+  id    = 'car_types1',
+  label = "What type of cars and how many of each do you have in your household? (Select all that apply)?",
+  row = c(
+    "0" = "0",
+    "1" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4",
+    "more than 4" = "more_than_4"
+  ),
+  option = c(
+    "Gasoline" = "Gasoline",
+    "Hybrid"     = "hybrid",
+    "Plug-in Hybrid"    = "plugin_hybrid",
+    "electric"          = "electric",
+    "other" =  "other"
+  )
+)
+
+
+
+sd_question(
+  type  = 'mc_multiple',
+  id    = 'parking',
+  label = "Where can you park at home? (Select all that apply)?",
+  option = c(
+    "Street Parking" = "Street_Parking",
+    "Driveway/ Carport"   = "Driveway_Carport",
+    "Single-family garage"  = "Single_family_garage",
+    "Shared parking garage" = "Shared_parking_garage",
+    "prefer not to say" = "prefer_not_to_say",
+    "other" =  "other"
+  )
+)
+
+
+sd_question(
+  type  = 'select',
+  id    = 'neighbor_ev_info',
+  label = "Do any of your neighbors own/lease a plug-in hybrid or pure electric vehicle (Select one)",
+  option = c(
+    "Yes" = "yes",
+    "No"  = "no",
+    "I'm not sure"  = "not_sure"
+  )
+)
+
+```
+
+<br>
+
+```{r}
+sd_next()
+```
+:::
+
+::: {#welcome2 .sd-page}
+
+
+## Below are some basic questions about your **primary vehicle**
 
 ### Please answer to the best of your knowledge
 
@@ -171,16 +242,13 @@ sd_question(
   label = "What is your monthly payment?",
   option = c(
     "Paid all cash/no loan" = "0",
-    "$100 - $199" = "199",
-    "$200 - $299" = "299",
-    "$300 - $399" = "399",
-    "$400 - $499" = "499",
-    "$500 - $599" = "599",
-    "$600 - $699" = "699",
-    "$700 - $799" = "799",
-    "$800 - $899"= "899",
-    "$900 - $999"= "999",
-    "1,000 or more" = "1000",
+    "$0 - $100" = "100",
+    "$100 - $200" = "200",
+    "$200 - $300" = "300",
+    "$300 - $500" = "500",
+    "$500 - $750" = "750",
+    "$750 - $1000" = "1000",
+    "1,000 or more" = "2000",
     "Do not remember or do not know" = "do_not_remember"
   )
 )
@@ -218,76 +286,17 @@ sd_question(
   )
 )
 
-# sd_question(
-#   type  = 'mc_multiple',
-#   id    = 'car_types',
-#   label = "What type of cars do you have in your household? (Select all that apply)?",
-#   option = c(
-#     "Gasoline" = "Gasoline",
-#     "Hybrid"     = "hybrid",
-#     "Plug-in Hybrid"    = "plugin_hybrid",
-#     "electric"          = "electric",
-#     "other" =  "other"
-#   )
-# )
-
-sd_question(
-  type  = 'matrix',
-  id    = 'car_types1',
-  label = "What type of cars and how many of each do you have in your household? (Select all that apply)?",
-  row = c(
-    "Gasoline" = "Gasoline",
-    "Hybrid"     = "hybrid",
-    "Plug-in Hybrid"    = "plugin_hybrid",
-    "electric"          = "electric",
-    "other" =  "other"
-  ),
-  option = c(
-    "zero" = "0",
-    "one" = "1",
-    "two" = "2",
-    "three" = "3",
-    "more than three" = "more_than_three"
-  )
-)
-
-
-
-
-sd_question(
-  type  = 'mc_multiple',
-  id    = 'parking',
-  label = "Where can you park at home? (Select all that apply)?",
-  option = c(
-    "Street Parking" = "Street_Parking",
-    "Driveway/ Carport"   = "Driveway_Carport",
-    "Single-family garage"  = "Single_family_garage",
-    "Shared parking garage" = "Shared_parking_garage",
-    "prefer not to say" = "prefer_not_to_say",
-    "other" =  "other"
-  )
-)
-
-
-sd_question(
-  type  = 'select',
-  id    = 'neighbor_ev_info',
-  label = "Do any of your neighbors own/lease a plug-in hybrid or pure electric vehicle (Select one)",
-  option = c(
-    "Yes" = "yes",
-    "No"  = "no",
-    "I'm not sure"  = "not_sure"
-  )
-)
 
 ```
 
 <br>
 
 ```{r}
-sd_next(next_page = 'page2')
+sd_next()
 ```
 :::
+
+
 
 ::: {#page2 .sd-page}
 ## How often you use different transportation types to get around.
@@ -296,77 +305,110 @@ sd_next(next_page = 'page2')
 
 ```{r}
 
+sd_question(
+  type  = 'mc_multiple',
+  id    = 'other_transport_choices',
+  label = "Select any of the modes you regularly use to travel:",
+  option = c(
+    "Walk" = "walk",
+    "Bicycle"     = "bicycle",
+    "Taxi"    = "taxi",
+    "Ride hail (Uber/ Lyft)"          = "Ride_hail",
+    "Bus"         = "Bus",
+    "Metro/ subway"   = "metro"
+  )
+)
 
 sd_question(
-  type  = 'select',
-  id    = 'household_vehicle',
-  label = "Your Household's vehicle",
-  option = c(
+  type  = 'matrix',
+  id    = 'other_transports',
+  label = "Select all that apply!",
+  row = c(
     "Less than once a month or never" = "never",
     "About once a month"  = "once_month",
     "About once a week" = "once_week",
     "2-3 times a week"  = "2_3_week",
     "4-5 times a week"  = "4_5_week",
     "Once a day or more"  = "once_day"
-  )
-)
-
-sd_question(
-  type  = 'select',
-  id    = 'Ride_friend',
-  label = "Ride from a friend or family member or carpool",
+  ),
   option = c(
-    "Less than once a month or never" = "never",
-    "About once a month"  = "once_month",
-    "About once a week" = "once_week",
-    "2-3 times a week"  = "2_3_week",
-    "4-5 times a week"  = "4_5_week",
-    "Once a day or more"  = "once_day"
+    "Walk, bicycle or other two wheeler" = "2_wheeler",
+    "Taxi"     = "Taxi",
+    "Public transit"    = "bus"
   )
 )
 
-sd_question(
-  type  = 'select',
-  id    = 'bicycle',
-  label = "Walk, bicycle or your own motorcycle, scooter or moped",
-  option = c(
-    "Less than once a month or never" = "never",
-    "About once a month"  = "once_month",
-    "About once a week" = "once_week",
-    "2-3 times a week"  = "2_3_week",
-    "4-5 times a week"  = "4_5_week",
-    "Once a day or more"  = "once_day"
-  )
-)
-
-sd_question(
-  type  = 'select',
-  id    = 'Taxi',
-  label = "Taxi or Uber",
-  option = c(
-    "Less than once a month or never" = "never",
-    "About once a month"  = "once_month",
-    "About once a week" = "once_week",
-    "2-3 times a week"  = "2_3_week",
-    "4-5 times a week"  = "4_5_week",
-    "Once a day or more"  = "once_day"
-  )
-)
-
-sd_question(
-  type  = 'select',
-  id    = 'Taxi',
-  label = "Public transit (bus, streetcar, subway, metro, rapid transit)",
-  option = c(
-    "Less than once a month or never" = "never",
-    "About once a month"  = "once_month",
-    "About once a week" = "once_week",
-    "2-3 times a week"  = "2_3_week",
-    "4-5 times a week"  = "4_5_week",
-    "Once a day or more"  = "once_day"
-  )
-)
-
+# 
+# sd_question(
+#   type  = 'select',
+#   id    = 'household_vehicle',
+#   label = "Your Household's vehicle",
+#   option = c(
+#     "Less than once a month or never" = "never",
+#     "About once a month"  = "once_month",
+#     "About once a week" = "once_week",
+#     "2-3 times a week"  = "2_3_week",
+#     "4-5 times a week"  = "4_5_week",
+#     "Once a day or more"  = "once_day"
+#   )
+# )
+# 
+# sd_question(
+#   type  = 'select',
+#   id    = 'Ride_friend',
+#   label = "Ride from a friend or family member or carpool",
+#   option = c(
+#     "Less than once a month or never" = "never",
+#     "About once a month"  = "once_month",
+#     "About once a week" = "once_week",
+#     "2-3 times a week"  = "2_3_week",
+#     "4-5 times a week"  = "4_5_week",
+#     "Once a day or more"  = "once_day"
+#   )
+# )
+# 
+# sd_question(
+#   type  = 'select',
+#   id    = 'bicycle',
+#   label = "Walk, bicycle or your own motorcycle, scooter or moped",
+#   option = c(
+#     "Less than once a month or never" = "never",
+#     "About once a month"  = "once_month",
+#     "About once a week" = "once_week",
+#     "2-3 times a week"  = "2_3_week",
+#     "4-5 times a week"  = "4_5_week",
+#     "Once a day or more"  = "once_day"
+#   )
+# )
+# 
+# sd_question(
+#   type  = 'select',
+#   id    = 'Taxi',
+#   label = "Taxi or Uber",
+#   option = c(
+#     "Less than once a month or never" = "never",
+#     "About once a month"  = "once_month",
+#     "About once a week" = "once_week",
+#     "2-3 times a week"  = "2_3_week",
+#     "4-5 times a week"  = "4_5_week",
+#     "Once a day or more"  = "once_day"
+#   )
+# )
+# 
+# sd_question(
+#   type  = 'select',
+#   id    = 'Taxi',
+#   label = "Public transit (bus, streetcar, subway, metro, rapid transit)",
+#   option = c(
+#     "Less than once a month or never" = "never",
+#     "About once a month"  = "once_month",
+#     "About once a week" = "once_week",
+#     "2-3 times a week"  = "2_3_week",
+#     "4-5 times a week"  = "4_5_week",
+#     "Once a day or more"  = "once_day"
+#   )
+# )
+# 
 
 ```
 
@@ -470,8 +512,7 @@ sd_question(
   option = c(
     "New" = "New",
     "Used"  = "Used",
-    "Both" = "Both",
-    "I'm not sure"  = "I'm not sure"
+    "Both" = "Both"
   )
 )
 

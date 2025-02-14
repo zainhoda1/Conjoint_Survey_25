@@ -75,24 +75,8 @@ server <- function(input, output, session) {
 
 
 
-  # Run observer that updates the chosen_image when an image is chosen
-  observe({
 
-    # This updates whenever input$images changes
-    chosen_src <- paste0(
-      'images/car-images/', input$images, '.jpg'
-    )
 
-    # Update the rendered image
-    output$chosen_image <- renderImage({
-      list(
-        src = chosen_src,
-        contentType = "image/jpg",
-        width = "200px"
-      )
-    }, deleteFile = FALSE)
-
-  })
 
 
   survey <- read_csv(here('data', 'choice_questions.csv'))
@@ -276,6 +260,306 @@ server <- function(input, output, session) {
   #   input$know_electric_vehicle == "Yes" ~ "write_electric_name"
   # )
 
+  observe(
+    {
+
+ # Run observer that updates the chosen_image when an image is chosen
+
+        # This updates whenever input$images changes
+        chosen_src <- paste0(
+          'images/car-images/', input$images, '.jpg'
+        )
+
+        # Update the rendered image
+        output$chosen_image <- renderImage({
+          list(
+            src = chosen_src,
+            contentType = "image/jpg",
+            width = "200px"
+          )
+        }, deleteFile = FALSE)
+
+
+  create_car_table1 <- function(car_data, chosen_src) {
+
+    car_data <- car_data %>%
+      # mutate(
+      #   price = as.numeric(price) * as.numeric(input$budget)
+      #   #, image = paste0('<img src="', image, '" width=100>')
+      #   ) %>%
+    select(powertrain, price, range, mileage, operating_cost, accelTime)
+
+    rownames(car_data) <- c("Row1","Row2","Row3")
+    car_data <- t(car_data)
+    car_data <- as.data.frame(car_data)
+    row.names(car_data) <- NULL
+    car_data$names <- c('<span title="Does the car run on gas or Electricity?" style="cursor: help; text-decoration: underline;">Powertrain</span>',
+                        '<span title="What is the price of the vehicle" style="cursor: help; text-decoration: underline;">Price</span>',
+                        '<span title="How many miles in a full tank/ fully charged battery" style="cursor: help; text-decoration: underline;">Range</span>',
+                        '<span title="How many miles in a gallon of fuel" style="cursor: help; text-decoration: underline;">Mileage</span>',
+                        '<span title="Operating cost per 100 miles" style="cursor: help; text-decoration: underline;">Operating Cost</span>',
+                        '<span title="Acceleration time 0 to 60 mph" style="cursor: help; text-decoration: underline;">accelTime</span>'
+                        )
+
+
+
+
+    # car_data should be a data frame with columns: model, range, price
+
+    # Create the header part of the table
+    html_table <- sprintf('
+
+    <link rel="stylesheet" href="css/testing_table.css">
+
+    <body>
+
+  <div class="car-comparison">
+    <div class="header-section">
+    <div class="header-question">
+      Assuming that you were able to purchase a vehicle that looked like the one you selected (see photo), which of these versions of that vehicle would you be most likely to purchase Compare the key features below:
+        </div>
+        <img src="%s" alt="Selected vehicle" style="max-width: 400px; height: auto;"><br><br>
+      </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Option 1</th>
+                <th>Option 2</th>
+                <th>Option 3</th>
+            </tr>
+        </thead>
+        <tbody>
+      ', chosen_src)
+
+    # Add rows for each car in the data frame
+    for(i in 1:nrow(car_data)) {
+      if (i ==2)
+        {
+          car_data$Row1[i] <- ifelse(is.na(car_data$Row1[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row1[i]))
+          car_data$Row2[i] <- ifelse(is.na(car_data$Row2[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row2[i]))
+          car_data$Row3[i] <- ifelse(is.na(car_data$Row3[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row3[i]))
+
+        }
+      temp <- as.numeric(input$budget) * as.numeric(car_data$Row1[i])
+      row <- sprintf('
+            <tr>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+
+            </tr>',
+                     car_data$names[i],
+                     car_data$Row1[i],
+                     car_data$Row2[i],
+                     car_data$Row3[i]
+
+      )
+      html_table <- paste0(html_table, row)
+    }
+
+    # Close the table
+    # html_table <- paste0(html_table, '
+    #     </tbody>
+    # </table>')
+
+    html_table <- paste0(html_table, '
+        </tbody>
+      </table>
+      <div class="footnote">
+        *To view an attribute description, hover over it. <br>
+        **The average acceleration for cars in the U.S. is 0 to 60 mph in 7.4 seconds
+      </div>
+    </div>')
+
+
+
+    function() { html_table }
+  }
+
+  df_temp <- df |> filter(qID == 1)
+  df_temp2 <- df |> filter(qID == 2)
+  df_temp3 <- df |> filter(qID == 3)
+  df_temp4 <- df |> filter(qID == 4)
+  df_temp5 <- df |> filter(qID == 5)
+  df_temp6 <- df |> filter(qID == 6)
+
+
+  output$make_table1 <-create_car_table1(df_temp, chosen_src)
+  output$make_table2 <-create_car_table1(df_temp2, chosen_src)
+  output$make_table3 <-create_car_table1(df_temp3, chosen_src)
+  output$make_table4 <-create_car_table1(df_temp4, chosen_src)
+  output$make_table5 <-create_car_table1(df_temp5, chosen_src)
+  output$make_table6 <-create_car_table1(df_temp6, chosen_src)
+    }
+  )
+
+
+  create_car_table2 <- function(car_data) {
+
+    # car_data <- car_data %>%
+    #   mutate(
+    #     price = paste(scales::dollar(price), "/ lb")
+    #     #, image = paste0('<img src="', image, '" width=100>')
+    #   )
+
+    # car_data should be a data frame with columns: model, range, price
+
+    # Create the header part of the table
+    html_table2 <-
+    '
+    <html>
+<head>
+<style>
+  .container {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .header {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .header-text {
+    flex: 2;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .header-image {
+    flex: 1;
+    max-width: 300px;
+  }
+
+  .header-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+  }
+
+  td:first-child {
+    text-align: left;
+    background-color: #f8f8f8;
+    font-weight: bold;
+    width: 20%;
+  }
+
+  .footnote {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+  }
+
+  .vehicle-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-text">
+      Assuming that you were able to purchase a vehicle that looked like the one you selected (see photo), which of these versions of that vehicle would you be most likely to purchase Compare the key features below:
+    </div>
+    <div class="header-image">
+      <img src="/api/placeholder/400/320" alt="SUV">
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <th>Attribute</th>
+      <th>Option 1</th>
+      <th>Option 2</th>
+      <th>Option 3</th>
+    </tr>
+    <tr>
+      <td>Vehicle Type</td>
+      <td>
+        {car_data$range[1]}
+      </td>
+      <td>
+        Plug-In Hybrid ⛽<br>
+        300 mile range on 1 tank<br>
+        (first 40 miles electric)
+      </td>
+      <td>
+        Electric ⚡<br>
+        75 mile range on full charge
+      </td>
+    </tr>
+    <tr>
+      <td>Range (in miles)</td>
+      <td>`{r}car_data$range[1]`</td>
+      <td>`car_data$range[1]`</td>
+      <td>{car_data$range[1]}</td>
+    </tr>
+    <tr>
+      <td>Purchase Price</td>
+      <td>$28,000</td>
+      <td>$32,000</td>
+      <td>$35,000</td>
+    </tr>
+    <tr>
+      <td>Operating Cost (Equivalent Gasoline Fuel Efficiency)</td>
+      <td>21 cents per mile</td>
+      <td>6 cents per mile<br>(20 MPG equivalent)</td>
+      <td>12 cents per mile<br>(60 MPG equivalent)</td>
+    </tr>
+    <tr>
+      <td>0 to 60 mph Acceleration Time</td>
+      <td>8.1 seconds</td>
+      <td>8.1 seconds</td>
+      <td>8 seconds</td>
+    </tr>
+    <tr>
+      <td>Mileage</td>
+      <td>25</td>
+      <td>25</td>
+      <td>55</td>
+    </tr>
+  </table>
+
+  <div class="footnote">
+    *To view an attribute description, click on ℹ️<br>
+    **The average acceleration for cars in the U.S. is 0 to 60 mph in 7.4 seconds
+  </div>
+</div>
+</body>
+</html>
+
+    '
+    function() { html_table2 }
+  }
+
+
+
+
   # Database designation and other settings
   sd_server(
     db = db,
@@ -284,6 +568,9 @@ server <- function(input, output, session) {
   )
 
 }
+
+
+
 
 # shinyApp() initiates your app - don't change it
 shiny::shinyApp(ui = sd_ui(), server = server)

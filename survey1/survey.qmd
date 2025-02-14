@@ -13,37 +13,19 @@ library(glue)
 library(kableExtra)
 ```
 
-
-
-
-::: {#page2 .sd-page}
-
+::: {#page00 .sd-page}
 
 ```{r}
-#| include: false
-
-# Here we prepare the data frames for choice questions, respondent ID, etc.
-survey <- read_csv(here('data', 'choice_questions.csv'))
-
-respondentID <- sample(survey$respID, 1)
-
-
- 
-df <- survey %>%
-    filter(respID == respondentID)
-
-# resp_id_send1 <- sd_output("resp_id_send", type = "value")
-# 
-#  
-# df <- survey %>%
-#     filter(respID == resp_id_send1)
-
+cbc_options <- c(
+  "Option 1" = "option_1",   
+  "Option 2" = "option_2", 
+  "Option 3" = "option_3"
+)
 ```
 
-
 ```{r}
-sd_output(id = 'images', type = 'question')
 
+sd_output(id = 'images', type = 'question')
 
 sd_question(
   type  = 'select',
@@ -64,120 +46,52 @@ sd_question(
     "more than $30,000"= "35000"
   )
 )
+
+sd_next()
+#sd_next(next_page  = "page3")
+
+
 ```
 
+:::
 
-This is another page in your survey.
-
-{surveydown} supports many types of questions. For example, here is a simple `text` type question:
-
-
+::: {#page1 .sd-page}
 
 ```{r}
 
-shiny::imageOutput('chosen_image')
-
-
-# Define q1 choice option
-
-
-q1_alts <- df %>% filter(qID == 1)
-q1_alt1 <- q1_alts %>% filter(altID == 1)
-q1_alt2 <- q1_alts %>% filter(altID == 2)
-q1_alt3 <- q1_alts %>% filter(altID == 3)
-
-
-
-# Define the option vector
-
-q1_options <- c("option_1", "option_2", "option_3")
-
-# Change the names of each element to display markdown-formatted
-# text and an embedded image using html
-
-
-q1c1_1 <- sd_output("q1c1", type = "value")
-q1c2_2 <- sd_output("q1c2", type = "value")
-q1c3_3 <- sd_output("q1c3", type = "value")
-
-vehi_type1 <- sd_output("vehi_type1", type = "value")
-range_type1 <- sd_output("range_type1", type = "value")
-range_type2 <- sd_output("range_type2", type = "value")
-acc_type1 <- sd_output("acc_type1", type = "value")
-resp_id_send <- sd_output("resp_id_send", type = "value")
-
-
-# # Pre-compute all values
-# values <- list(
-#   q1c1_1 = sd_output("q1c1", type = "value"),
-#   q1c2_2 = sd_output("q1c2", type = "value"),
-#   q1c3_3 = sd_output("q1c3", type = "value"),
-#   vehi_type1 = sd_output("vehi_type1", type = "value"),
-#   range_type1 = sd_output("range_type1", type = "value"),
-#   range_type2 = sd_output("range_type2", type = "value"),
-#   acc_type1 = sd_output("acc_type1", type = "value"),
-#   resp_id_send = sd_output("resp_id_send", type = "value")
-# )
-
-
-
-oper_cost <- sd_output("oper_cost1", type = "value")
-resp_id_send1 <- sd_output("resp_id_send", type = "value")
-
-names(q1_options)[1] <- glue("**Option 1**<br>
-    **Vehicle Type**:  {q1_alt1$powertrain}   
-    **Range(in miles)**: {q1_alt1$range} <br>
-    **Purchase Price**: {q1c1_1} <br>
-    **Operating Cost**:  {q1_alt1$operating_cost} <br> 
-    **acc time**: {q1_alt1$accelTime} <br>
-    **Mileage**: {q1_alt1$mileage} "
-)
-names(q1_options)[2] <-glue("**Option 2**<br>
-    **Vehicle Type**:  {q1_alt2$powertrain}   
-    **Range(in miles)**: {q1_alt2$range} <br>
-    **Purchase Price**: {q1c2_2} <br>
-    **Operating Cost**:  {q1_alt2$operating_cost} <br> 
-    **acc time**: {q1_alt2$accelTime} <br>
-    **Mileage**: {q1_alt2$mileage} "
-)
-names(q1_options)[3] <- glue("**Option 3**<br>
-    **Vehicle Type**:  {q1_alt3$powertrain}   
-    **Range(in miles)**: {q1_alt3$range} <br>
-    **Purchase Price**: {q1c3_3} <br>
-    **Operating Cost**:  {q1_alt3$operating_cost} <br> 
-    **acc time**: {q1_alt3$accelTime} <br>
-    **Mileage**: {q1_alt3$mileage} "
-)
+sd_output("make_table1") 
 
 sd_question(
   type   = 'mc_buttons',
   id     = 'cbc_q1',
-  label  = "(1 of 6) If these were your only options, which would you choose?",
-  option = q1_options
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
+)
+
+sd_next()
+
+
+```
+
+:::
+
+::: {#page2 .sd-page}
+
+```{r}
+sd_output("make_table2")
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'cbc_q2',
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
 )
 
 
 sd_next()
 
-```
-
-powertrain `r sd_output("vehi_type1", type = "value")`
-
-range `r sd_output("range_type1", type = "value")`
-
-range2 `r sd_output("range_type2", type = "value")`
-
-acceleration`r sd_output("acc_type1", type = "value")`
-
-respondent ID `r sd_output("resp_id_send", type = "value")`
-
-price `r sd_output("q1c1", type = "value")`
-
-```{r}
-temp_test <- sd_output("q1c1", type = "value")
-#print(temp_test)
-print(typeof(temp_test))
-print(temp_test[1])
 
 ```
 
@@ -186,148 +100,87 @@ print(temp_test[1])
 
 ::: {#page3 .sd-page}
 
-```{=html}
-<style>
-.car-comparison {
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 8px;
-}
-.header-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-.header-question {
-  flex: 1;
-  font-size: 0.8em;
-  font-weight: bold;
-  color: #333;
-  padding: 20px;
-}
-.header-image {
-  flex: 1;
-  max-width: 400px;
-  height: auto;
-  border-radius: 8px;
-}
-.car-table {
-  border-collapse: separate;
-  border-spacing: 10px;
-  width: 100%;
-  margin: 0;
-}
-.car-table th, 
-.car-table td {
-  background-color: white;
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  font-size: 0.8em;
-}
-.car-table th:first-child,
-.car-table td:first-child {
-  text-align: left;
-  background-color: #f8f8f8;
-  font-weight: bold;
-}
-.footnote {
-  font-size: 0.6em;
-  font-style: italic;
-  margin-top: 20px;
-}
-.icon {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-  margin-right: 8px;
-}
-@media (max-width: 768px) {
-  .header-section {
-    flex-direction: column;
-  }
-  .header-image {
-    max-width: 100%;
-  }
-}
-</style>
+```{r}
+sd_output("make_table3")
 
-<div class="car-comparison">
-  <div class="header-section">
-    <div class="header-question">
-      Assuming that you were able to purchase a vehicle that looked like the one you selected (see photo), which of these versions of that vehicle would you be most likely to purchase Compare the key features below:
-    </div>
-    <img src="suv_small_8.JPG"  alt="Charging icon"><br>
-  </div>
-  
-  <table class="car-table">
-    <tr>
-      <th>Attribute</th>
-      <th>Option 1</th>
-      <th>Option 2</th>
-      <th>Option 3</th>
-    </tr>
-    <tr>
-      <td>Vehicle Type</td>
-      <td>
-        Conventional <img src="pump.webp" width="25" alt="Gas pump icon"><br>
-        300 mile range on 1 tank
-      </td>
-      <td>
-        Plug-In Hybrid <img src="pump.webp" width="25" alt="Gas pump icon"> <img src="charging.JPG" width="23" alt="Charging icon"><br>
-        300 mile range on 1 tank<br>
-        (first 40 miles electric)
-      </td>
-      <td>
-        Electric <img src="charging.JPG" width="25" height="23" alt="Charging icon"><br>
-        75 mile range on full charge
-      </td>
-    </tr>
-    <tr>
-      <td>Range (in miles)</td>
-      <td> q1c1_1 </td>
-      <td> <div class="cell-output">`r range_type2`</div></td>  </td>
-      <td> `r sd_output("range_type2", type = "value")`</td>
-    </tr>
-    <tr>
-      <td>Purchase Price</td>
-      <td> `{r} glue( "{q1c1_1}") ` </td>
-      <td>`{r} glue("**Purchase Price**: {q1c1_1} ")` </td>
-      <td>`{r} q1c3_3` </td>
-    </tr>
-    <tr>
-      <td>Operating Cost (Equivalent Gasoline Fuel Efficiency)</td>
-      <td>`{r} oper_cost`</td>
-      <td>`{r} glue("{q1_alt2$operating_cost} cents per mile") ` <br>(20 MPG equivalent)</td>
-      <td>`{r} glue("{q1_alt3$operating_cost} cents per mile") ` <br>(60 MPG equivalent)</td>
-    </tr>
-    <tr>
-      <td>0 to 60 mph Acceleration Time</td>
-      <td>`{r} acc_type1 `</td>
-      <td>!! `{r} acc_type1 ` </td>
-      <td>`{r} glue("{q1_alt3$accelTime} seconds") `</td>
-    </tr>
-    <tr>
-      <td>Mileage</td>
-      <td> `{r} vehi_type1 ` </td>
-      <td> `{r} {q1_alt2$mileage} ` </td>
-      <td> `{r} {q1_alt3$mileage} ` </td>
-    </tr>
-  </table>
-  
-  <div class="footnote">
-    *To view an attribute description, click on: ℹ️<br>
-    **The average acceleration for cars in the U.S. is 0 to 60 mph in 7.4 seconds
-  </div>
-</div>
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'cbc_q3',
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
+)
+
+
+sd_next()
+
+
 ```
 
+:::
 
+
+::: {#page4 .sd-page}
 
 ```{r}
+sd_output("make_table4")
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'cbc_q4',
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
+)
+
+
 sd_next()
+
+
+```
+
+:::
+
+
+::: {#page5 .sd-page}
+
+```{r}
+sd_output("make_table5")
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'cbc_q5',
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
+)
+
+
+sd_next()
+
+
+```
+
+:::
+
+
+::: {#page6 .sd-page}
+
+```{r}
+sd_output("make_table6")
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'cbc_q6',
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
+)
+
+
+sd_next()
+
+
 ```
 
 :::

@@ -1,5 +1,94 @@
 # ! JUST READ - don't change the content of this file
 # Question structure extracted from survey.html
+car_types1:
+  type: matrix
+  label: What type of cars and how many of each do you have in your household? (Select
+    all that apply)?
+  options:
+    Gasoline: Gasoline
+    Hybrid: hybrid
+    Plug-in Hybrid: plugin_hybrid
+    electric: electric
+    other: other
+  row:
+    '0': '0'
+    '1': '1'
+    '2': '2'
+    '3': '3'
+    '4': '4'
+    more than 4: more_than_4
+car_types1_0:
+  type: mc
+  label: []
+  options:
+    Gasoline: Gasoline
+    Hybrid: hybrid
+    Plug-in Hybrid: plugin_hybrid
+    electric: electric
+    other: other
+car_types1_1:
+  type: mc
+  label: []
+  options:
+    Gasoline: Gasoline
+    Hybrid: hybrid
+    Plug-in Hybrid: plugin_hybrid
+    electric: electric
+    other: other
+car_types1_2:
+  type: mc
+  label: []
+  options:
+    Gasoline: Gasoline
+    Hybrid: hybrid
+    Plug-in Hybrid: plugin_hybrid
+    electric: electric
+    other: other
+car_types1_3:
+  type: mc
+  label: []
+  options:
+    Gasoline: Gasoline
+    Hybrid: hybrid
+    Plug-in Hybrid: plugin_hybrid
+    electric: electric
+    other: other
+car_types1_4:
+  type: mc
+  label: []
+  options:
+    Gasoline: Gasoline
+    Hybrid: hybrid
+    Plug-in Hybrid: plugin_hybrid
+    electric: electric
+    other: other
+car_types1_more_than_4:
+  type: mc
+  label: []
+  options:
+    Gasoline: Gasoline
+    Hybrid: hybrid
+    Plug-in Hybrid: plugin_hybrid
+    electric: electric
+    other: other
+parking:
+  type: mc_multiple
+  label: Where can you park at home? (Select all that apply)?
+  options:
+    Street Parking: Street_Parking
+    Driveway/ Carport: Driveway_Carport
+    Single-family garage: Single_family_garage
+    Shared parking garage: Shared_parking_garage
+    prefer not to say: prefer_not_to_say
+    other: other
+neighbor_ev_info:
+  type: select
+  label: Do any of your neighbors own/lease a plug-in hybrid or pure electric vehicle
+    (Select one)
+  options:
+    'Yes': 'yes'
+    'No': 'no'
+    I'm not sure: not_sure
 acquire_primary_vehicle:
   type: select
   label: Did you buy or lease your current primary vehicle?
@@ -43,16 +132,13 @@ monthly_payment:
   label: What is your monthly payment?
   options:
     Paid all cash/no loan: '0'
-    $100 - $199: '199'
-    $200 - $299: '299'
-    $300 - $399: '399'
-    $400 - $499: '499'
-    $500 - $599: '599'
-    $600 - $699: '699'
-    $700 - $799: '799'
-    $800 - $899: '899'
-    $900 - $999: '999'
-    1,000 or more: '1000'
+    $0 - $100: '100'
+    $100 - $200: '200'
+    $200 - $300: '300'
+    $300 - $500: '500'
+    $500 - $750: '750'
+    $750 - $1000: '1000'
+    1,000 or more: '2000'
     Do not remember or do not know: do_not_remember
 gas_mileage:
   type: select
@@ -77,125 +163,72 @@ refueling:
     three times a week: '4'
     four times a week: '5'
     over four times a week: '6'
-car_types1:
-  type: matrix
-  label: What type of cars and how many of each do you have in your household? (Select
-    all that apply)?
-  options:
-    zero: '0'
-    one: '1'
-    two: '2'
-    three: '3'
-    more than three: more_than_three
-  row:
-    Gasoline: Gasoline
-    Hybrid: hybrid
-    Plug-in Hybrid: plugin_hybrid
-    electric: electric
-    other: other
-car_types1_Gasoline:
-  type: mc
-  label: []
-  options:
-    zero: '0'
-    one: '1'
-    two: '2'
-    three: '3'
-    more than three: more_than_three
-car_types1_hybrid:
-  type: mc
-  label: []
-  options:
-    zero: '0'
-    one: '1'
-    two: '2'
-    three: '3'
-    more than three: more_than_three
-car_types1_plugin_hybrid:
-  type: mc
-  label: []
-  options:
-    zero: '0'
-    one: '1'
-    two: '2'
-    three: '3'
-    more than three: more_than_three
-car_types1_electric:
-  type: mc
-  label: []
-  options:
-    zero: '0'
-    one: '1'
-    two: '2'
-    three: '3'
-    more than three: more_than_three
-car_types1_other:
-  type: mc
-  label: []
-  options:
-    zero: '0'
-    one: '1'
-    two: '2'
-    three: '3'
-    more than three: more_than_three
-parking:
+other_transport_choices:
   type: mc_multiple
-  label: Where can you park at home? (Select all that apply)?
+  label: 'Select any of the modes you regularly use to travel:'
   options:
-    Street Parking: Street_Parking
-    Driveway/ Carport: Driveway_Carport
-    Single-family garage: Single_family_garage
-    Shared parking garage: Shared_parking_garage
-    prefer not to say: prefer_not_to_say
-    other: other
-neighbor_ev_info:
-  type: select
-  label: Do any of your neighbors own/lease a plug-in hybrid or pure electric vehicle
-    (Select one)
+    Walk: walk
+    Bicycle: bicycle
+    Taxi: taxi
+    Ride hail (Uber/ Lyft): Ride_hail
+    Bus: Bus
+    Metro/ subway: metro
+other_transports:
+  type: matrix
+  label: Select all that apply!
   options:
-    'Yes': 'yes'
-    'No': 'no'
-    I'm not sure: not_sure
-household_vehicle:
-  type: select
-  label: Your Household’s vehicle
-  options:
+    Walk, bicycle or other two wheeler: 2_wheeler
+    Taxi: Taxi
+    Public transit: bus
+  row:
     Less than once a month or never: never
     About once a month: once_month
     About once a week: once_week
     2-3 times a week: 2_3_week
     4-5 times a week: 4_5_week
     Once a day or more: once_day
-Ride_friend:
-  type: select
-  label: Ride from a friend or family member or carpool
+other_transports_never:
+  type: mc
+  label: []
   options:
-    Less than once a month or never: never
-    About once a month: once_month
-    About once a week: once_week
-    2-3 times a week: 2_3_week
-    4-5 times a week: 4_5_week
-    Once a day or more: once_day
-bicycle:
-  type: select
-  label: Walk, bicycle or your own motorcycle, scooter or moped
+    Walk, bicycle or other two wheeler: 2_wheeler
+    Taxi: Taxi
+    Public transit: bus
+other_transports_once_month:
+  type: mc
+  label: []
   options:
-    Less than once a month or never: never
-    About once a month: once_month
-    About once a week: once_week
-    2-3 times a week: 2_3_week
-    4-5 times a week: 4_5_week
-    Once a day or more: once_day
-Taxi:
-  type: select
-  label: Public transit (bus, streetcar, subway, metro, rapid transit)
+    Walk, bicycle or other two wheeler: 2_wheeler
+    Taxi: Taxi
+    Public transit: bus
+other_transports_once_week:
+  type: mc
+  label: []
   options:
-    Less than once a month or never: never
-    About once a month: once_month
-    About once a week: once_week
-    2-3 times a week: 2_3_week
-    4-5 times a week: 4_5_week
-    Once a day or more: once_day
+    Walk, bicycle or other two wheeler: 2_wheeler
+    Taxi: Taxi
+    Public transit: bus
+other_transports_2_3_week:
+  type: mc
+  label: []
+  options:
+    Walk, bicycle or other two wheeler: 2_wheeler
+    Taxi: Taxi
+    Public transit: bus
+other_transports_4_5_week:
+  type: mc
+  label: []
+  options:
+    Walk, bicycle or other two wheeler: 2_wheeler
+    Taxi: Taxi
+    Public transit: bus
+other_transports_once_day:
+  type: mc
+  label: []
+  options:
+    Walk, bicycle or other two wheeler: 2_wheeler
+    Taxi: Taxi
+    Public transit: bus
 images:
   type: unknown
   label: []
@@ -232,7 +265,6 @@ which_market:
     New: New
     Used: Used
     Both: Both
-    I'm not sure: I'm not sure
 plan_lease_buy:
   type: select
   label: Would you consider a Plug-in Hybrid Electric or an all-electric vehicle as
@@ -291,44 +323,44 @@ cbc_q1:
   type: mc_buttons
   label: (1 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  ElectricRange(in miles): 150 Purchase Price:  Operating Cost:  21 acc time: 9 Mileage: 35': option_1
-    'Option 2Vehicle Type:  ElectricRange(in miles): 175 Purchase Price:  Operating Cost:  18 acc time: 8 Mileage: 30': option_2
-    'Option 3Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  15 acc time: 8 Mileage: 45': option_3
+    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 100 Purchase Price:  Operating Cost:  18 acc time: 9 Mileage: 25': option_1
+    'Option 2Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  15 acc time: 8 Mileage: 55': option_2
+    'Option 3Vehicle Type:  ElectricRange(in miles): 75 Purchase Price:  Operating Cost:  9 acc time: 8 Mileage: 20': option_3
 cbc_q2:
   type: mc_buttons
   label: (2 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  ElectricRange(in miles): 125 Purchase Price:  Operating Cost:  12 acc time: 9 Mileage: 35': option_1
-    'Option 2Vehicle Type:  ElectricRange(in miles): 225 Purchase Price:  Operating Cost:  6 acc time: 8 Mileage: 60': option_2
-    'Option 3Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  15 acc time: 9 Mileage: 35': option_3
+    'Option 1Vehicle Type:  ElectricRange(in miles): 50 Purchase Price:  Operating Cost:  21 acc time: 9 Mileage: 40': option_1
+    'Option 2Vehicle Type:  ElectricRange(in miles): 250 Purchase Price:  Operating Cost:  21 acc time: 8 Mileage: 30': option_2
+    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 150 Purchase Price:  Operating Cost:  6 acc time: 7 Mileage: 40': option_3
 cbc_q3:
   type: mc_buttons
   label: (3 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  ElectricRange(in miles): 100 Purchase Price:  Operating Cost:  15 acc time: 9 Mileage: 20': option_1
-    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 175 Purchase Price:  Operating Cost:  21 acce time: 6 Mileage: 60': option_2
-    'Option 3Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  6 acc time: 6 Mileage: 20': option_3
+    'Option 1Vehicle Type:  ElectricRange(in miles): 150 Purchase Price:  Operating Cost:  9 acc time: 8 Mileage: 50': option_1
+    'Option 2Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  9 acce time: 9 Mileage: 50': option_2
+    'Option 3Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  12 acc time: 9 Mileage: 40': option_3
 cbc_q4:
   type: mc_buttons
   label: (4 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  12 acc time: 8 Mileage: 45': option_1
-    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 175 Purchase Price:  Operating Cost:  15 acc time: 9 Mileage: 40': option_2
-    'Option 3Vehicle Type:  ElectricRange(in miles): 200 Purchase Price:  Operating Cost:  21 acc time: 6 Mileage: 60': option_3
+    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 75 Purchase Price:  Operating Cost:  6 acc time: 6 Mileage: 55': option_1
+    'Option 2Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  6 acc time: 7 Mileage: 45': option_2
+    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 225 Purchase Price:  Operating Cost:  18 acc time: 8 Mileage: 20': option_3
 cbc_q5:
   type: mc_buttons
   label: (5 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 250 Purchase Price:  Operating Cost:  12 acc time: 7 Mileage: 60': option_1
-    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 125 Purchase Price:  Operating Cost:  6 acc time: 8 Mileage: 40': option_2
-    'Option 3Vehicle Type:  ElectricRange(in miles): 150 Purchase Price:  Operating Cost:  6 acc time: 9 Mileage: 60': option_3
+    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 75 Purchase Price:  Operating Cost:  9 acc time: 6 Mileage: 30': option_1
+    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 75 Purchase Price:  Operating Cost:  6 acc time: 9 Mileage: 40': option_2
+    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 125 Purchase Price:  Operating Cost:  12 acc time: 7 Mileage: 35': option_3
 cbc_q6:
   type: mc_buttons
   label: (6 of 6) If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 250 Purchase Price:  Operating Cost:  12 acc time: 7 Mileage: 60': option_1
-    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 125 Purchase Price:  Operating Cost:  6 acc time: 8 Mileage: 40': option_2
-    'Option 3Vehicle Type:  ElectricRange(in miles): 150 Purchase Price:  Operating Cost:  6 acc time: 9 Mileage: 60': option_3
+    'Option 1Vehicle Type:  Plug-in HybridRange(in miles): 75 Purchase Price:  Operating Cost:  9 acc time: 6 Mileage: 30': option_1
+    'Option 2Vehicle Type:  Plug-in HybridRange(in miles): 75 Purchase Price:  Operating Cost:  6 acc time: 9 Mileage: 40': option_2
+    'Option 3Vehicle Type:  Plug-in HybridRange(in miles): 125 Purchase Price:  Operating Cost:  12 acc time: 7 Mileage: 35': option_3
 run_on_gasoline:
   type: mc_multiple
   label: 'Please select which vehicle(s) can run on gasoline: (select all that apply)'

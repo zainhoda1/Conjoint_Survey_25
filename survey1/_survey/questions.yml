@@ -21,9 +21,44 @@ budget:
     more than $30,000: '35000'
 cbc_q1:
   type: mc_buttons
-  label: (1 of 6) If these were your only options, which would you choose?
+  label: If these were your only options, which would you choose?
   options:
-    'Option 1Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  18 acc time: 8 Mileage: 35': option_1
-    'Option 2Vehicle Type:  GasolineRange(in miles): NA Purchase Price:  Operating Cost:  21 acc time: 9 Mileage: 35': option_2
-    'Option 3Vehicle Type:  ElectricRange(in miles): 175 Purchase Price:  Operating Cost:  15 acc time: 7 Mileage: 55': option_3
+    Option 1: option_1
+    Option 2: option_2
+    Option 3: option_3
+cbc_q2:
+  type: mc_buttons
+  label: If these were your only options, which would you choose?
+  options:
+    Option 1: option_1
+    Option 2: option_2
+    Option 3: option_3
+cbc_q3:
+  type: mc_buttons
+  label: If these were your only options, which would you choose?
+  options:
+    Option 1: option_1
+    Option 2: option_2
+    Option 3: option_3
+cbc_q4:
+  type: mc_buttons
+  label: If these were your only options, which would you choose?
+  options:
+    Option 1: option_1
+    Option 2: option_2
+    Option 3: option_3
+cbc_q5:
+  type: mc_buttons
+  label: If these were your only options, which would you choose?
+  options:
+    Option 1: option_1
+    Option 2: option_2
+    Option 3: option_3
+cbc_q6:
+  type: mc_buttons
+  label: If these were your only options, which would you choose?
+  options:
+    Option 1: option_1
+    Option 2: option_2
+    Option 3: option_3
 
