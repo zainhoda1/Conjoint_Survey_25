@@ -12,26 +12,35 @@ library(here)
 
 # Define profiles with attributes and levels
 profiles_used <- cbc_profiles(
-  powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid'),
+  powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid', 'Hybrid'),
   price          = seq(0.8, 1.1, 0.1),
   range          = seq(50, 250, 25),
   mileage        = seq(20, 60, 5),
   my             = seq(2015, 2023),
-  operating_cost = seq(6, 21, 3)
+  operating_cost = seq(3, 21, 3)
 )
 
-profiles_new <- cbc_profiles(
-  powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid'),
-  price          = seq(0.8, 1.1, 0.1),
-  range          = seq(50, 250, 25),
-  mileage        = seq(20, 60, 5),
-  operating_cost = seq(6, 21, 3)
+profiles_used_restricted <- cbc_restrict(
+  profiles_used, 
+  (powertrain == "Gasoline") & (operating_cost < 9), 
+  (powertrain != "Gasoline") & (operating_cost >= 18)
 )
 
+# Check powertrain counts
+profiles_used_restricted %>% 
+  count(powertrain, operating_cost)
+
+# profiles_new <- cbc_profiles(
+#   powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid'),
+#   price          = seq(0.8, 1.1, 0.1),
+#   range          = seq(50, 250, 25),
+#   mileage        = seq(20, 60, 5),
+#   operating_cost = seq(6, 21, 3)
+# )
 
 # Make a basic survey using the full factorial of all profiles
 design <- cbc_design(
-  profiles = profiles,
+  profiles = profiles_used_restricted,
   n_resp   = 2000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6     # Number of questions per respondent
@@ -51,7 +60,7 @@ head(design) # preview
 # head(design) # preview
 
 
-design$range[design$powertrain =='Gasoline']= 'NA'
+design$range[design$powertrain =='Gasoline'] <- 'NA'
 
 duplicates <- design[duplicated(design[c('respID', 'qID', 'powertrain', 'price',
                                        'range', 'mileage', 'operating_cost' )]), ]
