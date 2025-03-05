@@ -48,16 +48,7 @@ design <- cbc_design(
 
 head(design) # preview
 
-# Add image names matched to the apple type
-# (we'll use these to display images in the survey)
-# image_names <- data.frame(
-#   type = c('Fuji', 'Gala', 'Honeycrisp', 'Pink Lady', 'Red Delicious'),
-#   image = c('fuji.jpg', 'gala.jpg', 'honeycrisp.jpg', 'pinkLady.jpg',
-#             'redDelicious.jpg')
-# )
-# design <- design %>%
-#   left_join(image_names, by = "type")
-# head(design) # preview
+
 
 
 design$range[design$powertrain =='Gasoline'] <- 'NA'
