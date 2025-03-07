@@ -112,10 +112,17 @@ server <- function(input, output, session) {
             value
           ))
         }
-        else{
+        # This checks if either "Hybrid" appears in the value
+        else if (grepl("Plug-in Hybrid", value)) {
           return(sprintf(
             '<img src="images/pump.webp" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">
              <img src="images/charging.JPG" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s', value
+          ))
+        }
+        else{
+          return(sprintf(
+              '<img src="images/pump.webp" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s',
+              value
           ))
 
         }
@@ -147,7 +154,7 @@ server <- function(input, output, session) {
           #   price = as.numeric(price) * as.numeric(input$budget)
           #   #, image = paste0('<img src="', image, '" width=100>')
           #   ) %>%
-          select(powertrain, make_year , range, mileage, operating_cost, price )
+          select(powertrain, range, price, make_year, mileage, operating_cost  )
 
         rownames(car_data) <- c("Row1","Row2","Row3")
         car_data <- t(car_data)
@@ -156,11 +163,11 @@ server <- function(input, output, session) {
 
 
         car_data$names <- c('<span title="Does the vehicle run on gas or Electricity?" style="cursor: help; text-decoration: underline;">Powertrain</span>',
-                            '<span title="Model/Manufacturing year is the actual year the vehicle was built " style="cursor: help; text-decoration: underline;">Model Year</span>',
                             '<span title="How many miles in a full tank/ fully charged battery" style="cursor: help; text-decoration: underline;">Range</span>',
+                            '<span title="What is the price of the vehicle" style="cursor: help; text-decoration: underline;">Price</span>',
+                            '<span title="Model/Manufacturing year is the actual year the vehicle was built " style="cursor: help; text-decoration: underline;">Model Year</span>',
                             '<span title="The number of miles vehicle has travelled while in operation" style="cursor: help; text-decoration: underline;">Mileage</span>',
-                            '<span title="Operating cost of the vehicle" style="cursor: help; text-decoration: underline;">Operating Cost (Equivalent Gasoline Fuel Efficiency)</span>',
-                            '<span title="What is the price of the vehicle" style="cursor: help; text-decoration: underline;">Price</span>'
+                            '<span title="Operating cost of the vehicle" style="cursor: help; text-decoration: underline;">Operating Cost (Equivalent Gasoline Fuel Efficiency)</span>'
 
         )
 
@@ -209,14 +216,22 @@ server <- function(input, output, session) {
 
           }
 
-          if (i ==6)
+          if (i ==3)
           {
-            car_data$Row1[i] <- ifelse(is.na(car_data$Row1[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row1[i]))
-            car_data$Row2[i] <- ifelse(is.na(car_data$Row2[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row2[i]))
-            car_data$Row3[i] <- ifelse(is.na(car_data$Row3[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row3[i]))
+            car_data$Row1[i] <- scales::dollar(ifelse(is.na(car_data$Row1[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row1[i])))
+            car_data$Row2[i] <- scales::dollar(ifelse(is.na(car_data$Row2[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row2[i])))
+            car_data$Row3[i] <- scales::dollar(ifelse(is.na(car_data$Row3[i]), NA, as.numeric(input$budget) * as.numeric(car_data$Row3[i])))
 
           }
-          temp <- as.numeric(input$budget) * as.numeric(car_data$Row1[i])
+
+          if (i ==5)
+          {
+            car_data$Row1[i] <- scales::comma(as.numeric(car_data$Row1[i]))
+            car_data$Row2[i] <- scales::comma(as.numeric(car_data$Row2[i]))
+            car_data$Row3[i] <- scales::comma(as.numeric(car_data$Row3[i]))
+
+          }
+          #temp <- as.numeric(input$budget) * as.numeric(car_data$Row1[i])
           row <- sprintf('
             <tr>
                 <td>%s</td>
@@ -252,15 +267,21 @@ server <- function(input, output, session) {
         function() { html_table }
       }
 
-      df_temp <- df |> filter(qID == 1)
+      df_temp0 <- df |> filter(qID == 1)
+      df_temp1 <- df |> filter(qID == 1)
       df_temp2 <- df |> filter(qID == 2)
       df_temp3 <- df |> filter(qID == 3)
       df_temp4 <- df |> filter(qID == 4)
       df_temp5 <- df |> filter(qID == 5)
       df_temp6 <- df |> filter(qID == 6)
 
-      output$make_table0 <-create_car_table1(df_temp4, chosen_src)
-      output$make_table1 <-create_car_table1(df_temp, chosen_src)
+     df_temp0$powertrain = c('Electric', 'Electric', 'Electric')
+     df_temp0$price = c(1.1, 1.0, 0.5)
+     df_temp0$range = c('100 mile range on full charge', '200 mile range on full charge', '300 mile range on full charge')
+
+
+      output$make_table0 <-create_car_table1(df_temp0, chosen_src)
+      output$make_table1 <-create_car_table1(df_temp1, chosen_src)
       output$make_table2 <-create_car_table1(df_temp2, chosen_src)
       output$make_table3 <-create_car_table1(df_temp3, chosen_src)
       output$make_table4 <-create_car_table1(df_temp4, chosen_src)

@@ -101,28 +101,68 @@ understood the information provided in the welcome page and this consent
 page, and agree to participate in the "Car Ownership Survey".
 
 ```{r}
-sd_next(next_page = 'welcome1', label = 'I Agree')
+sd_next(next_page = 'filter', label = 'I Agree')
 ```
+:::
+
+::: {#filter .sd-page}
+
+# This study is about the purchase of your next vehicle.
+
+```{r}
+sd_question(
+  type  = 'mc',
+  id    = 'next_vehicle_purchase',
+  label = " To your best estimate, when will you likely need to purchase another vehicle?",
+  option = c(
+    "Currently shopping" = "0",
+    "0-3 months"  = "3",
+    "3-6 months" = "6",
+    "6-12 months"  = "12",
+    "1-2 years"  = "24",
+    "I'm not sure"  = "not_sure"
+  )
+)
+
+sd_question(
+  type  = 'mc',
+  id    = 'which_market',
+  label = " Which market will you consider buying this vehicle from?",
+  option = c(
+    "New" = "New",
+    "Used"  = "Used",
+    "Both" = "Both"
+  )
+)
+
+```
+
+
+```{r}
+sd_next(next_page = 'welcome1', label = 'Next')
+```
+
+
 :::
 
 
 ::: {#welcome1 .sd-page}
 
-
-## Section 1 of 5 
+<center>
+## Section 1 of 5
+</center>
 ## Below are some basic questions about your household!
 
 ### Please answer to the best of your knowledge
 
-### testing approach 1 - has issue
+### How many of each type of vehicle do you have in your household?
 
 ```{r}
-
 
 sd_question(
   type  = 'matrix',
   id    = 'car_types1',
-  label = "What type of cars and how many of each do you have in your household? (Select all that apply)?",
+  label = "(Select all that apply)?",
   row = c(
     "0" = "0",
     "1" = "1",
@@ -139,12 +179,6 @@ sd_question(
     "Other" =  "other"
   )
 )
-```
-
-
-
-```{r}
-
 
 sd_question(
   type  = 'mc_multiple',
@@ -162,7 +196,7 @@ sd_question(
 
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'neighbor_ev_info',
   label = "Do any of your neighbors own/lease a plug-in hybrid or pure electric vehicle (Select one)",
   option = c(
@@ -172,22 +206,27 @@ sd_question(
   )
 )
 
-sd_next()
 
+```
+
+```{r}
+sd_next()
 ```
 
 :::
 
 ::: {#welcome2 .sd-page}
 
-## Section 1 of 5 
+<center>
+## Section 1 of 5
+</center>
 ## Below are some basic questions about your **primary vehicle**
 
 ### Please answer to the best of your knowledge
 
 ```{r}
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'acquire_primary_vehicle',
   label = "Did you buy or lease your current primary vehicle?",
   option = c(
@@ -199,7 +238,7 @@ sd_question(
 
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'acquire_how',
   label = "How did you purchase / lease your current primary vehicle?",
   option = c(
@@ -215,7 +254,7 @@ sd_question(
 
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'vehicle_cost',
   label = "How much did you pay for this vehicle, to your best estimate?",
   option = c(
@@ -240,7 +279,7 @@ sd_question(
 )
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'monthly_payment',
   label = "What is your monthly payment?",
   option = c(
@@ -257,7 +296,7 @@ sd_question(
 )
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'gas_mileage',
   label = "What gas mileage does your vehicle give?",
   option = c(
@@ -273,25 +312,9 @@ sd_question(
 )
 
 
-sd_question(
-  type  = 'slider',
-  id    = 'gas_mileage1',
-  label = "What gas mileage does your vehicle give? (Miles per gallon) ",
-  option = c(
-    "0 " = "0",
-    "10" = "10",
-    "20" = "20",
-    "30" = "30",
-    "40" = "40",
-    "50" = "50",
-    "60" = "60",
-    "not applicable" = "not_applicable"
-  )
-)
-
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'refueling',
   label = "How often do you refuel?",
   option = c(
@@ -308,16 +331,20 @@ sd_question(
 
 ```
 
-<br>
 
 ```{r}
 sd_next()
 ```
+
 :::
 
 
-## Section 1 of 5 
+
 ::: {#page2 .sd-page}
+<center>
+## Section 1 of 5
+</center>
+
 ## How often you use different transportation types to get around.
 
 ### Please answer to the best of your knowledge and note that this does not include travel that is for work(for example, if you are a professional chauffeur, driver or a delivery person)
@@ -338,96 +365,6 @@ sd_question(
   )
 )
 
-# sd_question(
-#   type  = 'matrix',
-#   id    = 'other_transports',
-#   label = "Select all that apply!",
-#   row = c(
-#     "Less than once a month or never" = "never",
-#     "About once a month"  = "once_month",
-#     "About once a week" = "once_week",
-#     "2-3 times a week"  = "2_3_week",
-#     "4-5 times a week"  = "4_5_week",
-#     "Once a day or more"  = "once_day"
-#   ),
-#   option = c(
-#     "Walk, bicycle or other two wheeler" = "2_wheeler",
-#     "Taxi"     = "Taxi",
-#     "Public transit"    = "bus"
-#   )
-# )
-
-# 
-# sd_question(
-#   type  = 'select',
-#   id    = 'household_vehicle',
-#   label = "Your Household's vehicle",
-#   option = c(
-#     "Less than once a month or never" = "never",
-#     "About once a month"  = "once_month",
-#     "About once a week" = "once_week",
-#     "2-3 times a week"  = "2_3_week",
-#     "4-5 times a week"  = "4_5_week",
-#     "Once a day or more"  = "once_day"
-#   )
-# )
-# 
-# sd_question(
-#   type  = 'select',
-#   id    = 'Ride_friend',
-#   label = "Ride from a friend or family member or carpool",
-#   option = c(
-#     "Less than once a month or never" = "never",
-#     "About once a month"  = "once_month",
-#     "About once a week" = "once_week",
-#     "2-3 times a week"  = "2_3_week",
-#     "4-5 times a week"  = "4_5_week",
-#     "Once a day or more"  = "once_day"
-#   )
-# )
-# 
-# sd_question(
-#   type  = 'select',
-#   id    = 'bicycle',
-#   label = "Walk, bicycle or your own motorcycle, scooter or moped",
-#   option = c(
-#     "Less than once a month or never" = "never",
-#     "About once a month"  = "once_month",
-#     "About once a week" = "once_week",
-#     "2-3 times a week"  = "2_3_week",
-#     "4-5 times a week"  = "4_5_week",
-#     "Once a day or more"  = "once_day"
-#   )
-# )
-# 
-# sd_question(
-#   type  = 'select',
-#   id    = 'Taxi',
-#   label = "Taxi or Uber",
-#   option = c(
-#     "Less than once a month or never" = "never",
-#     "About once a month"  = "once_month",
-#     "About once a week" = "once_week",
-#     "2-3 times a week"  = "2_3_week",
-#     "4-5 times a week"  = "4_5_week",
-#     "Once a day or more"  = "once_day"
-#   )
-# )
-# 
-# sd_question(
-#   type  = 'select',
-#   id    = 'Taxi',
-#   label = "Public transit (bus, streetcar, subway, metro, rapid transit)",
-#   option = c(
-#     "Less than once a month or never" = "never",
-#     "About once a month"  = "once_month",
-#     "About once a week" = "once_week",
-#     "2-3 times a week"  = "2_3_week",
-#     "4-5 times a week"  = "4_5_week",
-#     "Once a day or more"  = "once_day"
-#   )
-# )
-# 
 
 ```
 
@@ -441,16 +378,17 @@ sd_next(next_page = 'page3')
 
 
 ::: {#page3 .sd-page}
-## Section 2 of 5 
+<center>
+## Section 2 of 5
+</center>
 ## This section asks a few questions about your future vehicle.
 
 ```{r}
 
 
-sd_output(id = 'images', type = 'question')
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'budget',
   label = 'What is your budget range for your next vehicle?',
   option = c(
@@ -469,45 +407,10 @@ sd_question(
   )
 )
 
-sd_question(
-  type  = 'select',
-  id    = 'next_vehicle_purchase',
-  label = " To your best estimate, when will you likely need to purchase another vehicle?",
-  option = c(
-    "Currently shopping" = "0",
-    "0-3 months"  = "3",
-    "3-6 months" = "6",
-    "6-12 months"  = "12",
-    "1-2 years"  = "24",
-    "I'm not sure"  = "not_sure"
-  )
-)
-
-sd_question(
-  type  = 'select',
-  id    = 'which_market',
-  label = " Which market will you consider buying this vehicle from?",
-  option = c(
-    "New" = "New",
-    "Used"  = "Used",
-    "Both" = "Both"
-  )
-)
-
-sd_question(
-  type  = 'select',
-  id    = 'plan_lease_buy',
-  label = " Will you plan to lease or buy?",
-  option = c(
-    "Lease" = "Lease",
-    "Purchase"  = "Purchase",
-    "I'm not sure"  = "I'm not sure"
-  )
-)
 
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'next_car_down_payment',
   label = "  What will be your down payment for your next car?",
   option = c(
@@ -537,7 +440,7 @@ sd_question(
 )
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'plan_lease_buy',
   label = " Would you consider a Plug-in Hybrid Electric or an all-electric vehicle as your next vehicle?",
   option = c(
@@ -559,15 +462,30 @@ sd_next()
 
 :::
 
+::: {#page3b .sd-page}
+<center>
+## Section 2 of 5
+</center>
+## Future vehicle section continued!
 
+```{r}
+
+sd_output(id = 'images', type = 'question')
+```
+
+
+```{r}
+sd_next()
+```
+
+:::
 
 ::: {#cbc_intro .sd-page}
-## Section 3 of 5 
-## Choice Question Introduction
+<center>
+## Section 3 of 5
+</center>
 
-
-
-We will now show you **six** choice questions starting on the next page. Below is an example of the type of questions you will be asked.
+## Educational Page
 
 ```{r}
 
@@ -579,9 +497,69 @@ cbc_options <- c(
 
 ```
 
+Great Work! Now that you have shared a bit about yourself, we'd like you to consider a scenario in which you can choose a car from a set of cars with different attributes.
+
+Let's learn about the attributes.
+
+
+
+| **Types of Powertrain**    | **Definition**                                                                                                                                                                                                                          |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Gasoline                | Gasoline vehicles use an internal combustion engine (ICE) that burns gasoline (petrol) to create power.                                                                                                                             |
+| Hybrid (HEVs)          | HEVs take net propulsion energy from gasoline but utilize a small battery pack and electric motor to improve fuel efficiency, mostly through regenerative braking, engine downsizing, engine shutoff at idle, and power management. |
+| Plug-in Hybrid (PHEVs) | PHEVs are similar to HEVs, except they typically have a larger battery pack that can be charged by plugging into an electrical outlet.                                                                                              |
+| Electric (BEV)         | BEVs run purely on electricity and do not use gasoline                                                                                                                                                                              |
+
+
+| **Types of Powertrain** | **Definition**                                                                                                         |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Gasoline                | A conventional gasoline vehicle uses only gasoline.                                                                    |
+| Hybrid (HEVs)           | A hybrid vehicle uses a small battery to reduce fuel use but cannot be plugged in to rechage as it uses only gasoline. |
+| Plug-in Hybrid (PHEVs)  | A plug-in hybrid vehicle has a battery which can be plugged in recharge and can also use gasoline.                     |
+| Electric (BEVs)         | A battery electric vehicle must be plugged in to recharge its battery - it never uses gasoline.                        |
+
+
+| **Attribute**                                        | **Description**                                                   |
+|------------------------------------------------------|-------------------------------------------------------------------|
+| Powertrain                                           | Does the vehicle run on gas or Electricity?                       |
+| Range                                                | How many miles in a full tank/ fully charged battery              |
+| Price                                                | What is the price of the vehicle                                  |
+| Model Year                                           | Model/Manufacturing year is the actual year the vehicle was built |
+| Mileage                                              | The number of miles vehicle has travelled while in operation      |
+| Operating Cost (Equivalent Gasoline Fuel Efficiency) | Operating cost of the vehicle                                     |
+
+
+
+```{r}
+sd_next()
+```
+
+:::
+
+
+
+::: {#cbc_demo .sd-page}
+
+<center>
+## Section 3 of 5
+</center>
+
+## Choice Question Demonstration
+
+We will now begin the choice tasks. We will show you **six** choice questions starting on the next page. Below is an example of the type of questions you will be asked.
+
+
 
 ```{r}
 sd_output("make_table0")
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'cbc_q0',
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
+)
 
 sd_next()
 
@@ -591,7 +569,9 @@ sd_next()
 
 
 ::: {#pageQ1 .sd-page}
-## Section 3 of 5 
+<center>
+## Section 3 of 5
+</center>
 ### Question 1 of 6
 ```{r}
 sd_output("make_table1") 
@@ -611,7 +591,9 @@ sd_next()
 :::
 
 ::: {#pageQ2 .sd-page}
-## Section 3 of 5 
+<center>
+## Section 3 of 5
+</center>
 ### Question 2 of 6
 ```{r}
 sd_output("make_table2")
@@ -632,7 +614,9 @@ sd_next()
 :::
 
 ::: {#pageQ3 .sd-page}
-## Section 3 of 5 
+<center>
+## Section 3 of 5
+</center>
 ### Question 3 of 6
 ```{r}
 sd_output("make_table3")
@@ -653,7 +637,9 @@ sd_next()
 :::
 
 ::: {#pageQ4 .sd-page}
-## Section 3 of 5 
+<center>
+## Section 3 of 5
+</center>
 ### Question 4 of 6
 ```{r}
 sd_output("make_table4")
@@ -674,7 +660,9 @@ sd_next()
 :::
 
 ::: {#pageQ5 .sd-page}
-## Section 3 of 5 
+<center>
+## Section 3 of 5
+</center>
 ### Question 5 of 6
 ```{r}
 sd_output("make_table5")
@@ -695,7 +683,9 @@ sd_next()
 :::
 
 ::: {#pageQ6 .sd-page}
-## Section 3 of 5 
+<center>
+## Section 3 of 5
+</center>
 ### Question 6 of 6
 ```{r}
 sd_output("make_table6")
@@ -717,7 +707,9 @@ sd_next()
 
 
 ::: {#page4 .sd-page}
-## Section 4 of 5 
+<center>
+## Section 4 of 5
+</center>
 ## Below are a few questions about electric vehicles which we will only use for analyzing our survey data.
 
 ```{r}
@@ -748,9 +740,9 @@ sd_question(
 
 # Conditional Question
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'know_electric_vehicle',
-  label = "Do you know the name of a pure electric vehicle?",
+  label = "Can you name the make and model of atleast one vehicle powered partially or completely by electricity?",
   option = c(
     "Yes" = "Yes",
     "No"  = "No"
@@ -761,12 +753,12 @@ sd_question(
 sd_question(
   type  = "text",
   id    = "write_electric_name",
-  label = "Write the name"
+  label = "Please name a **make** and **model** of a vehicle that is powered partially or completelyby electricity"
 )
 
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'max_subsidy',
   label = "Do you know the current maximum subsidy available from the US federal government for purchasing an electric vehicle?",
   option = c(
@@ -782,7 +774,7 @@ sd_question(
 
 
 sd_question(
-  type  = 'select',
+  type  = 'mc',
   id    = 'plan_lease_buy',
   label = " Would you consider a Plug-in Hybrid Electric or an all-electric vehicle as your next vehicle?",
   option = c(
@@ -806,7 +798,9 @@ sd_next()
 
 
 ::: {#page6 .sd-page}
-## Section 5 of 5 
+<center>
+## Section 5 of 5
+</center>
 ## Demographic information
 
 ## We're almost done! We'd just like to ask just a few more questions about you which we will only use for analyzing our survey data.
@@ -814,14 +808,18 @@ sd_next()
 ```{r}
 #code block
 
+years <- seq(1930, 2007)
+names(years) <- as.character(years)
+
 sd_question(
-  type  = 'numeric',
+  type  = 'select',
   id    = 'dob',
-  label = "What's your age?"
+  label = "What is your year of birth?",
+  option = years
 )
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'gender',
   label  = " What is your gender?",
   option = c(
@@ -836,7 +834,7 @@ sd_question(
 )
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'hispanic',
   label  = " Are you of Hispanic, Latino or Spanish origin?",
   option = c(
@@ -863,7 +861,7 @@ sd_question(
 
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'people_household',
   label  = "How many people, in total, live in your household?",
   option = c(
@@ -877,7 +875,7 @@ sd_question(
 )
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'current_employment_status',
   label  = "Which of the following categories best describes your current employment status?",
   option = c(
@@ -895,7 +893,7 @@ sd_question(
 
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'total_household_income',
   label  = "Which of the following categories best represents your total household income?",
   option = c(
@@ -918,7 +916,7 @@ sd_question(
 
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'educational_qualification',
   label  = "What is the last grade or level of school you have completed? If currently enrolled, please use the highest degree received.",
   option = c(
@@ -938,7 +936,7 @@ sd_question(
   
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'current_housing',
   label  = "In which type of housing do you currently live?",
   option = c(
@@ -954,7 +952,7 @@ sd_question(
 )
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'own_or_rent',
   label  = "Do you own or rent the current place you are living in?",
   option = c(
@@ -966,7 +964,7 @@ sd_question(
 )
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'electric_bill',
   label  = "What is your monthly electricity bill on an average?",
   option = c(
@@ -981,7 +979,7 @@ sd_question(
 
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'political_views',
   label  = "How would you describe your political views?",
   option = c(
@@ -997,7 +995,7 @@ sd_question(
 )
 
 sd_question(
-  type   = 'select',
+  type   = 'mc',
   id     = 'party_voting',
   label  = "Which political party do you typically vote for?",
   option = c(
@@ -1024,5 +1022,9 @@ sd_next(next_page = 'end')
 ## This is the last page in the survey. Thanks for taking our survey!
 
 Your survey completion code is: `r sd_output("completion_code", type = 'value')`
+
+```{r}
+sd_close(label = 'Close window')
+```
 
 :::

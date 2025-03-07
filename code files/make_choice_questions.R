@@ -15,7 +15,7 @@ profiles_used <- cbc_profiles(
   powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid', 'Hybrid'),
   price          = seq(0.8, 1.1, 0.1),
   range          = seq(50, 250, 25),
-  mileage        = seq(20, 60, 5),
+  mileage        = seq(20000, 60000, 5000),
   make_year      = seq(2015, 2023),
   operating_cost = seq(3, 21, 3)
 )
@@ -50,7 +50,7 @@ head(design) # preview=
 
 
 
-design$range[design$powertrain !='Electric'] <- 'NA'
+design$range[design$powertrain !='Electric'] <- 300
 
 #design$range[design$powertrain =='Gasoline'] <- 'NA'
 
@@ -67,6 +67,19 @@ id_to_remove <- duplicates$respID
 design <- design %>% 
   filter(!respID %in% id_to_remove)
 
+design$operating_cost =  paste0(design$operating_cost, " cents per mile", "\n", 
+                            "("  ,round(330/design$operating_cost, 1), " MPG equivalent)")
+
+
+design <- design %>% 
+  mutate(range = case_when(
+    powertrain == "Hybrid" ~ "300 mile range on 1 tank",
+    powertrain == "Gasoline" ~ "300 mile range on 1 tank",
+    powertrain == "Plug-in Hybrid" ~ "300 mile range on 1 tank \n(first 40 miles electric)",
+    powertrain == "Electric"  ~ paste0(design$range, " mile range on full charge")
+  ))
+
+design$mileage = scales::comma(design$mileage)
 
 # Save design
 write_csv(design, here('data', 'choice_questions.csv'))
