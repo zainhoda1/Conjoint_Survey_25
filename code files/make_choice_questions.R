@@ -30,13 +30,6 @@ profiles_used_restricted <- cbc_restrict(
 profiles_used_restricted %>% 
   count(powertrain, operating_cost)
 
-# profiles_new <- cbc_profiles(
-#   powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid'),
-#   price          = seq(0.8, 1.1, 0.1),
-#   range          = seq(50, 250, 25),
-#   mileage        = seq(20, 60, 5),
-#   operating_cost = seq(6, 21, 3)
-# )
 
 # Make a basic survey using the full factorial of all profiles
 design <- cbc_design(
@@ -46,9 +39,7 @@ design <- cbc_design(
   n_q      = 6     # Number of questions per respondent
 )
 
-head(design) # preview=
-
-
+head(design) # preview
 
 design$range[design$powertrain !='Electric'] <- 300
 
@@ -79,7 +70,6 @@ design <- design %>%
     powertrain == "Electric"  ~ paste0(design$range, " mile range on full charge")
   ))
 
-design$mileage = scales::comma(design$mileage)
 
 # Save design
 write_csv(design, here('data', 'choice_questions.csv'))
