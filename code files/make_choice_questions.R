@@ -16,7 +16,7 @@ profiles_used <- cbc_profiles(
   price          = seq(0.8, 1.1, 0.1),
   range          = seq(50, 250, 25),
   mileage        = seq(20, 60, 5),
-  my             = seq(2015, 2023),
+  make_year      = seq(2015, 2023),
   operating_cost = seq(3, 21, 3)
 )
 
@@ -46,12 +46,13 @@ design <- cbc_design(
   n_q      = 6     # Number of questions per respondent
 )
 
-head(design) # preview
+head(design) # preview=
 
 
 
+design$range[design$powertrain !='Electric'] <- 'NA'
 
-design$range[design$powertrain =='Gasoline'] <- 'NA'
+#design$range[design$powertrain =='Gasoline'] <- 'NA'
 
 duplicates <- design[duplicated(design[c('respID', 'qID', 'powertrain', 'price',
                                        'range', 'mileage', 'operating_cost' )]), ]
@@ -68,6 +69,6 @@ design <- design %>%
 
 
 # Save design
-write_csv(design, here('survey','data', 'choice_questions.csv'))
+write_csv(design, here('data', 'choice_questions.csv'))
 
 

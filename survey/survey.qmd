@@ -28,9 +28,9 @@ subdivided in five sub-sections:
 
 -   Future vehicle information
 
--   Knowledge of electric vehicles
-
 -   Choice Questions
+
+-   Knowledge of electric vehicles
 
 -   Demographic Information
 
@@ -91,8 +91,10 @@ willingness to participate in this research study is implied if you
 proceed.
 
 **Participation to this survey is voluntary. To take a part in this
-survey, you must:** - Be at least 18 years old. - Authorize us to
-analyze the data exclusively for research purposes.
+survey, you must:** 
+
+-   Be at least 18 years old.
+-   Authorize us to analyze the data exclusively for research purposes.
 
 By clicking on "**I Agree**", you confirm that you have reviewed and
 understood the information provided in the welcome page and this consent
@@ -106,15 +108,15 @@ sd_next(next_page = 'welcome1', label = 'I Agree')
 
 ::: {#welcome1 .sd-page}
 
-# Welcome to our survey!
 
+## Section 1 of 5 
 ## Below are some basic questions about your household!
 
 ### Please answer to the best of your knowledge
 
+### testing approach 1 - has issue
+
 ```{r}
-
-
 
 
 sd_question(
@@ -133,11 +135,15 @@ sd_question(
     "Gasoline" = "Gasoline",
     "Hybrid"     = "hybrid",
     "Plug-in Hybrid"    = "plugin_hybrid",
-    "electric"          = "electric",
-    "other" =  "other"
+    "Electric"          = "electric",
+    "Other" =  "other"
   )
 )
+```
 
+
+
+```{r}
 
 
 sd_question(
@@ -149,8 +155,8 @@ sd_question(
     "Driveway/ Carport"   = "Driveway_Carport",
     "Single-family garage"  = "Single_family_garage",
     "Shared parking garage" = "Shared_parking_garage",
-    "prefer not to say" = "prefer_not_to_say",
-    "other" =  "other"
+    "Prefer not to say" = "prefer_not_to_say",
+    "Other" =  "other"
   )
 )
 
@@ -166,18 +172,15 @@ sd_question(
   )
 )
 
-```
-
-<br>
-
-```{r}
 sd_next()
+
 ```
+
 :::
 
 ::: {#welcome2 .sd-page}
 
-
+## Section 1 of 5 
 ## Below are some basic questions about your **primary vehicle**
 
 ### Please answer to the best of your knowledge
@@ -270,19 +273,35 @@ sd_question(
 )
 
 
+sd_question(
+  type  = 'slider',
+  id    = 'gas_mileage1',
+  label = "What gas mileage does your vehicle give? (Miles per gallon) ",
+  option = c(
+    "0 " = "0",
+    "10" = "10",
+    "20" = "20",
+    "30" = "30",
+    "40" = "40",
+    "50" = "50",
+    "60" = "60",
+    "not applicable" = "not_applicable"
+  )
+)
+
 
 sd_question(
   type  = 'select',
   id    = 'refueling',
   label = "How often do you refuel?",
   option = c(
-    "once a month" = "0",
-    "once in two weeks" = "1",
-    "once a week" = "2",
-    "twice a week" = "3",
-    "three times a week" = "4",
-    "four times a week" = "5",
-    "over four times a week" = "6"
+    "Once a month" = "0",
+    "Once in two weeks" = "1",
+    "Once a week" = "2",
+    "Twice a week" = "3",
+    "Three times a week" = "4",
+    "Four times a week" = "5",
+    "Over four times a week" = "6"
   )
 )
 
@@ -297,7 +316,7 @@ sd_next()
 :::
 
 
-
+## Section 1 of 5 
 ::: {#page2 .sd-page}
 ## How often you use different transportation types to get around.
 
@@ -319,24 +338,24 @@ sd_question(
   )
 )
 
-sd_question(
-  type  = 'matrix',
-  id    = 'other_transports',
-  label = "Select all that apply!",
-  row = c(
-    "Less than once a month or never" = "never",
-    "About once a month"  = "once_month",
-    "About once a week" = "once_week",
-    "2-3 times a week"  = "2_3_week",
-    "4-5 times a week"  = "4_5_week",
-    "Once a day or more"  = "once_day"
-  ),
-  option = c(
-    "Walk, bicycle or other two wheeler" = "2_wheeler",
-    "Taxi"     = "Taxi",
-    "Public transit"    = "bus"
-  )
-)
+# sd_question(
+#   type  = 'matrix',
+#   id    = 'other_transports',
+#   label = "Select all that apply!",
+#   row = c(
+#     "Less than once a month or never" = "never",
+#     "About once a month"  = "once_month",
+#     "About once a week" = "once_week",
+#     "2-3 times a week"  = "2_3_week",
+#     "4-5 times a week"  = "4_5_week",
+#     "Once a day or more"  = "once_day"
+#   ),
+#   option = c(
+#     "Walk, bicycle or other two wheeler" = "2_wheeler",
+#     "Taxi"     = "Taxi",
+#     "Public transit"    = "bus"
+#   )
+# )
 
 # 
 # sd_question(
@@ -422,28 +441,13 @@ sd_next(next_page = 'page3')
 
 
 ::: {#page3 .sd-page}
+## Section 2 of 5 
 ## This section asks a few questions about your future vehicle.
 
 ```{r}
 
-# sd_question(
-#   type  = 'mc',
-#   id    = 'next_vehicle_type',
-#   label = "For your next vehicle purchase, which type of vehicle would you consider ?",
-#   option = c(
-#     "Sedan"   = "sedan_images",
-#     "SUV"  = "suv_images"
-#   )
-# )
-
 
 sd_output(id = 'images', type = 'question')
-
-# sd_question(
-#   type  = 'numeric',
-#   id    = 'budget1',
-#   label = 'What is your budget for your next vehicle?'
-# )
 
 sd_question(
   type  = 'select',
@@ -479,32 +483,6 @@ sd_question(
   )
 )
 
-# sd_question(
-#   type  = 'mc_multiple',
-#   id    = 'next_vehicle_type1',
-#   label = "For your next vehicle purchase, which type of vehicles would you consider (select ALL that apply)?",
-#   option = c(
-#     "Small Sedan" = "Small_Sedan",
-#     "Large Sedan"     = "Large_Sedan",
-#     "Sports Car"    = "Sports_Car",
-#     "Compact SUV"          = "Compact_SUV",
-#     "Large SUV"         = "Large_SUV",
-#     "Van"       = "Van",
-#     "Pick-up truck"        = "Pick-up_truck",
-#     "Do not know"     = "Do_not_know"
-#   )
-# )
-
-# sd_question(
-#   type  = 'mc',
-#   id    = 'next_vehicle_type',
-#   label = "For your next vehicle purchase, which type of vehicle would you consider ?",
-#   option = c(
-#     "Sedan"   = "car",
-#     "SUV"  = "suv"
-#   )
-# )
-
 sd_question(
   type  = 'select',
   id    = 'which_market',
@@ -527,31 +505,6 @@ sd_question(
   )
 )
 
-# sd_question(
-#   type  = 'mc_multiple',
-#   id    = 'next_car_budget_range',
-#   label = "What is your budget range for this next vehicle purchase (select ALL that apply)?",
-#   option = c(
-#     "$4,999 or less" = "4999",
-#     "$5,000 - $9,999" = "9999",
-#     "$10,000 - $14,999" = "14999",
-#     "$15,000 - $19,999" = "19999",
-#     "$20,000 - $24,999"= "24999",
-#     "$25,000 - $29,999"= "29999",
-#     "$30,000 - $34,999"= "34999",
-#     "$35,000 - $39,999" = "39999",
-#     "$40,000 - $44,999"= "44999",
-#     "$45,000 - $49,999"= "49999",
-#     "$50,000 - $59,999"= "59999",
-#     "$60,000 - $69,999" = "69999",
-#     "$70,000 - $79,999"= "79999",
-#     "$80,000 - $89,999"= "89999",
-#     "$90,000 - $99,999"= "99999",
-#     "100,000 or more" = "100000",
-#     "I'm not sure" = "not_sure"
-# 
-#   )
-# )
 
 sd_question(
   type  = 'select',
@@ -609,41 +562,14 @@ sd_next()
 
 
 ::: {#cbc_intro .sd-page}
+## Section 3 of 5 
+## Choice Question Introduction
 
 
 
-# Choice Question Intro
-
-Great work!
-
-We will now show you 6 sets of choice questions starting on the next page.
+We will now show you **six** choice questions starting on the next page. Below is an example of the type of questions you will be asked.
 
 ```{r}
-#| include: false
-
-# Here we prepare the data frames for choice questions, respondent ID, etc.
-survey <- read_csv(here('data', 'choice_questions.csv'))
-respondentID <- sample(survey$respID, 1)
-df <- survey %>%
-    filter(respID == respondentID)
-
-```
-
-```{r}
-#sd_next(next_page = 'cbc_q1')
-sd_next()
-```
-
-:::
-
-
-
-::: {#cbc_q0 .sd-page}
-
-
-```{r}
-
-shiny::imageOutput('chosen_image')
 
 cbc_options <- c(
   "Option 1" = "option_1",   
@@ -651,470 +577,147 @@ cbc_options <- c(
   "Option 3" = "option_3"
 )
 
-sd_output("cbc1_table")
+```
 
-sd_question(
-  type   = 'mc_buttons',
-  id     = 'cbc_q00',
-  label  = "Assuming that you were able to purchase a vehicle that looked like the one you selected (see photo), which of these versions of that vehicle would you be most likely to purchase",
-  option = cbc_options, 
-  width = "600px"
-)
+
+```{r}
+sd_output("make_table0")
 
 sd_next()
+
 ```
 
 :::
 
 
-::: {#cbc_q01 .sd-page}
-
-
+::: {#pageQ1 .sd-page}
+## Section 3 of 5 
+### Question 1 of 6
 ```{r}
-
-shiny::imageOutput('chosen_image')
-
-sd_output("cbc2_table")
-
-sd_question(
-  type   = 'mc_buttons',
-  id     = 'cbc_q01',
-  label  = "Assuming that you were able to purchase a vehicle that looked like the one you selected (see photo), which of these versions of that vehicle would you be most likely to purchase",
-  option = cbc_options, 
-  width = "600px"
-)
-
-sd_next()
-```
-
-:::
-
-::: {#cbc_q1 .sd-page}
-
-# Choice Question 1
-
-
-
-```{r}
-shiny::imageOutput('chosen_image')
-```
-
-
-
-```{r}
-# Define q1 choice option
-
-
-q1_alts <- df %>% filter(qID == 1)
-q1_alt1 <- q1_alts %>% filter(altID == 1)
-q1_alt2 <- q1_alts %>% filter(altID == 2)
-q1_alt3 <- q1_alts %>% filter(altID == 3)
-
-
-
-# Define the option vector
-
-q1_options <- c("option_1", "option_2", "option_3")
-
-# Change the names of each element to display markdown-formatted
-# text and an embedded image using html
-
-
-q1c1_1 <- sd_output("q1c1", type = "value")
-q1c2_2 <- sd_output("q1c2", type = "value")
-q1c3_3 <- sd_output("q1c3", type = "value")
-
-names(q1_options)[1] <- glue("**Option 1**<br>
-    **Vehicle Type**:  {q1_alt1$powertrain}   
-    **Range(in miles)**: {q1_alt1$range} <br>
-    **Purchase Price**: {q1c1_1} <br>
-    **Operating Cost**:  {q1_alt1$operating_cost} <br> 
-    **acc time**: {q1_alt1$accelTime} <br>
-    **Mileage**: {q1_alt1$mileage} "
-)
-names(q1_options)[2] <-glue("**Option 2**<br>
-    **Vehicle Type**:  {q1_alt2$powertrain}   
-    **Range(in miles)**: {q1_alt2$range} <br>
-    **Purchase Price**: {q1c2_2} <br>
-    **Operating Cost**:  {q1_alt2$operating_cost} <br> 
-    **acc time**: {q1_alt2$accelTime} <br>
-    **Mileage**: {q1_alt2$mileage} "
-)
-names(q1_options)[3] <- glue("**Option 3**<br>
-    **Vehicle Type**:  {q1_alt3$powertrain}   
-    **Range(in miles)**: {q1_alt3$range} <br>
-    **Purchase Price**: {q1c3_3} <br>
-    **Operating Cost**:  {q1_alt3$operating_cost} <br> 
-    **acc time**: {q1_alt3$accelTime} <br>
-    **Mileage**: {q1_alt3$mileage} "
-)
+sd_output("make_table1") 
 
 sd_question(
   type   = 'mc_buttons',
   id     = 'cbc_q1',
-  label  = "(1 of 6) If these were your only options, which would you choose?",
-  option = q1_options
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
 )
 
+sd_next()
+
+
 ```
-
-
-
-```{r}
-sd_next(next_page = 'cbc_q2')
-```
-
 :::
 
-::: {#cbc_q2 .sd-page}
-
-# Choice Question 2
-
+::: {#pageQ2 .sd-page}
+## Section 3 of 5 
+### Question 2 of 6
 ```{r}
-shiny::imageOutput('chosen_image')
-```
-
-
-```{r}
-# Define q1 choice options
-
-q2_alts <- df %>% filter(qID == 2)
-q2_alt1 <- q2_alts %>% filter(altID == 1)
-q2_alt2 <- q2_alts %>% filter(altID == 2)
-q2_alt3 <- q2_alts %>% filter(altID == 3)
-
-# Define the option vector
-
-q2_options <- c("option_1", "option_2", "option_3")
-
-q2c1_1 <- sd_output("q2c1", type = "value")
-q2c2_2 <- sd_output("q2c2", type = "value")
-q2c3_3 <- sd_output("q2c3", type = "value")
-
-# Change the names of each element to display markdown-formatted
-# text and an embedded image using html
-
-names(q2_options)[1] <- glue("**Option 1**<br>
-    **Vehicle Type**:  {q2_alt1$powertrain}   
-    **Range(in miles)**: {q2_alt1$range} <br>
-    **Purchase Price**: {q2c1_1} <br>
-    **Operating Cost**:  {q2_alt1$operating_cost} <br> 
-    **acc time**: {q2_alt1$accelTime} <br>
-    **Mileage**: {q2_alt1$mileage} "
-)
-names(q2_options)[2] <-glue("**Option 2**<br>
-    **Vehicle Type**:  {q2_alt2$powertrain}   
-    **Range(in miles)**: {q2_alt2$range} <br>
-    **Purchase Price**: {q2c2_2} <br>
-    **Operating Cost**:  {q2_alt2$operating_cost} <br> 
-    **acc time**: {q2_alt2$accelTime} <br>
-    **Mileage**: {q2_alt2$mileage} "
-)
-names(q2_options)[3] <- glue("**Option 3**<br>
-    **Vehicle Type**:  {q2_alt3$powertrain}   
-    **Range(in miles)**: {q2_alt3$range} <br>
-    **Purchase Price**: {q2c3_3} <br>
-    **Operating Cost**:  {q2_alt3$operating_cost} <br> 
-    **acc time**: {q2_alt3$accelTime} <br>
-    **Mileage**: {q2_alt3$mileage} "
-)
+sd_output("make_table2")
 
 sd_question(
   type   = 'mc_buttons',
   id     = 'cbc_q2',
-  label  = "(2 of 6) If these were your only options, which would you choose?",
-  option = q2_options
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
 )
+
+
+sd_next()
+
+
 ```
-
-<br>
-
-```{r}
-sd_next(next_page = 'cbc_q3')
-```
-
-
 :::
 
-::: {#cbc_q3 .sd-page}
-
-# Choice Question 3
-
+::: {#pageQ3 .sd-page}
+## Section 3 of 5 
+### Question 3 of 6
 ```{r}
-shiny::imageOutput('chosen_image')
-```
-
-
-
-```{r}
-# Define q1 choice options
-
-q3_alts <- df %>% filter(qID == 3)
-q3_alt1 <- q3_alts %>% filter(altID == 1)
-q3_alt2 <- q3_alts %>% filter(altID == 2)
-q3_alt3 <- q3_alts %>% filter(altID == 3)
-
-# Define the option vector
-
-q3_options <- c("option_1", "option_2", "option_3")
-
-q3c1_1 <- sd_output("q3c1", type = "value")
-q3c2_2 <- sd_output("q3c2", type = "value")
-q3c3_3 <- sd_output("q3c3", type = "value")
-
-# Change the names of each element to display markdown-formatted
-# text and an embedded image using html
-
-names(q3_options)[1] <- glue("**Option 1**<br>
-    **Vehicle Type**:  {q3_alt1$powertrain}   
-    **Range(in miles)**: {q3_alt1$range} <br>
-    **Purchase Price**: {q3c1_1} <br>
-    **Operating Cost**:  {q3_alt1$operating_cost} <br> 
-    **acc time**: {q3_alt1$accelTime} <br>
-    **Mileage**: {q3_alt1$mileage} "
-)
-names(q3_options)[2] <-glue("**Option 2**<br>
-    **Vehicle Type**:  {q3_alt2$powertrain}   
-    **Range(in miles)**: {q3_alt2$range} <br>
-    **Purchase Price**: {q3c2_2} <br>
-    **Operating Cost**:  {q3_alt2$operating_cost} <br> 
-    **acce time**: {q3_alt2$accelTime} <br>
-    **Mileage**: {q3_alt2$mileage} "
-)
-names(q3_options)[3] <- glue("**Option 3**<br>
-    **Vehicle Type**:  {q3_alt3$powertrain}   
-    **Range(in miles)**: {q3_alt3$range} <br>
-    **Purchase Price**: {q3c3_3} <br>
-    **Operating Cost**:  {q3_alt3$operating_cost} <br> 
-    **acc time**: {q3_alt3$accelTime} <br>
-    **Mileage**: {q3_alt3$mileage} "
-)
+sd_output("make_table3")
 
 sd_question(
   type   = 'mc_buttons',
   id     = 'cbc_q3',
-  label  = "(3 of 6) If these were your only options, which would you choose?",
-  option = q3_options
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
 )
+
+
+sd_next()
+
+
 ```
-
-<br>
-
-```{r}
-sd_next(next_page = 'cbc_q4')
-```
-
 :::
 
-::: {#cbc_q4 .sd-page}
-
-# Choice Question 4
-
+::: {#pageQ4 .sd-page}
+## Section 3 of 5 
+### Question 4 of 6
 ```{r}
-shiny::imageOutput('chosen_image')
-```
-
-
-```{r}
-# Define q1 choice options
-
-q4_alts <- df %>% filter(qID == 4)
-q4_alt1 <- q4_alts %>% filter(altID == 1)
-q4_alt2 <- q4_alts %>% filter(altID == 2)
-q4_alt3 <- q4_alts %>% filter(altID == 3)
-
-# Define the option vector
-
-q4_options <- c("option_1", "option_2", "option_3")
-
-q4c1_1 <- sd_output("q4c1", type = "value")
-q4c2_2 <- sd_output("q4c2", type = "value")
-q4c3_3 <- sd_output("q4c3", type = "value")
-
-
-
-# Change the names of each element to display markdown-formatted
-# text and an embedded image using html
-
-names(q4_options)[1] <- glue("**Option 1**<br>
-    **Vehicle Type**:  {q4_alt1$powertrain}   
-    **Range(in miles)**: {q4_alt1$range} <br>
-    **Purchase Price**: {q4c1_1} <br>
-    **Operating Cost**:  {q4_alt1$operating_cost} <br> 
-    **acc time**: {q4_alt1$accelTime} <br>
-    **Mileage**: {q4_alt1$mileage} "
-)
-names(q4_options)[2] <-glue("**Option 2**<br>
-    **Vehicle Type**:  {q4_alt2$powertrain}   
-    **Range(in miles)**: {q4_alt2$range} <br>
-    **Purchase Price**: {q4c2_2} <br>
-    **Operating Cost**:  {q4_alt2$operating_cost} <br> 
-    **acc time**: {q4_alt2$accelTime} <br>
-    **Mileage**: {q4_alt2$mileage} "
-)
-names(q4_options)[3] <- glue("**Option 3**<br>
-    **Vehicle Type**:  {q4_alt3$powertrain}   
-    **Range(in miles)**: {q4_alt3$range} <br>
-    **Purchase Price**: {q4c3_3} <br>
-    **Operating Cost**:  {q4_alt3$operating_cost} <br> 
-    **acc time**: {q4_alt3$accelTime} <br>
-    **Mileage**: {q4_alt3$mileage} "
-)
+sd_output("make_table4")
 
 sd_question(
   type   = 'mc_buttons',
   id     = 'cbc_q4',
-  label  = "(4 of 6) If these were your only options, which would you choose?",
-  option = q4_options
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
 )
+
+
+sd_next()
+
+
 ```
-
-<br>
-
-```{r}
-sd_next(next_page = 'cbc_q5')
-```
-
 :::
 
-::: {#cbc_q5 .sd-page}
-
-# Choice Question 5
-
+::: {#pageQ5 .sd-page}
+## Section 3 of 5 
+### Question 5 of 6
 ```{r}
-shiny::imageOutput('chosen_image')
-```
-
-
-```{r}
-# Define q1 choice options
-
-q5_alts <- df %>% filter(qID == 5)
-q5_alt1 <- q5_alts %>% filter(altID == 1)
-q5_alt2 <- q5_alts %>% filter(altID == 2)
-q5_alt3 <- q5_alts %>% filter(altID == 3)
-
-# Define the option vector
-
-q5_options <- c("option_1", "option_2", "option_3")
-
-q5c1_1 <- sd_output("q5c1", type = "value")
-q5c2_2 <- sd_output("q5c2", type = "value")
-q5c3_3 <- sd_output("q5c3", type = "value")
-
-# Change the names of each element to display markdown-formatted
-# text and an embedded image using html
-
-names(q5_options)[1] <- glue("**Option 1**<br>
-    **Vehicle Type**:  {q5_alt1$powertrain}   
-    **Range(in miles)**: {q5_alt1$range} <br>
-    **Purchase Price**: {q5c1_1} <br>
-    **Operating Cost**:  {q5_alt1$operating_cost} <br> 
-    **acc time**: {q5_alt1$accelTime} <br>
-    **Mileage**: {q5_alt1$mileage} "
-)
-names(q5_options)[2] <-glue("**Option 2**<br>
-    **Vehicle Type**:  {q5_alt2$powertrain}   
-    **Range(in miles)**: {q5_alt2$range} <br>
-    **Purchase Price**: {q5c2_2} <br>
-    **Operating Cost**:  {q5_alt2$operating_cost} <br> 
-    **acc time**: {q5_alt2$accelTime} <br>
-    **Mileage**: {q5_alt2$mileage} "
-)
-names(q5_options)[3] <- glue("**Option 3**<br>
-    **Vehicle Type**:  {q5_alt3$powertrain}   
-    **Range(in miles)**: {q5_alt3$range} <br>
-    **Purchase Price**: {q5c3_3} <br>
-    **Operating Cost**:  {q5_alt3$operating_cost} <br> 
-    **acc time**: {q5_alt3$accelTime} <br>
-    **Mileage**: {q5_alt3$mileage} "
-)
+sd_output("make_table5")
 
 sd_question(
   type   = 'mc_buttons',
   id     = 'cbc_q5',
-  label  = "(5 of 6) If these were your only options, which would you choose?",
-  option = q5_options
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
 )
+
+
+sd_next()
+
+
 ```
-
-<br>
-
-```{r}
-sd_next(next_page = 'cbc_q6')
-```
-
 :::
 
-::: {#cbc_q6 .sd-page}
-
-# Choice Question 6
-
+::: {#pageQ6 .sd-page}
+## Section 3 of 5 
+### Question 6 of 6
 ```{r}
-shiny::imageOutput('chosen_image')
-```
-
-
-```{r}
-# Define q1 choice options
-
-q6_alts <- df %>% filter(qID == 5)
-q6_alt1 <- q6_alts %>% filter(altID == 1)
-q6_alt2 <- q6_alts %>% filter(altID == 2)
-q6_alt3 <- q6_alts %>% filter(altID == 3)
-
-# Define the option vector
-
-q6_options <- c("option_1", "option_2", "option_3")
-
-q6c1_1 <- sd_output("q6c1", type = "value")
-q6c2_2 <- sd_output("q6c2", type = "value")
-q6c3_3 <- sd_output("q6c3", type = "value")
-
-# Change the names of each element to display markdown-formatted
-# text and an embedded image using html
-
-names(q6_options)[1] <- glue("**Option 1**<br>
-    **Vehicle Type**:  {q6_alt1$powertrain}   
-    **Range(in miles)**: {q6_alt1$range} <br>
-    **Purchase Price**: {q6c1_1} <br>
-    **Operating Cost**:  {q6_alt1$operating_cost} <br> 
-    **acc time**: {q6_alt1$accelTime} <br>
-    **Mileage**: {q6_alt1$mileage} "
-)
-names(q6_options)[2] <-glue("**Option 2**<br>
-    **Vehicle Type**:  {q6_alt2$powertrain}   
-    **Range(in miles)**: {q6_alt2$range} <br>
-    **Purchase Price**: {q6c2_2} <br>
-    **Operating Cost**:  {q6_alt2$operating_cost} <br> 
-    **acc time**: {q6_alt2$accelTime} <br>
-    **Mileage**: {q6_alt2$mileage} "
-)
-names(q6_options)[3] <- glue("**Option 3**<br>
-    **Vehicle Type**:  {q6_alt3$powertrain}   
-    **Range(in miles)**: {q6_alt3$range} <br>
-    **Purchase Price**: {q6c3_3} <br>
-    **Operating Cost**:  {q6_alt3$operating_cost} <br> 
-    **acc time**: {q6_alt3$accelTime} <br>
-    **Mileage**: {q6_alt3$mileage} "
-)
+sd_output("make_table6")
 
 sd_question(
   type   = 'mc_buttons',
   id     = 'cbc_q6',
-  label  = "(6 of 6) If these were your only options, which would you choose?",
-  option = q6_options
+  label  = "If these were your only options, which would you choose?",
+  option = cbc_options, 
+  width = "600px"
 )
-```
 
-<br>
 
-```{r}
 sd_next()
+
+
 ```
+:::
 
 
 ::: {#page4 .sd-page}
+## Section 4 of 5 
 ## Below are a few questions about electric vehicles which we will only use for analyzing our survey data.
 
 ```{r}
@@ -1193,7 +796,7 @@ sd_question(
 
 ```
 
-<br>
+
 
 ```{r}
 sd_next()
@@ -1202,11 +805,9 @@ sd_next()
 :::
 
 
-:::
-
 ::: {#page6 .sd-page}
-
-# Demographic information
+## Section 5 of 5 
+## Demographic information
 
 ## We're almost done! We'd just like to ask just a few more questions about you which we will only use for analyzing our survey data.
 
@@ -1214,9 +815,9 @@ sd_next()
 #code block
 
 sd_question(
-  type  = 'date',
+  type  = 'numeric',
   id    = 'dob',
-  label = "What is your date of birth?"
+  label = "What's your age?"
 )
 
 sd_question(
@@ -1411,7 +1012,7 @@ sd_question(
 
 ```
 
-<br>
+
 
 ```{r}
 sd_next(next_page = 'end')
@@ -1419,5 +1020,9 @@ sd_next(next_page = 'end')
 :::
 
 ::: {#end .sd-page}
-This is the last page in the survey
+
+## This is the last page in the survey. Thanks for taking our survey!
+
+Your survey completion code is: `r sd_output("completion_code", type = 'value')`
+
 :::

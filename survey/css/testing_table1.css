@@ -1,0 +1,183 @@
+/* Base styles remain the same */
+.car-comparison {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 30px;
+  min-height: 200px;
+}
+
+.header-question {
+  flex: 2; /* Increased from 1.5 to 2 to give more space to the question text */
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.header-section img {
+  flex: 0 0 300px; /* Reduced from 400px to 300px */
+  max-width: 300px; /* Reduced from 400px to 300px */
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  object-fit: contain;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 10px;
+  width: 100%;
+  margin: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+th,
+td {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+.footnote {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 20px;
+  color: #666;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  .car-comparison {
+    padding: 10px;
+  }
+
+  .header-section {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+    min-height: auto;
+  }
+
+  .header-section img {
+    max-width: 80%; /* Changed from 100% to 80% */
+    flex: none;
+    height: auto;
+    margin: 0 auto; /* Center the image */
+  }
+
+  .header-question {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  table {
+    border-spacing: 5px;
+  }
+
+  th,
+  td {
+    padding: 8px 4px;
+    font-size: 0.75rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  td img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+  }
+
+  td:first-child {
+    font-size: 0.75rem;
+  }
+
+  .footnote {
+    font-size: 0.75rem;
+    margin-top: 15px;
+  }
+}
+
+/* Additional styles for very small screens */
+@media (max-width: 480px) {
+  .car-comparison {
+    padding: 5px;
+  }
+
+  table {
+    border-spacing: 2px;
+  }
+
+  th,
+  td {
+    padding: 6px 3px;
+    font-size: 0.7rem;
+  }
+
+  td img {
+    width: 16px;
+    height: 16px;
+    margin-right: 2px;
+  }
+
+  .header-question {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  .header-section img {
+    max-width: 70%; /* Further reduced for very small screens */
+  }
+
+}
+
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+
+@media (max-width: 768px) {
+  .responsive-image {
+    max-width: 80vw; /* Reduced from 90% to 80% of viewport width on mobile */
+  }
+}
+
+@media (min-width: 769px) {
+  .responsive-image {
+    max-width: 400px; /* Reduced from 600px to 400px */
+  }
+}

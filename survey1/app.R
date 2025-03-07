@@ -287,7 +287,7 @@ server <- function(input, output, session) {
       #   price = as.numeric(price) * as.numeric(input$budget)
       #   #, image = paste0('<img src="', image, '" width=100>')
       #   ) %>%
-    select(powertrain, price, range, mileage, operating_cost, accelTime)
+    select(powertrain, price, range, mileage, operating_cost)
 
     rownames(car_data) <- c("Row1","Row2","Row3")
     car_data <- t(car_data)
@@ -297,8 +297,7 @@ server <- function(input, output, session) {
                         '<span title="What is the price of the vehicle" style="cursor: help; text-decoration: underline;">Price</span>',
                         '<span title="How many miles in a full tank/ fully charged battery" style="cursor: help; text-decoration: underline;">Range</span>',
                         '<span title="How many miles in a gallon of fuel" style="cursor: help; text-decoration: underline;">Mileage</span>',
-                        '<span title="Operating cost per 100 miles" style="cursor: help; text-decoration: underline;">Operating Cost</span>',
-                        '<span title="Acceleration time 0 to 60 mph" style="cursor: help; text-decoration: underline;">accelTime</span>'
+                        '<span title="Operating cost per 100 miles" style="cursor: help; text-decoration: underline;">Operating Cost</span>'
                         )
 
 
