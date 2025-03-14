@@ -28,7 +28,7 @@ head(data)
 # "powertrain"  = Indicates if the car is electric or gas
 
 # -----------------------------------------------------------------------------
-# Estimate preference space MXL model with linear price, fuelEconomy, and accelTime
+# Estimate preference space MXL model
 
 
 
@@ -67,7 +67,7 @@ mxl_pref$gradient
 eigen(mxl_pref$hessian)$values
 
 # -----------------------------------------------------------------------------
-# Estimate WTP space MXL model with linear price, fuelEconomy, and accelTime
+# Estimate WTP space MXL model
 
 # Estimate the model
 mxl_wtp <- logitr(

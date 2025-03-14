@@ -1,4 +1,4 @@
-# Estimate multinomial logit (MNL) models
+# Estimate multinomial logit (MNL) model_linears
 
 # Load libraries
 
@@ -27,7 +27,7 @@ head(data_dummy)
 data_dummy1 <- clean_names(data_dummy)
 
 # Estimate the model
-model <- logitr(
+model_linear <- logitr(
   data    = data_dummy1,
   outcome = "choice",
   obsID   = "obs_id",
@@ -38,22 +38,22 @@ model <- logitr(
 
 
 # View summary of results
-summary(model)
+summary(model_linear)
 
 # Check the 1st order condition: Is the gradient at the solution zero?
-model$gradient
+model_linear$gradient
 
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)
-eigen(model$hessian)$values
+eigen(model_linear$hessian)$values
 
 
 
 # -----------------------------------------------------------------------------
-# Save model objects
+# Save model_linear objects
 
 save(
-  model,
-  file = here("models", "model.RData")
+  model_linear,
+  file = here("models", "model_linear.RData")
 )
 
