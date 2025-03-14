@@ -73,14 +73,22 @@ data_rand <- cbc_choices(
 # Adding price values (based on options shown to user)
 my_vec <- c()
 user_price_options <- seq(5000, 32500, 2500)
-for (i in seq(1,nrow(data_rand)/3,1))
-{
-  val <- sample(user_price_options,1)
-  my_vec <- c(my_vec , rep(val, times = 3))
-}
+respID <- unique(data_rand$respID)
+sampled_prices <- data.frame(
+  respID = respID,
+  user_price = sample(user_price_options, size = length(respID), replace = TRUE)
+  )
 
+data_rand = left_join(data_rand, sampled_prices)
 
-data_rand$price = data_rand$price*my_vec
+# for (i in seq(1,nrow(data_rand)/18,1))
+# {
+#   val <- sample(user_price_options,1)
+#   my_vec <- c(my_vec , rep(val, times = 18))
+# }
+
+data_rand$price = data_rand$user_price* data_rand$price
+
 
 
 

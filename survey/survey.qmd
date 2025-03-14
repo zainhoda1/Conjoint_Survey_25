@@ -741,7 +741,7 @@ sd_question(
 sd_question(
   type  = 'mc',
   id    = 'know_electric_vehicle',
-  label = "Can you name the make and model of atleast one vehicle powered partially or completely by electricity?",
+  label = "Can you name the make and model of atleast one vehicle powered completely by electricity (a battery electric vehicle)?",
   option = c(
     "Yes" = "Yes",
     "No"  = "No"
@@ -752,7 +752,7 @@ sd_question(
 sd_question(
   type  = "text",
   id    = "write_electric_name",
-  label = "Please name a **make** and **model** of a vehicle that is powered partially or completelyby electricity"
+  label = "Please name the **make** and **model** of the vehicle"
 )
 
 

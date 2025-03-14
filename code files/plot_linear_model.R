@@ -6,6 +6,14 @@ library(tidyverse)
 library(here)
 library(cowplot)
 
+# Load the data set:
+
+pathToData <- here('data', "generated_data.csv")
+data <- read_csv(pathToData)
+head(data)
+
+
+
 # Load estimated models
 load(here("models", "model_linear.RData"))
 
@@ -42,7 +50,7 @@ coefs <- coef(model_linear)
 # Create data frames for plotting each attribute:
 #   level   = The attribute level (x-axis)
 #   utility = The utility associated with each level (y-axis)
-df_price <- data.frame(level = c(0.8, 0.9, 1.0, 1.1)) %>%
+df_price <- data.frame(level = unique(data$price)) %>%
   mutate(
     diff    = level - min(level),
     utility = diff*coefs['price'])

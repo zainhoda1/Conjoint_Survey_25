@@ -16,6 +16,12 @@ pathToData <- here('data', "generated_data.csv")
 data <- read_csv(pathToData)
 head(data)
 
+#Baseline Price:
+data = data %>%
+  group_by(respID) %>% 
+  mutate(price_diff = price - min(price))
+
+
 # Estimate MNL model
 
 # Create dummy coded variables
@@ -24,7 +30,10 @@ data_dummy <- dummy_cols(
 head(data_dummy)
 
 # Clean up names of created variables
-data_dummy1 <- clean_names(data_dummy)
+data_dummy1 <- clean_names(data_dummy) 
+
+
+# -----------------------------------------------------------------------------
 
 # Estimate the model
 model_linear <- logitr(
@@ -32,7 +41,7 @@ model_linear <- logitr(
   outcome = "choice",
   obsID   = "obs_id",
   pars    = c(
-    "price","range", "mileage", "my", "operating_cost",
+    "price_diff","range", "mileage", "my", "operating_cost",
     "powertrain_electric","powertrain_hybrid" ,"powertrain_plug_in_hybrid")
 )
 
