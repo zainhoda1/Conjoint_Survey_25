@@ -100,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>profiles_used <span class="ot">&lt;-</span> <span class="fu">cbc_profiles</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain     =</span> <span class="fu">c</span>(<span class="st">'Gasoline'</span>, <span class="st">'Electric'</span>, <span class="st">'Plug-in Hybrid'</span>, <span class="st">'Hybrid'</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price          =</span> <span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price          =</span> <span class="dv">1000</span><span class="sc">*</span><span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>),</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">range          =</span> <span class="fu">seq</span>(<span class="dv">50</span>, <span class="dv">250</span>, <span class="dv">25</span>), </span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage        =</span> <span class="fu">seq</span>(<span class="dv">20000</span>, <span class="dv">60000</span>, <span class="dv">5000</span>),</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">my             =</span> <span class="fu">seq</span>(<span class="dv">2015</span>, <span class="dv">2023</span>),</span>
@@ -110,15 +110,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="resrictions" class="level2">
 <h2 class="anchored" data-anchor-id="resrictions">Resrictions:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>profiles_used_restricted <span class="ot">&lt;-</span> <span class="fu">cbc_restrict</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  profiles_used, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"Gasoline"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="dv">9</span>), </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">!=</span> <span class="st">"Gasoline"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;=</span> <span class="dv">18</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check powertrain counts</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>profiles_used_restricted <span class="sc">%&gt;%</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(powertrain, operating_cost)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>profiles_used_restricted <span class="ot">&lt;-</span> profiles_used</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>profiles_used_restricted <span class="ot">&lt;-</span> <span class="fu">cbc_restrict</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  profiles_used,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"Gasoline"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="dv">9</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">!=</span> <span class="st">"Gasoline"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;=</span> <span class="dv">18</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check powertrain counts</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>profiles_used_restricted <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(powertrain, operating_cost)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;        powertrain operating_cost    n
 #&gt; 1        Gasoline              9 2916
@@ -150,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>design_rand <span class="ot">&lt;-</span> <span class="fu">cbc_design</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_used_restricted,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_resp   =</span> <span class="dv">5000</span>, <span class="co"># Number of respondents</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_resp   =</span> <span class="dv">4000</span>, <span class="co"># Number of respondents</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_alts   =</span> <span class="dv">3</span>,    <span class="co"># Number of alternatives per question</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_q      =</span> <span class="dv">6</span>     <span class="co"># Number of questions per respondent</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -158,21 +159,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(design_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt;   profileID respID qID altID obsID     powertrain price range mileage   my
-#&gt; 1     27340      1   1     1     1         Hybrid   0.8   125   45000 2022
-#&gt; 2     44499      1   1     2     1 Plug-in Hybrid   1.0   150   55000 2017
-#&gt; 3     33826      1   1     3     1       Electric   1.0   125   45000 2018
-#&gt; 4     46900      1   2     1     2         Hybrid   1.0    75   50000 2019
-#&gt; 5     54485      1   2     2     2       Gasoline   0.8   150   25000 2021
-#&gt; 6      5833      1   2     3     2       Electric   0.8    50   20000 2021
+#&gt; 1     53628      1   1     1     1       Gasoline  1100   175   40000 2018
+#&gt; 2      3556      1   1     2     1       Electric   900   250   45000 2018
+#&gt; 3     30689      1   1     3     1       Gasoline  1000   175   25000 2016
+#&gt; 4     24967      1   2     1     2 Plug-in Hybrid  1100   225   50000 2020
+#&gt; 5     50551      1   2     2     2 Plug-in Hybrid  1100   150   40000 2022
+#&gt; 6     17210      1   2     3     2 Plug-in Hybrid   800   125   50000 2023
 #&gt;   operating_cost
-#&gt; 1              9
-#&gt; 2             15
+#&gt; 1             18
+#&gt; 2              3
 #&gt; 3             12
-#&gt; 4             15
-#&gt; 5             18
-#&gt; 6              3</code></pre>
+#&gt; 4              9
+#&gt; 5             15
+#&gt; 6              6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>design_rand<span class="sc">$</span>range[design_rand<span class="sc">$</span>powertrain <span class="sc">!=</span><span class="st">'Electric'</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>design_rand<span class="sc">$</span>range[design_rand<span class="sc">$</span>powertrain <span class="sc">!=</span><span class="st">'Electric'</span>] <span class="ot">&lt;-</span> <span class="dv">300</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> design_rand[<span class="fu">duplicated</span>(design_rand[<span class="fu">c</span>(<span class="st">'respID'</span>, <span class="st">'qID'</span>, <span class="st">'powertrain'</span>, <span class="st">'price'</span>,</span>
@@ -183,10 +184,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>id_to_remove <span class="ot">&lt;-</span> duplicates<span class="sc">$</span>respID</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>design_rand <span class="ot">&lt;-</span> design_rand <span class="sc">%&gt;%</span> </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>design_rand <span class="ot">&lt;-</span> design_rand <span class="sc">%&gt;%</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>respID <span class="sc">%in%</span> id_to_remove)</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cbc_balance</span>(design_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># design_rand$operating_cost =  paste0(design_rand$operating_cost, " cents per mile", "\n",</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                             "("  ,round(330/design_rand$operating_cost, 1), " MPG equivalent)")</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># design_rand &lt;- design_rand %&gt;%</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(range = case_when(</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     powertrain == "Hybrid" ~ "300 mile range on 1 tank",</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     powertrain == "Gasoline" ~ "300 mile range on 1 tank",</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#     powertrain == "Plug-in Hybrid" ~ "300 mile range on 1 tank \n(first 40 miles electric)",</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     powertrain == "Electric"  ~ paste0(design_rand$range, " mile range on full charge")</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   ))</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cbc_balance</span>(design_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; =====================================
 #&gt; Individual attribute level counts
@@ -194,203 +211,203 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; powertrain:
 #&gt; 
 #&gt;       Gasoline       Electric Plug-in Hybrid         Hybrid 
-#&gt;          21945          22238          22041          22102 
+#&gt;          17651          17821          17523          17547 
 #&gt; 
 #&gt; price:
 #&gt; 
-#&gt;   0.8   0.9     1   1.1 
-#&gt; 22188 21857 22136 22145 
+#&gt;   800   900  1000  1100 
+#&gt; 17576 17739 17568 17659 
 #&gt; 
 #&gt; range:
 #&gt; 
-#&gt;     0    50    75   100   125   150   175   200   225   250 
-#&gt; 66088  2466  2438  2420  2444  2482  2487  2557  2434  2510 
+#&gt;    50    75   100   125   150   175   200   225   250   300 
+#&gt;  2011  1922  1983  2067  1999  1972  1942  1957  1968 52721 
 #&gt; 
 #&gt; mileage:
 #&gt; 
 #&gt; 20000 25000 30000 35000 40000 45000 50000 55000 60000 
-#&gt;  9876  9774  9837  9769  9760  9789  9806  9809  9906 
+#&gt;  7838  7911  7712  7956  7934  7928  7726  7725  7812 
 #&gt; 
 #&gt; my:
 #&gt; 
-#&gt;  2015  2016  2017  2018  2019  2020  2021  2022  2023 
-#&gt;  9861  9716  9761  9857  9683 10022  9930  9771  9725 
+#&gt; 2015 2016 2017 2018 2019 2020 2021 2022 2023 
+#&gt; 7880 7741 7708 7790 7810 7995 7966 7721 7931 
 #&gt; 
 #&gt; operating_cost:
 #&gt; 
 #&gt;     3     6     9    12    15    18    21 
-#&gt; 13303 13125 17778 17549 17728  4473  4370 
+#&gt; 10415 10547 14324 14108 14099  3554  3495 
 #&gt; 
 #&gt; =====================================
 #&gt; Pairwise attribute level counts
 #&gt; 
 #&gt; powertrain x price:
 #&gt; 
-#&gt;                        0.8   0.9     1   1.1
-#&gt;                   NA 22188 21857 22136 22145
-#&gt; Gasoline       21945  5566  5476  5468  5435
-#&gt; Electric       22238  5532  5501  5628  5577
-#&gt; Plug-in Hybrid 22041  5553  5495  5433  5560
-#&gt; Hybrid         22102  5537  5385  5607  5573
+#&gt;                        800   900  1000  1100
+#&gt;                   NA 17576 17739 17568 17659
+#&gt; Gasoline       17651  4415  4465  4409  4362
+#&gt; Electric       17821  4433  4438  4466  4484
+#&gt; Plug-in Hybrid 17523  4367  4482  4311  4363
+#&gt; Hybrid         17547  4361  4354  4382  4450
 #&gt; 
 #&gt; powertrain x range:
 #&gt; 
-#&gt;                          0   50   75  100  125  150  175  200  225  250
-#&gt;                   NA 66088 2466 2438 2420 2444 2482 2487 2557 2434 2510
-#&gt; Gasoline       21945 21945    0    0    0    0    0    0    0    0    0
-#&gt; Electric       22238     0 2466 2438 2420 2444 2482 2487 2557 2434 2510
-#&gt; Plug-in Hybrid 22041 22041    0    0    0    0    0    0    0    0    0
-#&gt; Hybrid         22102 22102    0    0    0    0    0    0    0    0    0
+#&gt;                        50   75  100  125  150  175  200  225  250   300
+#&gt;                   NA 2011 1922 1983 2067 1999 1972 1942 1957 1968 52721
+#&gt; Gasoline       17651    0    0    0    0    0    0    0    0    0 17651
+#&gt; Electric       17821 2011 1922 1983 2067 1999 1972 1942 1957 1968     0
+#&gt; Plug-in Hybrid 17523    0    0    0    0    0    0    0    0    0 17523
+#&gt; Hybrid         17547    0    0    0    0    0    0    0    0    0 17547
 #&gt; 
 #&gt; powertrain x mileage:
 #&gt; 
 #&gt;                      20000 25000 30000 35000 40000 45000 50000 55000 60000
-#&gt;                   NA  9876  9774  9837  9769  9760  9789  9806  9809  9906
-#&gt; Gasoline       21945  2557  2425  2477  2358  2336  2487  2421  2369  2515
-#&gt; Electric       22238  2454  2507  2492  2438  2446  2455  2471  2421  2554
-#&gt; Plug-in Hybrid 22041  2417  2391  2466  2482  2499  2409  2407  2501  2469
-#&gt; Hybrid         22102  2448  2451  2402  2491  2479  2438  2507  2518  2368
+#&gt;                   NA  7838  7911  7712  7956  7934  7928  7726  7725  7812
+#&gt; Gasoline       17651  2003  1947  1934  1980  2006  1984  1951  1928  1918
+#&gt; Electric       17821  1973  1958  1957  2042  1963  1979  1967  2011  1971
+#&gt; Plug-in Hybrid 17523  1931  2003  1959  1949  1955  2007  1852  1857  2010
+#&gt; Hybrid         17547  1931  2003  1862  1985  2010  1958  1956  1929  1913
 #&gt; 
 #&gt; powertrain x my:
 #&gt; 
-#&gt;                      2015 2016 2017 2018 2019  2020 2021 2022 2023
-#&gt;                   NA 9861 9716 9761 9857 9683 10022 9930 9771 9725
-#&gt; Gasoline       21945 2477 2314 2334 2454 2525  2521 2403 2407 2510
-#&gt; Electric       22238 2479 2455 2550 2486 2476  2421 2499 2457 2415
-#&gt; Plug-in Hybrid 22041 2454 2433 2447 2422 2368  2579 2541 2435 2362
-#&gt; Hybrid         22102 2451 2514 2430 2495 2314  2501 2487 2472 2438
+#&gt;                      2015 2016 2017 2018 2019 2020 2021 2022 2023
+#&gt;                   NA 7880 7741 7708 7790 7810 7995 7966 7721 7931
+#&gt; Gasoline       17651 2005 1882 1925 1924 2006 1995 2047 1870 1997
+#&gt; Electric       17821 1930 1952 1984 1986 1936 1930 2093 2042 1968
+#&gt; Plug-in Hybrid 17523 1928 1985 1923 1941 1939 2047 1923 1856 1981
+#&gt; Hybrid         17547 2017 1922 1876 1939 1929 2023 1903 1953 1985
 #&gt; 
 #&gt; powertrain x operating_cost:
 #&gt; 
 #&gt;                          3     6     9    12    15   18   21
-#&gt;                   NA 13303 13125 17778 17549 17728 4473 4370
-#&gt; Gasoline       21945     0     0  4433  4292  4377 4473 4370
-#&gt; Electric       22238  4477  4369  4480  4424  4488    0    0
-#&gt; Plug-in Hybrid 22041  4445  4373  4432  4391  4400    0    0
-#&gt; Hybrid         22102  4381  4383  4433  4442  4463    0    0
+#&gt;                   NA 10415 10547 14324 14108 14099 3554 3495
+#&gt; Gasoline       17651     0     0  3527  3575  3500 3554 3495
+#&gt; Electric       17821  3550  3603  3588  3500  3580    0    0
+#&gt; Plug-in Hybrid 17523  3454  3444  3607  3510  3508    0    0
+#&gt; Hybrid         17547  3411  3500  3602  3523  3511    0    0
 #&gt; 
 #&gt; price x range:
 #&gt; 
-#&gt;               0   50   75  100  125  150  175  200  225  250
-#&gt;        NA 66088 2466 2438 2420 2444 2482 2487 2557 2434 2510
-#&gt; 0.8 22188 16656  638  615  593  602  623  625  645  570  621
-#&gt; 0.9 21857 16356  590  611  579  597  597  612  630  658  627
-#&gt; 1   22136 16508  635  597  605  631  631  617  678  589  645
-#&gt; 1.1 22145 16568  603  615  643  614  631  633  604  617  617
+#&gt;              50   75  100  125  150  175  200  225  250   300
+#&gt;         NA 2011 1922 1983 2067 1999 1972 1942 1957 1968 52721
+#&gt; 800  17576  506  450  509  488  503  520  513  482  462 13143
+#&gt; 900  17739  504  483  506  497  510  471  475  470  522 13301
+#&gt; 1000 17568  494  482  480  520  518  504  462  502  504 13102
+#&gt; 1100 17659  507  507  488  562  468  477  492  503  480 13175
 #&gt; 
 #&gt; price x mileage:
 #&gt; 
-#&gt;           20000 25000 30000 35000 40000 45000 50000 55000 60000
-#&gt;        NA  9876  9774  9837  9769  9760  9789  9806  9809  9906
-#&gt; 0.8 22188  2491  2455  2494  2432  2412  2508  2457  2433  2506
-#&gt; 0.9 21857  2460  2447  2459  2412  2410  2450  2448  2340  2431
-#&gt; 1   22136  2500  2438  2460  2396  2478  2478  2416  2490  2480
-#&gt; 1.1 22145  2425  2434  2424  2529  2460  2353  2485  2546  2489
+#&gt;            20000 25000 30000 35000 40000 45000 50000 55000 60000
+#&gt;         NA  7838  7911  7712  7956  7934  7928  7726  7725  7812
+#&gt; 800  17576  1904  2036  1961  1972  1982  1983  1928  1883  1927
+#&gt; 900  17739  1933  1935  1952  1981  2027  1997  2011  1951  1952
+#&gt; 1000 17568  1956  2000  1903  2010  1982  1939  1902  1917  1959
+#&gt; 1100 17659  2045  1940  1896  1993  1943  2009  1885  1974  1974
 #&gt; 
 #&gt; price x my:
 #&gt; 
-#&gt;           2015 2016 2017 2018 2019  2020 2021 2022 2023
-#&gt;        NA 9861 9716 9761 9857 9683 10022 9930 9771 9725
-#&gt; 0.8 22188 2491 2444 2392 2475 2515  2560 2527 2406 2378
-#&gt; 0.9 21857 2456 2405 2402 2473 2377  2445 2490 2433 2376
-#&gt; 1   22136 2423 2456 2472 2433 2457  2487 2473 2469 2466
-#&gt; 1.1 22145 2491 2411 2495 2476 2334  2530 2440 2463 2505
+#&gt;            2015 2016 2017 2018 2019 2020 2021 2022 2023
+#&gt;         NA 7880 7741 7708 7790 7810 7995 7966 7721 7931
+#&gt; 800  17576 1957 1910 1883 1941 1927 2037 2043 1969 1909
+#&gt; 900  17739 2017 1948 1944 1898 2001 2050 1960 1936 1985
+#&gt; 1000 17568 1927 1890 1961 1990 1934 1996 1987 1884 1999
+#&gt; 1100 17659 1979 1993 1920 1961 1948 1912 1976 1932 2038
 #&gt; 
 #&gt; price x operating_cost:
 #&gt; 
-#&gt;               3     6     9    12    15   18   21
-#&gt;        NA 13303 13125 17778 17549 17728 4473 4370
-#&gt; 0.8 22188  3363  3249  4491  4368  4452 1175 1090
-#&gt; 0.9 21857  3286  3304  4376  4322  4409 1094 1066
-#&gt; 1   22136  3333  3194  4531  4417  4439 1087 1135
-#&gt; 1.1 22145  3321  3378  4380  4442  4428 1117 1079
+#&gt;                3     6     9    12    15   18   21
+#&gt;         NA 10415 10547 14324 14108 14099 3554 3495
+#&gt; 800  17576  2644  2599  3550  3597  3467  889  830
+#&gt; 900  17739  2625  2600  3553  3527  3602  915  917
+#&gt; 1000 17568  2553  2607  3556  3560  3532  892  868
+#&gt; 1100 17659  2593  2741  3665  3424  3498  858  880
 #&gt; 
 #&gt; range x mileage:
 #&gt; 
 #&gt;           20000 25000 30000 35000 40000 45000 50000 55000 60000
-#&gt;        NA  9876  9774  9837  9769  9760  9789  9806  9809  9906
-#&gt; 0   66088  7422  7267  7345  7331  7314  7334  7335  7388  7352
-#&gt; 50   2466   280   267   286   255   278   276   280   253   291
-#&gt; 75   2438   281   270   267   276   245   280   300   259   260
-#&gt; 100  2420   282   281   252   259   259   283   271   242   291
-#&gt; 125  2444   252   269   270   272   277   278   278   275   273
-#&gt; 150  2482   255   294   285   285   292   270   268   264   269
-#&gt; 175  2487   261   305   291   259   249   264   265   283   310
-#&gt; 200  2557   296   294   289   292   287   271   246   309   273
-#&gt; 225  2434   272   255   269   269   264   249   310   262   284
-#&gt; 250  2510   275   272   283   271   295   284   253   274   303
+#&gt;        NA  7838  7911  7712  7956  7934  7928  7726  7725  7812
+#&gt; 50   2011   211   236   220   224   233   212   231   227   217
+#&gt; 75   1922   222   222   208   236   199   207   220   216   192
+#&gt; 100  1983   205   205   220   217   224   202   237   234   239
+#&gt; 125  2067   245   221   207   231   243   215   239   226   240
+#&gt; 150  1999   225   190   217   228   220   242   216   227   234
+#&gt; 175  1972   228   213   221   251   199   212   206   221   221
+#&gt; 200  1942   235   245   214   208   218   200   205   198   219
+#&gt; 225  1957   190   216   232   235   209   248   212   224   191
+#&gt; 250  1968   212   210   218   212   218   241   201   238   218
+#&gt; 300 52721  5865  5953  5755  5914  5971  5949  5759  5714  5841
 #&gt; 
 #&gt; range x my:
 #&gt; 
-#&gt;           2015 2016 2017 2018 2019  2020 2021 2022 2023
-#&gt;        NA 9861 9716 9761 9857 9683 10022 9930 9771 9725
-#&gt; 0   66088 7382 7261 7211 7371 7207  7601 7431 7314 7310
-#&gt; 50   2466  262  273  296  283  279   263  269  280  261
-#&gt; 75   2438  264  287  278  289  271   260  250  275  264
-#&gt; 100  2420  259  252  278  260  297   261  274  286  253
-#&gt; 125  2444  283  297  268  275  278   260  269  242  272
-#&gt; 150  2482  265  256  278  300  285   277  272  281  268
-#&gt; 175  2487  305  289  279  262  233   280  293  279  267
-#&gt; 200  2557  267  276  300  286  278   276  284  281  309
-#&gt; 225  2434  286  251  300  293  277   258  255  270  244
-#&gt; 250  2510  288  274  273  238  278   286  333  263  277
+#&gt;           2015 2016 2017 2018 2019 2020 2021 2022 2023
+#&gt;        NA 7880 7741 7708 7790 7810 7995 7966 7721 7931
+#&gt; 50   2011  219  195  228  226  225  235  258  211  214
+#&gt; 75   1922  213  225  210  221  187  223  230  196  217
+#&gt; 100  1983  222  194  246  242  219  207  243  206  204
+#&gt; 125  2067  211  232  255  219  213  231  238  247  221
+#&gt; 150  1999  212  207  206  231  219  234  227  233  230
+#&gt; 175  1972  226  232  201  220  224  196  207  229  237
+#&gt; 200  1942  213  223  205  217  227  196  210  233  218
+#&gt; 225  1957  213  211  214  201  204  201  245  257  211
+#&gt; 250  1968  201  233  219  209  218  207  235  230  216
+#&gt; 300 52721 5950 5789 5724 5804 5874 6065 5873 5679 5963
 #&gt; 
 #&gt; range x operating_cost:
 #&gt; 
 #&gt;               3     6     9    12    15   18   21
-#&gt;        NA 13303 13125 17778 17549 17728 4473 4370
-#&gt; 0   66088  8826  8756 13298 13125 13240 4473 4370
-#&gt; 50   2466   499   488   497   482   500    0    0
-#&gt; 75   2438   535   457   505   452   489    0    0
-#&gt; 100  2420   453   462   547   486   472    0    0
-#&gt; 125  2444   449   500   491   476   528    0    0
-#&gt; 150  2482   506   482   475   534   485    0    0
-#&gt; 175  2487   499   492   493   500   503    0    0
-#&gt; 200  2557   520   534   497   499   507    0    0
-#&gt; 225  2434   499   462   527   446   500    0    0
-#&gt; 250  2510   517   492   448   549   504    0    0
+#&gt;        NA 10415 10547 14324 14108 14099 3554 3495
+#&gt; 50   2011   379   410   428   360   434    0    0
+#&gt; 75   1922   375   390   379   406   372    0    0
+#&gt; 100  1983   385   369   433   384   412    0    0
+#&gt; 125  2067   411   407   393   417   439    0    0
+#&gt; 150  1999   422   404   391   382   400    0    0
+#&gt; 175  1972   372   425   419   380   376    0    0
+#&gt; 200  1942   396   418   377   374   377    0    0
+#&gt; 225  1957   409   381   402   397   368    0    0
+#&gt; 250  1968   401   399   366   400   402    0    0
+#&gt; 300 52721  6865  6944 10736 10608 10519 3554 3495
 #&gt; 
 #&gt; mileage x my:
 #&gt; 
-#&gt;            2015 2016 2017 2018 2019  2020 2021 2022 2023
-#&gt;         NA 9861 9716 9761 9857 9683 10022 9930 9771 9725
-#&gt; 20000 9876 1074 1101 1108 1110 1053  1096 1142 1067 1125
-#&gt; 25000 9774 1094 1017 1018 1113 1060  1080 1164 1085 1143
-#&gt; 30000 9837 1139 1113 1077 1039 1032  1173 1080 1071 1113
-#&gt; 35000 9769 1121 1048 1077 1052 1085  1147 1103 1089 1047
-#&gt; 40000 9760 1087 1112 1069 1144 1083  1103 1078 1061 1023
-#&gt; 45000 9789 1051 1072 1139 1137 1050  1099 1086 1060 1095
-#&gt; 50000 9806 1150 1086 1068 1094 1037  1101 1070 1142 1058
-#&gt; 55000 9809 1088 1114 1095 1049 1150  1110 1062 1098 1043
-#&gt; 60000 9906 1057 1053 1110 1119 1133  1113 1145 1098 1078
+#&gt;            2015 2016 2017 2018 2019 2020 2021 2022 2023
+#&gt;         NA 7880 7741 7708 7790 7810 7995 7966 7721 7931
+#&gt; 20000 7838  834  886  828  858  875  927  898  843  889
+#&gt; 25000 7911  852  852  852  891  875  912  937  856  884
+#&gt; 30000 7712  826  820  832  852  864  838  923  859  898
+#&gt; 35000 7956  886  863  857  885  883  880  897  889  916
+#&gt; 40000 7934  887  912  881  834  829  903  865  875  948
+#&gt; 45000 7928  894  859  880  863  851  878  867  921  915
+#&gt; 50000 7726  928  852  825  914  860  907  868  822  750
+#&gt; 55000 7725  878  830  853  861  876  850  861  835  881
+#&gt; 60000 7812  895  867  900  832  897  900  850  821  850
 #&gt; 
 #&gt; mileage x operating_cost:
 #&gt; 
 #&gt;                3     6     9    12    15   18   21
-#&gt;         NA 13303 13125 17778 17549 17728 4473 4370
-#&gt; 20000 9876  1564  1446  1957  1929  1958  528  494
-#&gt; 25000 9774  1546  1422  1974  1934  1962  471  465
-#&gt; 30000 9837  1452  1496  1989  1907  2008  497  488
-#&gt; 35000 9769  1475  1443  1953  1940  2008  457  493
-#&gt; 40000 9760  1515  1427  1950  1954  1944  494  476
-#&gt; 45000 9789  1396  1438  2016  1948  1946  534  511
-#&gt; 50000 9806  1417  1509  1939  2048  1933  461  499
-#&gt; 55000 9809  1471  1479  2022  1930  1969  510  428
-#&gt; 60000 9906  1467  1465  1978  1959  2000  521  516
+#&gt;         NA 10415 10547 14324 14108 14099 3554 3495
+#&gt; 20000 7838  1123  1188  1529  1572  1624  401  401
+#&gt; 25000 7911  1203  1213  1560  1603  1535  416  381
+#&gt; 30000 7712  1165  1091  1528  1593  1554  395  386
+#&gt; 35000 7956  1188  1165  1675  1547  1593  410  378
+#&gt; 40000 7934  1112  1148  1678  1588  1616  393  399
+#&gt; 45000 7928  1138  1232  1621  1620  1544  393  380
+#&gt; 50000 7726  1121  1175  1609  1514  1537  383  387
+#&gt; 55000 7725  1164  1161  1564  1527  1556  366  387
+#&gt; 60000 7812  1201  1174  1560  1544  1540  397  396
 #&gt; 
 #&gt; my x operating_cost:
 #&gt; 
-#&gt;                3     6     9    12    15   18   21
-#&gt;         NA 13303 13125 17778 17549 17728 4473 4370
-#&gt; 2015  9861  1490  1515  1861  2035  1967  488  505
-#&gt; 2016  9716  1448  1439  1951  2011  1935  454  478
-#&gt; 2017  9761  1510  1457  1956  1835  2078  470  455
-#&gt; 2018  9857  1392  1459  2075  1963  1986  519  463
-#&gt; 2019  9683  1483  1392  1952  1901  1948  497  510
-#&gt; 2020 10022  1552  1453  2009  1974  2015  525  494
-#&gt; 2021  9930  1505  1459  2063  1938  1998  496  471
-#&gt; 2022  9771  1495  1493  1944  1913  1927  511  488
-#&gt; 2023  9725  1428  1458  1967  1979  1874  513  506</code></pre>
+#&gt;               3     6     9    12    15   18   21
+#&gt;        NA 10415 10547 14324 14108 14099 3554 3495
+#&gt; 2015 7880  1177  1160  1632  1555  1537  395  424
+#&gt; 2016 7741  1154  1171  1524  1580  1568  368  376
+#&gt; 2017 7708  1140  1183  1507  1563  1543  393  379
+#&gt; 2018 7790  1160  1142  1633  1616  1463  375  401
+#&gt; 2019 7810  1130  1124  1512  1603  1630  427  384
+#&gt; 2020 7995  1172  1240  1641  1565  1581  400  396
+#&gt; 2021 7966  1186  1189  1623  1549  1599  425  395
+#&gt; 2022 7721  1135  1123  1587  1573  1557  381  365
+#&gt; 2023 7931  1161  1215  1665  1504  1621  390  375</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbc_overlap</span>(design_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -401,32 +418,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; powertrain:
 #&gt; 
 #&gt;     1     2     3 
-#&gt;  1860 16572 11010 
+#&gt;  1436 13287  8791 
 #&gt; 
 #&gt; price:
 #&gt; 
 #&gt;     1     2     3 
-#&gt;  1851 16431 11160 
+#&gt;  1485 13330  8699 
 #&gt; 
 #&gt; range:
 #&gt; 
 #&gt;     1     2     3 
-#&gt; 12370 12979  4093 
+#&gt;  9772 10516  3226 
 #&gt; 
 #&gt; mileage:
 #&gt; 
 #&gt;     1     2     3 
-#&gt;   362  8670 20410 
+#&gt;   308  6884 16322 
 #&gt; 
 #&gt; my:
 #&gt; 
 #&gt;     1     2     3 
-#&gt;   380  8755 20307 
+#&gt;   295  6916 16303 
 #&gt; 
 #&gt; operating_cost:
 #&gt; 
 #&gt;     1     2     3 
-#&gt;   937 12119 16386</code></pre>
+#&gt;   731  9750 13033</code></pre>
 </div>
 </div>
 <p>Simulate random choices</p>
@@ -438,53 +455,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Run power analysis</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>power_rand <span class="ot">&lt;-</span> <span class="fu">cbc_power</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">nbreaks =</span> <span class="dv">10</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_q     =</span> <span class="dv">6</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data    =</span> data_rand,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pars    =</span> <span class="fu">c</span>(<span class="st">"powertrain"</span>, <span class="st">"price"</span>, <span class="st">"range"</span>, <span class="st">"mileage"</span>, <span class="st">"my"</span>,<span class="st">"operating_cost"</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="st">"choice"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">obsID   =</span> <span class="st">"obsID"</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(power_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>#&gt;   sampleSize                     coef          est           se
-#&gt; 1        500       powertrainElectric 2.979419e-02 1.292642e-01
-#&gt; 2        500 powertrainPlug-in Hybrid 7.189237e-02 7.157082e-02
-#&gt; 3        500         powertrainHybrid 8.645696e-02 7.155322e-02
-#&gt; 4        500                    price 1.410769e-01 2.011804e-01
-#&gt; 5        500                    range 8.533656e-05 7.092148e-04
-#&gt; 6        500                  mileage 1.054395e-06 1.730615e-06</code></pre>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model &lt;- logitr(</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     data    = data_rand,</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     pars    = c("powertrain", "price", "range", "mileage", "my","operating_cost"),</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     outcome = "choice",</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     obsID   = "obsID"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(model)</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># head(power_rand)</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># tail(power_rand)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(power_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>power_rand <span class="ot">&lt;-</span> <span class="fu">cbc_power</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">nbreaks =</span> <span class="dv">20</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_q     =</span> <span class="dv">6</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data    =</span> data_rand,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pars    =</span> <span class="fu">c</span>(<span class="st">"powertrain"</span>, <span class="st">"price"</span>, <span class="st">"range"</span>, <span class="st">"mileage"</span>, <span class="st">"my"</span>,<span class="st">"operating_cost"</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="st">"choice"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">obsID   =</span> <span class="st">"obsID"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(power_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>#&gt;    sampleSize             coef           est           se
-#&gt; 75       5000 powertrainHybrid -6.659208e-03 2.252815e-02
-#&gt; 76       5000            price  1.357015e-03 6.368809e-02
-#&gt; 77       5000            range  2.085888e-04 2.210256e-04
-#&gt; 78       5000          mileage -2.392797e-07 5.535190e-07
-#&gt; 79       5000               my  3.895774e-03 2.771783e-03
-#&gt; 80       5000   operating_cost  1.323815e-03 1.678958e-03</code></pre>
+<pre><code>#&gt;   sampleSize                     coef           est           se
+#&gt; 1        200       powertrainElectric -3.117999e-01 2.056701e-01
+#&gt; 2        200 powertrainPlug-in Hybrid -8.577106e-02 1.106735e-01
+#&gt; 3        200         powertrainHybrid -7.067010e-02 1.116139e-01
+#&gt; 4        200                    price  7.196756e-04 3.258092e-04
+#&gt; 5        200                    range -1.062302e-03 1.120807e-03
+#&gt; 6        200                  mileage  1.678321e-07 2.797795e-06</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(power_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;     sampleSize             coef           est           se
+#&gt; 155       4000 powertrainHybrid -1.321215e-02 2.525857e-02
+#&gt; 156       4000            price -1.685777e-05 7.166027e-05
+#&gt; 157       4000            range -5.050977e-04 2.462342e-04
+#&gt; 158       4000          mileage  9.416873e-07 6.206202e-07
+#&gt; 159       4000               my  2.581043e-03 3.084718e-03
+#&gt; 160       4000   operating_cost  2.943653e-03 1.885594e-03</code></pre>
 </div>
 </div>
 <p>Here is a summary of the standard errors for each sample size:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(power_rand) <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> sampleSize, <span class="at">y =</span> se, <span class="at">color =</span> coef)) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">y =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.125</span>)) <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sample size"</span>, </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Standard error"</span>, </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Coefficient"</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(power_rand) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> sampleSize, <span class="at">y =</span> se, <span class="at">color =</span> coef)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">y =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.125</span>)) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sample size"</span>, </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Standard error"</span>, </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Coefficient"</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="figs/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="696"></p>
+<p><img src="figs/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="696"></p>
 </figure>
 </div>
 </div>

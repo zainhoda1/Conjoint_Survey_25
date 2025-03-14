@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 
 library(tidyverse)
 library(cbcTools)
+library(logitr)
 ```
 
 First, define the attributes and levels:
@@ -27,7 +28,7 @@ First, define the attributes and levels:
 ```{r}
 profiles_used <- cbc_profiles(
   powertrain     = c('Gasoline', 'Electric', 'Plug-in Hybrid', 'Hybrid'),
-  price          = seq(0.8, 1.1, 0.1),
+  price          = 1000*seq(0.8, 1.1, 0.1),
   range          = seq(50, 250, 25), 
   mileage        = seq(20000, 60000, 5000),
   my             = seq(2015, 2023),
@@ -38,15 +39,15 @@ profiles_used <- cbc_profiles(
 ## Resrictions:
 
 ```{r}
-
+profiles_used_restricted <- profiles_used
 profiles_used_restricted <- cbc_restrict(
-  profiles_used, 
-  (powertrain == "Gasoline") & (operating_cost < 9), 
+  profiles_used,
+  (powertrain == "Gasoline") & (operating_cost < 9),
   (powertrain != "Gasoline") & (operating_cost >= 18)
 )
 
 # Check powertrain counts
-profiles_used_restricted %>% 
+profiles_used_restricted %>%
   count(powertrain, operating_cost)
 
 ```
@@ -59,7 +60,7 @@ Make a randomized full-factorial design:
 ```{r}
 design_rand <- cbc_design(
   profiles = profiles_used_restricted,
-  n_resp   = 5000, # Number of respondents
+  n_resp   = 4000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6     # Number of questions per respondent
 )
@@ -77,16 +78,16 @@ design_rand <- design_rand[!duplicated(design_rand[c('respID', 'qID', 'powertrai
 
 id_to_remove <- duplicates$respID
 
-design_rand <- design_rand %>% 
+design_rand <- design_rand %>%
   filter(!respID %in% id_to_remove)
 
 
 # 
-# design_rand$operating_cost =  paste0(design_rand$operating_cost, " cents per mile", "\n", 
+# design_rand$operating_cost =  paste0(design_rand$operating_cost, " cents per mile", "\n",
 #                             "("  ,round(330/design_rand$operating_cost, 1), " MPG equivalent)")
+
 # 
-# 
-# design_rand <- design_rand %>% 
+# design_rand <- design_rand %>%
 #   mutate(range = case_when(
 #     powertrain == "Hybrid" ~ "300 mile range on 1 tank",
 #     powertrain == "Gasoline" ~ "300 mile range on 1 tank",
@@ -111,9 +112,25 @@ data_rand <- cbc_choices(
 
 Run power analysis
 
+
+
+```{r}
+# model <- logitr(
+#     data    = data_rand,
+#     pars    = c("powertrain", "price", "range", "mileage", "my","operating_cost"),
+#     outcome = "choice",
+#     obsID   = "obsID"
+# )
+# summary(model)
+# 
+# head(power_rand)
+# tail(power_rand)
+```
+
+
 ```{r}
 power_rand <- cbc_power(
-    nbreaks = 10,
+    nbreaks = 20,
     n_q     = 6,
     data    = data_rand,
     pars    = c("powertrain", "price", "range", "mileage", "my","operating_cost"),

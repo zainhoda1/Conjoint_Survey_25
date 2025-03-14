@@ -1,0 +1,3179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>survey</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="survey_files/libs/clipboard/clipboard.min.js"></script>
+<script src="survey_files/libs/quarto-html/quarto.js"></script>
+<script src="survey_files/libs/quarto-html/popper.min.js"></script>
+<script src="survey_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="survey_files/libs/quarto-html/anchor.min.js"></script>
+<link href="survey_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="survey_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="survey_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="survey_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="survey_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="survey_files/libs/sw-buttons-group-0.8.7/buttons-group.js"></script>
+
+<link href="survey_files/libs/selectize-0.15.2/css/selectize.bootstrap3.css" rel="stylesheet">
+
+<script src="survey_files/libs/selectize-0.15.2/js/selectize.min.js"></script>
+
+<script src="survey_files/libs/selectize-0.15.2/accessibility/js/selectize-plugin-a11y.min.js"></script>
+
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div id="welcome" class="sd-page">
+<section id="welcome-to-our-survey" class="level1">
+<h1>Welcome to our survey!</h1>
+<p>Hi! We are a research team of George Washington University. This survey will ask you simple questions regarding your purchase preference for used cars.</p>
+<p>This survey will take about <strong>10 minutes</strong> to complete. It can be stopped and picked up at any time. Your personal information will be kept private and won’t be shared with anyone else. The survey is subdivided in five sub-sections:</p>
+<ul>
+<li><p>Current vehicle information</p></li>
+<li><p>Future vehicle information</p></li>
+<li><p>Choice Questions</p></li>
+<li><p>Knowledge of electric vehicles</p></li>
+<li><p>Demographic Information</p></li>
+</ul>
+<p><strong>We greatly appreciate your participation!</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="consent" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<section id="consent" class="level1 sd-page">
+<h1>Consent</h1>
+<section id="informed-consent-for-participation-in-a-research-study" class="level2">
+<h2 class="anchored" data-anchor-id="informed-consent-for-participation-in-a-research-study">Informed Consent for Participation in a Research Study</h2>
+<p>You are invited to participate in a research study directed by Dr.&nbsp;John Paul Helveston of the Department of Engineering Management and Systems Engineering at George Washington University (GWU) and funded by the Department of Energy. Participation is entirely voluntary and you may obtain further information regarding this study by contacting us at gwuvehiclegroup7@gmail.com .</p>
+<p>The purpose of this study is to identify the preferences and needs of car ownership in different communities. If you choose to participate in this study, you will be asked to answer an online survey about vehicle ownership and preference. The total amount of time you will spend on this study is 10 minutes. You may refuse to answer any of the questions and stop participating at any time.</p>
+<p><strong>Benefits</strong> : The most important reason why someone would like to participate in this study is that they can share their vehicle usage needs and help inform policies that decide incentives on EV ownership. You will not benefit directly from your participation in the study. However, the benefits to science and humankind that might result from this study include implementing electric vehicle subsidy policies that are more in tune with people’s requirements.</p>
+<p><strong>Concerns/Risks</strong> : You may not choose to volunteer for this study if you do not want to share information about your vehicle usage. Possible risks or discomforts you could experience during this study include: - Although very unlikely, there is a risk of email address information being compromised if it is shared and in case our systems are compromised. - Psychological stress could be caused by the time and effort spent answering the survey.</p>
+<p><strong>Confidentiality</strong> : Every effort will be made to keep your information confidential. However, this cannot be guaranteed. The data will be stored in a secured online database which only the PI and student researcher can access. If the results of this research study are reported in journals or at scientific meetings, the people who participated in this study will not be named or identified.</p>
+<p><strong>Additional Information</strong> : The Office of Human Research of George Washington University, at telephone number (202) 994-2715, can provide further information about your rights as a research participant.Your willingness to participate in this research study is implied if you proceed.</p>
+<p><strong>Participation to this survey is voluntary. To take a part in this survey, you must:</strong></p>
+<ul>
+<li>Be at least 18 years old.</li>
+<li>Authorize us to analyze the data exclusively for research purposes.</li>
+</ul>
+<p>By clicking on “<strong>I Agree</strong>”, you confirm that you have reviewed and understood the information provided in the welcome page and this consent page, and agree to participate in the “Car Ownership Survey”.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="filter" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">I Agree</button>
+</div>
+</div>
+</div>
+</section>
+</section>
+<div id="filter" class="sd-page">
+<section id="this-study-is-about-the-purchase-of-your-next-vehicle." class="level1">
+<h1>This study is about the purchase of your next vehicle.</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-next_vehicle_purchase" data-question-id="next_vehicle_purchase" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('next_vehicle_purchase_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('next_vehicle_purchase_interacted', true, {priority: 'event'});">
+<div id="next_vehicle_purchase" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="next_vehicle_purchase-label">
+<label class="control-label" id="next_vehicle_purchase-label" for="next_vehicle_purchase"><p>To your best estimate, when will you likely need to purchase another vehicle?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="next_vehicle_purchase" value="0">
+<span>Currently shopping</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_vehicle_purchase" value="3">
+<span>0-3 months</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_vehicle_purchase" value="6">
+<span>3-6 months</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_vehicle_purchase" value="12">
+<span>6-12 months</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_vehicle_purchase" value="24">
+<span>1-2 years</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_vehicle_purchase" value="not_sure">
+<span>I'm not sure</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-which_market" data-question-id="which_market" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('which_market_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('which_market_interacted', true, {priority: 'event'});">
+<div id="which_market" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="which_market-label">
+<label class="control-label" id="which_market-label" for="which_market"><p>Which market will you consider buying this vehicle from?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="which_market" value="New">
+<span>New</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="which_market" value="Used">
+<span>Used</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="which_market" value="Both">
+<span>Both</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="welcome1" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="welcome1" class="sd-page">
+<center>
+<section id="section-1-of-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-1-of-5">Section 1 of 5</h2>
+</section></center>
+
+<section id="below-are-some-basic-questions-about-your-household" class="level2">
+<h2 class="anchored" data-anchor-id="below-are-some-basic-questions-about-your-household">Below are some basic questions about your household!</h2>
+<section id="please-answer-to-the-best-of-your-knowledge" class="level3">
+<h3 class="anchored" data-anchor-id="please-answer-to-the-best-of-your-knowledge">Please answer to the best of your knowledge</h3>
+</section>
+<section id="how-many-of-each-type-of-vehicle-do-you-have-in-your-household" class="level3">
+<h3 class="anchored" data-anchor-id="how-many-of-each-type-of-vehicle-do-you-have-in-your-household">How many of each type of vehicle do you have in your household?</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-car_types1" data-question-id="car_types1" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('car_types1_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('car_types1_interacted', true, {priority: 'event'});">
+<div class="matrix-question-container">
+<label class="control-label"><p>(Select all that apply)?</p>
+</label>
+
+<table class="matrix-question caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td data-quarto-table-cell-role="th">Gasoline</td>
+<td data-quarto-table-cell-role="th">Hybrid</td>
+<td data-quarto-table-cell-role="th">Plug-in Hybrid</td>
+<td data-quarto-table-cell-role="th">Electric</td>
+<td data-quarto-table-cell-role="th">Other</td>
+</tr>
+</tbody>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td colspan="5"><div id="container-car_types1_0" class="question-container" data-question-id="car_types1_0" style="width: 100%;" oninput="Shiny.setInputValue('car_types1_0_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('car_types1_0_interacted', true, {priority: 'event'});">
+<div id="car_types1_0" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="car_types1_0-label">
+<label class="control-label shiny-label-null" for="car_types1_0" id="car_types1_0-label"></label>
+<div class="shiny-options-group">
+<div class="radio">
+<label> <input type="radio" name="car_types1_0" value="Gasoline"> <span>Gasoline</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_0" value="hybrid"> <span>Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_0" value="plugin_hybrid"> <span>Plug-in Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_0" value="electric"> <span>Electric</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_0" value="other"> <span>Other</span> </label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td colspan="5"><div id="container-car_types1_1" class="question-container" data-question-id="car_types1_1" style="width: 100%;" oninput="Shiny.setInputValue('car_types1_1_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('car_types1_1_interacted', true, {priority: 'event'});">
+<div id="car_types1_1" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="car_types1_1-label">
+<label class="control-label shiny-label-null" for="car_types1_1" id="car_types1_1-label"></label>
+<div class="shiny-options-group">
+<div class="radio">
+<label> <input type="radio" name="car_types1_1" value="Gasoline"> <span>Gasoline</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_1" value="hybrid"> <span>Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_1" value="plugin_hybrid"> <span>Plug-in Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_1" value="electric"> <span>Electric</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_1" value="other"> <span>Other</span> </label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td colspan="5"><div id="container-car_types1_2" class="question-container" data-question-id="car_types1_2" style="width: 100%;" oninput="Shiny.setInputValue('car_types1_2_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('car_types1_2_interacted', true, {priority: 'event'});">
+<div id="car_types1_2" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="car_types1_2-label">
+<label class="control-label shiny-label-null" for="car_types1_2" id="car_types1_2-label"></label>
+<div class="shiny-options-group">
+<div class="radio">
+<label> <input type="radio" name="car_types1_2" value="Gasoline"> <span>Gasoline</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_2" value="hybrid"> <span>Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_2" value="plugin_hybrid"> <span>Plug-in Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_2" value="electric"> <span>Electric</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_2" value="other"> <span>Other</span> </label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div></td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td colspan="5"><div id="container-car_types1_3" class="question-container" data-question-id="car_types1_3" style="width: 100%;" oninput="Shiny.setInputValue('car_types1_3_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('car_types1_3_interacted', true, {priority: 'event'});">
+<div id="car_types1_3" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="car_types1_3-label">
+<label class="control-label shiny-label-null" for="car_types1_3" id="car_types1_3-label"></label>
+<div class="shiny-options-group">
+<div class="radio">
+<label> <input type="radio" name="car_types1_3" value="Gasoline"> <span>Gasoline</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_3" value="hybrid"> <span>Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_3" value="plugin_hybrid"> <span>Plug-in Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_3" value="electric"> <span>Electric</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_3" value="other"> <span>Other</span> </label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td colspan="5"><div id="container-car_types1_4" class="question-container" data-question-id="car_types1_4" style="width: 100%;" oninput="Shiny.setInputValue('car_types1_4_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('car_types1_4_interacted', true, {priority: 'event'});">
+<div id="car_types1_4" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="car_types1_4-label">
+<label class="control-label shiny-label-null" for="car_types1_4" id="car_types1_4-label"></label>
+<div class="shiny-options-group">
+<div class="radio">
+<label> <input type="radio" name="car_types1_4" value="Gasoline"> <span>Gasoline</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_4" value="hybrid"> <span>Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_4" value="plugin_hybrid"> <span>Plug-in Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_4" value="electric"> <span>Electric</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_4" value="other"> <span>Other</span> </label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div></td>
+</tr>
+<tr class="even">
+<td>more than 4</td>
+<td colspan="5"><div id="container-car_types1_more_than_4" class="question-container" data-question-id="car_types1_more_than_4" style="width: 100%;" oninput="Shiny.setInputValue('car_types1_more_than_4_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('car_types1_more_than_4_interacted', true, {priority: 'event'});">
+<div id="car_types1_more_than_4" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="car_types1_more_than_4-label">
+<label class="control-label shiny-label-null" for="car_types1_more_than_4" id="car_types1_more_than_4-label"></label>
+<div class="shiny-options-group">
+<div class="radio">
+<label> <input type="radio" name="car_types1_more_than_4" value="Gasoline"> <span>Gasoline</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_more_than_4" value="hybrid"> <span>Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_more_than_4" value="plugin_hybrid"> <span>Plug-in Hybrid</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_more_than_4" value="electric"> <span>Electric</span> </label>
+</div>
+<div class="radio">
+<label> <input type="radio" name="car_types1_more_than_4" value="other"> <span>Other</span> </label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-parking" data-question-id="parking" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('parking_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('parking_interacted', true, {priority: 'event'});">
+<div id="parking" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="parking-label">
+<label class="control-label" id="parking-label" for="parking"><p>Where can you park at home? (Select all that apply)?</p>
+</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="parking" value="Street_Parking">
+<span>Street Parking</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="parking" value="Driveway_Carport">
+<span>Driveway/ Carport</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="parking" value="Single_family_garage">
+<span>Single-family garage</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="parking" value="Shared_parking_garage">
+<span>Shared parking garage</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="parking" value="prefer_not_to_say">
+<span>Prefer not to say</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="parking" value="other">
+<span>Other</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-neighbor_ev_info" data-question-id="neighbor_ev_info" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('neighbor_ev_info_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('neighbor_ev_info_interacted', true, {priority: 'event'});">
+<div id="neighbor_ev_info" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="neighbor_ev_info-label">
+<label class="control-label" id="neighbor_ev_info-label" for="neighbor_ev_info"><p>Do any of your neighbors own/lease a plug-in hybrid or pure electric vehicle (Select one)</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="neighbor_ev_info" value="yes">
+<span>Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="neighbor_ev_info" value="no">
+<span>No</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="neighbor_ev_info" value="not_sure">
+<span>I'm not sure</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div>
+<div id="welcome2" class="sd-page">
+<center>
+<section id="section-1-of-5-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1-of-5-1">Section 1 of 5</h2>
+</section></center>
+
+<section id="below-are-some-basic-questions-about-your-primary-vehicle" class="level2">
+<h2 class="anchored" data-anchor-id="below-are-some-basic-questions-about-your-primary-vehicle">Below are some basic questions about your <strong>primary vehicle</strong></h2>
+<section id="please-answer-to-the-best-of-your-knowledge-1" class="level3">
+<h3 class="anchored" data-anchor-id="please-answer-to-the-best-of-your-knowledge-1">Please answer to the best of your knowledge</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-acquire_primary_vehicle" data-question-id="acquire_primary_vehicle" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('acquire_primary_vehicle_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('acquire_primary_vehicle_interacted', true, {priority: 'event'});">
+<div id="acquire_primary_vehicle" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="acquire_primary_vehicle-label">
+<label class="control-label" id="acquire_primary_vehicle-label" for="acquire_primary_vehicle"><p>Did you buy or lease your current primary vehicle?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="acquire_primary_vehicle" value="Buy">
+<span>Buy</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="acquire_primary_vehicle" value="Lease">
+<span>Lease</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="acquire_primary_vehicle" value="do_not_remember">
+<span>Do not remember or do not know</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-acquire_how" data-question-id="acquire_how" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('acquire_how_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('acquire_how_interacted', true, {priority: 'event'});">
+<div id="acquire_how" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="acquire_how-label">
+<label class="control-label" id="acquire_how-label" for="acquire_how"><p>How did you purchase / lease your current primary vehicle?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="acquire_how" value="new">
+<span>New car from a Dealership</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="acquire_how" value="used_dealer">
+<span>Used car from a Dealership</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="acquire_how" value="used_informally">
+<span>Personal Sale</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="acquire_how" value="received_gift">
+<span>Gift</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="acquire_how" value="move_in_access">
+<span>Move-in</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="acquire_how" value="do_not_remember">
+<span>Do not remember or do not know</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-vehicle_cost" data-question-id="vehicle_cost" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('vehicle_cost_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('vehicle_cost_interacted', true, {priority: 'event'});">
+<div id="vehicle_cost" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="vehicle_cost-label">
+<label class="control-label" id="vehicle_cost-label" for="vehicle_cost"><p>How much did you pay for this vehicle, to your best estimate?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="4999">
+<span>$4,999 or less</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="9999">
+<span>$5,000 - $9,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="14999">
+<span>$10,000 - $14,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="19999">
+<span>$15,000 - $19,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="24999">
+<span>$20,000 - $24,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="29999">
+<span>$25,000 - $29,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="34999">
+<span>$30,000 - $34,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="39999">
+<span>$35,000 - $39,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="44999">
+<span>$40,000 - $44,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="49999">
+<span>$45,000 - $49,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="59999">
+<span>$50,000 - $59,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="69999">
+<span>$60,000 - $69,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="79999">
+<span>$70,000 - $79,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="89999">
+<span>$80,000 - $89,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="99999">
+<span>$90,000 - $99,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="100000">
+<span>100,000 or more</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="vehicle_cost" value="do_not_remember">
+<span>Do not remember or do not know</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-monthly_payment" data-question-id="monthly_payment" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('monthly_payment_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('monthly_payment_interacted', true, {priority: 'event'});">
+<div id="monthly_payment" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="monthly_payment-label">
+<label class="control-label" id="monthly_payment-label" for="monthly_payment"><p>What is your monthly payment?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="0">
+<span>Paid all cash/no loan</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="100">
+<span>$0 - $100</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="200">
+<span>$100 - $200</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="300">
+<span>$200 - $300</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="500">
+<span>$300 - $500</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="750">
+<span>$500 - $750</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="1000">
+<span>$750 - $1000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="2000">
+<span>1,000 or more</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="monthly_payment" value="do_not_remember">
+<span>Do not remember or do not know</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-gas_mileage" data-question-id="gas_mileage" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('gas_mileage_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('gas_mileage_interacted', true, {priority: 'event'});">
+<div id="gas_mileage" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="gas_mileage-label">
+<label class="control-label" id="gas_mileage-label" for="gas_mileage"><p>What gas mileage does your vehicle give?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="gas_mileage" value="0">
+<span>0 - 9.99 mpg</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gas_mileage" value="10">
+<span>10 - 19.99 mpg</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gas_mileage" value="20">
+<span>20 - 29.99 mpg</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gas_mileage" value="30">
+<span>30 - 39.99 mpg</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gas_mileage" value="40">
+<span>40 - 49.99 mpg</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gas_mileage" value="50">
+<span>50 - 59.99 mpg</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gas_mileage" value="60">
+<span>60 mpg and above</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gas_mileage" value="not_applicable">
+<span>not applicable</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-refueling" data-question-id="refueling" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('refueling_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('refueling_interacted', true, {priority: 'event'});">
+<div id="refueling" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="refueling-label">
+<label class="control-label" id="refueling-label" for="refueling"><p>How often do you refuel?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="refueling" value="0">
+<span>Once a month</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="refueling" value="1">
+<span>Once in two weeks</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="refueling" value="2">
+<span>Once a week</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="refueling" value="3">
+<span>Twice a week</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="refueling" value="4">
+<span>Three times a week</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="refueling" value="5">
+<span>Four times a week</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="refueling" value="6">
+<span>Over four times a week</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div>
+<div id="page2" class="sd-page">
+<center>
+<section id="section-1-of-5-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-1-of-5-2">Section 1 of 5</h2>
+</section></center>
+
+<section id="how-often-you-use-different-transportation-types-to-get-around." class="level2">
+<h2 class="anchored" data-anchor-id="how-often-you-use-different-transportation-types-to-get-around.">How often you use different transportation types to get around.</h2>
+<section id="please-answer-to-the-best-of-your-knowledge-and-note-that-this-does-not-include-travel-that-is-for-workfor-example-if-you-are-a-professional-chauffeur-driver-or-a-delivery-person" class="level3">
+<h3 class="anchored" data-anchor-id="please-answer-to-the-best-of-your-knowledge-and-note-that-this-does-not-include-travel-that-is-for-workfor-example-if-you-are-a-professional-chauffeur-driver-or-a-delivery-person">Please answer to the best of your knowledge and note that this does not include travel that is for work(for example, if you are a professional chauffeur, driver or a delivery person)</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-other_transport_choices" data-question-id="other_transport_choices" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('other_transport_choices_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('other_transport_choices_interacted', true, {priority: 'event'});">
+<div id="other_transport_choices" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="other_transport_choices-label">
+<label class="control-label" id="other_transport_choices-label" for="other_transport_choices"><p>Select any of the modes you regularly use to travel:</p>
+</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="other_transport_choices" value="walk">
+<span>Walk</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="other_transport_choices" value="bicycle">
+<span>Bicycle</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="other_transport_choices" value="taxi">
+<span>Taxi</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="other_transport_choices" value="Ride_hail">
+<span>Ride hail (Uber/ Lyft)</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="other_transport_choices" value="Bus">
+<span>Bus</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="other_transport_choices" value="metro">
+<span>Metro/ subway</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="page3" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div>
+<div id="page3" class="sd-page">
+<center>
+<section id="section-2-of-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-2-of-5">Section 2 of 5</h2>
+</section></center>
+
+<section id="this-section-asks-a-few-questions-about-your-future-vehicle." class="level2">
+<h2 class="anchored" data-anchor-id="this-section-asks-a-few-questions-about-your-future-vehicle.">This section asks a few questions about your future vehicle.</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-budget" data-question-id="budget" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('budget_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('budget_interacted', true, {priority: 'event'});">
+<div id="budget" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="budget-label">
+<label class="control-label" id="budget-label" for="budget"><p>What is your budget range for your next vehicle?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="5000">
+<span>$4,999 or less</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="7500">
+<span>$5,000 - $7,500</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="10000">
+<span>$7,500 - $10,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="12500">
+<span>$10,000 - $12,500</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="15000">
+<span>$12,500 - $15,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="17500">
+<span>$15,000 - $17,500</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="20000">
+<span>$17,500 - $20,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="22500">
+<span>$20,000 - $22,500</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="25000">
+<span>$22,500 - $25,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="27500">
+<span>$25,000 - $27,500</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="30000">
+<span>$27,500 - $30,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="budget" value="35000">
+<span>more than $30,000</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-next_car_payment_source" data-question-id="next_car_payment_source" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('next_car_payment_source_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('next_car_payment_source_interacted', true, {priority: 'event'});">
+<div id="next_car_payment_source" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="next_car_payment_source-label">
+<label class="control-label" id="next_car_payment_source-label" for="next_car_payment_source"><p>How do you intend to pay for your next car?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="next_car_payment_source" value="buy">
+<span>Buy </span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_payment_source" value="finance">
+<span>Finance</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-next_car_down_payment" data-question-id="next_car_down_payment" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('next_car_down_payment_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('next_car_down_payment_interacted', true, {priority: 'event'});">
+<div id="next_car_down_payment" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="next_car_down_payment-label">
+<label class="control-label" id="next_car_down_payment-label" for="next_car_down_payment"><p>What will be your down payment for your next car?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="999">
+<span>$0 - $999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="1,999">
+<span>$1,000 - $1,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="2,999">
+<span>$2,000 - $2,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="3,999">
+<span>$3,000 - $3,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="4,999">
+<span>$4,000 - $4,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="5,999">
+<span>$5,000 - $5,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="6,999">
+<span>$6,000 - $6,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="7,999">
+<span>$7,000 - $7,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="8,999">
+<span>$8,000 - $8,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="9,999">
+<span>$9,000 - $9,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="10,999">
+<span>$10,000 - $10,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="11,999">
+<span>$11,000 - $11,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="12,999">
+<span>$12,000 - $12,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="13,999">
+<span>$13,000 - $13,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="14,999">
+<span>$14,000 - $14,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="15,999">
+<span>$15,000 - $15,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="16,999">
+<span>$16,000 - $16,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="17,999">
+<span>$17,000 - $17,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="18,999">
+<span>$18,000 - $18,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="19,999">
+<span>$19,000 - $19,999</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="20,000">
+<span>20,000 or more</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="next_car_down_payment" value="not_sure">
+<span>I'm not sure</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-plan_lease_buy" data-question-id="plan_lease_buy" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('plan_lease_buy_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('plan_lease_buy_interacted', true, {priority: 'event'});">
+<div id="plan_lease_buy" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="plan_lease_buy-label">
+<label class="control-label" id="plan_lease_buy-label" for="plan_lease_buy"><p>Would you consider a Plug-in Hybrid Electric or an all-electric vehicle as your next vehicle?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Definitely_Not">
+<span>Definitely Not</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Probably_Not">
+<span>Probably Not</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Maybe_Not_sure">
+<span>Maybe/ Not sure</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Probably_Yes">
+<span>Probably Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Definitely_Yes">
+<span>Definitely Yes</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="page3b" class="sd-page">
+<center>
+<section id="section-2-of-5-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-2-of-5-1">Section 2 of 5</h2>
+</section></center>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<div id="container-images" data-question-id="images" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('images_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('images_interacted', true, {priority: 'event'});">
+<div id="images" class="shiny-html-output"></div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+
+</div>
+<div id="cbc_intro" class="sd-page">
+<center>
+<section id="section-3-of-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-of-5">Section 3 of 5</h2>
+</section></center>
+
+<section id="educational-page" class="level2">
+<h2 class="anchored" data-anchor-id="educational-page">Educational Page</h2>
+<p>Great Work! Now that you have shared a bit about yourself, we’d like you to consider a scenario in which you can choose a car from a set of cars with different attributes.</p>
+<p>Let’s learn about the attributes.</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><img src="images/price_tag.JPG" class="img-fluid quarto-figure quarto-figure-left" width="200"></td>
+<td><strong>Price - </strong> The final price paid for the vehicle in dollars, including all taxes and fees.</td>
+</tr>
+<tr class="even">
+<td><img src="images/range.png" class="img-fluid quarto-figure quarto-figure-left" width="200"></td>
+<td><strong>Range - </strong> The maximum distance a vehicle can travel in a full tank/ fully charged battery.</td>
+</tr>
+<tr class="odd">
+<td><img src="images/odometer.png" class="img-fluid quarto-figure quarto-figure-left" width="200"></td>
+<td><strong>Mileage - </strong> The number of miles vehicle has traveled while in operation</td>
+</tr>
+<tr class="even">
+<td><img src="images/oper_cost.png" class="img-fluid quarto-figure quarto-figure-left" width="800"></td>
+<td><strong>Operating Cost (Equivalent Gasoline Fuel Efficiency) - </strong> Cost in cents per mile driven of fueling the vehicle. The equivalent fuel efficiency in miles per gallon (MPG) of a conventional gasoline vehicle is displayed in parenthesis. (Assumes <a href="https://www.eia.gov/todayinenergy/detail.php?id=64164#:~:text=The%20U.S.%20retail%20price%20for,Gasoline%20and%20Diesel%20Fuel%20Update.">gasoline costs$3.30/gallon</a> and <a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a">electricity costs $0.16/kWh</a>).</td>
+</tr>
+<tr class="odd">
+<td><img src="images/calendar.png" class="img-fluid quarto-figure quarto-figure-left" width="200"></td>
+<td><strong>Model Year - </strong> Model/Manufacturing year is the actual year the vehicle was built.</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Types of Powertrain</th>
+<th>Powertrain Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Conventional <img src="images/gas_pump.png" class="img-fluid"></td>
+<td>Gasoline engine only.</td>
+</tr>
+<tr class="even">
+<td>Hybrid (HEVs) <img src="images/gas_pump.png" class="img-fluid"></td>
+<td>Smaller gasoline engine + electric motor + small battery. Gasoline engine recharges the battery, fuel consumption is reduced</td>
+</tr>
+<tr class="odd">
+<td>Plug-in Hybrid (PHEVs) <img src="images/gas_pump.png" class="img-fluid"> <img src="images/electric_plug.png" class="img-fluid"></td>
+<td>Hybrid that can also be plugged in to an electrical outlet to charge the battery. Runs on electricity for a short range (10 – 40 miles), then switches to gasoline</td>
+</tr>
+<tr class="even">
+<td>Electric (BEVs) <img src="images/electric_plug.png" class="img-fluid"></td>
+<td>Electric motor only. Must be plugged into an electrical outlet to be refueled</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="cbc_demo" class="sd-page">
+<center>
+<section id="section-3-of-5-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-of-5-1">Section 3 of 5</h2>
+</section></center>
+
+<section id="choice-question-demonstration" class="level2">
+<h2 class="anchored" data-anchor-id="choice-question-demonstration">Choice Question Demonstration</h2>
+<p>We will now begin the choice tasks. We will show you <strong>six</strong> choice questions starting on the next page. Below is an example of the type of questions you will be asked.</p>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<span id="make_table0" class="shiny-html-output"></span>
+</div>
+<div class="cell-output-display">
+<div id="container-cbc_q0" data-question-id="cbc_q0" class="question-container" style="width: 600px;" oninput="Shiny.setInputValue('cbc_q0_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('cbc_q0_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
+<label class="control-label" id="cbc_q0-label" for="cbc_q0"><p>If these were your only options, which would you choose?</p>
+</label>
+<br>
+<div id="cbc_q0" class="radio-group-buttons">
+<div aria-labelledby="cbc_q0-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q0" value="option_1">
+Option 1
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q0" value="option_2">
+Option 2
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q0" value="option_3">
+Option 3
+</button>
+</div>
+</div>
+</div>
+<script>
+            $(document).on('click', '#cbc_q0 .btn', function() {
+                Shiny.setInputValue('cbc_q0_interacted', true, {priority: 'event'});
+            });
+        </script>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="pageQ1" class="sd-page">
+<center>
+<section id="section-3-of-5-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-of-5-2">Section 3 of 5</h2>
+</section></center>
+<section id="question-1-of-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-of-6">Question 1 of 6</h3>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<span id="make_table1" class="shiny-html-output"></span>
+</div>
+<div class="cell-output-display">
+<div id="container-cbc_q1" data-question-id="cbc_q1" class="question-container" style="width: 600px;" oninput="Shiny.setInputValue('cbc_q1_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('cbc_q1_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
+<label class="control-label" id="cbc_q1-label" for="cbc_q1"><p>If these were your only options, which would you choose?</p>
+</label>
+<br>
+<div id="cbc_q1" class="radio-group-buttons">
+<div aria-labelledby="cbc_q1-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q1" value="option_1">
+Option 1
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q1" value="option_2">
+Option 2
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q1" value="option_3">
+Option 3
+</button>
+</div>
+</div>
+</div>
+<script>
+            $(document).on('click', '#cbc_q1 .btn', function() {
+                Shiny.setInputValue('cbc_q1_interacted', true, {priority: 'event'});
+            });
+        </script>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<div id="pageQ2" class="sd-page">
+<center>
+<section id="section-3-of-5-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-of-5-3">Section 3 of 5</h2>
+</section></center>
+<section id="question-2-of-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-of-6">Question 2 of 6</h3>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<span id="make_table2" class="shiny-html-output"></span>
+</div>
+<div class="cell-output-display">
+<div id="container-cbc_q2" data-question-id="cbc_q2" class="question-container" style="width: 600px;" oninput="Shiny.setInputValue('cbc_q2_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('cbc_q2_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
+<label class="control-label" id="cbc_q2-label" for="cbc_q2"><p>If these were your only options, which would you choose?</p>
+</label>
+<br>
+<div id="cbc_q2" class="radio-group-buttons">
+<div aria-labelledby="cbc_q2-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q2" value="option_1">
+Option 1
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q2" value="option_2">
+Option 2
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q2" value="option_3">
+Option 3
+</button>
+</div>
+</div>
+</div>
+<script>
+            $(document).on('click', '#cbc_q2 .btn', function() {
+                Shiny.setInputValue('cbc_q2_interacted', true, {priority: 'event'});
+            });
+        </script>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<div id="pageQ3" class="sd-page">
+<center>
+<section id="section-3-of-5-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-of-5-4">Section 3 of 5</h2>
+</section></center>
+<section id="question-3-of-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-of-6">Question 3 of 6</h3>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<span id="make_table3" class="shiny-html-output"></span>
+</div>
+<div class="cell-output-display">
+<div id="container-cbc_q3" data-question-id="cbc_q3" class="question-container" style="width: 600px;" oninput="Shiny.setInputValue('cbc_q3_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('cbc_q3_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
+<label class="control-label" id="cbc_q3-label" for="cbc_q3"><p>If these were your only options, which would you choose?</p>
+</label>
+<br>
+<div id="cbc_q3" class="radio-group-buttons">
+<div aria-labelledby="cbc_q3-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q3" value="option_1">
+Option 1
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q3" value="option_2">
+Option 2
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q3" value="option_3">
+Option 3
+</button>
+</div>
+</div>
+</div>
+<script>
+            $(document).on('click', '#cbc_q3 .btn', function() {
+                Shiny.setInputValue('cbc_q3_interacted', true, {priority: 'event'});
+            });
+        </script>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<div id="pageQ4" class="sd-page">
+<center>
+<section id="section-3-of-5-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-of-5-5">Section 3 of 5</h2>
+</section></center>
+<section id="question-4-of-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-4-of-6">Question 4 of 6</h3>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<span id="make_table4" class="shiny-html-output"></span>
+</div>
+<div class="cell-output-display">
+<div id="container-cbc_q4" data-question-id="cbc_q4" class="question-container" style="width: 600px;" oninput="Shiny.setInputValue('cbc_q4_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('cbc_q4_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
+<label class="control-label" id="cbc_q4-label" for="cbc_q4"><p>If these were your only options, which would you choose?</p>
+</label>
+<br>
+<div id="cbc_q4" class="radio-group-buttons">
+<div aria-labelledby="cbc_q4-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q4" value="option_1">
+Option 1
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q4" value="option_2">
+Option 2
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q4" value="option_3">
+Option 3
+</button>
+</div>
+</div>
+</div>
+<script>
+            $(document).on('click', '#cbc_q4 .btn', function() {
+                Shiny.setInputValue('cbc_q4_interacted', true, {priority: 'event'});
+            });
+        </script>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<div id="pageQ5" class="sd-page">
+<center>
+<section id="section-3-of-5-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-of-5-6">Section 3 of 5</h2>
+</section></center>
+<section id="question-5-of-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-5-of-6">Question 5 of 6</h3>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<span id="make_table5" class="shiny-html-output"></span>
+</div>
+<div class="cell-output-display">
+<div id="container-cbc_q5" data-question-id="cbc_q5" class="question-container" style="width: 600px;" oninput="Shiny.setInputValue('cbc_q5_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('cbc_q5_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
+<label class="control-label" id="cbc_q5-label" for="cbc_q5"><p>If these were your only options, which would you choose?</p>
+</label>
+<br>
+<div id="cbc_q5" class="radio-group-buttons">
+<div aria-labelledby="cbc_q5-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q5" value="option_1">
+Option 1
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q5" value="option_2">
+Option 2
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q5" value="option_3">
+Option 3
+</button>
+</div>
+</div>
+</div>
+<script>
+            $(document).on('click', '#cbc_q5 .btn', function() {
+                Shiny.setInputValue('cbc_q5_interacted', true, {priority: 'event'});
+            });
+        </script>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<div id="pageQ6" class="sd-page">
+<center>
+<section id="section-3-of-5-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-3-of-5-7">Section 3 of 5</h2>
+</section></center>
+<section id="question-6-of-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-6-of-6">Question 6 of 6</h3>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<span id="make_table6" class="shiny-html-output"></span>
+</div>
+<div class="cell-output-display">
+<div id="container-cbc_q6" data-question-id="cbc_q6" class="question-container" style="width: 600px;" oninput="Shiny.setInputValue('cbc_q6_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('cbc_q6_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
+<label class="control-label" id="cbc_q6-label" for="cbc_q6"><p>If these were your only options, which would you choose?</p>
+</label>
+<br>
+<div id="cbc_q6" class="radio-group-buttons">
+<div aria-labelledby="cbc_q6-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q6" value="option_1">
+Option 1
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q6" value="option_2">
+Option 2
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="cbc_q6" value="option_3">
+Option 3
+</button>
+</div>
+</div>
+</div>
+<script>
+            $(document).on('click', '#cbc_q6 .btn', function() {
+                Shiny.setInputValue('cbc_q6_interacted', true, {priority: 'event'});
+            });
+        </script>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<div id="page4" class="sd-page">
+<center>
+<section id="section-4-of-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-4-of-5">Section 4 of 5</h2>
+</section></center>
+
+<section id="below-are-a-few-questions-about-electric-vehicles-which-we-will-only-use-for-analyzing-our-survey-data." class="level2">
+<h2 class="anchored" data-anchor-id="below-are-a-few-questions-about-electric-vehicles-which-we-will-only-use-for-analyzing-our-survey-data.">Below are a few questions about electric vehicles which we will only use for analyzing our survey data.</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-run_on_gasoline" data-question-id="run_on_gasoline" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('run_on_gasoline_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('run_on_gasoline_interacted', true, {priority: 'event'});">
+<div id="run_on_gasoline" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="run_on_gasoline-label">
+<label class="control-label" id="run_on_gasoline-label" for="run_on_gasoline"><p>Please select which vehicle(s) can run on gasoline: (select all that apply)</p>
+</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="run_on_gasoline" value="Hybrid_EV">
+<span>Hybrid Electric Vehicle</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="run_on_gasoline" value="Plug_Hybrid_in_EV">
+<span>Plug-in Hybrid Electric Vehicle</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="run_on_gasoline" value="EV">
+<span>Pure Electric Vehicle</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="run_on_gasoline" value="not_sure">
+<span>I’m not sure</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-plugged_in" data-question-id="plugged_in" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('plugged_in_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('plugged_in_interacted', true, {priority: 'event'});">
+<div id="plugged_in" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="plugged_in-label">
+<label class="control-label" id="plugged_in-label" for="plugged_in"><p>Please select which vehicles can be plugged-in: (Select all that apply)</p>
+</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="plugged_in" value="Hybrid_EV">
+<span>Hybrid Electric Vehicle</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="plugged_in" value="Plug_Hybrid_in_EV">
+<span>Plug-in Hybrid Electric Vehicle</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="plugged_in" value="EV">
+<span>Pure Electric Vehicle</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="plugged_in" value="not_sure">
+<span>I’m not sure</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-know_electric_vehicle" data-question-id="know_electric_vehicle" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('know_electric_vehicle_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('know_electric_vehicle_interacted', true, {priority: 'event'});">
+<div id="know_electric_vehicle" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="know_electric_vehicle-label">
+<label class="control-label" id="know_electric_vehicle-label" for="know_electric_vehicle"><p>Can you name the make and model of atleast one vehicle powered partially or completely by electricity?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="know_electric_vehicle" value="Yes">
+<span>Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="know_electric_vehicle" value="No">
+<span>No</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-write_electric_name" data-question-id="write_electric_name" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('write_electric_name_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('write_electric_name_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="write_electric_name-label" for="write_electric_name"><p>Please name a <strong>make</strong> and <strong>model</strong> of a vehicle that is powered partially or completelyby electricity</p>
+</label>
+<input id="write_electric_name" type="text" class="shiny-input-text form-control" value="">
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-max_subsidy" data-question-id="max_subsidy" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('max_subsidy_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('max_subsidy_interacted', true, {priority: 'event'});">
+<div id="max_subsidy" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="max_subsidy-label">
+<label class="control-label" id="max_subsidy-label" for="max_subsidy"><p>Do you know the current maximum subsidy available from the US federal government for purchasing an electric vehicle?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="max_subsidy" value="$1,000">
+<span>$1,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="max_subsidy" value="$2,500">
+<span>$2,500</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="max_subsidy" value="$5,000">
+<span>$5,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="max_subsidy" value="$7,500">
+<span>$7,500</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="max_subsidy" value="$10,000">
+<span>$10,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="max_subsidy" value="I'm not sure">
+<span>I'm not sure</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-plan_lease_buy" data-question-id="plan_lease_buy" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('plan_lease_buy_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('plan_lease_buy_interacted', true, {priority: 'event'});">
+<div id="plan_lease_buy" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="plan_lease_buy-label">
+<label class="control-label" id="plan_lease_buy-label" for="plan_lease_buy"><p>Would you consider a Plug-in Hybrid Electric or an all-electric vehicle as your next vehicle?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Definitely_Not">
+<span>Definitely Not</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Probably_Not">
+<span>Probably Not</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Maybe_Not_sure">
+<span>Maybe/ Not sure</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Probably_Yes">
+<span>Probably Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="plan_lease_buy" value="Definitely_Yes">
+<span>Definitely Yes</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="page6" class="sd-page">
+<center>
+<section id="section-5-of-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5-of-5">Section 5 of 5</h2>
+</section></center>
+
+<section id="demographic-information" class="level2">
+<h2 class="anchored" data-anchor-id="demographic-information">Demographic information</h2>
+</section>
+<section id="were-almost-done-wed-just-like-to-ask-just-a-few-more-questions-about-you-which-we-will-only-use-for-analyzing-our-survey-data." class="level2">
+<h2 class="anchored" data-anchor-id="were-almost-done-wed-just-like-to-ask-just-a-few-more-questions-about-you-which-we-will-only-use-for-analyzing-our-survey-data.">We’re almost done! We’d just like to ask just a few more questions about you which we will only use for analyzing our survey data.</h2>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<div id="container-dob" data-question-id="dob" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('dob_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('dob_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="dob-label" for="dob"><p>What is your year of birth?</p>
+</label>
+<div>
+<select id="dob" class="shiny-input-select"><option value="">Choose an option...</option>
+<option value="1930">1930</option>
+<option value="1931">1931</option>
+<option value="1932">1932</option>
+<option value="1933">1933</option>
+<option value="1934">1934</option>
+<option value="1935">1935</option>
+<option value="1936">1936</option>
+<option value="1937">1937</option>
+<option value="1938">1938</option>
+<option value="1939">1939</option>
+<option value="1940">1940</option>
+<option value="1941">1941</option>
+<option value="1942">1942</option>
+<option value="1943">1943</option>
+<option value="1944">1944</option>
+<option value="1945">1945</option>
+<option value="1946">1946</option>
+<option value="1947">1947</option>
+<option value="1948">1948</option>
+<option value="1949">1949</option>
+<option value="1950">1950</option>
+<option value="1951">1951</option>
+<option value="1952">1952</option>
+<option value="1953">1953</option>
+<option value="1954">1954</option>
+<option value="1955">1955</option>
+<option value="1956">1956</option>
+<option value="1957">1957</option>
+<option value="1958">1958</option>
+<option value="1959">1959</option>
+<option value="1960">1960</option>
+<option value="1961">1961</option>
+<option value="1962">1962</option>
+<option value="1963">1963</option>
+<option value="1964">1964</option>
+<option value="1965">1965</option>
+<option value="1966">1966</option>
+<option value="1967">1967</option>
+<option value="1968">1968</option>
+<option value="1969">1969</option>
+<option value="1970">1970</option>
+<option value="1971">1971</option>
+<option value="1972">1972</option>
+<option value="1973">1973</option>
+<option value="1974">1974</option>
+<option value="1975">1975</option>
+<option value="1976">1976</option>
+<option value="1977">1977</option>
+<option value="1978">1978</option>
+<option value="1979">1979</option>
+<option value="1980">1980</option>
+<option value="1981">1981</option>
+<option value="1982">1982</option>
+<option value="1983">1983</option>
+<option value="1984">1984</option>
+<option value="1985">1985</option>
+<option value="1986">1986</option>
+<option value="1987">1987</option>
+<option value="1988">1988</option>
+<option value="1989">1989</option>
+<option value="1990">1990</option>
+<option value="1991">1991</option>
+<option value="1992">1992</option>
+<option value="1993">1993</option>
+<option value="1994">1994</option>
+<option value="1995">1995</option>
+<option value="1996">1996</option>
+<option value="1997">1997</option>
+<option value="1998">1998</option>
+<option value="1999">1999</option>
+<option value="2000">2000</option>
+<option value="2001">2001</option>
+<option value="2002">2002</option>
+<option value="2003">2003</option>
+<option value="2004">2004</option>
+<option value="2005">2005</option>
+<option value="2006">2006</option>
+<option value="2007">2007</option></select>
+<script type="application/json" data-for="dob">{"plugins":["selectize-plugin-a11y"]}</script>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-gender" data-question-id="gender" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('gender_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('gender_interacted', true, {priority: 'event'});">
+<div id="gender" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="gender-label">
+<label class="control-label" id="gender-label" for="gender"><p>What is your gender?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="gender" value="Female">
+<span>Female</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gender" value="Male">
+<span>Male</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gender" value="Non_Binary">
+<span>Non Binary</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gender" value="Transgender">
+<span>Transgender</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gender" value="Gender_Nonconforming">
+<span>Gender Nonconforming</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gender" value="Other:">
+<span>Other:</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="gender" value="Prefer_not_to_answer">
+<span>Prefer not to answer</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-hispanic" data-question-id="hispanic" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('hispanic_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('hispanic_interacted', true, {priority: 'event'});">
+<div id="hispanic" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="hispanic-label">
+<label class="control-label" id="hispanic-label" for="hispanic"><p>Are you of Hispanic, Latino or Spanish origin?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="hispanic" value="Yes">
+<span>Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="hispanic" value="No">
+<span>No</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-ethnicity" data-question-id="ethnicity" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('ethnicity_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('ethnicity_interacted', true, {priority: 'event'});">
+<div id="ethnicity" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="ethnicity-label">
+<label class="control-label" id="ethnicity-label" for="ethnicity"><p>Which race/ethnicity best describes you? :(choose all that apply):</p>
+</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="ethnicity" value="native_american">
+<span>American Indian or Alaskan Native</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="ethnicity" value="asian">
+<span>Asian</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="ethnicity" value="African_American">
+<span>Black or African American</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="ethnicity" value="MENA">
+<span>Middle Eastern and North African (MENA)</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="ethnicity" value="Pacific_islander">
+<span>Native Hawaiian or Other Pacific Islander</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="ethnicity" value="white">
+<span>White</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="ethnicity" value="some_other_race">
+<span>some other race</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="ethnicity" value="no_answer">
+<span>Do not know/prefer not to answer</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-people_household" data-question-id="people_household" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('people_household_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('people_household_interacted', true, {priority: 'event'});">
+<div id="people_household" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="people_household-label">
+<label class="control-label" id="people_household-label" for="people_household"><p>How many people, in total, live in your household?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="people_household" value="1">
+<span>1</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="people_household" value="2">
+<span>2</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="people_household" value="3">
+<span>3</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="people_household" value="4">
+<span>4</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="people_household" value="5">
+<span>5</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="people_household" value="more_than_5">
+<span>More than 5</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-current_employment_status" data-question-id="current_employment_status" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('current_employment_status_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('current_employment_status_interacted', true, {priority: 'event'});">
+<div id="current_employment_status" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="current_employment_status-label">
+<label class="control-label" id="current_employment_status-label" for="current_employment_status"><p>Which of the following categories best describes your current employment status?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="current_employment_status" value="full_time_student">
+<span>I am a full-time student.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_employment_status" value="part_time">
+<span>Employed, working 1-39 hours per week.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_employment_status" value="full_time">
+<span>Employed, working 40 or more hours per week.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_employment_status" value="looking_for_work">
+<span>Not employed, looking for work.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_employment_status" value="not_looking_for_work">
+<span>Not employed, NOT looking for work.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_employment_status" value="Retired">
+<span>Retired.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_employment_status" value="disabled">
+<span>Disabled, not able to work.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_employment_status" value="no_answer">
+<span>Prefer not to answer</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-total_household_income" data-question-id="total_household_income" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('total_household_income_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('total_household_income_interacted', true, {priority: 'event'});">
+<div id="total_household_income" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="total_household_income-label">
+<label class="control-label" id="total_household_income-label" for="total_household_income"><p>Which of the following categories best represents your total household income?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="15000">
+<span>Less than $15,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="30000">
+<span>$15,000 to less than $30,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="40000">
+<span>$30,000 to less than $40,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="50000">
+<span>$40,000 to less than $50,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="60000">
+<span>$50,000 to less than $60,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="75000">
+<span>$60,000 to less than $75,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="100000">
+<span>$75,000 to less than $100,000.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="125000">
+<span>$100,000 to less than $125,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="150000">
+<span>$125,000 to less than $150,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="175000">
+<span>$150,000 to less than $175,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="200000">
+<span>$175,000 to less than $200,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="250000">
+<span>$200,000 to less than $250,000</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="more_than_250000">
+<span>$250,000 or more</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="total_household_income" value="no_answer">
+<span>Prefer not to answer</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-educational_qualification" data-question-id="educational_qualification" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('educational_qualification_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('educational_qualification_interacted', true, {priority: 'event'});">
+<div id="educational_qualification" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="educational_qualification-label">
+<label class="control-label" id="educational_qualification-label" for="educational_qualification"><p>What is the last grade or level of school you have completed? If currently enrolled, please use the highest degree received.</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="0">
+<span>Less than a high school diploma</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="1">
+<span>High school degree or equivalent (e.g. GED)</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="2">
+<span>Some college - but less than two years of college</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="3">
+<span>Some college - two years or more/A.A. degree</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="4">
+<span>Technical or trade school</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="5">
+<span>College graduate/bachelor's degree/B.A./B.S.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="6">
+<span>Postgraduate courses</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="7">
+<span>Master's degree</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="8">
+<span>M.B.A. or law degree</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="9">
+<span>Ph.D. or M.D</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="educational_qualification" value="10">
+<span>Prefer not to answer</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-current_housing" data-question-id="current_housing" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('current_housing_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('current_housing_interacted', true, {priority: 'event'});">
+<div id="current_housing" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="current_housing-label">
+<label class="control-label" id="current_housing-label" for="current_housing"><p>In which type of housing do you currently live?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="current_housing" value="0">
+<span>Single family house not attached to any other house</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_housing" value="1">
+<span>Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_housing" value="2">
+<span>A mobile home or trailer</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_housing" value="3">
+<span>Building with 2-4 apartments/condos/studios</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_housing" value="4">
+<span>Building with 5-19 apartments/condos/studios</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_housing" value="5">
+<span>Building with 20 or more apartments/condos/studios</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_housing" value="6">
+<span>Boat, RV, van, etc.</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="current_housing" value="7">
+<span>Other:</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-own_or_rent" data-question-id="own_or_rent" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('own_or_rent_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('own_or_rent_interacted', true, {priority: 'event'});">
+<div id="own_or_rent" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="own_or_rent-label">
+<label class="control-label" id="own_or_rent-label" for="own_or_rent"><p>Do you own or rent the current place you are living in?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="own_or_rent" value="0">
+<span>Own</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="own_or_rent" value="1">
+<span>Rent</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="own_or_rent" value="2">
+<span>Neither</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="own_or_rent" value="3">
+<span>Do not know/prefer not to know</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-electric_bill" data-question-id="electric_bill" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('electric_bill_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('electric_bill_interacted', true, {priority: 'event'});">
+<div id="electric_bill" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="electric_bill-label">
+<label class="control-label" id="electric_bill-label" for="electric_bill"><p>What is your monthly electricity bill on an average?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="electric_bill" value="0">
+<span>$0 - $99</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="electric_bill" value="1">
+<span>$100 - $199</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="electric_bill" value="2">
+<span>$200 - $299</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="electric_bill" value="3">
+<span>$300 - $399</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="electric_bill" value="4">
+<span>$400 - $499</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="electric_bill" value="5">
+<span>$500 or more</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-political_views" data-question-id="political_views" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('political_views_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('political_views_interacted', true, {priority: 'event'});">
+<div id="political_views" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="political_views-label">
+<label class="control-label" id="political_views-label" for="political_views"><p>How would you describe your political views?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="political_views" value="0">
+<span>Very conservative</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="political_views" value="1">
+<span>Conservative</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="political_views" value="2">
+<span>Moderate</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="political_views" value="3">
+<span>Liberal</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="political_views" value="4">
+<span>Very liberal</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="political_views" value="5">
+<span>Prefer not to say</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="political_views" value="6">
+<span>Other:</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-party_voting" data-question-id="party_voting" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('party_voting_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('party_voting_interacted', true, {priority: 'event'});">
+<div id="party_voting" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="party_voting-label">
+<label class="control-label" id="party_voting-label" for="party_voting"><p>Which political party do you typically vote for?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="party_voting" value="0">
+<span>Democratic</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="party_voting" value="1">
+<span>Republican</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="party_voting" value="2">
+<span>I am independent</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="party_voting" value="3">
+<span>Prefer not to say</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div data-next-page="end" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="end" class="sd-page">
+<section id="this-is-the-last-page-in-the-survey.-thanks-for-taking-our-survey" class="level2">
+<h2 class="anchored" data-anchor-id="this-is-the-last-page-in-the-survey.-thanks-for-taking-our-survey">This is the last page in the survey. Thanks for taking our survey!</h2>
+<p>Your survey completion code is: <span id="completion_code_value" class="shiny-text-output"></span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="close-survey-button" onclick="Shiny.setInputValue('show_exit_modal', true, {priority: 'event'});" style="display: block; margin: auto;" type="button">Close window</button>
+</div>
+<script>
+      Shiny.addCustomMessageHandler('closeWindow', function(message) {
+        window.close();
+        if (!window.closed) {
+          alert('Please close this tab manually to exit the survey.');
+        }
+      });
+    </script>
+</div>
+</div>
+</section>
+</div>
+<div id="screenout" class="sd-page">
+<p>Sorry, but you are not qualified to take our survey.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="close-survey-button" onclick="Shiny.setInputValue('show_exit_modal', true, {priority: 'event'});" style="display: block; margin: auto;" type="button">Close window</button>
+</div>
+<script>
+      Shiny.addCustomMessageHandler('closeWindow', function(message) {
+        window.close();
+        if (!window.closed) {
+          alert('Please close this tab manually to exit the survey.');
+        }
+      });
+    </script>
+</div>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

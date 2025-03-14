@@ -205,6 +205,12 @@ budget:
     $25,000 - $27,500: '27500'
     $27,500 - $30,000: '30000'
     more than $30,000: '35000'
+next_car_payment_source:
+  type: mc
+  label: How do you intend to pay for your next car?
+  options:
+    Buy: buy
+    Finance: finance
 next_car_down_payment:
   type: mc
   label: What will be your down payment for your next car?

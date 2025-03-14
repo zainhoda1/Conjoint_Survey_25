@@ -277,6 +277,9 @@ server <- function(input, output, session) {
 
      df_temp0$powertrain = c('Electric', 'Electric', 'Electric')
      df_temp0$price = c(1.1, 1.0, 0.5)
+     df_temp0$make_year = c(2018, 2018, 2018)
+     df_temp0$mileage = c(30000, 30000, 30000)
+     df_temp0$operating_cost = c('12 cents per mile (27.5 MPG equivalent)', '12 cents per mile (27.5 MPG equivalent)', '12 cents per mile (27.5 MPG equivalent)')
      df_temp0$range = c('100 mile range on full charge', '200 mile range on full charge', '300 mile range on full charge')
 
 
@@ -306,11 +309,15 @@ server <- function(input, output, session) {
 
 
   # Define any conditional skip logic here (skip to page if a condition is true)
-  sd_skip_if()
+  sd_skip_if(
+    input$next_vehicle_purchase == "not_sure" ~ "screenout",
+    input$which_market == "New" ~ "screenout"
+  )
 
   # Define any conditional display logic here (show a question if a condition is true)
   sd_show_if(
-    input$know_electric_vehicle == "Yes" ~ "write_electric_name"
+    input$know_electric_vehicle == "Yes" ~ "write_electric_name",
+    input$next_car_payment_source == "finance" ~ "next_car_down_payment"
   )
 
 
@@ -319,7 +326,9 @@ server <- function(input, output, session) {
   # Database designation and other settings
   sd_server(
     db = db,
-    required_questions = c("images", "budget", "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6" ),
+    required_questions = c("images", "budget", "next_vehicle_purchase",
+                           "which_market", "next_car_payment_source", "know_electric_vehicle",
+                           "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6" ),
     use_cookies = FALSE
   )
 
