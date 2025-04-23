@@ -99,8 +99,8 @@ parking:
     Other: other
 neighbor_ev_info:
   type: mc
-  label: Do any of your neighbors own/lease a plug-in hybrid or pure electric vehicle
-    (Select one)
+  label: Do any of your neighbors own/lease a plug-in hybrid or a battery electric
+    vehicle (Select one)
   options:
     'Yes': 'yes'
     'No': 'no'
@@ -305,7 +305,7 @@ run_on_gasoline:
   options:
     Hybrid Electric Vehicle: Hybrid_EV
     Plug-in Hybrid Electric Vehicle: Plug_Hybrid_in_EV
-    Pure Electric Vehicle: EV
+    Battery Electric Vehicle: EV
     I’m not sure: not_sure
 plugged_in:
   type: mc_multiple
@@ -313,19 +313,18 @@ plugged_in:
   options:
     Hybrid Electric Vehicle: Hybrid_EV
     Plug-in Hybrid Electric Vehicle: Plug_Hybrid_in_EV
-    Pure Electric Vehicle: EV
+    Battery Electric Vehicle: EV
     I’m not sure: not_sure
 know_electric_vehicle:
   type: mc
-  label: Can you name the make and model of atleast one vehicle powered partially
-    or completely by electricity?
+  label: Can you name the make and model of atleast one vehicle powered completely
+    by electricity (a battery electric vehicle)?
   options:
     'Yes': 'Yes'
     'No': 'No'
 write_electric_name:
   type: text
-  label: Please name a make and model of a vehicle that is powered partially or completelyby
-    electricity
+  label: Please name the make and model of the vehicle
 max_subsidy:
   type: mc
   label: Do you know the current maximum subsidy available from the US federal government

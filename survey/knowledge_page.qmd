@@ -21,7 +21,7 @@ Let's learn about the attributes.
 <br>
 
 | **Types of Powertrain**           | **Definition**                                                                                                          |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | Gasoline ![](images/gas_pump.png) | A conventional gasoline vehicle uses only gasoline.                                                                     |
 | Hybrid (HEVs)                     | A hybrid vehicle uses a small battery to reduce fuel use but cannot be plugged in to recharge as it uses only gasoline. |
 | Plug-in Hybrid (PHEVs)            | A plug-in hybrid vehicle has a battery which can be plugged in recharge and can also use gasoline.                      |
@@ -59,7 +59,7 @@ Let's learn about the attributes.
 <center>[**Powertrain**]{.underline}</center>
 
 | Types of Powertrain                                                          | Definition                                                                                                                                                         |
-|------------------------|------------------------------------------------|
+|-------------------------|------------------------------------------------|
 | Conventional ![](images/gas_pump.png)                                        | Gasoline engine only.                                                                                                                                              |
 | Hybrid (HEVs)![](images/gas_pump.png)                                        | Smaller gasoline engine + electric motor + small battery. Gasoline engine recharges the battery, fuel consumption is reduced                                       |
 | Plug-in Hybrid (PHEVs)![](images/gas_pump.png) ![](images/electric_plug.png) | Hybrid that can also be plugged in to an electrical outlet to charge the battery. Runs on electricity for a short range (10 – 40 miles), then switches to gasoline |
@@ -82,17 +82,16 @@ Let's learn about the attributes.
 <center>[**Mileage**]{.underline}</center>
 
 |                                                        |                                                             |
-|--------------------------------------------------------|-------------------------------------------------------------|
+|----------------------------------|-------------------------------------|
 | ![](images/odometer.png){fig-align="left" width="200"} | The number of miles vehicle has traveled while in operation |
 
 <br>
 
 <center>[**Operating Cost (Equivalent Gasoline Fuel Efficiency)**]{.underline}</center>
 
-|                                                         |                                                                                                                                                             |
-|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|--------------|----------------------------------------------------------|
 | ![](images/oper_cost.png){fig-align="left" width="800"} | Cost in cents per mile driven of fueling the vehicle. The equivalent fuel efficiency in miles per gallon (MPG) of a conventional gasoline vehicle is displayed in parenthesis. (Assumes [gasoline costs\$3.30/gallon](https://www.eia.gov/todayinenergy/detail.php?id=64164#:~:text=The%20U.S.%20retail%20price%20for,Gasoline%20and%20Diesel%20Fuel%20Update.) and [electricity costs \$0.16/kWh](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a)). |
-
 
 <br>
 
@@ -103,8 +102,6 @@ sd_next()
 
 
 
-
-
 ::: {#page3 .sd-page}
 ## page3 - Educational Page
 
@@ -112,22 +109,60 @@ Great Work! Now that you have shared a bit about yourself, we'd like you to cons
 
 Let's learn about the attributes.
 
+ |
+
+| Types of Powertrain                                                          | Powertrain Definition                                                                                                                                              |
+|-------------------------|------------------------------------------------|
+| Conventional ![](images/gas_pump.png)                                        | Gasoline engine only.                                                                                                                                              |
+| Hybrid (HEVs)![](images/gas_pump.png)                                        | Smaller gasoline engine + electric motor + small battery. Gasoline engine recharges the battery, fuel consumption is reduced                                       |
+| Plug-in Hybrid (PHEVs)![](images/gas_pump.png) ![](images/electric_plug.png) | Hybrid that can also be plugged in to an electrical outlet to charge the battery. Runs on electricity for a short range (10 – 40 miles), then switches to gasoline |
+| Electric (BEVs) ![](images/electric_plug.png)                                | Electric motor only. Must be plugged into an electrical outlet to be refueled                                                                                      |
+
+
 |                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](images/price_tag.JPG){fig-align="left" width="200"} | **Price - ** The final price paid for the vehicle in dollars, including all taxes and fees.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ![](images/range.png){fig-align="left" width="200"}     | **Range - ** The maximum distance a vehicle can travel in a full tank/ fully charged battery.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ![](images/odometer.png){fig-align="left" width="200"}  | **Mileage - ** The number of miles vehicle has traveled while in operation                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| ![](images/oper_cost.png){fig-align="left" width="800"} | **Operating Cost (Equivalent Gasoline Fuel Efficiency) - ** Cost in cents per mile driven of fueling the vehicle. The equivalent fuel efficiency in miles per gallon (MPG) of a conventional gasoline vehicle is displayed in parenthesis. (Assumes [gasoline costs\$3.30/gallon](https://www.eia.gov/todayinenergy/detail.php?id=64164#:~:text=The%20U.S.%20retail%20price%20for,Gasoline%20and%20Diesel%20Fuel%20Update.) and [electricity costs \$0.16/kWh](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a)). |
-| ![](images/calendar.png){fig-align="left" width="200"}  | **Model Year - ** Model/Manufacturing year is the actual year the vehicle was built.                                                                                                                                                              
+|-------------|----------------------------------------------------------|
+| ![](images/price_tag.JPG){fig-align="left" width="200"} | **Price -** The final price paid for the vehicle in dollars, including all taxes and fees.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ![](images/range.png){fig-align="left" width="200"}     | **Range -** The maximum distance a vehicle can travel in a full tank/ fully charged battery.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ![](images/odometer.png){fig-align="left" width="200"}  | **Mileage -** The number of miles vehicle has traveled while in operation                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ![](images/oper_cost.png){fig-align="left" width="800"} | **Operating Cost (Equivalent Gasoline Fuel Efficiency) -** Cost in cents per mile driven of fueling the vehicle. The equivalent fuel efficiency in miles per gallon (MPG) of a conventional gasoline vehicle is displayed in parenthesis. (Assumes [gasoline costs\$3.30/gallon](https://www.eia.gov/todayinenergy/detail.php?id=64164#:~:text=The%20U.S.%20retail%20price%20for,Gasoline%20and%20Diesel%20Fuel%20Update.) and [electricity costs \$0.16/kWh](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a)).  |
+| ![](images/calendar.png){fig-align="left" width="200"}  | **Model Year -** Model/Manufacturing year is the actual year the vehicle was built.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
-
-| Types of Powertrain                                                          | Powertrain Definition                                                                                                                                                         |
-|------------------------|------------------------------------------------|
+| Types of Powertrain                                                          | Powertrain Definition                                                                                                                                              |
+|-------------------------|------------------------------------------------|
 | Conventional ![](images/gas_pump.png)                                        | Gasoline engine only.                                                                                                                                              |
 | Hybrid (HEVs)![](images/gas_pump.png)                                        | Smaller gasoline engine + electric motor + small battery. Gasoline engine recharges the battery, fuel consumption is reduced                                       |
 | Plug-in Hybrid (PHEVs)![](images/gas_pump.png) ![](images/electric_plug.png) | Hybrid that can also be plugged in to an electrical outlet to charge the battery. Runs on electricity for a short range (10 – 40 miles), then switches to gasoline |
 | Electric (BEVs) ![](images/electric_plug.png)                                | Electric motor only. Must be plugged into an electrical outlet to be refueled                                                                                      |
 
 <br>
+:::
+
+## page in use
+
+::: {#page4 .sd-page}
+## page4 - Educational Page
+
+Great Work! Now that you have shared a bit about yourself, we'd like you to consider a scenario in which you can choose a car from a set of cars with different attributes.
+
+Let's learn about the attributes.
+
+
+| Types of Powertrain                                                          | Powertrain Definition                                                                                                                                              |
+|-------------------------|------------------------------------------------|
+| Conventional ![](images/gas_pump.png)                                        | Gasoline engine only.                                                                                                                                              |
+| Hybrid (HEVs)![](images/gas_pump.png)                                        | Smaller gasoline engine + electric motor + small battery. Gasoline engine recharges the battery, fuel consumption is reduced                                       |
+| Plug-in Hybrid (PHEVs)![](images/gas_pump.png) ![](images/electric_plug.png) | Hybrid that can also be plugged in to an electrical outlet to charge the battery. Runs on electricity for a short range (10 – 40 miles), then switches to gasoline |
+| Electric (BEVs) ![](images/electric_plug.png)                                | Electric motor only. Must be plugged into an electrical outlet to be refueled                                                                                      |
+
+
+|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|-------------|----------------------------------------------------------|
+| ![](images/range.png){fig-align="left" width="200"} | **Range -** The maximum distance a vehicle can travel in a full tank/ fully charged battery.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ![](images/price_tag.JPG){fig-align="left" width="200"}     | **Price -** The final price paid for the vehicle in dollars, including all taxes and fees.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ![](images/year5.JPG){fig-align="left" width="200"}     | **Model Year -** Model/Manufacturing year is the actual year the vehicle was built.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ![](images/odometer.png){fig-align="left" width="200"}  | **Mileage -** The number of miles vehicle has traveled while in operation                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ![](images/oper_cost.png){fig-align="left" width="800"} | **Operating Cost (Equivalent Gasoline Fuel Efficiency) -** Cost in cents per mile driven of fueling the vehicle. The equivalent fuel efficiency in miles per gallon (MPG) of a conventional gasoline vehicle is displayed in parenthesis. (Assumes [gasoline costs\$3.30/gallon](https://www.eia.gov/todayinenergy/detail.php?id=64164#:~:text=The%20U.S.%20retail%20price%20for,Gasoline%20and%20Diesel%20Fuel%20Update.) and [electricity costs \$0.16/kWh](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a)).  |
+                                                                                                                                                                                                                                                                                                                                                                                                                                              
 
 :::
+

@@ -101,27 +101,27 @@ server <- function(input, output, session) {
         # This checks if the word "Electric" appears in the value (case-insensitive)
         if (grepl("Electric", value)) {
           return(sprintf(
-            '<img src="images/charging.JPG" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s',
+            '<img src="images/electric_plug.png" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s',
             value
           ))
         }
         # This checks if either "Gas" or "Gasoline" appears in the value
         else if (grepl("Gasoline", value)) {
           return(sprintf(
-            '<img src="images/pump.webp" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s',
+            '<img src="images/gas_pump.png" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s',
             value
           ))
         }
         # This checks if either "Hybrid" appears in the value
         else if (grepl("Plug-in Hybrid", value)) {
           return(sprintf(
-            '<img src="images/pump.webp" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">
-             <img src="images/charging.JPG" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s', value
+            '<img src="images/gas_pump.png" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">
+             <img src="images/electric_plug.png" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s', value
           ))
         }
         else{
           return(sprintf(
-              '<img src="images/pump.webp" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s',
+              '<img src="images/gas_pump.png" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">%s',
               value
           ))
 
@@ -146,7 +146,7 @@ server <- function(input, output, session) {
         )
       }, deleteFile = FALSE)
 
-
+ 
       create_car_table1 <- function(car_data, chosen_src) {
 
         car_data <- car_data %>%
@@ -163,11 +163,11 @@ server <- function(input, output, session) {
 
 
         car_data$names <- c('<span title="Does the vehicle run on gas or Electricity?" style="cursor: help; text-decoration: underline;">Powertrain</span>',
-                            '<span title="How many miles in a full tank/ fully charged battery" style="cursor: help; text-decoration: underline;">Range</span>',
-                            '<span title="What is the price of the vehicle" style="cursor: help; text-decoration: underline;">Price</span>',
+                            '<span title="The maximum distance a vehicle can travel in a full tank/ fully charged battery." style="cursor: help; text-decoration: underline;">Range</span>',
+                            '<span title="The final price paid for the vehicle in dollars, including all taxes and fees." style="cursor: help; text-decoration: underline;">Price</span>',
                             '<span title="Model/Manufacturing year is the actual year the vehicle was built " style="cursor: help; text-decoration: underline;">Model Year</span>',
                             '<span title="The number of miles vehicle has travelled while in operation" style="cursor: help; text-decoration: underline;">Mileage</span>',
-                            '<span title="Operating cost of the vehicle" style="cursor: help; text-decoration: underline;">Operating Cost (Equivalent Gasoline Fuel Efficiency)</span>'
+                            '<span title="Cost in cents per mile driven of fueling the vehicle" style="cursor: help; text-decoration: underline;">Operating Cost (Equivalent Gasoline Fuel Efficiency)</span>'
 
         )
 
