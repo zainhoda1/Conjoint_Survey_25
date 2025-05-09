@@ -181,3 +181,20 @@ td:first-child {
     max-width: 400px; /* Reduced from 600px to 400px */
   }
 }
+
+/* Target ONLY buttons inside a div with both btn-group and btn-group-toggle */
+div.btn-group.btn-group-toggle > label.btn {
+  background-color: transparent !important;
+  border: 1px solid #ccc !important;
+  color: #333 !important;
+}
+
+/* Optional hover effect for those same buttons */
+div.btn-group.btn-group-toggle > label.btn:hover {
+  background-color: #eee !important;
+}
+
+/* Selected state */
+div.btn-group.btn-group-toggle > label.btn.active {
+  background-color: #d0eaff !important;
+}

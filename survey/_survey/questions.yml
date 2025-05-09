@@ -1,194 +1,5 @@
 # ! JUST READ - don't change the content of this file
 # Question structure extracted from survey.html
-next_vehicle_purchase:
-  type: mc
-  label: To your best estimate, when will you likely need to purchase another vehicle?
-  options:
-    Currently shopping: '0'
-    0-3 months: '3'
-    3-6 months: '6'
-    6-12 months: '12'
-    1-2 years: '24'
-    I'm not sure: not_sure
-which_market:
-  type: mc
-  label: Which market will you consider buying this vehicle from?
-  options:
-    New: New
-    Used: Used
-    Both: Both
-car_types1:
-  type: matrix
-  label: (Select all that apply)?
-  options:
-    Gasoline: Gasoline
-    Hybrid: hybrid
-    Plug-in Hybrid: plugin_hybrid
-    Electric: electric
-    Other: other
-  row:
-    '0': '0'
-    '1': '1'
-    '2': '2'
-    '3': '3'
-    '4': '4'
-    more than 4: more_than_4
-car_types1_0:
-  type: mc
-  label: []
-  options:
-    Gasoline: Gasoline
-    Hybrid: hybrid
-    Plug-in Hybrid: plugin_hybrid
-    Electric: electric
-    Other: other
-car_types1_1:
-  type: mc
-  label: []
-  options:
-    Gasoline: Gasoline
-    Hybrid: hybrid
-    Plug-in Hybrid: plugin_hybrid
-    Electric: electric
-    Other: other
-car_types1_2:
-  type: mc
-  label: []
-  options:
-    Gasoline: Gasoline
-    Hybrid: hybrid
-    Plug-in Hybrid: plugin_hybrid
-    Electric: electric
-    Other: other
-car_types1_3:
-  type: mc
-  label: []
-  options:
-    Gasoline: Gasoline
-    Hybrid: hybrid
-    Plug-in Hybrid: plugin_hybrid
-    Electric: electric
-    Other: other
-car_types1_4:
-  type: mc
-  label: []
-  options:
-    Gasoline: Gasoline
-    Hybrid: hybrid
-    Plug-in Hybrid: plugin_hybrid
-    Electric: electric
-    Other: other
-car_types1_more_than_4:
-  type: mc
-  label: []
-  options:
-    Gasoline: Gasoline
-    Hybrid: hybrid
-    Plug-in Hybrid: plugin_hybrid
-    Electric: electric
-    Other: other
-parking:
-  type: mc_multiple
-  label: Where can you park at home? (Select all that apply)?
-  options:
-    Street Parking: Street_Parking
-    Driveway/ Carport: Driveway_Carport
-    Single-family garage: Single_family_garage
-    Shared parking garage: Shared_parking_garage
-    Prefer not to say: prefer_not_to_say
-    Other: other
-neighbor_ev_info:
-  type: mc
-  label: Do any of your neighbors own/lease a plug-in hybrid or a battery electric
-    vehicle (Select one)
-  options:
-    'Yes': 'yes'
-    'No': 'no'
-    I'm not sure: not_sure
-acquire_primary_vehicle:
-  type: mc
-  label: Did you buy or lease your current primary vehicle?
-  options:
-    Buy: Buy
-    Lease: Lease
-    Do not remember or do not know: do_not_remember
-acquire_how:
-  type: mc
-  label: How did you purchase / lease your current primary vehicle?
-  options:
-    New car from a Dealership: new
-    Used car from a Dealership: used_dealer
-    Personal Sale: used_informally
-    Gift: received_gift
-    Move-in: move_in_access
-    Do not remember or do not know: do_not_remember
-vehicle_cost:
-  type: mc
-  label: How much did you pay for this vehicle, to your best estimate?
-  options:
-    $4,999 or less: '4999'
-    $5,000 - $9,999: '9999'
-    $10,000 - $14,999: '14999'
-    $15,000 - $19,999: '19999'
-    $20,000 - $24,999: '24999'
-    $25,000 - $29,999: '29999'
-    $30,000 - $34,999: '34999'
-    $35,000 - $39,999: '39999'
-    $40,000 - $44,999: '44999'
-    $45,000 - $49,999: '49999'
-    $50,000 - $59,999: '59999'
-    $60,000 - $69,999: '69999'
-    $70,000 - $79,999: '79999'
-    $80,000 - $89,999: '89999'
-    $90,000 - $99,999: '99999'
-    100,000 or more: '100000'
-    Do not remember or do not know: do_not_remember
-monthly_payment:
-  type: mc
-  label: What is your monthly payment?
-  options:
-    Paid all cash/no loan: '0'
-    $0 - $100: '100'
-    $100 - $200: '200'
-    $200 - $300: '300'
-    $300 - $500: '500'
-    $500 - $750: '750'
-    $750 - $1000: '1000'
-    1,000 or more: '2000'
-    Do not remember or do not know: do_not_remember
-gas_mileage:
-  type: mc
-  label: What gas mileage does your vehicle give?
-  options:
-    0 - 9.99 mpg: '0'
-    10 - 19.99 mpg: '10'
-    20 - 29.99 mpg: '20'
-    30 - 39.99 mpg: '30'
-    40 - 49.99 mpg: '40'
-    50 - 59.99 mpg: '50'
-    60 mpg and above: '60'
-    not applicable: not_applicable
-refueling:
-  type: mc
-  label: How often do you refuel?
-  options:
-    Once a month: '0'
-    Once in two weeks: '1'
-    Once a week: '2'
-    Twice a week: '3'
-    Three times a week: '4'
-    Four times a week: '5'
-    Over four times a week: '6'
-other_transport_choices:
-  type: mc_multiple
-  label: 'Select any of the modes you regularly use to travel:'
-  options:
-    Walk: walk
-    Bicycle: bicycle
-    Taxi: taxi
-    Ride hail (Uber/ Lyft): Ride_hail
-    Bus: Bus
-    Metro/ subway: metro
 budget:
   type: mc
   label: What is your budget range for your next vehicle?
@@ -257,48 +68,30 @@ cbc_q0:
     Option 1: option_1
     Option 2: option_2
     Option 3: option_3
-cbc_q1:
-  type: mc_buttons
-  label: If these were your only options, which would you choose?
-  options:
-    Option 1: option_1
-    Option 2: option_2
-    Option 3: option_3
-cbc_q2:
-  type: mc_buttons
-  label: If these were your only options, which would you choose?
-  options:
-    Option 1: option_1
-    Option 2: option_2
-    Option 3: option_3
-cbc_q3:
-  type: mc_buttons
-  label: If these were your only options, which would you choose?
-  options:
-    Option 1: option_1
-    Option 2: option_2
-    Option 3: option_3
-cbc_q4:
-  type: mc_buttons
-  label: If these were your only options, which would you choose?
-  options:
-    Option 1: option_1
-    Option 2: option_2
-    Option 3: option_3
-cbc_q5:
-  type: mc_buttons
-  label: If these were your only options, which would you choose?
-  options:
-    Option 1: option_1
-    Option 2: option_2
-    Option 3: option_3
-cbc_q6:
-  type: mc_buttons
-  label: If these were your only options, which would you choose?
-  options:
-    Option 1: option_1
-    Option 2: option_2
-    Option 3: option_3
+vehicle_cbc_q1_button:
+  type: unknown
+  label: []
+vehicle_cbc_q2_button:
+  type: unknown
+  label: []
+vehicle_cbc_q3_button:
+  type: unknown
+  label: []
+vehicle_cbc_q4_button:
+  type: unknown
+  label: []
+battery_cbc_q1_button:
+  type: unknown
+  label: []
+battery_cbc_q2_button:
+  type: unknown
+  label: []
+battery_cbc_q3_button:
+  type: unknown
+  label: []
+battery_cbc_q4_button:
+  type: unknown
+  label: []
 run_on_gasoline:
   type: mc_multiple
   label: 'Please select which vehicle(s) can run on gasoline: (select all that apply)'
