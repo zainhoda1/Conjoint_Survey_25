@@ -1,0 +1,13 @@
+name: NIST_GWU_survey
+title: NIST_GWU_survey
+username: xiatian-iogansen
+account: xiatian-iogansen
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14968190
+bundleId: 10492388
+url: https://xiatian-iogansen.shinyapps.io/NIST_GWU_survey/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: _survey/head.rds|_survey/pages.rds|_survey/questions.yml|_survey/survey.html|_survey/translations.yml|.env|.Rapp.history|css/survey_theme.css|css/table1.css|css/testing_table.css|css/testing_table1.css|figs/mnl_wtp.png|figs/unnamed-chunk-7-1.png|models/model_linear.RData|models/model.RData|models/mxl.RData|preview_data.csv|survey.qmd|data|images|knowledge_page_files|powerAnalysis_files

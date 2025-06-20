@@ -1,0 +1,13 @@
+name: BEV_Survey
+title: BEV_Survey
+username: xiatian-iogansen
+account: xiatian-iogansen
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14947321
+bundleId: 10469240
+url: https://xiatian-iogansen.shinyapps.io/BEV_Survey/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Rapp.history|app_archive.R|app_table_form_archive.R|css/survey_theme.css|css/table1.css|css/testing_table.css|css/testing_table1.css|figs/mnl_wtp.png|figs/unnamed-chunk-7-1.png|knowledge_page.html|knowledge_page.qmd|models/model_linear.RData|models/model.RData|models/mxl.RData|preview_data.csv|survey.qmd|data|images|knowledge_page_files|powerAnalysis_files

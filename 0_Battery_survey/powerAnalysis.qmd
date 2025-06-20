@@ -31,7 +31,9 @@ profiles_used <- cbc_profiles(
   veh_mileage        = seq(15000, 50000, 500), #2500
   veh_price          = 15000*seq(0.8, 1.2, 0.1),
   # battery_condition     = c('Like_new', 'Used'),
-  battery_refurbish     = c('Original', 'Reconditioned','Replaced'),
+  # battery_refurbish     = c('Original', 'Reconditioned','Replaced'),
+  battery_refurbish     = c('original', 'cellreplace','packreplace'),
+
   battery_range_year0 = seq(200, 360, 40),
   battery_degradation = seq(0.01,0.08, 0.01)
   # charge_freq = seq(1,7,1),
@@ -75,7 +77,9 @@ design_rand_output <-design_rand %>%
          battery_health_year3=paste0(round((1-battery_degradation)^3*100,0),"%"),
          battery_health_year8=paste0(round((1-battery_degradation)^8*100,0),"%"),
          ) %>% 
-  mutate(image=paste0("Range_Degradation_", battery_range_year0, "_", battery_degradation*100,".png")) %>% 
+  mutate(image_refurbishment=paste0("battery_survey_battery_", battery_refurbish, "_text",".png"),
+    image_degradation=paste0("Range_Degradation_", battery_range_year0, "_", battery_degradation*100,".png"),
+         ) %>% 
   mutate(veh_price=veh_price/15000
          # battery_condition=case_when(battery_condition=="Like_new" ~ "Like new", T ~ battery_condition)
          # charge_freq=paste0(charge_freq," times"),
@@ -227,11 +231,16 @@ Range_SoH_full_image<-ggplot() +
     axis.text.x = element_blank(),
     axis.text.y = element_text(colour="black", size = 9),
     axis.ticks = element_blank(),
-    panel.grid = element_blank()
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = NA, color = NA),
+    plot.background = element_rect(fill = NA, color = NA)
   )
 
 # ggsave(plot = Range_SoH_full_image, filename  = here::here("survey","images","battery_choices", "SoH_range_full_image.png"), width = 15, height = 12)
-ggsave(plot = Range_SoH_full_image, filename  = here::here("images","battery_choices_version1", "SoH_range_full_image.png"), width = 15, height = 12)
+ggsave(plot = Range_SoH_full_image, 
+       filename  = here::here("images","battery_choices_version1", "SoH_range_full_image.png"), 
+       bg = "transparent",
+       width = 15, height = 12)
 
 
 
@@ -324,7 +333,7 @@ dev.off()
 ```
 
 
-## Version 2: Range (SoH)- inside the battery
+## ***Version 2: Range (SoH)- inside the battery
 ```{r}
 df_range_SOH_long <- df_range_SOH %>%
   mutate(row_id = row_number()) %>%
@@ -500,7 +509,7 @@ for (id in row_ids) {
       aes(x = 5, y = as.numeric(factor(year)), label = label),
       hjust = 0, size = 5.5
     ) +
-    theme_minimal() +
+    # theme_minimal() +
     theme(
       axis.title = element_blank(),
       axis.text.x =element_blank(),
@@ -509,7 +518,10 @@ for (id in row_ids) {
       panel.grid = element_blank(),
       panel.spacing = unit(0, "pt"),
       plot.margin = margin(0,0,0,0),
-      axis.ticks.length = unit(0, "pt")
+      axis.ticks.length = unit(0, "pt"),
+    panel.background = element_rect(fill = NA, color = NA),
+    plot.background = element_rect(fill = NA, color = NA)
+      
     )
   
   # Save the image
@@ -527,7 +539,8 @@ agg_png(
   width = 4,
   height = 2.6,
   units = "in",
-  res = 250
+  res = 250,
+  background = "transparent"
 )
 print(p)
 dev.off()
