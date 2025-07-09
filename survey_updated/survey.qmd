@@ -21,7 +21,7 @@ Hi! We are a research team of George Washington University. This survey
 will ask you simple questions regarding your purchase preference for
 used cars.
 
-This survey will take about **10 minutes** to complete. It can be
+This survey will take about **15 minutes** to complete. It can be
 stopped and picked up at any time. Your personal information will be
 kept private and won't be shared with anyone else. The survey is
 subdivided in six sub-sections:
@@ -53,8 +53,7 @@ sd_next(next_page = 'consent')
 
 You are invited to participate in a research study directed by Dr. John
 Paul Helveston of the Department of Engineering Management and Systems
-Engineering at George Washington University (GWU) and funded by the
-Department of Energy. Participation is entirely voluntary and you may
+Engineering at George Washington University (GWU). This study is funded by the Department of Energy and the National Institute of Standards and Technology. Participation is entirely voluntary and you may
 obtain further information regarding this study by contacting us at
 gwuvehiclegroup7\@gmail.com .
 
@@ -62,7 +61,7 @@ The purpose of this study is to identify the preferences and needs of
 car ownership in different communities. If you choose to participate in
 this study, you will be asked to answer an online survey about vehicle
 ownership and preference. The total amount of time you will spend on
-this study is 10 minutes. You may refuse to answer any of the questions
+this study is 15 minutes. You may refuse to answer any of the questions
 and stop participating at any time.
 
 **Benefits** : The most important reason why someone would like to
@@ -70,8 +69,7 @@ participate in this study is that they can share their vehicle usage
 needs and help inform policies that decide incentives on EV ownership.
 You will not benefit directly from your participation in the study.
 However, the benefits to science and humankind that might result from
-this study include implementing electric vehicle subsidy policies that
-are more in tune with people's requirements.
+this study include advancing our understanding of consumer decision-making in the electric vehicle market.
 
 **Concerns/Risks** : You may not choose to volunteer for this study if
 you do not want to share information about your vehicle usage. Possible
@@ -111,7 +109,7 @@ sd_next(next_page = 'filter', label = 'I Agree')
 
 ::: {#filter .sd-page}
 
-# This study is about the purchase of your next vehicle.
+## This study is about the purchase of your next vehicle.
 
 ```{r}
 sd_question(
@@ -152,6 +150,19 @@ sd_question(
   )
 )
 
+
+sd_question(
+  type  = 'mc',
+  id    = 'attention_check_toyota',
+  label = "**Have you ever owned a Toyota vehicle?**",
+  option = c(
+    "Yes, currently" = "yes_current",
+    "Yes, in the past" = "yes_past",
+    "No" = "no"
+  )
+  # ,
+  # hidden = TRUE
+)
 ```
 
 
@@ -169,7 +180,7 @@ sd_next(next_page = 'household_veh', label = 'Next')
 </center>
 ## Below are some questions about your household.
 
-**Let’s begin with the vehicles in your household.** 
+**We’ll start with a few questions about the vehicles your household owns or leases.** 
 <br>
 - Please consider all passenger vehicles – including cars, SUVs, vans, and trucks – but exclude motorcycles.
 <br>
@@ -250,12 +261,7 @@ sd_next()
 
 ::: {#primary_veh .sd-page}
 
-<center>
-## Section 1 of 6
-</center>
-## Below are some questions about the household vehicle you currently drive most often.
-
-Please answer to the best of your knowledge.
+## The following questions are about the household vehicle you drive most often.
 
 ```{r}
 sd_question(
@@ -288,6 +294,7 @@ sd_question(
   option = c(
     "Bought from a dealership" = "bought_dealership",
     "Leased from a dealership" = "leased_dealership",
+    "Bought from an online retailer (e.g., Carvana)" = "bought_online",
     "Bought from a private seller" = "bought_private",
     "Received it as a gift" = "received_gift",
     "Do not remember / do not know"  = "do_not_know",
@@ -298,18 +305,13 @@ sd_question(
 sd_question(
   type  = 'mc',
   id    = 'primary_veh_cost',
-  label = "**To your best estimate, what was the total purchase or lease price for this vehicle?** *Please **include** all related expenses (such as down payment, monthly payments, taxes, fees, etc.), but **do not include** any trade-in value or credits from selling another vehicle.*",
+  label = "**To your best estimate, what was the total purchase or lease price for this vehicle?** *Please **include** all related expenses (such as the down payment, monthly payments, taxes, and any additional fees), but **do not include** any trade-in value or credits from selling another vehicle.*",
   option = c(
-    "$4,999 or less" = "2500",
-    "$5,000 - $9,999" = "7500",
-    "$10,000 - $14,999" = "12000",
-    "$15,000 - $19,999" = "17500",
-    "$20,000 - $24,999"= "22500",
-    "$25,000 - $29,999"= "27500",
-    "$30,000 - $34,999"= "32500",
-    "$35,000 - $39,999" = "37500",
-    "$40,000 - $44,999"= "42500",
-    "$45,000 - $49,999"= "47500",
+    "$9,999 or less" = "5000",
+    "$10,000 - $19,999" = "15000",
+    "$20,000 - $29,999"= "25000",
+    "$30,000 - $39,999" = "35000",
+    "$40,000 - $49,999"= "45000",
     "$50,000 - $59,999"= "55000",
     "$60,000 - $69,999" = "65000",
     "$70,000 - $79,999"= "75000",
@@ -407,7 +409,7 @@ sd_next()
 </center>
 ## This section asks a few questions about your future vehicle.
 
-You indicated earlier that you are interested in a **used `r sd_output("next_veh_style", type ="value")`** for your next vehicle.
+**You indicated earlier that you are interested in a used `r sd_output("next_veh_style", type ="value")` for your next vehicle.**
 
 
 ```{r}
@@ -520,7 +522,7 @@ sd_next()
 
 ## Vehicle Educational Page
 
-Great Work! Now that you have shared a bit about yourself, we'd like you to consider a scenario in which you can choose a used vehicle from a set of vehicles with different attributes.
+Great Work! Now that you have shared a bit about yourself, we'd like you to consider a scenario in which you can **choose a used vehicle from a set of vehicles with different attributes**.
 
 Let's learn about the attributes.
 
@@ -553,10 +555,6 @@ sd_next()
 
 ::: {#cbc_demo .sd-page}
 
-<!-- <center> -->
-<!-- ## Section 3 of 6 -->
-<!-- </center> -->
-
 ```{r}
 vehicle_cbc0_options<- c(
   "Option 1" = "option_1",
@@ -571,7 +569,7 @@ vehicle_cbc_options <- c(
 )
 ```
 
-## Vehicle Choice Question Demonstration
+## Choice Question Demonstration
 
 We will now begin the choice tasks. We will show you **six** choice questions, starting on the next page. Below is an example of the type of questions you will be asked.
 
@@ -588,9 +586,6 @@ sd_next()
 
 
 ::: {#vehicle_pageQ1_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 3 of 6 -->
-</center>
 ### Question 1 of 6
 ```{r}
 sd_output("make_table_short_1")
@@ -602,9 +597,6 @@ sd_next()
 :::
 
 ::: {#vehicle_pageQ2_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 3 of 6 -->
-</center>
 ### Question 2 of 6
 ```{r}
 sd_output("make_table_short_2")
@@ -616,9 +608,6 @@ sd_next()
 :::
 
 ::: {#vehicle_pageQ3_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 3 of 6 -->
-</center>
 ### Question 3 of 6
 ```{r}
 sd_output("make_table_short_3")
@@ -630,9 +619,6 @@ sd_next()
 :::
 
 ::: {#vehicle_pageQ4_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 3 of 6 -->
-</center>
 ### Question 4 of 6
 ```{r}
 sd_output("make_table_short_4")
@@ -644,9 +630,6 @@ sd_next()
 :::
 
 ::: {#vehicle_pageQ5_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 3 of 6 -->
-</center>
 ### Question 5 of 6
 ```{r}
 sd_output("make_table_short_5")
@@ -658,9 +641,6 @@ sd_next()
 :::
 
 ::: {#vehicle_pageQ6_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 3 of 6 -->
-</center>
 ### Question 6 of 6
 ```{r}
 sd_output("make_table_short_6")
@@ -700,8 +680,8 @@ Next, we’d like you to consider a scenario in which you can choose a **used ba
 |
 |-------------|----------------------------------------------------------|
 | ![](images/battery_survey_battery.png){fig-align="center" width="80"} | <span style="font-size: 20px;">**Vehicle Driving Range and Battery Health**</span><br>- EV batteries **gradually lose capacity over time (battery degradation)**, which reduces the vehicle's driving range and increases charging time.<br>- The condition of an EV battery is often described using **State of Health (SOH)**, expressed as a percentage.|
-|![](images/battery_survey_veh_maintenance.jpg){fig-align="center" width="100"} | <span style="font-size: 20px;">**Battery Maintenance**</span><br>- **Battery replacements** are rare but can be expensive, costing **between \$7,000 and \$20,000** depending on the model and labor costs.<br>- However, most modern EV batteries are **designed to last the lifetime** of the vehicle under normal use. |
-|![](images/battery_survey_veh_warranty.png){fig-align="center" width="100"} | <span style="font-size: 20px;">**Warranty Coverage**</span><br>- BEVs come with a **battery warranty** of at least **8 years or 100,000 miles**, whichever comes first.- Many batteries continue to perform well **beyond the warranty period**, though some performance degradation is expected over time.<br>- Most manufacturers will replace the battery when the SOH falls **below 70-75%** while under warranty. |
+|![](images/battery_survey_veh_maintenance.jpg){fig-align="center" width="100"} | <span style="font-size: 20px;">**Battery Maintenance**</span><br>- **Battery replacements** are rare but can be expensive, costing **between \$5,000 and \$20,000** depending on the model and labor costs.<br>- However, most modern EV batteries are **designed to last the lifetime** of the vehicle under normal use. |
+|![](images/battery_survey_veh_warranty.png){fig-align="center" width="100"} | <span style="font-size: 20px;">**Battery Warranty**</span><br>- BEVs come with a **battery warranty** of at least **8 years or 100,000 miles**, whichever comes first.<br>- Many batteries continue to perform well **beyond the warranty period**, though some performance degradation is expected over time.<br>- Most manufacturers will replace the battery when the SOH falls **below 70-75%** while under warranty. |
 
 
 ```{r}
@@ -711,9 +691,6 @@ sd_next()
 :::
 
 ::: {#battery_cbc_intro .sd-page}
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
 ## Battery Educational Page
 
 ```{r}
@@ -751,11 +728,7 @@ sd_next()
 
 ::: {#battery_cbc_demo .sd-page}
 
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
-
-## Battery Choice Question Demonstration
+## Choice Question Demonstration
 
 We will now show you **six** choice questions, starting on the next page. **For all choice questions, please assume the used vehicle was built in 2022 and is currently three years old.**
 
@@ -853,16 +826,17 @@ sd_question(
   label = "**How important are the following attributes to you when selecting a battery electric vehicle?**",
   row = c(
     "Vehicle mileage" = "veh_mile",
-    "Vehicle price"     = "veh_price",
-    "Battery Refurbishment history"    = "battery_refurbish",
+    "Purchase price"     = "purchase_price",
+    "Battery refurbishment history"    = "battery_refurbish",
     "Battery range and health"          = "battery_health"
   ),
   option = c(
-    "Not at all" = "not_at_all",
-    "Slightly" = "slightly",
-    "Moderately" = "moderately",
-    "Very" = "very",
-    "Extremely" = "extremely"
+    "Unimportant" = "unimportant",
+    "Of little importance" = "little_important",
+    "Moderately important" = "moderately_important",
+    "Important" = "important",
+    "Very important" = "very_important"
+
   )
 )
 
@@ -874,7 +848,8 @@ sd_next()
 <center>
 ## Section 5 of 6
 </center>
-## Below are a few questions about electric vehicles which we will only use for analyzing our survey data.
+
+## We'd like to learn more about your views on vehicle technologies and related topics.
 
 ```{r}
 
@@ -906,7 +881,7 @@ sd_question(
 sd_question(
   type  = 'mc',
   id    = 'know_electric_vehicle',
-  label = "**Can you name the make and model of atleast one vehicle powered completely by electricity (a battery electric vehicle)?**",
+  label = "**Can you name the make and model of at least one vehicle powered completely by electricity (a battery electric vehicle)?**",
   option = c(
     "Yes" = "yes",
     "No"  = "no"
@@ -924,7 +899,7 @@ sd_question(
 sd_question(
   type  = 'mc',
   id    = 'max_subsidy',
-  label = "**To the best of your knowledge, what is the maximum federal tax credit currently available in the US for purchasing a new electric vehicle**",
+  label = "**To the best of your knowledge, what is the maximum federal tax credit currently available in the US for purchasing a new electric vehicle?**",
   option = c(
     "$1,000" = "1000",
     "$2,500"  = "2500",
@@ -946,6 +921,67 @@ sd_next()
 
 :::
 
+::: {#attitudes_page1 .sd-page}
+
+```{r}
+sd_question(
+  type  = 'matrix',
+  id    = 'attitudes_1',
+  label = "**Please indicate the extent to which you agree or disagree with the following statements.**",
+  row = c(
+    "People who are important to me think that I should buy an EV."     = "ev_norm",
+    "Driving an EV would eventually result in cost savings."    = "ev_cost",
+    "Driving an EV would be beneficial to the environment in the long term."          = "ev_environment",
+    "If I owned a BEV, I would often worry about running out of charge." =  "ev_range",
+    "BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing." =  "ev_resale",
+    "The price of an EV is too high." =  "ev_price"
+  ),
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree"  = "somewhat_disagree",
+    "Neither agree nor disagree"  = "neutral",
+    "Somewhat agree"  = "somewhat_agree",
+    "Strongly agree"  = "strongly_agree"
+  )
+)
+```
+
+
+```{r}
+sd_next()
+```
+:::
+
+::: {#attitudes_page2 .sd-page}
+```{r}
+sd_question(
+  type  = 'matrix',
+  id    = 'attitudes_2',
+  label = "**Please indicate the extent to which you agree or disagree with the following statements.**",
+  row = c(
+    "Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems." =  "ev_battery_environment",
+    "Refurbished EV batteries do NOT perform and function as original EV batteries." =  "v_battery_function",
+    "Please select \"Strongly agree\" as your response to this item." =  "attention_check_disagree",
+    "Generally, I am willing to go to extra effort to find lower prices." =  "price_sensitive",
+    "I like to be among the first people to have the latest technology." =  "tech_savvy",
+    "I am a person who is fully prepared to take risks." =  "risk_taker"
+  ),
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree"  = "somewhat_disagree",
+    "Neither agree nor disagree"  = "neutral",
+    "Somewhat agree"  = "somewhat_agree",
+    "Strongly agree"  = "strongly_agree"
+  )
+)
+```
+
+
+```{r}
+sd_next()
+```
+
+:::
 
 ::: {#individual_attribute .sd-page}
 <center>
@@ -953,7 +989,7 @@ sd_next()
 </center>
 ## Demographic information
 
-## We're almost done! We'd just like to ask just a few more questions about you which we will only use for analyzing our survey data.
+**We're almost done! We'd just like to ask just a few more questions about you which we will only use for analyzing our survey data.**
 
 ```{r}
 #code block
@@ -973,13 +1009,13 @@ sd_question(
   id     = 'gender',
   label  = "**What is your gender?**",
   option = c(
-    "Female" = "Female",
-    "Male"  = "Male",
-    "Non Binary"  = "Non_Binary",
-    "Transgender"  = "Transgender",
-    "Gender Nonconforming"  = "Gender_Nonconforming",
-    "Other"   = "Other",
-    "Prefer not to answer"  = "Prefer_not_to_answer"
+    "Female" = "female",
+    "Male"  = "male",
+    "Non-binary"  = "non_binary",
+    "Transgender"  = "transgender",
+    "Gender Nonconforming"  = "nonconforming",
+    "Other"   = "other",
+    "Prefer not to answer"  = "prefer_not_answer"
   )
 )
 
@@ -988,8 +1024,8 @@ sd_question(
   id     = 'ethnicity',
   label  = "**Are you of Hispanic, Latino or Spanish origin?**",
   option = c(
-    "Yes" = "Yes",
-    "No"  = "No"
+    "Yes" = "yes",
+    "No"  = "no"
   )
 )
 
@@ -1012,7 +1048,7 @@ sd_question(
 
 sd_question(
   type   = 'mc',
-  id     = 'household_size',
+  id     = 'hh_size',
   label  = "**Including yourself, how many people live in your household?**",
   option = c(
     "1" = "1",
@@ -1025,8 +1061,8 @@ sd_question(
 )
 
 sd_question(
-  type   = 'mc',
-  id     = 'employment_status',
+  type   = 'mc_multiple',
+  id     = 'employment',
   label  = "**Which of the following categories best describes your current employment status?** *Select all that apply.*",
   option = c(
     "I am a part-time or full-time student" = "student",
@@ -1044,22 +1080,35 @@ sd_question(
 
 sd_question(
   type   = 'mc',
-  id     = 'total_household_income',
-  label  = "**Which of the following categories best represents your total household income?**",
+  id     = 'hh_income',
+  label  = "**What is your annual household income?**",
   option = c(
-    "$14,999 or less" = "15000",
-    "$15,000 - $29,999"  = "30000",
-    "$30,000 - $39,999" = "40000",
-    "$40,000 - $49,999"  = "50000",
-    "$50,000 - $59,999" = "60000",
-    "$60,000 - $74,999"  = "75000",
-    "$75,000 - $99,999"  = "100000",
-    "$100,000 - $124,999"  = "125000",
-    "$125,000 - $149,999" = "150000",
-    "$150,000 - $174,999"  = "175000",
-    "$175,000 - $199,999" = "200000",
-    "$200,000 -  $249,999"  = "250000",
-    "$250,000 or more"  = "more_than_250000",
+    "$9,999 or less" = "5000",
+    "$10,000 - $19,999" = "15000",
+    "$20,000 - $29,999"  = "25000",
+    "$30,000 - $39,999" = "35000",
+    "$40,000 - $49,999"  = "45000",
+    "$50,000 - $59,999" = "55000",
+    "$60,000 - $69,999"  = "65000",
+    "$70,000 - $79,999"  = "75000",
+    "$80,000 - $89,999"  = "85000",
+    "$90,000 - $99,999"  = "95000",
+    "$100,000 - $109,999"  = "105000",
+    "$110,000 - $119,999"  = "115000",
+    "$120,000 - $129,999"  = "125000",
+    "$130,000 - $139,999" = "135000",
+    "$140,000 - $149,999" = "145000",
+    "$150,000 - $159,999"  = "155000",
+    "$160,000 - $169,999"  = "165000",
+    "$170,000 - $179,999"  = "175000",
+    "$180,000 - $189,999" = "185000",
+    "$190,000 - $199,999" = "195000",
+    "$200,000 - $209,999" = "205000",
+    "$210,000 - $219,999" = "215000",
+    "$220,000 - $229,999"  = "225000",
+    "$230,000 - $239,999" = "235000",
+    "$240,000 - $249,999"  = "245000",
+    "$250,000 or more"  = "255000",
     "Prefer not to answer"  = "prefer_not_answer"
   )
 )
@@ -1067,43 +1116,43 @@ sd_question(
 
 sd_question(
   type   = 'mc',
-  id     = 'educational_qualification',
+  id     = 'education',
   label  = "**What is the last grade or level of school you have completed?**  *If currently enrolled, please use the highest degree received.*",
   option = c(
-    "Less than a high school diploma" = "0",
-    "High school degree or equivalent (e.g. GED)"  = "1",
-    "Some college - but less than two years of college" = "2",
-    "Some college - two years or more/A.A. degree"  = "3",
-    "Technical or trade school" = "4",
-    "College graduate/bachelor's degree/B.A./B.S."  = "5",
-    "Postgraduate courses"  = "6",
-    "Master's degree"  = "7",
-    "M.B.A. or law degree"  = "8",
-    "Ph.D. or M.D"  = "9",
-    "Prefer not to answer"  = "10"
+    "Less than a high school diploma" = "below_high_school",
+    "High school degree or equivalent (e.g. GED)"  = "high_school",
+    "Some college - but less than two years of college" = "college_less",
+    "Some college - two years or more/A.A. degree"  = "college_more",
+    "Technical or trade school" = "technical",
+    "College graduate/bachelor's degree/B.A./B.S."  = "bachelor",
+    "Postgraduate courses"  = "postgraduate",
+    "Master's degree"  = "master",
+    "M.B.A. or law degree"  = "mba",
+    "Ph.D. or M.D"  = "phd",
+    "Prefer not to answer"  = "prefer_not_answer"
   )
 )
 
 
 sd_question(
   type   = 'mc',
-  id     = 'current_housing',
+  id     = 'housing_type',
   label  = "**In which type of housing do you currently live?**",
   option = c(
-    "Single family house not attached to any other house" = "0",
-    "Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)"  = "1",
-    "A mobile home or trailer" = "2",
-    "Building with 2-4 apartments/condos/studios"  = "3",
-    "Building with 5-19 apartments/condos/studios" = "4",
-    "Building with 20 or more apartments/condos/studios"  = "5",
-    "Boat, RV, van, etc."  = "6",
-    "Other"  = "7"
+    "Single family house not attached to any other house" = "sf_detached ",
+    "Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)"  = "sf_attached",
+    "Building with 2-4 apartments/condos/studios"  = "apart_2",
+    "Building with 5-19 apartments/condos/studios" = "apart_5",
+    "Building with 20 or more apartments/condos/studios"  = "apart_20",
+    "A mobile home or trailer" = "mobile_home",
+    "Boat, RV, van, etc."  = "boat",
+    "Other"  = "other"
   )
 )
 
 sd_question(
   type   = 'mc',
-  id     = 'own_or_rent',
+  id     = 'housing_tenure',
   label  = "**Do you own or rent the current place you are living in?**",
   option = c(
     "Own" = "own",
@@ -1118,29 +1167,28 @@ sd_question(
   id     = 'electric_bill',
   label  = "**What is your monthly electricity bill on an average?**",
   option = c(
-    "$0 - $99" = "0",
-    "$100 - $199" = "1",
-    "$200 - $299" = "2",
-    "$300 - $399" = "3",
-    "$400 - $499" = "4",
-    "$500 or more" = "5"
+    "$0 - $99" = "50",
+    "$100 - $199" = "150",
+    "$200 - $299" = "250",
+    "$300 - $399" = "350",
+    "$400 - $499" = "450",
+    "$500 or more" = "550"
   )
 )
 
 
 sd_question(
   type   = 'mc',
-  id     = 'political_views',
+  id     = 'political_view',
   label  = "**How would you describe your political views?**",
   option = c(
-    "Very conservative" = "0",
-    "Conservative" = "1",
-    "Moderate" = "2",
-    "Liberal" = "3",
-    "Very liberal" = "4",
-    "Prefer not to say" = "5",
-    "Other" = "6"
-
+    "Very conservative" = "very_conservative",
+    "Conservative" = "conservative",
+    "Moderate" = "moderate",
+    "Liberal" = "liberal",
+    "Very liberal" = "very_liberal",
+    "Other" = "other",
+    "Prefer not to answer" = "prefer_not_answer"
   )
 )
 
@@ -1149,10 +1197,23 @@ sd_question(
   id     = 'party_voting',
   label  = "**Which political party do you typically vote for?**",
   option = c(
-    "Democratic" = "0",
-    "Republican" = "1",
-    "I am independent" = "2",
-    "Prefer not to answer" = "3"
+    "Democratic" = "democratic",
+    "Republican" = "republican",
+    "I am independent" = "independent",
+    "Prefer not to answer" = "prefer_not_answer"
+  )
+)
+
+sd_question(
+  type   = 'mc',
+  id     = 'climate_change',
+  label  = "**How much do you, personally, worry about the issue of global climate change?**",
+  option = c(
+    "None at all" = "not_at_all",
+    "A little" = "a_little",
+    "A moderate amount" = "moderate", 
+    "A lot" = "a_lot",
+    "A great deal" =  "great_deal"
   )
 )
 
@@ -1160,6 +1221,12 @@ sd_question(
   type  = "numeric",
   id    = "home_zipcode",
   label = "**What is the zip code of your primary residence?** *Please provide a 5-digit number.*"
+)
+
+sd_question(
+  type  = 'textarea',
+  id    = 'attention_check_survey_content',
+  label = "**Please briefly describe what this survey is about:**"
 )
 
 ```
@@ -1176,6 +1243,16 @@ sd_next(next_page = 'end')
 ## This is the last page in the survey. Thanks for taking our survey!
 
 Your survey completion code is: `r sd_output("completion_code", type = 'value')`
+
+```{r}
+sd_close(label = 'Close window')
+```
+
+:::
+
+::: {#screenout .sd-page}
+
+Sorry, but you are not qualified to take our survey. We appreciate your time and participation.
 
 ```{r}
 sd_close(label = 'Close window')

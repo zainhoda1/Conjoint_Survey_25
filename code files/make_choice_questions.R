@@ -23,12 +23,12 @@ dt_mpg<-as.data.frame(read.csv(paste0(here(),"/survey/data/mpg_by_segment_fuel.c
          )
 
 
-# electricity rate https://www.chooseenergy.com/electricity-rates-by-state/ March 2025
+# electricity rate per kwh https://www.chooseenergy.com/electricity-rates-by-state/ March 2025
 electricity_rate_low <- 0.11
 electricity_rate_avg <- 0.17
 electricity_rate_high <-0.33
 
-# gas rate https://www.chooseenergy.com/data-center/cost-of-driving-by-state May 2025
+# gas rate per gallon https://www.chooseenergy.com/data-center/cost-of-driving-by-state May 2025
 gasoline_rate_low <- 2.66
 gasoline_rate_avg <- 3.18
 gasoline_rate_high <- 4.77
@@ -37,7 +37,7 @@ gasoline_rate_high <- 4.77
 phev_uf_car<- 0.668
 phev_uf_suv<- 0.487
 
-# MPGe- One gallon of gasoline is equivalent to 33.7 kilowatt-hours (kWh) of electricity
+# MPGe- One gallon of gasoline is equivalent to 33.7 kilowatt-hours (kWh) of electricity https://www.bluegrassauto.com/hybrid-and-electric-vehicle-comparisons/
 gas_electricity<- 33.7
 
 # # PHEV: Assume total range = 300 miles, electric range = 40 miles,

@@ -5,6 +5,7 @@ library(here)
 library(glue)
 library(dplyr)
 library(kableExtra)
+library(digest)
 
 
 # Database setup
@@ -22,7 +23,7 @@ library(kableExtra)
 # dbname = "postgres",
 # port   = "6543",
 # user   = "postgres.odwtjhneiexjattttszm",
-# table  = "test_table_06_20",
+# table  = "test_table",
 
 # surveydown::sd_dashboard()
 
@@ -30,6 +31,12 @@ db <-sd_db_connect(
   # ignore = TRUE,
   gssencmode = "disable"
 )
+
+
+
+
+
+
 
 # Define vector of car image options
 
@@ -50,6 +57,104 @@ battery_respondentID <- sample(battery_survey$respID, 1)
 
 # Server setup
 server <- function(input, output, session) {
+
+##### Dynata set up
+  dynata_params <- reactive({
+
+  #### Starting Link Validation ####
+
+    # Get the psid, _k, and _s from the Starting Link
+    params <- sd_get_url_pars()
+
+    # Capture the psid, _k, and _s values
+    psid <- params["psid"]
+    keyid <- params["_k"]
+    signature_start <- params["_s"]
+
+    # Create the starting text
+    text_start <- paste0("/?psid=", psid, "&_k=", keyid)
+
+    # Create the secret key
+    secret_key <- "23e68f81d5ee1f4280d667862ded1a6e3e6b3f9" # Replace with your Dynata Secure Key
+
+    # Calculate the correct starting signature
+    signature_start_validate <- hmac(key       = secret_key,
+                                     object    = text_start,
+                                     algo      = "sha256",
+                                     serialize = FALSE)
+
+    # The is_valid should be TRUE if the psid is valid and the signature matches
+    is_valid_start <- !is.na(psid) && psid != "" && (signature_start == signature_start_validate)
+
+    # Return a list of values
+    list(
+      psid = psid,
+      keyid = keyid,
+      signature_start = signature_start,
+      is_valid_start = is_valid_start
+    )
+
+
+
+    #### Ending Link Redirection ####
+
+    # Create the ending texts for "Complete", "Screenout", and "Quotafull"
+    text_end_1 <- paste0("/projects/end?rst=1&psid=", psid, "&_k=", keyid)
+    text_end_2 <- paste0("/projects/end?rst=2&psid=", psid, "&_k=", keyid)
+    text_end_3 <- paste0("/projects/end?rst=3&psid=", psid, "&_k=", keyid)
+
+    # Create the ending signatures (_s) for "Complete", "Screenout", and "Quotafull"
+    signature_end_1 <- hmac(key       = secret_key,
+                            object    = text_end_1,
+                            algo      = "sha256",
+                            serialize = FALSE)
+
+    signature_end_2 <- hmac(key       = secret_key,
+                            object    = text_end_2,
+                            algo      = "sha256",
+                            serialize = FALSE)
+
+    signature_end_3 <- hmac(key       = secret_key,
+                            object    = text_end_3,
+                            algo      = "sha256",
+                            serialize = FALSE)
+
+    # Create the ending links of "Complete", "Screenout", and "Quotafull"
+    # These links are used for redirecting back to Dynata
+    ending_link_1 <- paste0("https://dkr1.ssisurveys.com/projects/end?rst=1&psid=", psid, "&_k=", keyid, "&_s=", signature_end_1)
+    ending_link_2 <- paste0("https://dkr1.ssisurveys.com/projects/end?rst=2&psid=", psid, "&_k=", keyid, "&_s=", signature_end_2)
+    ending_link_3 <- paste0("https://dkr1.ssisurveys.com/projects/end?rst=3&psid=", psid, "&_k=", keyid, "&_s=", signature_end_3)
+
+    # Once you have these ending links, you can generate redirection links using sd_redirect()
+    sd_redirect(
+      id = "redirect_complete",
+      url = ending_link_1,
+      button = TRUE,
+      label = "Complete"
+    )
+
+    sd_redirect(
+      id = "redirect_screenout",
+      url = ending_link_2,
+      button = TRUE,
+      label = "Screenout"
+    )
+
+    sd_redirect(
+      id = "redirect_quotafull",
+      url = ending_link_3,
+      button = TRUE,
+      label = "Quotafull"
+    )
+
+
+  })
+
+  observe({
+    params <- dynata_params_start()
+    updateTextInput(session, "is_valid_start", value = as.character(params$is_valid_start))
+  })
+
 
 
   # Make a 10-digit random number completion code
@@ -608,9 +713,16 @@ server <- function(input, output, session) {
 
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_forward(
+
+    input$is_valid_start!= "TRUE" ~ "redirect_screenout",
+    # input$is_valid_start == "TRUE" &  ~ "redirect_screenout",
+
+
+
     input$next_veh_when %in% c("24","not_sure") ~ "screenout",
     input$next_veh_market %in% c("new","both") ~ "screenout",
     input$next_veh_style %in% c("van","truck","other") ~ "screenout",
+    input$attention_check_toyota %in% c("yes_current","yes_past","no") ~ "screenout",
 
     input$household_veh_count=="0" ~ "next_veh_info",
 
@@ -621,6 +733,8 @@ server <- function(input, output, session) {
 
   # Define any conditional display logic here (show a question if a condition is true)
   sd_show_if(
+
+    !is.null(input$completion_code) ~"attention_check_toyota",
 
     input$household_veh_count!="0" ~ "household_veh_fuel",
     !(input$household_veh_count=="1" & length(input$household_veh_fuel)==1) ~"primary_veh_fuel",
@@ -660,7 +774,17 @@ server <- function(input, output, session) {
 
   )
 
+
+
+
 }
+
+
+
+
+
+
+
 
 
 # shinyApp() initiates your app - don't change it
