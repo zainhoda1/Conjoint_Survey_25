@@ -2,6 +2,8 @@
 title: "Power Analysis"
 format: html
 theme: united
+execute:
+  cache: true
 ---
 
 ```{r}
@@ -28,11 +30,11 @@ library(here)
 
 ```{r}
 profiles <- cbc_profiles(
-  veh_mileage        = seq(15000, 50000, 500), #2500
+  veh_mileage        = seq(15000, 50000, 10000), #5000
   veh_price          = 15000*seq(0.8, 1.2, 0.1),
   battery_refurbish     = c('original', 'cellreplace','packreplace'),
   battery_range_year0 = seq(200, 360, 40),
-  battery_degradation = seq(0.01,0.08, 0.01)
+  battery_degradation = seq(0.01,0.08, 0.02)
 )
 
 profiles
@@ -61,18 +63,18 @@ None
 ## Fixed Parameters
 For example, if the coefficient of battery degradation is -10, then:
 
-	-	A 1% increase in degradation (from 0.01 to 0.02) reduces utility by 0.10.
+	- A 1% increase in degradation (from 0.01 to 0.02) reduces utility by 0.10.
 	- A full 7% increase in degradation (from 0.01 to 0.08) would reduce utility by -0.7.
 
 In DCE models, utilities usually range between -2 and +2, so a utility loss of -0.7 is noticeable, but not extreme. It reflects that battery degradation is an important factor in evaluating a used EV.
 ```{r}
 priors_fixed <- cbc_priors(
   profiles = profiles,
-  veh_mileage          = -0.00005,     # Each 1000 mile increase reduces utility by 0.05
-  veh_price            = -0.0001,      # Each $1000 increase reduces utility by 0.1
+  veh_mileage          = -0.00002,     # Each 1000 mile increase reduces utility by 0.05
+  veh_price            = -0.00005,      # Each $1000 increase reduces utility by 0.1
   battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
-  battery_range_year0  = 0.01,         # Each 10 mile of range adds utility by 0.1
-  battery_degradation  = -10          # Each 1% of degradation increases subtracts utility by 0.1
+  battery_range_year0  = 0.005,         # Each 10 mile of range adds utility by 0.1
+  battery_degradation  = -3          # Each 1% of degradation increases subtracts utility by 0.1
 
 )
 
@@ -83,58 +85,60 @@ priors_fixed
 ```{r}
 priors_random_parameter <- cbc_priors(
   profiles = profiles,
-  veh_mileage          = -0.00005,     # Each 1000 mile increase reduces utility by 0.05
-  veh_price = rand_spec("n", -0.0001, 0.00005), # Assume $1,000 price increase = -0.1 utility
-  battery_range_year0 = rand_spec("n", 0.01, 0.005), # Assume each extra mile = +0.01 utility
-  battery_degradation = rand_spec("n", -10, 3), # 1% increase in degradation = -0.10 utility
-  battery_refurbish = rand_spec("n", c(-1.0, -0.5), c(0.1, 0.1)) # Reference = "original"
+  veh_mileage          = -0.00002,     # Each 1000 mile increase reduces utility by 0.05
+  veh_price = -0.00005, # Assume $1,000 price increase = -0.1 utility
+  battery_refurbish = rand_spec("n", c(-1.0, -0.5), c(0.1, 0.1)), # Reference = "original"
+  battery_range_year0 = 0.005,   # Assume each extra mile = +0.01 utility
+  battery_degradation = -3 # 1% increase in degradation = -0.10 utility
 )
 
 priors_random_parameter
 ```
 
-## Random Parameters with ln
-```{r}
-priors_random_parameter_ln <- cbc_priors(
-  profiles = profiles,
-  veh_mileage          = -0.00005,     # Each 1000 mile increase reduces utility by 0.05
-  veh_price = rand_spec("ln", log(0.0001), 0.5), # Assume $1,000 price increase = -0.1 utility
-  battery_range_year0 = rand_spec("n", 0.01, 0.005), # Assume each extra mile = +0.01 utility
-  battery_degradation = rand_spec("ln", log(10), 0.3), # 1% increase in degradation = -0.10 utility
-  battery_refurbish = rand_spec("n", c(-1.0, -0.5), c(0.1, 0.1)) # Reference = "original"
-)
 
-# draws <- draw_parameters(priors_ln, n_draws = 1000)
-# draws$veh_price <- -1 * draws$veh_price
-# draws$battery_degradation <- -1 * draws$battery_degradation
+<!-- ## Random Parameters with ln -->
+<!-- For the random priors, yes "ln" forces positivity, so the best way to implement this is to just make price levels negative in your profiles. So like:  -->
 
-priors_random_parameter_ln
-```
+<!--  veh_price          = -1*15000*seq(0.8, 1.2, 0.1) -->
+
+<!-- Then a positive coefficient times this is a negative utility. But I wouldn't recommend using ln anyway, it's just a rather difficult distribution to work with since it has such a long tail. -->
+<!-- ```{r} -->
+<!-- priors_random_parameter_ln <- cbc_priors( -->
+<!--   profiles = profiles, -->
+<!--   veh_mileage          = -0.00005,     # Each 1000 mile increase reduces utility by 0.05 -->
+<!--   veh_price = rand_spec("ln", -log(0.9999), 0.00005), # Assume $1,000 price increase = -0.1 utility -->
+<!--   battery_range_year0 = rand_spec("n", 0.01, 0.005), # Assume each extra mile = +0.01 utility -->
+<!--   battery_degradation = rand_spec("ln", -log(4.539993e-05), 3), # 1% increase in degradation = -0.10 utility -->
+<!--   battery_refurbish = rand_spec("n", c(-1.0, -0.5), c(0.1, 0.1)) # Reference = "original" -->
+<!-- ) -->
+
+<!-- priors_random_parameter -->
+<!-- ``` -->
 
 
-## Interaction Effects
-Note: Interactions with random parameters are not supported.
-```{r}
-priors_interactions <- cbc_priors(
-  profiles = profiles,
-  veh_mileage          = -0.00005,     # Fixed coefficient
-  veh_price = -0.0001,  # Assume $1,000 price increase = -0.1 utility
-  battery_range_year0 = rand_spec("n", 0.01, 0.005), # Assume each extra mile = +0.01 utility
-  # battery_range_year0 = rand_spec("ln", log(0.01), 0.3), 
-  battery_degradation = -10, # 1% increase in degradation = -0.10 utility
-  battery_refurbish = rand_spec("n", c(-1.0, -0.5), c(0.1, 0.1)), # Reference = "original"
-  
-  interactions = list(
-    # Price & degradation: price sensitivity increases when degradation worsens.
-    int_spec(
-      between = c("veh_price", "battery_degradation"),
-      value = -0.1
-    )
-  )
-)
+<!-- ## Interaction Effects -->
+<!-- Note: Interactions with random parameters are not supported. -->
+<!-- ```{r} -->
+<!-- priors_interactions <- cbc_priors( -->
+<!--   profiles = profiles, -->
+<!--   veh_mileage          = -0.00005,     # Fixed coefficient -->
+<!--   veh_price = -0.0001,  # Assume $1,000 price increase = -0.1 utility -->
+<!--     battery_refurbish = rand_spec("n", c(-1.0, -0.5), c(0.1, 0.1)), # Reference = "original" -->
+<!--   battery_range_year0 = rand_spec("n", 0.01, 0.005), # Assume each extra mile = +0.01 utility -->
+<!--   # battery_range_year0 = rand_spec("ln", log(0.01), 0.3),  -->
+<!--   battery_degradation = -10, # 1% increase in degradation = -0.10 utility -->
 
-priors_interactions
-```
+<!--   interactions = list( -->
+<!--     # Price & degradation: price sensitivity increases when degradation worsens. -->
+<!--     int_spec( -->
+<!--       between = c("veh_price", "battery_degradation"), -->
+<!--       value = -0.1 -->
+<!--     ) -->
+<!--   ) -->
+<!-- ) -->
+
+<!-- priors_interactions -->
+<!-- ``` -->
 
 
 
@@ -143,45 +147,78 @@ priors_interactions
 ## Different designs
 ### Random Method
 - **random**: randomly samples profiles for each respondent independently; maximum diversity but may be less statistically efficient
+```{r}
+design_random_fixed_parameter <- cbc_design(
+  profiles = profiles,
+  priors = priors_fixed,
+  method = "random", # randomized full-factorial design
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6,    # Number of questions per respondent #6
+  remove_dominant = TRUE
+) 
+
+design_random_random_parameter <- cbc_design(
+  profiles = profiles,
+  priors = priors_random_parameter,
+  method = "random", # randomized full-factorial design
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6,    # Number of questions per respondent #6
+  remove_dominant = TRUE
+) 
+
+# design_random_interactions <- cbc_design(
+#   profiles = profiles,
+#   priors = priors_interactions,
+#   method = "random", # randomized full-factorial design
+#   n_resp   = 3000, # Number of respondents
+#   n_alts   = 3,    # Number of alternatives per question
+#   n_q      = 6,    # Number of questions per respondent #6
+#   remove_dominant = TRUE
+# ) 
+```
+
+
 
 ### Frequency-Based Methods
 - **shortcut**: balances attribute level frequencies while avoiding duplicate profiles within questions.
 - **minoverlap**: prioritizes minimizing attribute overlap within choice questions.
 - **balanced**: optimizes both frequency balance and pairwise attribute interactions.
-
-### D-Optimal Methods 
-- **stochastic**: uses random profile swapping to minimize the d-error, accepting the first improvement found. This is a faster algorithm as a compromise between speed and exhaustiveness.
-- **modfed**: exhaustively tests all possible profile swaps for each position. It is slower than other methods though more thorough.
-- **cea**: optimizes attribute-by-attribute, testing all possible levels for each attribute. It is faster than "modfed", though requires all possible profiles and cannot accept restricted profile sets.
-
 ```{r}
-design_random <- cbc_design(
+design_shortcut <- cbc_design(
   profiles = profiles,
-  method = "random", # randomized full-factorial design
+  method = "shortcut",
   n_resp   = 3000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6    # Number of questions per respondent #6
-) 
+  
+)
 
-# ## Take long time to run
-# design_shortcut <- cbc_design(
-#   profiles = profiles,
-#   method = "shortcut",
-#   n_resp   = 3000, # Number of respondents
-#   n_alts   = 3,    # Number of alternatives per question
-#   n_q      = 6    # Number of questions per respondent #6
-# ) 
-# 
-# ## Take long time to run
-# design_minoverlap <- cbc_design(
-#   profiles = profiles,
-#   method = "minoverlap",
-#   n_resp   = 3000, # Number of respondents
-#   n_alts   = 3,    # Number of alternatives per question
-#   n_q      = 6    # Number of questions per respondent #6
-# ) 
+design_minoverlap <- cbc_design(
+  profiles = profiles,
+  method = "minoverlap",
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6,    # Number of questions per respondent #6
+)
+
+design_balanced <- cbc_design(
+  profiles = profiles,
+  method = "balanced",
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6    # Number of questions per respondent #6
+)
+
+```
 
 
+
+### D-Optimal Methods 
+- **stochastic**: uses random profile swapping to minimize the d-error, accepting the first improvement found. This is a faster algorithm as a compromise between speed and exhaustiveness.
+
+```{r}
 design_stochastic_fixed_parameter <- cbc_design(
   profiles = profiles,
   method = "stochastic",
@@ -189,7 +226,8 @@ design_stochastic_fixed_parameter <- cbc_design(
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
   priors = priors_fixed,
-  n_start = 1
+  n_start = 1,
+  remove_dominant = TRUE
 ) 
 
 design_stochastic_random_parameter <- cbc_design(
@@ -199,66 +237,123 @@ design_stochastic_random_parameter <- cbc_design(
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
   priors = priors_random_parameter,
-  n_start = 1
+  n_start = 1,
+  remove_dominant = TRUE
 ) 
 
-design_stochastic_random_parameter_ln <- cbc_design(
+# design_stochastic_interactions <- cbc_design(
+#   profiles = profiles,
+#   method = "stochastic",
+#   n_resp   = 3000, # Number of respondents
+#   n_alts   = 3,    # Number of alternatives per question
+#   n_q      = 6,    # Number of questions per respondent #6
+#   priors = priors_interactions,
+#   n_start = 1,
+#   remove_dominant = TRUE
+# ) 
+
+```
+
+- **modfed**: exhaustively tests all possible profile swaps for each position. It is slower than other methods though more thorough.
+
+```{r}
+design_modfed_fixed_parameter <- cbc_design(
   profiles = profiles,
-  method = "stochastic",
+  method = "modfed",
   n_resp   = 3000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
-  priors = priors_random_parameter_ln,
-  n_start = 1
+  priors = priors_fixed,
+  n_start = 1,
+  remove_dominant = TRUE
 ) 
 
-design_stochastic_interactions <- cbc_design(
+design_modfed_random_parameter <- cbc_design(
   profiles = profiles,
-  method = "stochastic",
+  method = "modfed",
   n_resp   = 3000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
-  priors = priors_interactions,
-  n_start = 1
+  priors = priors_random_parameter,
+  n_start = 1,
+  remove_dominant = TRUE
 ) 
 
-# ## Take long time to run
-# design_modfed <- cbc_design(
+# design_modfed_interactions <- cbc_design(
 #   profiles = profiles,
 #   method = "modfed",
 #   n_resp   = 3000, # Number of respondents
 #   n_alts   = 3,    # Number of alternatives per question
 #   n_q      = 6,    # Number of questions per respondent #6
 #   priors = priors_interactions,
-#   n_start = 1
+#   n_start = 1,
+#   remove_dominant = TRUE
 # ) 
-# 
-# ## Take long time to run
-# design_cea <- cbc_design(
+
+```
+
+- **cea**: optimizes attribute-by-attribute, testing all possible levels for each attribute. It is faster than "modfed", though requires all possible profiles and cannot accept restricted profile sets.
+
+```{r}
+design_cea_fixed_parameter <- cbc_design(
+  profiles = profiles,
+  method = "cea",
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6,    # Number of questions per respondent #6
+  priors = priors_fixed,
+  n_start = 1,
+  remove_dominant = TRUE
+) 
+
+design_cea_random_parameter <- cbc_design(
+  profiles = profiles,
+  method = "cea",
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6,    # Number of questions per respondent #6
+  priors = priors_random_parameter,
+  n_start = 1,
+  remove_dominant = TRUE
+) 
+
+# design_cea_interactions <- cbc_design(
 #   profiles = profiles,
 #   method = "cea",
 #   n_resp   = 3000, # Number of respondents
 #   n_alts   = 3,    # Number of alternatives per question
 #   n_q      = 6,    # Number of questions per respondent #6
 #   priors = priors_interactions,
-#   n_start = 1
+#   n_start = 1,
+#   remove_dominant = TRUE
 # ) 
 
 ```
 
+
+
 ## Design comparisons
 ```{r}
 cbc_compare(
-  "Random" = design_random,
-  # "Shortcut" = design_shortcut,
-  # "Min Overlap" = design_minoverlap,
-  # "Balanced" = design_balanced,
+  "Random_fixed_parameter" = design_random_fixed_parameter,
+  "Random_random_parameter" = design_random_random_parameter,
+  # "Random_interactions" = design_random_interactions,
+  "Shortcut" = design_shortcut,
+  "Minoverlap" = design_minoverlap,
+  "Balanced" = design_balanced,
+  
   "Stochastic_fixed_parameter" = design_stochastic_fixed_parameter,
   "Stochastic_random_parameter" = design_stochastic_random_parameter,
-  "Stochastic_interactions" = design_stochastic_interactions
+  # "Stochastic_interactions" = design_stochastic_interactions,
+
+  "Modfed_fixed_parameter" = design_modfed_fixed_parameter,
+  "Modfed_random_parameter" = design_modfed_random_parameter,
+  # "Modfed_interactions" = design_modfed_interactions,
+
+  "CEA_fixed_parameter" = design_cea_fixed_parameter,
+  "CEA_random_parameter" = design_cea_random_parameter
+  # "CEA_interactions" = design_cea_interactions
   
-  # "Modfed" = design_modfed,
-  # "CEA" = design_cea
 )
 ```
 
@@ -272,90 +367,252 @@ cbc_compare(
 - Profile usage: Higher percentages indicate better use of available profiles
 
 ```{r}
-cbc_inspect(design_random)
+cbc_inspect(design_random_random_parameter)
 ```
 
 ```{r}
-cbc_inspect(design_stochastic_fixed_parameter)
+cbc_inspect(design_random_fixed_parameter)
 ```
 
 ```{r}
-cbc_inspect(design_stochastic_random_parameter)
-```
-
-# Step 5: Simulate Choices
-
-```{r}
-choices_random <- cbc_choices(design_random)
-choices_fixed_parameter <- cbc_choices(design_stochastic_fixed_parameter, priors = priors_fixed)
-choices_random_parameter <- cbc_choices(design_stochastic_random_parameter, priors = priors_random_parameter)
-
-# choices
-```
-
-## Random
-```{r}
-choices_cat <- cbc_decode(choices_random)
-
-# Filter for the chosen rows only
-choices_cat <- choices_cat[which(choices_cat$choice == 1), ]
-
-# Counts of choices made for each attribute level
-table(choices_cat$veh_mileage)
-table(choices_cat$veh_price)
-table(choices_cat$battery_refurbish)
-table(choices_cat$battery_range_year0)
-table(choices_cat$battery_degradation)
-```
-
-
-## Stochastic- Fixed parameter
-```{r}
-choices_cat <- cbc_decode(choices_fixed_parameter)
-
-# Filter for the chosen rows only
-choices_cat <- choices_cat[which(choices_cat$choice == 1), ]
-
-# Counts of choices made for each attribute level
-table(choices_cat$veh_mileage)
-table(choices_cat$veh_price)
-table(choices_cat$battery_refurbish)
-table(choices_cat$battery_range_year0)
-table(choices_cat$battery_degradation)
-```
-
-## Stochastic- Random parameter
-```{r}
-choices_cat <- cbc_decode(choices_random_parameter)
-
-# Filter for the chosen rows only
-choices_cat <- choices_cat[which(choices_cat$choice == 1), ]
-
-# Counts of choices made for each attribute level
-table(choices_cat$veh_mileage)
-table(choices_cat$veh_price)
-table(choices_cat$battery_refurbish)
-table(choices_cat$battery_range_year0)
-table(choices_cat$battery_degradation)
-```
-
-
-# Step 6: Assess Power
-```{r}
-power_random <- cbc_power(choices_random)
-plot(power_random, type = "power", power_threshold = 0.9)
-
+cbc_inspect(design_shortcut)
 ```
 
 ```{r}
-power_fixed_parameter <- cbc_power(choices_fixed_parameter)
-plot(power_fixed_parameter, type = "power", power_threshold = 0.9)
+cbc_inspect(design_minoverlap)
 ```
 
 ```{r}
-power_random_parameter <- cbc_power(choices_random_parameter)
-plot(power_random_parameter, type = "power", power_threshold = 0.9)
+cbc_inspect(design_balanced)
 ```
+
+```{r}
+cbc_inspect(design_cea_fixed_parameter)
+```
+
+```{r}
+cbc_inspect(design_modfed_random_parameter)
+```
+
+```{r}
+cbc_inspect(design_modfed_fixed_parameter)
+```
+
+```{r}
+cbc_inspect(design_cea_random_parameter)
+```
+
+<!-- # Step 5: Simulate Choices -->
+
+<!-- ```{r} -->
+<!-- choices_random_fixed_parameter <- cbc_choices(design_random_fixed_parameter, priors = priors_fixed) -->
+<!-- choices_random_random_parameter <- cbc_choices(design_random_random_parameter, priors = priors_random_parameter) -->
+
+<!-- choices_shortcut <- cbc_choices(design_shortcut) -->
+<!-- choices_minoverlap <- cbc_choices(design_minoverlap) -->
+<!-- choices_balanced <- cbc_choices(design_balanced) -->
+
+<!-- choices_cea_fixed_parameter <- cbc_choices(design_cea_fixed_parameter, priors = priors_fixed) -->
+<!-- choices_cea_random_parameter <- cbc_choices(design_cea_random_parameter, priors = priors_random_parameter) -->
+
+<!-- choices_modfed_fixed_parameter <- cbc_choices(design_modfed_fixed_parameter, priors = priors_fixed) -->
+<!-- choices_modfed_random_parameter <- cbc_choices(design_modfed_random_parameter, priors = priors_random_parameter) -->
+
+<!-- ``` -->
+
+
+<!-- ## random_fixed_parameter -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_random_fixed_parameter) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+<!-- ## random_random_parameter -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_random_random_parameter) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+<!-- ## shortcut -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_shortcut) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+<!-- ## minoverlap -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_minoverlap) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+<!-- ## balanced -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_balanced) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+<!-- ## cea_fixed_parameter -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_cea_fixed_parameter) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+<!-- ## cea_random_parameter -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_cea_random_parameter) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+
+<!-- ## modfed_fixed_parameter -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_modfed_fixed_parameter) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+<!-- ## modfed_random_parameter -->
+<!-- ```{r} -->
+<!-- choices_cat <- cbc_decode(choices_modfed_random_parameter) -->
+
+<!-- # Filter for the chosen rows only -->
+<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+
+<!-- # Counts of choices made for each attribute level -->
+<!-- table(choices_cat$veh_mileage) -->
+<!-- table(choices_cat$veh_price) -->
+<!-- table(choices_cat$battery_refurbish) -->
+<!-- table(choices_cat$battery_range_year0) -->
+<!-- table(choices_cat$battery_degradation) -->
+<!-- ``` -->
+
+
+
+<!-- # Step 6: Assess Power -->
+<!-- ```{r} -->
+<!-- power_random_fixed_parameter <- cbc_power(choices_random_fixed_parameter) -->
+<!-- plot(power_random_fixed_parameter, type = "power", power_threshold = 0.9) -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- power_random_random_parameter <- cbc_power(choices_random_random_parameter) -->
+<!-- plot(power_random_random_parameter, type = "power", power_threshold = 0.9) -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- power_shortcut <- cbc_power(choices_shortcut) -->
+<!-- plot(power_shortcut, type = "power", power_threshold = 0.9) -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- power_minoverlap <- cbc_power(choices_minoverlap) -->
+<!-- plot(power_minoverlap, type = "power", power_threshold = 0.9) -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- power_balanced <- cbc_power(choices_balanced) -->
+<!-- plot(power_balanced, type = "power", power_threshold = 0.9) -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- power_cea_fixed_parameter <- cbc_power(choices_cea_fixed_parameter) -->
+<!-- plot(power_cea_fixed_parameter, type = "power", power_threshold = 0.9) -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- power_cea_random_parameter <- cbc_power(choices_cea_random_parameter) -->
+<!-- plot(power_cea_random_parameter, type = "power", power_threshold = 0.9) -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- power_modfed_fixed_parameter <- cbc_power(choices_modfed_fixed_parameter) -->
+<!-- plot(power_modfed_fixed_parameter, type = "power", power_threshold = 0.9) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- power_modfed_random_parameter <- cbc_power(choices_modfed_random_parameter) -->
+<!-- plot(power_modfed_random_parameter, type = "power", power_threshold = 0.9) -->
+<!-- ``` -->
+
+
 <!-- ## Output -->
 <!-- ```{r} -->
 <!-- design_rand_output <-design_random %>% -->
