@@ -1269,9 +1269,7 @@ sd_next(next_page = 'end')
 
 ::: {#end .sd-page}
 
-## This is the last page in the survey. Thanks for taking our survey!
-
-Your survey completion code is: `r sd_output("completion_code", type = 'value')`
+## You have reached the end of this survey. We appreciate your time and participation!
 
 ```{r}
 sd_output("redirect_complete")
@@ -1281,7 +1279,7 @@ sd_output("redirect_complete")
 
 ::: {#screenout .sd-page}
 
-Sorry, but you are not qualified to continue with the survey. We appreciate your time and participation.
+## Sorry, but you are not qualified to continue with the survey. We appreciate your time and participation!
 
 ```{r}
 sd_output("redirect_screenout")

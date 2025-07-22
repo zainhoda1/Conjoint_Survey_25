@@ -194,21 +194,14 @@ server <- function(input, output, session) {
   #  Function to add icons (gas pump, electric plug, or both) before text values in a vehicle’s powertrain description
   create_image_cell <- function(value) {
     # This checks if the word "Electric" appears in the value (case-insensitive)
-    if (grepl("Battery Electric", value)) {
+    if (grepl("Battery electric", value)) {
       return(sprintf(
         '<img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">%s',
         value
       ))
     }
-    # This checks if either "Gas" or "Gasoline" appears in the value
-    else if (grepl("Gasoline", value)) {
-      return(sprintf(
-        '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">%s',
-        value
-      ))
-    }
-    # This checks if either "Hybrid" appears in the value
-    else if (grepl("Plug-in Hybrid", value)) {
+    # This checks if either "PHEV" appears in the value
+    else if (grepl("Plug-in hybrid", value)) {
       return(sprintf(
         '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
              <img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">%s', value
@@ -317,9 +310,9 @@ server <- function(input, output, session) {
       alt2$price <- 1.0 * budget
       alt3$price <- 0.5 * budget
       
-      alt1$powertrain<-create_image_cell("Battery Electric")
-      alt2$powertrain<-create_image_cell("Battery Electric")
-      alt3$powertrain<-create_image_cell("Battery Electric")
+      alt1$powertrain<-create_image_cell("Battery electric")
+      alt2$powertrain<-create_image_cell("Battery electric")
+      alt3$powertrain<-create_image_cell("Battery electric")
       
       names(vehicle_cbc0_options) <- c(
         HTML(glue("
