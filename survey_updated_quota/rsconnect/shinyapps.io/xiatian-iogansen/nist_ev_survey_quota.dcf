@@ -1,0 +1,12 @@
+name: nist_ev_survey_quota
+title: nist_ev_survey_quota
+username: xiatian-iogansen
+account: xiatian-iogansen
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15086277
+bundleId: 10628370
+url: https://xiatian-iogansen.shinyapps.io/nist_ev_survey_quota/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
