@@ -62,7 +62,9 @@ server <- function(input, output, session) {
 
   # Starting Link Validation
   is_valid_start <- reactive({
-    text_start <- paste0("/?psid=", psid(), "&_k=", keyid())
+    # Get the current URL path (everything after the domain)
+    url_path <- session$clientData$url_pathname
+    text_start <- paste0(url_path, "?psid=", psid(), "&_k=", keyid())
     signature_start_validate <- hmac(
       key = secret_key,
       object = text_start,
