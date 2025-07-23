@@ -4,3 +4,5 @@
 .Ruserdata
 .DS_Store
 .env
+_survey/
+preview_data.csv
