@@ -162,6 +162,9 @@ server <- function(input, output, session) {
   # Store the completion code in the survey data
   sd_store_value(completion_code)
 
+  # Store the psid from URL
+  sd_store_value(psid())
+
   sd_store_value(respondentID, "respID")
   sd_store_value(battery_respondentID, "respID")
 
