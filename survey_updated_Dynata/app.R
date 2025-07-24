@@ -159,21 +159,17 @@ server <- function(input, output, session) {
   # Make a 10-digit random number completion code
   completion_code <- sd_completion_code(10)
 
-  # Store the completion code in the survey data
-  sd_store_value(completion_code)
-
-  # Store the psid from URL
-  sd_store_value(psid(), "psid")
-
-  sd_store_value(respondentID, "respID")
-  sd_store_value(battery_respondentID, "respID")
-
   # Create random assignment when session starts
   prime_groups <- c('prime_short', 'prime_long')
   prime_group_label <- sample(c('prime_short', 'prime_long'), 1)
   names(prime_groups) <- prime_group_label
 
-  sd_store_value(prime_group_label, id = "prime_group_label")
+  # Store necessary values in the survey data
+  sd_store_value(completion_code)
+  sd_store_value(psid(), "psid")
+  sd_store_value(respondentID, "respID")
+  sd_store_value(battery_respondentID, "respID")
+  sd_store_value(prime_group_label, "prime_group_label")
 
   ## data
   df <- survey %>%
