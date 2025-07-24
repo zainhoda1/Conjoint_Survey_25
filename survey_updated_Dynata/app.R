@@ -39,7 +39,7 @@ battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
 respondentID <- sample(survey$respID, 1)
 battery_respondentID <- sample(battery_survey$respID, 1)
 
-# Server setup
+# # Server setup
 server <- function(input, output, session) {
   ### Start of Dynata setup ###
 
@@ -362,39 +362,39 @@ server <- function(input, output, session) {
         HTML(glue(
           "
     <div style='text-align: left;'>
-      <b>Option 1</b><br>
-      <b><span style='font-size: 13px;'><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt1$powertrain}</span><br>
-      <b><span style='font-size: 13px;'><u>Range:</u></span></b><br> <span style='font-size: 13px;'>100 miles on full charge</span><br>
-      <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
-      <b><span style='font-size: 13px;'><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>2018</span><br>
-      <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>30,000</span><br>
-      <b><span style='font-size: 13px;'><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>7 cents per mile<br>(114.8 MPG equivalent)</span><br>
+      <b><span style='font-size: 20px;'>Option 1</span></b><br>
+      <b><span style='font-size: 15px;'><u>Powertrain:</u></span></b><br> <span style='font-size: 15px;'>{alt1$powertrain}</span><br>
+      <b><span style='font-size: 15px;'><u>Range:</u></span></b><br> <span style='font-size: 15px;'>100 miles on full charge</span><br>
+      <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt1$price)}</span><br>
+      <b><span style='font-size: 15px;'><u>Model year:</u></span></b><br> <span style='font-size: 15px;'>2018</span><br>
+      <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>30,000</span><br>
+      <b><span style='font-size: 15px;'><u>Operating cost:</u></span></b><br> <span style='font-size: 15px;'>7 cents per mile<br>(114.8 MPG equivalent)</span><br>
     </div>
   "
         )),
         HTML(glue(
           "
     <div style='text-align: left;'>
-      <b>Option 2</b><br>
-      <b><span style='font-size: 13px;'><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt1$powertrain}</span><br>
-      <b><span style='font-size: 13px;'><u>Range:</u></span></b><br> <span style='font-size: 13px;'>200 miles on full charge</span><br>
-      <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
-      <b><span style='font-size: 13px;'><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>2018</span><br>
-      <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>30,000</span><br>
-      <b><span style='font-size: 13px;'><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>7 cents per mile<br>(114.8 MPG equivalent)</span><br>
+      <b><span style='font-size: 20px;'>Option 2</span></b><br>
+      <b><span style='font-size: 15px;'><u>Powertrain:</u></span></b><br> <span style='font-size: 15px;'>{alt1$powertrain}</span><br>
+      <b><span style='font-size: 15px;'><u>Range:</u></span></b><br> <span style='font-size: 15px;'>200 miles on full charge</span><br>
+      <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt2$price)}</span><br>
+      <b><span style='font-size: 15px;'><u>Model year:</u></span></b><br> <span style='font-size: 15px;'>2018</span><br>
+      <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>30,000</span><br>
+      <b><span style='font-size: 15px;'><u>Operating cost:</u></span></b><br> <span style='font-size: 15px;'>7 cents per mile<br>(114.8 MPG equivalent)</span><br>
     </div>
   "
         )),
         HTML(glue(
           "
     <div style='text-align: left;'>
-      <b>Option 3</b><br>
-      <b><span style='font-size: 13px;'><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt1$powertrain}</span><br>
-      <b><span style='font-size: 13px;'><u>Range:</u></span></b><br> <span style='font-size: 13px;'>300 miles on full charge</span><br>
-      <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt3$price)}</span><br>
-      <b><span style='font-size: 13px;'><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>2018</span><br>
-      <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>30,000</span><br>
-      <b><span style='font-size: 13px;'><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>7 cents per mile<br>(114.8 MPG equivalent)</span><br>
+      <b><span style='font-size: 20px;'>Option 3</span></b><br>
+      <b><span style='font-size: 15px;'><u>Powertrain:</u></span></b><br> <span style='font-size: 15px;'>{alt1$powertrain}</span><br>
+      <b><span style='font-size: 15px;'><u>Range:</u></span></b><br> <span style='font-size: 15px;'>300 miles on full charge</span><br>
+      <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt3$price)}</span><br>
+      <b><span style='font-size: 15px;'><u>Model year:</u></span></b><br> <span style='font-size: 15px;'>2018</span><br>
+      <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>30,000</span><br>
+      <b><span style='font-size: 15px;'><u>Operating cost:</u></span></b><br> <span style='font-size: 15px;'>7 cents per mile<br>(114.8 MPG equivalent)</span><br>
     </div>
   "
         ))
@@ -429,39 +429,39 @@ server <- function(input, output, session) {
           HTML(glue(
             "
       <div style='text-align: left;'>
-        <b>Option 1</b><br>
-        <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt1$powertrain}</span><br>
-        <b><span style='font-size: 13px;' title='The maximum distance a vehicle can travel in a full tank/ fully charged battery.' ><u>Range:</u></span></b><br> <span style='font-size: 13px;'>{alt1$range}</span><br>
-        <b><span style='font-size: 13px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
-        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt1$make_year}</span><br>
-        <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$mileage)}</span><br>
-        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt1$operating_cost}</span><br>
+        <b><span style='font-size: 20px;'>Option 1</span></b><br>
+        <b><span style='font-size: 15px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 15px;'>{alt1$powertrain}</span><br>
+        <b><span style='font-size: 15px;' title='The maximum distance a vehicle can travel in a full tank/ fully charged battery.' ><u>Range:</u></span></b><br> <span style='font-size: 15px;'>{alt1$range}</span><br>
+        <b><span style='font-size: 15px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt1$price)}</span><br>
+        <b><span style='font-size: 15px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 15px;'>{alt1$make_year}</span><br>
+        <b><span style='font-size: 15px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(alt1$mileage)}</span><br>
+        <b><span style='font-size: 15px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 15px;'>{alt1$operating_cost}</span><br>
       </div>
     "
           )),
           HTML(glue(
             "
       <div style='text-align: left;'>
-        <b>Option 2</b><br>
-        <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt2$powertrain}</span><br>
-        <b><span style='font-size: 13px;' title='The maximum distance a vehicle can travel in a full tank/ fully charged battery.' ><u>Range:</u></span></b><br> <span style='font-size: 13px;'>{alt2$range}</span><br>
-        <b><span style='font-size: 13px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
-        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt2$make_year}</span><br>
-        <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$mileage)}</span><br>
-        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt2$operating_cost}</span><br>
+        <b><span style='font-size: 20px;'>Option 2</span></b><br>
+        <b><span style='font-size: 15px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 15px;'>{alt2$powertrain}</span><br>
+        <b><span style='font-size: 15px;' title='The maximum distance a vehicle can travel in a full tank/ fully charged battery.' ><u>Range:</u></span></b><br> <span style='font-size: 15px;'>{alt2$range}</span><br>
+        <b><span style='font-size: 15px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt2$price)}</span><br>
+        <b><span style='font-size: 15px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 15px;'>{alt2$make_year}</span><br>
+        <b><span style='font-size: 15px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(alt2$mileage)}</span><br>
+        <b><span style='font-size: 15px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 15px;'>{alt2$operating_cost}</span><br>
       </div>
     "
           )),
           HTML(glue(
             "
       <div style='text-align: left;'>
-        <b>Option 3</b><br>
-        <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt3$powertrain}</span><br>
-        <b><span style='font-size: 13px;' title='The maximum distance a vehicle can travel in a full tank/ fully charged battery.' ><u>Range:</u></span></b><br> <span style='font-size: 13px;'>{alt3$range}</span><br>
-        <b><span style='font-size: 13px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt3$price)}</span><br>
-        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt3$make_year}</span><br>
-        <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$mileage)}</span><br>
-        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt3$operating_cost}</span><br>
+        <b><span style='font-size: 20px;'>Option 3</span></b><br>
+        <b><span style='font-size: 15px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 15px;'>{alt3$powertrain}</span><br>
+        <b><span style='font-size: 15px;' title='The maximum distance a vehicle can travel in a full tank/ fully charged battery.' ><u>Range:</u></span></b><br> <span style='font-size: 15px;'>{alt3$range}</span><br>
+        <b><span style='font-size: 15px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt3$price)}</span><br>
+        <b><span style='font-size: 15px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 15px;'>{alt3$make_year}</span><br>
+        <b><span style='font-size: 15px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(alt3$mileage)}</span><br>
+        <b><span style='font-size: 15px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 15px;'>{alt3$operating_cost}</span><br>
       </div>
     "
           ))
@@ -585,23 +585,24 @@ server <- function(input, output, session) {
         HTML(glue(
           "
       <div style='text-align: left;'>
-        <b>Option 1</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(30000)}</span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
-        <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='images/battery_survey_battery_original_text.png' style='width: 70px; vertical-align: middle;'><br>
-        <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
+        <b><span style='font-size: 20px;'>Option 1</span></b><br>
+        <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(30000)}</span><br>
+        <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt1$price)}</span><br>
+        <b><span style='font-size: 15px;'><u>Battery refurbishment:</u></span></b><br> <img src='images/battery_survey_battery_original_text.png' style='width: 70px; vertical-align: middle;'><br>
+        <b><span style='font-size: 15px;'><u>Battery range and health:</u></span></b><br>
         <img src='images/battery_choices_version2/Range_Degradation_200_8.png' style='width: 230px; vertical-align: middle;'>
       </div>
     "
+          
         )),
         HTML(glue(
           "
       <div style='text-align: left;'>
-        <b>Option 2</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(30000)}</span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
-        <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='images/battery_survey_battery_original_text.png' style='width: 70px; vertical-align: middle;'><br>
-        <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
+        <b><span style='font-size: 20px;'>Option 2</span></b><br>
+        <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(30000)}</span><br>
+        <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt2$price)}</span><br>
+        <b><span style='font-size: 15px;'><u>Battery refurbishment:</u></span></b><br> <img src='images/battery_survey_battery_original_text.png' style='width: 70px; vertical-align: middle;'><br>
+        <b><span style='font-size: 15px;'><u>Battery range and health:</u></span></b><br>
         <img src='images/battery_choices_version2/Range_Degradation_280_4.png' style='width: 230px; vertical-align: middle;'>
       </div>
     "
@@ -609,11 +610,11 @@ server <- function(input, output, session) {
         HTML(glue(
           "
       <div style='text-align: left;'>
-        <b>Option 3</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(30000)}</span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {(scales::comma(alt3$price))}</span><br>
-        <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='images/battery_survey_battery_original_text.png' style='width: 70px; vertical-align: middle;'><br>
-        <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
+        <b><span style='font-size: 20px;'>Option 3</span></b><br>
+        <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(30000)}</span><br>
+        <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {(scales::comma(alt3$price))}</span><br>
+        <b><span style='font-size: 15px;'><u>Battery refurbishment:</u></span></b><br> <img src='images/battery_survey_battery_original_text.png' style='width: 70px; vertical-align: middle;'><br>
+        <b><span style='font-size: 15px;'><u>Battery range and health:</u></span></b><br>
         <img src= 'images/battery_choices_version2/Range_Degradation_360_1.png' style='width: 230px;  vertical-align: middle;'>
       </div>
     "
@@ -633,16 +634,15 @@ server <- function(input, output, session) {
 
         options <- c("option_1", "option_2", "option_3")
 
-        # <span style='font-size: 13px;'>{alt3$battery_refurbish}</span>
         names(options) <- c(
           HTML(glue(
             "
       <div style='text-align: left;'>
-        <b>Option 1</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
-        <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='{alt1$image1}' style='width: 70px; vertical-align: left;'><br>
-        <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
+        <b><span style='font-size: 20px;'>Option 1</span></b><br>
+        <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(alt1$veh_mileage)}</span><br>
+        <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt1$price)}</span><br>
+        <b><span style='font-size: 15px;'><u>Battery refurbishment:</u></span></b><br> <img src='{alt1$image1}' style='width: 70px; vertical-align: left;'><br>
+        <b><span style='font-size: 15px;'><u>Battery range and health:</u></span></b><br>
         <img src='{alt1$image2}' style='width: 230px; vertical-align: middle;'>
       </div>
     "
@@ -650,11 +650,11 @@ server <- function(input, output, session) {
           HTML(glue(
             "
       <div style='text-align: left;'>
-        <b>Option 2</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
-        <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='{alt2$image1}' style='width: 70px; vertical-align: left;'><br>
-        <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
+        <b><span style='font-size: 20px;'>Option 2</span></b><br>
+        <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(alt2$veh_mileage)}</span><br>
+        <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {scales::comma(alt2$price)}</span><br>
+        <b><span style='font-size: 15px;'><u>Battery refurbishment:</u></span></b><br> <img src='{alt2$image1}' style='width: 70px; vertical-align: left;'><br>
+        <b><span style='font-size: 15px;'><u>Battery range and health:</u></span></b><br>
         <img src='{alt2$image2}' style='width: 230px; vertical-align: middle;'>
       </div>
     "
@@ -662,11 +662,11 @@ server <- function(input, output, session) {
           HTML(glue(
             "
       <div style='text-align: left;'>
-        <b>Option 3</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {(scales::comma(alt3$price))}</span><br>
-        <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='{alt3$image1}' style='width: 70px; vertical-align: left;'></span><br>
-        <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
+        <b><span style='font-size: 20px;'>Option 3</span></b><br>
+        <b><span style='font-size: 15px;'><u>Mileage:</u></span></b><br> <span style='font-size: 15px;'>{scales::comma(alt3$veh_mileage)}</span><br>
+        <b><span style='font-size: 15px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 15px;'>$ {(scales::comma(alt3$price))}</span><br>
+        <b><span style='font-size: 15px;'><u>Battery refurbishment:</u></span></b><br> <img src='{alt3$image1}' style='width: 70px; vertical-align: left;'></span><br>
+        <b><span style='font-size: 15px;'><u>Battery range and health:</u></span></b><br>
         <img src= '{alt3$image2}' style='width: 230px;  vertical-align: middle;'>
       </div>
     "
