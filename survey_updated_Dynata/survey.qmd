@@ -159,10 +159,10 @@ sd_next(next_page = 'household_veh', label = 'Next')
 - The table below describes each type of passenger vehicle. 
 <br>
 
-| Types of Powertrain   | Powertrain Definition   | Examples  |
+| Types of Powertrains   | Powertrain Definition   | Examples  |
 |-------------------------|-------------------------------------|-----------|
 | Conventional ![](images/gas_pump.png) | Gasoline or other liquid-fuel engine, such as diesel or flex-fuel.| Honda Civic, Ford Explorer |
-| Gas hybrid electric vehicle (HEV)![](images/gas_pump.png) | Smaller gasoline engine + electric motor + small battery. Gasoline engine recharges the battery to improve fuel efficiency. | Toyota Prius, Ford Escape Hybrid |
+| Gas hybrid electric vehicle (HEV)![](images/gas_pump.png) | Smaller gasoline engine + electric motor + small battery. The gasoline engine recharges the battery to improve fuel efficiency. | Toyota Prius, Ford Escape Hybrid |
 | Plug-in hybrid electric vehicle (PHEV)![](images/gas_pump.png) ![](images/electric_plug.png) | Hybrid that can also be plugged into an electrical outlet to charge the battery. Runs on electricity for a short range (10 – 40 miles), then switches to gasoline. | Kia Niro, Toyota RAV4 Prime |
 | Battery electric vehicle (BEV) ![](images/electric_plug.png)| Electric motor only. Must be plugged into an electrical outlet to be refueled.  | Nissan Leaf, Tesla Model Y |  
 
@@ -502,7 +502,7 @@ Let's learn about the attributes.
 | Types of Powertrain   | Powertrain Definition   | Examples  |
 |-------------------------|-------------------------------------|-----------|
 | Conventional ![](images/gas_pump.png) | Gasoline or other liquid-fuel engine, such as diesel or flex-fuel.| Honda Civic, Ford Explorer |
-| Gas hybrid electric vehicle (HEV)![](images/gas_pump.png) | Smaller gasoline engine + electric motor + small battery. Gasoline engine recharges the battery to improve fuel efficiency. | Toyota Prius, Ford Escape Hybrid |
+| Gas hybrid electric vehicle (HEV)![](images/gas_pump.png) | Smaller gasoline engine + electric motor + small battery. The gasoline engine recharges the battery to improve fuel efficiency. | Toyota Prius, Ford Escape Hybrid |
 | Plug-in hybrid electric vehicle (PHEV)![](images/gas_pump.png) ![](images/electric_plug.png) | Hybrid that can also be plugged into an electrical outlet to charge the battery. Runs on electricity for a short range (10 – 40 miles), then switches to gasoline. | Kia Niro, Toyota RAV4 Prime |
 | Battery electric vehicle (BEV) ![](images/electric_plug.png)| Electric motor only. Must be plugged into an electrical outlet to be refueled.  | Nissan Leaf, Tesla Model Y
 
@@ -840,7 +840,7 @@ sd_question(
 sd_question(
   type  = 'mc_multiple',
   id    = 'plugged_in',
-  label = "**Please select which vehicles can be plugged-in.** *Select all that apply.*",
+  label = "**Please select which vehicles can be plugged in.** *Select all that apply.*",
   option = c(
     "Gas hybrid electric vehicle" = "hev",
     "Plug-in hybrid electric vehicle"  = "phev",
@@ -1065,7 +1065,7 @@ sd_question(
 sd_question(
   type   = 'mc_multiple',
   id     = 'employment',
-  label  = "**Which of the following category best describes your current employment status?** *Select all that apply.*",
+  label  = "**Which of the following describes your current employment status?** *Select all that apply.*",
   option = c(
     "I am a part-time or full-time student" = "student",
     "Employed, working fewer than 40 hours per week"  = "part_time",
@@ -1138,7 +1138,7 @@ sd_question(
 sd_question(
   type   = 'mc',
   id     = 'housing_type',
-  label  = "**In which type of housing do you currently live?**",
+  label  = "**What type of housing do you currently live in?**",
   option = c(
     "Single family house not attached to any other house" = "sf_detached ",
     "Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)"  = "sf_attached",
