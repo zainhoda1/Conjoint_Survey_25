@@ -163,7 +163,7 @@ server <- function(input, output, session) {
   sd_store_value(completion_code)
 
   # Store the psid from URL
-  sd_store_value(psid())
+  sd_store_value(psid(), "psid")
 
   sd_store_value(respondentID, "respID")
   sd_store_value(battery_respondentID, "respID")
@@ -593,7 +593,6 @@ server <- function(input, output, session) {
         <img src='images/battery_choices_version2/Range_Degradation_200_8.png' style='width: 230px; vertical-align: middle;'>
       </div>
     "
-          
         )),
         HTML(glue(
           "
