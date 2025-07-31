@@ -247,11 +247,33 @@ next_veh_nobev:
   label: You mentioned that you are unlikely to purchase a battery electric vehicle
     as your next vehicle. What is your biggest concern or reason for this?
 next_veh_car_images:
-  type: unknown
-  label: []
+  type: mc_buttons
+  label: Select a vehicle based on it’s segment / style that is most closely aligned
+    with the next vehicle you are considering purchasing.
+  options:
+    '': 8_new_car_sedan_midsize
+    '': 4_new_car_sedan_fullsize
+    '': 2_new_car_hatchback_subcompact
+    '': 6_new_car_hatchback_compact
+    '': 1_new_car_sedan_compact
+    '': 3_new_car_sedan_subcompact
+    '': 7_new_car_hatchback_compact_luxury
+    '': 5_new_car_sedan_fullsize_luxury
+    '': 9_new_car_hatchback_subcompact_luxury
 next_veh_suv_images:
-  type: unknown
-  label: []
+  type: mc_buttons
+  label: Select a vehicle based on it’s segment / style that is most closely aligned
+    with the next vehicle you are considering purchasing.
+  options:
+    '': 5_new_suv_fullsize
+    '': 4_new_crossover_midsize
+    '': 2_new_crossover_midsize
+    '': 1_new_crossover_compact
+    '': 7_new_crossover_subcompact
+    '': 9_new_crossover_compact
+    '': 8_new_suv_fullsize
+    '': 6_new_crossover_subcompact
+    '': 3_new_suv_fullsize
 vehicle_cbc_q0_button:
   type: unknown
   label: []

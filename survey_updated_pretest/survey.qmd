@@ -492,7 +492,35 @@ sd_next()
 
 ```{r}
 
-sd_output(id = 'next_veh_car_images', type = 'question')
+# Car image options
+car_images <- sample(c("1_new_car_sedan_compact",
+                       "2_new_car_hatchback_subcompact",
+                       "3_new_car_sedan_subcompact",
+                       "4_new_car_sedan_fullsize",
+                       "5_new_car_sedan_fullsize_luxury",
+                       "6_new_car_hatchback_compact",
+                       "7_new_car_hatchback_compact_luxury",
+                       "8_new_car_sedan_midsize",
+                       "9_new_car_hatchback_subcompact_luxury"))
+
+
+  #Choosing Car/SUV type
+all_cars <- car_images
+
+car_src <- glue::glue(
+  '<img src="images/car-images/{all_cars}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">'
+ )
+
+names(all_cars) <- car_src
+
+# Define first choice question
+sd_question(
+    type  = 'mc_buttons',
+    id    = 'next_veh_car_images',
+    label = "**Select a vehicle based on it’s segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
+    option = all_cars
+)
+  
 ```
 
 
@@ -506,7 +534,36 @@ sd_next()
 
 ```{r}
 
-sd_output(id = 'next_veh_suv_images', type = 'question')
+# Car image options
+suv_images <- sample(c("1_new_crossover_compact",
+                       "2_new_crossover_midsize",
+                       "3_new_suv_fullsize",
+                       "4_new_crossover_midsize",
+                       "5_new_suv_fullsize",
+                       "6_new_crossover_subcompact",
+                       "7_new_crossover_subcompact",
+                       "8_new_suv_fullsize",
+                       "9_new_crossover_compact"))
+
+  #Choosing Car/SUV type
+
+all_suv <- suv_images
+
+suv_src <- glue::glue(
+  '<img src="images/car-images/{all_suv}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">'
+)
+
+names(all_suv) <- suv_src
+  
+
+sd_question(
+    type  = 'mc_buttons',
+    id    = 'next_veh_suv_images',
+    label = "**Select a vehicle based on it’s segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
+    option = all_suv
+)
+
+
 ```
 
 
