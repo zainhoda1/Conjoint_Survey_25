@@ -7,7 +7,7 @@ library(kableExtra)
 library(digest)
 
 # Database setup
-db <- sd_db_connect(ignore = TRUE)
+db <- sd_db_connect()
 
 
 demo_options <- tibble(
@@ -37,6 +37,8 @@ electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
 vehicle_cbc_options <- function(df, budget_select) {
+  cat("Budget_select received:", budget_select, "length:", length(budget_select), "\n")
+  
   df <- df %>%
     mutate(
       powertrain = case_when(
@@ -52,9 +54,12 @@ vehicle_cbc_options <- function(df, budget_select) {
   alt2 <- df |> filter(altID == 2)
   alt3 <- df |> filter(altID == 3)
 
-  alt1$price <- alt1$price * budget_select
-  alt2$price <- alt2$price * budget_select
-  alt3$price <- alt3$price * budget_select
+  # Use only the first value of budget_select if it has multiple values
+  budget_val <- budget_select[1]
+  
+  alt1$price <- alt1$price[1] * budget_val
+  alt2$price <- alt2$price[1] * budget_val
+  alt3$price <- alt3$price[1] * budget_val
 
   options <- c("option_1", "option_2", "option_3")
 
@@ -174,9 +179,28 @@ server <- function(input, output, session) {
 
   # pulling blocks outside of observe - start
   budget <- reactive({
-    req(input$next_veh_budget)
-    value <- as.numeric(input$next_veh_budget)
-    return(value)
+    # First try to get from current input
+    if (!is.null(input$next_veh_budget)) {
+      value <- as.numeric(input$next_veh_budget)
+      cat("Budget from input:", value, "\n")
+      return(value)
+    }
+
+    # If not available, try to retrieve from stored data
+    stored_data <- sd_get_data(db)
+    if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
+      budget_values <- as.numeric(stored_data$next_veh_budget)
+      # Get the most recent non-NA value
+      valid_values <- budget_values[!is.na(budget_values)]
+      if (length(valid_values) > 0) {
+        value <- valid_values[length(valid_values)] # Get the last (most recent) valid value
+        cat("Budget from stored data:", value, "\n")
+        return(value)
+      }
+    }
+
+    cat("No budget found, returning NULL\n")
+    return(NULL)
   })
 
   # This updates whenever input$images changes
@@ -200,6 +224,8 @@ server <- function(input, output, session) {
 
   observe(
     {
+      budget_val <- budget()
+      req(budget_val) # Ensure budget is available
       df <- df_filtered_vehicle_type()
 
       output$make_table_short_0 <- create_car_table_short(chosen_input())
@@ -208,9 +234,11 @@ server <- function(input, output, session) {
       # Create the options for each choice question
       vehicle_cbc1_options <- vehicle_cbc_options(
         df |> filter(qID == 1),
-        budget()
+        budget_val
       )
-      vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget())
+      vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget_val)
+      
+      cat("Using budget:", budget_val, "for CBC options\n")
 
       sd_question(
         type = 'mc_buttons',
