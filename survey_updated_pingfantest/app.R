@@ -37,13 +37,6 @@ electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
 vehicle_cbc_options <- function(df, budget_select) {
-  cat(
-    "Budget_select received:",
-    budget_select,
-    "length:",
-    length(budget_select),
-    "\n"
-  )
 
   df <- df %>%
     mutate(
@@ -182,7 +175,6 @@ server <- function(input, output, session) {
         valid_styles <- style_values[!is.na(style_values)]
         if (length(valid_styles) > 0) {
           vehicle_style <- valid_styles[length(valid_styles)]
-          cat("Vehicle style from stored data:", vehicle_style, "\n")
         }
       }
     }
@@ -204,7 +196,6 @@ server <- function(input, output, session) {
     # First try to get from current input
     if (!is.null(input$next_veh_budget)) {
       value <- as.numeric(input$next_veh_budget)
-      cat("Budget from input:", value, "\n")
       return(value)
     }
 
@@ -219,15 +210,12 @@ server <- function(input, output, session) {
           !is.null(session$userData$all_data$session_id)
       ) {
         actual_session_id <- session$userData$all_data$session_id
-        cat("Using restored session ID:", actual_session_id, "\n")
       } else {
         actual_session_id <- session$token
-        cat("Using current session ID:", actual_session_id, "\n")
       }
 
       # Filter to get only current session data
       session_rows <- which(stored_data$session_id == actual_session_id)
-      cat("Found", length(session_rows), "rows for actual session\n")
 
       if (length(session_rows) > 0) {
         # Get only the current session's data
@@ -239,15 +227,12 @@ server <- function(input, output, session) {
         if (length(session_budget) > 0) {
           # Get the most recent budget for this session
           value <- as.numeric(session_budget[length(session_budget)])
-          cat("Budget from stored data (actual session):", value, "\n")
           return(value)
         }
       }
 
-      cat("No budget found for actual session\n")
     }
 
-    cat("No budget found, returning NULL\n")
     return(NULL)
   })
 
@@ -269,7 +254,6 @@ server <- function(input, output, session) {
           valid_cars <- car_values[!is.na(car_values) & car_values != ""]
           if (length(valid_cars) > 0) {
             selected <- valid_cars[length(valid_cars)]
-            cat("Car image from stored data:", selected, "\n")
           }
         }
         # Try SUV images if no car image found
@@ -280,7 +264,6 @@ server <- function(input, output, session) {
           valid_suvs <- suv_values[!is.na(suv_values) & suv_values != ""]
           if (length(valid_suvs) > 0) {
             selected <- valid_suvs[length(valid_suvs)]
-            cat("SUV image from stored data:", selected, "\n")
           }
         }
       }
@@ -318,7 +301,6 @@ server <- function(input, output, session) {
       )
       vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget_val)
 
-      cat("Recreating CBC questions with budget:", budget_val, "\n")
 
       sd_question(
         type = 'mc_buttons',
