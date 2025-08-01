@@ -37,8 +37,14 @@ electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
 vehicle_cbc_options <- function(df, budget_select) {
-  cat("Budget_select received:", budget_select, "length:", length(budget_select), "\n")
-  
+  cat(
+    "Budget_select received:",
+    budget_select,
+    "length:",
+    length(budget_select),
+    "\n"
+  )
+
   df <- df %>%
     mutate(
       powertrain = case_when(
@@ -56,7 +62,7 @@ vehicle_cbc_options <- function(df, budget_select) {
 
   # Use only the first value of budget_select if it has multiple values
   budget_val <- budget_select[1]
-  
+
   alt1$price <- alt1$price[1] * budget_val
   alt2$price <- alt2$price[1] * budget_val
   alt3$price <- alt3$price[1] * budget_val
@@ -167,7 +173,7 @@ server <- function(input, output, session) {
   df_filtered_vehicle_type <- reactive({
     # Try to get vehicle style from input first
     vehicle_style <- input$next_veh_style
-    
+
     # If not available, try from stored data
     if (is.null(vehicle_style)) {
       stored_data <- sd_get_data(db)
@@ -180,7 +186,7 @@ server <- function(input, output, session) {
         }
       }
     }
-    
+
     req(vehicle_style) # ensures we have a vehicle style
 
     df %>%
@@ -208,23 +214,28 @@ server <- function(input, output, session) {
       # Try to get the actual session_id that surveydown is using (after cookie restoration)
       # Check if all_data has been initialized with the restored session_id
       actual_session_id <- NULL
-      if (!is.null(session$userData$all_data) && !is.null(session$userData$all_data$session_id)) {
+      if (
+        !is.null(session$userData$all_data) &&
+          !is.null(session$userData$all_data$session_id)
+      ) {
         actual_session_id <- session$userData$all_data$session_id
         cat("Using restored session ID:", actual_session_id, "\n")
       } else {
         actual_session_id <- session$token
         cat("Using current session ID:", actual_session_id, "\n")
       }
-      
+
       # Filter to get only current session data
       session_rows <- which(stored_data$session_id == actual_session_id)
       cat("Found", length(session_rows), "rows for actual session\n")
-      
+
       if (length(session_rows) > 0) {
         # Get only the current session's data
         session_data <- stored_data[session_rows, ]
-        session_budget <- session_data$next_veh_budget[!is.na(session_data$next_veh_budget)]
-        
+        session_budget <- session_data$next_veh_budget[
+          !is.na(session_data$next_veh_budget)
+        ]
+
         if (length(session_budget) > 0) {
           # Get the most recent budget for this session
           value <- as.numeric(session_budget[length(session_budget)])
@@ -232,7 +243,7 @@ server <- function(input, output, session) {
           return(value)
         }
       }
-      
+
       cat("No budget found for actual session\n")
     }
 
@@ -247,7 +258,7 @@ server <- function(input, output, session) {
     } else {
       input$next_veh_suv_images
     }
-    
+
     # If no input available, try to get from stored data
     if (is.null(selected)) {
       stored_data <- sd_get_data(db)
@@ -262,7 +273,9 @@ server <- function(input, output, session) {
           }
         }
         # Try SUV images if no car image found
-        if (is.null(selected) && "next_veh_suv_images" %in% names(stored_data)) {
+        if (
+          is.null(selected) && "next_veh_suv_images" %in% names(stored_data)
+        ) {
           suv_values <- stored_data$next_veh_suv_images
           valid_suvs <- suv_values[!is.na(suv_values) & suv_values != ""]
           if (length(valid_suvs) > 0) {
@@ -281,7 +294,7 @@ server <- function(input, output, session) {
       )
       return(chosen_src)
     }
-    
+
     # Return a default image if nothing found
     return('images/car-images/1_new_car_sedan_compact.png')
   })
@@ -293,11 +306,10 @@ server <- function(input, output, session) {
       # Force reactivity on budget changes
       budget_val <- budget()
       req(budget_val) # Ensure budget is available
-      
+
       df <- df_filtered_vehicle_type()
 
-      output$make_table_short_0 <- create_car_table_short(chosen_input())
-      output$make_table_short_1 <- create_car_table_short(chosen_input())
+      output$make_table_short <- create_car_table_short(chosen_input())
 
       # Create the options for each choice question
       vehicle_cbc1_options <- vehicle_cbc_options(
@@ -305,7 +317,7 @@ server <- function(input, output, session) {
         budget_val
       )
       vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget_val)
-      
+
       cat("Recreating CBC questions with budget:", budget_val, "\n")
 
       sd_question(

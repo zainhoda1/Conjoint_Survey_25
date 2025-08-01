@@ -168,7 +168,7 @@ We will now begin the choice tasks. We will show you **six** choice questions, s
 
 
 ```{r}
-sd_output("make_table_short_0")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q0_button", type = "question")
 
@@ -181,7 +181,7 @@ sd_next()
 ::: {#vehicle_pageQ1_button .sd-page}
 ### Question 1 of 6
 ```{r}
-sd_output("make_table_short_1")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q1_button", type = "question")
 
