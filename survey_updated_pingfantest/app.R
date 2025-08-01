@@ -146,7 +146,7 @@ server <- function(input, output, session) {
 
   sd_store_value(prime_group_label, id = "prime_group_label")
 
-  ## data
+  # data
   df <- survey %>%
     filter(respID == respondentID) |>
     mutate(
@@ -189,7 +189,6 @@ server <- function(input, output, session) {
       }
   })
 
-  # pulling blocks outside of observe - start
   budget <- reactive({
     if (!is.null(input$next_veh_budget)) {
       return(as.numeric(input$next_veh_budget))
@@ -209,7 +208,6 @@ server <- function(input, output, session) {
     }
   })
 
-  # This updates whenever input$images changes
   chosen_input <- reactive({
     # First try current input
     selected <- input$next_veh_car_images %||% input$next_veh_suv_images
@@ -240,8 +238,7 @@ server <- function(input, output, session) {
     paste0('images/car-images/', selected, '.png')
   })
 
-  # pulling blocks outside of observe - end
-
+  # Questions
   observe(
     {
       # Force reactivity on budget changes
