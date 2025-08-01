@@ -165,11 +165,27 @@ server <- function(input, output, session) {
     )
 
   df_filtered_vehicle_type <- reactive({
-    req(input$next_veh_style) # ensures input is available
+    # Try to get vehicle style from input first
+    vehicle_style <- input$next_veh_style
+    
+    # If not available, try from stored data
+    if (is.null(vehicle_style)) {
+      stored_data <- sd_get_data(db)
+      if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
+        style_values <- stored_data$next_veh_style
+        valid_styles <- style_values[!is.na(style_values)]
+        if (length(valid_styles) > 0) {
+          vehicle_style <- valid_styles[length(valid_styles)]
+          cat("Vehicle style from stored data:", vehicle_style, "\n")
+        }
+      }
+    }
+    
+    req(vehicle_style) # ensures we have a vehicle style
 
     df %>%
       {
-        if (input$next_veh_style == "Car / sedan / hatchback") {
+        if (vehicle_style == "Car / sedan / hatchback") {
           filter(., vehicle_type == "car")
         } else {
           filter(., vehicle_type == "suv")
@@ -186,17 +202,30 @@ server <- function(input, output, session) {
       return(value)
     }
 
-    # If not available, try to retrieve from stored data
+    # If not available, try to retrieve from stored data for current session only
     stored_data <- sd_get_data(db)
     if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
-      budget_values <- as.numeric(stored_data$next_veh_budget)
-      # Get the most recent non-NA value
-      valid_values <- budget_values[!is.na(budget_values)]
-      if (length(valid_values) > 0) {
-        value <- valid_values[length(valid_values)] # Get the last (most recent) valid value
-        cat("Budget from stored data:", value, "\n")
-        return(value)
+      current_session <- session$token
+      cat("Current session ID:", current_session, "\n")
+      
+      # Filter to get only current session data
+      session_rows <- which(stored_data$session_id == current_session)
+      cat("Found", length(session_rows), "rows for current session\n")
+      
+      if (length(session_rows) > 0) {
+        # Get only the current session's data
+        session_data <- stored_data[session_rows, ]
+        session_budget <- session_data$next_veh_budget[!is.na(session_data$next_veh_budget)]
+        
+        if (length(session_budget) > 0) {
+          # Get the most recent budget for this session
+          value <- as.numeric(session_budget[length(session_budget)])
+          cat("Budget from stored data (current session):", value, "\n")
+          return(value)
+        }
       }
+      
+      cat("No budget found for current session\n")
     }
 
     cat("No budget found, returning NULL\n")
@@ -210,22 +239,53 @@ server <- function(input, output, session) {
     } else {
       input$next_veh_suv_images
     }
+    
+    # If no input available, try to get from stored data
+    if (is.null(selected)) {
+      stored_data <- sd_get_data(db)
+      if (!is.null(stored_data)) {
+        # Try car images first
+        if ("next_veh_car_images" %in% names(stored_data)) {
+          car_values <- stored_data$next_veh_car_images
+          valid_cars <- car_values[!is.na(car_values) & car_values != ""]
+          if (length(valid_cars) > 0) {
+            selected <- valid_cars[length(valid_cars)]
+            cat("Car image from stored data:", selected, "\n")
+          }
+        }
+        # Try SUV images if no car image found
+        if (is.null(selected) && "next_veh_suv_images" %in% names(stored_data)) {
+          suv_values <- stored_data$next_veh_suv_images
+          valid_suvs <- suv_values[!is.na(suv_values) & suv_values != ""]
+          if (length(valid_suvs) > 0) {
+            selected <- valid_suvs[length(valid_suvs)]
+            cat("SUV image from stored data:", selected, "\n")
+          }
+        }
+      }
+    }
 
-    chosen_src <- paste0(
-      'images/car-images/',
-      selected,
-      '.png'
-    )
-
-    return(chosen_src)
+    if (!is.null(selected)) {
+      chosen_src <- paste0(
+        'images/car-images/',
+        selected,
+        '.png'
+      )
+      return(chosen_src)
+    }
+    
+    # Return a default image if nothing found
+    return('images/car-images/1_new_car_sedan_compact.png')
   })
 
   # pulling blocks outside of observe - end
 
   observe(
     {
+      # Force reactivity on budget changes
       budget_val <- budget()
       req(budget_val) # Ensure budget is available
+      
       df <- df_filtered_vehicle_type()
 
       output$make_table_short_0 <- create_car_table_short(chosen_input())
@@ -238,7 +298,7 @@ server <- function(input, output, session) {
       )
       vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget_val)
       
-      cat("Using budget:", budget_val, "for CBC options\n")
+      cat("Recreating CBC questions with budget:", budget_val, "\n")
 
       sd_question(
         type = 'mc_buttons',
