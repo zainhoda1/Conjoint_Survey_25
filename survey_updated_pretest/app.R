@@ -7,8 +7,7 @@ library(kableExtra)
 library(digest)
 
 # Database setup
-db <-sd_db_connect()
-
+db <- sd_db_connect()
 
 demo_options <- tibble(
   profileID = c(1, 1, 1),  # or c(1, 2, 3) if you want different IDs
@@ -175,8 +174,6 @@ battery_cbc_options <- function(df, budget_select) {
   )
   return(options)
 }
-
-
 
 survey <- read_csv(here('data', 'choice_questions.csv'))
 battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
@@ -450,63 +447,64 @@ server <- function(input, output, session) {
       battery_cbc5_options <- battery_cbc_options(battery_df |> filter(qID == 5), budget())
       battery_cbc6_options <- battery_cbc_options(battery_df |> filter(qID == 6), budget())
 
+
       # Create each choice question - display these in your survey using sd_output()
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'battery_cbc_q0_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'battery_cbc_q0_button',
+        label = "If these were your only options, which would you choose?",
         option = battery_cbc0_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'battery_cbc_q1_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'battery_cbc_q1_button',
+        label = "If these were your only options, which would you choose?",
         option = battery_cbc1_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'battery_cbc_q2_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'battery_cbc_q2_button',
+        label = "If these were your only options, which would you choose?",
         option = battery_cbc2_options,
-        width  = "70%"
+        width = "70%"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'battery_cbc_q3_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'battery_cbc_q3_button',
+        label = "If these were your only options, which would you choose?",
         option = battery_cbc3_options,
-        width  = "70%"
+        width = "70%"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'battery_cbc_q4_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'battery_cbc_q4_button',
+        label = "If these were your only options, which would you choose?",
         option = battery_cbc4_options,
-        width  = "70%"
+        width = "70%"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'battery_cbc_q5_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'battery_cbc_q5_button',
+        label = "If these were your only options, which would you choose?",
         option = battery_cbc5_options,
-        width  = "70%"
+        width = "70%"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'battery_cbc_q6_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'battery_cbc_q6_button',
+        label = "If these were your only options, which would you choose?",
         option = battery_cbc6_options,
-        width  = "70%"
+        width = "70%"
       )
 
     }
@@ -516,27 +514,33 @@ server <- function(input, output, session) {
 
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_forward(
-
     # Screen out if the respondent doesn't have valid start
     # !is_valid_start() ~ "screenout",
 
-    input$next_veh_when %in% c("24","not_sure") ~ "screenout",
-    input$next_veh_market %in% c("new","both") ~ "screenout",
-    input$next_veh_style %in% c("van","truck","other") ~ "screenout",
-    input$attention_check_toyota %in% c("yes_current","yes_past","no") ~ "screenout",
-    input$attitudes_2_a_attention_check_agree %in% c("strongly_disagree","somewhat_disagree","neutral","somewhat_agree") ~ "screenout",
+    input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
+    input$next_veh_market %in% c("new", "both") ~ "screenout",
+    input$next_veh_style %in% c("van", "truck", "other") ~ "screenout",
+    input$attention_check_toyota %in% c("yes_current", "yes_past", "no") ~
+      "screenout",
+    input$attitudes_2_a_attention_check_agree %in%
+      c("strongly_disagree", "somewhat_disagree", "neutral", "somewhat_agree") ~
+      "screenout",
 
-    input$household_veh_count=="0" ~ "next_veh_info",
+    input$household_veh_count == "0" ~ "next_veh_info",
 
     !is.null(input$next_veh_car_images) ~ "cbc_intro",
-    input$next_veh_style =="SUV / crossover" & ((!is.null(input$next_veh_nobev)) | (input$next_veh_fuel_new_bev %in% c("neutral","somewhat_likely","very_likely") | input$next_veh_fuel_used_bev %in% c("neutral","somewhat_likely","very_likely"))) ~ "next_veh_style_suv"
-
+    input$next_veh_style == "SUV / crossover" &
+      ((!is.null(input$next_veh_nobev)) |
+        (input$next_veh_fuel_new_bev %in%
+          c("neutral", "somewhat_likely", "very_likely") |
+          input$next_veh_fuel_used_bev %in%
+            c("neutral", "somewhat_likely", "very_likely"))) ~
+      "next_veh_style_suv"
 
   )
 
   # Define any conditional display logic here (show a question if a condition is true)
   sd_show_if(
-
     !is.null(input$completion_code) ~"attention_check_toyota",
 
     input$household_veh_count!="0" ~ "household_veh_fuel",
@@ -575,10 +579,9 @@ server <- function(input, output, session) {
     highlight_unanswered = TRUE,
     highlight_color = "gray"
 
+
   )
-
 }
-
 
 
 # shinyApp() initiates your app - don't change it

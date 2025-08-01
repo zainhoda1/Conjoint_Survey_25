@@ -183,7 +183,7 @@ battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
 respondentID <- sample(survey$respID, 1)
 battery_respondentID <- sample(battery_survey$respID, 1)
 
-# Server setup
+# # Server setup
 server <- function(input, output, session) {
   ### Start of Dynata setup ###
 
@@ -303,21 +303,17 @@ server <- function(input, output, session) {
   # Make a 10-digit random number completion code
   completion_code <- sd_completion_code(10)
 
-  # Store the completion code in the survey data
-  sd_store_value(completion_code)
-
-  # Store the psid from URL
-  sd_store_value(psid())
-
-  sd_store_value(respondentID, "respID")
-  sd_store_value(battery_respondentID, "respID")
-
   # Create random assignment when session starts
   prime_groups <- c('prime_short', 'prime_long')
   prime_group_label <- sample(c('prime_short', 'prime_long'), 1)
   names(prime_groups) <- prime_group_label
 
-  sd_store_value(prime_group_label, id = "prime_group_label")
+  # Store necessary values in the survey data
+  sd_store_value(completion_code)
+  sd_store_value(psid(), "psid")
+  sd_store_value(respondentID, "respID")
+  sd_store_value(battery_respondentID, "respID")
+  sd_store_value(prime_group_label, "prime_group_label")
 
   ## data
   df <- survey %>%
@@ -400,7 +396,6 @@ server <- function(input, output, session) {
       output$make_table_short_4 <-create_car_table_short(chosen_input())
       output$make_table_short_5 <-create_car_table_short(chosen_input())
       output$make_table_short_6 <-create_car_table_short(chosen_input())
-
 
       # Create the options for each choice question
       vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget())
