@@ -205,12 +205,20 @@ server <- function(input, output, session) {
     # If not available, try to retrieve from stored data for current session only
     stored_data <- sd_get_data(db)
     if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
-      current_session <- session$token
-      cat("Current session ID:", current_session, "\n")
+      # Try to get the actual session_id that surveydown is using (after cookie restoration)
+      # Check if all_data has been initialized with the restored session_id
+      actual_session_id <- NULL
+      if (!is.null(session$userData$all_data) && !is.null(session$userData$all_data$session_id)) {
+        actual_session_id <- session$userData$all_data$session_id
+        cat("Using restored session ID:", actual_session_id, "\n")
+      } else {
+        actual_session_id <- session$token
+        cat("Using current session ID:", actual_session_id, "\n")
+      }
       
       # Filter to get only current session data
-      session_rows <- which(stored_data$session_id == current_session)
-      cat("Found", length(session_rows), "rows for current session\n")
+      session_rows <- which(stored_data$session_id == actual_session_id)
+      cat("Found", length(session_rows), "rows for actual session\n")
       
       if (length(session_rows) > 0) {
         # Get only the current session's data
@@ -220,12 +228,12 @@ server <- function(input, output, session) {
         if (length(session_budget) > 0) {
           # Get the most recent budget for this session
           value <- as.numeric(session_budget[length(session_budget)])
-          cat("Budget from stored data (current session):", value, "\n")
+          cat("Budget from stored data (actual session):", value, "\n")
           return(value)
         }
       }
       
-      cat("No budget found for current session\n")
+      cat("No budget found for actual session\n")
     }
 
     cat("No budget found, returning NULL\n")
