@@ -1,0 +1,211 @@
+---
+echo: false
+warning: false
+css: css/survey_theme.css
+---
+
+```{r}
+library(surveydown)
+library(tidyverse)
+library(here)
+library(kableExtra)
+library(glue)
+```
+
+
+
+
+
+::: {#filter .sd-page}
+
+## This study is about the purchase of your next vehicle.
+
+```{r}
+
+sd_question(
+  type  = 'mc',
+  id    = 'next_veh_style',
+  label = "**Which vehicle body style would you consider for your next vehicle?**",
+  option = c(
+    "Car / sedan / hatchback" = "Car / sedan / hatchback",
+    "SUV / crossover" = "SUV / crossover",
+    "Minivan / van" = "van",
+    "Truck" = "truck",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type  = 'mc',
+  id    = 'household_veh_count',
+  label = "**How many passenger vehicles are currently owned or leased by your household?**",
+  option = c(
+    "0" = "0",
+    "1"  = "1",
+    "2"  = "2",
+    "3" = "3",
+    "4"  = "4",
+    "5"  = "5",
+    "6 or more"  = "6"
+  )
+)
+
+sd_question(
+  type  = 'mc',
+  id    = 'next_veh_budget',
+  label = '**What is your budget for the vehicle?**',
+  option = c(
+    "$4,999 or less" = "5000",
+    "$5,000 - $9,999" = "10000",
+    "$10,000 - $14,999" = "15000",
+    "$15,000 - $19,999" = "20000",
+    "$20,000 - $24,999" = "25000",
+    "$25,000 - $29,999" = "30000",
+    "$30,000 - $34,999" = "35000",
+    "$35,000 - $39,999" = "40000",
+    "$40,000 - $44,999" = "45000",
+    "$45,000 - $49,999" = "50000",
+    "$50,000 or more"= "55000"
+  )
+)
+
+```
+
+
+```{r}
+sd_next()
+```
+
+:::
+
+
+::: {#testpage .sd-page}
+
+## Test Page
+
+```{r}
+
+car_images <- sample(c("1_new_car_sedan_compact",
+                       "2_new_car_hatchback_subcompact",
+                       "3_new_car_sedan_subcompact",
+                       "4_new_car_sedan_fullsize",
+                       "5_new_car_sedan_fullsize_luxury",
+                       "6_new_car_hatchback_compact",
+                       "7_new_car_hatchback_compact_luxury",
+                       "8_new_car_sedan_midsize",
+                       "9_new_car_hatchback_subcompact_luxury"))
+
+
+suv_images <- sample(c("1_new_crossover_compact",
+                       "2_new_crossover_midsize",
+                       "3_new_suv_fullsize",
+                       "4_new_crossover_midsize",
+                       "5_new_suv_fullsize",
+                       "6_new_crossover_subcompact",
+                       "7_new_crossover_subcompact",
+                       "8_new_suv_fullsize",
+                       "9_new_crossover_compact"))
+
+
+
+# Here we're just making copies of static vectors. Those lists can be defined in the survey.qmd if we want. They're defined in the app.R though for now:
+
+#Choosing Car/SUV type
+  all_cars <- car_images
+  all_suvs <- suv_images
+
+# Here we're using glue() to add the necessary html to the vectors and renaming them - they're still just static vectors:
+
+  car_src <- glue::glue(
+    '<img src="images/car-images/{all_cars}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">'
+  )
+  suv_src <- glue::glue(
+    '<img src="images/car-images/{all_suvs}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">'
+  )
+  names(all_cars) <- car_src
+  names(all_suvs) <- suv_src
+
+# Here we're defining a mu_button question with a static vector for the option. This means this could be made in the survey.qmd if we wanted:
+
+  # Define first choice question
+sd_question(
+    type  = 'mc_buttons',
+    id    = 'next_veh_car_images',
+    label = "**Select a vehicle based on it's segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
+    option = all_cars
+  )
+
+
+
+```
+
+
+```{r}
+sd_next()
+```
+
+:::
+
+::: {#cbc_demo .sd-page}
+
+```{r}
+vehicle_cbc0_options<- c(
+  "Option 1" = "option_1",
+  "Option 2" = "option_2",
+  "Option 3" = "option_3"
+)
+
+vehicle_cbc_options <- c(
+  "Option 1" = "option_1",
+  "Option 2" = "option_2",
+  "Option 3" = "option_3"
+)
+```
+
+## Choice Question Demonstration
+
+We will now begin the choice tasks. We will show you **six** choice questions, starting on the next page. Below is an example of the type of questions you will be asked.
+
+
+```{r}
+sd_output("make_table_short_0")
+
+sd_output("vehicle_cbc_q0_button", type = "question")
+
+sd_next()
+```
+
+:::
+
+
+::: {#vehicle_pageQ1_button .sd-page}
+### Question 1 of 6
+```{r}
+sd_output("make_table_short_1")
+
+sd_output("vehicle_cbc_q1_button", type = "question")
+
+sd_next()
+```
+:::
+
+
+## This is the last page in the survey. Thanks for taking our survey!
+
+Your survey completion code is: `r sd_output("completion_code", type = 'value')`
+
+```{r}
+sd_output("redirect_complete")
+```
+
+:::
+
+::: {#screenout .sd-page}
+
+Sorry, but you are not qualified to continue with the survey. We appreciate your time and participation.
+
+```{r}
+sd_output("redirect_screenout")
+```
+
+:::
