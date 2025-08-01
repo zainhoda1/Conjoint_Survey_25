@@ -10,19 +10,25 @@ library(digest)
 db <- sd_db_connect()
 
 demo_options <- tibble(
-  profileID = c(1, 1, 1),  # or c(1, 2, 3) if you want different IDs
-  respID = c(1620, 1621, 1622),  # Different response IDs
+  profileID = c(1, 1, 1), # or c(1, 2, 3) if you want different IDs
+  respID = c(1620, 1621, 1622), # Different response IDs
   qID = c(1, 1, 1),
   altID = c(1, 2, 3),
   obsID = c(1, 2, 3),
-  powertrain = c('Battery electric', 'Battery electric', 'Battery electric'),  # Different powertrain codes
-  price = c(0.8, 1.2, 1.5),  # Different prices
-  range = c("225 miles on full charge<br>", "225 miles on full charge<br>", "225 miles on full charge<br>"),
+  powertrain = c('Battery electric', 'Battery electric', 'Battery electric'), # Different powertrain codes
+  price = c(0.8, 1.2, 1.5), # Different prices
+  range = c(
+    "225 miles on full charge<br>",
+    "225 miles on full charge<br>",
+    "225 miles on full charge<br>"
+  ),
   mileage = c(25000, 30000, 45000),
   make_year = c(2018, 2018, 2018),
-  operating_cost = c("7 cents per mile<br>( 46.7 MPG equivalent)",
-                     "8 cents per mile<br>( 42.3 MPG equivalent)",
-                     "9 cents per mile<br>( 55.2 MPG equivalent)"),
+  operating_cost = c(
+    "7 cents per mile<br>( 46.7 MPG equivalent)",
+    "8 cents per mile<br>( 42.3 MPG equivalent)",
+    "9 cents per mile<br>( 55.2 MPG equivalent)"
+  ),
   vehicle_type = c("car", "car", "car")
 )
 
@@ -32,20 +38,22 @@ demo_battery_options <- tibble(
   altID = c(1, 2, 3),
   veh_mileage = c(30000, 30000, 30000),
   veh_price = c(1.1, 1, 0.5),
-  image1 = c("images/battery_survey_battery_original_text.png",
-              "images/battery_survey_battery_original_text.png",
-              "images/battery_survey_battery_original_text.png"),
+  image1 = c(
+    "images/battery_survey_battery_original_text.png",
+    "images/battery_survey_battery_original_text.png",
+    "images/battery_survey_battery_original_text.png"
+  ),
   image2 = c(
     "images/battery_choices_version2/Range_Degradation_200_8.png",
     "images/battery_choices_version2/Range_Degradation_280_4.png",
-    "images/battery_choices_version2/Range_Degradation_360_1.png")
+    "images/battery_choices_version2/Range_Degradation_360_1.png"
+  )
 )
 
 electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
 vehicle_cbc_options <- function(df, budget_select) {
-
   df <- df %>%
     mutate(
       powertrain = case_when(
@@ -53,8 +61,7 @@ vehicle_cbc_options <- function(df, budget_select) {
           paste0(electric_icon, powertrain),
         grepl("Plug-in hybrid", powertrain, ignore.case = TRUE) ~
           paste0(gas_icon, electric_icon, powertrain),
-        TRUE ~
-          paste0(gas_icon, powertrain)
+        TRUE ~ paste0(gas_icon, powertrain)
       )
     )
 
@@ -69,7 +76,8 @@ vehicle_cbc_options <- function(df, budget_select) {
   options <- c("option_1", "option_2", "option_3")
 
   names(options) <- c(
-    HTML(glue("
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 1</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt1$powertrain}</span><br>
@@ -79,8 +87,10 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt1$operating_cost}</span><br>
       </div>
-    ")),
-    HTML(glue("
+    "
+    )),
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 2</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt2$powertrain}</span><br>
@@ -90,8 +100,10 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt2$operating_cost}</span><br>
       </div>
-    ")),
-    HTML(glue("
+    "
+    )),
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 3</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt3$powertrain}</span><br>
@@ -101,14 +113,15 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt3$operating_cost}</span><br>
       </div>
-    "))
+    "
+    ))
   )
   return(options)
 }
 
 create_car_table_short <- function(chosen_vehicle_image) {
-
-  html_table <- sprintf('
+  html_table <- sprintf(
+    '
 
  <link rel="stylesheet" href="css/testing_table1.css">
 
@@ -123,12 +136,15 @@ create_car_table_short <- function(chosen_vehicle_image) {
 
       </body>
 
-      ', chosen_vehicle_image)
-  function() { html_table }
+      ',
+    chosen_vehicle_image
+  )
+  function() {
+    html_table
+  }
 }
 
 battery_cbc_options <- function(df, budget_select) {
-
   alt1 <- df |> filter(altID == 1)
   alt2 <- df |> filter(altID == 2)
   alt3 <- df |> filter(altID == 3)
@@ -141,7 +157,8 @@ battery_cbc_options <- function(df, budget_select) {
 
   # <span style='font-size: 13px;'>{alt3$battery_refurbish}</span>
   names(options) <- c(
-    HTML(glue("
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 1</b><br>
         <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$veh_mileage)}</span><br>
@@ -150,8 +167,10 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
         <img src='{alt1$image2}' style='width: 230px; vertical-align: middle;'>
       </div>
-    ")),
-    HTML(glue("
+    "
+    )),
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 2</b><br>
         <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$veh_mileage)}</span><br>
@@ -160,8 +179,10 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
         <img src='{alt2$image2}' style='width: 230px; vertical-align: middle;'>
       </div>
-    ")),
-    HTML(glue("
+    "
+    )),
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 3</b><br>
         <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$veh_mileage)}</span><br>
@@ -170,7 +191,8 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
         <img src= '{alt3$image2}' style='width: 230px;  vertical-align: middle;'>
       </div>
-    "))
+    "
+    ))
   )
   return(options)
 }
@@ -182,7 +204,6 @@ battery_respondentID <- sample(battery_survey$respID, 1)
 
 # Server setup
 server <- function(input, output, session) {
-
   # ### Start of Dynata setup ###
   #
   # # Secret key
@@ -270,8 +291,8 @@ server <- function(input, output, session) {
   # Store the completion code in the survey data
   sd_store_value(completion_code)
 
-  sd_store_value(respondentID,"respID")
-  sd_store_value(battery_respondentID,"respID")
+  sd_store_value(respondentID, "respID")
+  sd_store_value(battery_respondentID, "respID")
 
   # Create random assignment when session starts
   prime_groups <- c('prime_short', 'prime_long')
@@ -284,18 +305,19 @@ server <- function(input, output, session) {
   df <- survey %>%
     filter(respID == respondentID) |>
     mutate(
-      `range`=case_when(
+      `range` = case_when(
         str_detect(`range`, "\\(") ~ str_replace(`range`, "\\s*\\(", "<br>("),
         TRUE ~ paste0(`range`, "<br>")
       ),
-      operating_cost=case_when(
-        str_detect(operating_cost, "\\(") ~ str_replace(operating_cost, "\\s*\\(", "<br>("),
+      operating_cost = case_when(
+        str_detect(operating_cost, "\\(") ~
+          str_replace(operating_cost, "\\s*\\(", "<br>("),
         TRUE ~ paste0(operating_cost, "<br>")
       )
     )
 
   battery_df <- battery_survey |>
-    filter(respID == battery_respondentID)|>
+    filter(respID == battery_respondentID) |>
     # Paste on the "images/" path (images are stored in the "images" folder)
     mutate(
       # battery_refurbish= case_when(battery_refurbish=="Original" ~"Original",
@@ -306,17 +328,17 @@ server <- function(input, output, session) {
       image2 = paste0("images/battery_choices_version2/", image_degradation)
     )
 
-
   df_filtered_vehicle_type <- reactive({
-    req(input$next_veh_style)  # ensures input is available
+    req(input$next_veh_style) # ensures input is available
 
-    df %>% {
-      if (input$next_veh_style == "Car / sedan / hatchback") {
-        filter(., vehicle_type == "car")
-      } else {
-        filter(., vehicle_type == "suv")
+    df %>%
+      {
+        if (input$next_veh_style == "Car / sedan / hatchback") {
+          filter(., vehicle_type == "car")
+        } else {
+          filter(., vehicle_type == "suv")
+        }
       }
-    }
   })
 
   budget <- reactive({
@@ -328,125 +350,161 @@ server <- function(input, output, session) {
   chosen_input <- reactive({
     selected <- if (!is.null(input$next_veh_car_images)) {
       input$next_veh_car_images
-    }
-    else {
+    } else {
       input$next_veh_suv_images
     }
 
     chosen_src <- paste0(
-      'images/car-images/', selected, '.png'
+      'images/car-images/',
+      selected,
+      '.png'
     )
 
     return(chosen_src)
   })
 
-
   # Vehicle DCE -- Button Format
   observe(
     {
-      df<-df_filtered_vehicle_type()
+      df <- df_filtered_vehicle_type()
       # Run observer that updates the chosen_image when an image is chosen
 
-      output$make_table_short_0 <-create_car_table_short(chosen_input())
-      output$make_table_short_1 <-create_car_table_short(chosen_input())
-      output$make_table_short_2 <-create_car_table_short(chosen_input())
-      output$make_table_short_3 <-create_car_table_short(chosen_input())
-      output$make_table_short_4 <-create_car_table_short(chosen_input())
-      output$make_table_short_5 <-create_car_table_short(chosen_input())
-      output$make_table_short_6 <-create_car_table_short(chosen_input())
+      output$make_table_short_0 <- create_car_table_short(chosen_input())
+      output$make_table_short_1 <- create_car_table_short(chosen_input())
+      output$make_table_short_2 <- create_car_table_short(chosen_input())
+      output$make_table_short_3 <- create_car_table_short(chosen_input())
+      output$make_table_short_4 <- create_car_table_short(chosen_input())
+      output$make_table_short_5 <- create_car_table_short(chosen_input())
+      output$make_table_short_6 <- create_car_table_short(chosen_input())
 
       ##### vehicle_cbc1_options -- vehicle_cbc6_options
 
       # Create the options for each choice question
       vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget())
-      vehicle_cbc1_options <- vehicle_cbc_options(df |> filter(qID == 1), budget())
-      vehicle_cbc2_options <- vehicle_cbc_options(df |> filter(qID == 2), budget())
-      vehicle_cbc3_options <- vehicle_cbc_options(df |> filter(qID == 3), budget())
-      vehicle_cbc4_options <- vehicle_cbc_options(df |> filter(qID == 4), budget())
-      vehicle_cbc5_options <- vehicle_cbc_options(df |> filter(qID == 5), budget())
-      vehicle_cbc6_options <- vehicle_cbc_options(df |> filter(qID == 6), budget())
+      vehicle_cbc1_options <- vehicle_cbc_options(
+        df |> filter(qID == 1),
+        budget()
+      )
+      vehicle_cbc2_options <- vehicle_cbc_options(
+        df |> filter(qID == 2),
+        budget()
+      )
+      vehicle_cbc3_options <- vehicle_cbc_options(
+        df |> filter(qID == 3),
+        budget()
+      )
+      vehicle_cbc4_options <- vehicle_cbc_options(
+        df |> filter(qID == 4),
+        budget()
+      )
+      vehicle_cbc5_options <- vehicle_cbc_options(
+        df |> filter(qID == 5),
+        budget()
+      )
+      vehicle_cbc6_options <- vehicle_cbc_options(
+        df |> filter(qID == 6),
+        budget()
+      )
 
       # Create each choice question - display these in your survey using sd_output()
       # Example: sd_output('cbc_q1', type = 'question')
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q0_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q0_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc0_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q1_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q1_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc1_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q2_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q2_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc2_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q3_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q3_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc3_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q4_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q4_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc4_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q5_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q5_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc5_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q6_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q6_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc6_options,
-        width  = "70%"
+        width = "70%"
       )
-
     }
   )
 
   # Battery DCE -- Button Format
   observe(
     {
-
       # Create the options for each choice question
-      battery_cbc0_options <- battery_cbc_options(demo_battery_options,budget())
-      battery_cbc1_options <- battery_cbc_options(battery_df |> filter(qID == 1), budget())
-      battery_cbc2_options <- battery_cbc_options(battery_df |> filter(qID == 2), budget())
-      battery_cbc3_options <- battery_cbc_options(battery_df |> filter(qID == 3), budget())
-      battery_cbc4_options <- battery_cbc_options(battery_df |> filter(qID == 4), budget())
-      battery_cbc5_options <- battery_cbc_options(battery_df |> filter(qID == 5), budget())
-      battery_cbc6_options <- battery_cbc_options(battery_df |> filter(qID == 6), budget())
-
+      battery_cbc0_options <- battery_cbc_options(
+        demo_battery_options,
+        budget()
+      )
+      battery_cbc1_options <- battery_cbc_options(
+        battery_df |> filter(qID == 1),
+        budget()
+      )
+      battery_cbc2_options <- battery_cbc_options(
+        battery_df |> filter(qID == 2),
+        budget()
+      )
+      battery_cbc3_options <- battery_cbc_options(
+        battery_df |> filter(qID == 3),
+        budget()
+      )
+      battery_cbc4_options <- battery_cbc_options(
+        battery_df |> filter(qID == 4),
+        budget()
+      )
+      battery_cbc5_options <- battery_cbc_options(
+        battery_df |> filter(qID == 5),
+        budget()
+      )
+      battery_cbc6_options <- battery_cbc_options(
+        battery_df |> filter(qID == 6),
+        budget()
+      )
 
       # Create each choice question - display these in your survey using sd_output()
       sd_question(
@@ -506,11 +564,8 @@ server <- function(input, output, session) {
         option = battery_cbc6_options,
         width = "70%"
       )
-
     }
   )
-
-
 
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_forward(
@@ -536,33 +591,37 @@ server <- function(input, output, session) {
           input$next_veh_fuel_used_bev %in%
             c("neutral", "somewhat_likely", "very_likely"))) ~
       "next_veh_style_suv"
-
   )
 
   # Define any conditional display logic here (show a question if a condition is true)
   sd_show_if(
-    !is.null(input$completion_code) ~"attention_check_toyota",
+    !is.null(input$completion_code) ~ "attention_check_toyota",
 
-    input$household_veh_count!="0" ~ "household_veh_fuel",
-    !(input$household_veh_count=="1" & length(input$household_veh_fuel)==1) ~"primary_veh_fuel",
+    input$household_veh_count != "0" ~ "household_veh_fuel",
+    !(input$household_veh_count == "1" &
+      length(input$household_veh_fuel) == 1) ~
+      "primary_veh_fuel",
 
-    input$primary_veh_obtain_how %in% c("bought_dealership","leased_dealership","bought_private") ~ "primary_veh_cost",
-    input$primary_veh_obtain_how %in% c("bought_dealership","leased_dealership","bought_private") ~ "primary_veh_payment",
+    input$primary_veh_obtain_how %in%
+      c("bought_dealership", "leased_dealership", "bought_private") ~
+      "primary_veh_cost",
+    input$primary_veh_obtain_how %in%
+      c("bought_dealership", "leased_dealership", "bought_private") ~
+      "primary_veh_payment",
 
-    input$primary_veh_fuel %in% c("gas","hev","phev") ~"primary_veh_mpg",
+    input$primary_veh_fuel %in% c("gas", "hev", "phev") ~ "primary_veh_mpg",
 
-    input$next_veh_fuel_new_bev %in% c("very_unlikely","somewhat_unlikely") & input$next_veh_fuel_used_bev %in% c("very_unlikely","somewhat_unlikely") ~ "next_veh_info_nobev",
-
+    input$next_veh_fuel_new_bev %in%
+      c("very_unlikely", "somewhat_unlikely") &
+      input$next_veh_fuel_used_bev %in%
+        c("very_unlikely", "somewhat_unlikely") ~
+      "next_veh_info_nobev",
 
     input$know_electric_vehicle == "yes" ~ "write_electric_name",
 
-    prime_group_label=="prime_short"  ~ "battery_prime_short",
-    prime_group_label=="prime_long" ~ "battery_prime_long"
-
+    prime_group_label == "prime_short" ~ "battery_prime_short",
+    prime_group_label == "prime_long" ~ "battery_prime_long"
   )
-
-
-
 
   # Database designation and other settings
   sd_server(
@@ -578,8 +637,6 @@ server <- function(input, output, session) {
     use_cookies = TRUE,
     highlight_unanswered = TRUE,
     highlight_color = "gray"
-
-
   )
 }
 
