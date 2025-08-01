@@ -9,7 +9,6 @@ library(digest)
 # Database setup
 db <- sd_db_connect()
 
-
 demo_options <- tibble(
   profileID = c(1, 1, 1), # or c(1, 2, 3) if you want different IDs
   respID = c(1620, 1621, 1622), # Different response IDs
@@ -37,7 +36,6 @@ electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
 vehicle_cbc_options <- function(df, budget_select) {
-
   df <- df %>%
     mutate(
       powertrain = case_when(
@@ -230,7 +228,6 @@ server <- function(input, output, session) {
           return(value)
         }
       }
-
     }
 
     return(NULL)
@@ -301,7 +298,6 @@ server <- function(input, output, session) {
       )
       vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget_val)
 
-
       sd_question(
         type = 'mc_buttons',
         id = 'vehicle_cbc_q0_button',
@@ -347,7 +343,6 @@ server <- function(input, output, session) {
     highlight_color = "gray"
   )
 }
-
 
 # shinyApp() initiates your app - don't change it
 shiny::shinyApp(ui = sd_ui(), server = server)
