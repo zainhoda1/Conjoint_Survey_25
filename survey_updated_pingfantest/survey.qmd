@@ -131,7 +131,7 @@ suv_images <- sample(c("1_new_crossover_compact",
 sd_question(
     type  = 'mc_buttons',
     id    = 'next_veh_car_images',
-    label = "**Select a vehicle based on it's segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
+    label = "**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
     option = all_cars
   )
 
