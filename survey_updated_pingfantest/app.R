@@ -191,92 +191,49 @@ server <- function(input, output, session) {
 
   # pulling blocks outside of observe - start
   budget <- reactive({
-    # First try to get from current input
     if (!is.null(input$next_veh_budget)) {
-      value <- as.numeric(input$next_veh_budget)
-      return(value)
+      return(as.numeric(input$next_veh_budget))
     }
 
-    # If not available, try to retrieve from stored data for current session only
     stored_data <- sd_get_data(db)
-    if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
-      # Try to get the actual session_id that surveydown is using (after cookie restoration)
-      # Check if all_data has been initialized with the restored session_id
-      actual_session_id <- NULL
-      if (
-        !is.null(session$userData$all_data) &&
-          !is.null(session$userData$all_data$session_id)
-      ) {
-        actual_session_id <- session$userData$all_data$session_id
-      } else {
-        actual_session_id <- session$token
-      }
+    session_id <- session$userData$all_data$session_id %||% session$token
+    session_budget <- stored_data[
+      stored_data$session_id == session_id,
+    ]$next_veh_budget
+    valid_budget <- session_budget[!is.na(session_budget)]
 
-      # Filter to get only current session data
-      session_rows <- which(stored_data$session_id == actual_session_id)
-
-      if (length(session_rows) > 0) {
-        # Get only the current session's data
-        session_data <- stored_data[session_rows, ]
-        session_budget <- session_data$next_veh_budget[
-          !is.na(session_data$next_veh_budget)
-        ]
-
-        if (length(session_budget) > 0) {
-          # Get the most recent budget for this session
-          value <- as.numeric(session_budget[length(session_budget)])
-          return(value)
-        }
-      }
+    if (length(valid_budget) > 0) {
+      as.numeric(valid_budget[length(valid_budget)])
+    } else {
+      NULL
     }
-
-    return(NULL)
   })
 
   # This updates whenever input$images changes
   chosen_input <- reactive({
-    selected <- if (!is.null(input$next_veh_car_images)) {
-      input$next_veh_car_images
-    } else {
-      input$next_veh_suv_images
-    }
-
-    # If no input available, try to get from stored data
-    if (is.null(selected)) {
-      stored_data <- sd_get_data(db)
-      if (!is.null(stored_data)) {
-        # Try car images first
-        if ("next_veh_car_images" %in% names(stored_data)) {
-          car_values <- stored_data$next_veh_car_images
-          valid_cars <- car_values[!is.na(car_values) & car_values != ""]
-          if (length(valid_cars) > 0) {
-            selected <- valid_cars[length(valid_cars)]
-          }
-        }
-        # Try SUV images if no car image found
-        if (
-          is.null(selected) && "next_veh_suv_images" %in% names(stored_data)
-        ) {
-          suv_values <- stored_data$next_veh_suv_images
-          valid_suvs <- suv_values[!is.na(suv_values) & suv_values != ""]
-          if (length(valid_suvs) > 0) {
-            selected <- valid_suvs[length(valid_suvs)]
-          }
-        }
-      }
-    }
-
+    # First try current input
+    selected <- input$next_veh_car_images %||% input$next_veh_suv_images
+    
     if (!is.null(selected)) {
-      chosen_src <- paste0(
-        'images/car-images/',
-        selected,
-        '.png'
-      )
-      return(chosen_src)
+      return(paste0('images/car-images/', selected, '.png'))
     }
-
-    # Return a default image if nothing found
-    return('images/car-images/1_new_car_sedan_compact.png')
+    
+    # Fallback: get from current session data
+    stored_data <- sd_get_data(db)
+    session_id <- session$userData$all_data$session_id %||% session$token
+    session_data <- stored_data[stored_data$session_id == session_id, ]
+    
+    # Try car images first, then SUV images
+    car_image <- session_data$next_veh_car_images[!is.na(session_data$next_veh_car_images)]
+    suv_image <- session_data$next_veh_suv_images[!is.na(session_data$next_veh_suv_images)]
+    
+    selected <- if (length(car_image) > 0) {
+      car_image[length(car_image)]
+    } else {
+      suv_image[length(suv_image)]
+    }
+    
+    paste0('images/car-images/', selected, '.png')
   })
 
   # pulling blocks outside of observe - end
