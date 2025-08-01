@@ -7,23 +7,29 @@ library(kableExtra)
 library(digest)
 
 # Database setup
-db <-sd_db_connect()
+db <- sd_db_connect(ignore = TRUE)
 
 
 demo_options <- tibble(
-  profileID = c(1, 1, 1),  # or c(1, 2, 3) if you want different IDs
-  respID = c(1620, 1621, 1622),  # Different response IDs
+  profileID = c(1, 1, 1), # or c(1, 2, 3) if you want different IDs
+  respID = c(1620, 1621, 1622), # Different response IDs
   qID = c(1, 1, 1),
   altID = c(1, 2, 3),
   obsID = c(1, 2, 3),
-  powertrain = c('Battery electric', 'Battery electric', 'Battery electric'),  # Different powertrain codes
-  price = c(0.8, 1.2, 1.5),  # Different prices
-  range = c("225 miles on full charge<br>", "225 miles on full charge<br>", "225 miles on full charge<br>"),
+  powertrain = c('Battery electric', 'Battery electric', 'Battery electric'), # Different powertrain codes
+  price = c(0.8, 1.2, 1.5), # Different prices
+  range = c(
+    "225 miles on full charge<br>",
+    "225 miles on full charge<br>",
+    "225 miles on full charge<br>"
+  ),
   mileage = c(25000, 30000, 45000),
   make_year = c(2018, 2018, 2018),
-  operating_cost = c("7 cents per mile<br>( 46.7 MPG equivalent)",
-                     "8 cents per mile<br>( 42.3 MPG equivalent)",
-                     "9 cents per mile<br>( 55.2 MPG equivalent)"),
+  operating_cost = c(
+    "7 cents per mile<br>( 46.7 MPG equivalent)",
+    "8 cents per mile<br>( 42.3 MPG equivalent)",
+    "9 cents per mile<br>( 55.2 MPG equivalent)"
+  ),
   vehicle_type = c("car", "car", "car")
 )
 
@@ -31,7 +37,6 @@ electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
 vehicle_cbc_options <- function(df, budget_select) {
-
   df <- df %>%
     mutate(
       powertrain = case_when(
@@ -39,8 +44,7 @@ vehicle_cbc_options <- function(df, budget_select) {
           paste0(electric_icon, powertrain),
         grepl("Plug-in hybrid", powertrain, ignore.case = TRUE) ~
           paste0(gas_icon, electric_icon, powertrain),
-        TRUE ~
-          paste0(gas_icon, powertrain)
+        TRUE ~ paste0(gas_icon, powertrain)
       )
     )
 
@@ -55,7 +59,8 @@ vehicle_cbc_options <- function(df, budget_select) {
   options <- c("option_1", "option_2", "option_3")
 
   names(options) <- c(
-    HTML(glue("
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 1</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt1$powertrain}</span><br>
@@ -65,8 +70,10 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt1$operating_cost}</span><br>
       </div>
-    ")),
-    HTML(glue("
+    "
+    )),
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 2</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt2$powertrain}</span><br>
@@ -76,8 +83,10 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt2$operating_cost}</span><br>
       </div>
-    ")),
-    HTML(glue("
+    "
+    )),
+    HTML(glue(
+      "
       <div style='text-align: left;'>
         <b>Option 3</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt3$powertrain}</span><br>
@@ -87,14 +96,15 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt3$operating_cost}</span><br>
       </div>
-    "))
+    "
+    ))
   )
   return(options)
 }
 
 create_car_table_short <- function(chosen_vehicle_image) {
-
-  html_table <- sprintf('
+  html_table <- sprintf(
+    '
 
  <link rel="stylesheet" href="css/testing_table1.css">
 
@@ -109,21 +119,23 @@ create_car_table_short <- function(chosen_vehicle_image) {
 
       </body>
 
-      ', chosen_vehicle_image)
-  function() { html_table }
+      ',
+    chosen_vehicle_image
+  )
+  function() {
+    html_table
+  }
 }
 
 # Server setup
 server <- function(input, output, session) {
-
   survey <- read_csv(here('data', 'choice_questions.csv'))
   battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
   respondentID <- sample(survey$respID, 1)
   battery_respondentID <- sample(battery_survey$respID, 1)
 
-
-  sd_store_value(respondentID,"respID")
-  sd_store_value(battery_respondentID,"respID")
+  sd_store_value(respondentID, "respID")
+  sd_store_value(battery_respondentID, "respID")
 
   # Create random assignment when session starts
   prime_groups <- c('prime_short', 'prime_long')
@@ -136,31 +148,31 @@ server <- function(input, output, session) {
   df <- survey %>%
     filter(respID == respondentID) |>
     mutate(
-      `range`=case_when(
+      `range` = case_when(
         str_detect(`range`, "\\(") ~ str_replace(`range`, "\\s*\\(", "<br>("),
         TRUE ~ paste0(`range`, "<br>")
       ),
-      operating_cost=case_when(
-        str_detect(operating_cost, "\\(") ~ str_replace(operating_cost, "\\s*\\(", "<br>("),
+      operating_cost = case_when(
+        str_detect(operating_cost, "\\(") ~
+          str_replace(operating_cost, "\\s*\\(", "<br>("),
         TRUE ~ paste0(operating_cost, "<br>")
       )
     )
 
-
   df_filtered_vehicle_type <- reactive({
-    req(input$next_veh_style)  # ensures input is available
+    req(input$next_veh_style) # ensures input is available
 
-    df %>% {
-      if (input$next_veh_style == "Car / sedan / hatchback") {
-        filter(., vehicle_type == "car")
-      } else {
-        filter(., vehicle_type == "suv")
+    df %>%
+      {
+        if (input$next_veh_style == "Car / sedan / hatchback") {
+          filter(., vehicle_type == "car")
+        } else {
+          filter(., vehicle_type == "suv")
+        }
       }
-    }
-  }
-  )
+  })
 
-# pulling blocks outside of observe - start
+  # pulling blocks outside of observe - start
   budget <- reactive({
     req(input$next_veh_budget)
     value <- as.numeric(input$next_veh_budget)
@@ -170,75 +182,64 @@ server <- function(input, output, session) {
   # This updates whenever input$images changes
   chosen_input <- reactive({
     selected <- if (!is.null(input$next_veh_car_images)) {
-        input$next_veh_car_images
-        }
-      else {
+      input$next_veh_car_images
+    } else {
       input$next_veh_suv_images
-        }
+    }
 
     chosen_src <- paste0(
-    'images/car-images/', selected, '.png'
-  )
+      'images/car-images/',
+      selected,
+      '.png'
+    )
 
-  return(chosen_src)
+    return(chosen_src)
   })
-
 
   # pulling blocks outside of observe - end
 
   observe(
     {
-      df<-df_filtered_vehicle_type()
+      df <- df_filtered_vehicle_type()
 
-
-      output$make_table_short_0 <-create_car_table_short(chosen_input())
-      output$make_table_short_1 <-create_car_table_short(chosen_input())
-
+      output$make_table_short_0 <- create_car_table_short(chosen_input())
+      output$make_table_short_1 <- create_car_table_short(chosen_input())
 
       # Create the options for each choice question
-      vehicle_cbc1_options <- vehicle_cbc_options(df |> filter(qID == 1), budget())
+      vehicle_cbc1_options <- vehicle_cbc_options(
+        df |> filter(qID == 1),
+        budget()
+      )
       vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget())
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q0_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q0_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc0_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
 
       sd_question(
-        type   = 'mc_buttons',
-        id     = 'vehicle_cbc_q1_button',
-        label  = "If these were your only options, which would you choose?",
+        type = 'mc_buttons',
+        id = 'vehicle_cbc_q1_button',
+        label = "If these were your only options, which would you choose?",
         option = vehicle_cbc1_options,
-        width  = "70%",
+        width = "70%",
         direction = "horizontal"
       )
     }
   )
 
-
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_forward(
-
     # Screen out if the respondent doesn't have valid start
     # !is_valid_start() ~ "screenout",
-
-
-
-
   )
 
   # Define any conditional display logic here (show a question if a condition is true)
-  sd_show_if(
-
-
-  )
-
-
-
+  sd_show_if()
 
   # Database designation and other settings
   sd_server(
@@ -254,11 +255,8 @@ server <- function(input, output, session) {
     use_cookies = TRUE,
     highlight_unanswered = TRUE,
     highlight_color = "gray"
-
   )
-
 }
-
 
 
 # shinyApp() initiates your app - don't change it
