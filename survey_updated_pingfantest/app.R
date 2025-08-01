@@ -161,7 +161,7 @@ server <- function(input, output, session) {
       )
     )
 
-  df_filtered_vehicle_type <- reactive({
+  df_filtered <- reactive({
     # Try to get vehicle style from input first
     vehicle_style <- input$next_veh_style
 
@@ -196,7 +196,7 @@ server <- function(input, output, session) {
     }
 
     stored_data <- sd_get_data(db)
-    session_id <- session$userData$all_data$session_id %||% session$token
+    session_id <- session$userData$all_data$session_id
     session_budget <- stored_data[
       stored_data$session_id == session_id,
     ]$next_veh_budget
@@ -213,26 +213,30 @@ server <- function(input, output, session) {
   chosen_input <- reactive({
     # First try current input
     selected <- input$next_veh_car_images %||% input$next_veh_suv_images
-    
+
     if (!is.null(selected)) {
       return(paste0('images/car-images/', selected, '.png'))
     }
-    
+
     # Fallback: get from current session data
     stored_data <- sd_get_data(db)
-    session_id <- session$userData$all_data$session_id %||% session$token
+    session_id <- session$userData$all_data$session_id
     session_data <- stored_data[stored_data$session_id == session_id, ]
-    
+
     # Try car images first, then SUV images
-    car_image <- session_data$next_veh_car_images[!is.na(session_data$next_veh_car_images)]
-    suv_image <- session_data$next_veh_suv_images[!is.na(session_data$next_veh_suv_images)]
-    
+    car_image <- session_data$next_veh_car_images[
+      !is.na(session_data$next_veh_car_images)
+    ]
+    suv_image <- session_data$next_veh_suv_images[
+      !is.na(session_data$next_veh_suv_images)
+    ]
+
     selected <- if (length(car_image) > 0) {
       car_image[length(car_image)]
     } else {
       suv_image[length(suv_image)]
     }
-    
+
     paste0('images/car-images/', selected, '.png')
   })
 
@@ -244,7 +248,7 @@ server <- function(input, output, session) {
       budget_val <- budget()
       req(budget_val) # Ensure budget is available
 
-      df <- df_filtered_vehicle_type()
+      df <- df_filtered()
 
       output$make_table_short <- create_car_table_short(chosen_input())
 
