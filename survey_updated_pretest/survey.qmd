@@ -48,7 +48,7 @@ sd_next(next_page = 'consent')
 
 ## Informed Consent for Participation in a Research Study
 
-You are invited to participate in a research study directed by Dr. John Paul Helveston of the Department of Engineering Management and Systems Engineering at George Washington University (GWU). This study is funded by the Department of Energy and the National Institute of Standards and Technology. Participation is entirely voluntary and you may obtain further information regarding this study by contacting us at gwuvehiclegroup7\@gmail.com .
+You are invited to participate in a research study directed by Dr. John Paul Helveston of the Department of Engineering Management and Systems Engineering at George Washington University (GWU). This study is funded by the Department of Energy and the National Institute of Standards and Technology. Participation is entirely voluntary and you may obtain further information regarding this study by contacting us at gwuvehiclegroup25\@gmail.com .
 
 The purpose of this study is to better understand vehicle ownership patterns and preferences across different communities. If you choose to participate, you will be asked to complete an online survey, which will take approximately **15 minutes**. You may refuse to answer any of the questions and stop participating at any time.
 
@@ -604,7 +604,7 @@ We will now begin the choice tasks. We will show you **six** choice questions, s
 
 
 ```{r}
-sd_output("make_table_short_1")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q0_button", type = "question")
 
@@ -617,7 +617,7 @@ sd_next()
 ::: {#vehicle_pageQ1_button .sd-page}
 ### Question 1 of 6
 ```{r}
-sd_output("make_table_short_1")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q1_button", type = "question")
 
@@ -628,7 +628,7 @@ sd_next()
 ::: {#vehicle_pageQ2_button .sd-page}
 ### Question 2 of 6
 ```{r}
-sd_output("make_table_short_2")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q2_button", type = "question")
 
@@ -639,7 +639,7 @@ sd_next()
 ::: {#vehicle_pageQ3_button .sd-page}
 ### Question 3 of 6
 ```{r}
-sd_output("make_table_short_3")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q3_button", type = "question")
 
@@ -650,7 +650,7 @@ sd_next()
 ::: {#vehicle_pageQ4_button .sd-page}
 ### Question 4 of 6
 ```{r}
-sd_output("make_table_short_4")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q4_button", type = "question")
 
@@ -661,7 +661,7 @@ sd_next()
 ::: {#vehicle_pageQ5_button .sd-page}
 ### Question 5 of 6
 ```{r}
-sd_output("make_table_short_5")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q5_button", type = "question")
 
@@ -672,7 +672,7 @@ sd_next()
 ::: {#vehicle_pageQ6_button .sd-page}
 ### Question 6 of 6
 ```{r}
-sd_output("make_table_short_6")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q6_button", type = "question")
 
@@ -1122,7 +1122,7 @@ sd_question(
 sd_question(
   type   = 'mc_multiple',
   id     = 'employment',
-  label  = "**Which of the following category best describes your current employment status?** *Select all that apply.*",
+  label  = "**Which of the following describes your current employment status?** *Select all that apply.*",
   option = c(
     "I am a part-time or full-time student" = "student",
     "Employed, working fewer than 40 hours per week"  = "part_time",
@@ -1195,7 +1195,7 @@ sd_question(
 sd_question(
   type   = 'mc',
   id     = 'housing_type',
-  label  = "**In which type of housing do you currently live?**",
+  label  = "**What type of housing do you currently live in?**",
   option = c(
     "Single family house not attached to any other house" = "sf_detached ",
     "Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)"  = "sf_attached",

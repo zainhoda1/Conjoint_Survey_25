@@ -604,7 +604,7 @@ We will now begin the choice tasks. We will show you **six** choice questions, s
 
 
 ```{r}
-sd_output("make_table_short_1")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q0_button", type = "question")
 
@@ -617,7 +617,7 @@ sd_next()
 ::: {#vehicle_pageQ1_button .sd-page}
 ### Question 1 of 6
 ```{r}
-sd_output("make_table_short_1")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q1_button", type = "question")
 
@@ -628,7 +628,7 @@ sd_next()
 ::: {#vehicle_pageQ2_button .sd-page}
 ### Question 2 of 6
 ```{r}
-sd_output("make_table_short_2")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q2_button", type = "question")
 
@@ -639,7 +639,7 @@ sd_next()
 ::: {#vehicle_pageQ3_button .sd-page}
 ### Question 3 of 6
 ```{r}
-sd_output("make_table_short_3")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q3_button", type = "question")
 
@@ -650,7 +650,7 @@ sd_next()
 ::: {#vehicle_pageQ4_button .sd-page}
 ### Question 4 of 6
 ```{r}
-sd_output("make_table_short_4")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q4_button", type = "question")
 
@@ -661,7 +661,7 @@ sd_next()
 ::: {#vehicle_pageQ5_button .sd-page}
 ### Question 5 of 6
 ```{r}
-sd_output("make_table_short_5")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q5_button", type = "question")
 
@@ -672,7 +672,7 @@ sd_next()
 ::: {#vehicle_pageQ6_button .sd-page}
 ### Question 6 of 6
 ```{r}
-sd_output("make_table_short_6")
+sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q6_button", type = "question")
 

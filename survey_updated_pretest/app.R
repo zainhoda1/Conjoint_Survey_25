@@ -328,12 +328,28 @@ server <- function(input, output, session) {
       image2 = paste0("images/battery_choices_version2/", image_degradation)
     )
 
-  df_filtered_vehicle_type <- reactive({
-    req(input$next_veh_style) # ensures input is available
+
+  df_filtered <- reactive({
+    # Try to get vehicle style from input first
+    vehicle_style <- input$next_veh_style
+
+    # If not available, try from stored data
+    if (is.null(vehicle_style)) {
+      stored_data <- sd_get_data(db)
+      if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
+        style_values <- stored_data$next_veh_style
+        valid_styles <- style_values[!is.na(style_values)]
+        if (length(valid_styles) > 0) {
+          vehicle_style <- valid_styles[length(valid_styles)]
+        }
+      }
+    }
+
+    req(vehicle_style) # ensures we have a vehicle style
 
     df %>%
       {
-        if (input$next_veh_style == "Car / sedan / hatchback") {
+        if (vehicle_style == "Car / sedan / hatchback") {
           filter(., vehicle_type == "car")
         } else {
           filter(., vehicle_type == "suv")
@@ -343,39 +359,71 @@ server <- function(input, output, session) {
 
   budget <- reactive({
     req(input$next_veh_budget)
-    value <- as.numeric(input$next_veh_budget)
-    return(value)
+    if (!is.null(input$next_veh_budget)) {
+      return(as.numeric(input$next_veh_budget))
+    }
+
+    stored_data <- sd_get_data(db)
+    session_id <- session$userData$all_data$session_id
+    session_budget <- stored_data[
+      stored_data$session_id == session_id,
+    ]$next_veh_budget
+    valid_budget <- session_budget[!is.na(session_budget)]
+
+    if (length(valid_budget) > 0) {
+      as.numeric(valid_budget[length(valid_budget)])
+    } else {
+      NULL
+    }
   })
 
   chosen_input <- reactive({
-    selected <- if (!is.null(input$next_veh_car_images)) {
-      input$next_veh_car_images
-    } else {
-      input$next_veh_suv_images
+    # First try current input
+    selected <- input$next_veh_car_images %||% input$next_veh_suv_images
+
+    if (!is.null(selected)) {
+      return(paste0('images/car-images/', selected, '.png'))
     }
 
-    chosen_src <- paste0(
-      'images/car-images/',
-      selected,
-      '.png'
-    )
+    # Fallback: get from current session data
+    stored_data <- sd_get_data(db)
+    session_id <- session$userData$all_data$session_id
+    session_data <- stored_data[stored_data$session_id == session_id, ]
 
-    return(chosen_src)
+    # Try car images first, then SUV images
+    car_image <- session_data$next_veh_car_images[
+      !is.na(session_data$next_veh_car_images)
+    ]
+    suv_image <- session_data$next_veh_suv_images[
+      !is.na(session_data$next_veh_suv_images)
+    ]
+
+    selected <- if (length(car_image) > 0) {
+      car_image[length(car_image)]
+    } else {
+      suv_image[length(suv_image)]
+    }
+
+    paste0('images/car-images/', selected, '.png')
   })
 
   # Vehicle DCE -- Button Format
   observe(
     {
-      df <- df_filtered_vehicle_type()
+      budget_val <- budget()
+      req(budget_val) # Ensure budget is available
+
+      df <- df_filtered()
       # Run observer that updates the chosen_image when an image is chosen
 
-      output$make_table_short_0 <- create_car_table_short(chosen_input())
-      output$make_table_short_1 <- create_car_table_short(chosen_input())
-      output$make_table_short_2 <- create_car_table_short(chosen_input())
-      output$make_table_short_3 <- create_car_table_short(chosen_input())
-      output$make_table_short_4 <- create_car_table_short(chosen_input())
-      output$make_table_short_5 <- create_car_table_short(chosen_input())
-      output$make_table_short_6 <- create_car_table_short(chosen_input())
+      output$make_table_short <- create_car_table_short(chosen_input())
+      # output$make_table_short_0 <- create_car_table_short(chosen_input())
+      # output$make_table_short_1 <- create_car_table_short(chosen_input())
+      # output$make_table_short_2 <- create_car_table_short(chosen_input())
+      # output$make_table_short_3 <- create_car_table_short(chosen_input())
+      # output$make_table_short_4 <- create_car_table_short(chosen_input())
+      # output$make_table_short_5 <- create_car_table_short(chosen_input())
+      # output$make_table_short_6 <- create_car_table_short(chosen_input())
 
       ##### vehicle_cbc1_options -- vehicle_cbc6_options
 

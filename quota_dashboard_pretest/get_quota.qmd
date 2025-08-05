@@ -22,7 +22,7 @@ survey_data <- sd_get_data(db) %>%
   filter(get_start_date>="2025-07-16" )
 
 table(survey_data$get_start_date)
-date_only <- as.Date(timestamp))
+date_only <- as.Date(timestamp)
 
 
 survey_data %>%

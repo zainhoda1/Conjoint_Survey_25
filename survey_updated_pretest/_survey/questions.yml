@@ -251,29 +251,29 @@ next_veh_car_images:
   label: Select a vehicle based on it’s segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
-    '': 3_new_car_sedan_subcompact
     '': 6_new_car_hatchback_compact
-    '': 9_new_car_hatchback_subcompact_luxury
-    '': 5_new_car_sedan_fullsize_luxury
-    '': 8_new_car_sedan_midsize
-    '': 4_new_car_sedan_fullsize
     '': 7_new_car_hatchback_compact_luxury
     '': 1_new_car_sedan_compact
+    '': 3_new_car_sedan_subcompact
+    '': 9_new_car_hatchback_subcompact_luxury
+    '': 4_new_car_sedan_fullsize
+    '': 8_new_car_sedan_midsize
+    '': 5_new_car_sedan_fullsize_luxury
     '': 2_new_car_hatchback_subcompact
 next_veh_suv_images:
   type: mc_buttons
   label: Select a vehicle based on it’s segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
-    '': 6_new_crossover_subcompact
-    '': 4_new_crossover_midsize
-    '': 9_new_crossover_compact
-    '': 1_new_crossover_compact
     '': 7_new_crossover_subcompact
-    '': 8_new_suv_fullsize
-    '': 5_new_suv_fullsize
-    '': 2_new_crossover_midsize
     '': 3_new_suv_fullsize
+    '': 4_new_crossover_midsize
+    '': 5_new_suv_fullsize
+    '': 6_new_crossover_subcompact
+    '': 2_new_crossover_midsize
+    '': 8_new_suv_fullsize
+    '': 1_new_crossover_compact
+    '': 9_new_crossover_compact
 vehicle_cbc_q0_button:
   type: unknown
   label: []
@@ -686,8 +686,8 @@ hh_size:
     More than 5: more_than_5
 employment:
   type: mc_multiple
-  label: Which of the following category best describes your current employment status?
-    Select all that apply.
+  label: Which of the following describes your current employment status? Select all
+    that apply.
   options:
     I am a part-time or full-time student: student
     Employed, working fewer than 40 hours per week: part_time
@@ -746,7 +746,7 @@ education:
     Prefer not to answer: prefer_not_answer
 housing_type:
   type: mc
-  label: In which type of housing do you currently live?
+  label: What type of housing do you currently live in?
   options:
     Single family house not attached to any other house: 'sf_detached '
     Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.): sf_attached
