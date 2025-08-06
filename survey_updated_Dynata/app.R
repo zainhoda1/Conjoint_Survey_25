@@ -653,7 +653,7 @@ server <- function(input, output, session) {
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_forward(
     # Screen out if the respondent doesn't have valid start
-    # !is_valid_start() ~ "screenout",
+    !is_valid_start() ~ "screenout",
 
     input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
     input$next_veh_market %in% c("new", "both") ~ "screenout",
