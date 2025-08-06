@@ -416,14 +416,14 @@ server <- function(input, output, session) {
       df <- df_filtered()
       # Run observer that updates the chosen_image when an image is chosen
 
-      output$make_table_short <- create_car_table_short(chosen_input())
-      # output$make_table_short_0 <- create_car_table_short(chosen_input())
-      # output$make_table_short_1 <- create_car_table_short(chosen_input())
-      # output$make_table_short_2 <- create_car_table_short(chosen_input())
-      # output$make_table_short_3 <- create_car_table_short(chosen_input())
-      # output$make_table_short_4 <- create_car_table_short(chosen_input())
-      # output$make_table_short_5 <- create_car_table_short(chosen_input())
-      # output$make_table_short_6 <- create_car_table_short(chosen_input())
+      #output$make_table_short <- create_car_table_short(chosen_input())
+      output$make_table_short_0 <- create_car_table_short(chosen_input())
+      output$make_table_short_1 <- create_car_table_short(chosen_input())
+      output$make_table_short_2 <- create_car_table_short(chosen_input())
+      output$make_table_short_3 <- create_car_table_short(chosen_input())
+      output$make_table_short_4 <- create_car_table_short(chosen_input())
+      output$make_table_short_5 <- create_car_table_short(chosen_input())
+      output$make_table_short_6 <- create_car_table_short(chosen_input())
 
       ##### vehicle_cbc1_options -- vehicle_cbc6_options
 

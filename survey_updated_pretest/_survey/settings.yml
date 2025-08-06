@@ -1,0 +1,12 @@
+# ! JUST READ - don't change the content of this file
+# Server settings with final resolved parameters
+# (includes sd_server() parameters, YAML header, and defaults)
+use_cookies: yes
+auto_scroll: no
+rate_survey: no
+all_questions_required: yes
+system_language: en
+highlight_unanswered: yes
+highlight_color: gray
+capture_metadata: yes
+
