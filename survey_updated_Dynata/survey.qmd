@@ -488,7 +488,7 @@ names(all_cars) <- car_src
 sd_question(
     type  = 'mc_buttons',
     id    = 'next_veh_car_images',
-    label = "**Select a vehicle based on it’s segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
+    label = "**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
     option = all_cars
 )
   
@@ -530,7 +530,7 @@ names(all_suv) <- suv_src
 sd_question(
     type  = 'mc_buttons',
     id    = 'next_veh_suv_images',
-    label = "**Select a vehicle based on it’s segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
+    label = "**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
     option = all_suv
 )
 
