@@ -197,13 +197,15 @@ battery_cbc_options <- function(df, budget_select) {
   return(options)
 }
 
-survey <- read_csv(here('data', 'choice_questions.csv'))
-battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
-respondentID <- sample(survey$respID, 1)
-battery_respondentID <- sample(battery_survey$respID, 1)
+
 
 # Server setup
 server <- function(input, output, session) {
+  survey <- read_csv(here('data', 'choice_questions.csv'))
+  battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
+  respondentID <- sample(survey$respID, 1)
+  battery_respondentID <- sample(battery_survey$respID, 1)
+
   # ### Start of Dynata setup ###
   #
   # # Secret key
@@ -335,7 +337,7 @@ server <- function(input, output, session) {
 
     # If not available, try from stored data
     if (is.null(vehicle_style)) {
-      stored_data <- sd_get_data(db)
+      stored_data <- isolate(sd_get_data(db))
       if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
         style_values <- stored_data$next_veh_style
         valid_styles <- style_values[!is.na(style_values)]
@@ -358,12 +360,11 @@ server <- function(input, output, session) {
   })
 
   budget <- reactive({
-    req(input$next_veh_budget)
     if (!is.null(input$next_veh_budget)) {
       return(as.numeric(input$next_veh_budget))
     }
 
-    stored_data <- sd_get_data(db)
+    stored_data <- isolate(sd_get_data(db))
     session_id <- session$userData$all_data$session_id
     session_budget <- stored_data[
       stored_data$session_id == session_id,
@@ -386,7 +387,7 @@ server <- function(input, output, session) {
     }
 
     # Fallback: get from current session data
-    stored_data <- sd_get_data(db)
+    stored_data <- isolate(sd_get_data(db))
     session_id <- session$userData$all_data$session_id
     session_data <- stored_data[stored_data$session_id == session_id, ]
 
@@ -410,48 +411,43 @@ server <- function(input, output, session) {
   # Vehicle DCE -- Button Format
   observe(
     {
+	  # Force reactivity on budget changes
       budget_val <- budget()
       req(budget_val) # Ensure budget is available
 
       df <- df_filtered()
       # Run observer that updates the chosen_image when an image is chosen
 
-      #output$make_table_short <- create_car_table_short(chosen_input())
-      output$make_table_short_0 <- create_car_table_short(chosen_input())
-      output$make_table_short_1 <- create_car_table_short(chosen_input())
-      output$make_table_short_2 <- create_car_table_short(chosen_input())
-      output$make_table_short_3 <- create_car_table_short(chosen_input())
-      output$make_table_short_4 <- create_car_table_short(chosen_input())
-      output$make_table_short_5 <- create_car_table_short(chosen_input())
-      output$make_table_short_6 <- create_car_table_short(chosen_input())
+      output$make_table_short <- create_car_table_short(chosen_input())
+
 
       ##### vehicle_cbc1_options -- vehicle_cbc6_options
 
       # Create the options for each choice question
-      vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget())
+      vehicle_cbc0_options <- vehicle_cbc_options(demo_options, budget_val)
       vehicle_cbc1_options <- vehicle_cbc_options(
         df |> filter(qID == 1),
-        budget()
+        budget_val
       )
       vehicle_cbc2_options <- vehicle_cbc_options(
         df |> filter(qID == 2),
-        budget()
+        budget_val
       )
       vehicle_cbc3_options <- vehicle_cbc_options(
         df |> filter(qID == 3),
-        budget()
+        budget_val
       )
       vehicle_cbc4_options <- vehicle_cbc_options(
         df |> filter(qID == 4),
-        budget()
+        budget_val
       )
       vehicle_cbc5_options <- vehicle_cbc_options(
         df |> filter(qID == 5),
-        budget()
+        budget_val
       )
       vehicle_cbc6_options <- vehicle_cbc_options(
         df |> filter(qID == 6),
-        budget()
+        budget_val
       )
 
       # Create each choice question - display these in your survey using sd_output()
@@ -524,34 +520,36 @@ server <- function(input, output, session) {
   # Battery DCE -- Button Format
   observe(
     {
+      budget_val <- budget()
+      req(budget_val) # Ensure budget is available
       # Create the options for each choice question
       battery_cbc0_options <- battery_cbc_options(
         demo_battery_options,
-        budget()
+        budget_val
       )
       battery_cbc1_options <- battery_cbc_options(
         battery_df |> filter(qID == 1),
-        budget()
+        budget_val
       )
       battery_cbc2_options <- battery_cbc_options(
         battery_df |> filter(qID == 2),
-        budget()
+        budget_val
       )
       battery_cbc3_options <- battery_cbc_options(
         battery_df |> filter(qID == 3),
-        budget()
+        budget_val
       )
       battery_cbc4_options <- battery_cbc_options(
         battery_df |> filter(qID == 4),
-        budget()
+        budget_val
       )
       battery_cbc5_options <- battery_cbc_options(
         battery_df |> filter(qID == 5),
-        budget()
+        budget_val
       )
       battery_cbc6_options <- battery_cbc_options(
         battery_df |> filter(qID == 6),
-        budget()
+        budget_val
       )
 
       # Create each choice question - display these in your survey using sd_output()
@@ -679,12 +677,8 @@ server <- function(input, output, session) {
     #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
     #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
     #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    auto_scroll = FALSE,
-    rate_survey = FALSE,
-    language = "en",
-    use_cookies = TRUE,
-    highlight_unanswered = TRUE,
-    highlight_color = "gray"
+    use_cookies = TRUE
+
   )
 }
 

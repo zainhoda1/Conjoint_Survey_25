@@ -656,7 +656,7 @@ server <- function(input, output, session) {
     !is_valid_start() ~ "screenout",
 
     input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
-    input$next_veh_market %in% c("new", "both") ~ "screenout",
+    input$next_veh_market %in% c("new") ~ "screenout",
     input$next_veh_style %in% c("van", "truck", "other") ~ "screenout",
     input$attention_check_toyota %in% c("yes_current", "yes_past", "no") ~
       "screenout",

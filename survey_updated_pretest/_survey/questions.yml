@@ -251,29 +251,29 @@ next_veh_car_images:
   label: Select a vehicle based on it’s segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
-    6_new_car_hatchback_compact: 6_new_car_hatchback_compact
-    8_new_car_sedan_midsize: 8_new_car_sedan_midsize
-    4_new_car_sedan_fullsize: 4_new_car_sedan_fullsize
-    3_new_car_sedan_subcompact: 3_new_car_sedan_subcompact
-    1_new_car_sedan_compact: 1_new_car_sedan_compact
-    5_new_car_sedan_fullsize_luxury: 5_new_car_sedan_fullsize_luxury
     7_new_car_hatchback_compact_luxury: 7_new_car_hatchback_compact_luxury
+    8_new_car_sedan_midsize: 8_new_car_sedan_midsize
+    3_new_car_sedan_subcompact: 3_new_car_sedan_subcompact
+    5_new_car_sedan_fullsize_luxury: 5_new_car_sedan_fullsize_luxury
     9_new_car_hatchback_subcompact_luxury: 9_new_car_hatchback_subcompact_luxury
     2_new_car_hatchback_subcompact: 2_new_car_hatchback_subcompact
+    6_new_car_hatchback_compact: 6_new_car_hatchback_compact
+    1_new_car_sedan_compact: 1_new_car_sedan_compact
+    4_new_car_sedan_fullsize: 4_new_car_sedan_fullsize
 next_veh_suv_images:
   type: mc_buttons
-  label: Select a vehicle based on it’s segment / style that is most closely aligned
+  label: Select a vehicle based on its segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
-    8_new_suv_fullsize: 8_new_suv_fullsize
-    6_new_crossover_subcompact: 6_new_crossover_subcompact
-    1_new_crossover_compact: 1_new_crossover_compact
-    9_new_crossover_compact: 9_new_crossover_compact
-    7_new_crossover_subcompact: 7_new_crossover_subcompact
-    3_new_suv_fullsize: 3_new_suv_fullsize
     5_new_suv_fullsize: 5_new_suv_fullsize
-    2_new_crossover_midsize: 2_new_crossover_midsize
     4_new_crossover_midsize: 4_new_crossover_midsize
+    3_new_suv_fullsize: 3_new_suv_fullsize
+    1_new_crossover_compact: 1_new_crossover_compact
+    2_new_crossover_midsize: 2_new_crossover_midsize
+    9_new_crossover_compact: 9_new_crossover_compact
+    8_new_suv_fullsize: 8_new_suv_fullsize
+    7_new_crossover_subcompact: 7_new_crossover_subcompact
+    6_new_crossover_subcompact: 6_new_crossover_subcompact
 vehicle_cbc_q0_button:
   type: unknown
   label: []
@@ -374,7 +374,7 @@ run_on_gasoline:
     I’m not sure: not_sure
 plugged_in:
   type: mc_multiple
-  label: Please select which vehicles can be plugged-in. Select all that apply.
+  label: Please select which vehicles can be plugged in. Select all that apply.
   options:
     Gas hybrid electric vehicle: hev
     Plug-in hybrid electric vehicle: phev

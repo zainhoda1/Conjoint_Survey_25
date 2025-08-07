@@ -1,0 +1,12 @@
+name: Survey
+title: Survey
+username: gwu-vehicle-lab
+account: gwu-vehicle-lab
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15170255
+bundleId: 10735932
+url: https://gwu-vehicle-lab.shinyapps.io/Survey/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
