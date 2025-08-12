@@ -19,10 +19,9 @@ function(input, output, session) {
   # Get data reactively
   survey_data <- reactive({
     db <- sd_db_connect()
-    sd_get_data(db)
-    # %>%
-    #   mutate(get_start_date =as.Date(as.POSIXct(time_start, tz = "UTC"))) %>%
-    #   filter(get_start_date>="2025-07-16" )
+    sd_get_data(db)%>%
+      mutate(get_start_date =as.Date(as.POSIXct(time_start, tz = "UTC"))) %>%
+      filter(get_start_date>="2025-08-07" )
   })
 
   # Acceptance distribution

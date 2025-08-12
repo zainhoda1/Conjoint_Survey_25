@@ -19,7 +19,7 @@ library(tidyr)
 db <- sd_db_connect()
 survey_data <- sd_get_data(db) %>% 
   mutate(get_start_date =as.Date(as.POSIXct(time_start, tz = "UTC"))) %>% 
-  filter(get_start_date>="2025-07-16" )
+  filter(get_start_date<="2025-08-07" )
 
 table(survey_data$get_start_date)
 date_only <- as.Date(timestamp)

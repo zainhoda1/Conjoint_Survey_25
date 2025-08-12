@@ -11,6 +11,7 @@ library(shiny)
 library(surveydown)
 library(DT)
 library(tidyverse)
+library(lubridate)
 
 # Define server logic required to draw a histogram
 function(input, output, session) {
@@ -19,10 +20,10 @@ function(input, output, session) {
   # Get data reactively
   survey_data <- reactive({
     db <- sd_db_connect()
-    sd_get_data(db)
-    # %>% 
-    #   mutate(get_start_date =as.Date(as.POSIXct(time_start, tz = "UTC"))) %>% 
-    #   filter(get_start_date>="2025-07-16" )
+    sd_get_data(db)%>%
+      #mutate(get_start_date =as.Date(as.POSIXct(time_start, tz = "UTC"))) %>%
+      mutate(get_start_datetime = ymd_hms(time_start, tz = "UTC")) %>% 
+      filter(get_start_datetime>"2025-08-08 01:52:00 UTC" )
   })
   
   
