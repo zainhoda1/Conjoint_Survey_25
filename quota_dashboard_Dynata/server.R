@@ -23,7 +23,7 @@ function(input, output, session) {
     sd_get_data(db)%>%
       #mutate(get_start_date =as.Date(as.POSIXct(time_start, tz = "UTC"))) %>%
       mutate(get_start_datetime = ymd_hms(time_start, tz = "UTC")) %>% 
-      filter(get_start_datetime>"2025-08-08 01:52:00 UTC" )
+      filter(get_start_datetime>"2025-08-14 13:22:57 UTC" )
   })
   
   
