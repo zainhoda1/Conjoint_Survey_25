@@ -11,8 +11,18 @@ options(dplyr.width = Inf) # So you can see all of the columns
 # -----------------------------------------------------------------------------
 # Load the data set:
 
-data <- read_csv(here("code files", "modeling",  "choice_data.csv"))
+data <- read_csv(here("code files", "testing_initial_data_modeling",  "vehicle_choice_data.csv"))
 head(data)
+
+data <- data %>%
+  mutate(oper_cost = parse_number(operating_cost),
+         range = parse_number (range),
+         age = 2025- make_year,
+         price = price/1000,
+         range = range /10, 
+         mileage = mileage /1000
+         )
+
 
 # Estimate MNL model
 
@@ -29,9 +39,17 @@ model <- logitr(
   obsID   = "obs_id",
   pars = c(
     "price",
+    "mileage",
+    "age",
+    "oper_cost",
+    "range",
     "powertrain_battery_electric",
-    "powertrain_gas_hybrid", "powertrain_plug_in_hybrid")
+    "powertrain_gas_hybrid",
+    "powertrain_plug_in_hybrid"
+    )
 )
+
+
 
 
 # View summary of results

@@ -28,7 +28,7 @@ demo_options <- tibble(
   operating_cost = c(
     "7 cents per mile<br>( 46.7 MPG equivalent)",
     "8 cents per mile<br>( 42.3 MPG equivalent)",
-    "9 cents per mile<br>( 55.2 MPG equivalent)"
+    "9 cents per mile<br>( 37.0 MPG equivalent)"
   ),
   vehicle_type = c("car", "car", "car")
 )

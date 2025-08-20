@@ -30,13 +30,13 @@ data <- data_raw %>%
     time_end =  ymd_hms(time_end, tz = "UTC"),
     time_total = as.numeric(time_end - time_start, units = "secs"),
     # Compute time through just the cbc questions
-    time_p_vehicle_pageQ1_button =  ymd_hms(time_p_vehicle_pageQ1_button, tz = "UTC"),
-    time_p_vehicle_pageQ6_button =  ymd_hms(time_p_vehicle_pageQ6_button, tz = "UTC"),
-    time_cbc_total = as.numeric(time_p_vehicle_pageQ6_button - time_p_vehicle_pageQ1_button, units = "secs")
+    time_p_battery_pageQ1_button =  ymd_hms(time_p_battery_pageQ1_button, tz = "UTC"),
+    time_p_battery_pageQ6_button =  ymd_hms(time_p_battery_pageQ6_button, tz = "UTC"),
+    time_cbc_total = as.numeric(time_p_battery_pageQ6_button - time_p_battery_pageQ1_button, units = "secs")
   ) %>%
   # Select important columns
   select(
-    session_id, time_start, time_total, time_cbc_total, respID, next_veh_budget , next_veh_style, current_page, starts_with("vehicle_cbc_q")
+    session_id, time_start, time_total, time_cbc_total, respID, next_veh_budget , next_veh_style, current_page, starts_with("battery_cbc_q")
   )
 
 head(data)
@@ -61,32 +61,35 @@ data <- data %>%
 nrow(data)
 
 
+data$battery_cbc_q6_button <- data$battery_cbc_q4_button # line added to account for missing Question 6 
+
+
 # Drop anyone who didn't complete all choice questions
 data <- data %>%
-  filter(!is.na(vehicle_cbc_q1_button)) %>%
-  filter(!is.na(vehicle_cbc_q2_button)) %>%
-  filter(!is.na(vehicle_cbc_q3_button)) %>%
-  filter(!is.na(vehicle_cbc_q4_button)) %>%
-  filter(!is.na(vehicle_cbc_q5_button)) %>%
-  filter(!is.na(vehicle_cbc_q6_button))
+  filter(!is.na(battery_cbc_q1_button)) %>%
+  filter(!is.na(battery_cbc_q2_button)) %>%
+  filter(!is.na(battery_cbc_q3_button)) %>%
+  filter(!is.na(battery_cbc_q4_button)) %>%
+  filter(!is.na(battery_cbc_q5_button))  %>%
+  filter(!is.na(battery_cbc_q6_button))
 nrow(data)
 
 # Drop anyone who got the demo question wrong:
 
 data <- data %>% 
-  filter(vehicle_cbc_q0_button == 'option_1' ) %>%
-  select(-vehicle_cbc_q0_button)
+  filter(battery_cbc_q0_button == 'option_3' ) %>%
+  select(-battery_cbc_q0_button)
 nrow(data)
 
 
 # Drop anyone who answered the same question for all choice questions
 data <- data %>%
   mutate(cbc_all_same =
-           (vehicle_cbc_q1_button == vehicle_cbc_q2_button) &
-           (vehicle_cbc_q2_button == vehicle_cbc_q3_button) &
-           (vehicle_cbc_q3_button == vehicle_cbc_q4_button) &
-           (vehicle_cbc_q4_button == vehicle_cbc_q5_button) &
-           (vehicle_cbc_q5_button == vehicle_cbc_q6_button)
+           (battery_cbc_q1_button == battery_cbc_q2_button) &
+           (battery_cbc_q2_button == battery_cbc_q3_button) &
+           (battery_cbc_q3_button == battery_cbc_q4_button) &
+           (battery_cbc_q4_button == battery_cbc_q5_button) &
+           (battery_cbc_q5_button == battery_cbc_q6_button) 
   ) %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
@@ -115,34 +118,34 @@ nrow(data)
 # First convert the data to long format
 choice_data <- data %>%
   pivot_longer(
-    cols = vehicle_cbc_q1_button:vehicle_cbc_q6_button,
+    cols = battery_cbc_q1_button:battery_cbc_q6_button,
     names_to = "qID",
     values_to = "choice") %>%
   # Convert the qID variable and choice column to a number
   mutate(
     qID = parse_number(qID),
     choice = parse_number(choice),
-    vehicle_type = case_when(
-      next_veh_style == 'Car / sedan / hatchback' ~ 'car',
-      next_veh_style == 'SUV / crossover' ~ 'suv'
-    )
+    # vehicle_type = case_when(
+    #   next_veh_style == 'Car / sedan / hatchback' ~ 'car',
+    #   next_veh_style == 'SUV / crossover' ~ 'suv'
+    # )
   )%>%
   select(-next_veh_style)
 
 head(choice_data)
 
 # Read in choice questions and join it to the choice_data
-survey <- read_csv(here("survey_updated_dynata", "data", "choice_questions.csv"))
+survey <- read_csv(here("survey_updated_dynata", "data", "battery_choice_questions.csv"))
 
-c1 <- choice_data
-                   
+
+
 choice_data <- choice_data %>%
-  left_join(survey, by = c( "vehicle_type", "respID", "qID"))
+  left_join(survey, by = c("respID", "qID"))
 
 # Convert choice column to 1 or 0 based on if the alternative was chosen
 choice_data <- choice_data %>%
   mutate(choice = ifelse(choice == altID, 1, 0),
-         price = price * next_veh_budget) 
+         veh_price = veh_price * next_veh_budget) 
 
 head(choice_data)
 
@@ -160,4 +163,4 @@ choice_data <- choice_data %>%
 head(choice_data)
 
 # Save cleaned data for modeling
-write_csv(choice_data, here("code files", "testing_initial_data_modeling",  "vehicle_choice_data.csv"))
+write_csv(choice_data, here("code files", "testing_initial_data_modeling",  "battery_choice_data.csv"))
