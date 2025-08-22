@@ -1,6 +1,8 @@
 ---
-format: html
-editor: visual
+format:
+  html:
+    embed-resources: true
+    standalone: true
 ---
 
 
@@ -143,7 +145,7 @@ summary(model1)
 ```
 
 ## Interpretations: 
--   Negative preference to Vehicle price and batery degradation as expected.
+-   Negative preference to battery degradation as expected.
 
 
 
@@ -169,3 +171,5 @@ model3 <- logitr(
 summary(model3)
 ```
 
+## Interpretations: 
+-   Negative preference to high battery degradation (degradation_high_1) as expected.
