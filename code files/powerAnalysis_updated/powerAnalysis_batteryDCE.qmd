@@ -74,8 +74,8 @@ priors_fixed <- cbc_priors(
   veh_price            = -0.1,      # Each $20000 increase reduces utility by 0.1
   battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
   battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
-  battery_degradation  = -0.5,          # Each 1% of degradation increases subtracts utility by 0.5
-  no_choice = 0
+  battery_degradation  = -0.5         # Each 1% of degradation increases subtracts utility by 0.5
+
 )
 
 priors_fixed
@@ -89,8 +89,7 @@ priors_random_parameter <- cbc_priors(
   veh_price = -0.1, # Assume $1,000 price increase = -0.1 utility
   battery_refurbish = rand_spec("n", c(-1.0, -0.5), c(0.1, 0.1)), # Reference = "original"
   battery_range_year0 = 0.5,   # Each 100 mile of range adds utility by 0.5
-  battery_degradation = -0.5, # 1% increase in degradation = -1 utility
-  no_choice = 0
+  battery_degradation = -0.5 # 1% increase in degradation = -1 utility
 )
 
 priors_random_parameter
@@ -120,8 +119,8 @@ design_random_fixed_parameter <- cbc_design(
   n_resp   = 3000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
-  remove_dominant = TRUE,
-  no_choice = TRUE
+  remove_dominant = TRUE
+
 ) 
 
 design_random_random_parameter <- cbc_design(
@@ -131,8 +130,7 @@ design_random_random_parameter <- cbc_design(
   n_resp   = 3000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
-  remove_dominant = TRUE,
-  no_choice = TRUE
+  remove_dominant = TRUE
 ) 
 ```
 

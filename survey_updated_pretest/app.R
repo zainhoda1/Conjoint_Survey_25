@@ -34,19 +34,21 @@ demo_options <- tibble(
 
 
 demo_battery_options <- tibble(
-  qID = c(1, 1, 1),
-  altID = c(1, 2, 3),
-  veh_mileage = c(30000, 30000, 30000),
-  veh_price = c(1.1, 1, 0.5),
+  qID = c(1, 1, 1, 1),
+  altID = c(1, 2, 3, 4),
+  veh_mileage = c(30000, 30000, 30000, 30000),
+  veh_price = c(1.1, 1, 0.5, 0.5),
   image1 = c(
     "images/battery_survey_battery_original_text.png",
     "images/battery_survey_battery_original_text.png",
-    "images/battery_survey_battery_original_text.png"
+    "images/battery_survey_battery_original_text.png",
+    "images/no_choice.png" #  Line added
   ),
   image2 = c(
     "images/battery_choices_version2/Range_Degradation_200_8.png",
     "images/battery_choices_version2/Range_Degradation_280_4.png",
-    "images/battery_choices_version2/Range_Degradation_360_1.png"
+    "images/battery_choices_version2/Range_Degradation_360_1.png",
+    "images/battery_choices_version2/Range_Degradation_360_1.png" # Line added
   )
 )
 
@@ -148,16 +150,18 @@ battery_cbc_options <- function(df, budget_select) {
   alt1 <- df |> filter(altID == 1)
   alt2 <- df |> filter(altID == 2)
   alt3 <- df |> filter(altID == 3)
+  alt4 <- df |> filter(altID == 4) # Line added
 
   alt1$price <- alt1$veh_price * budget_select
   alt2$price <- alt2$veh_price * budget_select
   alt3$price <- alt3$veh_price * budget_select
+  alt4$price <- alt4$veh_price * budget_select  # Line added
 
-  options <- c("option_1", "option_2", "option_3")
+  options <- c("option_1", "option_2", "option_3", "option_4")
 
   # <span style='font-size: 13px;'>{alt3$battery_refurbish}</span>
   names(options) <- c(
-    HTML(glue(
+    glue(
       "
       <div style='text-align: left;'>
         <b>Option 1</b><br>
@@ -165,11 +169,11 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
         <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='{alt1$image1}' style='width: 70px; vertical-align: left;'><br>
         <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
-        <img src='{alt1$image2}' style='width: 230px; vertical-align: middle;'>
+        <img src='{alt1$image2}' style='width: 160px; vertical-align: middle;'>
       </div>
     "
-    )),
-    HTML(glue(
+    ),
+    glue(
       "
       <div style='text-align: left;'>
         <b>Option 2</b><br>
@@ -177,11 +181,11 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
         <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='{alt2$image1}' style='width: 70px; vertical-align: left;'><br>
         <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
-        <img src='{alt2$image2}' style='width: 230px; vertical-align: middle;'>
+        <img src='{alt2$image2}' style='width: 160px; vertical-align: middle;'>
       </div>
     "
-    )),
-    HTML(glue(
+    ),
+    glue(
       "
       <div style='text-align: left;'>
         <b>Option 3</b><br>
@@ -189,20 +193,28 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {(scales::comma(alt3$price))}</span><br>
         <b><span style='font-size: 13px;'>Battery refurbishment:</span></b><br> <img src='{alt3$image1}' style='width: 70px; vertical-align: left;'></span><br>
         <b><span style='font-size: 13px;'>Battery range and health:</span></b><br>
-        <img src= '{alt3$image2}' style='width: 230px;  vertical-align: middle;'>
+        <img src= '{alt3$image2}' style='width: 160px;  vertical-align: middle;'>
       </div>
     "
-    ))
+    ),
+    glue(
+      "
+      <div style='text-align: left;'>
+      <b>Option 4</b><br><br><br>
+      <img src='images/refuse.png' style='width: 160px; vertical-align: middle;'><br><br><br><br>
+      </div>
+      "
+    )
   )
   return(options)
 }
 
 
-
 # Server setup
 server <- function(input, output, session) {
   survey <- read_csv(here('data', 'choice_questions.csv'))
-  battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
+  #battery_survey1 <- read_csv(here('data', 'battery_choice_questions.csv'))
+  battery_survey <- read_csv(here('data', 'battery_choice_questions_testing_zain.csv'))
   respondentID <- sample(survey$respID, 1)
   battery_respondentID <- sample(battery_survey$respID, 1)
 
@@ -672,12 +684,12 @@ server <- function(input, output, session) {
   # Database designation and other settings
   sd_server(
     db = db,
-    all_questions_required = TRUE,
+    #all_questions_required = TRUE,
     # required_questions = c("images", "budget", "next_vehicle_purchase",
     #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
     #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
     #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    use_cookies = TRUE
+    use_cookies = FALSE
 
   )
 }
