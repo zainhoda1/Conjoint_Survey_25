@@ -78,10 +78,10 @@ cbc_inspect(design)
 
 choices <- cbc_choices(design)
 
-
-design <- design %>% 
-  clean_names()
-
+design <- design %>%
+  rename(powertrain_gas_hybrid = `powertrainGas hybrid`,
+         powertrain_plug_in_hybrid = `powertrainPlug-in hybrid`,
+         powertrain_battery_electric = `powertrainBattery electric`)
 
 
 design <- design %>%
@@ -93,7 +93,17 @@ design <- design %>%
        powertrain_plug_in_hybrid == 0 &
        powertrain_gas_hybrid == 0 &
        no_choice == 0)~ "300 miles on 1 tank"
-  ))
+  ),
+  powertrain = case_when(
+    powertrain_gas_hybrid == 1 ~ "Gas hybrid",
+    powertrain_plug_in_hybrid == 1 ~ "Plug-in hybrid",
+    powertrain_battery_electric == 1  ~ 'Battery electric',
+    (powertrain_battery_electric == 0 &
+       powertrain_plug_in_hybrid == 0 &
+       powertrain_gas_hybrid == 0 &
+       no_choice == 0)~ "Conventional"
+  )
+  )
 
 
 design_car<-design %>% mutate(vehicle_type="car")
