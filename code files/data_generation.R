@@ -23,7 +23,7 @@ profiles_used <- cbc_profiles(
 
 # Resrictions:
 
-profiles_used_restricted <- profiles_used
+#profiles_used_restricted <- profiles_used
 profiles_used_restricted <- cbc_restrict(
   profiles_used,
   # BEV range restrictions
@@ -46,6 +46,7 @@ profiles_used_restricted <- cbc_restrict(
 
 design_rand <- cbc_design(
   profiles = profiles_used_restricted,
+  method = 'stochastic',
   n_resp = 4000, # Number of respondents
   n_alts = 3, # Number of alternatives per question
   n_q = 6, # Number of questions per respondent
@@ -54,8 +55,8 @@ design_rand <- cbc_design(
 
 head(design_rand)
 
-design_rand$range_bev[design_rand$powertrainElectric != 1] <- 0
-design_rand$range_phev[design_rand$`powertrainPlug-in Hybrid` != 1] <- 0
+#design_rand$range_bev[design_rand$powertrainElectric != 1] <- 0
+#design_rand$range_phev[design_rand$`powertrainPlug-in Hybrid` != 1] <- 0
 
 # Check that counts by powertrain are even
 design_rand %>%
@@ -70,6 +71,31 @@ design_rand %>%
   )
 
 
+cbc_inspect(design_rand)
+
+choices <- cbc_choices(design_rand)
+
+#power <- cbc_power(choices)
+
+power_basic <- cbc_power(
+  data = choices,
+  outcome = "choice",
+  pars = c(
+    # Specific dummy variables
+    "range_bev",
+    "powertrainElectric",
+    "powertrainPlug-in Hybrid",
+    "powertrainHybrid"  
+  ),
+  obsID = "obsID",
+  n_q = 6,
+  n_breaks = 10
+)
+
+
+plot(power_basic, type = "power", power_threshold = 0.9)
+summary(power_basic, power_threshold = 0.9)
+
 #Checking counts:
 #cbc_balance(design_rand)
 #cbc_overlap(design_rand)
@@ -81,25 +107,6 @@ data_rand <- cbc_choices(
   obsID = "obsID"
 )
 
-# Adding price values (based on options shown to user)
-my_vec <- c()
-user_price_options <- seq(5000, 32500, 2500)
-respID <- unique(data_rand$respID)
-sampled_prices <- data.frame(
-  respID = respID,
-  user_price = sample(user_price_options, size = length(respID), replace = TRUE)
-)
-
-data_rand = left_join(data_rand, sampled_prices)
-
-# for (i in seq(1,nrow(data_rand)/18,1))
-# {
-#   val <- sample(user_price_options,1)
-#   my_vec <- c(my_vec , rep(val, times = 18))
-# }
-
-data_rand$price = data_rand$user_price * data_rand$price
-
 
 # Save data
-write_csv(data_rand, here('data', 'generated_data.csv'))
+#write_csv(data_rand, here('data', 'generated_data.csv'))

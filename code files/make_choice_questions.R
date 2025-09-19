@@ -19,9 +19,9 @@ library(janitor)
 profiles <- cbc_profiles(
   powertrain     = c('Conventional','Gas hybrid', 'Plug-in hybrid','Battery electric'),
   price          = seq(0.8, 1.1, 0.1),
-  range          = seq(50, 250, 25), # x 100
-  mileage        = seq(20000, 60000, 5000), # x 10,000
-  make_year      = seq(2015, 2023),  # (2015 - 2023)
+  range          = seq(50, 250, 25), 
+  mileage        = seq(20000, 60000, 5000), 
+  make_year      = seq(2015, 2023),  
   operating_cost = seq(3, 21, 3)
 ) 
 
@@ -57,9 +57,9 @@ duplicates <- design[duplicated(design[c('respID',
                                          'powertrainBattery electric',
                                          'price',
                                          'range',
-                                        'mileage',
-                                        'make_year',
-                                       'operating_cost' )]), ]
+                                         'mileage',
+                                         'make_year',
+                                         'operating_cost' )]), ]
 
 design <- design[!duplicated(design[c( 'respID',
                                        'qID',
@@ -71,28 +71,31 @@ design <- design[!duplicated(design[c( 'respID',
                                        'mileage',
                                        'make_year',
                                        'operating_cost')]), ]
- 
-
-cbc_inspect(design)
 
 
-choices <- cbc_choices(design)
+#cbc_inspect(design)
+
+
+#choices <- cbc_choices(design)
 
 design <- design %>%
   rename(powertrain_gas_hybrid = `powertrainGas hybrid`,
          powertrain_plug_in_hybrid = `powertrainPlug-in hybrid`,
          powertrain_battery_electric = `powertrainBattery electric`)
 
+design$operating_cost =  paste0(design$operating_cost, " cents per mile", "\n", 
+                                "("  ,round(330/design$operating_cost, 1), " MPG equivalent)")
+
 
 design <- design %>%
   mutate(range = case_when(
-    powertrain_gas_hybrid == 1 ~ "300 miles on 1 tank",
-    powertrain_plug_in_hybrid == 1 ~ "300 miles on 1 tank \n(first 40 miles electric)",
-    powertrain_battery_electric == 1  ~ paste0(design$range, " miles on full charge"),
+    powertrain_gas_hybrid == 1 ~ " ",
+    powertrain_plug_in_hybrid == 1 ~ " ",
+    powertrain_battery_electric == 1  ~ paste0("Range: ", design$range, " miles on full charge"),
     (powertrain_battery_electric == 0 &
        powertrain_plug_in_hybrid == 0 &
        powertrain_gas_hybrid == 0 &
-       no_choice == 0)~ "300 miles on 1 tank"
+       no_choice == 0)~ " "
   ),
   powertrain = case_when(
     powertrain_gas_hybrid == 1 ~ "Gas hybrid",
@@ -110,7 +113,7 @@ design_car<-design %>% mutate(vehicle_type="car")
 
 
 # Save design
-write_csv(design_car, here('survey_updated_Dynata','data', 'testing_choice_questions.csv'))
+write_csv(design_car, here('data', 'testing_choice_questions.csv'))
 
 
 power <- cbc_power(choices)
@@ -119,10 +122,3 @@ power <- cbc_power(choices)
 plot(power, type = "power", power_threshold = 0.9)
 
 summary(power, power_threshold = 0.9)
-
-
-
-
-
-
-

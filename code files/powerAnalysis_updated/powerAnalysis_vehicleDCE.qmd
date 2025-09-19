@@ -26,185 +26,49 @@ library(logitr)
 library(here)
 ```
 
-# Step 0: Data set up (Operation costs)
-## Assumptions
-```{r}
-# quantiles of MPG for the 2024 model year vehicles by for different powertrains and vehicle types. Data source: EPA or fuel_economic_gov
-dt_mpg<-as.data.frame(read.csv(here("..", "..","survey_updated_pretest","data","mpg_by_segment_fuel.csv"))) %>% 
-  # kwh per 100 miles --> kwh per mile
-  mutate(kwh_q10=kwh_q10/100,
-         kwh_q25=kwh_q25/100,
-         kwh_q50=kwh_q50/100,
-         kwh_q75=kwh_q75/100,
-         kwh_q90=kwh_q90/100
-         )
 
-
-# electricity rate per kwh https://www.chooseenergy.com/electricity-rates-by-state/ March 2025
-electricity_rate_low <- 0.11
-electricity_rate_avg <- 0.17
-electricity_rate_high <-0.33
-
-# gas rate per gallon https://www.chooseenergy.com/data-center/cost-of-driving-by-state May 2025
-gasoline_rate_low <- 2.66
-gasoline_rate_avg <- 3.18
-gasoline_rate_high <- 4.77
-
-# PHEV utility factors https://docs.nrel.gov/docs/gen/fy07/41341.pdf
-phev_uf_car<- 0.668
-phev_uf_suv<- 0.487
-
-# MPGe- One gallon of gasoline is equivalent to 33.7 kilowatt-hours (kWh) of electricity https://www.bluegrassauto.com/hybrid-and-electric-vehicle-comparisons/
-gas_electricity<- 33.7
-
-# # PHEV: Assume total range = 300 miles, electric range = 40 miles,
-# phev_total_range<- 300
-# phev_e_range<- 40
-
-```
-
-## All levels
-```{r}
-dt_mpg<-dt_mpg %>% 
-  mutate(
-    cents_mile_min=case_when(
-      powertrain=="bev" ~ electricity_rate_low*(kwh_q10)*100,
-      powertrain %in% c("cv","hev") ~ gasoline_rate_low/mpg_q90*100,
-      
-      powertrain=="phev" & vehicle_type=="car" ~ (phev_uf_car*(electricity_rate_low*(kwh_q10))+(1-phev_uf_car)*(gasoline_rate_low/mpg_q90))*100,
-      powertrain=="phev" & vehicle_type=="suv" ~ (phev_uf_suv*(electricity_rate_low*(kwh_q10))+(1-phev_uf_suv)*(gasoline_rate_low/mpg_q90))*100
-    ),
-    cents_mile_max=case_when(
-      powertrain=="bev" ~ electricity_rate_high*(kwh_q90)*100,
-      powertrain %in% c("cv","hev") ~ gasoline_rate_high/mpg_q10*100,
-      
-      powertrain=="phev" & vehicle_type=="car" ~ (phev_uf_car*(electricity_rate_high*(kwh_q90))+(1-phev_uf_car)*(gasoline_rate_high/mpg_q10))*100,
-      powertrain=="phev" & vehicle_type=="suv" ~ (phev_uf_suv*(electricity_rate_high*(kwh_q90))+(1-phev_uf_suv)*(gasoline_rate_high/mpg_q10))*100
-    )
- 
-    ) %>%
-  mutate(MPGe_min=case_when(
-    powertrain %in% c("bev","cv","hev") ~ mpg_q10,
-    
-    powertrain=="phev" & vehicle_type=="car" ~ (1 / (phev_uf_car * (kwh_q10 / gas_electricity) + (1 - phev_uf_car) * (1 / mpg_q90))),
-    powertrain=="phev" & vehicle_type=="suv" ~ (1 / (phev_uf_suv * (kwh_q10 / gas_electricity) + (1 - phev_uf_suv) * (1 / mpg_q90)))
-  ),
-  
-  MPGe_max=case_when(
-    powertrain %in% c("bev","cv","hev") ~ mpg_q90,
-    
-    powertrain=="phev" & vehicle_type=="car" ~ (1 / (phev_uf_car * (kwh_q90 / gas_electricity) + (1 - phev_uf_car) * (1 / mpg_q10))),
-    powertrain=="phev" & vehicle_type=="suv" ~ (1 / (phev_uf_suv * (kwh_q90 / gas_electricity) + (1 - phev_uf_suv) * (1 / mpg_q10)))
-  )
-    
-  ) 
-
-
-dt_mpg<-dt_mpg %>% 
-  rowwise() %>%
-  mutate(
-    quintiles = list(seq(from = cents_mile_min, to = cents_mile_max, length.out = 5))
-  ) %>%
-  unnest_wider(quintiles, names_sep = "_") %>%
-  rename_with(~ paste0("cents_mile_value_", 1:5), starts_with("quintiles")) 
-
-dt_mpg<-dt_mpg%>% 
-  rowwise() %>%
-  mutate(
-    quintiles = list(seq(from = MPGe_max, to = MPGe_min, length.out = 5))
-  ) %>%
-  unnest_wider(quintiles, names_sep = "_") %>%
-  rename_with(~ paste0("MPGe_value_", 1:5), starts_with("quintiles"))
-  
-
-# write.csv(dt_mpg, here("survey_updated_pretest","data","mpg_by_segment_fuel_cost_final.csv"),row.names = F)    
-  
-dt_mpg_expanded <- dt_mpg %>%
-  ## Display all possible values
-  # mutate(
-  #   cents_mile_value = map2(cents_mile_min_round, cents_mile_max_round, ~ .x:.y)
-  # ) %>%
-  # unnest(cents_mile_value) %>%
-  
-  ## Only display min, avg, max values
-  pivot_longer(starts_with("cents_mile_value_") | starts_with("MPGe_value_"),
-               names_to = c(".value", "rank"),
-               names_pattern = "(.*)_value_(\\d+)"
-  ) %>%
-  mutate(cents_mile=round(cents_mile,0),
-         MPGe=format(round(MPGe,1), nsmall=1)) %>% 
-  select(vehicle_type,powertrain,cents_mile, MPGe) %>%
-  mutate(operating_cost_text =  paste0(cents_mile, " cents per mile", 
-                                  " ("  ,MPGe, " MPG equivalent)")) %>% 
-  select(-MPGe)
-  
-  
-cost_list <- dt_mpg_expanded %>%
-  group_by(vehicle_type, powertrain) %>%
-  summarise(cents_mile_list = list(cents_mile), .groups = 'drop')
-
-```
-
-Operation costs by fuel type among cars
-```{r}
-dt_mpg_expanded %>%
-  filter(vehicle_type=="car") %>%
-  count(powertrain, cents_mile)
-```
-
-Operation costs by fuel type among SUVs
-```{r}
-dt_mpg_expanded %>%
-  filter(vehicle_type=="suv") %>%
-  count(powertrain, cents_mile)
-```
 
 # ----------------------------
 # For car
 ## Step 1: Generate Profiles
 ```{r}
 profiles <- cbc_profiles(
-  powertrain     = c('Conventional','Gas hybrid', 'Plug-in hybrid','Battery electric'),
-  price          = seq(0.8, 1.2, 0.1), # unit: maximum buget
-  range          = seq(0.5, 3, 0.25), # unit: 100
-  mileage        = seq(1.5, 5, 0.5), # unit: 10000
-  make_year      = seq(2, 10), # make_year 2015-2023 --> vehicle age 2-10
-  operating_cost = seq(dt_mpg_expanded %>%
-                         filter(vehicle_type == "car") %>%
-                         select(starts_with("cents")) %>%
-                         unlist() %>%
-                         min(na.rm = TRUE),
-                       dt_mpg_expanded %>%
-                         filter(vehicle_type == "car") %>%
-                         select(starts_with("cents")) %>%
-                         unlist() %>%
-                         max(na.rm = TRUE)+1) # unit: cents/mile
-) 
+  powertrain = c('Gasoline', 'Electric', 'Plug-in Hybrid', 'Hybrid'),
+  price = seq(0.8, 1.1, 0.1),
+  range_bev = c(0, seq(0.5, 2.5, 0.25)), # unit: 100
+  range_phev = c(0, seq(0.1, 0.4, 0.1)), # unit: 100
+  mileage = seq(2, 6, 0.5), # unit: 10000
+  make_year = seq(2, 10),  # vehicle age: 2 -10
+  operating_cost = seq(3, 21, 3)
+)
 
-nrow(profiles)
+
 
 ```
 
 ### Resrictions
 Only include profiles with feasible operation costs
 ```{r}
-profiles_restricted <-profiles %>% 
-  filter(
-    (powertrain == "Conventional"   & operating_cost %in% unlist(cost_list %>% filter(vehicle_type == "car", powertrain == "cv") %>% pull(cents_mile_list))) |
-    (powertrain == "Gas hybrid"     & operating_cost %in% unlist(cost_list %>% filter(vehicle_type == "car", powertrain == "hev")  %>% pull(cents_mile_list))) |
-    (powertrain == "Plug-in hybrid" & operating_cost %in% unlist(cost_list %>% filter(vehicle_type == "car", powertrain == "phev") %>% pull(cents_mile_list))) |
-    (powertrain == "Battery electric" & operating_cost %in% unlist(cost_list %>% filter(vehicle_type == "car", powertrain == "bev") %>% pull(cents_mile_list)))
-  )
-
-nrow(profiles_restricted)
-
-profiles_restricted %>%
-  group_by(powertrain, operating_cost) %>% 
-  summarise(n=n())
+profiles_restricted <- cbc_restrict(
+  profiles,
+  # BEV range restrictions
+  (powertrain == "Gasoline") & (range_bev != 0),
+  (powertrain == "Hybrid") & (range_bev != 0),
+  (powertrain == "Plug-in Hybrid") & (range_bev != 0),
+  (powertrain == "Electric") & (range_bev < 0.5),
+  # PHEV range restrictions
+  (powertrain == "Gasoline") & (range_phev != 0),
+  (powertrain == "Hybrid") & (range_phev != 0),
+  (powertrain == "Electric") & (range_phev != 0),
+  (powertrain == "Plug-in Hybrid") & (range_phev > 0.4),
+  (powertrain == "Plug-in Hybrid") & (range_phev == 0),
+  # Gas efficiency restrictions
+  (powertrain == "Gasoline") & (operating_cost < 9),
+  (powertrain != "Gasoline") & (operating_cost >= 18)
+)
 
 # table(profiles_restricted$operating_cost)
 ```
-
 
 ## Step 2: Set up priors
 
@@ -221,21 +85,27 @@ profiles_restricted %>%
 ### Fixed Parameters
 ```{r}
 priors_fixed_parameter <- cbc_priors(
-  profiles = profiles_restricted,
+  profiles = profiles,
   # powertrain: categorical (effects coded or dummy)
-  powertrain = c( -0.1, -0.2, -0.3),
+  powertrain = c("Electric" = -1.0, "Plug-in Hybrid" = 1.0,  "Hybrid" = 0.5),
   # price: scaled by 1,000s
   price = -0.1,
-  # range: scaled by 100s → positive effect
-  range = 0.5,
+  # range bev: scaled by 100s → positive effect
+  range_bev = 0.5,
+  # range phev: scaled by 100s → positive effect
+  range_phev = 0.75,
   # mileage: scaled by 10,000s → negative effect
   mileage = -0.5,
   # make_year: higher means older → negative effect
   make_year = -0.2,
   # operating cost: higher means worse → negative effect
-  operating_cost = -0.3
+  operating_cost = -0.3,
+  no_choice = 0.5
+
   
 )
+
+
 
 # priors_fixed_parameter
 ```
@@ -247,14 +117,17 @@ priors_random_parameter <- cbc_priors(
   # powertrain: categorical (effects coded or dummy)
   powertrain = rand_spec("n", c(-0.1, -0.2, -0.3), c( 0.1, 0.1, 0.1)),
   price = -0.1, # Assume $1,000 price increase = -0.1 utility
-  # range: scaled by 100s → positive effect
-  range = 0.5,
+  # range bev: scaled by 100s → positive effect
+  range_bev = 0.5,
+  # range phev: scaled by 100s → positive effect
+  range_phev = 0.75,
   # mileage: scaled by 10,000s → negative effect
   mileage = -0.5,
   # make_year: higher means older → negative effect
   make_year = -0.2,
   # operating cost: higher means worse → negative effect
-  operating_cost = -0.3
+  operating_cost = -0.3,
+  no_choice = 0.5
   
 )
 
@@ -263,518 +136,82 @@ priors_random_parameter <- cbc_priors(
 
 
 
+
 ## Step 3: Generate Designs
 
-## Different designs
-### Random Method
-- **random**: randomly samples profiles for each respondent independently; maximum diversity but may be less statistically efficient
+
+- **shortcut**: The "shortcut" method balances attribute level frequencies while avoiding duplicate profiles within questions
 
 ```{r}
-## Error- not run
-
-# design_random_fixed_parameter <- cbc_design(
-#   profiles = profiles_restricted,
-#   priors = priors_fixed_parameter,
-#   method = "random", # randomized full-factorial design
-#   n_resp   = 3000, # Number of respondents
-#   n_alts   = 3,    # Number of alternatives per question
-#   n_q      = 6,    # Number of questions per respondent #6
-#   remove_dominant = TRUE
-# )
-```
-
-```{r}
-
-design_random_fixed_parameter <- cbc_design(
-  # profiles = profiles_restricted,
+design_rand <- cbc_design(
   profiles = profiles,
+  method = 'random',
+  n_resp = 4000, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
   priors = priors_fixed_parameter,
-  method = "random", # randomized full-factorial design
-  n_resp   = 3000, # Number of respondents
-  n_alts   = 3,    # Number of alternatives per question
-  n_q      = 6,    # Number of questions per respondent #6
   remove_dominant = TRUE
-) 
-
-
+)
 ```
 
-<!-- ```{r} -->
-<!-- design_random_random_parameter <- cbc_design( -->
-<!--   profiles = profiles_restricted, -->
-<!--   priors = priors_random_parameter, -->
-<!--   method = "random", # randomized full-factorial design -->
-<!--   n_resp   = 3000, # Number of respondents -->
-<!--   n_alts   = 3,    # Number of alternatives per question -->
-<!--   n_q      = 6,    # Number of questions per respondent #6 -->
-<!--   remove_dominant = TRUE -->
-<!-- )  -->
-<!-- ``` -->
 
-
-
-<!-- ### Frequency-Based Methods -->
-<!-- - **shortcut**: balances attribute level frequencies while avoiding duplicate profiles within questions. -->
-<!-- - **minoverlap**: prioritizes minimizing attribute overlap within choice questions. -->
-<!-- - **balanced**: optimizes both frequency balance and pairwise attribute interactions. -->
-<!-- ```{r} -->
-<!-- # design_shortcut <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "shortcut", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6    # Number of questions per respondent #6 -->
-<!-- #    -->
-<!-- # ) -->
-<!-- #  -->
-<!-- # design_minoverlap <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "minoverlap", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- # ) -->
-<!-- #  -->
-<!-- # design_balanced <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "balanced", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6    # Number of questions per respondent #6 -->
-<!-- # ) -->
-
-<!-- ``` -->
-
-
-
-<!-- ### D-Optimal Methods  -->
-<!-- - **stochastic**: uses random profile swapping to minimize the d-error, accepting the first improvement found. This is a faster algorithm as a compromise between speed and exhaustiveness. -->
-
-<!-- ```{r} -->
-<!-- # design_stochastic_fixed_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "stochastic", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_fixed, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- #  -->
-<!-- # design_stochastic_random_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "stochastic", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_random_parameter, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-
-<!-- # design_stochastic_interactions <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "stochastic", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_interactions, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-
-<!-- ``` -->
-
-<!-- - **modfed**: exhaustively tests all possible profile swaps for each position. It is slower than other methods though more thorough. -->
-
-<!-- ```{r} -->
-<!-- # design_modfed_fixed_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "modfed", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_fixed, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- #  -->
-<!-- # design_modfed_random_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "modfed", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_random_parameter, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-
-<!-- # design_modfed_interactions <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "modfed", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_interactions, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-
-<!-- ``` -->
-
-<!-- - **cea**: optimizes attribute-by-attribute, testing all possible levels for each attribute. It is faster than "modfed", though requires all possible profiles and cannot accept restricted profile sets. -->
-
-<!-- ```{r} -->
-<!-- # design_cea_fixed_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "cea", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_fixed, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- #  -->
-<!-- # design_cea_random_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "cea", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_random_parameter, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-
-<!-- # design_cea_interactions <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "cea", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_interactions, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-
-<!-- ``` -->
-
-
-
-<!-- ## Design comparisons -->
-<!-- ```{r} -->
-<!-- cbc_compare( -->
-<!--   "Random_fixed_parameter" = design_random_fixed_parameter, -->
-<!--   "Random_random_parameter" = design_random_random_parameter -->
-<!--   # "Random_interactions" = design_random_interactions, -->
-<!--   # "Shortcut" = design_shortcut, -->
-<!--   # "Minoverlap" = design_minoverlap, -->
-<!--   # "Balanced" = design_balanced, -->
-
-<!--   # "Stochastic_fixed_parameter" = design_stochastic_fixed_parameter, -->
-<!--   # "Stochastic_random_parameter" = design_stochastic_random_parameter, -->
-<!--   # "Stochastic_interactions" = design_stochastic_interactions, -->
-
-<!--   # "Modfed_fixed_parameter" = design_modfed_fixed_parameter, -->
-<!--   # "Modfed_random_parameter" = design_modfed_random_parameter, -->
-<!--   # "Modfed_interactions" = design_modfed_interactions, -->
-
-<!--   # "CEA_fixed_parameter" = design_cea_fixed_parameter, -->
-<!--   # "CEA_random_parameter" = design_cea_random_parameter -->
-<!--   # "CEA_interactions" = design_cea_interactions -->
-
-<!-- ) -->
-<!-- ``` -->
-
-
-# Step 4: Inspect Design
-
-<!-- **Goal: Evaluate the quality and properties of the design.** -->
-<!-- - D-error: Lower values indicate more efficient designs -->
-<!-- - Balance: Higher scores indicate better attribute level balance -->
-<!-- - Overlap: Lower scores indicate less attribute overlap within questions -->
-<!-- - Profile usage: Higher percentages indicate better use of available profiles -->
+## Check that counts by powertrain are even
 
 ```{r}
-cbc_inspect(design_random_fixed_parameter)
+design_rand %>%
+  tibble() %>%
+  select(starts_with('power'), no_choice) %>%
+  janitor::clean_names() %>%
+  count(
+    powertrain_electric,
+    powertrain_plug_in_hybrid,
+    powertrain_hybrid,
+    no_choice
+  )
+
 ```
 
-<!-- ```{r} -->
-<!-- cbc_inspect(design_random_random_parameter) -->
-<!-- ``` -->
 
 
+```{r}
 
-<!-- ```{r} -->
-<!-- cbc_inspect(design_shortcut) -->
-<!-- ``` -->
+cbc_inspect(design_rand)
 
-<!-- ```{r} -->
-<!-- cbc_inspect(design_minoverlap) -->
-<!-- ``` -->
+choices <- cbc_choices(design_rand)
 
-<!-- ```{r} -->
-<!-- cbc_inspect(design_balanced) -->
-<!-- ``` -->
+```
 
-<!-- ```{r} -->
-<!-- cbc_inspect(design_cea_fixed_parameter) -->
-<!-- ``` -->
 
-<!-- ```{r} -->
-<!-- cbc_inspect(design_modfed_random_parameter) -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- cbc_inspect(design_modfed_fixed_parameter) -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- cbc_inspect(design_cea_random_parameter) -->
-<!-- ``` -->
-
-<!-- # Step 5: Simulate Choices -->
 
-<!-- ```{r} -->
-<!-- choices_random_fixed_parameter <- cbc_choices(design_random_fixed_parameter, priors = priors_fixed) -->
-<!-- choices_random_random_parameter <- cbc_choices(design_random_random_parameter, priors = priors_random_parameter) -->
-
-<!-- choices_shortcut <- cbc_choices(design_shortcut) -->
-<!-- choices_minoverlap <- cbc_choices(design_minoverlap) -->
-<!-- choices_balanced <- cbc_choices(design_balanced) -->
-
-<!-- choices_cea_fixed_parameter <- cbc_choices(design_cea_fixed_parameter, priors = priors_fixed) -->
-<!-- choices_cea_random_parameter <- cbc_choices(design_cea_random_parameter, priors = priors_random_parameter) -->
-
-<!-- choices_modfed_fixed_parameter <- cbc_choices(design_modfed_fixed_parameter, priors = priors_fixed) -->
-<!-- choices_modfed_random_parameter <- cbc_choices(design_modfed_random_parameter, priors = priors_random_parameter) -->
-
-<!-- ``` -->
-
-
-<!-- ## random_fixed_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_random_fixed_parameter) -->
-
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-
-<!-- ## random_random_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_random_random_parameter) -->
-
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-
-<!-- ## shortcut -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_shortcut) -->
-
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-
-<!-- ## minoverlap -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_minoverlap) -->
-
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-
-<!-- ## balanced -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_balanced) -->
 
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
+```{r}
+power <- cbc_power(choices)
 
-<!-- ## cea_fixed_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_cea_fixed_parameter) -->
 
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
 
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
+power_basic <- cbc_power(
+  data = choices,
+  outcome = "choice",
+  pars = c(
+    # Specific dummy variables
+    "range_bev",
+    "powertrainElectric",
+    "powertrainPlug-in Hybrid",
+    "powertrainHybrid"  
+  ),
+  obsID = "obsID",
+  n_q = 6,
+  n_breaks = 10
+)
 
-<!-- ## cea_random_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_cea_random_parameter) -->
 
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
+plot(power_basic, type = "power", power_threshold = 0.9)
+summary(power_basic, power_threshold = 0.9)
 
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-
-
-<!-- ## modfed_fixed_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_modfed_fixed_parameter) -->
-
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-
-<!-- ## modfed_random_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_modfed_random_parameter) -->
-
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-
-
-
-<!-- # Step 6: Assess Power -->
-<!-- ```{r} -->
-<!-- power_random_fixed_parameter <- cbc_power(choices_random_fixed_parameter) -->
-<!-- plot(power_random_fixed_parameter, type = "power", power_threshold = 0.9) -->
-
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- power_random_random_parameter <- cbc_power(choices_random_random_parameter) -->
-<!-- plot(power_random_random_parameter, type = "power", power_threshold = 0.9) -->
-
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- power_shortcut <- cbc_power(choices_shortcut) -->
-<!-- plot(power_shortcut, type = "power", power_threshold = 0.9) -->
-
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- power_minoverlap <- cbc_power(choices_minoverlap) -->
-<!-- plot(power_minoverlap, type = "power", power_threshold = 0.9) -->
-
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- power_balanced <- cbc_power(choices_balanced) -->
-<!-- plot(power_balanced, type = "power", power_threshold = 0.9) -->
-
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- power_cea_fixed_parameter <- cbc_power(choices_cea_fixed_parameter) -->
-<!-- plot(power_cea_fixed_parameter, type = "power", power_threshold = 0.9) -->
-
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- power_cea_random_parameter <- cbc_power(choices_cea_random_parameter) -->
-<!-- plot(power_cea_random_parameter, type = "power", power_threshold = 0.9) -->
-
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- power_modfed_fixed_parameter <- cbc_power(choices_modfed_fixed_parameter) -->
-<!-- plot(power_modfed_fixed_parameter, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- power_modfed_random_parameter <- cbc_power(choices_modfed_random_parameter) -->
-<!-- plot(power_modfed_random_parameter, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-
-
-<!-- ## Output -->
-<!-- ```{r} -->
-<!-- design_rand_output <-design_random %>% -->
-<!--   mutate(battery_health_year0=paste0(round(1 * 100, 0), "%"), -->
-<!--          battery_health_year3=(1-battery_degradation)^3, -->
-<!--          battery_health_year8=(1-battery_degradation)^8, -->
-<!--          # round to the closest 5 -->
-<!--          battery_range_year3=round(battery_range_year0*battery_health_year3/5)*5, -->
-<!--          battery_range_year8=round(battery_range_year0*battery_health_year8/5)*5, -->
-
-<!--          battery_health_year3=paste0(round((1-battery_degradation)^3*100,0),"%"), -->
-<!--          battery_health_year8=paste0(round((1-battery_degradation)^8*100,0),"%"), -->
-<!--          ) %>%  -->
-<!--   mutate(image_refurbishment=paste0("battery_survey_battery_", battery_refurbish, "_text",".png"), -->
-<!--     image_degradation=paste0("Range_Degradation_", battery_range_year0, "_", battery_degradation*100,".png"), -->
-<!--          ) %>%  -->
-<!--   mutate(veh_price=veh_price/15000 -->
-<!--          # battery_condition=case_when(battery_condition=="Like_new" ~ "Like new", T ~ battery_condition) -->
-<!--          # charge_freq=paste0(charge_freq," times"), -->
-<!--          # charge_DCFC=paste0(charge_DCFC,"%") -->
-<!--          ) -->
-<!-- # head(design_rand) -->
-<!-- # cbc_balance(design_rand) -->
-<!-- # cbc_overlap(design_rand) -->
-
-<!-- # write.csv(design_rand, paste0(here(),"/survey/data/battery_choice_questions.csv"), row.names = FALSE) -->
-<!-- # write.csv(design_rand_output, paste0(here(),"/data/battery_choice_questions.csv"), row.names = FALSE) -->
-<!-- ``` -->
 
+plot(power, type = "power", power_threshold = 0.9)
+summary(power, power_threshold = 0.9)
 
 
+```

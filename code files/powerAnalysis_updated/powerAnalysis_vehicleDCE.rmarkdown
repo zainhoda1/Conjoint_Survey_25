@@ -1,0 +1,232 @@
+---
+title: "Power Analysis - Vehicle Choices"
+format: html
+theme: united
+execute:
+  cache: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+
+library(tidyverse)
+library(cbcTools)
+library(logitr)
+library(here)
+```
+
+
+
+
+
+# ----------------------------
+# For car
+## Step 1: Generate Profiles
+
+
+```{r}
+profiles <- cbc_profiles(
+  powertrain = c('Gasoline', 'Electric', 'Plug-in Hybrid', 'Hybrid'),
+  price = seq(0.8, 1.1, 0.1),
+  range_bev = c(0, seq(0.5, 2.5, 0.25)), # unit: 100
+  range_phev = c(0, seq(0.1, 0.4, 0.1)), # unit: 100
+  mileage = seq(2, 6, 0.5), # unit: 10000
+  make_year = seq(2, 10),  # vehicle age: 2 -10
+  operating_cost = seq(3, 21, 3)
+)
+
+
+
+```
+
+
+
+### Resrictions
+Only include profiles with feasible operation costs
+
+
+```{r}
+profiles_restricted <- cbc_restrict(
+  profiles,
+  # BEV range restrictions
+  (powertrain == "Gasoline") & (range_bev != 0),
+  (powertrain == "Hybrid") & (range_bev != 0),
+  (powertrain == "Plug-in Hybrid") & (range_bev != 0),
+  (powertrain == "Electric") & (range_bev < 0.5),
+  # PHEV range restrictions
+  (powertrain == "Gasoline") & (range_phev != 0),
+  (powertrain == "Hybrid") & (range_phev != 0),
+  (powertrain == "Electric") & (range_phev != 0),
+  (powertrain == "Plug-in Hybrid") & (range_phev > 0.4),
+  (powertrain == "Plug-in Hybrid") & (range_phev == 0),
+  # Gas efficiency restrictions
+  (powertrain == "Gasoline") & (operating_cost < 9),
+  (powertrain != "Gasoline") & (operating_cost >= 18)
+)
+
+# table(profiles_restricted$operating_cost)
+```
+
+
+
+## Step 2: Set up priors
+
+| Attribute | Expectation | Theory  | Suggested Sign |
+|--------------|---------------|-----------|-----------|
+| powertrain       | ICEV > HEV > PHEV > BEV | Concerns about battery health | Negative (−) | 
+| price        | Lower price preferred   | Standard economic theory (price disutility)  |Negative (−)|
+| range      | More range preferred          | Reduces range anxiety    | Positive (+)|
+| mileage          | Lower mileage preferred           |Higher mileage = older/worn vehicle    |Negative (−)|
+| make_year     | Newer car preferred   | Risk aversion, resale concerns    |Negative (−)|
+| operating_cost | Lower cost preferred   |  Standard economic theory (price disutility) | Negative (−)|
+
+
+### Fixed Parameters
+
+
+```{r}
+priors_fixed_parameter <- cbc_priors(
+  profiles = profiles_restricted,
+  # powertrain: categorical (effects coded or dummy)
+  powertrain = c( -0.1, -0.2, -0.3),
+  # price: scaled by 1,000s
+  price = -0.1,
+  # range bev: scaled by 100s → positive effect
+  range_bev = 0.5,
+  # range phev: scaled by 100s → positive effect
+  range_phev = 0.75,
+  # mileage: scaled by 10,000s → negative effect
+  mileage = -0.5,
+  # make_year: higher means older → negative effect
+  make_year = -0.2,
+  # operating cost: higher means worse → negative effect
+  operating_cost = -0.3,
+  no_choice = 0.5
+  
+)
+
+# priors_fixed_parameter
+```
+
+
+
+### Random Parameters
+
+
+```{r}
+priors_random_parameter <- cbc_priors(
+  profiles = profiles_restricted,
+  # powertrain: categorical (effects coded or dummy)
+  powertrain = rand_spec("n", c(-0.1, -0.2, -0.3), c( 0.1, 0.1, 0.1)),
+  price = -0.1, # Assume $1,000 price increase = -0.1 utility
+  # range bev: scaled by 100s → positive effect
+  range_bev = 0.5,
+  # range phev: scaled by 100s → positive effect
+  range_phev = 0.75,
+  # mileage: scaled by 10,000s → negative effect
+  mileage = -0.5,
+  # make_year: higher means older → negative effect
+  make_year = -0.2,
+  # operating cost: higher means worse → negative effect
+  operating_cost = -0.3,
+  no_choice = 0.5
+  
+)
+
+# priors_random_parameter
+```
+
+
+
+
+
+
+## Step 3: Generate Designs
+
+
+- **shortcut**: The "shortcut" method balances attribute level frequencies while avoiding duplicate profiles within questions
+
+
+
+```{r}
+design_rand <- cbc_design(
+  profiles = profiles_restricted,
+  method = 'shortcut',
+  n_resp = 4000, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_parameter
+)
+```
+
+
+
+
+## Check that counts by powertrain are even
+
+
+
+```{r}
+design_rand %>%
+  tibble() %>%
+  select(starts_with('power'), no_choice) %>%
+  janitor::clean_names() %>%
+  count(
+    powertrain_electric,
+    powertrain_plug_in_hybrid,
+    powertrain_hybrid,
+    no_choice
+  )
+
+```
+
+```{r}
+
+cbc_inspect(design_rand)
+
+choices <- cbc_choices(design_rand)
+
+```
+
+```{r}
+power <- cbc_power(choices)
+
+
+
+power_basic <- cbc_power(
+  data = choices,
+  outcome = "choice",
+  pars = c(
+    # Specific dummy variables
+    "range_bev",
+    "powertrainElectric",
+    "powertrainPlug-in Hybrid",
+    "powertrainHybrid"  
+  ),
+  obsID = "obsID",
+  n_q = 6,
+  n_breaks = 10
+)
+
+
+plot(power_basic, type = "power", power_threshold = 0.9)
+summary(power_basic, power_threshold = 0.9)
+
+
+plot(power, type = "power", power_threshold = 0.9)
+summary(power, power_threshold = 0.9)
+
+
+```
