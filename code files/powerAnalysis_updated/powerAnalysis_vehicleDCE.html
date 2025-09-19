@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,10 +63,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="powerAnalysis_vehicleDCE_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="powerAnalysis_vehicleDCE_files/libs/quarto-html/anchor.min.js"></script>
 <link href="powerAnalysis_vehicleDCE_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="powerAnalysis_vehicleDCE_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="powerAnalysis_vehicleDCE_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="powerAnalysis_vehicleDCE_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="powerAnalysis_vehicleDCE_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="powerAnalysis_vehicleDCE_files/libs/bootstrap/bootstrap-5cf72aeb05ad37414ccd9374578a01f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="powerAnalysis_vehicleDCE_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -96,189 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="step-0-data-set-up-operation-costs" class="level1">
-<h1>Step 0: Data set up (Operation costs)</h1>
-<section id="assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># quantiles of MPG for the 2024 model year vehicles by for different powertrains and vehicle types. Data source: EPA or fuel_economic_gov</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dt_mpg<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(<span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">".."</span>, <span class="st">".."</span>,<span class="st">"survey_updated_pretest"</span>,<span class="st">"data"</span>,<span class="st">"mpg_by_segment_fuel.csv"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># kwh per 100 miles --&gt; kwh per mile</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kwh_q10=</span>kwh_q10<span class="sc">/</span><span class="dv">100</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">kwh_q25=</span>kwh_q25<span class="sc">/</span><span class="dv">100</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">kwh_q50=</span>kwh_q50<span class="sc">/</span><span class="dv">100</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">kwh_q75=</span>kwh_q75<span class="sc">/</span><span class="dv">100</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">kwh_q90=</span>kwh_q90<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># electricity rate per kwh https://www.chooseenergy.com/electricity-rates-by-state/ March 2025</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>electricity_rate_low <span class="ot">&lt;-</span> <span class="fl">0.11</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>electricity_rate_avg <span class="ot">&lt;-</span> <span class="fl">0.17</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>electricity_rate_high <span class="ot">&lt;-</span><span class="fl">0.33</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># gas rate per gallon https://www.chooseenergy.com/data-center/cost-of-driving-by-state May 2025</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>gasoline_rate_low <span class="ot">&lt;-</span> <span class="fl">2.66</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>gasoline_rate_avg <span class="ot">&lt;-</span> <span class="fl">3.18</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>gasoline_rate_high <span class="ot">&lt;-</span> <span class="fl">4.77</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># PHEV utility factors https://docs.nrel.gov/docs/gen/fy07/41341.pdf</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>phev_uf_car<span class="ot">&lt;-</span> <span class="fl">0.668</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>phev_uf_suv<span class="ot">&lt;-</span> <span class="fl">0.487</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># MPGe- One gallon of gasoline is equivalent to 33.7 kilowatt-hours (kWh) of electricity https://www.bluegrassauto.com/hybrid-and-electric-vehicle-comparisons/</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>gas_electricity<span class="ot">&lt;-</span> <span class="fl">33.7</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># # PHEV: Assume total range = 300 miles, electric range = 40 miles,</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># phev_total_range&lt;- 300</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># phev_e_range&lt;- 40</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="all-levels" class="level2">
-<h2 class="anchored" data-anchor-id="all-levels">All levels</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dt_mpg<span class="ot">&lt;-</span>dt_mpg <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cents_mile_min=</span><span class="fu">case_when</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      powertrain<span class="sc">==</span><span class="st">"bev"</span> <span class="sc">~</span> electricity_rate_low<span class="sc">*</span>(kwh_q10)<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      powertrain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"cv"</span>,<span class="st">"hev"</span>) <span class="sc">~</span> gasoline_rate_low<span class="sc">/</span>mpg_q90<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      powertrain<span class="sc">==</span><span class="st">"phev"</span> <span class="sc">&amp;</span> vehicle_type<span class="sc">==</span><span class="st">"car"</span> <span class="sc">~</span> (phev_uf_car<span class="sc">*</span>(electricity_rate_low<span class="sc">*</span>(kwh_q10))<span class="sc">+</span>(<span class="dv">1</span><span class="sc">-</span>phev_uf_car)<span class="sc">*</span>(gasoline_rate_low<span class="sc">/</span>mpg_q90))<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      powertrain<span class="sc">==</span><span class="st">"phev"</span> <span class="sc">&amp;</span> vehicle_type<span class="sc">==</span><span class="st">"suv"</span> <span class="sc">~</span> (phev_uf_suv<span class="sc">*</span>(electricity_rate_low<span class="sc">*</span>(kwh_q10))<span class="sc">+</span>(<span class="dv">1</span><span class="sc">-</span>phev_uf_suv)<span class="sc">*</span>(gasoline_rate_low<span class="sc">/</span>mpg_q90))<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">cents_mile_max=</span><span class="fu">case_when</span>(</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      powertrain<span class="sc">==</span><span class="st">"bev"</span> <span class="sc">~</span> electricity_rate_high<span class="sc">*</span>(kwh_q90)<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      powertrain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"cv"</span>,<span class="st">"hev"</span>) <span class="sc">~</span> gasoline_rate_high<span class="sc">/</span>mpg_q10<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      powertrain<span class="sc">==</span><span class="st">"phev"</span> <span class="sc">&amp;</span> vehicle_type<span class="sc">==</span><span class="st">"car"</span> <span class="sc">~</span> (phev_uf_car<span class="sc">*</span>(electricity_rate_high<span class="sc">*</span>(kwh_q90))<span class="sc">+</span>(<span class="dv">1</span><span class="sc">-</span>phev_uf_car)<span class="sc">*</span>(gasoline_rate_high<span class="sc">/</span>mpg_q10))<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      powertrain<span class="sc">==</span><span class="st">"phev"</span> <span class="sc">&amp;</span> vehicle_type<span class="sc">==</span><span class="st">"suv"</span> <span class="sc">~</span> (phev_uf_suv<span class="sc">*</span>(electricity_rate_high<span class="sc">*</span>(kwh_q90))<span class="sc">+</span>(<span class="dv">1</span><span class="sc">-</span>phev_uf_suv)<span class="sc">*</span>(gasoline_rate_high<span class="sc">/</span>mpg_q10))<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MPGe_min=</span><span class="fu">case_when</span>(</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    powertrain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"bev"</span>,<span class="st">"cv"</span>,<span class="st">"hev"</span>) <span class="sc">~</span> mpg_q10,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    powertrain<span class="sc">==</span><span class="st">"phev"</span> <span class="sc">&amp;</span> vehicle_type<span class="sc">==</span><span class="st">"car"</span> <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">/</span> (phev_uf_car <span class="sc">*</span> (kwh_q10 <span class="sc">/</span> gas_electricity) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> phev_uf_car) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> mpg_q90))),</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    powertrain<span class="sc">==</span><span class="st">"phev"</span> <span class="sc">&amp;</span> vehicle_type<span class="sc">==</span><span class="st">"suv"</span> <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">/</span> (phev_uf_suv <span class="sc">*</span> (kwh_q10 <span class="sc">/</span> gas_electricity) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> phev_uf_suv) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> mpg_q90)))</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">MPGe_max=</span><span class="fu">case_when</span>(</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    powertrain <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"bev"</span>,<span class="st">"cv"</span>,<span class="st">"hev"</span>) <span class="sc">~</span> mpg_q90,</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    powertrain<span class="sc">==</span><span class="st">"phev"</span> <span class="sc">&amp;</span> vehicle_type<span class="sc">==</span><span class="st">"car"</span> <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">/</span> (phev_uf_car <span class="sc">*</span> (kwh_q90 <span class="sc">/</span> gas_electricity) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> phev_uf_car) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> mpg_q10))),</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    powertrain<span class="sc">==</span><span class="st">"phev"</span> <span class="sc">&amp;</span> vehicle_type<span class="sc">==</span><span class="st">"suv"</span> <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">/</span> (phev_uf_suv <span class="sc">*</span> (kwh_q90 <span class="sc">/</span> gas_electricity) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> phev_uf_suv) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> mpg_q10)))</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>dt_mpg<span class="ot">&lt;-</span>dt_mpg <span class="sc">%&gt;%</span> </span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">quintiles =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="at">from =</span> cents_mile_min, <span class="at">to =</span> cents_mile_max, <span class="at">length.out =</span> <span class="dv">5</span>))</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(quintiles, <span class="at">names_sep =</span> <span class="st">"_"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">"cents_mile_value_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="fu">starts_with</span>(<span class="st">"quintiles"</span>)) </span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>dt_mpg<span class="ot">&lt;-</span>dt_mpg<span class="sc">%&gt;%</span> </span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">quintiles =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="at">from =</span> MPGe_max, <span class="at">to =</span> MPGe_min, <span class="at">length.out =</span> <span class="dv">5</span>))</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(quintiles, <span class="at">names_sep =</span> <span class="st">"_"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">"MPGe_value_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="fu">starts_with</span>(<span class="st">"quintiles"</span>))</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(dt_mpg, here("survey_updated_pretest","data","mpg_by_segment_fuel_cost_final.csv"),row.names = F)    </span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>dt_mpg_expanded <span class="ot">&lt;-</span> dt_mpg <span class="sc">%&gt;%</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Display all possible values</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mutate(</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   cents_mile_value = map2(cents_mile_min_round, cents_mile_max_round, ~ .x:.y)</span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ) %&gt;%</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># unnest(cents_mile_value) %&gt;%</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Only display min, avg, max values</span></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">starts_with</span>(<span class="st">"cents_mile_value_"</span>) <span class="sc">|</span> <span class="fu">starts_with</span>(<span class="st">"MPGe_value_"</span>),</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">".value"</span>, <span class="st">"rank"</span>),</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">"(.*)_value_(</span><span class="sc">\\</span><span class="st">d+)"</span></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cents_mile=</span><span class="fu">round</span>(cents_mile,<span class="dv">0</span>),</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>         <span class="at">MPGe=</span><span class="fu">format</span>(<span class="fu">round</span>(MPGe,<span class="dv">1</span>), <span class="at">nsmall=</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(vehicle_type,powertrain,cents_mile, MPGe) <span class="sc">%&gt;%</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">operating_cost_text =</span>  <span class="fu">paste0</span>(cents_mile, <span class="st">" cents per mile"</span>, </span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">" ("</span>  ,MPGe, <span class="st">" MPG equivalent)"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>MPGe)</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>cost_list <span class="ot">&lt;-</span> dt_mpg_expanded <span class="sc">%&gt;%</span></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(vehicle_type, powertrain) <span class="sc">%&gt;%</span></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cents_mile_list =</span> <span class="fu">list</span>(cents_mile), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Operation costs by fuel type among cars</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dt_mpg_expanded <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(vehicle_type<span class="sc">==</span><span class="st">"car"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(powertrain, cents_mile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 3
-   powertrain cents_mile     n
-   &lt;chr&gt;           &lt;dbl&gt; &lt;int&gt;
- 1 bev                 3     1
- 2 bev                 5     1
- 3 bev                 7     1
- 4 bev                 9     1
- 5 bev                12     1
- 6 cv                  8     1
- 7 cv                 12     1
- 8 cv                 16     1
- 9 cv                 20     1
-10 cv                 24     1
-11 hev                 5     1
-12 hev                 7     1
-13 hev                 9     1
-14 hev                11     1
-15 hev                12     1
-16 phev                3     1
-17 phev                6     1
-18 phev                8     1
-19 phev               10     1
-20 phev               12     1</code></pre>
-</div>
-</div>
-<p>Operation costs by fuel type among SUVs</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dt_mpg_expanded <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(vehicle_type<span class="sc">==</span><span class="st">"suv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(powertrain, cents_mile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 3
-   powertrain cents_mile     n
-   &lt;chr&gt;           &lt;dbl&gt; &lt;int&gt;
- 1 bev                 3     1
- 2 bev                 6     1
- 3 bev                 8     1
- 4 bev                11     1
- 5 bev                14     1
- 6 cv                  9     1
- 7 cv                 13     1
- 8 cv                 17     1
- 9 cv                 21     1
-10 cv                 25     1
-11 hev                 7     1
-12 hev                10     1
-13 hev                13     1
-14 hev                17     1
-15 hev                20     1
-16 phev                8     1
-17 phev               12     1
-18 phev               16     1
-19 phev               19     1
-20 phev               23     1</code></pre>
-</div>
-</div>
-</section>
-</section>
 <section id="section" class="level1">
 <h1>—————————-</h1>
 </section>
@@ -287,79 +104,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-1-generate-profiles" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-generate-profiles">Step 1: Generate Profiles</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>profiles <span class="ot">&lt;-</span> <span class="fu">cbc_profiles</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain     =</span> <span class="fu">c</span>(<span class="st">'Conventional'</span>,<span class="st">'Gas hybrid'</span>, <span class="st">'Plug-in hybrid'</span>,<span class="st">'Battery electric'</span>),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price          =</span> <span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.2</span>, <span class="fl">0.1</span>), <span class="co"># unit: maximum buget</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">range          =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="dv">3</span>, <span class="fl">0.25</span>), <span class="co"># unit: 100</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage        =</span> <span class="fu">seq</span>(<span class="fl">1.5</span>, <span class="dv">5</span>, <span class="fl">0.5</span>), <span class="co"># unit: 10000</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">make_year      =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>), <span class="co"># make_year 2015-2023 --&gt; vehicle age 2-10</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(dt_mpg_expanded <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"car"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"cents"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">min</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                       dt_mpg_expanded <span class="sc">%&gt;%</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"car"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"cents"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">max</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">+</span><span class="dv">1</span>) <span class="co"># unit: cents/mile</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(profiles)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 364320</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>profiles <span class="ot">&lt;-</span> <span class="fu">cbc_profiles</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain =</span> <span class="fu">c</span>(<span class="st">'Gasoline'</span>, <span class="st">'Battery Electric'</span>, <span class="st">'Plug-in Hybrid'</span>, <span class="st">'Gas Hybrid'</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>, <span class="fl">0.25</span>)), <span class="co"># unit: 100</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.5</span>), <span class="co"># unit: 10000</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">make_year =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>),  <span class="co"># vehicle age: 2 -10</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="dv">21</span>, <span class="dv">3</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="resrictions" class="level3">
 <h3 class="anchored" data-anchor-id="resrictions">Resrictions</h3>
 <p>Only include profiles with feasible operation costs</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>profiles_restricted <span class="ot">&lt;-</span>profiles <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    (powertrain <span class="sc">==</span> <span class="st">"Conventional"</span>   <span class="sc">&amp;</span> operating_cost <span class="sc">%in%</span> <span class="fu">unlist</span>(cost_list <span class="sc">%&gt;%</span> <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"car"</span>, powertrain <span class="sc">==</span> <span class="st">"cv"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(cents_mile_list))) <span class="sc">|</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    (powertrain <span class="sc">==</span> <span class="st">"Gas hybrid"</span>     <span class="sc">&amp;</span> operating_cost <span class="sc">%in%</span> <span class="fu">unlist</span>(cost_list <span class="sc">%&gt;%</span> <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"car"</span>, powertrain <span class="sc">==</span> <span class="st">"hev"</span>)  <span class="sc">%&gt;%</span> <span class="fu">pull</span>(cents_mile_list))) <span class="sc">|</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    (powertrain <span class="sc">==</span> <span class="st">"Plug-in hybrid"</span> <span class="sc">&amp;</span> operating_cost <span class="sc">%in%</span> <span class="fu">unlist</span>(cost_list <span class="sc">%&gt;%</span> <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"car"</span>, powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(cents_mile_list))) <span class="sc">|</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    (powertrain <span class="sc">==</span> <span class="st">"Battery electric"</span> <span class="sc">&amp;</span> operating_cost <span class="sc">%in%</span> <span class="fu">unlist</span>(cost_list <span class="sc">%&gt;%</span> <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"car"</span>, powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(cents_mile_list)))</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(profiles_restricted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 79200</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>profiles_restricted <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(powertrain, operating_cost) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'powertrain'. You can override using the
-`.groups` argument.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 3
-# Groups:   powertrain [4]
-   powertrain       operating_cost     n
-   &lt;fct&gt;                     &lt;int&gt; &lt;int&gt;
- 1 Conventional                  8  3960
- 2 Conventional                 12  3960
- 3 Conventional                 16  3960
- 4 Conventional                 20  3960
- 5 Conventional                 24  3960
- 6 Gas hybrid                    5  3960
- 7 Gas hybrid                    7  3960
- 8 Gas hybrid                    9  3960
- 9 Gas hybrid                   11  3960
-10 Gas hybrid                   12  3960
-11 Plug-in hybrid                3  3960
-12 Plug-in hybrid                6  3960
-13 Plug-in hybrid                8  3960
-14 Plug-in hybrid               10  3960
-15 Plug-in hybrid               12  3960
-16 Battery electric              3  3960
-17 Battery electric              5  3960
-18 Battery electric              7  3960
-19 Battery electric              9  3960
-20 Battery electric             12  3960</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table(profiles_restricted$operating_cost)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>profiles_restricted <span class="ot">&lt;-</span> <span class="fu">cbc_restrict</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  profiles,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># BEV range restrictions</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"Battery Electric"</span>) <span class="sc">&amp;</span> (range <span class="sc">&lt;</span> <span class="fl">0.5</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Gas efficiency restrictions</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"Gasoline"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="dv">9</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">!=</span> <span class="st">"Gasoline"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;=</span> <span class="dv">18</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># table(profiles_restricted$operating_cost)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -422,260 +189,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="fixed-parameters" class="level3">
 <h3 class="anchored" data-anchor-id="fixed-parameters">Fixed Parameters</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>priors_fixed_parameter <span class="ot">&lt;-</span> <span class="fu">cbc_priors</span>(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># powertrain: categorical (effects coded or dummy)</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain =</span> <span class="fu">c</span>( <span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">0.3</span>),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># price: scaled by 1,000s</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># range: scaled by 100s → positive effect</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fl">0.5</span>,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mileage: scaled by 10,000s → negative effect</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make_year: higher means older → negative effect</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">make_year =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># operating cost: higher means worse → negative effect</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="sc">-</span><span class="fl">0.3</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># priors_fixed_parameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>priors_fixed_parameter <span class="ot">&lt;-</span> <span class="fu">cbc_priors</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># powertrain: categorical (effects coded or dummy)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain =</span> <span class="fu">c</span>(<span class="st">"Battery Electric"</span> <span class="ot">=</span> <span class="sc">-</span><span class="fl">1.0</span>, <span class="st">"Plug-in Hybrid"</span> <span class="ot">=</span> <span class="fl">1.0</span>,  <span class="st">"Gas Hybrid"</span> <span class="ot">=</span> <span class="fl">0.5</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># price: scaled by 1,000s</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># range bev: scaled by 100s → positive effect</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fl">0.5</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># range phev: scaled by 100s → positive effect</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make_year: higher means older → negative effect</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">make_year =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># operating cost: higher means worse → negative effect</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">no_choice =</span> <span class="fl">0.5</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># priors_fixed_parameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="random-parameters" class="level3">
 <h3 class="anchored" data-anchor-id="random-parameters">Random Parameters</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>priors_random_parameter <span class="ot">&lt;-</span> <span class="fu">cbc_priors</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># powertrain: categorical (effects coded or dummy)</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain =</span> <span class="fu">rand_spec</span>(<span class="st">"n"</span>, <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">0.3</span>), <span class="fu">c</span>( <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>)),</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="co"># Assume $1,000 price increase = -0.1 utility</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># range: scaled by 100s → positive effect</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fl">0.5</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mileage: scaled by 10,000s → negative effect</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make_year: higher means older → negative effect</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">make_year =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># operating cost: higher means worse → negative effect</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="sc">-</span><span class="fl">0.3</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># priors_random_parameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># priors_random_parameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="step-3-generate-designs" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-generate-designs">Step 3: Generate Designs</h2>
-</section>
-<section id="different-designs" class="level2">
-<h2 class="anchored" data-anchor-id="different-designs">Different designs</h2>
-<section id="random-method" class="level3">
-<h3 class="anchored" data-anchor-id="random-method">Random Method</h3>
 <ul>
-<li><strong>random</strong>: randomly samples profiles for each respondent independently; maximum diversity but may be less statistically efficient</li>
+<li><strong>shortcut</strong>: The “shortcut” method balances attribute level frequencies while avoiding duplicate profiles within questions</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Error- not run</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># design_random_fixed_parameter &lt;- cbc_design(</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   profiles = profiles_restricted,</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   priors = priors_fixed_parameter,</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   method = "random", # randomized full-factorial design</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   n_resp   = 3000, # Number of respondents</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   n_alts   = 3,    # Number of alternatives per question</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   n_q      = 6,    # Number of questions per respondent #6</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   remove_dominant = TRUE</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>design_rand <span class="ot">&lt;-</span> <span class="fu">cbc_design</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">'random'</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_resp =</span> <span class="dv">4000</span>, <span class="co"># Number of respondents</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_alts =</span> <span class="dv">3</span>, <span class="co"># Number of alternatives per question</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_q =</span> <span class="dv">6</span>, <span class="co"># Number of questions per respondent</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">no_choice =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">priors =</span> priors_fixed_parameter</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="check-for-balance" class="level2">
+<h2 class="anchored" data-anchor-id="check-for-balance">Check for balance:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>design_random_fixed_parameter <span class="ot">&lt;-</span> <span class="fu">cbc_design</span>(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># profiles = profiles_restricted,</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">priors =</span> priors_fixed_parameter,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"random"</span>, <span class="co"># randomized full-factorial design</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_resp   =</span> <span class="dv">3000</span>, <span class="co"># Number of respondents</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_alts   =</span> <span class="dv">3</span>,    <span class="co"># Number of alternatives per question</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_q      =</span> <span class="dv">6</span>,    <span class="co"># Number of questions per respondent #6</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">remove_dominant =</span> <span class="cn">TRUE</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<!-- ```{r} -->
-<!-- design_random_random_parameter <- cbc_design( -->
-<!--   profiles = profiles_restricted, -->
-<!--   priors = priors_random_parameter, -->
-<!--   method = "random", # randomized full-factorial design -->
-<!--   n_resp   = 3000, # Number of respondents -->
-<!--   n_alts   = 3,    # Number of alternatives per question -->
-<!--   n_q      = 6,    # Number of questions per respondent #6 -->
-<!--   remove_dominant = TRUE -->
-<!-- )  -->
-<!-- ``` -->
-<!-- ### Frequency-Based Methods -->
-<!-- - **shortcut**: balances attribute level frequencies while avoiding duplicate profiles within questions. -->
-<!-- - **minoverlap**: prioritizes minimizing attribute overlap within choice questions. -->
-<!-- - **balanced**: optimizes both frequency balance and pairwise attribute interactions. -->
-<!-- ```{r} -->
-<!-- # design_shortcut <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "shortcut", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6    # Number of questions per respondent #6 -->
-<!-- #    -->
-<!-- # ) -->
-<!-- #  -->
-<!-- # design_minoverlap <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "minoverlap", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- # ) -->
-<!-- #  -->
-<!-- # design_balanced <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "balanced", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6    # Number of questions per respondent #6 -->
-<!-- # ) -->
-<!-- ``` -->
-<!-- ### D-Optimal Methods  -->
-<!-- - **stochastic**: uses random profile swapping to minimize the d-error, accepting the first improvement found. This is a faster algorithm as a compromise between speed and exhaustiveness. -->
-<!-- ```{r} -->
-<!-- # design_stochastic_fixed_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "stochastic", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_fixed, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- #  -->
-<!-- # design_stochastic_random_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "stochastic", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_random_parameter, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- # design_stochastic_interactions <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "stochastic", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_interactions, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- ``` -->
-<!-- - **modfed**: exhaustively tests all possible profile swaps for each position. It is slower than other methods though more thorough. -->
-<!-- ```{r} -->
-<!-- # design_modfed_fixed_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "modfed", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_fixed, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- #  -->
-<!-- # design_modfed_random_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "modfed", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_random_parameter, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- # design_modfed_interactions <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "modfed", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_interactions, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- ``` -->
-<!-- - **cea**: optimizes attribute-by-attribute, testing all possible levels for each attribute. It is faster than "modfed", though requires all possible profiles and cannot accept restricted profile sets. -->
-<!-- ```{r} -->
-<!-- # design_cea_fixed_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "cea", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_fixed, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- #  -->
-<!-- # design_cea_random_parameter <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "cea", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_random_parameter, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- # design_cea_interactions <- cbc_design( -->
-<!-- #   profiles = profiles, -->
-<!-- #   method = "cea", -->
-<!-- #   n_resp   = 3000, # Number of respondents -->
-<!-- #   n_alts   = 3,    # Number of alternatives per question -->
-<!-- #   n_q      = 6,    # Number of questions per respondent #6 -->
-<!-- #   priors = priors_interactions, -->
-<!-- #   n_start = 1, -->
-<!-- #   remove_dominant = TRUE -->
-<!-- # )  -->
-<!-- ``` -->
-<!-- ## Design comparisons -->
-<!-- ```{r} -->
-<!-- cbc_compare( -->
-<!--   "Random_fixed_parameter" = design_random_fixed_parameter, -->
-<!--   "Random_random_parameter" = design_random_random_parameter -->
-<!--   # "Random_interactions" = design_random_interactions, -->
-<!--   # "Shortcut" = design_shortcut, -->
-<!--   # "Minoverlap" = design_minoverlap, -->
-<!--   # "Balanced" = design_balanced, -->
-<!--   # "Stochastic_fixed_parameter" = design_stochastic_fixed_parameter, -->
-<!--   # "Stochastic_random_parameter" = design_stochastic_random_parameter, -->
-<!--   # "Stochastic_interactions" = design_stochastic_interactions, -->
-<!--   # "Modfed_fixed_parameter" = design_modfed_fixed_parameter, -->
-<!--   # "Modfed_random_parameter" = design_modfed_random_parameter, -->
-<!--   # "Modfed_interactions" = design_modfed_interactions, -->
-<!--   # "CEA_fixed_parameter" = design_cea_fixed_parameter, -->
-<!--   # "CEA_random_parameter" = design_cea_random_parameter -->
-<!--   # "CEA_interactions" = design_cea_interactions -->
-<!-- ) -->
-<!-- ``` -->
-</section>
-</section>
-</section>
-<section id="step-4-inspect-design" class="level1">
-<h1>Step 4: Inspect Design</h1>
-<!-- **Goal: Evaluate the quality and properties of the design.** -->
-<!-- - D-error: Lower values indicate more efficient designs -->
-<!-- - Balance: Higher scores indicate better attribute level balance -->
-<!-- - Overlap: Lower scores indicate less attribute overlap within questions -->
-<!-- - Profile usage: Higher percentages indicate better use of available profiles -->
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbc_inspect</span>(design_random_fixed_parameter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbc_inspect</span>(design_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>DESIGN SUMMARY
 =========================
@@ -683,391 +249,274 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 STRUCTURE
 ================
 Method: random
-Created: 2025-07-18 13:16:34
-Respondents: 3000
+Created: 2025-09-19 02:25:58
+Respondents: 4000
 Questions per respondent: 6
 Alternatives per question: 3
-Total choice sets: 18000
-Profile usage: 50044/364320 (13.7%)
+Total choice sets: 24000
+Profile usage: 42991/63180 (68.0%)
 Special features:
-  • Dominance removal: total, partial
+  • No-choice option
 
 SUMMARY METRICS
 =================
 D-error calculation not available for random designs
-Overall balance score: 0.822 (higher is better)
-Overall overlap score: 0.175 (lower is better)
+Overall balance score: 0.620 (higher is better)
+Overall overlap score: 0.142 (lower is better)
 
 VARIABLE ENCODING
 =================
 Format: Dummy-coded (powertrain)
-💡 Use cbc_decode_design() to convert to categorical format
 
 ATTRIBUTE BALANCE
 =================
-Overall balance score: 0.822 (higher is better)
+Overall balance score: 0.620 (higher is better)
 
 Individual attribute level counts:
 
-powertrainGas hybrid:
+powertrainBattery Electric:
 
     0     1 
-40506 13494 
-  Balance score: 0.586 (higher is better)
+79452 16548 
+  Balance score: 0.519 (higher is better)
 
-powertrainPlug-in hybrid:
-
-    0     1 
-40478 13522 
-  Balance score: 0.586 (higher is better)
-
-powertrainBattery electric:
+powertrainPlug-in Hybrid:
 
     0     1 
-40398 13602 
-  Balance score: 0.588 (higher is better)
+77503 18497 
+  Balance score: 0.535 (higher is better)
+
+powertrainGas Hybrid:
+
+    0     1 
+77602 18398 
+  Balance score: 0.534 (higher is better)
 
 price:
 
-  0.8   0.9     1   1.1   1.2 
-10674 10782 10822 11005 10717 
-  Balance score: 0.988 (higher is better)
+    0   0.8   0.9     1   1.1 
+24000 17867 18122 18087 17924 
+  Balance score: 0.877 (higher is better)
 
 range:
 
- 0.5 0.75    1 1.25  1.5 1.75    2 2.25  2.5 2.75    3 
-4801 4894 4897 4948 4897 4900 4951 5054 4939 4814 4905 
-  Balance score: 0.986 (higher is better)
+    0   0.5  0.75     1  1.25   1.5  1.75     2  2.25   2.5 
+29541  7358  7428  7384  7486  7361  7381  7343  7279  7439 
+  Balance score: 0.578 (higher is better)
 
 mileage:
 
- 1.5    2  2.5    3  3.5    4  4.5    5 
-6743 6745 6844 6771 6686 6825 6740 6646 
-  Balance score: 0.990 (higher is better)
+    0     2   2.5     3   3.5     4   4.5     5   5.5     6 
+24000  7956  8088  7808  7937  8032  8087  7962  8019  8111 
+  Balance score: 0.655 (higher is better)
 
 make_year:
 
-   2    3    4    5    6    7    8    9   10 
-5920 6012 6048 5931 6032 6216 5967 5927 5947 
-  Balance score: 0.985 (higher is better)
+    0     2     3     4     5     6     7     8     9    10 
+24000  7883  7920  8101  8199  8034  7869  8046  7931  8017 
+  Balance score: 0.655 (higher is better)
 
 operating_cost:
 
-   3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18 
-1775 2020 2305 2514 2526 2605 2804 2759 2813 2695 2749 2686 2576 2496 2422 2358 
-  19   20   21   22   23   24   25 
-2272 2165 2076 1979 1794 1814 1797 
-  Balance score: 0.869 (higher is better)
+    0     3     6     9    12    15    18    21 
+24000 10623 10598 14461 14569 14386  3686  3677 
+  Balance score: 0.645 (higher is better)
+
+no_choice:
+
+    0     1 
+72000 24000 
+  Balance score: 0.586 (higher is better)
 
 ATTRIBUTE OVERLAP
 =================
-Overall overlap score: 0.175 (lower is better)
+Overall overlap score: 0.142 (lower is better)
 
 Counts of attribute overlap:
 (# of questions with N unique levels)
 
-powertrainGas hybrid: Continuous variable
+powertrainBattery Electric: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):  44.2%  (7962 / 18000 questions)
-  2 (no overlap):        55.8%  (10038 / 18000 questions)
-  Average unique levels per question: 1.56
+  1 (complete overlap):  45.7%  (10966 / 24000 questions)
+  2 (no overlap):        54.3%  (13034 / 24000 questions)
+  Average unique levels per question: 1.54
 
-powertrainPlug-in hybrid: Continuous variable
+powertrainPlug-in Hybrid: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):  43.9%  (7898 / 18000 questions)
-  2 (no overlap):        56.1%  (10102 / 18000 questions)
-  Average unique levels per question: 1.56
+  1 (complete overlap):  41.0%  (9838 / 24000 questions)
+  2 (no overlap):        59.0%  (14162 / 24000 questions)
+  Average unique levels per question: 1.59
 
-powertrainBattery electric: Continuous variable
+powertrainGas Hybrid: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):  43.5%  (7824 / 18000 questions)
-  2 (no overlap):        56.5%  (10176 / 18000 questions)
-  Average unique levels per question: 1.57
+  1 (complete overlap):  41.5%  (9954 / 24000 questions)
+  2 (no overlap):        58.5%  (14046 / 24000 questions)
+  Average unique levels per question: 1.59
 
 price: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):   4.0%  (723 / 18000 questions)
-  2 (partial overlap):   47.8%  (8599 / 18000 questions)
-  3 (partial overlap):   48.2%  (8678 / 18000 questions)
-  4 (partial overlap):    0.0%  (0 / 18000 questions)
-  5 (no overlap):         0.0%  (0 / 18000 questions)
-  Average unique levels per question: 2.44
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (partial overlap):    6.2%  (1496 / 24000 questions)
+  3 (partial overlap):   55.8%  (13384 / 24000 questions)
+  4 (partial overlap):   38.0%  (9120 / 24000 questions)
+  5 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.32
 
 range: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):   0.8%  (137 / 18000 questions)
-  2 (partial overlap):   24.5%  (4407 / 18000 questions)
-  3 (partial overlap):   74.8%  (13456 / 18000 questions)
-  4 (partial overlap):    0.0%  (0 / 18000 questions)
-  5 (partial overlap):    0.0%  (0 / 18000 questions)
-  6 (partial overlap):    0.0%  (0 / 18000 questions)
-  7 (partial overlap):    0.0%  (0 / 18000 questions)
-  8 (partial overlap):    0.0%  (0 / 18000 questions)
-  9 (partial overlap):    0.0%  (0 / 18000 questions)
-  10 (partial overlap):    0.0%  (0 / 18000 questions)
-  11 (no overlap):         0.0%  (0 / 18000 questions)
-  Average unique levels per question: 2.74
+  1 (complete overlap):   0.0%  (9 / 24000 questions)
+  2 (partial overlap):    4.8%  (1148 / 24000 questions)
+  3 (partial overlap):   40.4%  (9699 / 24000 questions)
+  4 (partial overlap):   54.8%  (13144 / 24000 questions)
+  5 (partial overlap):    0.0%  (0 / 24000 questions)
+  6 (partial overlap):    0.0%  (0 / 24000 questions)
+  7 (partial overlap):    0.0%  (0 / 24000 questions)
+  8 (partial overlap):    0.0%  (0 / 24000 questions)
+  9 (partial overlap):    0.0%  (0 / 24000 questions)
+  10 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.50
 
 mileage: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):   1.7%  (304 / 18000 questions)
-  2 (partial overlap):   33.1%  (5966 / 18000 questions)
-  3 (partial overlap):   65.2%  (11730 / 18000 questions)
-  4 (partial overlap):    0.0%  (0 / 18000 questions)
-  5 (partial overlap):    0.0%  (0 / 18000 questions)
-  6 (partial overlap):    0.0%  (0 / 18000 questions)
-  7 (partial overlap):    0.0%  (0 / 18000 questions)
-  8 (no overlap):         0.0%  (0 / 18000 questions)
-  Average unique levels per question: 2.63
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (partial overlap):    1.3%  (319 / 24000 questions)
+  3 (partial overlap):   29.6%  (7115 / 24000 questions)
+  4 (partial overlap):   69.0%  (16566 / 24000 questions)
+  5 (partial overlap):    0.0%  (0 / 24000 questions)
+  6 (partial overlap):    0.0%  (0 / 24000 questions)
+  7 (partial overlap):    0.0%  (0 / 24000 questions)
+  8 (partial overlap):    0.0%  (0 / 24000 questions)
+  9 (partial overlap):    0.0%  (0 / 24000 questions)
+  10 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.68
 
 make_year: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):   1.2%  (218 / 18000 questions)
-  2 (partial overlap):   30.2%  (5437 / 18000 questions)
-  3 (partial overlap):   68.6%  (12345 / 18000 questions)
-  4 (partial overlap):    0.0%  (0 / 18000 questions)
-  5 (partial overlap):    0.0%  (0 / 18000 questions)
-  6 (partial overlap):    0.0%  (0 / 18000 questions)
-  7 (partial overlap):    0.0%  (0 / 18000 questions)
-  8 (partial overlap):    0.0%  (0 / 18000 questions)
-  9 (no overlap):         0.0%  (0 / 18000 questions)
-  Average unique levels per question: 2.67
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (partial overlap):    1.3%  (315 / 24000 questions)
+  3 (partial overlap):   29.2%  (7008 / 24000 questions)
+  4 (partial overlap):   69.5%  (16677 / 24000 questions)
+  5 (partial overlap):    0.0%  (0 / 24000 questions)
+  6 (partial overlap):    0.0%  (0 / 24000 questions)
+  7 (partial overlap):    0.0%  (0 / 24000 questions)
+  8 (partial overlap):    0.0%  (0 / 24000 questions)
+  9 (partial overlap):    0.0%  (0 / 24000 questions)
+  10 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.68
 
 operating_cost: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):   0.4%  (71 / 18000 questions)
-  2 (partial overlap):   15.7%  (2826 / 18000 questions)
-  3 (partial overlap):   83.9%  (15103 / 18000 questions)
-  4 (partial overlap):    0.0%  (0 / 18000 questions)
-  5 (partial overlap):    0.0%  (0 / 18000 questions)
-  6 (partial overlap):    0.0%  (0 / 18000 questions)
-  7 (partial overlap):    0.0%  (0 / 18000 questions)
-  8 (partial overlap):    0.0%  (0 / 18000 questions)
-  9 (partial overlap):    0.0%  (0 / 18000 questions)
-  10 (partial overlap):    0.0%  (0 / 18000 questions)
-  11 (partial overlap):    0.0%  (0 / 18000 questions)
-  12 (partial overlap):    0.0%  (0 / 18000 questions)
-  13 (partial overlap):    0.0%  (0 / 18000 questions)
-  14 (partial overlap):    0.0%  (0 / 18000 questions)
-  15 (partial overlap):    0.0%  (0 / 18000 questions)
-  16 (partial overlap):    0.0%  (0 / 18000 questions)
-  17 (partial overlap):    0.0%  (0 / 18000 questions)
-  18 (partial overlap):    0.0%  (0 / 18000 questions)
-  19 (partial overlap):    0.0%  (0 / 18000 questions)
-  20 (partial overlap):    0.0%  (0 / 18000 questions)
-  21 (partial overlap):    0.0%  (0 / 18000 questions)
-  22 (partial overlap):    0.0%  (0 / 18000 questions)
-  23 (no overlap):         0.0%  (0 / 18000 questions)
-  Average unique levels per question: 2.84</code></pre>
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (partial overlap):    3.2%  (768 / 24000 questions)
+  3 (partial overlap):   41.5%  (9972 / 24000 questions)
+  4 (partial overlap):   55.2%  (13260 / 24000 questions)
+  5 (partial overlap):    0.0%  (0 / 24000 questions)
+  6 (partial overlap):    0.0%  (0 / 24000 questions)
+  7 (partial overlap):    0.0%  (0 / 24000 questions)
+  8 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.52
+
+no_choice: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (no overlap):       100.0%  (24000 / 24000 questions)
+  Average unique levels per question: 2.00</code></pre>
 </div>
 </div>
-<!-- ```{r} -->
-<!-- cbc_inspect(design_random_random_parameter) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- cbc_inspect(design_shortcut) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- cbc_inspect(design_minoverlap) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- cbc_inspect(design_balanced) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- cbc_inspect(design_cea_fixed_parameter) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- cbc_inspect(design_modfed_random_parameter) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- cbc_inspect(design_modfed_fixed_parameter) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- cbc_inspect(design_cea_random_parameter) -->
-<!-- ``` -->
-<!-- # Step 5: Simulate Choices -->
-<!-- ```{r} -->
-<!-- choices_random_fixed_parameter <- cbc_choices(design_random_fixed_parameter, priors = priors_fixed) -->
-<!-- choices_random_random_parameter <- cbc_choices(design_random_random_parameter, priors = priors_random_parameter) -->
-<!-- choices_shortcut <- cbc_choices(design_shortcut) -->
-<!-- choices_minoverlap <- cbc_choices(design_minoverlap) -->
-<!-- choices_balanced <- cbc_choices(design_balanced) -->
-<!-- choices_cea_fixed_parameter <- cbc_choices(design_cea_fixed_parameter, priors = priors_fixed) -->
-<!-- choices_cea_random_parameter <- cbc_choices(design_cea_random_parameter, priors = priors_random_parameter) -->
-<!-- choices_modfed_fixed_parameter <- cbc_choices(design_modfed_fixed_parameter, priors = priors_fixed) -->
-<!-- choices_modfed_random_parameter <- cbc_choices(design_modfed_random_parameter, priors = priors_random_parameter) -->
-<!-- ``` -->
-<!-- ## random_fixed_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_random_fixed_parameter) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- ## random_random_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_random_random_parameter) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- ## shortcut -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_shortcut) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- ## minoverlap -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_minoverlap) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- ## balanced -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_balanced) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- ## cea_fixed_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_cea_fixed_parameter) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- ## cea_random_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_cea_random_parameter) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- ## modfed_fixed_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_modfed_fixed_parameter) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- ## modfed_random_parameter -->
-<!-- ```{r} -->
-<!-- choices_cat <- cbc_decode(choices_modfed_random_parameter) -->
-<!-- # Filter for the chosen rows only -->
-<!-- choices_cat <- choices_cat[which(choices_cat$choice == 1), ] -->
-<!-- # Counts of choices made for each attribute level -->
-<!-- table(choices_cat$veh_mileage) -->
-<!-- table(choices_cat$veh_price) -->
-<!-- table(choices_cat$battery_refurbish) -->
-<!-- table(choices_cat$battery_range_year0) -->
-<!-- table(choices_cat$battery_degradation) -->
-<!-- ``` -->
-<!-- # Step 6: Assess Power -->
-<!-- ```{r} -->
-<!-- power_random_fixed_parameter <- cbc_power(choices_random_fixed_parameter) -->
-<!-- plot(power_random_fixed_parameter, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- power_random_random_parameter <- cbc_power(choices_random_random_parameter) -->
-<!-- plot(power_random_random_parameter, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- power_shortcut <- cbc_power(choices_shortcut) -->
-<!-- plot(power_shortcut, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- power_minoverlap <- cbc_power(choices_minoverlap) -->
-<!-- plot(power_minoverlap, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- power_balanced <- cbc_power(choices_balanced) -->
-<!-- plot(power_balanced, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- power_cea_fixed_parameter <- cbc_power(choices_cea_fixed_parameter) -->
-<!-- plot(power_cea_fixed_parameter, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- power_cea_random_parameter <- cbc_power(choices_cea_random_parameter) -->
-<!-- plot(power_cea_random_parameter, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- power_modfed_fixed_parameter <- cbc_power(choices_modfed_fixed_parameter) -->
-<!-- plot(power_modfed_fixed_parameter, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- power_modfed_random_parameter <- cbc_power(choices_modfed_random_parameter) -->
-<!-- plot(power_modfed_random_parameter, type = "power", power_threshold = 0.9) -->
-<!-- ``` -->
-<!-- ## Output -->
-<!-- ```{r} -->
-<!-- design_rand_output <-design_random %>% -->
-<!--   mutate(battery_health_year0=paste0(round(1 * 100, 0), "%"), -->
-<!--          battery_health_year3=(1-battery_degradation)^3, -->
-<!--          battery_health_year8=(1-battery_degradation)^8, -->
-<!--          # round to the closest 5 -->
-<!--          battery_range_year3=round(battery_range_year0*battery_health_year3/5)*5, -->
-<!--          battery_range_year8=round(battery_range_year0*battery_health_year8/5)*5, -->
-<!--          battery_health_year3=paste0(round((1-battery_degradation)^3*100,0),"%"), -->
-<!--          battery_health_year8=paste0(round((1-battery_degradation)^8*100,0),"%"), -->
-<!--          ) %>%  -->
-<!--   mutate(image_refurbishment=paste0("battery_survey_battery_", battery_refurbish, "_text",".png"), -->
-<!--     image_degradation=paste0("Range_Degradation_", battery_range_year0, "_", battery_degradation*100,".png"), -->
-<!--          ) %>%  -->
-<!--   mutate(veh_price=veh_price/15000 -->
-<!--          # battery_condition=case_when(battery_condition=="Like_new" ~ "Like new", T ~ battery_condition) -->
-<!--          # charge_freq=paste0(charge_freq," times"), -->
-<!--          # charge_DCFC=paste0(charge_DCFC,"%") -->
-<!--          ) -->
-<!-- # head(design_rand) -->
-<!-- # cbc_balance(design_rand) -->
-<!-- # cbc_overlap(design_rand) -->
-<!-- # write.csv(design_rand, paste0(here(),"/survey/data/battery_choice_questions.csv"), row.names = FALSE) -->
-<!-- # write.csv(design_rand_output, paste0(here(),"/data/battery_choice_questions.csv"), row.names = FALSE) -->
-<!-- ``` -->
+</section>
+<section id="check-that-counts-by-powertrain-are-even" class="level2">
+<h2 class="anchored" data-anchor-id="check-that-counts-by-powertrain-are-even">Check that counts by powertrain are even</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>design_rand <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">'power'</span>), no_choice) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    powertrain_battery_electric,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    powertrain_plug_in_hybrid,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    powertrain_gas_hybrid,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    no_choice</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  powertrain_battery_el…¹ powertrain_plug_in_h…² powertrain_gas_hybrid no_choice
+                    &lt;dbl&gt;                  &lt;dbl&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
+1                       0                      0                     0         0
+2                       0                      0                     0         1
+3                       0                      0                     1         0
+4                       0                      1                     0         0
+5                       1                      0                     0         0
+# ℹ abbreviated names: ¹​powertrain_battery_electric, ²​powertrain_plug_in_hybrid
+# ℹ 1 more variable: n &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="remove-duplicates" class="level2">
+<h2 class="anchored" data-anchor-id="remove-duplicates">Remove duplicates:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>design_rand<span class="sc">$</span>range[design_rand<span class="sc">$</span><span class="st">"powertrainBattery Electric"</span>  <span class="sc">!=</span><span class="st">'1'</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> design_rand[<span class="fu">duplicated</span>(design_rand[<span class="fu">c</span>(<span class="st">'respID'</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'qID'</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainGas Hybrid'</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainPlug-in Hybrid'</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainBattery Electric'</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'price'</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'range'</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'mileage'</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'make_year'</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'operating_cost'</span> )]), ]</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>design_rand <span class="ot">&lt;-</span> design_rand[<span class="sc">!</span><span class="fu">duplicated</span>(design_rand[<span class="fu">c</span>(<span class="st">'respID'</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'qID'</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainGas Hybrid'</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainPlug-in Hybrid'</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainBattery Electric'</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'price'</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'range'</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'mileage'</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'make_year'</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'operating_cost'</span> )]), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-that-counts-by-powertrain-are-even-1" class="level2">
+<h2 class="anchored" data-anchor-id="check-that-counts-by-powertrain-are-even-1">Check that counts by powertrain are even</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>design_rand <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">'power'</span>), no_choice) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    powertrain_battery_electric,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    powertrain_plug_in_hybrid,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    powertrain_gas_hybrid,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    no_choice</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  powertrain_battery_el…¹ powertrain_plug_in_h…² powertrain_gas_hybrid no_choice
+                    &lt;dbl&gt;                  &lt;dbl&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
+1                       0                      0                     0         0
+2                       0                      0                     0         1
+3                       0                      0                     1         0
+4                       0                      1                     0         0
+5                       1                      0                     0         0
+# ℹ abbreviated names: ¹​powertrain_battery_electric, ²​powertrain_plug_in_hybrid
+# ℹ 1 more variable: n &lt;int&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>choices <span class="ot">&lt;-</span> <span class="fu">cbc_choices</span>(design_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#power &lt;- cbc_power(choices)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(power, type = "power", power_threshold = 0.9)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(power, power_threshold = 0.9)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 
 </main>
@@ -1154,6 +603,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1264,6 +715,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
