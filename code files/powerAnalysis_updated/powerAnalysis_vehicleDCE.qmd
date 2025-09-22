@@ -26,22 +26,22 @@ library(logitr)
 library(here)
 ```
 
-
-
 # ----------------------------
-# For car
+
+# For cars
+
 ## Step 1: Generate Profiles
+
 ```{r}
 profiles <- cbc_profiles(
   powertrain = c('gas', 'bev', 'phev', 'hev'),
   price = seq(0.8, 1.1, 0.1),
-  range_bev = c(0, seq(50, 250, 25)),
+  range_bev = c(0, seq(50, 250, 50)),
   range_phev = c(0, seq(10, 40, 10)),
   mileage = seq(20000, 60000, 5000),
   make_year = seq(2015, 2023),
-  operating_cost = seq(3, 21, 3)
+  operating_cost = seq(3, 21, 2)
 )
-
 ```
 
 ### Resrictions
@@ -52,22 +52,20 @@ Only include profiles with feasible operation costs
 profiles_restricted <- cbc_restrict(
   profiles,
   # BEV range restrictions
-  (powertrain == "Gasoline") & (range_bev != 0),
-  (powertrain == "Hybrid") & (range_bev != 0),
-  (powertrain == "Plug-in Hybrid") & (range_bev != 0),
-  (powertrain == "Electric") & (range_bev < 50),
+  (powertrain == "gas") & (range_bev != 0),
+  (powertrain == "hev") & (range_bev != 0),
+  (powertrain == "phev") & (range_bev != 0),
+  (powertrain == "bev") & (range_bev == 0),
   # PHEV range restrictions
-  (powertrain == "Gasoline") & (range_phev != 0),
-  (powertrain == "Hybrid") & (range_phev != 0),
-  (powertrain == "Electric") & (range_phev != 0),
-  (powertrain == "Plug-in Hybrid") & (range_phev > 40),
-  (powertrain == "Plug-in Hybrid") & (range_phev == 0),
+  (powertrain == "gas") & (range_phev != 0),
+  (powertrain == "hev") & (range_phev != 0),
+  (powertrain == "bev") & (range_phev != 0),
+  (powertrain == "phev") & (range_phev == 0),
   # Gas efficiency restrictions
   (powertrain == "gas") & (operating_cost < 9),
-  (powertrain != "gas") & (operating_cost >= 18)
+  (powertrain != "gas") & (operating_cost >= 18), 
+  (powertrain %in% c('bev', 'phev')) & (operating_cost >= 13)
 )
-
-
 ```
 
 ## Step 2: Set up priors
@@ -102,8 +100,6 @@ priors_fixed_parameter <- cbc_priors(
 ```
 
 
-
-
 ## Step 3: Generate Designs
 
 
@@ -117,14 +113,13 @@ design_rand <- cbc_design(
   n_alts = 3, # Number of alternatives per question
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
-  priors = priors_fixed_parameter
-  
+  priors = priors_fixed_parameter,
+  balance_by = c('powertrain', 'operating_cost')
+  # remove_dominant = TRUE
 )
 ```
 
-
 ## Check for balance:
-
 
 ```{r}
 cbc_inspect(design_rand)
@@ -136,14 +131,13 @@ cbc_inspect(design_rand)
 ```{r}
 design_rand %>%
   tibble() %>%
-  select(starts_with('power'), no_choice) %>%
-  janitor::clean_names() %>%
   count(
     powertrainbev,
     powertrainphev,
     powertrainhev,
-    no_choice
-  )
+    operating_cost
+  ) %>% 
+  View()
 
 table(design_rand$powertrainbev)
 table(design_rand$powertrainphev)
