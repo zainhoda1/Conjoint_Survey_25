@@ -35,9 +35,10 @@ library(here)
 profiles <- cbc_profiles(
   powertrain = c('gas', 'bev', 'phev', 'hev'),
   price = seq(0.8, 1.1, 0.1),
-  range = c(0, seq(0.5, 2.5, 0.25)), # unit: 100
-  mileage = seq(2, 6, 0.5), # unit: 10000
-  make_year = seq(2, 10),  # vehicle age: 2 -10
+  range_bev = c(0, seq(50, 250, 25)),
+  range_phev = c(0, seq(10, 40, 10)),
+  mileage = seq(20000, 60000, 5000),
+  make_year = seq(2015, 2023),
   operating_cost = seq(3, 21, 3)
 )
 
@@ -51,13 +52,22 @@ Only include profiles with feasible operation costs
 profiles_restricted <- cbc_restrict(
   profiles,
   # BEV range restrictions
-  (powertrain == "bev") & (range < 0.5),
+  (powertrain == "Gasoline") & (range_bev != 0),
+  (powertrain == "Hybrid") & (range_bev != 0),
+  (powertrain == "Plug-in Hybrid") & (range_bev != 0),
+  (powertrain == "Electric") & (range_bev < 50),
+  # PHEV range restrictions
+  (powertrain == "Gasoline") & (range_phev != 0),
+  (powertrain == "Hybrid") & (range_phev != 0),
+  (powertrain == "Electric") & (range_phev != 0),
+  (powertrain == "Plug-in Hybrid") & (range_phev > 40),
+  (powertrain == "Plug-in Hybrid") & (range_phev == 0),
   # Gas efficiency restrictions
   (powertrain == "gas") & (operating_cost < 9),
   (powertrain != "gas") & (operating_cost >= 18)
 )
 
-# table(profiles_restricted$operating_cost)
+
 ```
 
 ## Step 2: Set up priors
@@ -78,30 +88,17 @@ priors_fixed_parameter <- cbc_priors(
   profiles = profiles_restricted,
   # powertrain: categorical (effects coded or dummy)
   powertrain = c("bev" = -1.0, "phev" = -0.0,  "hev" = 0.5),
-  # price: scaled by 1,000s
   price = -0.2,
-  # range bev: scaled by 100s → positive effect
-  range = 0.5,
-  # range phev: scaled by 100s → positive effect
+  range_bev = 0.5,
+  range_phev = 0.6,
   mileage = -0.5,
-  # make_year: higher means older → negative effect
   make_year = -0.2,
-  # operating cost: higher means worse → negative effect
   operating_cost = -0.3,
   no_choice = 0.5
 )
 
 
-
 # priors_fixed_parameter
-```
-
-### Random Parameters
-
-```{r}
-
-
-# priors_random_parameter
 ```
 
 
@@ -156,63 +153,14 @@ table(design_rand$range)
 table(design_rand$operating_cost)
 ```
 
-## Remove duplicates:
-
-```{r}
-design_rand$range[design_rand$"powertrainBattery Electric"  !='1'] <- 0
-
-
-duplicates <- design_rand[duplicated(design_rand[c('respID',
-                                         'qID',
-                                         'powertrainhev',
-                                         'powertrainphev',
-                                         'powertrainbev',
-                                         'price',
-                                         'range',
-                                         'mileage',
-                                         'make_year',
-                                         'operating_cost' )]), ]
-
-design_rand <- design_rand[!duplicated(design_rand[c('respID',
-                                         'qID',
-                                         'powertrainhev',
-                                         'powertrainphev',
-                                         'powertrainbev',
-                                         'price',
-                                         'range',
-                                         'mileage',
-                                         'make_year',
-                                         'operating_cost' )]), ]
-
-
-
-
-```
-
-
-## Check that counts by powertrain are even
-
-```{r}
-design_rand %>%
-  tibble() %>%
-  select(starts_with('power'), no_choice) %>%
-  janitor::clean_names() %>%
-  count(
-    powertrainbev,
-    powertrainphev,
-    powertrainhev,
-    no_choice
-  )
-
-```
 
 
 
 
 ```{r}
 
-choices <- cbc_choices(design_rand)
-choices_priors <- cbc_choices(design_rand, priors)
+#choices <- cbc_choices(design_rand)
+choices_priors <- cbc_choices(design_rand, priors_fixed_parameter)
 
 ```
 
@@ -221,22 +169,22 @@ choices_priors <- cbc_choices(design_rand, priors)
 
 ```{r}
 model <- logitr(
-  data = choices, 
+  data = choices_priors, 
   outcome = 'choice', 
   obsID = 'obsID', 
   pars = c(
-    'price', 'range', 'mileage', 'make_year', 'operating_cost',
+    'price', 'range_bev', 'range_phev', 'mileage', 'make_year', 'operating_cost',
     'powertrainbev', 'powertrainphev', 'powertrainhev'
   )
 )
 
 summary(model)
 
-power <- cbc_power(choices)
+power <- cbc_power(choices_priors)
 
 
-# plot(power, type = "power", power_threshold = 0.9)
-# summary(power, power_threshold = 0.9)
+plot(power, type = "power", power_threshold = 0.9)
+summary(power, power_threshold = 0.9)
 
 
 ```
