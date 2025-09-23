@@ -1,0 +1,13 @@
+# Load libraries
+library(cbcTools)
+library(tidyverse)
+library(here)
+
+
+profiles <- cbc_profiles(
+  veh_mileage        = seq(1.5, 5, 0.5), # unit: 10000
+  veh_price          = seq(0.8, 1.1, 0.1), # unit: 20000
+  battery_refurbish  = c('original', 'cellreplace','packreplace'),
+  battery_range_year0 = seq(2, 3.6, 0.4), # unit: 100
+  battery_degradation = seq(1, 8, 1) # %
+)

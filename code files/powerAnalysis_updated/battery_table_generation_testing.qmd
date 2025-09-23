@@ -110,7 +110,8 @@ design_random <- cbc_design(
   n_resp   = 3000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
-  no_choice = TRUE
+  no_choice = TRUE,
+  remove_dominant = TRUE
 )
 
 design_random_fixed_parameter <- cbc_design(
@@ -120,7 +121,8 @@ design_random_fixed_parameter <- cbc_design(
   n_resp   = 3000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
-  no_choice = TRUE
+  no_choice = TRUE,
+  remove_dominant = TRUE
 ) 
 
 design_random_random_parameter <- cbc_design(
@@ -200,7 +202,6 @@ cbc_compare(
 ```{r}
 cbc_inspect(design_random)
 ```
-
 
 ```{r}
 # cbc_inspect(design_random)
@@ -396,24 +397,10 @@ design_rand_output <-design_random_fixed_parameter %>%
          battery_range_year8=round(battery_range_year0*battery_health_year8/5)*5,
 
          battery_health_year3=paste0(round((1-battery_degradation)^3*100,0),"%"),
-         battery_health_year8=paste0(round((1-battery_degradation)^8*100,0),"%"),
-         image_degradation=paste0("Range_Degradation_", battery_range_year0, "_", battery_degradation*100,".png")
-         ) 
+         battery_health_year8=paste0(round((1-battery_degradation)^8*100,0),"%")
+         )
   
-design_rand_output <- design_rand_output%>%
-  mutate(image_refurbishment= case_when( 
-    (no_choice == 0 & 
-      battery_refurbishpackreplace == 0 &
-      battery_refurbishcellreplace == 0) ~ paste("battery_survey_battery_original_text.png"),
-    (no_choice == 0 & 
-      battery_refurbishpackreplace == 1 &
-      battery_refurbishcellreplace == 0) ~ paste("battery_survey_battery_packreplace_text.png"),
-    (no_choice == 0 & 
-      battery_refurbishpackreplace == 0 &
-      battery_refurbishcellreplace == 1) ~ paste("battery_survey_battery_cellreplace_text.png") ,
-    TRUE ~ 'NA'
-      )
-   )
+
 
 # head(design_random_fixed_parameter)
 

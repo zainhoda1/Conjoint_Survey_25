@@ -125,6 +125,17 @@ cost_list <- dt_mpg_expanded %>%
 
 ### For car 
 
+test <-    seq(dt_mpg_expanded %>%
+                                 filter(vehicle_type == "car") %>%
+                                 select(starts_with("cents")) %>%
+                                 unlist() %>%
+                                 min(na.rm = TRUE),
+                               dt_mpg_expanded %>%
+                                 filter(vehicle_type == "car") %>%
+                                 select(starts_with("cents")) %>%
+                                 unlist() %>%
+                                 max(na.rm = TRUE)+1)
+
 
 # Define profiles with attributes and levels
 profiles <- cbc_profiles(
@@ -143,7 +154,7 @@ profiles <- cbc_profiles(
                          filter(vehicle_type == "car") %>%
                          select(starts_with("cents")) %>%
                          unlist() %>%
-                         max(na.rm = TRUE)+1, 2)
+                         max(na.rm = TRUE)+1)
 ) 
 
 
@@ -162,18 +173,26 @@ profiles_restricted <- cbc_restrict(
   (powertrain == "bev") & (range_phev != 0),
   (powertrain == "phev") & (range_phev == 0),
   # Gas efficiency restrictions
-  (powertrain == "gas") & (operating_cost < 9),
-  (powertrain != "gas") & (operating_cost >= 18), 
-  (powertrain %in% c('bev', 'phev')) & (operating_cost >= 13)
+  #(powertrain == "gas") & (operating_cost < 9),
+  (powertrain == "bev") & !(operating_cost %in% c(3,5,7,9,12)),
+  (powertrain == "hev") & !(operating_cost %in% c(5,7,9,11,12)), 
+  (powertrain == "phev") & !(operating_cost %in% c(3,6,8,10,12)), 
+  (powertrain == "gas") & !(operating_cost %in% c(8,12,16,20,24)) 
+
 )
 
+
+checking <- profiles_restricted %>% 
+  filter(powertrain == 'hev') %>% 
+  select(operating_cost) %>% 
+  distinct()
 
 ## Set up priors
 
 priors_fixed_parameter <- cbc_priors(
   profiles = profiles_restricted,
   # powertrain: categorical (effects coded or dummy)
-  powertrain = c("bev" = -1.0, "phev" = -0.0,  "hev" = 0.5),
+  powertrain = c("bev" = -1.0, "phev" = 0.0,  "hev" = 0.5),
   price = -0.2,
   range_bev = 0.5,
   range_phev = 0.6,
@@ -240,15 +259,15 @@ profiles <- cbc_profiles(
   mileage        = seq(20000, 60000, 5000),
   make_year      = seq(2015, 2023), 
   operating_cost = seq(dt_mpg_expanded %>%
-                         filter(vehicle_type == "car") %>%
+                         filter(vehicle_type == "suv") %>%
                          select(starts_with("cents")) %>%
                          unlist() %>%
                          min(na.rm = TRUE),
                        dt_mpg_expanded %>%
-                         filter(vehicle_type == "car") %>%
+                         filter(vehicle_type == "suv") %>%
                          select(starts_with("cents")) %>%
                          unlist() %>%
-                         max(na.rm = TRUE)+1, 2)
+                         max(na.rm = TRUE)+1)
 ) 
 
 
@@ -267,9 +286,11 @@ profiles_restricted <- cbc_restrict(
   (powertrain == "bev") & (range_phev != 0),
   (powertrain == "phev") & (range_phev == 0),
   # Gas efficiency restrictions
-  (powertrain == "gas") & (operating_cost < 9),
-  (powertrain != "gas") & (operating_cost >= 18), 
-  (powertrain %in% c('bev', 'phev')) & (operating_cost >= 13)
+  #(powertrain == "gas") & (operating_cost < 9),
+  (powertrain == "bev") & !(operating_cost %in% c(3,6,8,11,14)),
+  (powertrain == "hev") & !(operating_cost %in% c(7,10,13,17,20)), 
+  (powertrain == "phev") & !(operating_cost %in% c(8,12,16,19,23)), 
+  (powertrain == "gas") & !(operating_cost %in% c(9,13,17,21,25)) 
 )
 
 
@@ -278,7 +299,7 @@ profiles_restricted <- cbc_restrict(
 priors_fixed_parameter <- cbc_priors(
   profiles = profiles_restricted,
   # powertrain: categorical (effects coded or dummy)
-  powertrain = c("bev" = -1.0, "phev" = -0.0,  "hev" = 0.5),
+  powertrain = c("bev" = -1.0, "phev" = 0.0,  "hev" = 0.5),
   price = -0.2,
   range_bev = 0.5,
   range_phev = 0.6,
@@ -336,6 +357,6 @@ design_combined<-rbind(design_car,design_suv)
 
 
 # Save design
-#write_csv(design_combined, here('survey','data', 'choice_questions.csv'))
+write_csv(design_combined, here('survey_updated_dynata','data', 'testing_choice_questions.csv'))
 
 
