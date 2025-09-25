@@ -74,9 +74,10 @@ priors_fixed <- cbc_priors(
   veh_price            = -0.1,      # Each $20000 increase reduces utility by 0.1
   battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
   battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
-  battery_degradation  = -0.5         # Each 1% of degradation increases subtracts utility by 0.5
-
+  battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
+  no_choice = 1.0                      # There is a strong negative preference for EV, so positive for "no_choice"
 )
+
 
 priors_fixed
 ```
@@ -121,8 +122,7 @@ design_random_fixed_parameter <- cbc_design(
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
   no_choice = TRUE,
-  remove_dominant = TRUE
-
+  remove_dominant = FALSE
 ) 
 
 design_random_random_parameter <- cbc_design(
@@ -133,7 +133,7 @@ design_random_random_parameter <- cbc_design(
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
   no_choice = TRUE,
-  remove_dominant = TRUE
+  remove_dominant = FALSE
 ) 
 ```
 
@@ -399,11 +399,19 @@ design_rand_output <-design_random_fixed_parameter %>%
 
          battery_health_year3=paste0(round((1-battery_degradation)^3*100,0),"%"),
          battery_health_year8=paste0(round((1-battery_degradation)^8*100,0),"%")
-         ) 
+         ) %>% 
+  mutate(battery_condition = case_when(
+    battery_refurbishcellreplace == 1 ~ 'Refurbished Cell-Replaced',
+    battery_refurbishpackreplace == 1 ~ 'Refurbished Pack-Replaced',
+    ((battery_refurbishcellreplace == 0) &
+      (battery_refurbishcellreplace == 0) &
+      (no_choice == 0)) ~ 'Original Battery' ,
+    TRUE ~ NA
+  ))
 # head(design_random_fixed_parameter)
 
 #write.csv(design_rand_output, paste0(here("..",".."),"/survey_updated_pretest/data/battery_choice_questions.csv"), row.names = FALSE)
 
-write.csv(design_rand_output, here('survey_updated_pretest', 'data', 'battery_choice_questions_testing_zain.csv'))
+#write.csv(design_rand_output, here('survey_updated_dynata', 'data', 'battery_choice_questions_testing_zain.csv'))
 ```
 

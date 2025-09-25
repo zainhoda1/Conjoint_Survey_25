@@ -838,7 +838,7 @@ sd_next()
 </center>
 ### Question 6 of 6
 ```{r}
-sd_output("battery_cbc_q4_button", type = "question")
+sd_output("battery_cbc_q6_button", type = "question")
 
 sd_next()
 ```

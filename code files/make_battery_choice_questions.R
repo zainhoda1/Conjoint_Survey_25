@@ -31,7 +31,7 @@ design_random_fixed_parameter <- cbc_design(
   n_alts   = 3,    # Number of alternatives per question
   n_q      = 6,    # Number of questions per respondent #6
   no_choice = TRUE,
-  remove_dominant = TRUE
+  remove_dominant = FALSE
 ) 
 
 cbc_inspect(design_random_fixed_parameter)
@@ -66,4 +66,4 @@ cbc_inspect(design_random_fixed_parameter)
 
 #write.csv(design_rand_output, paste0(here("..",".."),"/survey_updated_pretest/data/battery_choice_questions.csv"), row.names = FALSE)
 
-write.csv(design_rand_output, here('survey_updated_dynata', 'data', 'battery_choice_questions_testing_zain.csv'))
+write.csv(design_rand_output, here('survey_updated_dynata', 'data', 'battery_choice_questions.csv'))

@@ -99,19 +99,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="section" class="level1">
 <h1>—————————-</h1>
 </section>
-<section id="for-car" class="level1">
-<h1>For car</h1>
+<section id="for-cars" class="level1">
+<h1>For cars</h1>
 <section id="step-1-generate-profiles" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-generate-profiles">Step 1: Generate Profiles</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>profiles <span class="ot">&lt;-</span> <span class="fu">cbc_profiles</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain =</span> <span class="fu">c</span>(<span class="st">'Gasoline'</span>, <span class="st">'Battery Electric'</span>, <span class="st">'Plug-in Hybrid'</span>, <span class="st">'Gas Hybrid'</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>, <span class="fl">0.25</span>)), <span class="co"># unit: 100</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.5</span>), <span class="co"># unit: 10000</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">make_year =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>),  <span class="co"># vehicle age: 2 -10</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="dv">21</span>, <span class="dv">3</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain     =</span> <span class="fu">c</span>(<span class="st">'gas'</span>, <span class="st">'bev'</span>, <span class="st">'phev'</span>, <span class="st">'hev'</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price          =</span> <span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_bev =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>, <span class="fl">0.5</span>)), <span class="co"># x 100</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_phev =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="dv">1</span>)), <span class="co"># x 100</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage        =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.5</span>), <span class="co"># x 10000</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">age            =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>),  <span class="co"># make_year changed to age</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(dt_mpg_expanded <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"car"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"cents"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">min</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                       dt_mpg_expanded <span class="sc">%&gt;%</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"car"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"cents"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">max</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="resrictions" class="level3">
 <h3 class="anchored" data-anchor-id="resrictions">Resrictions</h3>
@@ -120,13 +130,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>profiles_restricted <span class="ot">&lt;-</span> <span class="fu">cbc_restrict</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  profiles,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># BEV range restrictions</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"Battery Electric"</span>) <span class="sc">&amp;</span> (range <span class="sc">&lt;</span> <span class="fl">0.5</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Gas efficiency restrictions</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"Gasoline"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="dv">9</span>),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">!=</span> <span class="st">"Gasoline"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;=</span> <span class="dv">18</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># table(profiles_restricted$operating_cost)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> (range_bev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> (range_bev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (range_bev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (range_bev <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PHEV range restrictions</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Gas efficiency restrictions</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#(powertrain == "gas") &amp; (operating_cost &lt; 9),</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(operating_cost <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">12</span>)),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(operating_cost <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">12</span>)), </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(operating_cost <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)), </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(operating_cost <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">12</span>,<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">24</span>)) </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -173,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Negative (−)</td>
 </tr>
 <tr class="odd">
-<td>make_year</td>
+<td>age</td>
 <td>Newer car preferred</td>
 <td>Risk aversion, resale concerns</td>
 <td>Negative (−)</td>
@@ -192,56 +212,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>priors_fixed_parameter <span class="ot">&lt;-</span> <span class="fu">cbc_priors</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># powertrain: categorical (effects coded or dummy)</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain =</span> <span class="fu">c</span>(<span class="st">"Battery Electric"</span> <span class="ot">=</span> <span class="sc">-</span><span class="fl">1.0</span>, <span class="st">"Plug-in Hybrid"</span> <span class="ot">=</span> <span class="fl">1.0</span>,  <span class="st">"Gas Hybrid"</span> <span class="ot">=</span> <span class="fl">0.5</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># price: scaled by 1,000s</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># range bev: scaled by 100s → positive effect</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fl">0.5</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># range phev: scaled by 100s → positive effect</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make_year: higher means older → negative effect</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">make_year =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># operating cost: higher means worse → negative effect</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">no_choice =</span> <span class="fl">0.5</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># priors_fixed_parameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="random-parameters" class="level3">
-<h3 class="anchored" data-anchor-id="random-parameters">Random Parameters</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># priors_random_parameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain =</span> <span class="fu">c</span>(<span class="st">"bev"</span> <span class="ot">=</span> <span class="sc">-</span><span class="fl">1.0</span>, <span class="st">"phev"</span> <span class="ot">=</span> <span class="sc">-</span><span class="fl">0.5</span>,  <span class="st">"hev"</span> <span class="ot">=</span> <span class="fl">0.1</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_bev =</span> <span class="fl">0.1</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_phev =</span> <span class="fl">0.1</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">no_choice =</span> <span class="fl">0.5</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="step-3-generate-designs" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-generate-designs">Step 3: Generate Designs</h2>
-<ul>
-<li><strong>shortcut</strong>: The “shortcut” method balances attribute level frequencies while avoiding duplicate profiles within questions</li>
-</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>design_rand <span class="ot">&lt;-</span> <span class="fu">cbc_design</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">'random'</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_resp =</span> <span class="dv">4000</span>, <span class="co"># Number of respondents</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_alts =</span> <span class="dv">3</span>, <span class="co"># Number of alternatives per question</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_q =</span> <span class="dv">6</span>, <span class="co"># Number of questions per respondent</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">no_choice =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">priors =</span> priors_fixed_parameter</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">cbc_design</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">'random'</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_resp =</span> <span class="dv">4000</span>, <span class="co"># Number of respondents</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_alts =</span> <span class="dv">3</span>, <span class="co"># Number of alternatives per question</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_q =</span> <span class="dv">6</span>, <span class="co"># Number of questions per respondent</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">no_choice =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">priors =</span> priors_fixed_parameter,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_by =</span> <span class="fu">c</span>(<span class="st">'powertrain'</span>, <span class="st">'operating_cost'</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">remove_dominant =</span> <span class="cn">FALSE</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="check-for-balance" class="level2">
 <h2 class="anchored" data-anchor-id="check-for-balance">Check for balance:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbc_inspect</span>(design_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbc_inspect</span>(design)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>DESIGN SUMMARY
 =========================
@@ -249,20 +251,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 STRUCTURE
 ================
 Method: random
-Created: 2025-09-19 02:25:58
+Created: 2025-09-25 15:51:28
 Respondents: 4000
 Questions per respondent: 6
 Alternatives per question: 3
 Total choice sets: 24000
-Profile usage: 42991/63180 (68.0%)
+Profile usage: 12056/12960 (93.0%)
 Special features:
   • No-choice option
 
 SUMMARY METRICS
 =================
 D-error calculation not available for random designs
-Overall balance score: 0.620 (higher is better)
-Overall overlap score: 0.142 (lower is better)
+Overall balance score: 0.580 (higher is better)
+Overall overlap score: 0.210 (lower is better)
 
 VARIABLE ENCODING
 =================
@@ -270,57 +272,63 @@ Format: Dummy-coded (powertrain)
 
 ATTRIBUTE BALANCE
 =================
-Overall balance score: 0.620 (higher is better)
+Overall balance score: 0.580 (higher is better)
 
 Individual attribute level counts:
 
-powertrainBattery Electric:
+powertrainbev:
 
     0     1 
-79452 16548 
-  Balance score: 0.519 (higher is better)
+78055 17945 
+  Balance score: 0.530 (higher is better)
 
-powertrainPlug-in Hybrid:
-
-    0     1 
-77503 18497 
-  Balance score: 0.535 (higher is better)
-
-powertrainGas Hybrid:
+powertrainphev:
 
     0     1 
-77602 18398 
-  Balance score: 0.534 (higher is better)
+77830 18170 
+  Balance score: 0.532 (higher is better)
+
+powertrainhev:
+
+    0     1 
+78010 17990 
+  Balance score: 0.531 (higher is better)
 
 price:
 
     0   0.8   0.9     1   1.1 
-24000 17867 18122 18087 17924 
+24000 18152 17799 17891 18158 
   Balance score: 0.877 (higher is better)
 
-range:
+range_bev:
 
-    0   0.5  0.75     1  1.25   1.5  1.75     2  2.25   2.5 
-29541  7358  7428  7384  7486  7361  7381  7343  7279  7439 
-  Balance score: 0.578 (higher is better)
+    0   0.5     1   1.5     2   2.5 
+78055  3564  3634  3613  3625  3509 
+  Balance score: 0.345 (higher is better)
+
+range_phev:
+
+    0   0.1 
+77830 18170 
+  Balance score: 0.532 (higher is better)
 
 mileage:
 
     0     2   2.5     3   3.5     4   4.5     5   5.5     6 
-24000  7956  8088  7808  7937  8032  8087  7962  8019  8111 
+24000  7767  8196  7924  8014  8125  7880  8066  8030  7998 
   Balance score: 0.655 (higher is better)
 
-make_year:
+age:
 
     0     2     3     4     5     6     7     8     9    10 
-24000  7883  7920  8101  8199  8034  7869  8046  7931  8017 
+24000  8104  7942  7992  8160  7774  8102  7935  7870  8121 
   Balance score: 0.655 (higher is better)
 
 operating_cost:
 
-    0     3     6     9    12    15    18    21 
-24000 10623 10598 14461 14569 14386  3686  3677 
-  Balance score: 0.645 (higher is better)
+    0     3     5     6     7     8     9    10    11    12    16    20    24 
+24000  7184  7177  3723  7195  7159  7149  3583  3562 14505  3586  3510  3667 
+  Balance score: 0.557 (higher is better)
 
 no_choice:
 
@@ -330,58 +338,60 @@ no_choice:
 
 ATTRIBUTE OVERLAP
 =================
-Overall overlap score: 0.142 (lower is better)
+Overall overlap score: 0.210 (lower is better)
 
 Counts of attribute overlap:
 (# of questions with N unique levels)
 
-powertrainBattery Electric: Continuous variable
+powertrainbev: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):  45.7%  (10966 / 24000 questions)
-  2 (no overlap):        54.3%  (13034 / 24000 questions)
-  Average unique levels per question: 1.54
+  1 (complete overlap):  42.2%  (10124 / 24000 questions)
+  2 (no overlap):        57.8%  (13876 / 24000 questions)
+  Average unique levels per question: 1.58
 
-powertrainPlug-in Hybrid: Continuous variable
+powertrainphev: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):  41.0%  (9838 / 24000 questions)
-  2 (no overlap):        59.0%  (14162 / 24000 questions)
-  Average unique levels per question: 1.59
+  1 (complete overlap):  41.6%  (9985 / 24000 questions)
+  2 (no overlap):        58.4%  (14015 / 24000 questions)
+  Average unique levels per question: 1.58
 
-powertrainGas Hybrid: Continuous variable
+powertrainhev: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):  41.5%  (9954 / 24000 questions)
-  2 (no overlap):        58.5%  (14046 / 24000 questions)
-  Average unique levels per question: 1.59
+  1 (complete overlap):  42.5%  (10199 / 24000 questions)
+  2 (no overlap):        57.5%  (13801 / 24000 questions)
+  Average unique levels per question: 1.58
 
 price: Continuous variable
   Questions by # unique levels:
   1 (complete overlap):   0.0%  (0 / 24000 questions)
-  2 (partial overlap):    6.2%  (1496 / 24000 questions)
-  3 (partial overlap):   55.8%  (13384 / 24000 questions)
-  4 (partial overlap):   38.0%  (9120 / 24000 questions)
+  2 (partial overlap):    6.2%  (1495 / 24000 questions)
+  3 (partial overlap):   55.7%  (13374 / 24000 questions)
+  4 (partial overlap):   38.0%  (9131 / 24000 questions)
   5 (no overlap):         0.0%  (0 / 24000 questions)
   Average unique levels per question: 3.32
 
-range: Continuous variable
+range_bev: Continuous variable
   Questions by # unique levels:
-  1 (complete overlap):   0.0%  (9 / 24000 questions)
-  2 (partial overlap):    4.8%  (1148 / 24000 questions)
-  3 (partial overlap):   40.4%  (9699 / 24000 questions)
-  4 (partial overlap):   54.8%  (13144 / 24000 questions)
+  1 (complete overlap):  42.2%  (10124 / 24000 questions)
+  2 (partial overlap):   45.2%  (10856 / 24000 questions)
+  3 (partial overlap):   11.9%  (2852 / 24000 questions)
+  4 (partial overlap):    0.7%  (168 / 24000 questions)
   5 (partial overlap):    0.0%  (0 / 24000 questions)
-  6 (partial overlap):    0.0%  (0 / 24000 questions)
-  7 (partial overlap):    0.0%  (0 / 24000 questions)
-  8 (partial overlap):    0.0%  (0 / 24000 questions)
-  9 (partial overlap):    0.0%  (0 / 24000 questions)
-  10 (no overlap):         0.0%  (0 / 24000 questions)
-  Average unique levels per question: 3.50
+  6 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 1.71
+
+range_phev: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):  41.6%  (9985 / 24000 questions)
+  2 (no overlap):        58.4%  (14015 / 24000 questions)
+  Average unique levels per question: 1.58
 
 mileage: Continuous variable
   Questions by # unique levels:
   1 (complete overlap):   0.0%  (0 / 24000 questions)
-  2 (partial overlap):    1.3%  (319 / 24000 questions)
-  3 (partial overlap):   29.6%  (7115 / 24000 questions)
-  4 (partial overlap):   69.0%  (16566 / 24000 questions)
+  2 (partial overlap):    1.3%  (306 / 24000 questions)
+  3 (partial overlap):   29.2%  (7014 / 24000 questions)
+  4 (partial overlap):   69.5%  (16680 / 24000 questions)
   5 (partial overlap):    0.0%  (0 / 24000 questions)
   6 (partial overlap):    0.0%  (0 / 24000 questions)
   7 (partial overlap):    0.0%  (0 / 24000 questions)
@@ -390,12 +400,12 @@ mileage: Continuous variable
   10 (no overlap):         0.0%  (0 / 24000 questions)
   Average unique levels per question: 3.68
 
-make_year: Continuous variable
+age: Continuous variable
   Questions by # unique levels:
   1 (complete overlap):   0.0%  (0 / 24000 questions)
-  2 (partial overlap):    1.3%  (315 / 24000 questions)
-  3 (partial overlap):   29.2%  (7008 / 24000 questions)
-  4 (partial overlap):   69.5%  (16677 / 24000 questions)
+  2 (partial overlap):    1.3%  (310 / 24000 questions)
+  3 (partial overlap):   29.7%  (7132 / 24000 questions)
+  4 (partial overlap):   69.0%  (16558 / 24000 questions)
   5 (partial overlap):    0.0%  (0 / 24000 questions)
   6 (partial overlap):    0.0%  (0 / 24000 questions)
   7 (partial overlap):    0.0%  (0 / 24000 questions)
@@ -407,14 +417,19 @@ make_year: Continuous variable
 operating_cost: Continuous variable
   Questions by # unique levels:
   1 (complete overlap):   0.0%  (0 / 24000 questions)
-  2 (partial overlap):    3.2%  (768 / 24000 questions)
-  3 (partial overlap):   41.5%  (9972 / 24000 questions)
-  4 (partial overlap):   55.2%  (13260 / 24000 questions)
+  2 (partial overlap):    1.4%  (328 / 24000 questions)
+  3 (partial overlap):   27.8%  (6680 / 24000 questions)
+  4 (partial overlap):   70.8%  (16992 / 24000 questions)
   5 (partial overlap):    0.0%  (0 / 24000 questions)
   6 (partial overlap):    0.0%  (0 / 24000 questions)
   7 (partial overlap):    0.0%  (0 / 24000 questions)
-  8 (no overlap):         0.0%  (0 / 24000 questions)
-  Average unique levels per question: 3.52
+  8 (partial overlap):    0.0%  (0 / 24000 questions)
+  9 (partial overlap):    0.0%  (0 / 24000 questions)
+  10 (partial overlap):    0.0%  (0 / 24000 questions)
+  11 (partial overlap):    0.0%  (0 / 24000 questions)
+  12 (partial overlap):    0.0%  (0 / 24000 questions)
+  13 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.69
 
 no_choice: Continuous variable
   Questions by # unique levels:
@@ -423,99 +438,595 @@ no_choice: Continuous variable
   Average unique levels per question: 2.00</code></pre>
 </div>
 </div>
-</section>
-<section id="check-that-counts-by-powertrain-are-even" class="level2">
-<h2 class="anchored" data-anchor-id="check-that-counts-by-powertrain-are-even">Check that counts by powertrain are even</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>design_rand <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">'power'</span>), no_choice) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    powertrain_battery_electric,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    powertrain_plug_in_hybrid,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    powertrain_gas_hybrid,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    no_choice</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>choices_priors <span class="ot">&lt;-</span> <span class="fu">cbc_choices</span>(design, <span class="at">priors =</span> priors_fixed_parameter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> design <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">powertrain =</span> <span class="fu">case_when</span>(powertrainphev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">'phev'</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                powertrainhev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">'hev'</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                                powertrainbev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">'bev'</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                ( powertrainphev <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                                  powertrainhev <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                                  powertrainbev <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                  no_choice <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">~</span> <span class="st">'gas'</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                                ),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">range_phev =</span> range_phev <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">range_bev =</span> range_bev <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">range =</span> <span class="fu">case_when</span>(powertrainphev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">paste0</span>(range_phev, <span class="st">' miles on a full charge'</span>),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                               powertrainbev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">paste0</span>(range_bev,<span class="st">' miles on a full charge'</span>),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">vehicle_type =</span> <span class="st">'car'</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>by <span class="ot">&lt;-</span> <span class="fu">join_by</span>(vehicle_type, powertrain,  operating_cost <span class="sc">==</span> cents_mile)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>design_car <span class="ot">&lt;-</span> <span class="fu">left_join</span>(design, dt_mpg_expanded, by)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">logitr</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> choices_priors, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="st">'choice'</span>, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">obsID =</span> <span class="st">'obsID'</span>, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pars =</span> <span class="fu">c</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'price'</span>, <span class="st">'range_bev'</span>, <span class="st">'range_phev'</span>, <span class="st">'mileage'</span>, <span class="st">'age'</span>, <span class="st">'operating_cost'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'powertrainbev'</span>, <span class="st">'powertrainphev'</span>, <span class="st">'powertrainhev'</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Running model...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Done!</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 5
-  powertrain_battery_el…¹ powertrain_plug_in_h…² powertrain_gas_hybrid no_choice
-                    &lt;dbl&gt;                  &lt;dbl&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
-1                       0                      0                     0         0
-2                       0                      0                     0         1
-3                       0                      0                     1         0
-4                       0                      1                     0         0
-5                       1                      0                     0         0
-# ℹ abbreviated names: ¹​powertrain_battery_electric, ²​powertrain_plug_in_hybrid
-# ℹ 1 more variable: n &lt;int&gt;</code></pre>
+<pre><code>=================================================
+
+Model estimated on: Thu Sep 25 5:14:09 PM 2025 
+
+Using logitr version: 1.1.2 
+
+Call:
+logitr(data = choices_priors, outcome = "choice", obsID = "obsID", 
+    pars = c("price", "range_bev", "range_phev", "mileage", "age", 
+        "operating_cost", "powertrainbev", "powertrainphev", 
+        "powertrainhev"))
+
+Frequencies of alternatives:
+        1         2         3         4 
+0.0020417 0.0022500 0.0017083 0.9940000 
+
+Exit Status: 3, Optimization stopped because ftol_rel or ftol_abs was reached.
+                                
+Model Type:    Multinomial Logit
+Model Space:          Preference
+Model Run:                1 of 1
+Iterations:                  297
+Elapsed Time:          0h:0m:14s
+Algorithm:        NLOPT_LD_LBFGS
+Weights Used?:             FALSE
+Robust?                    FALSE
+
+Model Coefficients: 
+                  Estimate  Std. Error z-value  Pr(&gt;|z|)    
+price          -1.1229e+00  4.5119e-01 -2.4887   0.01282 *  
+range_bev       7.0211e-02  2.6103e-01  0.2690   0.78795    
+range_phev     -4.6185e-01  5.8923e+04  0.0000   0.99999    
+mileage        -5.4436e-01  7.1640e-02 -7.5985 2.998e-14 ***
+age            -1.6495e-01  3.3373e-02 -4.9425 7.714e-07 ***
+operating_cost -2.8367e-01  3.0527e-02 -9.2926 &lt; 2.2e-16 ***
+powertrainbev  -8.8684e-01  5.3013e-01 -1.6729   0.09435 .  
+powertrainphev -4.6184e-02  5.8923e+03  0.0000   0.99999    
+powertrainhev   2.7115e-01  3.1900e-01  0.8500   0.39533    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+                                     
+Log-Likelihood:         -9.282484e+02
+Null Log-Likelihood:    -3.327106e+04
+AIC:                     1.874497e+03
+BIC:                     1.947269e+03
+McFadden R2:             9.721004e-01
+Adj McFadden R2:         9.718299e-01
+Number of Observations:  2.400000e+04</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">cbc_power</span>(choices_priors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Auto-detected parameters: powertrainbev, powertrainphev, powertrainhev, price, range_bev, range_phev, mileage, age, operating_cost, no_choice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 'respID' as panelID for panel data estimation.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Estimating models using 7 cores...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Model estimation complete!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in sqrt(diag(stats::vcov(object))): NaNs produced
+Warning in sqrt(diag(stats::vcov(object))): NaNs produced
+Warning in sqrt(diag(stats::vcov(object))): NaNs produced
+Warning in sqrt(diag(stats::vcov(object))): NaNs produced
+Warning in sqrt(diag(stats::vcov(object))): NaNs produced</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(power, <span class="at">type =</span> <span class="st">"power"</span>, <span class="at">power_threshold =</span> <span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="powerAnalysis_vehicleDCE_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(power, power_threshold = 0.9)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(power, <span class="at">type =</span> <span class="st">"se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="powerAnalysis_vehicleDCE_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="section-1" class="level96">
+<p class="heading"></p>
+</section>
+<section id="for-suv" class="level3">
+<h3 class="anchored" data-anchor-id="for-suv">For SUV</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define profiles with attributes and levels</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>profiles <span class="ot">&lt;-</span> <span class="fu">cbc_profiles</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain     =</span> <span class="fu">c</span>(<span class="st">'gas'</span>, <span class="st">'bev'</span>, <span class="st">'phev'</span>, <span class="st">'hev'</span>),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">price          =</span> <span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_bev =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>, <span class="fl">0.5</span>)), <span class="co"># x 100</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_phev =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="dv">1</span>)), <span class="co"># x 100</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage        =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="fl">0.5</span>), <span class="co"># x 10000</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">age            =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>),  <span class="co"># make_year changed to age</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(dt_mpg_expanded <span class="sc">%&gt;%</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"suv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"cents"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">min</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                       dt_mpg_expanded <span class="sc">%&gt;%</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">filter</span>(vehicle_type <span class="sc">==</span> <span class="st">"suv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"cents"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">max</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="remove-duplicates" class="level2">
-<h2 class="anchored" data-anchor-id="remove-duplicates">Remove duplicates:</h2>
+</section>
+</section>
+<section id="restrictions" class="level1">
+<h1>Restrictions</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>design_rand<span class="sc">$</span>range[design_rand<span class="sc">$</span><span class="st">"powertrainBattery Electric"</span>  <span class="sc">!=</span><span class="st">'1'</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> design_rand[<span class="fu">duplicated</span>(design_rand[<span class="fu">c</span>(<span class="st">'respID'</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'qID'</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainGas Hybrid'</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainPlug-in Hybrid'</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainBattery Electric'</span>,</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'price'</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'range'</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'mileage'</span>,</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'make_year'</span>,</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'operating_cost'</span> )]), ]</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>design_rand <span class="ot">&lt;-</span> design_rand[<span class="sc">!</span><span class="fu">duplicated</span>(design_rand[<span class="fu">c</span>(<span class="st">'respID'</span>,</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'qID'</span>,</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainGas Hybrid'</span>,</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainPlug-in Hybrid'</span>,</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'powertrainBattery Electric'</span>,</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'price'</span>,</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'range'</span>,</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'mileage'</span>,</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'make_year'</span>,</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">'operating_cost'</span> )]), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>profiles_restricted <span class="ot">&lt;-</span> <span class="fu">cbc_restrict</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  profiles,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># BEV range restrictions</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> (range_bev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> (range_bev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (range_bev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (range_bev <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PHEV range restrictions</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Gas efficiency restrictions</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#(powertrain == "gas") &amp; (operating_cost &lt; 9),</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(operating_cost <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">11</span>,<span class="dv">14</span>)),</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(operating_cost <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">13</span>,<span class="dv">17</span>,<span class="dv">20</span>)), </span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(operating_cost <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">12</span>,<span class="dv">16</span>,<span class="dv">19</span>,<span class="dv">23</span>)), </span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(operating_cost <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">13</span>,<span class="dv">17</span>,<span class="dv">21</span>,<span class="dv">25</span>)) </span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="set-up-priors" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-priors">Set up priors</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>priors_fixed_parameter <span class="ot">&lt;-</span> <span class="fu">cbc_priors</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># powertrain: categorical (effects coded or dummy)</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">powertrain =</span> <span class="fu">c</span>(<span class="st">"bev"</span> <span class="ot">=</span> <span class="sc">-</span><span class="fl">1.0</span>, <span class="st">"phev"</span> <span class="ot">=</span> <span class="sc">-</span><span class="fl">0.5</span>,  <span class="st">"hev"</span> <span class="ot">=</span> <span class="fl">0.1</span>),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_bev =</span> <span class="fl">0.1</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_phev =</span> <span class="fl">0.1</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">no_choice =</span> <span class="fl">0.5</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="check-that-counts-by-powertrain-are-even-1" class="level2">
-<h2 class="anchored" data-anchor-id="check-that-counts-by-powertrain-are-even-1">Check that counts by powertrain are even</h2>
+<section id="generate-designs" class="level2">
+<h2 class="anchored" data-anchor-id="generate-designs">Generate Designs</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>design_rand <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">'power'</span>), no_choice) <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    powertrain_battery_electric,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    powertrain_plug_in_hybrid,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    powertrain_gas_hybrid,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    no_choice</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">cbc_design</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">profiles =</span> profiles_restricted,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">'random'</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_resp =</span> <span class="dv">4000</span>, <span class="co"># Number of respondents</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_alts =</span> <span class="dv">3</span>, <span class="co"># Number of alternatives per question</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_q =</span> <span class="dv">6</span>, <span class="co"># Number of questions per respondent</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">no_choice =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">priors =</span> priors_fixed_parameter,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">balance_by =</span> <span class="fu">c</span>(<span class="st">'powertrain'</span>, <span class="st">'operating_cost'</span>),</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">remove_dominant =</span> <span class="cn">FALSE</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-for-balance-1" class="level2">
+<h2 class="anchored" data-anchor-id="check-for-balance-1">Check for balance:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbc_inspect</span>(design)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 5
-  powertrain_battery_el…¹ powertrain_plug_in_h…² powertrain_gas_hybrid no_choice
-                    &lt;dbl&gt;                  &lt;dbl&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
-1                       0                      0                     0         0
-2                       0                      0                     0         1
-3                       0                      0                     1         0
-4                       0                      1                     0         0
-5                       1                      0                     0         0
-# ℹ abbreviated names: ¹​powertrain_battery_electric, ²​powertrain_plug_in_hybrid
-# ℹ 1 more variable: n &lt;int&gt;</code></pre>
+<pre><code>DESIGN SUMMARY
+=========================
+
+STRUCTURE
+================
+Method: random
+Created: 2025-09-25 15:54:27
+Respondents: 4000
+Questions per respondent: 6
+Alternatives per question: 3
+Total choice sets: 24000
+Profile usage: 12108/12960 (93.4%)
+Special features:
+  • No-choice option
+
+SUMMARY METRICS
+=================
+D-error calculation not available for random designs
+Overall balance score: 0.576 (higher is better)
+Overall overlap score: 0.212 (lower is better)
+
+VARIABLE ENCODING
+=================
+Format: Dummy-coded (powertrain)
+
+ATTRIBUTE BALANCE
+=================
+Overall balance score: 0.576 (higher is better)
+
+Individual attribute level counts:
+
+powertrainbev:
+
+    0     1 
+77903 18097 
+  Balance score: 0.532 (higher is better)
+
+powertrainphev:
+
+    0     1 
+78072 17928 
+  Balance score: 0.530 (higher is better)
+
+powertrainhev:
+
+    0     1 
+78006 17994 
+  Balance score: 0.531 (higher is better)
+
+price:
+
+    0   0.8   0.9     1   1.1 
+24000 18125 18101 17922 17852 
+  Balance score: 0.877 (higher is better)
+
+range_bev:
+
+    0   0.5     1   1.5     2   2.5 
+77903  3599  3554  3745  3636  3563 
+  Balance score: 0.345 (higher is better)
+
+range_phev:
+
+    0   0.1 
+78072 17928 
+  Balance score: 0.530 (higher is better)
+
+mileage:
+
+    0     2   2.5     3   3.5     4   4.5     5   5.5     6 
+24000  8119  7890  8005  7847  8120  7842  8079  8080  8018 
+  Balance score: 0.655 (higher is better)
+
+age:
+
+    0     2     3     4     5     6     7     8     9    10 
+24000  7944  8055  7871  8023  8048  8089  7968  8025  7977 
+  Balance score: 0.655 (higher is better)
+
+operating_cost:
+
+    0     3     6     7     8     9    10    11    12    13    14    16    17 
+24000  3594  3631  3531  7066  3613  3642  3656  3680  7291  3649  3593  7071 
+   19    20    21    23    25 
+ 3534  3599  3618  3622  3610 
+  Balance score: 0.524 (higher is better)
+
+no_choice:
+
+    0     1 
+72000 24000 
+  Balance score: 0.586 (higher is better)
+
+ATTRIBUTE OVERLAP
+=================
+Overall overlap score: 0.212 (lower is better)
+
+Counts of attribute overlap:
+(# of questions with N unique levels)
+
+powertrainbev: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):  42.1%  (10110 / 24000 questions)
+  2 (no overlap):        57.9%  (13890 / 24000 questions)
+  Average unique levels per question: 1.58
+
+powertrainphev: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):  42.6%  (10230 / 24000 questions)
+  2 (no overlap):        57.4%  (13770 / 24000 questions)
+  Average unique levels per question: 1.57
+
+powertrainhev: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):  42.3%  (10146 / 24000 questions)
+  2 (no overlap):        57.7%  (13854 / 24000 questions)
+  Average unique levels per question: 1.58
+
+price: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (partial overlap):    6.2%  (1494 / 24000 questions)
+  3 (partial overlap):   56.7%  (13606 / 24000 questions)
+  4 (partial overlap):   37.1%  (8900 / 24000 questions)
+  5 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.31
+
+range_bev: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):  42.1%  (10110 / 24000 questions)
+  2 (partial overlap):   44.8%  (10743 / 24000 questions)
+  3 (partial overlap):   12.4%  (2967 / 24000 questions)
+  4 (partial overlap):    0.8%  (180 / 24000 questions)
+  5 (partial overlap):    0.0%  (0 / 24000 questions)
+  6 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 1.72
+
+range_phev: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):  42.6%  (10230 / 24000 questions)
+  2 (no overlap):        57.4%  (13770 / 24000 questions)
+  Average unique levels per question: 1.57
+
+mileage: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (partial overlap):    1.2%  (284 / 24000 questions)
+  3 (partial overlap):   29.6%  (7113 / 24000 questions)
+  4 (partial overlap):   69.2%  (16603 / 24000 questions)
+  5 (partial overlap):    0.0%  (0 / 24000 questions)
+  6 (partial overlap):    0.0%  (0 / 24000 questions)
+  7 (partial overlap):    0.0%  (0 / 24000 questions)
+  8 (partial overlap):    0.0%  (0 / 24000 questions)
+  9 (partial overlap):    0.0%  (0 / 24000 questions)
+  10 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.68
+
+age: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (partial overlap):    1.3%  (314 / 24000 questions)
+  3 (partial overlap):   29.4%  (7057 / 24000 questions)
+  4 (partial overlap):   69.3%  (16629 / 24000 questions)
+  5 (partial overlap):    0.0%  (0 / 24000 questions)
+  6 (partial overlap):    0.0%  (0 / 24000 questions)
+  7 (partial overlap):    0.0%  (0 / 24000 questions)
+  8 (partial overlap):    0.0%  (0 / 24000 questions)
+  9 (partial overlap):    0.0%  (0 / 24000 questions)
+  10 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.68
+
+operating_cost: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (partial overlap):    0.4%  (106 / 24000 questions)
+  3 (partial overlap):   18.0%  (4318 / 24000 questions)
+  4 (partial overlap):   81.6%  (19576 / 24000 questions)
+  5 (partial overlap):    0.0%  (0 / 24000 questions)
+  6 (partial overlap):    0.0%  (0 / 24000 questions)
+  7 (partial overlap):    0.0%  (0 / 24000 questions)
+  8 (partial overlap):    0.0%  (0 / 24000 questions)
+  9 (partial overlap):    0.0%  (0 / 24000 questions)
+  10 (partial overlap):    0.0%  (0 / 24000 questions)
+  11 (partial overlap):    0.0%  (0 / 24000 questions)
+  12 (partial overlap):    0.0%  (0 / 24000 questions)
+  13 (partial overlap):    0.0%  (0 / 24000 questions)
+  14 (partial overlap):    0.0%  (0 / 24000 questions)
+  15 (partial overlap):    0.0%  (0 / 24000 questions)
+  16 (partial overlap):    0.0%  (0 / 24000 questions)
+  17 (partial overlap):    0.0%  (0 / 24000 questions)
+  18 (no overlap):         0.0%  (0 / 24000 questions)
+  Average unique levels per question: 3.81
+
+no_choice: Continuous variable
+  Questions by # unique levels:
+  1 (complete overlap):   0.0%  (0 / 24000 questions)
+  2 (no overlap):       100.0%  (24000 / 24000 questions)
+  Average unique levels per question: 2.00</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>choices <span class="ot">&lt;-</span> <span class="fu">cbc_choices</span>(design_rand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>choices_priors <span class="ot">&lt;-</span> <span class="fu">cbc_choices</span>(design, <span class="at">priors =</span> priors_fixed_parameter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#power &lt;- cbc_power(choices)</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(power, type = "power", power_threshold = 0.9)</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(power, power_threshold = 0.9)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> design <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">powertrain =</span> <span class="fu">case_when</span>(powertrainphev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">'phev'</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                                powertrainhev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">'hev'</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                                powertrainbev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">'bev'</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                                ( powertrainphev <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                                    powertrainhev <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                                    powertrainbev <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                                    no_choice <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">~</span> <span class="st">'gas'</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_phev =</span> range_phev <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_bev =</span> range_bev <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fu">case_when</span>(powertrainphev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">paste0</span>(range_phev, <span class="st">' miles on a full charge'</span>),</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                    powertrainbev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">paste0</span>(range_bev,<span class="st">' miles on a full charge'</span>),</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>                    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>),</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">vehicle_type =</span> <span class="st">'suv'</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>by <span class="ot">&lt;-</span> <span class="fu">join_by</span>(vehicle_type, powertrain,  operating_cost <span class="sc">==</span> cents_mile)</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>design_suv <span class="ot">&lt;-</span> <span class="fu">left_join</span>(design, dt_mpg_expanded, by)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">logitr</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> choices_priors, </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="st">'choice'</span>, </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">obsID =</span> <span class="st">'obsID'</span>, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pars =</span> <span class="fu">c</span>(</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'price'</span>, <span class="st">'range_bev'</span>, <span class="st">'range_phev'</span>, <span class="st">'mileage'</span>, <span class="st">'age'</span>, <span class="st">'operating_cost'</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'powertrainbev'</span>, <span class="st">'powertrainphev'</span>, <span class="st">'powertrainhev'</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Running model...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Done!</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in sqrt(diag(stats::vcov(object))): NaNs produced</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=================================================
+
+Model estimated on: Thu Sep 25 5:15:37 PM 2025 
+
+Using logitr version: 1.1.2 
+
+Call:
+logitr(data = choices_priors, outcome = "choice", obsID = "obsID", 
+    pars = c("price", "range_bev", "range_phev", "mileage", "age", 
+        "operating_cost", "powertrainbev", "powertrainphev", 
+        "powertrainhev"))
+
+Frequencies of alternatives:
+       1        2        3        4 
+0.000875 0.001000 0.001125 0.997000 
+
+Exit Status: 3, Optimization stopped because ftol_rel or ftol_abs was reached.
+                                
+Model Type:    Multinomial Logit
+Model Space:          Preference
+Model Run:                1 of 1
+Iterations:                  148
+Elapsed Time:           0h:0m:5s
+Algorithm:        NLOPT_LD_LBFGS
+Weights Used?:             FALSE
+Robust?                    FALSE
+
+Model Coefficients: 
+                Estimate Std. Error z-value  Pr(&gt;|z|)    
+price          -0.399476   0.625982 -0.6382  0.523370    
+range_bev       0.178393   0.238707  0.7473  0.454864    
+range_phev     -0.754064        NaN     NaN       NaN    
+mileage        -0.529413   0.101289 -5.2268 1.725e-07 ***
+age            -0.125814   0.046674 -2.6956  0.007026 ** 
+operating_cost -0.364687   0.044950 -8.1132 4.441e-16 ***
+powertrainbev  -1.239008   0.560091 -2.2122  0.026956 *  
+powertrainphev -0.075406        NaN     NaN       NaN    
+powertrainhev  -0.339722   0.410729 -0.8271  0.408168    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+                                     
+Log-Likelihood:         -4.831925e+02
+Null Log-Likelihood:    -3.327106e+04
+AIC:                     9.843850e+02
+BIC:                     1.057157e+03
+McFadden R2:             9.854771e-01
+Adj McFadden R2:         9.852066e-01
+Number of Observations:  2.400000e+04</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">cbc_power</span>(choices_priors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Auto-detected parameters: powertrainbev, powertrainphev, powertrainhev, price, range_bev, range_phev, mileage, age, operating_cost, no_choice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 'respID' as panelID for panel data estimation.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Estimating models using 7 cores...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Model estimation complete!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in sqrt(diag(stats::vcov(object))): NaNs produced
+Warning in sqrt(diag(stats::vcov(object))): NaNs produced
+Warning in sqrt(diag(stats::vcov(object))): NaNs produced
+Warning in sqrt(diag(stats::vcov(object))): NaNs produced
+Warning in sqrt(diag(stats::vcov(object))): NaNs produced</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(power, <span class="at">type =</span> <span class="st">"power"</span>, <span class="at">power_threshold =</span> <span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 10 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="powerAnalysis_vehicleDCE_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(power, power_threshold = 0.9)</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(power, <span class="at">type =</span> <span class="st">"se"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_line()`).
+Removed 10 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="powerAnalysis_vehicleDCE_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="section-2" class="level96">
+<p class="heading"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>design_combined<span class="ot">&lt;-</span><span class="fu">rbind</span>(design_car,design_suv)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Save design</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">#write_csv(design_combined, here('survey_updated_dynata','data', 'choice_questions.csv'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 </section>
 

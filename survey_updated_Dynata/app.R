@@ -16,7 +16,7 @@ demo_options <- tibble(
   qID = c(1, 1, 1, 1),
   altID = c(1, 2, 3, 4),
   obsID = c(1, 2, 3, 4),
-  powertrain = c('Conventional', 'Conventional', 'Conventional', 'Conventional'), # Different powertrain codes
+  powertrain = c('gas', 'gas', 'gas', 'gas'), # Different powertrain codes
   price = c(0.8, 1.2, 1.5, 1.6), # Different prices
   range = c(
     " ",
@@ -24,9 +24,9 @@ demo_options <- tibble(
     " ",
     " "
   ),
-  mileage = c(25000, 30000, 45000, 60000),
-  make_year = c(2018, 2018, 2018, 2018),
-  operating_cost = c(
+  mileage = c(2.5, 3.0, 4.5, 6.0),
+  age = c(7, 7, 7, 7),
+  operating_cost_text = c(
     "7 cents per mile<br>( 46.7 MPG equivalent)",
     "8 cents per mile<br>( 42.3 MPG equivalent)",
     "9 cents per mile<br>( 37.0 MPG equivalent)",
@@ -40,49 +40,35 @@ demo_battery_options <- tibble(
   qID = c(1, 1, 1, 1),
   altID = c(1, 2, 3, 4),
   veh_mileage = c(30000, 30000, 30000, 30000),
-  veh_price = c(1.1, 1, 0.5, 0.5),
-  image1 = c(
-    "images/battery_survey_battery_original_text.png",
-    "images/battery_survey_battery_original_text.png",
-    "images/battery_survey_battery_original_text.png",
-    "images/refuse.png" #  Line added
-  ),
-  image2 = c(
-    "images/temp_folder2/Range_Degradation_200_3_3.png",
-    "images/temp_folder2/Range_Degradation_280_5_3.png",
-    "images/temp_folder2/Range_Degradation_360_4_3.png",
-    "images/temp_folder2/Range_Degradation_360_6_3.png" # Line added
-  ),
-  image3 = c(
-    "images/temp_folder2/Range_Degradation_200_3_8.png",
-    "images/temp_folder2/Range_Degradation_280_5_8.png",
-    "images/temp_folder2/Range_Degradation_360_4_8.png",
-    "images/temp_folder2/Range_Degradation_360_6_8.png" # Line added
-  )
+  battery_condition = c('Original', 'Refurbished Cell-Replaced', 'Refurbished Pack-Replaced', ''),
+  battery_range_year3 = c(185, 240, 320, 0),
+  battery_health_year3 = c('91%', '86%','88%', '0%' ),
+  battery_range_year8 = c(155, 185, 260, 0),
+  battery_health_year8 = c('78%', '66%', '72%', '0%'),
+  veh_price = c(1.1, 1, 0.5, 0.5)
 )
 
 electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
-#df <- demo_options
-
 vehicle_cbc_options <- function(df, budget_select) {
   df <- df %>%
-    mutate(
-      powertrain = case_when(
-        grepl("Battery electric", powertrain, ignore.case = TRUE) ~
-          paste0(electric_icon, powertrain),
-        grepl("Plug-in hybrid", powertrain, ignore.case = TRUE) ~
-          paste0(gas_icon, electric_icon, powertrain),
-        TRUE ~ paste0(gas_icon, powertrain)
-      )
+      mutate(
+        powertrain = case_when(
+          powertrain == 'bev' ~ paste0(electric_icon, 'Battery electric'),
+          powertrain == 'phev' ~ paste0(gas_icon, electric_icon, 'Plug-in hybrid electric'),
+          powertrain == 'hev' ~ paste0(gas_icon, 'Gas hybrid electric'),
+          powertrain == 'gas' ~ paste0(gas_icon, 'Conventional')
+        ),
+        age = 2025 - age,
+        mileage = mileage * 10000
     )
+
 
   alt1 <- df |> filter(altID == 1)
   alt2 <- df |> filter(altID == 2)
   alt3 <- df |> filter(altID == 3)
   alt4 <- df |> filter(altID == 4)
-
   # Use only the first value of budget_select if it has multiple values
   budget_val <- budget_select[1]
 
@@ -90,7 +76,6 @@ vehicle_cbc_options <- function(df, budget_select) {
   alt2$price <- alt2$price[1] * budget_val
   alt3$price <- alt3$price[1] * budget_val
   alt4$price <- alt4$price[1] * budget_val
-
   options <- c("option_1", "option_2", "option_3", "option_4")
 
   names(options) <- c(
@@ -100,9 +85,9 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt1$powertrain}</span><br>
         <span style='font-size: 13px;'>{alt1$range}</span>
-        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt1$make_year}</span><br>
+        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt1$age}</span><br>
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$mileage)}</span><br>
-        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt1$operating_cost}</span><br>
+        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt1$operating_cost_text}</span><br>
         <b><span style='font-size: 13px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
       </div>
     "
@@ -113,9 +98,9 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 2</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt2$powertrain}</span><br>
         <span style='font-size: 13px;'>{alt2$range}</span>
-        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt2$make_year}</span><br>
+        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt2$age}</span><br>
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$mileage)}</span><br>
-        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt2$operating_cost}</span><br>
+        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt2$operating_cost_text}</span><br>
         <b><span style='font-size: 13px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
       </div>
     "
@@ -126,9 +111,9 @@ vehicle_cbc_options <- function(df, budget_select) {
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 3</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt3$powertrain}</span><br>
         <span style='font-size: 13px;'>{alt3$range}</span>
-        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt3$make_year}</span><br>
+        <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt3$age}</span><br>
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$mileage)}</span><br>
-        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt3$operating_cost}</span><br>
+        <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt3$operating_cost_text}</span><br>
         <b><span style='font-size: 13px;' title='The final price paid for the vehicle in dollars, including all taxes and fees.' ><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt3$price)}</span><br>
       </div>
     "
@@ -147,8 +132,6 @@ vehicle_cbc_options <- function(df, budget_select) {
   )
   return(options)
 }
-
-#<b><span style='font-size: 13px;' title='The maximum distance a vehicle can travel in a full tank/ fully charged battery.' ><u>Range:</u></span></b><br> 
 
 create_car_table_short <- function(chosen_vehicle_image) {
   html_table <- sprintf(
@@ -198,9 +181,10 @@ battery_cbc_options <- function(df, budget_select) {
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
         <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>Original Battery</span><br>
-        <b><span style='font-size: 13px;'>Current Battery Range:</span></b><br> <span style='font-size: 13px;'> 185 miles <br>(Battery Health - 91%) </span><br>
-        <b><span style='font-size: 13px;'>Expected Range in 5 years:</span></b><br> <span style='font-size: 13px;'> 155 miles <br> (Battery Health - 78%) </span><br>
+        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>{alt1$battery_condition} </span><br>
+        <b><span style='font-size: 13px;'>Range on a full charge:</span></b><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health -{alt1$battery_health_year3}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt1$battery_health_year8}) </span><br>
         <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
       </div>
     "
@@ -210,9 +194,10 @@ battery_cbc_options <- function(df, budget_select) {
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 2</b><br>
         <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>Refurbished Cell-Replaced</span><br>
-        <b><span style='font-size: 13px;'>Current Battery Range:</span></b><br> <span style='font-size: 13px;'> 240 miles <br> (Battery Health - 86%) </span><br>
-        <b><span style='font-size: 13px;'>Expected Range in 5 years:</span></b><br> <span style='font-size: 13px;'> 185 miles <br> (Battery Health - 66%) </span><br>
+        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>{alt2$battery_condition} </span><br>
+        <b><span style='font-size: 13px;'>Range on a full charge:</span></b><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health -{alt2$battery_health_year3}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt2$battery_health_year8}) </span><br>
         <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
       </div>
     "
@@ -222,10 +207,11 @@ battery_cbc_options <- function(df, budget_select) {
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 3</b><br>
         <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>Refurbished Pack-Replaced</span><br>
-        <b><span style='font-size: 13px;'>Current Battery Range:</span></b><br> <span style='font-size: 13px;'> 320 miles <br>(Battery Health - 88%) </span><br>
-        <b><span style='font-size: 13px;'>Expected Range in 5 years:</span></b><br> <span style='font-size: 13px;'> 260 miles <br> (Battery Health - 72%) </span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {(scales::comma(alt3$price))}</span><br>
+        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>{alt3$battery_condition} </span><br>
+        <b><span style='font-size: 13px;'>Range on a full charge:</span></b><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health -{alt3$battery_health_year3}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt3$battery_health_year8}) </span><br>
+        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt3$price)}</span><br>
       </div>
     "
     )),
@@ -243,18 +229,15 @@ battery_cbc_options <- function(df, budget_select) {
     )
   return(options)
 }
-#'images/refuse.png'
-#Even if these were my best options, I would not choose any of these vehicles
-#<img src='images/first_image.png' style='width: 70px; vertical-align: left;'></span><br>
-#  <img src= 'images/second_image.png'  style='width: 160px;  vertical-align: middle;'>
+
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_csv(here('data', 'testing_choice_questions.csv'))
+  survey <- read_csv(here('data', 'choice_questions.csv'))
   survey$range[is.na(survey$range)] <- ''
   #survey0 <- read_csv(here('data', 'choice_questions.csv'))
   #battery_survey1 <- read_csv(here('data', 'battery_choice_questions.csv'))
-  battery_survey <- read_csv(here('data', 'battery_choice_questions_testing_zain.csv'))
+  battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
   respondentID <- sample(survey$respID, 1)
   battery_respondentID <- sample(battery_survey$respID, 1)
 
@@ -404,16 +387,7 @@ server <- function(input, output, session) {
     )
 
   battery_df <- battery_survey |>
-    filter(respID == battery_respondentID) |>
-    # Paste on the "images/" path (images are stored in the "images" folder)
-    mutate(
-      # battery_refurbish= case_when(battery_refurbish=="Original" ~"Original",
-      #                                   battery_refurbish=="Reconditioned" ~"Some battery cells replaced",
-      #                                   battery_refurbish=="Replaced" ~"Entire battery pack replaced"
-      #                                   ),
-      image1 = paste0("images/", image_refurbishment),
-      image2 = paste0("images/battery_choices_version2/", image_degradation)
-    )
+    filter(respID == battery_respondentID)
 
   df_filtered <- reactive({
     # Try to get vehicle style from input first
@@ -567,7 +541,7 @@ server <- function(input, output, session) {
         id = 'vehicle_cbc_q3_button',
         label = "If these were your only options, which would you choose?",
         option = vehicle_cbc3_options,
-        width = "70%",
+        width = "90%",
         direction = "horizontal"
       )
 
@@ -667,7 +641,7 @@ server <- function(input, output, session) {
         id = 'battery_cbc_q3_button',
         label = "If these were your only options, which would you choose?",
         option = battery_cbc3_options,
-        width = "70%"
+        width = "90%"
       )
 
       sd_question(
@@ -701,58 +675,63 @@ server <- function(input, output, session) {
     # Screen out if the respondent doesn't have valid start
     #!is_valid_start() ~ "screenout",  # Fix it
 
-    # input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
-    # input$next_veh_market %in% c("new") ~ "screenout",
-    # input$next_veh_style %in% c("van", "truck", "other") ~ "screenout",
-    # input$attention_check_toyota %in% c("yes_current", "yes_past", "no") ~
-    #   "screenout",
-    # input$attitudes_2_a_attention_check_agree %in%
-    #   c("strongly_disagree", "somewhat_disagree", "neutral", "somewhat_agree") ~
-    #   "screenout",
-    #
-    # input$household_veh_count == "0" ~ "next_veh_info",
-    #
-    # !is.null(input$next_veh_car_images) ~ "cbc_intro",
-    # input$next_veh_style == "SUV / crossover" &
-    #   ((!is.null(input$next_veh_nobev)) |
-    #     (input$next_veh_fuel_new_bev %in%
-    #       c("neutral", "somewhat_likely", "very_likely") |
-    #       input$next_veh_fuel_used_bev %in%
-    #         c("neutral", "somewhat_likely", "very_likely"))) ~
-    #   "next_veh_style_suv"
+    input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
+    input$next_veh_market %in% c("new") ~ "screenout",
+    input$next_veh_style %in% c("van", "truck", "other") ~ "screenout",
+    input$attention_check_toyota %in% c("yes_current", "yes_past", "no") ~
+      "screenout",
+    input$attitudes_2_a_attention_check_agree %in%
+      c("strongly_disagree", "somewhat_disagree", "neutral", "somewhat_agree") ~
+      "screenout",
+
+    input$household_veh_count == "0" ~ "next_veh_info",
+
+    !is.null(input$next_veh_car_images) ~ "cbc_intro",
+    input$next_veh_style == "SUV / crossover" &
+      ((!is.null(input$next_veh_nobev)) |
+         (input$next_veh_fuel_new_bev %in%
+            c("neutral", "somewhat_likely", "very_likely") |
+            input$next_veh_fuel_used_bev %in%
+            c("neutral", "somewhat_likely", "very_likely"))) ~
+      "next_veh_style_suv"
   )
 
   # Define any conditional display logic here (show a question if a condition is true)
   sd_show_if(
-    # !is.null(input$completion_code) ~ "attention_check_toyota",
-    #
-    # input$household_veh_count != "0" ~ "household_veh_fuel",
-    # !(input$household_veh_count == "1" &
-    #   length(input$household_veh_fuel) == 1) ~
-    #   "primary_veh_fuel",
-    #
-    # input$primary_veh_obtain_how %in%
-    #   c("bought_dealership", "leased_dealership", "bought_private") ~
-    #   "primary_veh_cost",
-    # input$primary_veh_obtain_how %in%
-    #   c("bought_dealership", "leased_dealership", "bought_private") ~
-    #   "primary_veh_payment",
-    #
-    # input$primary_veh_fuel %in% c("gas", "hev", "phev") ~ "primary_veh_mpg",
-    #
-    # input$next_veh_fuel_new_bev %in%
-    #   c("very_unlikely", "somewhat_unlikely") &
-    #   input$next_veh_fuel_used_bev %in%
-    #     c("very_unlikely", "somewhat_unlikely") ~
-    #   "next_veh_info_nobev",
-    #
-    # input$know_electric_vehicle == "yes" ~ "write_electric_name",
-    #
-    # prime_group_label == "prime_short" ~ "battery_prime_short",
-    # prime_group_label == "prime_long" ~ "battery_prime_long"
+    !is.null(input$completion_code) ~ "attention_check_toyota",
 
-    input$vehicle_cbc_q1_button == "4" ~  "no_bev_selected0"
-  )
+    input$household_veh_count != "0" ~ "household_veh_fuel",
+    !(input$household_veh_count == "1" &
+        length(input$household_veh_fuel) == 1) ~
+      "primary_veh_fuel",
+
+    input$primary_veh_obtain_how %in%
+      c("bought_dealership", "leased_dealership", "bought_private") ~
+      "primary_veh_cost",
+    input$primary_veh_obtain_how %in%
+      c("bought_dealership", "leased_dealership", "bought_private") ~
+      "primary_veh_payment",
+
+    input$primary_veh_fuel %in% c("gas", "hev", "phev") ~ "primary_veh_mpg",
+
+    input$next_veh_fuel_new_bev %in%
+      c("very_unlikely", "somewhat_unlikely") &
+      input$next_veh_fuel_used_bev %in%
+      c("very_unlikely", "somewhat_unlikely") ~
+      "next_veh_info_nobev",
+
+    input$know_electric_vehicle == "yes" ~ "write_electric_name",
+
+    prime_group_label == "prime_short" ~ "battery_prime_short",
+    prime_group_label == "prime_long" ~ "battery_prime_long",
+
+    input$battery_cbc_q1_button == 'option_4' &
+      input$battery_cbc_q2_button == 'option_4' &
+      input$battery_cbc_q3_button == 'option_4' &
+      input$battery_cbc_q4_button == 'option_4' &
+      input$battery_cbc_q5_button == 'option_4' &
+      input$battery_cbc_q6_button == 'option_4'  ~ 'page2a'
+    )
 
   # Database designation and other settings
   sd_server(
