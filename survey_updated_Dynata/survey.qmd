@@ -762,13 +762,16 @@ sd_next()
 
 We will now show you **six** choice questions, starting on the next page. **For all choice questions, please assume the used vehicle was built in 2022 and is currently three years old.**
 
-Below is an example of the type of questions you will be asked.
+
 
 
 ```{r}
-sd_output("battery_cbc_q0_button", type = "question")
 
-sd_next()
+#Below is an example of the type of questions you will be asked.
+
+#sd_output("battery_cbc_q0_button", type = "question")
+
+#sd_next()
 ```
 :::
 

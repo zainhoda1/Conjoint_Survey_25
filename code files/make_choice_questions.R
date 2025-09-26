@@ -141,7 +141,7 @@ profiles <- cbc_profiles(
   powertrain     = c('gas', 'bev', 'phev', 'hev'),
   price          = seq(0.8, 1.1, 0.1),
   range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
-  range_phev = c(0, seq(0.1, 0.4, 1)), # x 100
+  range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
   mileage        = seq(2, 6, 0.5), # x 10000
   age            = seq(2, 10),  # make_year changed to age
   operating_cost = seq(dt_mpg_expanded %>%
@@ -247,7 +247,7 @@ profiles <- cbc_profiles(
   powertrain     = c('gas', 'bev', 'phev', 'hev'),
   price          = seq(0.8, 1.1, 0.1),
   range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
-  range_phev = c(0, seq(0.1, 0.4, 1)), # x 100
+  range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
   mileage        = seq(2, 6, 0.5), # x 10000
   age            = seq(2, 10),  # make_year changed to age
   operating_cost = seq(dt_mpg_expanded %>%
