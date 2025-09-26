@@ -168,9 +168,9 @@ profiles <- cbc_profiles(
   price          = seq(0.8, 1.1, 0.1),
   range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
   range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
-  mileage        = seq(2, 6, 1), # x 10000
-  age            = seq(3, 9, 3),  # make_year changed to age
-  operating_cost = seq(3, 18, 3)
+  mileage        = seq(0.2, 0.6, 0.05), # x 100000
+  age            = seq(0.2, 1.0, 0.2),  # make_year changed to age  x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x10
   # operating_cost = seq(dt_mpg_expanded %>%
   #                        filter(vehicle_type == "car") %>%
   #                        select(starts_with("cents")) %>%
@@ -205,10 +205,10 @@ profiles_restricted <- cbc_restrict(
   (powertrain == "bev") & (range_phev != 0),
   (powertrain == "phev") & (range_phev == 0),
   # Gas efficiency restrictions
-  (powertrain == "gas") & (operating_cost < 9 ),
-  (powertrain == "bev") & (operating_cost > 12),
-  (powertrain == "hev") & (operating_cost < 6) & (operating_cost > 12),
-  (powertrain == "phev") & (operating_cost > 12)
+  (powertrain == "gas") & (operating_cost < 0.9 ),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.6) & (operating_cost > 1.2),
+  (powertrain == "phev") & (operating_cost > 1.2)
   # (powertrain == "bev") & !(operating_cost %in% c(3,5,7,9,12)),
   # (powertrain == "hev") & !(operating_cost %in% c(5,7,9,11,12)), 
   # (powertrain == "phev") & !(operating_cost %in% c(3,6,8,10,12)), 
@@ -290,7 +290,9 @@ design <- design %>%
          range = case_when(powertrainphev == 1 ~ paste0(range_phev, ' miles on a full charge'),
                                powertrainbev == 1 ~ paste0(range_bev,' miles on a full charge'),
                                TRUE ~ NA),
-         vehicle_type = 'car'
+         vehicle_type = 'car',
+         operating_cost = operating_cost * 10
+         
          )
          
 
@@ -339,9 +341,9 @@ profiles <- cbc_profiles(
   price          = seq(0.8, 1.1, 0.1),
   range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
   range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
-  mileage        = seq(2, 6, 1), # x 10000
-  age            = seq(3, 9, 3),  # make_year changed to age
-  operating_cost = seq(3, 18, 3)
+  mileage        = seq(0.2, 0.6, 0.05), # x 100000
+  age            = seq(0.2, 1.0, 0.2),  # make_year changed to age  x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x10
   # operating_cost = seq(dt_mpg_expanded %>%
   #                        filter(vehicle_type == "car") %>%
   #                        select(starts_with("cents")) %>%
@@ -372,10 +374,10 @@ profiles_restricted <- cbc_restrict(
   (powertrain == "bev") & (range_phev != 0),
   (powertrain == "phev") & (range_phev == 0),
   # Gas efficiency restrictions
-  (powertrain == "gas") & (operating_cost < 9 ),
-  (powertrain == "bev") & (operating_cost > 12),
-  (powertrain == "hev") & (operating_cost < 9) ,
-  (powertrain == "phev") & (operating_cost <9)
+  (powertrain == "gas") & (operating_cost < 0.9 ),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.9) ,
+  (powertrain == "phev") & (operating_cost < 0.9)
   # (powertrain == "bev") & !(operating_cost %in% c(3,5,7,9,12)),
   # (powertrain == "hev") & !(operating_cost %in% c(5,7,9,11,12)), 
   # (powertrain == "phev") & !(operating_cost %in% c(3,6,8,10,12)), 
@@ -453,7 +455,8 @@ design <- design %>%
   range = case_when(powertrainphev == 1 ~ paste0(range_phev, ' miles on a full charge'),
                     powertrainbev == 1 ~ paste0(range_bev,' miles on a full charge'),
                     TRUE ~ NA),
-  vehicle_type = 'suv'
+  vehicle_type = 'suv',
+  operating_cost = operating_cost * 10
   )
 
 

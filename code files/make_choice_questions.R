@@ -83,18 +83,20 @@ dt_mpg<-dt_mpg %>%
 dt_mpg<-dt_mpg %>% 
   rowwise() %>%
   mutate(
-    quintiles = list(seq(from = cents_mile_min, to = cents_mile_max, length.out = 5))
+    quintiles = list(seq(from = cents_mile_min, to = cents_mile_max, length.out = 15))
   ) %>%
   unnest_wider(quintiles, names_sep = "_") %>%
-  rename_with(~ paste0("cents_mile_value_", 1:5), starts_with("quintiles")) 
+  rename_with(~ paste0("cents_mile_value_", 1:15), starts_with("quintiles")) 
 
 dt_mpg<-dt_mpg%>% 
   rowwise() %>%
   mutate(
-    quintiles = list(seq(from = MPGe_max, to = MPGe_min, length.out = 5))
+    quintiles = list(seq(from = MPGe_max, to = MPGe_min, length.out = 15))
   ) %>%
   unnest_wider(quintiles, names_sep = "_") %>%
-  rename_with(~ paste0("MPGe_value_", 1:5), starts_with("quintiles"))
+  rename_with(~ paste0("MPGe_value_", 1:15), starts_with("quintiles"))
+dt_mpg <- dt_mpg %>% 
+  mutate(across(starts_with("cents_mile_value_"), ~ round(.x, 0)))
 
 
 # write.csv(dt_mpg, here("survey","data","mpg_by_segment_fuel_cost_final.csv"),row.names = F)    
@@ -119,6 +121,12 @@ dt_mpg_expanded <- dt_mpg %>%
   select(-MPGe)
 
 
+dt_mpg_expanded <- dt_mpg_expanded %>%
+  group_by(vehicle_type, powertrain, cents_mile) %>%
+  slice_head(n = 1) %>%  # or slice_tail(n = 1)
+  ungroup()
+  
+
 cost_list <- dt_mpg_expanded %>%
   group_by(vehicle_type, powertrain) %>%
   summarise(cents_mile_list = list(cents_mile), .groups = 'drop')
@@ -142,18 +150,19 @@ profiles <- cbc_profiles(
   price          = seq(0.8, 1.1, 0.1),
   range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
   range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
-  mileage        = seq(2, 6, 0.5), # x 10000
-  age            = seq(2, 10),  # make_year changed to age
-  operating_cost = seq(dt_mpg_expanded %>%
-                         filter(vehicle_type == "car") %>%
-                         select(starts_with("cents")) %>%
-                         unlist() %>%
-                         min(na.rm = TRUE),
-                       dt_mpg_expanded %>%
-                         filter(vehicle_type == "car") %>%
-                         select(starts_with("cents")) %>%
-                         unlist() %>%
-                         max(na.rm = TRUE)+1)
+  mileage        = seq(0.2, 0.6, 0.05), # x 100000
+  age            = seq(0.2, 1.0, 0.2),  # make_year changed to age  x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x10
+  # operating_cost = seq(dt_mpg_expanded %>%
+  #                        filter(vehicle_type == "car") %>%
+  #                        select(starts_with("cents")) %>%
+  #                        unlist() %>%
+  #                        min(na.rm = TRUE),
+  #                      dt_mpg_expanded %>%
+  #                        filter(vehicle_type == "car") %>%
+  #                        select(starts_with("cents")) %>%
+  #                        unlist() %>%
+  #                        max(na.rm = TRUE)+1)
 ) 
 
 
@@ -172,11 +181,14 @@ profiles_restricted <- cbc_restrict(
   (powertrain == "bev") & (range_phev != 0),
   (powertrain == "phev") & (range_phev == 0),
   # Gas efficiency restrictions
-  #(powertrain == "gas") & (operating_cost < 9),
-  (powertrain == "bev") & !(operating_cost %in% c(3,5,7,9,12)),
-  (powertrain == "hev") & !(operating_cost %in% c(5,7,9,11,12)), 
-  (powertrain == "phev") & !(operating_cost %in% c(3,6,8,10,12)), 
-  (powertrain == "gas") & !(operating_cost %in% c(8,12,16,20,24)) 
+  (powertrain == "gas") & (operating_cost < 0.9 ),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.6) & (operating_cost > 1.2),
+  (powertrain == "phev") & (operating_cost > 1.2)
+  # (powertrain == "bev") & !(operating_cost %in% c(3,5,7,9,12)),
+  # (powertrain == "hev") & !(operating_cost %in% c(5,7,9,11,12)), 
+  # (powertrain == "phev") & !(operating_cost %in% c(3,6,8,10,12)), 
+  # (powertrain == "gas") & !(operating_cost %in% c(8,12,16,20,24)) 
 
 )
 
@@ -225,7 +237,8 @@ design <- design %>%
          range = case_when(powertrainphev == 1 ~ paste0(range_phev, ' miles on a full charge'),
                                powertrainbev == 1 ~ paste0(range_bev,' miles on a full charge'),
                                TRUE ~ NA),
-         vehicle_type = 'car'
+         vehicle_type = 'car',
+         operating_cost = operating_cost * 10
          )
 
 by <- join_by(vehicle_type, powertrain,  operating_cost == cents_mile)
@@ -248,18 +261,19 @@ profiles <- cbc_profiles(
   price          = seq(0.8, 1.1, 0.1),
   range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
   range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
-  mileage        = seq(2, 6, 0.5), # x 10000
-  age            = seq(2, 10),  # make_year changed to age
-  operating_cost = seq(dt_mpg_expanded %>%
-                         filter(vehicle_type == "suv") %>%
-                         select(starts_with("cents")) %>%
-                         unlist() %>%
-                         min(na.rm = TRUE),
-                       dt_mpg_expanded %>%
-                         filter(vehicle_type == "suv") %>%
-                         select(starts_with("cents")) %>%
-                         unlist() %>%
-                         max(na.rm = TRUE)+1)
+  mileage        = seq(0.2, 0.6, 0.05), # x 100000
+  age            = seq(0.2, 1.0, 0.2),  # make_year changed to age  x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x10
+  # operating_cost = seq(dt_mpg_expanded %>%
+  #                        filter(vehicle_type == "car") %>%
+  #                        select(starts_with("cents")) %>%
+  #                        unlist() %>%
+  #                        min(na.rm = TRUE),
+  #                      dt_mpg_expanded %>%
+  #                        filter(vehicle_type == "car") %>%
+  #                        select(starts_with("cents")) %>%
+  #                        unlist() %>%
+  #                        max(na.rm = TRUE)+1)
 ) 
 
 
@@ -278,11 +292,14 @@ profiles_restricted <- cbc_restrict(
   (powertrain == "bev") & (range_phev != 0),
   (powertrain == "phev") & (range_phev == 0),
   # Gas efficiency restrictions
-  #(powertrain == "gas") & (operating_cost < 9),
-  (powertrain == "bev") & !(operating_cost %in% c(3,6,8,11,14)),
-  (powertrain == "hev") & !(operating_cost %in% c(7,10,13,17,20)), 
-  (powertrain == "phev") & !(operating_cost %in% c(8,12,16,19,23)), 
-  (powertrain == "gas") & !(operating_cost %in% c(9,13,17,21,25)) 
+  (powertrain == "gas") & (operating_cost < 0.9 ),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.9) ,
+  (powertrain == "phev") & (operating_cost < 0.9)
+  # (powertrain == "bev") & !(operating_cost %in% c(3,5,7,9,12)),
+  # (powertrain == "hev") & !(operating_cost %in% c(5,7,9,11,12)), 
+  # (powertrain == "phev") & !(operating_cost %in% c(3,6,8,10,12)), 
+  # (powertrain == "gas") & !(operating_cost %in% c(8,12,16,20,24)) 
 )
 
 
@@ -332,7 +349,8 @@ design <- design %>%
   range = case_when(powertrainphev == 1 ~ paste0(range_phev, ' miles on a full charge'),
                     powertrainbev == 1 ~ paste0(range_bev,' miles on a full charge'),
                     TRUE ~ NA),
-  vehicle_type = 'suv'
+  vehicle_type = 'suv',
+  operating_cost = operating_cost * 10  
   )
 
 

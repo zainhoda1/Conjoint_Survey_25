@@ -60,8 +60,8 @@ vehicle_cbc_options <- function(df, budget_select) {
           powertrain == 'hev' ~ paste0(gas_icon, 'Gas hybrid electric'),
           powertrain == 'gas' ~ paste0(gas_icon, 'Conventional')
         ),
-        age = 2025 - age,
-        mileage = mileage * 10000
+        age = 2025 - (age*10),
+        mileage = mileage * 100000
     )
 
 
@@ -673,7 +673,7 @@ server <- function(input, output, session) {
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_forward(
     # Screen out if the respondent doesn't have valid start
-    #!is_valid_start() ~ "screenout",  # Fix it
+    !is_valid_start() ~ "screenout",  # Fix it
 
     input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
     input$next_veh_market %in% c("new") ~ "screenout",
@@ -696,7 +696,6 @@ server <- function(input, output, session) {
       "next_veh_style_suv"
   )
 
-  # Define any conditional display logic here (show a question if a condition is true)
   sd_show_if(
     !is.null(input$completion_code) ~ "attention_check_toyota",
 
@@ -736,12 +735,12 @@ server <- function(input, output, session) {
   # Database designation and other settings
   sd_server(
     db = db,
-    all_questions_required = FALSE,  # Fix it
+    all_questions_required = TRUE,  # Fixed
     # required_questions = c("images", "budget", "next_vehicle_purchase",
     #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
     #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
     #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    use_cookies = FALSE   # Fix it
+    use_cookies = TRUE   # Fixed
   )
 }
 

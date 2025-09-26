@@ -758,9 +758,10 @@ sd_next()
 
 ::: {#battery_cbc_demo .sd-page}
 
-## Choice Question Demonstration
+## Battery Choice Question 
 
-We will now show you **six** choice questions, starting on the next page. **For all choice questions, please assume the used vehicle was built in 2022 and is currently three years old.**
+We will now show you **six** choice questions, starting on the next page.
+**For all choice questions, please assume the used vehicle was built in 2022 and is currently three years old.**
 
 
 
@@ -771,7 +772,7 @@ We will now show you **six** choice questions, starting on the next page. **For 
 
 #sd_output("battery_cbc_q0_button", type = "question")
 
-#sd_next()
+sd_next()
 ```
 :::
 

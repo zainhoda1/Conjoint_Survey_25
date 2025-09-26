@@ -109,9 +109,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price          =</span> <span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>),</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_bev =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>, <span class="fl">0.5</span>)), <span class="co"># x 100</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_phev =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>)), <span class="co"># x 100</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage        =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>), <span class="co"># x 10000</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">age            =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">3</span>),  <span class="co"># make_year changed to age</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="dv">18</span>, <span class="dv">3</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage        =</span> <span class="fu">seq</span>(<span class="fl">0.2</span>, <span class="fl">0.6</span>, <span class="fl">0.05</span>), <span class="co"># x 100000</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">age            =</span> <span class="fu">seq</span>(<span class="fl">0.2</span>, <span class="fl">1.0</span>, <span class="fl">0.2</span>),  <span class="co"># make_year changed to age  x10</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(<span class="fl">0.3</span>, <span class="fl">1.8</span>, <span class="fl">0.3</span>) <span class="co"># x10</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># operating_cost = seq(dt_mpg_expanded %&gt;%</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                        filter(vehicle_type == "car") %&gt;%</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                        select(starts_with("cents")) %&gt;%</span></span>
@@ -141,10 +141,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">!=</span> <span class="dv">0</span>),</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">==</span> <span class="dv">0</span>),</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Gas efficiency restrictions</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="dv">9</span> ),</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;</span> <span class="dv">12</span>),</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="dv">6</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;</span> <span class="dv">12</span>),</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;</span> <span class="dv">12</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="fl">0.9</span> ),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;</span> <span class="fl">1.2</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="fl">0.6</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;</span> <span class="fl">1.2</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;</span> <span class="fl">1.2</span>)</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (powertrain == "bev") &amp; !(operating_cost %in% c(3,5,7,9,12)),</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (powertrain == "hev") &amp; !(operating_cost %in% c(5,7,9,11,12)), </span></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (powertrain == "phev") &amp; !(operating_cost %in% c(3,6,8,10,12)), </span></span>
@@ -255,20 +255,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; STRUCTURE
 #&gt; ================
 #&gt; Method: random
-#&gt; Created: 2025-09-26 11:46:52
+#&gt; Created: 2025-09-26 18:48:22
 #&gt; Respondents: 4000
 #&gt; Questions per respondent: 6
 #&gt; Alternatives per question: 3
 #&gt; Total choice sets: 24000
-#&gt; Profile usage: 2759/2760 (100.0%)
+#&gt; Profile usage: 8050/8100 (99.4%)
 #&gt; Special features:
 #&gt;   • No-choice option
 #&gt; 
 #&gt; SUMMARY METRICS
 #&gt; =================
 #&gt; D-error calculation not available for random designs
-#&gt; Overall balance score: 0.629 (higher is better)
-#&gt; Overall overlap score: 0.218 (lower is better)
+#&gt; Overall balance score: 0.599 (higher is better)
+#&gt; Overall overlap score: 0.208 (lower is better)
 #&gt; 
 #&gt; VARIABLE ENCODING
 #&gt; =================
@@ -276,63 +276,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 
 #&gt; ATTRIBUTE BALANCE
 #&gt; =================
-#&gt; Overall balance score: 0.629 (higher is better)
+#&gt; Overall balance score: 0.599 (higher is better)
 #&gt; 
 #&gt; Individual attribute level counts:
 #&gt; 
 #&gt; powertrainbev:
 #&gt; 
 #&gt;     0     1 
-#&gt; 79937 16063 
-#&gt;   Balance score: 0.515 (higher is better)
+#&gt; 79416 16584 
+#&gt;   Balance score: 0.519 (higher is better)
 #&gt; 
 #&gt; powertrainphev:
 #&gt; 
 #&gt;     0     1 
-#&gt; 80085 15915 
-#&gt;   Balance score: 0.514 (higher is better)
+#&gt; 79078 16922 
+#&gt;   Balance score: 0.522 (higher is better)
 #&gt; 
 #&gt; powertrainhev:
 #&gt; 
 #&gt;     0     1 
-#&gt; 71950 24050 
-#&gt;   Balance score: 0.586 (higher is better)
+#&gt; 70408 25592 
+#&gt;   Balance score: 0.602 (higher is better)
 #&gt; 
 #&gt; price:
 #&gt; 
 #&gt;     0   0.8   0.9     1   1.1 
-#&gt; 24000 18072 18042 17993 17893 
+#&gt; 24000 18155 17938 17982 17925 
 #&gt;   Balance score: 0.877 (higher is better)
 #&gt; 
 #&gt; range_bev:
 #&gt; 
 #&gt;     0   0.5     1   1.5     2   2.5 
-#&gt; 79937  3219  3193  3208  3264  3179 
-#&gt;   Balance score: 0.338 (higher is better)
+#&gt; 79416  3316  3320  3332  3298  3318 
+#&gt;   Balance score: 0.340 (higher is better)
 #&gt; 
 #&gt; range_phev:
 #&gt; 
 #&gt;     0   0.1   0.2   0.3   0.4 
-#&gt; 80085  3982  3869  4029  4035 
-#&gt;   Balance score: 0.361 (higher is better)
+#&gt; 79078  4189  4266  4238  4229 
+#&gt;   Balance score: 0.365 (higher is better)
 #&gt; 
 #&gt; mileage:
 #&gt; 
-#&gt;     0     2     3     4     5     6 
-#&gt; 24000 14457 14329 14331 14373 14510 
-#&gt;   Balance score: 0.803 (higher is better)
+#&gt;     0   0.2  0.25   0.3  0.35   0.4  0.45   0.5  0.55   0.6 
+#&gt; 24000  8008  7823  8005  8062  7999  8018  7939  8098  8048 
+#&gt;   Balance score: 0.655 (higher is better)
 #&gt; 
 #&gt; age:
 #&gt; 
-#&gt;     0     3     6     9 
-#&gt; 24000 23861 24095 24044 
-#&gt;   Balance score: 0.996 (higher is better)
+#&gt;     0   0.2   0.4   0.6   0.8     1 
+#&gt; 24000 14347 14547 14233 14624 14249 
+#&gt;   Balance score: 0.803 (higher is better)
 #&gt; 
 #&gt; operating_cost:
 #&gt; 
-#&gt;     0     3     6     9    12    15    18 
-#&gt; 24000 12113 12043 15889 16129  7871  7955 
-#&gt;   Balance score: 0.710 (higher is better)
+#&gt;     0   0.3   0.6   0.9   1.2   1.5   1.8 
+#&gt; 24000 12540 12787 12639 16816  8678  8540 
+#&gt;   Balance score: 0.720 (higher is better)
 #&gt; 
 #&gt; no_choice:
 #&gt; 
@@ -342,85 +342,91 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 
 #&gt; ATTRIBUTE OVERLAP
 #&gt; =================
-#&gt; Overall overlap score: 0.218 (lower is better)
+#&gt; Overall overlap score: 0.208 (lower is better)
 #&gt; 
 #&gt; Counts of attribute overlap:
 #&gt; (# of questions with N unique levels)
 #&gt; 
 #&gt; powertrainbev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  47.0%  (11283 / 24000 questions)
-#&gt;   2 (no overlap):        53.0%  (12717 / 24000 questions)
-#&gt;   Average unique levels per question: 1.53
+#&gt;   1 (complete overlap):  45.6%  (10950 / 24000 questions)
+#&gt;   2 (no overlap):        54.4%  (13050 / 24000 questions)
+#&gt;   Average unique levels per question: 1.54
 #&gt; 
 #&gt; powertrainphev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  47.3%  (11353 / 24000 questions)
-#&gt;   2 (no overlap):        52.7%  (12647 / 24000 questions)
-#&gt;   Average unique levels per question: 1.53
+#&gt;   1 (complete overlap):  44.9%  (10782 / 24000 questions)
+#&gt;   2 (no overlap):        55.1%  (13218 / 24000 questions)
+#&gt;   Average unique levels per question: 1.55
 #&gt; 
 #&gt; powertrainhev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  29.4%  (7052 / 24000 questions)
-#&gt;   2 (no overlap):        70.6%  (16948 / 24000 questions)
-#&gt;   Average unique levels per question: 1.71
+#&gt;   1 (complete overlap):  27.0%  (6478 / 24000 questions)
+#&gt;   2 (no overlap):        73.0%  (17522 / 24000 questions)
+#&gt;   Average unique levels per question: 1.73
 #&gt; 
 #&gt; price: Continuous variable
 #&gt;   Questions by # unique levels:
 #&gt;   1 (complete overlap):   0.0%  (0 / 24000 questions)
-#&gt;   2 (partial overlap):    6.2%  (1496 / 24000 questions)
-#&gt;   3 (partial overlap):   56.2%  (13478 / 24000 questions)
-#&gt;   4 (partial overlap):   37.6%  (9026 / 24000 questions)
+#&gt;   2 (partial overlap):    6.3%  (1520 / 24000 questions)
+#&gt;   3 (partial overlap):   55.6%  (13349 / 24000 questions)
+#&gt;   4 (partial overlap):   38.0%  (9131 / 24000 questions)
 #&gt;   5 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 3.31
+#&gt;   Average unique levels per question: 3.32
 #&gt; 
 #&gt; range_bev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  47.0%  (11283 / 24000 questions)
-#&gt;   2 (partial overlap):   42.7%  (10239 / 24000 questions)
-#&gt;   3 (partial overlap):    9.8%  (2342 / 24000 questions)
-#&gt;   4 (partial overlap):    0.6%  (136 / 24000 questions)
+#&gt;   1 (complete overlap):  45.6%  (10950 / 24000 questions)
+#&gt;   2 (partial overlap):   43.4%  (10426 / 24000 questions)
+#&gt;   3 (partial overlap):   10.4%  (2491 / 24000 questions)
+#&gt;   4 (partial overlap):    0.6%  (133 / 24000 questions)
 #&gt;   5 (partial overlap):    0.0%  (0 / 24000 questions)
 #&gt;   6 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 1.64
+#&gt;   Average unique levels per question: 1.66
 #&gt; 
 #&gt; range_phev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  47.3%  (11353 / 24000 questions)
-#&gt;   2 (partial overlap):   43.1%  (10337 / 24000 questions)
-#&gt;   3 (partial overlap):    9.3%  (2225 / 24000 questions)
-#&gt;   4 (partial overlap):    0.4%  (85 / 24000 questions)
+#&gt;   1 (complete overlap):  44.9%  (10782 / 24000 questions)
+#&gt;   2 (partial overlap):   44.3%  (10636 / 24000 questions)
+#&gt;   3 (partial overlap):   10.3%  (2476 / 24000 questions)
+#&gt;   4 (partial overlap):    0.4%  (106 / 24000 questions)
 #&gt;   5 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 1.63
+#&gt;   Average unique levels per question: 1.66
 #&gt; 
 #&gt; mileage: Continuous variable
 #&gt;   Questions by # unique levels:
 #&gt;   1 (complete overlap):   0.0%  (0 / 24000 questions)
-#&gt;   2 (partial overlap):    3.8%  (915 / 24000 questions)
-#&gt;   3 (partial overlap):   48.3%  (11596 / 24000 questions)
-#&gt;   4 (partial overlap):   47.9%  (11489 / 24000 questions)
+#&gt;   2 (partial overlap):    1.2%  (284 / 24000 questions)
+#&gt;   3 (partial overlap):   29.3%  (7024 / 24000 questions)
+#&gt;   4 (partial overlap):   69.5%  (16692 / 24000 questions)
 #&gt;   5 (partial overlap):    0.0%  (0 / 24000 questions)
-#&gt;   6 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 3.44
+#&gt;   6 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   7 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   8 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   9 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   10 (no overlap):         0.0%  (0 / 24000 questions)
+#&gt;   Average unique levels per question: 3.68
 #&gt; 
 #&gt; age: Continuous variable
 #&gt;   Questions by # unique levels:
 #&gt;   1 (complete overlap):   0.0%  (0 / 24000 questions)
-#&gt;   2 (partial overlap):   11.4%  (2736 / 24000 questions)
-#&gt;   3 (partial overlap):   65.9%  (15821 / 24000 questions)
-#&gt;   4 (no overlap):        22.7%  (5443 / 24000 questions)
-#&gt;   Average unique levels per question: 3.11
+#&gt;   2 (partial overlap):    4.1%  (990 / 24000 questions)
+#&gt;   3 (partial overlap):   47.9%  (11508 / 24000 questions)
+#&gt;   4 (partial overlap):   47.9%  (11502 / 24000 questions)
+#&gt;   5 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   6 (no overlap):         0.0%  (0 / 24000 questions)
+#&gt;   Average unique levels per question: 3.44
 #&gt; 
 #&gt; operating_cost: Continuous variable
 #&gt;   Questions by # unique levels:
 #&gt;   1 (complete overlap):   0.0%  (0 / 24000 questions)
-#&gt;   2 (partial overlap):    3.4%  (827 / 24000 questions)
-#&gt;   3 (partial overlap):   43.9%  (10526 / 24000 questions)
-#&gt;   4 (partial overlap):   52.7%  (12647 / 24000 questions)
+#&gt;   2 (partial overlap):    3.3%  (798 / 24000 questions)
+#&gt;   3 (partial overlap):   42.8%  (10281 / 24000 questions)
+#&gt;   4 (partial overlap):   53.8%  (12921 / 24000 questions)
 #&gt;   5 (partial overlap):    0.0%  (0 / 24000 questions)
 #&gt;   6 (partial overlap):    0.0%  (0 / 24000 questions)
 #&gt;   7 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 3.49
+#&gt;   Average unique levels per question: 3.51
 #&gt; 
 #&gt; no_choice: Continuous variable
 #&gt;   Questions by # unique levels:
@@ -447,12 +453,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">range =</span> <span class="fu">case_when</span>(powertrainphev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">paste0</span>(range_phev, <span class="st">' miles on a full charge'</span>),</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                               powertrainbev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">paste0</span>(range_bev,<span class="st">' miles on a full charge'</span>),</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>),</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">vehicle_type =</span> <span class="st">'car'</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">vehicle_type =</span> <span class="st">'car'</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">operating_cost =</span> operating_cost <span class="sc">*</span> <span class="dv">10</span></span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>         </span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>by <span class="ot">&lt;-</span> <span class="fu">join_by</span>(vehicle_type, powertrain,  operating_cost <span class="sc">==</span> cents_mile)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>design_car <span class="ot">&lt;-</span> <span class="fu">left_join</span>(design, dt_mpg_expanded, by)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>by <span class="ot">&lt;-</span> <span class="fu">join_by</span>(vehicle_type, powertrain,  operating_cost <span class="sc">==</span> cents_mile)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>design_car <span class="ot">&lt;-</span> <span class="fu">left_join</span>(design, dt_mpg_expanded, by)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">logitr</span>(</span>
@@ -469,7 +477,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; =================================================
 #&gt; 
-#&gt; Model estimated on: Fri Sep 26 11:48:08 AM 2025 
+#&gt; Model estimated on: Fri Sep 26 6:49:43 PM 2025 
 #&gt; 
 #&gt; Using logitr version: 1.1.2 
 #&gt; 
@@ -480,40 +488,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         "powertrainhev"))
 #&gt; 
 #&gt; Frequencies of alternatives:
-#&gt;         1         2         3         4 
-#&gt; 0.0029167 0.0023333 0.0022917 0.9924583 
+#&gt;       1       2       3       4 
+#&gt; 0.12783 0.13129 0.13042 0.61046 
 #&gt; 
 #&gt; Exit Status: 3, Optimization stopped because ftol_rel or ftol_abs was reached.
 #&gt;                                 
 #&gt; Model Type:    Multinomial Logit
 #&gt; Model Space:          Preference
 #&gt; Model Run:                1 of 1
-#&gt; Iterations:                  194
-#&gt; Elapsed Time:           0h:0m:7s
+#&gt; Iterations:                   25
+#&gt; Elapsed Time:           0h:0m:1s
 #&gt; Algorithm:        NLOPT_LD_LBFGS
 #&gt; Weights Used?:             FALSE
 #&gt; Robust?                    FALSE
 #&gt; 
 #&gt; Model Coefficients: 
 #&gt;                 Estimate Std. Error  z-value  Pr(&gt;|z|)    
-#&gt; price          -0.618817   0.406562  -1.5221 0.1279911    
-#&gt; range_bev       0.379593   0.311436   1.2188 0.2229023    
-#&gt; range_phev     -1.284202   1.234337  -1.0404 0.2981551    
-#&gt; mileage        -0.349325   0.054870  -6.3665 1.934e-10 ***
-#&gt; age            -0.208681   0.032698  -6.3820 1.748e-10 ***
-#&gt; operating_cost -0.340956   0.027301 -12.4887 &lt; 2.2e-16 ***
-#&gt; powertrainbev  -2.225886   0.629956  -3.5334 0.0004103 ***
-#&gt; powertrainphev -0.380493   0.426506  -0.8921 0.3723309    
-#&gt; powertrainhev  -0.211013   0.295791  -0.7134 0.4756088    
+#&gt; price          -0.574659   0.055557 -10.3437 &lt; 2.2e-16 ***
+#&gt; range_bev       0.116155   0.041097   2.8263  0.004708 ** 
+#&gt; range_phev     -0.258394   0.218236  -1.1840  0.236407    
+#&gt; mileage        -0.488835   0.082378  -5.9340 2.956e-09 ***
+#&gt; age            -0.287736   0.038730  -7.4293 1.092e-13 ***
+#&gt; operating_cost -0.358944   0.025537 -14.0560 &lt; 2.2e-16 ***
+#&gt; powertrainbev  -1.118847   0.076019 -14.7180 &lt; 2.2e-16 ***
+#&gt; powertrainphev -0.469102   0.066584  -7.0452 1.851e-12 ***
+#&gt; powertrainhev   0.056294   0.031522   1.7859  0.074123 .  
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #&gt;                                      
-#&gt; Log-Likelihood:         -1.088691e+03
+#&gt; Log-Likelihood:         -2.582272e+04
 #&gt; Null Log-Likelihood:    -3.327106e+04
-#&gt; AIC:                     2.195381e+03
-#&gt; BIC:                     2.268153e+03
-#&gt; McFadden R2:             9.672782e-01
-#&gt; Adj McFadden R2:         9.670077e-01
+#&gt; AIC:                     5.166345e+04
+#&gt; BIC:                     5.173622e+04
+#&gt; McFadden R2:             2.238684e-01
+#&gt; Adj McFadden R2:         2.235979e-01
 #&gt; Number of Observations:  2.400000e+04</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">cbc_power</span>(choices_priors)</span>
@@ -550,9 +558,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">price          =</span> <span class="fu">seq</span>(<span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>),</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_bev =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>, <span class="fl">0.5</span>)), <span class="co"># x 100</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">range_phev =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>)), <span class="co"># x 100</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage        =</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>), <span class="co"># x 10000</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">age            =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">3</span>),  <span class="co"># make_year changed to age</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="dv">18</span>, <span class="dv">3</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mileage        =</span> <span class="fu">seq</span>(<span class="fl">0.2</span>, <span class="fl">0.6</span>, <span class="fl">0.05</span>), <span class="co"># x 100000</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">age            =</span> <span class="fu">seq</span>(<span class="fl">0.2</span>, <span class="fl">1.0</span>, <span class="fl">0.2</span>),  <span class="co"># make_year changed to age  x10</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> <span class="fu">seq</span>(<span class="fl">0.3</span>, <span class="fl">1.8</span>, <span class="fl">0.3</span>) <span class="co"># x10</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># operating_cost = seq(dt_mpg_expanded %&gt;%</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                        filter(vehicle_type == "car") %&gt;%</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                        select(starts_with("cents")) %&gt;%</span></span>
@@ -584,10 +592,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">!=</span> <span class="dv">0</span>),</span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (range_phev <span class="sc">==</span> <span class="dv">0</span>),</span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Gas efficiency restrictions</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="dv">9</span> ),</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;</span> <span class="dv">12</span>),</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="dv">9</span>) ,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span><span class="dv">9</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"gas"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="fl">0.9</span> ),</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"bev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&gt;</span> <span class="fl">1.2</span>),</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"hev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="fl">0.9</span>) ,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  (powertrain <span class="sc">==</span> <span class="st">"phev"</span>) <span class="sc">&amp;</span> (operating_cost <span class="sc">&lt;</span> <span class="fl">0.9</span>)</span>
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (powertrain == "bev") &amp; !(operating_cost %in% c(3,5,7,9,12)),</span></span>
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (powertrain == "hev") &amp; !(operating_cost %in% c(5,7,9,11,12)), </span></span>
 <span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (powertrain == "phev") &amp; !(operating_cost %in% c(3,6,8,10,12)), </span></span>
@@ -638,20 +646,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; STRUCTURE
 #&gt; ================
 #&gt; Method: random
-#&gt; Created: 2025-09-26 11:49:33
+#&gt; Created: 2025-09-26 18:50:57
 #&gt; Respondents: 4000
 #&gt; Questions per respondent: 6
 #&gt; Alternatives per question: 3
 #&gt; Total choice sets: 24000
-#&gt; Profile usage: 2639/2640 (100.0%)
+#&gt; Profile usage: 6833/6840 (99.9%)
 #&gt; Special features:
 #&gt;   • No-choice option
 #&gt; 
 #&gt; SUMMARY METRICS
 #&gt; =================
 #&gt; D-error calculation not available for random designs
-#&gt; Overall balance score: 0.622 (higher is better)
-#&gt; Overall overlap score: 0.210 (lower is better)
+#&gt; Overall balance score: 0.588 (higher is better)
+#&gt; Overall overlap score: 0.204 (lower is better)
 #&gt; 
 #&gt; VARIABLE ENCODING
 #&gt; =================
@@ -659,63 +667,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 
 #&gt; ATTRIBUTE BALANCE
 #&gt; =================
-#&gt; Overall balance score: 0.622 (higher is better)
+#&gt; Overall balance score: 0.588 (higher is better)
 #&gt; 
 #&gt; Individual attribute level counts:
 #&gt; 
 #&gt; powertrainbev:
 #&gt; 
 #&gt;     0     1 
-#&gt; 77958 18042 
-#&gt;   Balance score: 0.531 (higher is better)
+#&gt; 73680 22320 
+#&gt;   Balance score: 0.569 (higher is better)
 #&gt; 
 #&gt; powertrainphev:
 #&gt; 
 #&gt;     0     1 
-#&gt; 77682 18318 
-#&gt;   Balance score: 0.533 (higher is better)
+#&gt; 79565 16435 
+#&gt;   Balance score: 0.518 (higher is better)
 #&gt; 
 #&gt; powertrainhev:
 #&gt; 
 #&gt;     0     1 
-#&gt; 78178 17822 
-#&gt;   Balance score: 0.529 (higher is better)
+#&gt; 79296 16704 
+#&gt;   Balance score: 0.520 (higher is better)
 #&gt; 
 #&gt; price:
 #&gt; 
 #&gt;     0   0.8   0.9     1   1.1 
-#&gt; 24000 17992 17980 17929 18099 
+#&gt; 24000 17979 17942 18113 17966 
 #&gt;   Balance score: 0.877 (higher is better)
 #&gt; 
 #&gt; range_bev:
 #&gt; 
 #&gt;     0   0.5     1   1.5     2   2.5 
-#&gt; 77958  3625  3603  3600  3528  3686 
-#&gt;   Balance score: 0.345 (higher is better)
+#&gt; 73680  4524  4392  4480  4499  4425 
+#&gt;   Balance score: 0.362 (higher is better)
 #&gt; 
 #&gt; range_phev:
 #&gt; 
 #&gt;     0   0.1   0.2   0.3   0.4 
-#&gt; 77682  4548  4525  4592  4653 
-#&gt;   Balance score: 0.370 (higher is better)
+#&gt; 79565  4088  4150  4078  4119 
+#&gt;   Balance score: 0.363 (higher is better)
 #&gt; 
 #&gt; mileage:
 #&gt; 
-#&gt;     0     2     3     4     5     6 
-#&gt; 24000 14400 14287 14450 14429 14434 
-#&gt;   Balance score: 0.803 (higher is better)
+#&gt;     0   0.2  0.25   0.3  0.35   0.4  0.45   0.5  0.55   0.6 
+#&gt; 24000  7876  7945  8075  7919  8109  7891  8026  7986  8173 
+#&gt;   Balance score: 0.655 (higher is better)
 #&gt; 
 #&gt; age:
 #&gt; 
-#&gt;     0     3     6     9 
-#&gt; 24000 23739 24200 24061 
-#&gt;   Balance score: 0.992 (higher is better)
+#&gt;     0   0.2   0.4   0.6   0.8     1 
+#&gt; 24000 14639 14319 14387 14218 14437 
+#&gt;   Balance score: 0.803 (higher is better)
 #&gt; 
 #&gt; operating_cost:
 #&gt; 
-#&gt;     0     3     6     9    12    15    18 
-#&gt; 24000  4553  4408 18005 17956 13450 13628 
-#&gt;   Balance score: 0.655 (higher is better)
+#&gt;     0   0.3   0.6   0.9   1.2   1.5   1.8 
+#&gt; 24000  5567  5669  5454 22262 16662 16386 
+#&gt;   Balance score: 0.629 (higher is better)
 #&gt; 
 #&gt; no_choice:
 #&gt; 
@@ -725,85 +733,91 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; 
 #&gt; ATTRIBUTE OVERLAP
 #&gt; =================
-#&gt; Overall overlap score: 0.210 (lower is better)
+#&gt; Overall overlap score: 0.204 (lower is better)
 #&gt; 
 #&gt; Counts of attribute overlap:
 #&gt; (# of questions with N unique levels)
 #&gt; 
 #&gt; powertrainbev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  42.5%  (10212 / 24000 questions)
-#&gt;   2 (no overlap):        57.5%  (13788 / 24000 questions)
-#&gt;   Average unique levels per question: 1.57
+#&gt;   1 (complete overlap):  33.0%  (7924 / 24000 questions)
+#&gt;   2 (no overlap):        67.0%  (16076 / 24000 questions)
+#&gt;   Average unique levels per question: 1.67
 #&gt; 
 #&gt; powertrainphev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  41.3%  (9904 / 24000 questions)
-#&gt;   2 (no overlap):        58.7%  (14096 / 24000 questions)
-#&gt;   Average unique levels per question: 1.59
+#&gt;   1 (complete overlap):  46.2%  (11077 / 24000 questions)
+#&gt;   2 (no overlap):        53.8%  (12923 / 24000 questions)
+#&gt;   Average unique levels per question: 1.54
 #&gt; 
 #&gt; powertrainhev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  42.8%  (10264 / 24000 questions)
-#&gt;   2 (no overlap):        57.2%  (13736 / 24000 questions)
-#&gt;   Average unique levels per question: 1.57
+#&gt;   1 (complete overlap):  45.3%  (10878 / 24000 questions)
+#&gt;   2 (no overlap):        54.7%  (13122 / 24000 questions)
+#&gt;   Average unique levels per question: 1.55
 #&gt; 
 #&gt; price: Continuous variable
 #&gt;   Questions by # unique levels:
 #&gt;   1 (complete overlap):   0.0%  (0 / 24000 questions)
-#&gt;   2 (partial overlap):    6.3%  (1501 / 24000 questions)
-#&gt;   3 (partial overlap):   55.7%  (13364 / 24000 questions)
-#&gt;   4 (partial overlap):   38.1%  (9135 / 24000 questions)
+#&gt;   2 (partial overlap):    6.4%  (1543 / 24000 questions)
+#&gt;   3 (partial overlap):   56.5%  (13559 / 24000 questions)
+#&gt;   4 (partial overlap):   37.1%  (8898 / 24000 questions)
 #&gt;   5 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 3.32
+#&gt;   Average unique levels per question: 3.31
 #&gt; 
 #&gt; range_bev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  42.5%  (10212 / 24000 questions)
-#&gt;   2 (partial overlap):   44.2%  (10614 / 24000 questions)
-#&gt;   3 (partial overlap):   12.5%  (2991 / 24000 questions)
-#&gt;   4 (partial overlap):    0.8%  (183 / 24000 questions)
+#&gt;   1 (complete overlap):  33.0%  (7924 / 24000 questions)
+#&gt;   2 (partial overlap):   48.3%  (11584 / 24000 questions)
+#&gt;   3 (partial overlap):   17.4%  (4173 / 24000 questions)
+#&gt;   4 (partial overlap):    1.3%  (319 / 24000 questions)
 #&gt;   5 (partial overlap):    0.0%  (0 / 24000 questions)
 #&gt;   6 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 1.71
+#&gt;   Average unique levels per question: 1.87
 #&gt; 
 #&gt; range_phev: Continuous variable
 #&gt;   Questions by # unique levels:
-#&gt;   1 (complete overlap):  41.3%  (9904 / 24000 questions)
-#&gt;   2 (partial overlap):   46.4%  (11127 / 24000 questions)
-#&gt;   3 (partial overlap):   11.7%  (2809 / 24000 questions)
-#&gt;   4 (partial overlap):    0.7%  (160 / 24000 questions)
+#&gt;   1 (complete overlap):  46.2%  (11077 / 24000 questions)
+#&gt;   2 (partial overlap):   43.4%  (10422 / 24000 questions)
+#&gt;   3 (partial overlap):   10.0%  (2398 / 24000 questions)
+#&gt;   4 (partial overlap):    0.4%  (103 / 24000 questions)
 #&gt;   5 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 1.72
+#&gt;   Average unique levels per question: 1.65
 #&gt; 
 #&gt; mileage: Continuous variable
 #&gt;   Questions by # unique levels:
 #&gt;   1 (complete overlap):   0.0%  (0 / 24000 questions)
-#&gt;   2 (partial overlap):    3.9%  (942 / 24000 questions)
-#&gt;   3 (partial overlap):   48.2%  (11558 / 24000 questions)
-#&gt;   4 (partial overlap):   47.9%  (11500 / 24000 questions)
+#&gt;   2 (partial overlap):    1.2%  (285 / 24000 questions)
+#&gt;   3 (partial overlap):   29.7%  (7128 / 24000 questions)
+#&gt;   4 (partial overlap):   69.1%  (16587 / 24000 questions)
 #&gt;   5 (partial overlap):    0.0%  (0 / 24000 questions)
-#&gt;   6 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 3.44
+#&gt;   6 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   7 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   8 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   9 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   10 (no overlap):         0.0%  (0 / 24000 questions)
+#&gt;   Average unique levels per question: 3.68
 #&gt; 
 #&gt; age: Continuous variable
 #&gt;   Questions by # unique levels:
 #&gt;   1 (complete overlap):   0.0%  (0 / 24000 questions)
-#&gt;   2 (partial overlap):   11.1%  (2663 / 24000 questions)
-#&gt;   3 (partial overlap):   67.0%  (16081 / 24000 questions)
-#&gt;   4 (no overlap):        21.9%  (5256 / 24000 questions)
-#&gt;   Average unique levels per question: 3.11
+#&gt;   2 (partial overlap):    4.0%  (965 / 24000 questions)
+#&gt;   3 (partial overlap):   48.1%  (11533 / 24000 questions)
+#&gt;   4 (partial overlap):   47.9%  (11502 / 24000 questions)
+#&gt;   5 (partial overlap):    0.0%  (0 / 24000 questions)
+#&gt;   6 (no overlap):         0.0%  (0 / 24000 questions)
+#&gt;   Average unique levels per question: 3.44
 #&gt; 
 #&gt; operating_cost: Continuous variable
 #&gt;   Questions by # unique levels:
 #&gt;   1 (complete overlap):   0.0%  (0 / 24000 questions)
-#&gt;   2 (partial overlap):    5.0%  (1188 / 24000 questions)
-#&gt;   3 (partial overlap):   46.5%  (11165 / 24000 questions)
-#&gt;   4 (partial overlap):   48.5%  (11647 / 24000 questions)
+#&gt;   2 (partial overlap):    5.3%  (1279 / 24000 questions)
+#&gt;   3 (partial overlap):   49.5%  (11887 / 24000 questions)
+#&gt;   4 (partial overlap):   45.1%  (10834 / 24000 questions)
 #&gt;   5 (partial overlap):    0.0%  (0 / 24000 questions)
 #&gt;   6 (partial overlap):    0.0%  (0 / 24000 questions)
 #&gt;   7 (no overlap):         0.0%  (0 / 24000 questions)
-#&gt;   Average unique levels per question: 3.44
+#&gt;   Average unique levels per question: 3.40
 #&gt; 
 #&gt; no_choice: Continuous variable
 #&gt;   Questions by # unique levels:
@@ -830,14 +844,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="fu">case_when</span>(powertrainphev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">paste0</span>(range_phev, <span class="st">' miles on a full charge'</span>),</span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>                    powertrainbev <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">paste0</span>(range_bev,<span class="st">' miles on a full charge'</span>),</span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>                    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>),</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">vehicle_type =</span> <span class="st">'suv'</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">vehicle_type =</span> <span class="st">'suv'</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">operating_cost =</span> operating_cost <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>by <span class="ot">&lt;-</span> <span class="fu">join_by</span>(vehicle_type, powertrain,  operating_cost <span class="sc">==</span> cents_mile)</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>design_suv <span class="ot">&lt;-</span> <span class="fu">left_join</span>(design, dt_mpg_expanded, by)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>by <span class="ot">&lt;-</span> <span class="fu">join_by</span>(vehicle_type, powertrain,  operating_cost <span class="sc">==</span> cents_mile)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>design_suv <span class="ot">&lt;-</span> <span class="fu">left_join</span>(design, dt_mpg_expanded, by)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">logitr</span>(</span>
@@ -854,7 +869,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; =================================================
 #&gt; 
-#&gt; Model estimated on: Fri Sep 26 11:50:40 AM 2025 
+#&gt; Model estimated on: Fri Sep 26 6:52:13 PM 2025 
 #&gt; 
 #&gt; Using logitr version: 1.1.2 
 #&gt; 
@@ -865,40 +880,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt;         "powertrainhev"))
 #&gt; 
 #&gt; Frequencies of alternatives:
-#&gt;         1         2         3         4 
-#&gt; 0.0012500 0.0010417 0.0010000 0.9967083 
+#&gt;       1       2       3       4 
+#&gt; 0.11804 0.12004 0.11663 0.64529 
 #&gt; 
 #&gt; Exit Status: 3, Optimization stopped because ftol_rel or ftol_abs was reached.
 #&gt;                                 
 #&gt; Model Type:    Multinomial Logit
 #&gt; Model Space:          Preference
 #&gt; Model Run:                1 of 1
-#&gt; Iterations:                  169
-#&gt; Elapsed Time:           0h:0m:5s
+#&gt; Iterations:                   28
+#&gt; Elapsed Time:           0h:0m:1s
 #&gt; Algorithm:        NLOPT_LD_LBFGS
 #&gt; Weights Used?:             FALSE
 #&gt; Robust?                    FALSE
 #&gt; 
 #&gt; Model Coefficients: 
-#&gt;                 Estimate Std. Error z-value  Pr(&gt;|z|)    
-#&gt; price          -1.013501   0.598021 -1.6948  0.090121 .  
-#&gt; range_bev       0.201140   0.251732  0.7990  0.424276    
-#&gt; range_phev      1.230297   2.607138  0.4719  0.637001    
-#&gt; mileage        -0.323441   0.082824 -3.9052 9.417e-05 ***
-#&gt; age            -0.141553   0.047084 -3.0064  0.002644 ** 
-#&gt; operating_cost -0.346513   0.044137 -7.8509 4.219e-15 ***
-#&gt; powertrainbev  -1.697457   0.556116 -3.0523  0.002271 ** 
-#&gt; powertrainphev -0.626964   0.792079 -0.7915  0.428628    
-#&gt; powertrainhev   0.186526   0.337218  0.5531  0.580174    
+#&gt;                 Estimate Std. Error  z-value  Pr(&gt;|z|)    
+#&gt; price          -0.618627   0.065996  -9.3737 &lt; 2.2e-16 ***
+#&gt; range_bev       0.107679   0.034359   3.1340  0.001725 ** 
+#&gt; range_phev     -0.203751   0.236936  -0.8599  0.389820    
+#&gt; mileage        -0.418906   0.086363  -4.8505 1.231e-06 ***
+#&gt; age            -0.177179   0.040195  -4.4080 1.043e-05 ***
+#&gt; operating_cost -0.402378   0.037482 -10.7353 &lt; 2.2e-16 ***
+#&gt; powertrainbev  -1.097908   0.067633 -16.2334 &lt; 2.2e-16 ***
+#&gt; powertrainphev -0.420192   0.068069  -6.1730 6.700e-10 ***
+#&gt; powertrainhev   0.121852   0.030314   4.0196 5.829e-05 ***
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #&gt;                                      
-#&gt; Log-Likelihood:         -5.598352e+02
+#&gt; Log-Likelihood:         -2.453447e+04
 #&gt; Null Log-Likelihood:    -3.327106e+04
-#&gt; AIC:                     1.137670e+03
-#&gt; BIC:                     1.210443e+03
-#&gt; McFadden R2:             9.831735e-01
-#&gt; Adj McFadden R2:         9.829030e-01
+#&gt; AIC:                     4.908693e+04
+#&gt; BIC:                     4.915970e+04
+#&gt; McFadden R2:             2.625885e-01
+#&gt; Adj McFadden R2:         2.623180e-01
 #&gt; Number of Observations:  2.400000e+04</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">cbc_power</span>(choices_priors)</span>
