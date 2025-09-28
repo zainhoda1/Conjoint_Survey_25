@@ -9,15 +9,17 @@
 # remotes::install_github("jhelvy/cbcTools")
 
 # Load libraries
-library(cbcTools)
+
 library(tidyverse)
+library(cbcTools)
+library(logitr)
 library(here)
 library(data.table)
 # library(readxl)
 
 # quantiles of MPG for the 2024 model year vehicles by for different powertrains and vehicle types. Data source: EPA or fuel_economic_gov
 
-dt_mpg <-  read.csv(here('survey', 'data', 'mpg_by_segment_fuel.csv')) %>% 
+dt_mpg <-  read.csv(here('data', 'mpg_by_segment_fuel.csv')) %>% 
   # kwh per 100 miles --> kwh per mile
   mutate(kwh_q10=kwh_q10/100,
          kwh_q25=kwh_q25/100,
@@ -164,21 +166,21 @@ dt_mpg_expanded %>%
 
 
 # Define profiles with attributes and levels
-profiles <- cbc_profiles(
+profiles_car <- cbc_profiles(
   powertrain     = c('gas', 'bev', 'phev', 'hev'),
   price          = seq(0.8, 1.1, 0.1),
   range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
   range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
   mileage        = seq(0.2, 0.6, 0.05), # x 100000
   age            = seq(0.2, 1.0, 0.2),  # make_year changed to age  x10
-  operating_cost = seq(0.3, 1.8, 0.3) # x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x 10
 ) 
 
 
 # Restrictions
 
-profiles_restricted <- cbc_restrict(
-  profiles,
+profiles_restricted_car <- cbc_restrict(
+  profiles_car,
   # BEV range restrictions
   (powertrain == "gas") & (range_bev != 0),
   (powertrain == "hev") & (range_bev != 0),
@@ -199,7 +201,7 @@ profiles_restricted <- cbc_restrict(
 )
 
 # checking restrictions:
-profiles_restricted %>%
+profiles_restricted_car %>%
   group_by(powertrain) %>%
   count(operating_cost)
 
@@ -207,8 +209,8 @@ profiles_restricted %>%
 
 ## Set up priors
 
-priors_fixed_parameter <- cbc_priors(
-  profiles = profiles_restricted,
+priors_fixed_parameter_car <- cbc_priors(
+  profiles = profiles_restricted_car,
   # powertrain: categorical (effects coded or dummy)
   powertrain = c("bev" = -1.0, "phev" = -0.5,  "hev" = 0.1),
   price = -0.2,
@@ -222,27 +224,27 @@ priors_fixed_parameter <- cbc_priors(
 
 ## Generate Designs
 
-design <- cbc_design(
-  profiles = profiles_restricted,
+design_car <- cbc_design(
+  profiles = profiles_restricted_car,
   method = 'random',
   n_resp = 4000, # Number of respondents
   n_alts = 3, # Number of alternatives per question
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
-  priors = priors_fixed_parameter,
+  priors = priors_fixed_parameter_car,
   balance_by = c('powertrain', 'operating_cost'),
   remove_dominant = FALSE
 )
 
 
-design <- design %>% 
+design_car_data <- design_car %>% 
   mutate(powertrain = case_when(powertrainphev == 1 ~ 'phev',
                                 powertrainhev == 1 ~ 'hev',
                                 powertrainbev == 1 ~ 'bev',
                                 ( powertrainphev == 0 & 
-                                    powertrainhev == 0 &
-                                    powertrainbev == 0 &
-                                    no_choice == 0) ~ 'gas'
+                                  powertrainhev == 0 &
+                                  powertrainbev == 0 &
+                                  no_choice == 0) ~ 'gas'
   ),
   range_phev = range_phev * 100,
   range_bev = range_bev * 100,
@@ -254,7 +256,7 @@ design <- design %>%
   )
 
 by <- join_by(vehicle_type, powertrain,  operating_cost == cents_mile)
-design_car <- left_join(design, dt_mpg_expanded, by)
+design_car_data <- left_join(design_car_data, dt_mpg_expanded, by)
 
 
 
@@ -268,7 +270,7 @@ design_car <- left_join(design, dt_mpg_expanded, by)
 
 
 # Define profiles with attributes and levels
-profiles <- cbc_profiles(
+profiles_suv <- cbc_profiles(
   powertrain     = c('gas', 'bev', 'phev', 'hev'),
   price          = seq(0.8, 1.1, 0.1),
   range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
@@ -281,8 +283,8 @@ profiles <- cbc_profiles(
 
 # Restrictions
 
-profiles_restricted <- cbc_restrict(
-  profiles,
+profiles_restricted_suv <- cbc_restrict(
+  profiles_suv,
   # BEV range restrictions
   (powertrain == "gas") & (range_bev != 0),
   (powertrain == "hev") & (range_bev != 0),
@@ -303,15 +305,15 @@ profiles_restricted <- cbc_restrict(
 
 
 # checking restrictions:
-profiles_restricted %>%
+profiles_restricted_suv %>%
   group_by(powertrain) %>%
   count(operating_cost)
 
 ## Set up priors
 
 
-priors_fixed_parameter <- cbc_priors(
-  profiles = profiles_restricted,
+priors_fixed_parameter_suv <- cbc_priors(
+  profiles = profiles_restricted_suv,
   # powertrain: categorical (effects coded or dummy)
   powertrain = c("bev" = -1.0, "phev" = -0.5,  "hev" = 0.1),
   price = -0.2,
@@ -326,20 +328,21 @@ priors_fixed_parameter <- cbc_priors(
 
 ## Generate Designs
 
-design <- cbc_design(
-  profiles = profiles_restricted,
+design_suv <- cbc_design(
+  profiles = profiles_restricted_suv,
   method = 'random',
   n_resp = 4000, # Number of respondents
   n_alts = 3, # Number of alternatives per question
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
-  priors = priors_fixed_parameter,
+  priors = priors_fixed_parameter_suv,
   balance_by = c('powertrain', 'operating_cost'),
   remove_dominant = FALSE
 )
 
 
-design <- design %>% 
+
+design_suv_data <- design_suv %>% 
   mutate(powertrain = case_when(powertrainphev == 1 ~ 'phev',
                                 powertrainhev == 1 ~ 'hev',
                                 powertrainbev == 1 ~ 'bev',
@@ -361,7 +364,7 @@ design <- design %>%
 
 
 by <- join_by(vehicle_type, powertrain,  operating_cost == cents_mile)
-design_suv <- left_join(design, dt_mpg_expanded, by)
+design_suv_data <- left_join(design_suv_data, dt_mpg_expanded, by)
 
 
 
@@ -370,11 +373,18 @@ design_suv <- left_join(design, dt_mpg_expanded, by)
 
 
 
-design_combined<-rbind(design_car,design_suv)
+design_combined<-rbind(design_car_data,design_suv_data)
 
 
 # Save design
-write_csv(design_combined, here('survey','data', 'choice_questions.csv'))
+#write_csv(design_combined, here('survey','data', 'choice_questions.csv'))
+
+arrow::write_parquet(design_combined, here('survey', 'data', 'design_vehicle.parquet'))
+
+##############
+
+
+
 
 
 
@@ -392,7 +402,7 @@ library(logitr)
 library(here)
 
 
-profiles <- cbc_profiles(
+profiles_battery <- cbc_profiles(
   veh_mileage        = seq(1.5, 5, 0.5), # unit: 10000
   veh_price          = seq(0.8, 1.1, 0.1), # unit: 20000
   battery_refurbish  = c('original', 'cellreplace','packreplace'),
@@ -400,8 +410,8 @@ profiles <- cbc_profiles(
   battery_degradation = seq(1, 8, 1) # %
 )
 
-priors_fixed <- cbc_priors(
-  profiles = profiles,
+priors_fixed_battery <- cbc_priors(
+  profiles = profiles_battery,
   veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
   veh_price            = -0.1,      # Each $20000 increase reduces utility by 0.1
   battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
@@ -409,9 +419,9 @@ priors_fixed <- cbc_priors(
   battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
   no_choice = 1.0                      # There is a strong negative preference for EV, so positive for "no_choice"
 )
-design_random_fixed_parameter <- cbc_design(
-  profiles = profiles,
-  priors = priors_fixed,
+design_battery <- cbc_design(
+  profiles = profiles_battery,
+  priors = priors_fixed_battery,
   method = "random", # randomized full-factorial design
   n_resp   = 3000, # Number of respondents
   n_alts   = 3,    # Number of alternatives per question
@@ -420,13 +430,13 @@ design_random_fixed_parameter <- cbc_design(
   remove_dominant = FALSE
 ) 
 
-cbc_inspect(design_random_fixed_parameter)
+
 
 
 #design_random_fixed_parameter_origin<-design_random_fixed_parameter
 #design_random_fixed_parameter<-cbc_decode(design_random_fixed_parameter)
 
-design_rand_output <-design_random_fixed_parameter %>%
+design_rand_output_battery <-design_battery %>%
   mutate(veh_mileage = veh_mileage*10000,
          battery_degradation=battery_degradation/100,
          battery_range_year0=battery_range_year0*100) %>% 
@@ -447,11 +457,105 @@ design_rand_output <-design_random_fixed_parameter %>%
     TRUE ~ NA
   ))
 
-cbc_inspect(design_random_fixed_parameter)
-# head(design_random_fixed_parameter)
 
-#write.csv(design_rand_output, paste0(here("..",".."),"/survey_updated_pretest/data/battery_choice_questions.csv"), row.names = FALSE)
 
-write.csv(design_rand_output, here('survey', 'data', 'battery_choice_questions.csv'))
+#write.csv(design_rand_output_battery, here('survey', 'data', 'battery_choice_questions.csv'))
+
+arrow::write_parquet(design_rand_output_battery, here('survey', 'data', 'design_battery.parquet'))
+
+
+################################################################################################
+################################################################################################
+
+#Power Analysis Car:
+
+cbc_inspect(design_car)
+
+choices_priors_car <- cbc_choices(design_car, priors = priors_fixed_parameter_car)
+
+model_car <- logitr(
+  data = choices_priors_car, 
+  outcome = 'choice', 
+  obsID = 'obsID', 
+  pars = c(
+    'price', 'range_bev', 'range_phev', 'mileage', 'age', 'operating_cost',
+    'powertrainbev', 'powertrainphev', 'powertrainhev'
+  )
+)
+
+summary(model_car)
+
+power_car <- cbc_power(choices_priors_car)
+
+
+plot(power_car, type = "power", power_threshold = 0.9)
+summary(power_car, power_threshold = 0.9)
+
+plot(power_car, type = "se")
+
+
+
+# Power Analysis SUV:
+
+cbc_inspect(design_suv)
+
+
+choices_priors_suv <- cbc_choices(design_suv, priors = priors_fixed_parameter_suv)
+
+model_suv <- logitr(
+  data = choices_priors_suv, 
+  outcome = 'choice', 
+  obsID = 'obsID', 
+  pars = c(
+    'price', 'range_bev', 'range_phev', 'mileage', 'age', 'operating_cost',
+    'powertrainbev', 'powertrainphev', 'powertrainhev'
+  )
+)
+
+summary(model_suv)
+
+power_suv <- cbc_power(choices_priors_suv)
+
+
+plot(power_suv, type = "power", power_threshold = 0.9)
+summary(power_suv, power_threshold = 0.9)
+
+plot(power_suv, type = "se")
+
+#####
+
+
+# Power Analysis Battery
+
+cbc_inspect(design_battery)
+
+
+choices_priors_battery <- cbc_choices(design_battery, priors = priors_fixed_battery)
+
+model_battery <- logitr(
+  data = choices_priors_battery, 
+  outcome = 'choice', 
+  obsID = 'obsID', 
+  pars = c(
+    'veh_price',
+    'veh_mileage',
+    'battery_refurbishcellreplace',
+    'battery_refurbishpackreplace',
+    'battery_range_year0',
+    'battery_degradation'
+  )
+)
+
+summary(model_battery)
+
+power_battery <- cbc_power(choices_priors_battery)
+
+
+plot(power_battery, type = "power", power_threshold = 0.9)
+summary(power_battery, power_threshold = 0.9)
+
+plot(power_battery, type = "se")
+
+#####
 
 

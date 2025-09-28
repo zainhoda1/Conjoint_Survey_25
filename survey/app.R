@@ -5,6 +5,7 @@ library(glue)
 library(dplyr)
 library(kableExtra)
 library(digest)
+library(arrow)
 
 # Database setup
 db <- sd_db_connect()
@@ -235,9 +236,9 @@ battery_cbc_options <- function(df, budget_select) {
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_csv(here('data', 'choice_questions.csv'))
+  survey <- read_parquet(here('data', 'design_vehicle.parquet'))
   survey$range[is.na(survey$range)] <- ''
-  battery_survey <- read_csv(here('data', 'battery_choice_questions.csv'))
+  battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
   respondentID <- sample(survey$respID, 1)
   battery_respondentID <- sample(battery_survey$respID, 1)
 

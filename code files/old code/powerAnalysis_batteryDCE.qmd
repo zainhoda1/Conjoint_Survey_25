@@ -1,0 +1,417 @@
+---
+title: "Power Analysis - Battery Choices"
+format: html
+theme: united
+execute:
+  cache: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+
+library(tidyverse)
+library(cbcTools)
+library(logitr)
+library(here)
+```
+
+# Step 1: Generate Profiles
+
+```{r}
+profiles <- cbc_profiles(
+  veh_mileage        = seq(1.5, 5, 0.5), # unit: 10000
+  veh_price          = seq(0.8, 1.1, 0.1), # unit: 20000
+  battery_refurbish  = c('original', 'cellreplace','packreplace'),
+  battery_range_year0 = seq(2, 3.6, 0.4), # unit: 100
+  battery_degradation = seq(1, 8, 1) # %
+)
+
+profiles
+
+```
+
+## Resrictions
+None
+```{r,echo=FALSE}
+
+
+```
+
+
+# Step 2: Set up priors
+
+| Attribute | Expectation | Theory  | Suggested Sign |
+|--------------|---------------|-----------|-----------|
+| veh_price        | Lower price preferred   | Standard economic theory (price disutility)  |Negative (−)|
+| veh_mileage          | Lower mileage preferred           |Higher mileage = older/worn vehicle    |Negative (−)|
+| battery_refurbish    | Original battery > pack-based refurbishment > cell-based refurbishment   |Risk aversion, resale concerns, BEV reliability    |Negative (−)|
+| battery_range_year0       | More range preferred          | Reduces range anxiety    | Positive (+)|
+| battery_degradation | Less degradation preferred   | Reflects battery health and future value   | Negative (−)|
+
+
+## Fixed Parameters
+For example, if the coefficient of battery degradation is -10, then:
+
+	- A 1% increase in degradation (from 0.01 to 0.02) reduces utility by 0.10.
+	- A full 7% increase in degradation (from 0.01 to 0.08) would reduce utility by -0.7.
+
+In DCE models, utilities usually range between -2 and +2, so a utility loss of -0.7 is noticeable, but not extreme. It reflects that battery degradation is an important factor in evaluating a used EV.
+```{r}
+priors_fixed <- cbc_priors(
+  profiles = profiles,
+  veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
+  veh_price            = -0.1,      # Each $20000 increase reduces utility by 0.1
+  battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
+  battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
+  battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
+  no_choice = 1.0                      # There is a strong negative preference for EV, so positive for "no_choice"
+)
+
+
+priors_fixed
+```
+
+## Random Parameters
+```{r}
+priors_random_parameter <- cbc_priors(
+  profiles = profiles,
+  veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
+  veh_price = -0.1, # Assume $1,000 price increase = -0.1 utility
+  battery_refurbish = rand_spec("n", c(-1.0, -0.5), c(0.1, 0.1)), # Reference = "original"
+  battery_range_year0 = 0.5,   # Each 100 mile of range adds utility by 0.5
+  battery_degradation = -0.5, # 1% increase in degradation = -1 utility
+  no_choice = 1.0            # There is a strong negative preference for EV, so positive for "no_choice"
+)
+
+priors_random_parameter
+```
+
+
+# Step 3: Generate Designs
+
+## Different designs
+### Random Method
+- **random**: randomly samples profiles for each respondent independently; maximum diversity but may be less statistically efficient
+```{r}
+
+design_random <- cbc_design(
+  profiles = profiles,
+  method = "random", # randomized full-factorial design
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6,    # Number of questions per respondent #6
+  no_choice = TRUE
+)
+
+design_random_fixed_parameter <- cbc_design(
+  profiles = profiles,
+  priors = priors_fixed,
+  method = "random", # randomized full-factorial design
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6,    # Number of questions per respondent #6
+  no_choice = TRUE,
+  remove_dominant = FALSE
+) 
+
+design_random_random_parameter <- cbc_design(
+  profiles = profiles,
+  priors = priors_random_parameter,
+  method = "random", # randomized full-factorial design
+  n_resp   = 3000, # Number of respondents
+  n_alts   = 3,    # Number of alternatives per question
+  n_q      = 6,    # Number of questions per respondent #6
+  no_choice = TRUE,
+  remove_dominant = FALSE
+) 
+```
+
+
+
+### Frequency-Based Methods
+- **shortcut**: balances attribute level frequencies while avoiding duplicate profiles within questions.
+- **minoverlap**: prioritizes minimizing attribute overlap within choice questions.
+- **balanced**: optimizes both frequency balance and pairwise attribute interactions.
+```{r}
+# design_shortcut <- cbc_design(
+#   profiles = profiles,
+#   method = "shortcut",
+#   n_resp   = 3000, # Number of respondents
+#   n_alts   = 3,    # Number of alternatives per question
+#   n_q      = 6    # Number of questions per respondent #6
+#   
+# )
+# 
+# design_shortcut_fixed_parameter <- cbc_design(
+#   profiles = profiles,
+#   priors = priors_fixed,
+#   method = "shortcut",
+#   n_resp   = 3000, # Number of respondents
+#   n_alts   = 3,    # Number of alternatives per question
+#   n_q      = 6   # Number of questions per respondent #6
+# )
+
+
+## Code will not run
+# design_shortcut_fixed_parameter_remove_dominant <- cbc_design(
+#   profiles = profiles,
+#   priors = priors_fixed,
+#   method = "shortcut",
+#   n_resp   = 3000, # Number of respondents
+#   n_alts   = 3,    # Number of alternatives per question
+#   n_q      = 6,   # Number of questions per respondent #6
+#   remove_dominant = TRUE
+# )
+
+
+
+```
+
+
+
+## Design comparisons
+```{r}
+cbc_compare(
+  "Random"= design_random,
+  "Random_fixed_parameter" = design_random_fixed_parameter,
+  "Random_random_parameter" = design_random_random_parameter
+  # "Shortcut" = design_shortcut,
+  # "Shortcut_fixed_parameter" = design_shortcut_fixed_parameter
+)
+```
+
+
+# Step 4: Inspect Design
+
+**Goal: Evaluate the quality and properties of the design.**
+- D-error: Lower values indicate more efficient designs
+- Balance: Higher scores indicate better attribute level balance
+- Overlap: Lower scores indicate less attribute overlap within questions
+- Profile usage: Higher percentages indicate better use of available profiles
+
+```{r}
+cbc_inspect(design_random)
+```
+
+```{r}
+# cbc_inspect(design_random)
+cbc_inspect(design_random_fixed_parameter)
+```
+
+```{r}
+cbc_inspect(design_random_random_parameter)
+```
+
+
+```{r}
+# cbc_inspect(design_shortcut)
+```
+
+
+```{r}
+# cbc_inspect(design_shortcut_fixed_parameter)
+```
+# Step 5: Simulate Choices
+
+```{r}
+choices_random_fixed_parameter <- cbc_choices(design_random_fixed_parameter, priors = priors_fixed)
+choices_random_random_parameter <- cbc_choices(design_random_random_parameter, priors = priors_random_parameter)
+
+# choices_shortcut <- cbc_choices(design_shortcut)
+# choices_shortcut_fixed_parameter <- cbc_choices(design_shortcut_fixed_parameter,priors = priors_fixed)
+
+```
+
+
+## random_fixed_parameter
+```{r}
+# choices_cat <- cbc_decode(choices_random_fixed_parameter)  # Does not work because of no_choice option
+# 
+# # Filter for the chosen rows only
+# choices_cat <- choices_cat[which(choices_cat$choice == 1), ]
+# 
+# # Counts of choices made for each attribute level
+# table(choices_cat$veh_mileage)
+# table(choices_cat$veh_price)
+# table(choices_cat$battery_refurbish)
+# table(choices_cat$battery_range_year0)
+# table(choices_cat$battery_degradation)
+```
+
+## random_random_parameter
+```{r}
+# choices_cat <- cbc_decode(choices_random_random_parameter) # Does not work because of no_choice option
+# 
+# # Filter for the chosen rows only
+# choices_cat <- choices_cat[which(choices_cat$choice == 1), ]
+# 
+# # Counts of choices made for each attribute level
+# table(choices_cat$veh_mileage)
+# table(choices_cat$veh_price)
+# table(choices_cat$battery_refurbish)
+# table(choices_cat$battery_range_year0)
+# table(choices_cat$battery_degradation)
+```
+
+## shortcut
+```{r}
+# choices_cat <- cbc_decode(choices_shortcut)
+# 
+# # Filter for the chosen rows only
+# choices_cat <- choices_cat[which(choices_cat$choice == 1), ]
+# 
+# # Counts of choices made for each attribute level
+# table(choices_cat$veh_mileage)
+# table(choices_cat$veh_price)
+# table(choices_cat$battery_refurbish)
+# table(choices_cat$battery_range_year0)
+# table(choices_cat$battery_degradation)
+```
+
+## shortcut_fixed_parameter
+```{r}
+# choices_cat_fixed_parameter <- cbc_decode(choices_shortcut_fixed_parameter)
+# 
+# # Filter for the chosen rows only
+# choices_cat <- choices_cat[which(choices_cat$choice == 1), ]
+# 
+# # Counts of choices made for each attribute level
+# table(choices_cat$veh_mileage)
+# table(choices_cat$veh_price)
+# table(choices_cat$battery_refurbish)
+# table(choices_cat$battery_range_year0)
+# table(choices_cat$battery_degradation)
+```
+
+# Step 6: Assess Power
+- Statistical power is the probability of correctly detecting an effect when it truly exists, which depends on effect size, sample size, design efficiency, and model complexity.
+- Power analysis focuses on prevision (standard errors)
+
+## random_fixed_parameter
+```{r}
+power_random_fixed_parameter <- cbc_power(
+  data=choices_random_fixed_parameter,
+  outcome = "choice",
+  obsID = "obsID",
+  n_q = 6,
+  n_breaks = 10
+  )
+
+
+plot(power_random_fixed_parameter, type = "power", power_threshold = 0.9)
+plot(power_random_fixed_parameter, type = "se")
+summary(power_random_fixed_parameter, power_threshold = 0.9)
+
+```
+
+## random_random_parameter
+```{r}
+power_random_random_parameter <- cbc_power(
+  data=choices_random_random_parameter,
+  outcome = "choice",
+  obsID = "obsID",
+  n_q = 6,
+  n_breaks = 10)
+
+plot(power_random_random_parameter, type = "power", power_threshold = 0.9)
+plot(power_random_random_parameter, type = "se")
+summary(power_random_random_parameter, power_threshold = 0.9)
+
+```
+
+## shortcut
+```{r}
+# power_shortcut <- cbc_power(
+#   data=choices_shortcut,
+#   outcome = "choice",
+#   obsID = "obsID",
+#   n_q = 6,
+#   n_breaks = 10)
+# 
+# plot(power_shortcut, type = "power", power_threshold = 0.9)
+# plot(power_shortcut, type = "se", power_threshold = 0.9)
+# summary(power_shortcut, power_threshold = 0.9)
+
+```
+
+## shortcut_fixed_parameter
+```{r}
+# power_shortcut_fixed_parameter <- cbc_power(
+#   data=choices_shortcut_fixed_parameter,
+#   outcome = "choice",
+#   obsID = "obsID",
+#   n_q = 6,
+#   n_breaks = 10)
+# 
+# plot(power_shortcut_fixed_parameter, type = "power", power_threshold = 0.9)
+# plot(power_shortcut_fixed_parameter, type = "se", power_threshold = 0.9)
+# summary(power_shortcut_fixed_parameter, power_threshold = 0.9)
+
+```
+
+## comparison
+```{r}
+plot_compare_power(
+  random_fixed_parameter = power_random_fixed_parameter,
+  random_random_parameter = power_random_random_parameter,
+  # shortcut = power_shortcut,
+  # shortcut_fixed_parameter = power_shortcut_fixed_parameter,
+  type = "power"
+)
+
+plot_compare_power(
+  random_fixed_parameter = power_random_fixed_parameter,
+  random_random_parameter = power_random_random_parameter,
+  # shortcut = power_shortcut,
+  # shortcut_fixed_parameter = power_shortcut_fixed_parameter,
+  type = "se"
+)
+
+```
+
+
+#Step 7: Generate and output choices
+```{r}
+design_random_fixed_parameter_origin<-design_random_fixed_parameter
+#design_random_fixed_parameter<-cbc_decode(design_random_fixed_parameter)
+
+design_rand_output <-design_random_fixed_parameter %>%
+  mutate(veh_mileage = veh_mileage*10000,
+         battery_degradation=battery_degradation/100,
+         battery_range_year0=battery_range_year0*100) %>% 
+  mutate(battery_health_year0=paste0(round(1 * 100, 0), "%"),
+         battery_health_year3=(1-battery_degradation)^3,
+         battery_health_year8=(1-battery_degradation)^8,
+         # round to the closest 5
+         battery_range_year3=round(battery_range_year0*battery_health_year3/5)*5,
+         battery_range_year8=round(battery_range_year0*battery_health_year8/5)*5,
+
+         battery_health_year3=paste0(round((1-battery_degradation)^3*100,0),"%"),
+         battery_health_year8=paste0(round((1-battery_degradation)^8*100,0),"%")
+         ) %>% 
+  mutate(battery_condition = case_when(
+    battery_refurbishcellreplace == 1 ~ 'Refurbished Cell-Replaced',
+    battery_refurbishpackreplace == 1 ~ 'Refurbished Pack-Replaced',
+    ((battery_refurbishcellreplace == 0) &
+      (battery_refurbishcellreplace == 0) &
+      (no_choice == 0)) ~ 'Original Battery' ,
+    TRUE ~ NA
+  ))
+# head(design_random_fixed_parameter)
+
+#write.csv(design_rand_output, paste0(here("..",".."),"/survey_updated_pretest/data/battery_choice_questions.csv"), row.names = FALSE)
+
+#write.csv(design_rand_output, here('survey_updated_dynata', 'data', 'battery_choice_questions.csv'))
+```
+
