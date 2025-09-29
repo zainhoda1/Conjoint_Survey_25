@@ -744,7 +744,7 @@ Let’s take a moment to learn about the specific attributes of the BEVs that yo
 | ![](images/odometer.jpeg){fig-align="center" width="200"}  | **Mileage -** The number of miles a vehicle has traveled.|
 | ![](images/price_tag.JPG){fig-align="center" width="200"}     | **Purchase price -** The total price for the vehicle (in dollars), including down payment, monthly payments, taxes, fees, etc. |
 | ![](images/battery_survey_battery.png){fig-align="center" width="60"} | **Battery refurbishment history -** The repair or replacement work that has been done on the vehicle’s main battery.<br>![](images/battery_survey_battery_combined.png){fig-align="center" width="300"}|
-| ![](images/battery_survey_battery_degradation1.png){fig-align="center" width="300"} | **Electric range -** The maximum distance (in miles) the vehicle can travel on a full battery charge, under typical driving conditions.<br>**Battery Condition -** How much (in percentages) of the battery’s original capacity remains.|
+| ![](images/battery_survey_battery_degradation1.png){fig-align="center" width="300"} | **Electric range -** The maximum distance (in miles) the vehicle can travel on a full battery charge, under typical driving conditions.<br>**Battery Health -** How much (in percentages) of the battery’s original capacity remains.|
 
 
 
