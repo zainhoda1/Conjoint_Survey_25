@@ -41,9 +41,14 @@ demo_battery_options <- tibble(
   qID = c(1, 1, 1, 1),
   altID = c(1, 2, 3, 4),
   veh_mileage = c(30000, 30000, 30000, 30000),
-  battery_condition = c('Original', 'Refurbished Cell-Replaced', 'Refurbished Pack-Replaced', ''),
+  battery_condition = c(
+    'Original',
+    'Refurbished Cell-Replaced',
+    'Refurbished Pack-Replaced',
+    ''
+  ),
   battery_range_year3 = c(185, 240, 320, 0),
-  battery_health_year3 = c('91%', '86%','88%', '0%' ),
+  battery_health_year3 = c('91%', '86%', '88%', '0%'),
   battery_range_year8 = c(155, 185, 260, 0),
   battery_health_year8 = c('78%', '66%', '72%', '0%'),
   veh_price = c(1.1, 1, 0.5, 0.5)
@@ -54,17 +59,17 @@ gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; ve
 
 vehicle_cbc_options <- function(df, budget_select) {
   df <- df %>%
-      mutate(
-        powertrain = case_when(
-          powertrain == 'bev' ~ paste0(electric_icon, 'Battery electric'),
-          powertrain == 'phev' ~ paste0(gas_icon, electric_icon, 'Plug-in hybrid'),  # 'Plug-in hybrid electric'
-          powertrain == 'hev' ~ paste0(gas_icon, 'Gas hybrid'),  # 'Gas hybrid electric'
-          powertrain == 'gas' ~ paste0(gas_icon, 'Conventional')
-        ),
-        age = 2025 - (age*10),
-        mileage = mileage * 100000
+    mutate(
+      powertrain = case_when(
+        powertrain == 'bev' ~ paste0(electric_icon, 'Battery electric'),
+        powertrain == 'phev' ~
+          paste0(gas_icon, electric_icon, 'Plug-in hybrid'), # 'Plug-in hybrid electric'
+        powertrain == 'hev' ~ paste0(gas_icon, 'Gas hybrid'), # 'Gas hybrid electric'
+        powertrain == 'gas' ~ paste0(gas_icon, 'Conventional')
+      ),
+      age = 2025 - (age * 10),
+      mileage = mileage * 100000
     )
-
 
   alt1 <- df |> filter(altID == 1)
   alt2 <- df |> filter(altID == 2)
@@ -175,7 +180,7 @@ battery_cbc_options <- function(df, budget_select) {
 
   options <- c("option_1", "option_2", "option_3", "option_4")
 
-#  <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
+  #  <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
 
   # <span style='font-size: 13px;'>{alt3$battery_refurbish}</span>
   names(options) <- c(
@@ -228,8 +233,8 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'>of these vehicles</span></b><br>
       </div>
     "
-      ))
-    )
+    ))
+  )
   return(options)
 }
 
@@ -374,7 +379,7 @@ server <- function(input, output, session) {
 
   ## data
   df <- survey %>%
-    filter(respID == respondentID) |>  #filter(respID == 2169)
+    filter(respID == respondentID) |> #filter(respID == 2169)
     mutate(
       `range` = case_when(
         str_detect(`range`, "\\(") ~ str_replace(`range`, "\\s*\\(", "<br>("),
@@ -672,9 +677,9 @@ server <- function(input, output, session) {
   )
 
   # Define any conditional skip logic here (skip to page if a condition is true)
-  sd_skip_forward(
+  sd_skip_if(
     # Screen out if the respondent doesn't have valid start
-    #!is_valid_start() ~ "screenout",  # Fix it
+    !is_valid_start() ~ "screenout", # Fix it
 
     input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
     input$next_veh_market %in% c("new") ~ "screenout",
@@ -690,9 +695,9 @@ server <- function(input, output, session) {
     !is.null(input$next_veh_car_images) ~ "cbc_intro",
     input$next_veh_style == "SUV / crossover" &
       ((!is.null(input$next_veh_nobev)) |
-         (input$next_veh_fuel_new_bev %in%
-            c("neutral", "somewhat_likely", "very_likely") |
-            input$next_veh_fuel_used_bev %in%
+        (input$next_veh_fuel_new_bev %in%
+          c("neutral", "somewhat_likely", "very_likely") |
+          input$next_veh_fuel_used_bev %in%
             c("neutral", "somewhat_likely", "very_likely"))) ~
       "next_veh_style_suv"
   )
@@ -702,7 +707,7 @@ server <- function(input, output, session) {
 
     input$household_veh_count != "0" ~ "household_veh_fuel",
     !(input$household_veh_count == "1" &
-        length(input$household_veh_fuel) == 1) ~
+      length(input$household_veh_fuel) == 1) ~
       "primary_veh_fuel",
 
     input$primary_veh_obtain_how %in%
@@ -717,7 +722,7 @@ server <- function(input, output, session) {
     input$next_veh_fuel_new_bev %in%
       c("very_unlikely", "somewhat_unlikely") &
       input$next_veh_fuel_used_bev %in%
-      c("very_unlikely", "somewhat_unlikely") ~
+        c("very_unlikely", "somewhat_unlikely") ~
       "next_veh_info_nobev",
 
     input$know_electric_vehicle == "yes" ~ "write_electric_name",
@@ -730,18 +735,19 @@ server <- function(input, output, session) {
       input$battery_cbc_q3_button == 'option_4' &
       input$battery_cbc_q4_button == 'option_4' &
       input$battery_cbc_q5_button == 'option_4' &
-      input$battery_cbc_q6_button == 'option_4'  ~ 'page2a'
-    )
+      input$battery_cbc_q6_button == 'option_4' ~
+      'page2a'
+  )
 
   # Database designation and other settings
   sd_server(
     db = db,
-    all_questions_required = TRUE,  # fixed
+    all_questions_required = TRUE, # fixed
     # required_questions = c("images", "budget", "next_vehicle_purchase",
     #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
     #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
     #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    use_cookies = TRUE   # fixed
+    use_cookies = TRUE # fixed
   )
 }
 
