@@ -213,7 +213,7 @@ battery_cbc_options <- function(df, budget_select) {
     HTML(glue(
       "
       <div style='text-align: left;'>
-        <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
+        <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 3</b><br>
         <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$veh_mileage)}</span><br>
         <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>{alt3$battery_condition} </span><br>
         <b><span style='font-size: 13px;'>Range on a full charge:</span></b><br>
@@ -226,7 +226,7 @@ battery_cbc_options <- function(df, budget_select) {
     HTML(glue(
       "
       <div style='text-align: left;'>
-        <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
+        <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 4</b><br>
         <b><span style='font-size: 13px;'>Even if these were </span></b><br>
         <b><span style='font-size: 13px;'>my best options,  </span></b><br>
         <b><span style='font-size: 13px;'>I would not choose any</span></b><br>
@@ -679,7 +679,7 @@ server <- function(input, output, session) {
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_if(
     # Screen out if the respondent doesn't have valid start
-    !is_valid_start() ~ "screenout", # Fix it
+    #!is_valid_start() ~ "screenout", # Fix it
 
     input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
     input$next_veh_market %in% c("new") ~ "screenout",
