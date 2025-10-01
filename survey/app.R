@@ -188,12 +188,12 @@ battery_cbc_options <- function(df, budget_select) {
       "
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>{alt1$battery_condition} </span><br>
-        <b><span style='font-size: 13px;'>Range on a full charge:</span></b><br>
+        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$veh_mileage)}</span><br>
+        <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt1$battery_condition} </span><br>
+        <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health - {alt1$battery_health_year3}) </span><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt1$battery_health_year8}) </span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
+        <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
       </div>
     "
     )),
@@ -201,12 +201,12 @@ battery_cbc_options <- function(df, budget_select) {
       "
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 2</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>{alt2$battery_condition} </span><br>
-        <b><span style='font-size: 13px;'>Range on a full charge:</span></b><br>
+        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$veh_mileage)}</span><br>
+        <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt2$battery_condition} </span><br>
+        <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health - {alt2$battery_health_year3}) </span><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt2$battery_health_year8}) </span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
+        <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
       </div>
     "
     )),
@@ -214,12 +214,12 @@ battery_cbc_options <- function(df, budget_select) {
       "
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 3</b><br>
-        <b><span style='font-size: 13px;'>Mileage:</span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$veh_mileage)}</span><br>
-        <b><span style='font-size: 13px;'>Battery condition:</span></b><br> <span style='font-size: 13px;'>{alt3$battery_condition} </span><br>
-        <b><span style='font-size: 13px;'>Range on a full charge:</span></b><br>
+        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$veh_mileage)}</span><br>
+        <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt3$battery_condition} </span><br>
+        <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health - {alt3$battery_health_year3}) </span><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt3$battery_health_year8}) </span><br>
-        <b><span style='font-size: 13px;'>Purchase price:</span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt3$price)}</span><br>
+        <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt3$price)}</span><br>
       </div>
     "
     )),
