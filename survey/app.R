@@ -677,7 +677,7 @@ server <- function(input, output, session) {
   )
 
   # Define any conditional skip logic here (skip to page if a condition is true)
-  sd_skip_forward(
+  sd_skip_if(
     # Screen out if the respondent doesn't have valid start
     #!is_valid_start() ~ "screenout", # Fix it
 
