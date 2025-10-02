@@ -864,7 +864,7 @@ sd_next()
 sd_question(
   type  = "textarea",
   id    = "no_bev_selected0",
-  label = "We noticed you did not choose any of the electric vehicle options in the last few questions. Could you tell us any reasons why?"
+  label = "**We noticed you did not choose any of the electric vehicle options in the last few questions. Could you tell us any reasons why?**S"
 )
 
 sd_next()
