@@ -1,12 +1,12 @@
-name: Survey
-title: Survey
+name: Dashboard_survey
+title: Dashboard_survey
 username: gwu-vehicle-lab
 account: gwu-vehicle-lab
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 15170255
-bundleId: 10983770
-url: https://gwu-vehicle-lab.shinyapps.io/Survey/
+appId: 15644488
+bundleId: 10985737
+url: https://gwu-vehicle-lab.shinyapps.io/Dashboard_survey/
 version: 1
 asMultiple: FALSE
 asStatic: FALSE

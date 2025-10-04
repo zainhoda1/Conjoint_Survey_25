@@ -22,12 +22,12 @@ function(input, output, session) {
     db <- sd_db_connect()
     sd_get_data(db)%>%
       #mutate(get_start_date =as.Date(as.POSIXct(time_start, tz = "UTC"))) %>%
-      mutate(get_start_datetime = ymd_hms(time_start, tz = "UTC")) %>% 
-      filter(get_start_datetime>"2025-08-14 13:22:57 UTC" )
+      mutate(get_start_datetime = ymd_hms(time_start, tz = "UTC")) %>%
+      filter(get_start_datetime>"2025-10-02 01:22:57 UTC" )
   })
-  
-  
-  
+
+
+
   # Acceptance distribution
   output$completeTable <- renderDT({
     survey_data() %>%
@@ -36,17 +36,17 @@ function(input, output, session) {
                                             TRUE ~ "in progress"
                                             ))%>%
       mutate(completion_status = factor(completion_status, levels = c("complete", "in progress", "screenout"))) %>%
-      
+
       count(completion_status, name = "sample_size") %>%
-      complete(completion_status, fill = list(sample_size = 0)) %>% 
+      complete(completion_status, fill = list(sample_size = 0)) %>%
       mutate(percentage=paste0(round(sample_size/sum(sample_size)*100,0),"%"))
   })
-    
-  
+
+
   # Age distribution (binned)
   output$ageTable <- renderDT({
     survey_data() %>%
-      filter(current_page=="end") %>% 
+      filter(current_page=="end") %>%
       mutate(
         birth_year = as.numeric(birth_year),
         age = 2025 - birth_year # yob changed to age
@@ -61,17 +61,17 @@ function(input, output, session) {
       )) %>%
       mutate(age_group = factor(age_group, levels = c("18 - 24", "25 - 34", "35 - 44", "45 - 54", "55 - 64", "65+"))) %>%
       count(age_group, name = "sample_size") %>%
-      complete(age_group, fill = list(sample_size = 0)) %>% 
+      complete(age_group, fill = list(sample_size = 0)) %>%
       mutate(percentage_num=round(sample_size/sum(sample_size)*100,0),
              percentage=paste0(round(sample_size/sum(sample_size)*100,0),"%")
-      ) %>% 
+      ) %>%
       mutate(population_target_num=c(18,17,17,18,14,16),
              population_target=paste0(population_target_num,"%")
       ) %>%
-      mutate(discrepancy=paste0(percentage_num-population_target_num,"%")) %>% 
-      select(-c(percentage_num,population_target_num))  
+      mutate(discrepancy=paste0(percentage_num-population_target_num,"%")) %>%
+      select(-c(percentage_num,population_target_num))
   })
-  
+
   # Gender distribution
   output$genderTable <- renderDT({
     survey_data() %>%
@@ -82,24 +82,24 @@ function(input, output, session) {
       filter(gender!="") %>%
       mutate(gender = factor(gender, levels = c("male", "female"))) %>%
       count(gender, name = "sample_size") %>%
-      complete(gender, fill = list(sample_size = 0)) %>% 
+      complete(gender, fill = list(sample_size = 0)) %>%
       mutate(percentage_num=round(sample_size/sum(sample_size)*100,0),
              percentage=paste0(round(sample_size/sum(sample_size)*100,0),"%")
-      ) %>% 
+      ) %>%
       mutate(population_target_num=c(49,51),
              population_target=paste0(population_target_num,"%")
       ) %>%
-      mutate(discrepancy=paste0(percentage_num-population_target_num,"%")) %>% 
-      select(-c(percentage_num,population_target_num))  
+      mutate(discrepancy=paste0(percentage_num-population_target_num,"%")) %>%
+      select(-c(percentage_num,population_target_num))
   })
-  
+
   # Income distribution (binned)
   output$incomeTable <- renderDT({
     survey_data() %>%
       filter(current_page=="end") %>%
       mutate(hh_income=case_when(hh_income=="prefer_not_answer" ~ NA,
                                  TRUE ~ as.numeric(hh_income))) %>%
-      filter(!is.na(hh_income)) %>% 
+      filter(!is.na(hh_income)) %>%
       mutate(hh_income= case_when(hh_income<=15000 ~ "< $15,000",
                                   hh_income<=25000 ~ "$15,000 - $24,999",
                                   hh_income<=45000 ~ "$25,000 - $49,999",
@@ -116,22 +116,22 @@ function(input, output, session) {
                                                    "$100,000 - $149,999",
                                                    "$150,000+"))) %>%
       count(hh_income, name = "sample_size") %>%
-      complete(hh_income, fill = list(sample_size = 0)) %>% 
+      complete(hh_income, fill = list(sample_size = 0)) %>%
       mutate(percentage_num=round(sample_size/sum(sample_size)*100,0),
              percentage=paste0(round(sample_size/sum(sample_size)*100,0),"%")
-      ) %>% 
+      ) %>%
       mutate(population_target_num=c(12,10,23,18,12,13,11),
              population_target=paste0(population_target_num,"%")
       ) %>%
-      mutate(discrepancy=paste0(percentage_num-population_target_num,"%")) %>% 
+      mutate(discrepancy=paste0(percentage_num-population_target_num,"%")) %>%
       select(-c(percentage_num,population_target_num))
-      
+
   })
-  
+
   # Disconnect when session ends
   session$onSessionEnded(function() {
     dbDisconnect(con)
   })
-    
+
 
 }
