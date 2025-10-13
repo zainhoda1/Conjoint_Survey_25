@@ -3,6 +3,7 @@ library(fastDummies)
 library(here)
 library(lubridate)
 library(tidyverse)
+library(arrow)
 
 # Change dplyr settings so I can view all columns
 options(dplyr.widtkh = Inf)
@@ -11,7 +12,13 @@ options(dplyr.widtkh = Inf)
 
 # Import raw data
 
-data_raw <- read_csv(here('Dynata Screenout Reasons', 'dynata_test_rows.csv'))
+data_raw <- read_csv(here("code files","old code", "testing_initial_data_modeling", "survey_data.csv"))
+
+
+# removing testing entries
+data_raw <- data_raw %>%
+  filter(!is.na(psid), nchar(psid) >= 10)
+
 
 # Format and join the three surveys -------
 
@@ -106,7 +113,7 @@ summary(data$time_min_cbc)
 
 # Drop anyone who finished the choice question section in under 1 minute
 data <- data %>%
-  filter(time_min_cbc >= 1)
+  filter(time_min_cbc >= 0.75)
 nrow(data)
 
 
@@ -132,7 +139,8 @@ choice_data <- data %>%
 head(choice_data)
 
 # Read in choice questions and join it to the choice_data
-survey <- read_csv(here("survey_updated_dynata", "data", "choice_questions.csv"))
+#survey <- read_csv(here("survey_updated_dynata", "data", "choice_questions.csv"))
+survey <- read_parquet(here('survey','data', 'design_vehicle.parquet'))
 
 c1 <- choice_data
                    
@@ -160,4 +168,4 @@ choice_data <- choice_data %>%
 head(choice_data)
 
 # Save cleaned data for modeling
-write_csv(choice_data, here("code files", "testing_initial_data_modeling",  "vehicle_choice_data.csv"))
+write_csv(choice_data, here("code files","old code", "testing_initial_data_modeling", "vehicle_choice_data.csv"))

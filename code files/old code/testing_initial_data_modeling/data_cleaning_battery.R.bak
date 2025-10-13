@@ -77,14 +77,12 @@ data <- data %>%
   filter(!is.na(battery_cbc_q6_button))
 nrow(data)
 
+# Drop anyone who got the demo question wrong:
 
-
-# Drop anyone who got the demo question wrong:  - Question removed
-
-# data <- data %>% 
-#   filter(battery_cbc_q0_button == 'option_3' ) %>%
-#   select(-battery_cbc_q0_button)
-# nrow(data)
+data <- data %>% 
+  filter(battery_cbc_q0_button == 'option_3' ) %>%
+  select(-battery_cbc_q0_button)
+nrow(data)
 
 
 # Drop anyone who answered the same question for all choice questions
@@ -140,7 +138,7 @@ choice_data <- data %>%
 head(choice_data)
 
 # Read in choice questions and join it to the choice_data
-#survey <- read_csv(here("survey_updated_dynata", "data", "battery_choice_questions.csv"))
+survey <- read_csv(here("survey_updated_dynata", "data", "battery_choice_questions.csv"))
 survey <- read_parquet(here('survey','data', 'design_battery.parquet'))
 
 
@@ -168,4 +166,4 @@ choice_data <- choice_data %>%
 head(choice_data)
 
 # Save cleaned data for modeling
-write_csv(choice_data, here("code files", "old code", "testing_initial_data_modeling",  "battery_choice_data.csv"))
+write_csv(choice_data, here("code files", "testing_initial_data_modeling",  "battery_choice_data.csv"))

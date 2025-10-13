@@ -11,23 +11,26 @@ options(dplyr.width = Inf) # So you can see all of the columns
 # -----------------------------------------------------------------------------
 # Load the data set:
 
-data <- read_csv(here("code files", "testing_initial_data_modeling",  "vehicle_choice_data.csv"))
+data <- read_csv(here("code files", "old code", "testing_initial_data_modeling",  "vehicle_choice_data.csv"))
 head(data)
 
+glimpse(data)
+
 data <- data %>%
-  mutate(oper_cost = parse_number(operating_cost),
-         range = parse_number (range),
-         age = 2025- make_year,
-         price = price/1000,
-         range = range /10, 
-         mileage = mileage /1000
+  #select(price, mileage, age, operating_cost, )
+  mutate(price = price/1000,  # 5-50
+         range_bev = range_bev/100,  # 0.5 - 2.5
+         range_phev = range_phev /10,  # 1 - 4 
+         mileage = mileage * 10,  # 2 - 6
+         age = age * 10, # 2 - 8
+        operating_cost = operating_cost/10 # 0.3 - 2.5
          )
 
 
 # Estimate MNL model
 
 # First create some dummy coded variables for categorical variables
-data <- dummy_cols(data, c('powertrain'))
+#data <- dummy_cols(data, c('powertrain'))
 
 # Clean up names of created variables
 data <- clean_names(data)
@@ -41,11 +44,12 @@ model <- logitr(
     "price",
     "mileage",
     "age",
-    "oper_cost",
-    "range",
-    "powertrain_battery_electric",
-    "powertrain_gas_hybrid",
-    "powertrain_plug_in_hybrid"
+    "operating_cost",
+    "range_bev",
+    "range_phev",
+    "powertrainbev",
+    "powertrainhev",
+    "powertrainphev"
     )
 )
 
