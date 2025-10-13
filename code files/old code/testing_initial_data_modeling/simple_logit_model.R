@@ -18,7 +18,7 @@ glimpse(data)
 
 data <- data %>%
   #select(price, mileage, age, operating_cost, )
-  mutate(price = price/1000,  # 5-50
+  mutate(price = price/10000,  # 0.5-6
          range_bev = range_bev/100,  # 0.5 - 2.5
          range_phev = range_phev /10,  # 1 - 4 
          mileage = mileage * 10,  # 2 - 6

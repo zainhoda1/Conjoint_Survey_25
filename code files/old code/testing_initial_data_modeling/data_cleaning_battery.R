@@ -41,7 +41,7 @@ data <- data_raw %>%
   ) %>%
   # Select important columns
   select(
-    session_id, time_start, time_total, time_cbc_total, respID, next_veh_budget , next_veh_style, current_page, starts_with("battery_cbc_q")
+    session_id, time_start, time_total, time_cbc_total, battery_respID, next_veh_budget , next_veh_style, current_page, starts_with("battery_cbc_q")
   )
 
 head(data)
@@ -118,6 +118,13 @@ data <- data %>%
 nrow(data)
 
 
+# dropping non-unique respID (keeping first one):
+
+data <- data %>%
+  distinct(battery_respID, .keep_all = TRUE)
+
+
+
 # Create choice data ---------
 
 # First convert the data to long format
@@ -130,12 +137,12 @@ choice_data <- data %>%
   mutate(
     qID = parse_number(qID),
     choice = parse_number(choice),
-    # vehicle_type = case_when(
-    #   next_veh_style == 'Car / sedan / hatchback' ~ 'car',
-    #   next_veh_style == 'SUV / crossover' ~ 'suv'
-    # )
-  )%>%
-  select(-next_veh_style)
+     vehicle_type = case_when(
+       next_veh_style == 'Car / sedan / hatchback' ~ 'car',
+       next_veh_style == 'SUV / crossover' ~ 'suv'
+    )
+  ) #%>%
+  #select(-next_veh_style)
 
 head(choice_data)
 
@@ -144,8 +151,12 @@ head(choice_data)
 survey <- read_parquet(here('survey','data', 'design_battery.parquet'))
 
 
+
 choice_data <- choice_data %>%
-  left_join(survey, by = c("respID", "qID"))
+  left_join(survey, by = c("battery_respID" = "respID", "qID"))
+
+
+
 
 # Convert choice column to 1 or 0 based on if the alternative was chosen
 choice_data <- choice_data %>%
