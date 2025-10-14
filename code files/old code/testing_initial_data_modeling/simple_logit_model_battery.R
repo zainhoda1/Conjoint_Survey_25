@@ -66,7 +66,7 @@ model1 <- logitr(
 summary(model1)
 
 # Check the 1st order condition: Is the gradient at the solution zero?
-model$gradient
+model1$gradient
 
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)

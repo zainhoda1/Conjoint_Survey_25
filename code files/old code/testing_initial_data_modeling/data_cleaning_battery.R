@@ -15,6 +15,9 @@ options(dplyr.widtkh = Inf)
 data_raw <- read_csv(here("code files","old code", "testing_initial_data_modeling", "survey_data.csv"))
 
 
+survey <- read_parquet(here("code files","old code", "testing_initial_data_modeling", 'design_battery.parquet'))
+
+
 # removing testing entries
 data_raw <- data_raw %>%
   filter(!is.na(psid), nchar(psid) >= 10)
@@ -141,14 +144,13 @@ choice_data <- data %>%
        next_veh_style == 'Car / sedan / hatchback' ~ 'car',
        next_veh_style == 'SUV / crossover' ~ 'suv'
     )
-  ) #%>%
-  #select(-next_veh_style)
+  ) %>%
+  select(-next_veh_style)
 
 head(choice_data)
 
-# Read in choice questions and join it to the choice_data
-#survey <- read_csv(here("survey_updated_dynata", "data", "battery_choice_questions.csv"))
-survey <- read_parquet(here('survey','data', 'design_battery.parquet'))
+glimpse(choice_data)
+glimpse(survey)
 
 
 
@@ -180,3 +182,4 @@ head(choice_data)
 
 # Save cleaned data for modeling
 write_csv(choice_data, here("code files", "old code", "testing_initial_data_modeling",  "battery_choice_data.csv"))
+

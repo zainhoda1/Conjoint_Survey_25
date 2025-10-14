@@ -14,6 +14,10 @@ options(dplyr.widtkh = Inf)
 
 data_raw <- read_csv(here("code files","old code", "testing_initial_data_modeling", "survey_data.csv"))
 
+# Read in choice questions and join it to the choice_data
+
+survey <- read_parquet(here("code files","old code", "testing_initial_data_modeling", 'design_vehicle.parquet'))
+
 
 # removing testing entries
 data_raw <- data_raw %>%
@@ -113,7 +117,7 @@ summary(data$time_min_cbc)
 
 # Drop anyone who finished the choice question section in under 1 minute
 data <- data %>%
-  filter(time_min_cbc >= 0.75)
+  filter(time_min_cbc >= 1)
 nrow(data)
 
 
@@ -138,14 +142,26 @@ choice_data <- data %>%
 
 head(choice_data)
 
-# Read in choice questions and join it to the choice_data
-#survey <- read_csv(here("survey_updated_dynata", "data", "choice_questions.csv"))
-survey <- read_parquet(here('survey','data', 'design_vehicle.parquet'))
-
-c1 <- choice_data
+# temp_survey <- survey %>% 
+#   filter(respID == 2859,
+#          vehicle_type == 'car')
+# 
+# temp_data <- data_raw %>% 
+#   filter(respID == 2859 ,
+#     next_veh_style == 'Car / sedan / hatchback')
+# 
+# temp_choice <- choice_data %>% 
+#   filter(respID == 2859,
+#          vehicle_type == 'car')
+# 
+# c1 <- choice_data
                    
 choice_data <- choice_data %>%
   left_join(survey, by = c( "vehicle_type", "respID", "qID"))
+
+# temp_choice1 <- choice_data %>% 
+#   filter(respID == 2859,
+#          vehicle_type == 'car')
 
 # Convert choice column to 1 or 0 based on if the alternative was chosen
 choice_data <- choice_data %>%
