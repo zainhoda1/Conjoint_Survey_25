@@ -246,6 +246,14 @@ profiles_restricted_car %>%
   group_by(powertrain) %>%
   count(operating_cost)
 
+# checking restrictions:
+profiles_restricted_car %>%
+  count(powertrain)
+
+# checking restrictions:
+profiles_restricted_car %>%
+  count(operating_cost)
+
 
 ## Set up priors
 
@@ -272,28 +280,32 @@ design_car <- cbc_design(
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
   priors = priors_fixed_parameter_car,
-  balance_by = c('powertrain', 'operating_cost'),
+  balance_by = c('powertrain'),
   remove_dominant = FALSE
 )
 
+cbc_inspect(design_car)
+
+# checking restrictions:
+design_car %>%
+  group_by(powertrain) %>%
+  count(operating_cost)
+
+# checking restrictions:
+design_car %>%
+  count(powertrain)
+
+# checking restrictions:
+design_car %>%
+  count(operating_cost)
 
 design_car_data <- design_car %>%
   mutate(
-    powertrain = case_when(
-      powertrainphev == 1 ~ 'phev',
-      powertrainhev == 1 ~ 'hev',
-      powertrainbev == 1 ~ 'bev',
-      (powertrainphev == 0 &
-        powertrainhev == 0 &
-        powertrainbev == 0 &
-        no_choice == 0) ~
-        'gas'
-    ),
     range_phev = range_phev * 100,
     range_bev = range_bev * 100,
     range = case_when(
-      powertrainphev == 1 ~ paste0(range_phev, ' miles on a full charge'),
-      powertrainbev == 1 ~ paste0(range_bev, ' miles on a full charge'),
+      powertrain == 'phev' ~ paste0(range_phev, ' miles on a full charge'),
+      powertrain == 'bev' ~ paste0(range_bev, ' miles on a full charge'),
       TRUE ~ NA
     ),
     vehicle_type = 'car',
@@ -373,28 +385,19 @@ design_suv <- cbc_design(
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
   priors = priors_fixed_parameter_suv,
-  balance_by = c('powertrain', 'operating_cost'),
+  balance_by = c('powertrain'),
   remove_dominant = FALSE
 )
 
+cbc_inspect(design_suv)
 
 design_suv_data <- design_suv %>%
   mutate(
-    powertrain = case_when(
-      powertrainphev == 1 ~ 'phev',
-      powertrainhev == 1 ~ 'hev',
-      powertrainbev == 1 ~ 'bev',
-      (powertrainphev == 0 &
-        powertrainhev == 0 &
-        powertrainbev == 0 &
-        no_choice == 0) ~
-        'gas'
-    ),
     range_phev = range_phev * 100,
     range_bev = range_bev * 100,
     range = case_when(
-      powertrainphev == 1 ~ paste0(range_phev, ' miles on a full charge'),
-      powertrainbev == 1 ~ paste0(range_bev, ' miles on a full charge'),
+      powertrain == 'phev' ~ paste0(range_phev, ' miles on a full charge'),
+      powertrain == 'bev' ~ paste0(range_bev, ' miles on a full charge'),
       TRUE ~ NA
     ),
     vehicle_type = 'suv',
@@ -419,20 +422,18 @@ arrow::write_parquet(
   here('survey', 'data', 'design_vehicle.parquet')
 )
 
+saveRDS(
+  design_combined,
+  here('data', 'design_vehicle.Rds')
+)
+
+
 ##############
 
 ################################################################################################
 ################################################################################################
 
 # (2) For Battery Survey
-
-# Load libraries
-library(cbcTools)
-library(tidyverse)
-library(cbcTools)
-library(logitr)
-library(here)
-
 
 profiles_battery <- cbc_profiles(
   veh_mileage = seq(1.5, 5, 0.5), # unit: 10000
@@ -451,6 +452,7 @@ priors_fixed_battery <- cbc_priors(
   battery_degradation = -0.5, # Each 1% of degradation increases subtracts utility by 0.5
   no_choice = 1.0 # There is a strong negative preference for EV, so positive for "no_choice"
 )
+
 design_battery <- cbc_design(
   profiles = profiles_battery,
   priors = priors_fixed_battery,
@@ -462,6 +464,7 @@ design_battery <- cbc_design(
   remove_dominant = FALSE
 )
 
+cbc_inspect(design_battery)
 
 #design_random_fixed_parameter_origin<-design_random_fixed_parameter
 #design_random_fixed_parameter<-cbc_decode(design_random_fixed_parameter)
@@ -495,12 +498,9 @@ design_rand_output_battery <- design_battery %>%
   ) %>%
   mutate(
     battery_condition = case_when(
-      battery_refurbishcellreplace == 1 ~ 'Refurbished Cell-Replaced',
-      battery_refurbishpackreplace == 1 ~ 'Refurbished Pack-Replaced',
-      ((battery_refurbishcellreplace == 0) &
-        (battery_refurbishcellreplace == 0) &
-        (no_choice == 0)) ~
-        'Original Battery',
+      battery_refurbish == 'cellreplace' ~ 'Refurbished Cell-Replaced',
+      battery_refurbish == 'packreplace' ~ 'Refurbished Pack-Replaced',
+      battery_refurbish == 'original' ~ 'Original Battery',
       TRUE ~ NA
     )
   )
@@ -513,6 +513,11 @@ arrow::write_parquet(
   here('survey', 'data', 'design_battery.parquet')
 )
 
+saveRDS(
+  design_rand_output_battery,
+  here('data', 'design_battery.Rds')
+)
+
 
 ################################################################################################
 ################################################################################################
@@ -522,7 +527,7 @@ arrow::write_parquet(
 cbc_inspect(design_car)
 
 choices_priors_car <- cbc_choices(
-  design_car,
+  cbc_encode(design_car, 'dummy'),
   priors = priors_fixed_parameter_car
 )
 
@@ -539,7 +544,8 @@ model_car <- logitr(
     'operating_cost',
     'powertrainbev',
     'powertrainphev',
-    'powertrainhev'
+    'powertrainhev',
+    'no_choice'
   )
 )
 
@@ -560,7 +566,7 @@ cbc_inspect(design_suv)
 
 
 choices_priors_suv <- cbc_choices(
-  design_suv,
+  cbc_encode(design_suv, 'dummy'),
   priors = priors_fixed_parameter_suv
 )
 
@@ -577,7 +583,8 @@ model_suv <- logitr(
     'operating_cost',
     'powertrainbev',
     'powertrainphev',
-    'powertrainhev'
+    'powertrainhev',
+    'no_choice'
   )
 )
 
@@ -599,7 +606,7 @@ cbc_inspect(design_battery)
 
 
 choices_priors_battery <- cbc_choices(
-  design_battery,
+  cbc_encode(design_battery, 'dummy'),
   priors = priors_fixed_battery
 )
 
@@ -613,7 +620,8 @@ model_battery <- logitr(
     'battery_refurbishcellreplace',
     'battery_refurbishpackreplace',
     'battery_range_year0',
-    'battery_degradation'
+    'battery_degradation',
+    'no_choice'
   )
 )
 
