@@ -14,8 +14,8 @@ options(dplyr.width = Inf) # So you can see all of the columns
 
 data <- read_csv(here(
   "code files",
-  "pilot",
-  "data",
+  "old code",
+  "testing_initial_data_modeling",
   "battery_choice_data.csv"
 ))
 #head(data)
@@ -83,7 +83,7 @@ model1$gradient
 
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)
-eigen(model1$hessian)$values
+eigen(model$hessian)$values
 
 # Estimate the model
 model2 <- logitr(
@@ -105,4 +105,9 @@ model2 <- logitr(
 summary(model2)
 
 
+# Check the 1st order condition: Is the gradient at the solution zero?
+model$gradient
 
+# 2nd order condition: Is the hessian negative definite?
+# (If all the eigenvalues are negative, the hessian is negative definite)
+eigen(model$hessian)$values

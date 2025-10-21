@@ -14,8 +14,8 @@ options(dplyr.width = Inf) # So you can see all of the columns
 
 data <- read_csv(here(
   "code files",
-  "pilot",
-  "data",
+  "old code",
+  "testing_initial_data_modeling",
   "vehicle_choice_data.csv"
 ))
 head(data)

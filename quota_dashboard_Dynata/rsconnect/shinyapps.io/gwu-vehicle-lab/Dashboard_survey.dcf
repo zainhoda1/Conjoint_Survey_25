@@ -5,8 +5,13 @@ account: gwu-vehicle-lab
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 15644488
+<<<<<<< Updated upstream
 bundleId: 11046397
+=======
+bundleId: 11019744
+>>>>>>> Stashed changes
 url: https://gwu-vehicle-lab.shinyapps.io/Dashboard_survey/
 version: 1
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: checking_survey_run.R|dropouts.xlsx|round2_rows.csv
