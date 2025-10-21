@@ -9,13 +9,22 @@ library(arrow)
 options(dplyr.widtkh = Inf)
 
 
-
 # Import raw data
 
-data_raw <- read_csv(here("code files","old code", "testing_initial_data_modeling", "survey_data.csv"))
+data_raw <- read_csv(here(
+  "code files",
+  "old code",
+  "testing_initial_data_modeling",
+  "survey_data.csv"
+))
 
 
-survey <- read_parquet(here("code files","Design folders", "Design-10_14_25", 'design_battery.parquet'))
+survey <- read_parquet(here(
+  "code files",
+  "Design folders",
+  "Design-10_14_25",
+  'design_battery.parquet'
+))
 
 
 # removing testing entries
@@ -35,20 +44,36 @@ data <- data_raw %>%
   mutate(
     # Compute time through whole survey
     time_start = ymd_hms(time_start, tz = "UTC"),
-    time_end =  ymd_hms(time_end, tz = "UTC"),
+    time_end = ymd_hms(time_end, tz = "UTC"),
     time_total = as.numeric(time_end - time_start, units = "secs"),
     # Compute time through just the cbc questions
-    time_p_battery_pageQ1_button =  ymd_hms(time_p_battery_pageQ1_button, tz = "UTC"),
-    time_p_battery_pageQ6_button =  ymd_hms(time_p_battery_pageQ6_button, tz = "UTC"),
-    time_cbc_total = as.numeric(time_p_battery_pageQ6_button - time_p_battery_pageQ1_button, units = "secs")
+    time_p_battery_pageQ1_button = ymd_hms(
+      time_p_battery_pageQ1_button,
+      tz = "UTC"
+    ),
+    time_p_battery_pageQ6_button = ymd_hms(
+      time_p_battery_pageQ6_button,
+      tz = "UTC"
+    ),
+    time_cbc_total = as.numeric(
+      time_p_battery_pageQ6_button - time_p_battery_pageQ1_button,
+      units = "secs"
+    )
   ) %>%
   # Select important columns
   select(
-    session_id, time_start, time_total, time_cbc_total, battery_respID, next_veh_budget , next_veh_style, current_page, starts_with("battery_cbc_q")
+    session_id,
+    time_start,
+    time_total,
+    time_cbc_total,
+    battery_respID,
+    next_veh_budget,
+    next_veh_style,
+    current_page,
+    starts_with("battery_cbc_q")
   )
 
 head(data)
-
 
 
 # Filter out bad responses ---------
@@ -57,8 +82,7 @@ nrow(data)
 
 # Drop people who got screened out
 data <- data %>%
-  filter(!is.na(current_page),
-         current_page == "end") # 2025-08-07 18:38:21
+  filter(!is.na(current_page), current_page == "end") # 2025-08-07 18:38:21
 
 nrow(data)
 
@@ -68,6 +92,11 @@ data <- data %>%
 
 nrow(data)
 
+# Drop respondents that had a missing budget (somehow)
+data <- data %>%
+  filter(!is.na(next_veh_budget))
+
+nrow(data)
 
 
 # Drop anyone who didn't complete all choice questions
@@ -76,28 +105,26 @@ data <- data %>%
   filter(!is.na(battery_cbc_q2_button)) %>%
   filter(!is.na(battery_cbc_q3_button)) %>%
   filter(!is.na(battery_cbc_q4_button)) %>%
-  filter(!is.na(battery_cbc_q5_button))  %>%
+  filter(!is.na(battery_cbc_q5_button)) %>%
   filter(!is.na(battery_cbc_q6_button))
 nrow(data)
 
 
-
 # Drop anyone who got the demo question wrong:  - Question removed
 
-# data <- data %>% 
+# data <- data %>%
 #   filter(battery_cbc_q0_button == 'option_3' ) %>%
 #   select(-battery_cbc_q0_button)
 # nrow(data)
 
-
 # Drop anyone who answered the same question for all choice questions
 data <- data %>%
-  mutate(cbc_all_same =
-           (battery_cbc_q1_button == battery_cbc_q2_button) &
-           (battery_cbc_q2_button == battery_cbc_q3_button) &
-           (battery_cbc_q3_button == battery_cbc_q4_button) &
-           (battery_cbc_q4_button == battery_cbc_q5_button) &
-           (battery_cbc_q5_button == battery_cbc_q6_button) 
+  mutate(
+    cbc_all_same = (battery_cbc_q1_button == battery_cbc_q2_button) &
+      (battery_cbc_q2_button == battery_cbc_q3_button) &
+      (battery_cbc_q3_button == battery_cbc_q4_button) &
+      (battery_cbc_q4_button == battery_cbc_q5_button) &
+      (battery_cbc_q5_button == battery_cbc_q6_button)
   ) %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
@@ -117,7 +144,7 @@ summary(data$time_min_cbc)
 
 # Drop anyone who finished the choice question section in under 1 minute
 data <- data %>%
-  filter(time_min_cbc >= 1)
+  filter(time_min_cbc >= 0.5)
 nrow(data)
 
 
@@ -127,7 +154,6 @@ data <- data %>%
   distinct(battery_respID, .keep_all = TRUE)
 
 
-
 # Create choice data ---------
 
 # First convert the data to long format
@@ -135,14 +161,15 @@ choice_data <- data %>%
   pivot_longer(
     cols = battery_cbc_q1_button:battery_cbc_q6_button,
     names_to = "qID",
-    values_to = "choice") %>%
+    values_to = "choice"
+  ) %>%
   # Convert the qID variable and choice column to a number
   mutate(
     qID = parse_number(qID),
     choice = parse_number(choice),
-     vehicle_type = case_when(
-       next_veh_style == 'Car / sedan / hatchback' ~ 'car',
-       next_veh_style == 'SUV / crossover' ~ 'suv'
+    vehicle_type = case_when(
+      next_veh_style == 'Car / sedan / hatchback' ~ 'car',
+      next_veh_style == 'SUV / crossover' ~ 'suv'
     )
   ) %>%
   select(-next_veh_style)
@@ -153,26 +180,27 @@ glimpse(choice_data)
 glimpse(survey)
 
 
-
 choice_data <- choice_data %>%
   left_join(survey, by = c("battery_respID" = "respID", "qID"))
 
 
-
-
 # Convert choice column to 1 or 0 based on if the alternative was chosen
 choice_data <- choice_data %>%
-  mutate(choice = ifelse(choice == altID, 1, 0),
-         veh_price = veh_price * next_veh_budget) 
+  mutate(
+    choice = ifelse(choice == altID, 1, 0),
+    veh_price = veh_price * next_veh_budget
+  )
 
-head(choice_data)
+glimpse(choice_data)
+
+nrow(data)
 
 # Create new values for respID & obsID
 nRespondents <- nrow(data)
 nAlts <- max(survey$altID)
 nQuestions <- max(survey$qID)
-choice_data$respID <- rep(seq(nRespondents), each = nAlts*nQuestions)
-choice_data$obsID <- rep(seq(nRespondents*nQuestions), each = nAlts)
+choice_data$respID <- rep(seq(nRespondents), each = nAlts * nQuestions)
+choice_data$obsID <- rep(seq(nRespondents * nQuestions), each = nAlts)
 
 # Reorder columns - it's nice to have the "ID" variables first
 choice_data <- choice_data %>%
@@ -181,5 +209,12 @@ choice_data <- choice_data %>%
 head(choice_data)
 
 # Save cleaned data for modeling
-write_csv(choice_data, here("code files", "old code", "testing_initial_data_modeling",  "battery_choice_data.csv"))
-
+write_csv(
+  choice_data,
+  here(
+    "code files",
+    "old code",
+    "testing_initial_data_modeling",
+    "battery_choice_data.csv"
+  )
+)

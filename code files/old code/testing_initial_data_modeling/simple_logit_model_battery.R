@@ -4,6 +4,7 @@
 library(logitr)
 library(tidyverse)
 library(fastDummies)
+library(cbcTools)
 library(janitor)
 library(here)
 options(dplyr.width = Inf) # So you can see all of the columns
@@ -11,26 +12,42 @@ options(dplyr.width = Inf) # So you can see all of the columns
 # -----------------------------------------------------------------------------
 # Load the data set:
 
-data <- read_csv(here("code files","old code", "testing_initial_data_modeling",  "battery_choice_data.csv"))
+data <- read_csv(here(
+  "code files",
+  "old code",
+  "testing_initial_data_modeling",
+  "battery_choice_data.csv"
+))
 #head(data)
 
 glimpse(data)
 
 
-
-
 data <- data %>%
   mutate(
-    veh_mileage = veh_mileage/10000,  #3 - 6
-    veh_price = veh_price/10000, # 0.5 - 6 
-    battery_range_year0 = battery_range_year0 /100, # 1-3
-    battery_range_year3 = battery_range_year3 /100, # 1-3
-    battery_range_year8 = battery_range_year8 /100, # 0.5 - 2
+    veh_mileage = veh_mileage / 10000, #3 - 6
+    veh_price = veh_price / 10000, # 0.5 - 6
+    battery_range_year0 = battery_range_year0 / 100, # 1-3
+    battery_range_year3 = battery_range_year3 / 100, # 1-3
+    battery_range_year8 = battery_range_year8 / 100, # 0.5 - 2
     battery_degradation = (battery_degradation * 10)
-         ) %>% 
-  select(-starts_with("battery_health"), -starts_with("time") )
+  ) %>%
+  select(
+    -starts_with("battery_health"),
+    -starts_with("time"),
+    -session_id,
+    -vehicle_type,
+    -battery_condition
+  )
 
-
+# Dummy encode
+data <- cbc_encode(
+  data,
+  coding = 'dummy',
+  ref_levels = list(battery_refurbish = 'original')
+) %>%
+  as.data.frame() %>%
+  clean_names()
 
 # Estimate MNL model
 
@@ -38,38 +55,24 @@ data <- data %>%
 #data <- dummy_cols(data, c('battery_refurbish', 'degradation_high'))
 
 # Clean up names of created variables
-data <- clean_names(data)
-
-data <- data %>% 
-  select(-battery_cbc_q0_button, -battery_condition)
-
-data$battery_refurbish[is.na(data$battery_refurbish)] <- '0'
-
-# For character columns, replace NA with "0" (as a string)
-#data[is.na(data) & sapply(data, is.character)] <- '0'
-# For numeric columns, replace NA with 0 (as a number)
-#data[is.na(data) & sapply(data, is.numeric)] <- 0
-
-data[is.na(data)] <- 0
 
 glimpse(data)
 
 # Estimate the model
 model1 <- logitr(
-  data    = data,
+  data = data,
   outcome = "choice",
-  obsID   = "obs_id",
+  obsID = "obs_id",
   pars = c(
-    "veh_mileage", 
+    "veh_mileage",
     "veh_price",
-    "battery_refurbish",
     "battery_range_year3",
-    "battery_range_year8" , 
+    "battery_range_year8",
+    "battery_refurbishpackreplace",
+    "battery_refurbishcellreplace",
     "no_choice"
   )
 )
-
-
 
 
 # View summary of results
@@ -84,15 +87,16 @@ eigen(model$hessian)$values
 
 # Estimate the model
 model2 <- logitr(
-  data    = data ,
+  data = data,
   outcome = "choice",
-  obsID   = "obs_id",
+  obsID = "obs_id",
   pars = c(
-    "veh_mileage", 
+    "veh_mileage",
     "veh_price",
-    "battery_refurbish",
     "battery_range_year0",
     "battery_degradation",
+    "battery_refurbishpackreplace",
+    "battery_refurbishcellreplace",
     "no_choice"
   )
 )
@@ -107,4 +111,3 @@ model$gradient
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)
 eigen(model$hessian)$values
-

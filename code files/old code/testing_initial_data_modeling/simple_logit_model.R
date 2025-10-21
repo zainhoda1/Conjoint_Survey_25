@@ -4,6 +4,7 @@
 library(logitr)
 library(tidyverse)
 library(fastDummies)
+library(cbcTools)
 library(janitor)
 library(here)
 options(dplyr.width = Inf) # So you can see all of the columns
@@ -11,32 +12,33 @@ options(dplyr.width = Inf) # So you can see all of the columns
 # -----------------------------------------------------------------------------
 # Load the data set:
 
-data <- read_csv(here("code files", "old code", "testing_initial_data_modeling",  "vehicle_choice_data.csv"))
+data <- read_csv(here(
+  "code files",
+  "old code",
+  "testing_initial_data_modeling",
+  "vehicle_choice_data.csv"
+))
 head(data)
 
 glimpse(data)
 
-
-
 data <- data %>%
   #select(price, mileage, age, operating_cost, )
-  mutate(price = price/10000,  # 0.5-6
-         range_bev = range_bev/100,  # 0.5 - 2.5
-         range_phev = range_phev /10,  # 1 - 4 
-         mileage = mileage * 10,  # 2 - 6
-         age = age * 10, # 2 - 8
-        operating_cost = operating_cost/10 # 0.3 - 2.5,
-         ) %>% 
-  select(-range, -operating_cost_text )
+  mutate(
+    price = price / 10000, # 0.5-6
+    range_bev = range_bev / 100, # 0.5 - 2.5
+    range_phev = range_phev / 10, # 1 - 4
+    mileage = mileage * 10, # 2 - 6
+    age = age * 10, # 2 - 8
+    operating_cost = operating_cost / 10 # 0.3 - 2.5,
+  ) %>%
+  select(-range, -operating_cost_text, -session_id, -vehicle_type)
 
-data$powertrain[is.na(data$powertrain)] <- '0'
+# Dummy encode
+data <- cbc_encode(data, coding = 'dummy') %>%
+  as.data.frame()
 
-data[is.na(data)] <- 0
-
-# data %>% 
-#   mutate(
-#     powertrain = factor(powertrain, levels = c("gas", "phev", "bev", "hev", "0"))
-#   )
+glimpse(data)
 
 
 # Estimate MNL model
@@ -44,14 +46,17 @@ data[is.na(data)] <- 0
 # First create some dummy coded variables for categorical variables
 #data <- dummy_cols(data, c('powertrain'))
 
-# Clean up names of created variables
-data <- clean_names(data)
+data %>%
+  count(choice, qID)
+
+data %>%
+  count(no_choice, choice)
 
 # Estimate the model
 model <- logitr(
-  data    = data,
+  data = data,
   outcome = "choice",
-  obsID   = "obs_id",
+  obsID = "obsID",
   pars = c(
     "price",
     "mileage",
@@ -59,12 +64,12 @@ model <- logitr(
     "operating_cost",
     "range_bev",
     "range_phev",
-    "powertrain",
+    "powertrainbev",
+    "powertrainphev",
+    "powertrainhev",
     "no_choice"
-    )
+  )
 )
-
-
 
 
 # View summary of results
