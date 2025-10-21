@@ -23,6 +23,7 @@ data <- data %>%
   mutate(
     veh_mileage = veh_mileage/10000,  #3 - 6
     veh_price = veh_price/10000, # 0.5 - 6 
+    battery_range_year0 = battery_range_year0 /100, # 1-3
     battery_range_year3 = battery_range_year3 /100, # 1-3
     battery_range_year8 = battery_range_year8 /100, # 0.5 - 2
     battery_degradation = (battery_degradation * 10)
@@ -39,8 +40,17 @@ data <- data %>%
 # Clean up names of created variables
 data <- clean_names(data)
 
+data <- data %>% 
+  select(-battery_cbc_q0_button, -battery_condition)
 
+data$battery_refurbish[is.na(data$battery_refurbish)] <- '0'
 
+# For character columns, replace NA with "0" (as a string)
+#data[is.na(data) & sapply(data, is.character)] <- '0'
+# For numeric columns, replace NA with 0 (as a number)
+#data[is.na(data) & sapply(data, is.numeric)] <- 0
+
+data[is.na(data)] <- 0
 
 glimpse(data)
 
@@ -52,10 +62,10 @@ model1 <- logitr(
   pars = c(
     "veh_mileage", 
     "veh_price",
-    "battery_refurbishcellreplace",
-    "battery_refurbishpackreplace",
+    "battery_refurbish",
     "battery_range_year3",
-    "battery_range_year8"
+    "battery_range_year8" , 
+    "no_choice"
   )
 )
 
@@ -74,17 +84,16 @@ eigen(model$hessian)$values
 
 # Estimate the model
 model2 <- logitr(
-  data    = data 
-  ,
+  data    = data ,
   outcome = "choice",
   obsID   = "obs_id",
   pars = c(
     "veh_mileage", 
     "veh_price",
-    "battery_refurbishcellreplace",
-    "battery_refurbishpackreplace",
+    "battery_refurbish",
     "battery_range_year0",
-    "battery_degradation"
+    "battery_degradation",
+    "no_choice"
   )
 )
 
@@ -98,3 +107,4 @@ model$gradient
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)
 eigen(model$hessian)$values
+

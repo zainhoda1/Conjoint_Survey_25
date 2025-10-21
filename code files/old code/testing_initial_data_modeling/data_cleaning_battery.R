@@ -15,7 +15,7 @@ options(dplyr.widtkh = Inf)
 data_raw <- read_csv(here("code files","old code", "testing_initial_data_modeling", "survey_data.csv"))
 
 
-survey <- read_parquet(here("code files","old code", "testing_initial_data_modeling", 'design_battery.parquet'))
+survey <- read_parquet(here("code files","Design folders", "Design-10_14_25", 'design_battery.parquet'))
 
 
 # removing testing entries
@@ -64,7 +64,7 @@ nrow(data)
 
 # Drop those who completed before the adjustments
 data <- data %>%
-  filter(time_start > '2025-08-14 14:08:00') #2025-08-14 14:08:00 # 2025-08-06 18:38:21
+  filter(time_start > '2025-10-14 00:00:00') #2025-08-14 14:08:00 # 2025-08-06 18:38:21
 
 nrow(data)
 

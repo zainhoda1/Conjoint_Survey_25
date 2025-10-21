@@ -16,6 +16,8 @@ head(data)
 
 glimpse(data)
 
+
+
 data <- data %>%
   #select(price, mileage, age, operating_cost, )
   mutate(price = price/10000,  # 0.5-6
@@ -23,8 +25,18 @@ data <- data %>%
          range_phev = range_phev /10,  # 1 - 4 
          mileage = mileage * 10,  # 2 - 6
          age = age * 10, # 2 - 8
-        operating_cost = operating_cost/10 # 0.3 - 2.5
-         )
+        operating_cost = operating_cost/10 # 0.3 - 2.5,
+         ) %>% 
+  select(-range, -operating_cost_text )
+
+data$powertrain[is.na(data$powertrain)] <- '0'
+
+data[is.na(data)] <- 0
+
+# data %>% 
+#   mutate(
+#     powertrain = factor(powertrain, levels = c("gas", "phev", "bev", "hev", "0"))
+#   )
 
 
 # Estimate MNL model
@@ -47,9 +59,8 @@ model <- logitr(
     "operating_cost",
     "range_bev",
     "range_phev",
-    "powertrainbev",
-    "powertrainhev",
-    "powertrainphev"
+    "powertrain",
+    "no_choice"
     )
 )
 
