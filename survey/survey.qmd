@@ -958,7 +958,7 @@ sd_question(
 sd_question(
   type  = 'mc',
   id    = 'max_subsidy',
-  label = "**To the best of your knowledge, what is the maximum federal tax credit currently available in the US for purchasing a new electric vehicle?**",
+  label = "**To the best of your knowledge, what was the previous maximum federal tax credit (up till 09/30/2025) available in the US for purchasing a new electric vehicle?**",
   option = c(
     "$1,000" = "1000",
     "$2,500"  = "2500",

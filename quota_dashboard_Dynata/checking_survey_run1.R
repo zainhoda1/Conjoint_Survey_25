@@ -37,4 +37,7 @@ data %>%
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
