@@ -1,0 +1,24 @@
+---
+title: "3_descriptive_stats"
+output: html_notebook
+---
+
+```{r}
+# Import raw data
+data_raw <- read_csv(here(
+  "code files",
+  "pilot",
+  "data",
+  "survey_data.csv"
+))
+
+choice_data <- read_csv(here(
+  "code files",
+  "old code",
+  "testing_initial_data_modeling",
+  "battery_choice_data.csv"
+))
+
+```
+
+
