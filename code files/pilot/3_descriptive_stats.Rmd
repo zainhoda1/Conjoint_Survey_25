@@ -2,7 +2,13 @@
 title: "3_descriptive_stats"
 output: html_notebook
 ---
+# Library
+```{r}
+library(tidyverse)
+`%notin%`<-Negate(`%in%`)
+```
 
+# Read Data
 ```{r}
 # Import raw data
 data_raw <- read_csv(here(
@@ -18,6 +24,14 @@ choice_data <- read_csv(here(
   "testing_initial_data_modeling",
   "battery_choice_data.csv"
 ))
+
+data_full<-data_raw %>% 
+  filter(session_id %in% choice_data$session_id) %>% 
+  select(-starts_with("time_"))
+```
+
+
+```{r}
 
 ```
 
