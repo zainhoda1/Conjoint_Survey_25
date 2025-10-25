@@ -711,13 +711,11 @@ server <- function(input, output, session) {
       "primary_veh_fuel",
 
     input$primary_veh_obtain_how %in%
-      c("bought_dealership", "leased_dealership", "bought_private") ~
+      c("bought_dealership", "leased_dealership", "bought_private", "bought_online") ~
       "primary_veh_cost",
-    input$primary_veh_obtain_how %in%
-      c("bought_dealership", "leased_dealership", "bought_private") ~
-      "primary_veh_payment",
 
-    input$primary_veh_fuel %in% c("gas", "hev", "phev") ~ "primary_veh_mpg",
+
+    input$primary_veh_fuel %in% c("icev", "hev", "phev") ~ "primary_veh_mpg",
 
     input$next_veh_fuel_new_bev %in%
       c("very_unlikely", "somewhat_unlikely") &
