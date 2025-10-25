@@ -23,11 +23,10 @@ function(input, output, session) {
     sd_get_data(db)%>%
       #mutate(get_start_date =as.Date(as.POSIXct(time_start, tz = "UTC"))) %>%
       mutate(get_start_datetime = ymd_hms(time_start, tz = "UTC")) %>%
-<<<<<<< Updated upstream
-      filter(get_start_datetime>"2025-10-14 00:00:00 UTC" )  #
-=======
+#<<<<<<< Updated upstream
+      filter(get_start_datetime>"2025-10-14 00:00:00 UTC" )  #=======
       filter(get_start_datetime>"2025-10-10 21:00:00 UTC" )
->>>>>>> Stashed changes
+#>>>>>>> Stashed changes
   })
 
 

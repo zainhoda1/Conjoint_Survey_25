@@ -66,8 +66,10 @@ model1 <- logitr(
   pars = c(
     "veh_mileage",
     "veh_price",
-    "battery_range_year3",
-    "battery_range_year8",
+    #### ranges are highly correlated, so only include one year.
+    #### Keeping year8 generates higher R2
+    # "battery_range_year3",
+    "battery_range_year8", 
     "battery_refurbishpackreplace",
     "battery_refurbishcellreplace",
     "no_choice"

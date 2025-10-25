@@ -82,7 +82,8 @@ nrow(data)
 
 # Drop people who got screened out
 data <- data %>%
-  filter(!is.na(current_page), current_page == "end") # 2025-08-07 18:38:21
+  filter(!is.na(current_page), current_page == "end") %>%  # 2025-08-07 18:38:21
+  select(-current_page)
 
 nrow(data)
 
@@ -112,10 +113,10 @@ nrow(data)
 
 # Drop anyone who got the demo question wrong:  - Question removed
 
-# data <- data %>%
-#   filter(battery_cbc_q0_button == 'option_3' ) %>%
-#   select(-battery_cbc_q0_button)
-# nrow(data)
+data <- data %>%
+  # filter(battery_cbc_q0_button == 'option_3' ) %>%
+  select(-battery_cbc_q0_button)
+nrow(data)
 
 # Drop anyone who answered the same question for all choice questions
 data <- data %>%
