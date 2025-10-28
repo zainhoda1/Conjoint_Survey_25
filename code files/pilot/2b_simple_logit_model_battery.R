@@ -20,6 +20,14 @@ data <- read_csv(here(
 ))
 #head(data)
 
+data_covariates <- read_csv(here(
+  "code files",
+  "pilot",
+  "Battery_analysis",
+  "data_covariates.csv"
+))
+
+
 glimpse(data)
 
 
@@ -48,6 +56,14 @@ data <- cbc_encode(
 ) %>%
   as.data.frame() %>%
   clean_names()
+
+
+data<-data %>%
+  mutate(battery_respID=battery_resp_id) %>% 
+  left_join(data_covariates %>% 
+              select(battery_respID, ends_with("_num"), ends_with("cate")),
+            by="battery_respID")
+
 
 # Estimate MNL model
 
@@ -113,3 +129,36 @@ model$gradient
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)
 eigen(model$hessian)$values
+
+
+
+
+# # Estimate the model
+# model3 <- logitr(
+#   data = data,
+#   outcome = "choice",
+#   obsID = "obs_id",
+#   pars = c(
+#     "veh_mileage",
+#     "veh_price",
+#     "battery_range_year0",
+#     "battery_degradation",
+#     "battery_refurbishpackreplace",
+#     "battery_refurbishcellreplace",
+#     "no_choice",
+#     "age_num",
+#     "hhincome_num",
+#     "hhsize_num"
+#   )
+# )
+# 
+# # View summary of results
+# summary(model3)
+# 
+# 
+# # Check the 1st order condition: Is the gradient at the solution zero?
+# model$gradient
+# 
+# # 2nd order condition: Is the hessian negative definite?
+# # (If all the eigenvalues are negative, the hessian is negative definite)
+# eigen(model$hessian)$values

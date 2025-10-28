@@ -83,7 +83,7 @@ summary(data$time_min_cbc)
 data <- data %>%
   filter(time_min_vehicle_cbc >= 1) %>% 
   # dropping non-unique respID (keeping first one)
-  distinct(vehicle_respID, .keep_all = TRUE) 
+  distinct(respID, .keep_all = TRUE) 
 nrow(data)
 
 
