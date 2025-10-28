@@ -1,22 +1,23 @@
 ---
-title: "3_descriptive_stats"
+title: "4_modeling"
 output: html_notebook
 ---
 # Library
 ```{r}
 library(tidyverse)
 library(stringr)
+library(apollo)
 `%notin%`<-Negate(`%in%`)
 ```
 
 # Read Data
 ```{r}
 # Import raw data
-data_raw <- read_csv(here(
+data_covariates <- read_csv(here(
   "code files",
   "pilot",
-  "data",
-  "survey_data.csv"
+  "Battery_analysis",
+  "data_covariates.csv"
 ))
 
 
@@ -225,22 +226,6 @@ data<-data %>%
 
 table(data$Veh_primary_fuel)
 ```
-
-# -------------------------------
-# Output dataset
-# -------------------------------
-```{r}
-write_csv(
-  data,
-  here(
-    "code files",
-    "pilot",
-    "Battery_analysis",
-    "data_covariates.csv"
-  )
-)
-```
-
 
 # -------------------------------
 # Summary Statistics

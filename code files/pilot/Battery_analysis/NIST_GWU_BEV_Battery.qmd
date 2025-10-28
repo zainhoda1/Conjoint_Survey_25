@@ -8,9 +8,21 @@ editor: visual
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
-## Running Code
+## Knowledge
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
++--------------------------------------------+------------------------+---------------------+------------------------------------+
+| **Response pattern**                       | **Example selections** | **Knowledge score** | **Interpretation**                 |
++============================================+========================+=====================+====================================+
+| Selected both correct answers only         | HEV + PHEV             | 2                   | Fully knowledgeable                |
++--------------------------------------------+------------------------+---------------------+------------------------------------+
+| Selected one correct answer only           | HEV (or PHEV)          | 1                   | Partially knowledgeable            |
++--------------------------------------------+------------------------+---------------------+------------------------------------+
+| Selected a correct answer + “I’m not sure” | HEV + not_sure         | 0.5                 | Some knowledge, but uncertain      |
++--------------------------------------------+------------------------+---------------------+------------------------------------+
+| Selected only incorrect options            | BEV or not_sure only   | 0                   | No knowledge / misconception       |
++--------------------------------------------+------------------------+---------------------+------------------------------------+
+| Selected both correct + incorrect          | HEV + BEV              | 1                   | Knowledge mixed with misconception |
++--------------------------------------------+------------------------+---------------------+------------------------------------+
 
 ```{r}
 1 + 1

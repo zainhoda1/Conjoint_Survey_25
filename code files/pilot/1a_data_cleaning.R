@@ -28,78 +28,20 @@ survey <- read_parquet(here(
 ))
 
 
-# removing testing entries
-data_raw <- data_raw %>%
-  filter(!is.na(psid), nchar(psid) >= 10)
-
-
-# Format and join the three surveys -------
-
-# Some special variables:
-# session_id = a unique ID for the Run - should be the same across all surveys
-# time_start = time stamp when survey was started
-# time_end   = time stamp when survey ended
-# time_p_*** = Time page *** was reached
-# time_q_*** = Time question *** was last answered
 
 # Compute time values for each page
 data <- data_raw %>%
-  mutate(
-    # Compute time through whole survey
-    time_start = ymd_hms(time_start, tz = "UTC"),
-    time_end = ymd_hms(time_end, tz = "UTC"),
-    time_total = as.numeric(time_end - time_start, units = "secs"),
-    # Compute time through just the cbc questions
-    time_p_vehicle_pageQ1_button = ymd_hms(
-      time_p_vehicle_pageQ1_button,
-      tz = "UTC"
-    ),
-    time_p_vehicle_pageQ6_button = ymd_hms(
-      time_p_vehicle_pageQ6_button,
-      tz = "UTC"
-    ),
-    time_cbc_total = as.numeric(
-      time_p_vehicle_pageQ6_button - time_p_vehicle_pageQ1_button,
-      units = "secs"
-    )
-  ) %>%
   # Select important columns
   select(
     session_id,
     time_start,
     time_total,
-    time_cbc_total,
+    time_min_vehicle_cbc,
     respID,
     next_veh_budget,
     next_veh_style,
-    current_page,
     starts_with("vehicle_cbc_q")
   )
-
-head(data)
-
-
-# Filter out bad responses ---------
-
-nrow(data)
-
-# Drop people who got screened out
-data <- data %>%
-  filter(!is.na(current_page), current_page == "end") # 2025-08-07 18:38:21
-
-nrow(data)
-
-# Drop those who completed before the adjustments
-data <- data %>%
-  filter(time_start > '2025-10-14 00:00:00') #2025-08-14 14:08:00 # 2025-08-06 18:38:21
-
-nrow(data)
-
-# Drop respondents that had a missing budget (somehow)
-data <- data %>%
-  filter(!is.na(next_veh_budget))
-
-nrow(data)
 
 # Drop anyone who didn't complete all choice questions
 data <- data %>%
@@ -133,20 +75,15 @@ data <- data %>%
 nrow(data)
 
 # Drop respondents who went too fast
-data <- data %>%
-  mutate(
-    # Convert time to minutes
-    time_min_total = time_total / 60,
-    time_min_cbc = time_cbc_total / 60
-  )
-
 # Look at summary of completion times
 summary(data$time_min_total)
 summary(data$time_min_cbc)
 
 # Drop anyone who finished the choice question section in under 1 minute
-# data <- data %>%
-#   filter(time_min_cbc >= 1)
+data <- data %>%
+  filter(time_min_vehicle_cbc >= 1) %>% 
+  # dropping non-unique respID (keeping first one)
+  distinct(vehicle_respID, .keep_all = TRUE) 
 nrow(data)
 
 
