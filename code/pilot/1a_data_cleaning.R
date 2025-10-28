@@ -1,29 +1,20 @@
-# Load libraries
-library(fastDummies)
-library(here)
-library(lubridate)
-library(tidyverse)
-library(arrow)
-
-# Change dplyr settings so I can view all columns
-options(dplyr.widtkh = Inf)
+source(here::here('code', 'setup.R'))
 
 
 # Import raw data
 
 data_raw <- read_csv(here(
-  "code files",
-  "pilot",
   "data",
+  "pilot",
   "survey_data.csv"
 ))
 
 # Read in choice questions and join it to the choice_data
 
 survey <- read_parquet(here(
-  "code files",
-  "Design folders",
-  "Design-10_14_25",
+  "data",
+  "doe",
+  "design-10-14-25",
   'design_vehicle.parquet'
 ))
 
@@ -35,7 +26,7 @@ data <- data_raw %>%
   select(
     session_id,
     time_start,
-    time_total,
+    time_min_total,
     time_min_vehicle_cbc,
     respID,
     next_veh_budget,
@@ -77,11 +68,11 @@ nrow(data)
 # Drop respondents who went too fast
 # Look at summary of completion times
 summary(data$time_min_total)
-summary(data$time_min_cbc)
+summary(data$time_min_vehicle_cbc)
 
-# Drop anyone who finished the choice question section in under 1 minute
+# Drop anyone who finished the choice question section in under 30 second
 data <- data %>%
-  filter(time_min_vehicle_cbc >= 1) %>% 
+  filter(time_min_vehicle_cbc >= 0.5) %>% 
   # dropping non-unique respID (keeping first one)
   distinct(respID, .keep_all = TRUE) 
 nrow(data)
@@ -109,26 +100,11 @@ choice_data <- data %>%
 
 head(choice_data)
 
-# temp_survey <- survey %>%
-#   filter(respID == 2859,
-#          vehicle_type == 'car')
-#
-# temp_data <- data_raw %>%
-#   filter(respID == 2859 ,
-#     next_veh_style == 'Car / sedan / hatchback')
-#
-# temp_choice <- choice_data %>%
-#   filter(respID == 2859,
-#          vehicle_type == 'car')
-#
-# c1 <- choice_data
 
 choice_data <- choice_data %>%
   left_join(survey, by = c("vehicle_type", "respID", "qID"))
 
-# temp_choice1 <- choice_data %>%
-#   filter(respID == 2859,
-#          vehicle_type == 'car')
+
 
 # Convert choice column to 1 or 0 based on if the alternative was chosen
 choice_data <- choice_data %>%
@@ -158,13 +134,14 @@ choice_data <- choice_data %>%
 
 head(choice_data)
 
+#n_distinct(choice_data$session_id)  #68
+
 # Save cleaned data for modeling
 write_csv(
   choice_data,
   here(
-    "code files",
-    "pilot",
     "data",
+    "pilot",
     "vehicle_choice_data.csv"
   )
 )

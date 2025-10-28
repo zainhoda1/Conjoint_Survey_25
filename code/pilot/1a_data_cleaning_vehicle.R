@@ -1,4 +1,4 @@
-source(here::here('code files', 'setup.R'))
+source(here::here('code', 'setup.R'))
 
 # Import raw data
 
@@ -14,11 +14,9 @@ survey <- read_parquet(here(
   "data",
   "doe",
   "design-10-14-25",
-  'design_battery.parquet'
+  'design_vehicle.parquet'
 ))
 
-
-# Format and join the three surveys -------
 
 # Compute time values for each page
 data <- data_raw %>%
@@ -26,56 +24,64 @@ data <- data_raw %>%
   select(
     session_id,
     time_start,
-    time_total,
-    time_min_battery_cbc,
-    battery_respID,
+    time_min_total,
+    time_min_vehicle_cbc,
+    respID,
     next_veh_budget,
     next_veh_style,
-    starts_with("battery_cbc_q")
+    starts_with("vehicle_cbc_q")
   )
-
-head(data)
-
-# Drop respondents who went too fast
-# Look at summary of completion times
-summary(data$time_min_total)
-summary(data$time_min_battery_cbc)
-data <- data %>%
-  # Drop anyone who finished the choice question section in under 1 minute
-  filter(time_min_battery_cbc >= 0.5) %>%
-
-  # dropping non-unique respID (keeping first one)
-  distinct(battery_respID, .keep_all = TRUE)
 
 # Drop anyone who didn't complete all choice questions
 data <- data %>%
-  filter(!is.na(battery_cbc_q1_button)) %>%
-  filter(!is.na(battery_cbc_q2_button)) %>%
-  filter(!is.na(battery_cbc_q3_button)) %>%
-  filter(!is.na(battery_cbc_q4_button)) %>%
-  filter(!is.na(battery_cbc_q5_button)) %>%
-  filter(!is.na(battery_cbc_q6_button))
+  filter(!is.na(vehicle_cbc_q1_button)) %>%
+  filter(!is.na(vehicle_cbc_q2_button)) %>%
+  filter(!is.na(vehicle_cbc_q3_button)) %>%
+  filter(!is.na(vehicle_cbc_q4_button)) %>%
+  filter(!is.na(vehicle_cbc_q5_button)) %>%
+  filter(!is.na(vehicle_cbc_q6_button))
 nrow(data)
+
+# Drop anyone who got the demo question wrong:
+
+data <- data %>%
+  filter(vehicle_cbc_q0_button %in% c('option_1', 'option_4')) %>%
+  select(-vehicle_cbc_q0_button)
+nrow(data)
+
 
 # Drop anyone who answered the same question for all choice questions
 data <- data %>%
   mutate(
-    cbc_all_same = (battery_cbc_q1_button == battery_cbc_q2_button) &
-      (battery_cbc_q2_button == battery_cbc_q3_button) &
-      (battery_cbc_q3_button == battery_cbc_q4_button) &
-      (battery_cbc_q4_button == battery_cbc_q5_button) &
-      (battery_cbc_q5_button == battery_cbc_q6_button)
+    cbc_all_same = (vehicle_cbc_q1_button == vehicle_cbc_q2_button) &
+      (vehicle_cbc_q2_button == vehicle_cbc_q3_button) &
+      (vehicle_cbc_q3_button == vehicle_cbc_q4_button) &
+      (vehicle_cbc_q4_button == vehicle_cbc_q5_button) &
+      (vehicle_cbc_q5_button == vehicle_cbc_q6_button)
   ) %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
 nrow(data)
+
+# Drop respondents who went too fast
+# Look at summary of completion times
+summary(data$time_min_total)
+summary(data$time_min_vehicle_cbc)
+
+# Drop anyone who finished the choice question section in under 1 minute
+data <- data %>%
+  filter(time_min_vehicle_cbc >= 0.5) %>%
+  # dropping non-unique respID (keeping first one)
+  distinct(respID, .keep_all = TRUE)
+nrow(data)
+
 
 # Create choice data ---------
 
 # First convert the data to long format
 choice_data <- data %>%
   pivot_longer(
-    cols = battery_cbc_q1_button:battery_cbc_q6_button,
+    cols = vehicle_cbc_q1_button:vehicle_cbc_q6_button,
     names_to = "qID",
     values_to = "choice"
   ) %>%
@@ -92,24 +98,25 @@ choice_data <- data %>%
 
 head(choice_data)
 
-glimpse(choice_data)
-glimpse(survey)
-
 
 choice_data <- choice_data %>%
-  left_join(survey, by = c("battery_respID" = "respID", "qID"))
+  left_join(survey, by = c("vehicle_type", "respID", "qID"))
 
 
 # Convert choice column to 1 or 0 based on if the alternative was chosen
 choice_data <- choice_data %>%
   mutate(
     choice = ifelse(choice == altID, 1, 0),
-    veh_price = veh_price * next_veh_budget
+    price = price * next_veh_budget
   )
 
-glimpse(choice_data)
+head(choice_data)
 
-nrow(data)
+# Remove bad respID
+choice_data <- choice_data %>%
+  filter(respID != 3587)
+data <- data %>%
+  filter(respID != 3587)
 
 # Create new values for respID & obsID
 nRespondents <- nrow(data)
@@ -128,9 +135,8 @@ head(choice_data)
 write_csv(
   choice_data,
   here(
-    "code files",
-    "pilot",
     "data",
-    "battery_choice_data.csv"
+    "pilot",
+    "vehicle_choice_data.csv"
   )
 )

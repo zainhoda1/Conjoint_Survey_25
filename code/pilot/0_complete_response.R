@@ -1,7 +1,7 @@
-source(here::here('code files', 'setup.R'))
+source(here::here('code', 'setup.R'))
 
-pilot_start <- ymd_hms('2025-10-14 00:00:00')
-pilot_end <- ymd_hms('2025-10-20 00:00:00')
+pilot_start <- ymd_hms('2025-10-14 21:00:00')  
+pilot_end <- ymd_hms('2025-10-21 16:00:00')
 
 # Connect to database
 #### surveydown::sd_db_config()
@@ -69,7 +69,6 @@ data <- data %>%
   select(
     !c(
       attention_check_toyota,
-      battery_cbc_q0_button,
       attitudes_1_a,
       attitudes_1_b,
       attitudes_2_a,
@@ -79,15 +78,16 @@ data <- data %>%
   ) %>%
 
   # Drop people who got screened out
-  filter(!is.na(current_page), current_page == "end") %>% # 2025-08-07 18:38:21
+  filter(!is.na(current_page), current_page == "end") %>% 
   select(-current_page) %>%
 
   # Drop those who completed before the adjustments
-  filter(time_start >= pilot_start) %>% #2025-08-14 14:08:00 # 2025-08-06 18:38:21 %>%
-  filter(time_start <= pilot_end)
+  filter(time_start >= pilot_start) %>% 
+  filter(time_start <= pilot_end) %>% 
+  # Drop respondents that had a missing budget (somehow)
+  filter(!is.na(next_veh_budget))
 
-# Drop respondents that had a missing budget (somehow)
-filter(!is.na(next_veh_budget))
+#n_distinct(data$session_id)  # 98
 
 write_csv(
   data,

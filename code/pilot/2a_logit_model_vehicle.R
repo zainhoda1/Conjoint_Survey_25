@@ -1,20 +1,20 @@
-source(here::here('code files', 'setup.R'))
+source(here::here('code', 'setup.R'))
 
 # --------------------------------------------------------------------------
 # Load the data set:
 
 data <- read_csv(here(
-  "code files",
-  "pilot",
   "data",
+  "pilot",
   "vehicle_choice_data.csv"
 ))
 head(data)
 
+#n_distinct(data$session_id)  #68
+
 glimpse(data)
 
 data <- data %>%
-  #select(price, mileage, age, operating_cost, )
   mutate(
     price = price / 10000, # 0.5-6
     range_bev = range_bev / 100, # 0.5 - 2.5
@@ -26,7 +26,7 @@ data <- data %>%
   select(-range, -operating_cost_text, -session_id, -vehicle_type)
 
 # Dummy encode
-data <- cbc_encode(data, coding = 'dummy') %>%
+data <- cbc_encode(data, coding = 'dummy', ref_levels = list(powertrain='gas')) %>%
   as.data.frame()
 
 glimpse(data)
@@ -72,3 +72,4 @@ model$gradient
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)
 eigen(model$hessian)$values
+
