@@ -1,14 +1,7 @@
-# Load libraries
-library(fastDummies)
-library(here)
-library(lubridate)
-library(tidyverse)
-library(arrow)
-library(dotenv)
-library(surveydown)
-# Change dplyr settings so I can view all columns
-options(dplyr.widtkh = Inf)
+source(here::here('code files', 'setup.R'))
 
+pilot_start <- ymd_hms('2025-10-14 00:00:00')
+pilot_end <- ymd_hms('2025-10-20 00:00:00')
 
 # Connect to database
 #### surveydown::sd_db_config()
@@ -65,38 +58,42 @@ data <- data_raw %>%
     time_min_total = time_total / 60,
     time_min_vehicle_cbc = time_vehicle_cbc_total / 60,
     time_min_battery_cbc = time_battery_cbc_total / 60
-  ) 
+  )
 
 
-  
 data <- data %>%
   # Bot
-  filter(is.na(attention_check_toyota)) %>% 
-  
+  filter(is.na(attention_check_toyota)) %>%
+
   # Survey question removed
-  select( !c(attention_check_toyota,
-             battery_cbc_q0_button,
-             attitudes_1_a,attitudes_1_b,attitudes_2_a,attitudes_2_b,
-             battery_attribute)) %>%
-  
+  select(
+    !c(
+      attention_check_toyota,
+      battery_cbc_q0_button,
+      attitudes_1_a,
+      attitudes_1_b,
+      attitudes_2_a,
+      attitudes_2_b,
+      battery_attribute
+    )
+  ) %>%
+
   # Drop people who got screened out
-  filter(!is.na(current_page), current_page == "end") %>%  # 2025-08-07 18:38:21
+  filter(!is.na(current_page), current_page == "end") %>% # 2025-08-07 18:38:21
   select(-current_page) %>%
-  
+
   # Drop those who completed before the adjustments
-  filter(time_start > '2025-10-14 00:00:00') %>%  #2025-08-14 14:08:00 # 2025-08-06 18:38:21
-  
-  # Drop respondents that had a missing budget (somehow)
-  filter(!is.na(next_veh_budget))
+  filter(time_start >= pilot_start) %>% #2025-08-14 14:08:00 # 2025-08-06 18:38:21 %>%
+  filter(time_start <= pilot_end)
+
+# Drop respondents that had a missing budget (somehow)
+filter(!is.na(next_veh_budget))
 
 write_csv(
   data,
   here(
-    "code files",
-    "pilot",
     "data",
+    "pilot",
     "survey_data.csv"
   )
 )
-  
-  

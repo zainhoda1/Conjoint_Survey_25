@@ -1,13 +1,6 @@
-# Estimate multinomial logit (MNL) models
+source(here::here('code files', 'setup.R'))
 
-# Load libraries
-library(logitr)
-library(tidyverse)
-library(fastDummies)
-library(cbcTools)
-library(janitor)
-library(here)
-options(dplyr.width = Inf) # So you can see all of the columns
+# Estimate multinomial logit (MNL) models
 
 # -----------------------------------------------------------------------------
 # Load the data set:

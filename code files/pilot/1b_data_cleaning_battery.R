@@ -1,28 +1,19 @@
-# Load libraries
-library(fastDummies)
-library(here)
-library(lubridate)
-library(tidyverse)
-library(arrow)
-
-# Change dplyr settings so I can view all columns
-options(dplyr.widtkh = Inf)
-
+source(here::here('code files', 'setup.R'))
 
 # Import raw data
 
 data_raw <- read_csv(here(
-  "code files",
-  "pilot",
   "data",
+  "pilot",
   "survey_data.csv"
 ))
 
+# Read in choice questions and join it to the choice_data
 
 survey <- read_parquet(here(
-  "code files",
-  "Design folders",
-  "Design-10_14_25",
+  "data",
+  "doe",
+  "design-10-14-25",
   'design_battery.parquet'
 ))
 
@@ -49,12 +40,12 @@ head(data)
 # Look at summary of completion times
 summary(data$time_min_total)
 summary(data$time_min_battery_cbc)
-data<-data %>% 
+data <- data %>%
   # Drop anyone who finished the choice question section in under 1 minute
-  filter(time_min_battery_cbc >= 0.5) %>% 
-  
+  filter(time_min_battery_cbc >= 0.5) %>%
+
   # dropping non-unique respID (keeping first one)
-  distinct(battery_respID, .keep_all = TRUE) 
+  distinct(battery_respID, .keep_all = TRUE)
 
 # Drop anyone who didn't complete all choice questions
 data <- data %>%

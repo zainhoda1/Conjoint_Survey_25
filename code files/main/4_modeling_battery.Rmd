@@ -1,22 +1,24 @@
 ---
-title: "3_descriptive_stats"
+title: "4_modeling"
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
+
 # Library
+
 ```{r}
-library(tidyverse)
-library(stringr)
-`%notin%`<-Negate(`%in%`)
+source(here::here('code files', 'setup.R'))
 ```
 
 # Read Data
 ```{r}
 # Import raw data
-data_raw <- read_csv(here(
+data_covariates <- read_csv(here(
   "code files",
   "pilot",
-  "data",
-  "survey_data.csv"
+  "Battery_analysis",
+  "data_covariates.csv"
 ))
 
 
@@ -81,10 +83,7 @@ Explortory Factor analysis
 (http://www.di.fc.ul.pt/~jpn/r/factoranalysis/factoranalysis.html)
 ```{r}
 # colnames(data)
-library(psych)
-library(nFactors)
-library(GPArotation)
-         
+
 att<-data %>%
   # filter(attitudes_2_a_attention_check_agree=="strongly_agree")%>% 
   select(!attitudes_2_a_attention_check_agree) %>% 
@@ -225,22 +224,6 @@ data<-data %>%
 
 table(data$Veh_primary_fuel)
 ```
-
-# -------------------------------
-# Output dataset
-# -------------------------------
-```{r}
-write_csv(
-  data,
-  here(
-    "code files",
-    "pilot",
-    "Battery_analysis",
-    "data_covariates.csv"
-  )
-)
-```
-
 
 # -------------------------------
 # Summary Statistics
