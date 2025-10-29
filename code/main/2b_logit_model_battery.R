@@ -1,7 +1,6 @@
 source(here::here('code', 'setup.R'))
 
-# -----------------------------------------------------------------------------
-# Load the data set:
+# ----Load the data set----
 
 data <- read_csv(here(
   "data",
@@ -10,9 +9,9 @@ data <- read_csv(here(
 ))
 #head(data)
 
-#n_distinct(data$session_id)  #373
+#n_distinct(data$resp_id)  #373
 
-glimpse(data)
+# glimpse(data)
 
 
 data <- data %>%
@@ -27,7 +26,6 @@ data <- data %>%
   select(
     -starts_with("battery_health"),
     -starts_with("time"),
-    -session_id,
     -vehicle_type,
     -battery_condition
   )

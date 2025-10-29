@@ -1,10 +1,10 @@
 source(here::here('code', 'setup.R'))
 
-pilot_start <- ymd_hms('2025-10-14 21:00:00')  
-pilot_end <- ymd_hms('2025-10-21 16:00:00')
+pilot_start <- ymd_hms('2025-10-21 16:00:00')  
+# pilot_end <- ymd_hms('2025-10-21 16:00:00')
 
 # Connect to database
-#### surveydown::sd_db_config()
+### surveydown::sd_db_config()
 db <- sd_db_connect()
 
 # original db
