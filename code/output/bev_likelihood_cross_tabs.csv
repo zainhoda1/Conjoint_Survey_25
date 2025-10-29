@@ -1,4 +1,7 @@
-variable,level,n,perc,,new_bev_very_unlikely,new_bev_somewhat_unlikely,new_bev_neutral,new_bev_somewhat_likely,new_bev_very_likely,,used_bev_very_unlikely,used_bev_somewhat_unlikely,used_bev_neutral,used_bev_somewhat_likely,used_bev_very_likely
+variable,level,n,perc/mean,,new_bev_very_unlikely,new_bev_somewhat_unlikely,new_bev_neutral,new_bev_somewhat_likely,new_bev_very_likely,,used_bev_very_unlikely,used_bev_somewhat_unlikely,used_bev_neutral,used_bev_somewhat_likely,used_bev_very_likely
+,,,,,169,60,103,98,55,,156,70,104,115,40
+,,,,,35%,12%,21%,20%,11%,,32%,14%,21%,24%,8%
+,,,,,,,,,,,,,,,
 gender_cate,female,238,49%,,40%,11%,19%,17%,13%,,37%,14%,18%,22%,9%
 gender_cate,male,240,49%,,30%,13%,23%,23%,10%,,28%,15%,24%,25%,8%
 gender_cate,gender_other,7,1%,,NA,29%,43%,14%,14%,,NA,14%,57%,14%,14%
@@ -81,9 +84,9 @@ EV_charger,EVc_not sure,29,6%,,0.379,0.207,0.138,0.241,0.034,,0.345,0.103,0.31,0
 EV_neighbor,EVn_no,210,43%,,0.462,0.119,0.205,0.157,0.057,,0.443,0.143,0.205,0.171,0.038
 EV_neighbor,EVn_yes,161,33%,,0.23,0.112,0.224,0.242,0.193,,0.18,0.143,0.199,0.323,0.155
 EV_neighbor,EVn_not sure,113,23%,,0.31,0.15,0.212,0.221,0.106,,0.301,0.15,0.257,0.23,0.062
-age_num,age_num,46.961,,,50.148,47.433,46.097,44.306,43,,51.237,49.557,45.115,43.296,41.075
-hhincome_num,hhincome_num,78762.994,,,68869.048,71000,87549.02,84591.837,91226.415,,73645.161,89927.536,70533.981,85350.877,81750
-hhsize_num,hhsize_num,2.711,,,2.639,2.55,2.612,2.888,2.982,,2.615,2.486,2.558,3.043,2.925
-FA_EV_benefit,FA_EV_benefit,0,,,-0.69,0.061,0.117,0.555,0.844,,-0.729,-0.018,0.195,0.517,0.881
-FA_EV_anxiety,FA_EV_anxiety,0,,,0.31,-0.184,-0.171,-0.19,-0.092,,0.33,-0.149,-0.038,-0.209,-0.325
-Veh_hh_count,Veh_hh_count,1.682,,,1.645,1.417,1.845,1.68,1.782,,1.628,1.6,1.769,1.754,1.6
+age_num,age_num,,46.961,,50.148,47.433,46.097,44.306,43,,51.237,49.557,45.115,43.296,41.075
+hhincome_num,hhincome_num,,78762.994,,68869.048,71000,87549.02,84591.837,91226.415,,73645.161,89927.536,70533.981,85350.877,81750
+hhsize_num,hhsize_num,,2.711,,2.639,2.55,2.612,2.888,2.982,,2.615,2.486,2.558,3.043,2.925
+FA_EV_benefit,FA_EV_benefit,,0.000,,-0.69,0.061,0.117,0.555,0.844,,-0.729,-0.018,0.195,0.517,0.881
+FA_EV_anxiety,FA_EV_anxiety,,0.000,,0.31,-0.184,-0.171,-0.19,-0.092,,0.33,-0.149,-0.038,-0.209,-0.325
+Veh_hh_count,Veh_hh_count,,1.682,,1.645,1.417,1.845,1.68,1.782,,1.628,1.6,1.769,1.754,1.6
