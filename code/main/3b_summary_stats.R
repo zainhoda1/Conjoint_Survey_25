@@ -671,16 +671,16 @@ cross_tabs_combined<-cbind(cross_tabs_new_bev %>%
                              )
                            )
 
-write_csv(
-  cross_tabs_combined,
-  here(
-    "code",
-    "output",
-    "bev_likelihood_cross_tabs.csv"
-  )
-)
+# write_csv(
+#   cross_tabs_combined,
+#   here(
+#     "code",
+#     "output",
+#     "bev_likelihood_cross_tabs.csv"
+#   )
+# )
 
-# ----Archive (column-wise tables)----
+# ----Archive codes (column-wise tables)----
 # library(rlang)
 #
 # varfactor <- data %>%
