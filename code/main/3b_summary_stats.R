@@ -50,7 +50,7 @@ varfactor_names <- names(select(
   next_veh_fuel_new_bev
 ))
 
-lapply(summary_dt[varfactor_names], levels)
+# lapply(summary_dt[varfactor_names], levels)
 
 summary_dt <- summary_dt %>%
   mutate(
@@ -336,7 +336,7 @@ for (var in seq_along(varfactor)) {
     summarise(n = sum(final_weights)) %>%
     filter(!is.na(!!varfactor[[var]])) %>%
     mutate(perc = round(n / sum(n), 3)) %>%
-    setNames(., c("next_veh_fuel_new_bev", "Variables", "n", "perc"))
+    setNames(., c("Variables","next_veh_fuel_new_bev", "n", "perc"))
   cross_tabs_cat <- rbind(
     as.data.frame(cross_tabs_cat),
     as.data.frame(new_cross_tab)
@@ -346,12 +346,12 @@ for (var in seq_along(varfactor)) {
 cross_tabs_cat_wide_perc <- cross_tabs_cat %>%
   select(-n) %>%
   # mutate(rowid=c(1:nrow(cross_tabs_cat))) %>%
-  pivot_wider(names_from = Variables, values_from = perc)
+  pivot_wider(names_from = next_veh_fuel_new_bev, values_from = perc)
 
 cross_tabs_cat_wide_n <- cross_tabs_cat %>%
   select(-perc) %>%
   # mutate(rowid=c(1:nrow(cross_tabs_cat))) %>%
-  pivot_wider(names_from = Variables, values_from = n)
+  pivot_wider(names_from = next_veh_fuel_new_bev, values_from = n)
 
 
 cross_tabs_cat_pop <- data.frame()
@@ -374,6 +374,7 @@ cross_tabs_cat_pop_wide_n <- cross_tabs_cat_pop %>%
 
 cross_tabs_cat_pop_wide_perc <- cross_tabs_cat_pop %>%
   select(!n)
+
 
 ## Continuous vehicle
 
@@ -478,6 +479,8 @@ df_levels <- tibble(variable = names(vars), levels_list = vars) %>%
 cross_tabs_new_bev <- df_levels %>%
   full_join(cross_tabs_new_bev, by = c("level" = "Variables"))
 
+
+
 ### ----Used BEV----
 #### ----Row-wise %----
 varfactor <- summary_dt %>%
@@ -499,7 +502,7 @@ for (var in seq_along(varfactor)) {
     summarise(n = sum(final_weights)) %>%
     filter(!is.na(!!varfactor[[var]])) %>%
     mutate(perc = round(n / sum(n), 3)) %>%
-    setNames(., c("next_veh_fuel_new_bev", "Variables", "n", "perc"))
+    setNames(., c( "Variables","next_veh_fuel_used_bev", "n", "perc"))
   cross_tabs_cat <- rbind(
     as.data.frame(cross_tabs_cat),
     as.data.frame(new_cross_tab)
@@ -509,12 +512,12 @@ for (var in seq_along(varfactor)) {
 cross_tabs_cat_wide_perc <- cross_tabs_cat %>%
   select(-n) %>%
   # mutate(rowid=c(1:nrow(cross_tabs_cat))) %>%
-  pivot_wider(names_from = Variables, values_from = perc)
+  pivot_wider(names_from = next_veh_fuel_used_bev, values_from = perc)
 
 cross_tabs_cat_wide_n <- cross_tabs_cat %>%
   select(-perc) %>%
   # mutate(rowid=c(1:nrow(cross_tabs_cat))) %>%
-  pivot_wider(names_from = Variables, values_from = n)
+  pivot_wider(names_from = next_veh_fuel_used_bev, values_from = n)
 
 
 cross_tabs_cat_pop <- data.frame()
@@ -560,7 +563,7 @@ cross_tabs_con <- data.frame()
 for (var in seq_along(varcon)) {
   new_cross_tab <- summary_dt %>%
     filter(!is.na(!!varcon[[var]])) %>%
-    group_by(next_veh_fuel_new_bev) %>% # Unquote with !!
+    group_by(next_veh_fuel_used_bev) %>% # Unquote with !!
     summarise(
       n = sum(!!varcon[[var]] * final_weights),
       pop = sum(final_weights)
@@ -588,8 +591,8 @@ cross_tabs_con_wide <- cross_tabs_con %>%
       each = 5
     ))
   ) %>%
-  select(next_veh_fuel_new_bev, Variables, perc) %>%
-  pivot_wider(names_from = next_veh_fuel_new_bev, values_from = perc)
+  select(next_veh_fuel_used_bev, Variables, perc) %>%
+  pivot_wider(names_from = next_veh_fuel_used_bev, values_from = perc)
 
 cross_tabs_con_pop <- data.frame()
 for (var in seq_along(varcon)) {
@@ -641,7 +644,43 @@ df_levels <- tibble(variable = names(vars), levels_list = vars) %>%
 cross_tabs_used_bev <- df_levels %>%
   full_join(cross_tabs_used_bev, by = c("level" = "Variables"))
 
-# ----Archive (column-wise tables)----
+
+### ----Combined----
+cross_tabs_combined<-cbind(cross_tabs_new_bev %>%
+                             group_by(variable) %>% 
+                             mutate(perc=n/sum(n)) %>% 
+                             select(variable, level, n, perc, everything()) %>% 
+                             setNames(c("variable","level","n","perc",
+                                        "new_bev_very_unlikely",
+                                        "new_bev_somewhat_unlikely",
+                                        "new_bev_neutral",
+                                        "new_bev_somewhat_likely",
+                                        "new_bev_very_likely"
+                                        )
+                                      ), 
+                           NA,
+                          cross_tabs_used_bev %>%
+                             select(very_unlikely:very_likely) %>% 
+                             setNames(c(
+                                        "used_bev_very_unlikely",
+                                        "used_bev_somewhat_unlikely",
+                                        "used_bev_neutral",
+                                        "used_bev_somewhat_likely",
+                                        "used_bev_very_likely"
+                             )
+                             )
+                           )
+
+# write_csv(
+#   cross_tabs_combined,
+#   here(
+#     "code",
+#     "output",
+#     "bev_likelihood_cross_tabs.csv"
+#   )
+# )
+
+# ----Archive codes (column-wise tables)----
 # library(rlang)
 #
 # varfactor <- data %>%
