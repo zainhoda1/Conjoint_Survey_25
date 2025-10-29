@@ -12,7 +12,7 @@ library(janitor)
 library(apollo)
 library(psych)
 library(nFactors)
-library(GPArotation)
+library(rlang)
 
 `%notin%` <- Negate(`%in%`)
 
