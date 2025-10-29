@@ -479,6 +479,8 @@ df_levels <- tibble(variable = names(vars), levels_list = vars) %>%
 cross_tabs_new_bev <- df_levels %>%
   full_join(cross_tabs_new_bev, by = c("level" = "Variables"))
 
+
+
 ### ----Used BEV----
 #### ----Row-wise %----
 varfactor <- summary_dt %>%
@@ -644,32 +646,37 @@ cross_tabs_used_bev <- df_levels %>%
 
 
 ### ----Combined----
-cross_tabs_combined<-cbind(cross_tabs_new_bev %>% 
-                             setNames(c("variable","level","n",
+cross_tabs_combined<-cbind(cross_tabs_new_bev %>%
+                             group_by(variable) %>% 
+                             mutate(perc=n/sum(n)) %>% 
+                             select(variable, level, n, perc, everything()) %>% 
+                             setNames(c("variable","level","n","perc",
                                         "new_bev_very_unlikely",
                                         "new_bev_somewhat_unlikely",
                                         "new_bev_neutral",
                                         "new_bev_somewhat_likely",
                                         "new_bev_very_likely"
-                                        )), 
+                                        )
+                                      ), 
                            NA,
-                           cross_tabs_used_bev %>% 
+                          cross_tabs_used_bev %>%
                              select(very_unlikely:very_likely) %>% 
-                             setNames(c("variable","level","n",
+                             setNames(c(
                                         "used_bev_very_unlikely",
                                         "used_bev_somewhat_unlikely",
                                         "used_bev_neutral",
                                         "used_bev_somewhat_likely",
                                         "used_bev_very_likely"
-                             ))
+                             )
+                             )
                            )
 
 write_csv(
-  data,
+  cross_tabs_combined,
   here(
-    "data",
-    "cross_tabs_combined",
-    "data_clean_variables.csv"
+    "code",
+    "output",
+    "bev_likelihood_cross_tabs.csv"
   )
 )
 
