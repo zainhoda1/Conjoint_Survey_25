@@ -4,7 +4,7 @@ source(here::here('code', 'setup.R'))
 
 data <- read_csv(here(
   "data",
-  "pilot",
+  "main",
   "survey_data.csv"
 ))
 # head(data)
@@ -200,6 +200,6 @@ write_csv(
   here(
     "data",
     "main",
-    "data_covariates.csv"
+    "data_clean_variables.csv"
   )
 )
