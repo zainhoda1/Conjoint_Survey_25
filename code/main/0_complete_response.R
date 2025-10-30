@@ -1,6 +1,6 @@
 source(here::here('code', 'setup.R'))
 
-pilot_start <- ymd_hms('2025-10-21 16:00:00')  
+pilot_start <- ymd_hms('2025-10-21 16:00:00')
 # pilot_end <- ymd_hms('2025-10-21 16:00:00')
 
 # Connect to database
@@ -78,12 +78,12 @@ data <- data %>%
   ) %>%
 
   # Drop people who got screened out
-  filter(!is.na(current_page), current_page == "end") %>% 
+  filter(!is.na(current_page), current_page == "end") %>%
   select(-current_page) %>%
 
   # Drop those who completed before the adjustments
-  filter(time_start > pilot_end) %>% 
-  #filter(time_start <= pilot_end) %>% 
+  filter(time_start >= pilot_start) %>%
+  #filter(time_start <= pilot_end) %>%
   # Drop respondents that had a missing budget (somehow)
   filter(!is.na(next_veh_budget))
 
