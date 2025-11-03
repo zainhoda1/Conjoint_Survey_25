@@ -57,17 +57,15 @@ data_dce_dummy <- cbind(data_dce_dummy, data_dce %>% select(psid))
 data_covariate <- data_dce_dummy %>%
   left_join(data_variable, by = "psid")
 
-# ----Apollo----
-## ----Simple MNL----
-### ----DCE only----
-
+# ----Simple MNL----
+## ----Preference space----
 # Initialize
 apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "MNL_DCE",
-  modelDescr = "MNL model in WTP-space",
+  modelName = "MNL_DCE_preference_space",
+  modelDescr = "MNL model in preference-space",
   indivID = "respID",
   panelData = TRUE,
   outputDirectory = paste0(here(), "/code/main/model_output/apollo"),
@@ -80,15 +78,14 @@ database <- data_covariate %>%
   ungroup()
 
 #### 2. Parameter starting values
-# You can initialize them to 0 or to your logitr estimates.
 apollo_beta <- c(
   b_mileage = 0,
   b_range_year0 = 0,
   b_degradation = 0,
   b_packreplace = 0,
   b_cellreplace = 0,
-  b_no_choice = 0,
-  mu_price = -1 # price coefficient (scale parameter)
+  asc_no_choice = 0,
+  b_price = 0 # price coefficient (scale parameter)
 )
 
 #### 3. No random parameters (simple MNL)
@@ -119,7 +116,7 @@ apollo_probabilities <- function(
     b_degradation * battery_degradation +
     b_packreplace * battery_refurbishpackreplace +
     b_cellreplace * battery_refurbishcellreplace +
-    mu_price * veh_price
+    b_price * veh_price
 
   V[["alt2"]] <-
     b_mileage *
@@ -128,7 +125,7 @@ apollo_probabilities <- function(
     b_degradation * battery_degradation +
     b_packreplace * battery_refurbishpackreplace +
     b_cellreplace * battery_refurbishcellreplace +
-    mu_price * veh_price
+    b_price * veh_price
 
   V[["alt3"]] <-
     b_mileage *
@@ -137,9 +134,141 @@ apollo_probabilities <- function(
     b_degradation * battery_degradation +
     b_packreplace * battery_refurbishpackreplace +
     b_cellreplace * battery_refurbishcellreplace +
-    mu_price * veh_price
+    b_price * veh_price
 
-  V[["no_choice"]] <- b_no_choice
+  V[["no_choice"]] <- asc_no_choice
+
+  # Model settings
+  mnl_settings <- list(
+    # altID = altID,
+    alternatives = c(alt1 = 1, alt2 = 2, alt3 = 3, no_choice = 4),
+    avail = list(alt1 = 1, alt2 = 1, alt3 = 1, no_choice = 1), ## Availability of alternatives
+    choiceVar = choice_alt,
+    utilities = V
+  )
+
+  # Compute probabilities
+  P[["model"]] = apollo_mnl(mnl_settings, functionality)
+  ### Take product across observation for same individual
+  P <- apollo_panelProd(P, apollo_inputs, functionality)
+  ### Prepare and return outputs of function
+  P <- apollo_prepareProb(P, apollo_inputs, functionality)
+
+  return(P)
+}
+
+#### 6. Estimate model
+mnl_prefer <- apollo_estimate(
+  apollo_beta,
+  apollo_fixed,
+  apollo_probabilities,
+  apollo_inputs,
+  estimate_settings = list(maxIterations = 1000)
+)
+
+#### 7. Output results
+apollo_modelOutput(mnl_prefer, modelOutput_settings = list(printPVal = TRUE))
+
+#### 8. WTP - delta method
+for (i in c(
+  "b_mileage",
+  "b_range_year0",
+  "b_degradation",
+  "b_packreplace",
+  "b_cellreplace",
+  "asc_no_choice"
+)) {
+  deltaMethod_settings <- list(
+    operation = "ratio",
+    parName1 = i,
+    parName2 = "b_price",
+    multPar1 = -1
+  )
+  apollo_deltaMethod(mnl_prefer, deltaMethod_settings)
+}
+
+
+## ----WTP space----
+
+# Initialize
+apollo_initialise()
+
+# Define core controls
+apollo_control = list(
+  modelName = "MNL_DCE",
+  modelDescr = "MNL model in WTP-space",
+  indivID = "respID",
+  panelData = TRUE,
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo"),
+  mixing = FALSE
+)
+
+database <- data_covariate %>%
+  group_by(respID, obsID) %>%
+  mutate(choice_alt = altID[choice == 1]) %>%
+  ungroup()
+
+#### 2. Parameter starting values
+# You can initialize them to 0 or to your logitr estimates.
+apollo_beta <- c(
+  wtp_mileage = 0,
+  wtp_range_year0 = 0,
+  wtp_degradation = 0,
+  wtp_packreplace = 0,
+  wtp_cellreplace = 0,
+  asc_no_choice = 0,
+  b_price = -1 # price coefficient (scale parameter)
+)
+
+#### 3. No random parameters (simple MNL)
+# Skip apollo_randCoeff
+
+#### 4. Validate inputs
+apollo_fixed <- c()
+apollo_inputs <- apollo_validateInputs()
+
+#### 5. Define the model and utilities
+apollo_probabilities <- function(
+  apollo_beta,
+  apollo_inputs,
+  functionality = "estimate"
+) {
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+
+  ### Define utility functions
+  P <- list()
+  # For each alternative, use the same variables (if attributes vary across alts)
+  # If they are alt-specific columns, adjust accordingly.
+  V <- list()
+  V[["alt1"]] <-
+    b_price *
+    (veh_price +
+      wtp_mileage * veh_mileage +
+      wtp_range_year0 * battery_range_year0 +
+      wtp_degradation * battery_degradation +
+      wtp_packreplace * battery_refurbishpackreplace +
+      wtp_cellreplace * battery_refurbishcellreplace)
+
+  V[["alt2"]] <-
+    b_price *
+    (veh_price +
+      wtp_mileage * veh_mileage +
+      wtp_range_year0 * battery_range_year0 +
+      wtp_degradation * battery_degradation +
+      wtp_packreplace * battery_refurbishpackreplace +
+      wtp_cellreplace * battery_refurbishcellreplace)
+
+  V[["alt3"]] <-
+    b_price *
+    (veh_price +
+      wtp_mileage * veh_mileage +
+      wtp_range_year0 * battery_range_year0 +
+      wtp_degradation * battery_degradation +
+      wtp_packreplace * battery_refurbishpackreplace +
+      wtp_cellreplace * battery_refurbishcellreplace)
+
+  V[["no_choice"]] <- asc_no_choice
 
   # Model settings
   mnl_settings <- list(
