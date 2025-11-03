@@ -23,10 +23,11 @@ data <- data_raw %>%
   # Select important columns
   select(
     session_id,
+    psid,
+    respID,
     time_start,
     time_min_total,
     time_min_vehicle_cbc,
-    respID,
     next_veh_budget,
     next_veh_style,
     starts_with("vehicle_cbc_q")
@@ -40,7 +41,7 @@ data <- data %>%
   filter(!is.na(vehicle_cbc_q4_button)) %>%
   filter(!is.na(vehicle_cbc_q5_button)) %>%
   filter(!is.na(vehicle_cbc_q6_button))
-nrow(data)
+# nrow(data)
 
 # Drop anyone who got the demo question wrong:
 
@@ -61,20 +62,19 @@ data <- data %>%
   ) %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
-nrow(data)
+# nrow(data)
 
 # Drop respondents who went too fast
 # Look at summary of completion times
-summary(data$time_min_total)
-summary(data$time_min_vehicle_cbc)
+# summary(data$time_min_total)
+# summary(data$time_min_vehicle_cbc)
 
 # Drop anyone who finished the choice question section in under 1 minute
 data <- data %>%
   filter(time_min_vehicle_cbc >= 0.5) %>%
   # dropping non-unique respID (keeping first one)
   distinct(respID, .keep_all = TRUE)
-nrow(data)
-
+# nrow(data)
 
 # Create choice data ---------
 
@@ -96,8 +96,7 @@ choice_data <- data %>%
   ) %>%
   select(-next_veh_style)
 
-head(choice_data)
-
+# head(choice_data)
 
 choice_data <- choice_data %>%
   left_join(survey, by = c("vehicle_type", "respID", "qID"))
@@ -110,7 +109,7 @@ choice_data <- choice_data %>%
     price = price * next_veh_budget
   )
 
-head(choice_data)
+# head(choice_data)
 
 # Remove bad respID
 choice_data <- choice_data %>%
@@ -129,7 +128,7 @@ choice_data$obsID <- rep(seq(nRespondents * nQuestions), each = nAlts)
 choice_data <- choice_data %>%
   select(ends_with("ID"), "choice", everything())
 
-head(choice_data)
+# head(choice_data)
 
 # Save cleaned data for modeling
 write_csv(

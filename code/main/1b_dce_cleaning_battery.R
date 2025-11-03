@@ -25,23 +25,24 @@ data <- data_raw %>%
   # Select important columns
   select(
     session_id,
+    psid,
+    battery_respID,
     time_start,
     time_min_total,
     time_min_battery_cbc,
-    battery_respID,
     next_veh_budget,
     next_veh_style,
     starts_with("battery_cbc_q"),
     -battery_cbc_q0_button
-  ) %>% 
-  rename(respID = battery_respID)  #changed battery_respID to just respID for ease of use
+  ) %>%
+  rename(respID = battery_respID) #changed battery_respID to just respID for ease of use
 
-glimpse(data)
+# glimpse(data)
 
 # Drop respondents who went too fast
 # Look at summary of completion times
-summary(data$time_min_total)
-summary(data$time_min_battery_cbc)
+# summary(data$time_min_total)
+# summary(data$time_min_battery_cbc)
 data <- data %>%
   # Drop anyone who finished the choice question section in under 30 second
   filter(time_min_battery_cbc >= 0.5) %>%
@@ -57,7 +58,7 @@ data <- data %>%
   filter(!is.na(battery_cbc_q4_button)) %>%
   filter(!is.na(battery_cbc_q5_button)) %>%
   filter(!is.na(battery_cbc_q6_button))
-nrow(data)
+# nrow(data)
 
 # Drop anyone who answered the same question for all choice questions
 data <- data %>%
@@ -70,7 +71,7 @@ data <- data %>%
   ) %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
-nrow(data)
+# nrow(data)
 
 # Create choice data ---------
 
@@ -92,11 +93,10 @@ choice_data <- data %>%
   ) %>%
   select(-next_veh_style)
 
-head(choice_data)
+# head(choice_data)
 
-glimpse(choice_data)
-glimpse(survey)
-
+# glimpse(choice_data)
+# glimpse(survey)
 
 choice_data <- choice_data %>%
   left_join(survey, by = c("respID", "qID"))
@@ -109,9 +109,9 @@ choice_data <- choice_data %>%
     veh_price = veh_price * next_veh_budget
   )
 
-glimpse(choice_data)
+# glimpse(choice_data)
 
-nrow(data)
+# nrow(data)
 
 # Create new values for respID & obsID
 nRespondents <- nrow(data)

@@ -1,23 +1,45 @@
 source(here::here('code', 'setup.R'))
 
-# ----Load the data set----
+# ----Data----
+## ----Load dataset----
+data_dce <- read_csv(here(
+  "data",
+  "main",
+  "vehicle_choice_data.csv"
+))
 
-data <- read_csv(here(
+data_variable <- read_csv(here(
   "data",
   "main",
   "data_clean_variables.csv"
 ))
 
-choice_data <- read_csv(here(
-  "data",
-  "main",
-  # "vehicle_choice_data.csv",
-  "battery_choice_data.csv"
-))
+data_variable <- data_variable %>%
+  select(
+    psid,
+    ends_with("_num"),
+    ends_with("_cate"),
+    starts_with("ATT_"),
+    starts_with("FA_"),
+    starts_with("knowledge_"),
+    Veh_hh_fuel,
+    starts_with("EV_")
+  )
 
-data <- data %>%
-  filter(respID %in% choice_data$respID) %>%
-  select(-starts_with("time_"))
+# head(data)
+
+# glimpse(data)
+## ----Processing----
+data_dce <- data_dce %>%
+  mutate(
+    price = price / 10000, # 0.4-6
+    range_bev = range_bev / 100, # 0.5 - 2.5
+    range_phev = range_phev / 10, # 1 - 4
+    mileage = mileage * 10, # 2 - 6
+    age = age * 10, # 2 - 8
+    operating_cost = operating_cost # 3 - 18,
+  ) %>%
+  select(-range, -operating_cost_text, -session_id, -vehicle_type)
 
 
 # ----Apollo----
