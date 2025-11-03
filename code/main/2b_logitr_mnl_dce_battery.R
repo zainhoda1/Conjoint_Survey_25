@@ -133,7 +133,7 @@ wtpCompare(mnl_pref, mnl_wtp, scalePar = "veh_price")
 ## --- WTP Space ----
 ### --- full ----
 mxl_wtp_full <- logitr(
-  data = data,
+  data = data_dce_dummy,
   outcome = "choice",
   obsID = "obs_id",
   pars = c(
@@ -152,11 +152,23 @@ mxl_wtp_full <- logitr(
     battery_refurbishpackreplace = "n",
     battery_refurbishcellreplace = "n"
   ),
-  numMultiStarts = 10,
+  numMultiStarts = 100,
   numCores = 1
 )
 
 summary(mxl_wtp_full)
+
+save(
+  mxl_wtp_full,
+  file = file.path(
+    here(),
+    "code",
+    "main",
+    "model_output",
+    "logitr",
+    "mxl_wtp_full.RData"
+  )
+)
 
 ### --- reduced ----
 mxl_wtp_reduced <- logitr(

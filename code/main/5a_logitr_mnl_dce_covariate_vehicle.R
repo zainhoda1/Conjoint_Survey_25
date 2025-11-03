@@ -117,43 +117,10 @@ data_covariate <- cbc_encode(
 # Estimate MNL model
 
 # ---- ****DCE ONLY**** ----
-# ---- Estimate MNL model (range:yr0 + degradation) ----
-## --- Preference Space ----
-mnl_pref <- logitr(
-  data = data_dce,
-  outcome = "choice",
-  obsID = "obsID",
-  pars = c(
-    "price",
-    "mileage",
-    "age",
-    "operating_cost",
-    "range_bev",
-    "range_phev",
-    "powertrainbev",
-    "powertrainphev",
-    "powertrainhev",
-    "no_choice"
-  )
-)
-
-
-# View summary of results
-summary(mnl_pref)
-
-# Check the 1st order condition: Is the gradient at the solution zero?
-mnl_pref$gradient
-
-# 2nd order condition: Is the hessian negative definite?
-# (If all the eigenvalues are negative, the hessian is negative definite)
-eigen(mnl_pref$hessian)$values
-
-wtp(mnl_pref, scalePar = "price")
-
 ## --- WTP Space ----
 
 mnl_wtp <- logitr(
-  data = data_dce,
+  data = data_dce_dummy,
   outcome = "choice",
   obsID = "obsID",
   pars = c(
@@ -180,80 +147,6 @@ mnl_wtp$gradient
 # (If all the eigenvalues are negative, the hessian is negative definite)
 eigen(mnl_wtp$hessian)$values
 
-## ---- WTP comparison ----
-wtpCompare(mnl_pref, mnl_wtp, scalePar = "price")
-
-
-# ---- Estimate MXL model ----
-## --- WTP Space ----
-### --- full ----
-mxl_wtp_full <- logitr(
-  data = data_dce,
-  outcome = "choice",
-  obsID = "obsID",
-  pars = c(
-    "mileage",
-    "age",
-    "operating_cost",
-    "range_bev",
-    "range_phev",
-    "powertrainbev",
-    "powertrainphev",
-    "powertrainhev",
-    "no_choice"
-  ),
-  scalePar = "price",
-  randPars = c(
-    mileage = "n",
-    age = "n",
-    operating_cost = "n",
-    range_bev = "n",
-    range_phev = "n",
-    powertrainbev = "n",
-    powertrainphev = "n",
-    powertrainhev = "n"
-  ),
-  numMultiStarts = 10,
-  numCores = 1
-)
-
-# View summary of results
-summary(mxl_wtp_full)
-
-### --- No range ----
-mxl_wtp_reduced <- logitr(
-  data = data_dce,
-  outcome = "choice",
-  obsID = "obsID",
-  pars = c(
-    "mileage",
-    "age",
-    "operating_cost",
-    # "range_bev",
-    # "range_phev",
-    "powertrainbev",
-    "powertrainphev",
-    "powertrainhev",
-    "no_choice"
-  ),
-  scalePar = "price",
-  randPars = c(
-    mileage = "n",
-    age = "n",
-    operating_cost = "n",
-    # range_bev = "n",
-    # range_phev = "n",
-    powertrainbev = "n",
-    powertrainphev = "n",
-    powertrainhev = "n"
-  ),
-  numMultiStarts = 10,
-  numCores = 1
-)
-
-# View summary of results
-summary(mxl_wtp_reduced)
-
 # ---- ****DCE ONLY + Covariates**** ----
 ## --- WTP Space ----
 ### --- FA_EV ----
@@ -274,14 +167,14 @@ mnl_wtp_FA_EV <- logitr(
     "no_choice",
     # EV attitudes
     "FA_EV_benefit",
-    "FA_EV_anxiety"
+    "FA_EV_anxiety",
 
     # "knowledge_gas1",
     # "knowledge_gas2"
     # "knowledge_plugin1",
     # "knowledge_plugin2",
     # "knowledge_ev1",
-    # "knowledge_subsidy1"
+    "knowledge_subsidy1"
   ),
   scalePar = "price",
   numMultiStarts = 50,
