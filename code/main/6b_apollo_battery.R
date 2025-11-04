@@ -80,12 +80,13 @@ database <- data_covariate %>%
 #### 2. Parameter starting values
 apollo_beta <- c(
   b_mileage = 0,
+  b_price = 0,
   b_range_year0 = 0,
   b_degradation = 0,
   b_packreplace = 0,
   b_cellreplace = 0,
-  asc_no_choice = 0,
-  b_price = 0 # price coefficient (scale parameter)
+  asc_no_choice = 0
+  # price coefficient (scale parameter)
 )
 
 #### 3. No random parameters (simple MNL)
@@ -112,11 +113,11 @@ apollo_probabilities <- function(
   V[["alt1"]] <-
     b_mileage *
     veh_mileage +
+    b_price * veh_price +
     b_range_year0 * battery_range_year0 +
     b_degradation * battery_degradation +
     b_packreplace * battery_refurbishpackreplace +
-    b_cellreplace * battery_refurbishcellreplace +
-    b_price * veh_price
+    b_cellreplace * battery_refurbishcellreplace
 
   V[["alt2"]] <-
     b_mileage *
@@ -217,7 +218,7 @@ apollo_beta <- c(
   wtp_packreplace = 0,
   wtp_cellreplace = 0,
   asc_no_choice = 0,
-  b_price = -1 # price coefficient (scale parameter)
+  b_price = 1 # price coefficient (scale parameter)
 )
 
 #### 3. No random parameters (simple MNL)
@@ -268,7 +269,7 @@ apollo_probabilities <- function(
       wtp_packreplace * battery_refurbishpackreplace +
       wtp_cellreplace * battery_refurbishcellreplace)
 
-  V[["no_choice"]] <- asc_no_choice
+  V[["no_choice"]] <- b_price * asc_no_choice
 
   # Model settings
   mnl_settings <- list(
