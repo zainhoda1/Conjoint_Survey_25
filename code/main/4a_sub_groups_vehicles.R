@@ -18,12 +18,14 @@ survey <- read_parquet(here(
 ))
 
 
+
 # Compute time values for each page
 data <- data_raw 
   # Select important columns
   # select(
   #   session_id,
   #   time_start,
+
   #   time_min_total,
   #   time_min_vehicle_cbc,
   #   respID,
@@ -162,10 +164,45 @@ choice_data %>%
   group_by( max_subsidy) %>% 
   count()
 
-grouping <- 'max_subsidy'
+choice_data %>% 
+  group_by( next_veh_fuel_new_bev) %>% 
+  count()
+
+choice_data %>% 
+  group_by( next_veh_fuel_used_bev) %>% 
+  count()
+
+
+########  selecting those who chose BEV at least once:
+temp1 <- choice_data %>% 
+  select(qID, choice, respID, psid, session_id, altID, vehicle_type) 
+
+temp2 <- survey %>% 
+  select (profileID, respID, qID, powertrain, vehicle_type, altID) 
+
+temp3 <- temp1 %>%
+  left_join(temp2, by = c("vehicle_type", "respID", "qID", 'altID')) 
+
+temp4 <- temp3 %>%
+  group_by(respID) %>%
+  summarize(count = sum(choice == 1 & powertrain == "bev")) %>% 
+  filter(count>0) 
+
+
+selected_bev_list <- temp4$respID
+
+
+##################
+
+grouping <- 'next_vehicle_bev'
 
 positive_group <-  choice_data %>% 
-  filter(max_subsidy == 7500) 
+  #filter(max_subsidy == 7500) %>% 
+  #filter(respID %in%  selected_bev_list) %>% 
+  filter((next_veh_fuel_new_bev %in% c('very_likely','somewhat_likely' )) | (next_veh_fuel_new_bev %in% c('very_likely','somewhat_likely')) ) 
+
+
+
 
   
   data <- positive_group %>%
@@ -260,7 +297,9 @@ positive_group <-  choice_data %>%
   
   
   negative_group <-  choice_data %>% 
-    filter(!max_subsidy == 7500) 
+    #filter(max_subsidy == 7500) %>% 
+    #filter(!respID %in%  selected_bev_list)
+  filter((!next_veh_fuel_new_bev %in% c('very_likely','somewhat_likely' )) & (!next_veh_fuel_new_bev %in% c('very_likely','somewhat_likely' )) )
   
   
   data <- negative_group %>%
@@ -362,7 +401,7 @@ positive_group <-  choice_data %>%
   print(paste0("Willingness to pay for models based on ", grouping ))
   print(paste0("positive group : ",wtp_pos_group))
   print(paste0("negative group : ",wtp_neg_group))
-  
+``  
   
         
         
