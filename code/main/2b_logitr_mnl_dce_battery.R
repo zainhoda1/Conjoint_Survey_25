@@ -324,19 +324,38 @@ comparison <- all_results %>%
   left_join(full_coefs, by = "term", suffix = c("_loo", "_full")) %>%
   mutate(
     diff_estimate = round(estimate_loo - estimate_full, 5),
-    diff_std = round(std.error_loo - std.error_full, 5)
+    diff_std = round(std.error_loo - std.error_full, 5),
+    diff_estimate_perc = round(
+      ((estimate_loo - estimate_full) / estimate_full) * 100,
+      3
+    ),
+    diff_std_perc = round(
+      ((std.error_loo - std.error_full) / std.error_full) * 100,
+      3
+    )
   )
 
 # 6. Identify respondents who change results substantially
 influential <- comparison %>%
   group_by(resp_removed) %>%
   summarise(
-    max_abs_coef_change = max(abs(diff_estimate), na.rm = TRUE),
-    max_abs_se_change = max(abs(diff_std), na.rm = TRUE)
+    coef_change = max(abs(diff_estimate), na.rm = TRUE),
+    se_change = max(abs(diff_std), na.rm = TRUE)
   ) %>%
   arrange(desc(max_abs_coef_change))
 
 head(influential)
+
+write_csv(
+  comparison,
+  here(
+    "code",
+    "main",
+    "model_output",
+    "logitr",
+    "dce_influential_comparison.csv"
+  )
+)
 
 write_csv(
   influential,
