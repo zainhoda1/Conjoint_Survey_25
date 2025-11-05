@@ -38,6 +38,17 @@ data_dce <- data_dce %>%
     battery_range_year8 = battery_range_year8 / 100, # 0.5 - 2
     battery_degradation = (battery_degradation * 100) # percentage
   ) %>%
+  mutate(
+    veh_price_cate = case_when(
+      is.na(veh_price) ~ NA,
+      veh_price < 1.5 ~ "price_1",
+      veh_price < 2.5 ~ "price_2",
+      veh_price < 3.5 ~ "price_3",
+      veh_price < 4.5 ~ "price_4",
+      veh_price < 5.5 ~ "price_5",
+      T ~ "price_6"
+    )
+  ) %>%
   select(
     -session_id,
     -starts_with("battery_health"),
@@ -48,13 +59,21 @@ data_dce <- data_dce %>%
 
 ## ---- Dummy encode----
 data_dce_dummy <- cbc_encode(
-  data_dce %>% select(-psid),
+  data_dce %>% select(-c(psid, veh_price)),
   coding = 'dummy',
-  ref_levels = list(battery_refurbish = 'original')
+  ref_levels = list(
+    battery_refurbish = 'original',
+    veh_price_cate = 'price_1'
+  )
 ) %>%
   as.data.frame()
 
-data_dce_dummy <- cbind(data_dce_dummy, data_dce %>% select(psid))
+data_dce_dummy <- cbind(
+  data_dce_dummy,
+  data_dce %>%
+    select(psid, veh_price) %>%
+    mutate(veh_price = case_when(is.na(veh_price) ~ 0, T ~ veh_price))
+)
 
 data_covariate <- data_dce_dummy %>%
   left_join(data_variable, by = "psid")
@@ -119,16 +138,76 @@ mnl_pref <- logitr(
 
 # View summary of results
 summary(mnl_pref)
-
 # Check the 1st order condition: Is the gradient at the solution zero?
 mnl_pref$gradient
-
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)
 eigen(mnl_pref$hessian)$values
 
 ### ---- WTP calculation ----
 wtp(mnl_pref, scalePar = "veh_price")
+
+## ---- Price categories----
+
+mnl_pref_pricecate <- logitr(
+  data = data_dce_dummy,
+  outcome = "choice",
+  obsID = "obsID",
+  pars = c(
+    "veh_mileage",
+    "veh_price_cateprice_2",
+    "veh_price_cateprice_3",
+    "veh_price_cateprice_4",
+    "veh_price_cateprice_5",
+    "veh_price_cateprice_6",
+    "battery_range_year0",
+    "battery_degradation",
+    "battery_refurbishpackreplace",
+    "battery_refurbishcellreplace",
+    "no_choice"
+  ),
+  numMultiStarts = 50,
+  numCores = 1
+)
+
+# View summary of results
+summary(mnl_pref_pricecate)
+# plot
+veh_price_coefs_df <- data.frame(
+  coef_name = names(mnl_pref_pricecate$coefficients),
+  estimate = mnl_pref_pricecate$coefficients
+) %>%
+  dplyr::filter(grepl("^veh_price", coef_name)) %>%
+  add_row(coef_name = "veh_price_cateprice_1", estimate = 0) %>%
+  mutate(
+    coef_name = c(
+      "price2_15_25k",
+      "price3_25_35k",
+      "price4_35_45k",
+      "price5_45_55k",
+      "price6_55_65k",
+      "price1_4_15k"
+    )
+  )
+
+veh_price_coefs_df
+
+
+ggplot(veh_price_coefs_df, aes(x = coef_name, y = estimate, group = 1)) +
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "blue", size = 3) +
+  geom_text(aes(label = round(estimate, 2)), vjust = -0.8, size = 3) +
+  labs(
+    title = "Coefficients in Preference Space (Battery Survey)",
+    x = "Vehicle Price Category",
+    y = "Coefficient"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.minor = element_blank()
+  )
 
 ## --- WTP Space ----
 ### --- Only DCE ----
@@ -162,6 +241,114 @@ mnl_wtp_coef <- mnl_wtp$coefficients
 
 ## ---- WTP comparison ----
 wtpCompare(mnl_pref, mnl_wtp, scalePar = "veh_price")
+
+## ---- Detecting outlier ----
+#leave-one-out influence analysis (similar to jackknife diagnostics)
+# 1. Run full model
+full_model <- logitr(
+  data = data_dce_dummy,
+  outcome = "choice",
+  obsID = "obsID",
+  pars = c(
+    "veh_mileage",
+    "battery_range_year0",
+    "battery_degradation",
+    "battery_refurbishpackreplace",
+    "battery_refurbishcellreplace",
+    "no_choice"
+  ),
+  scalePar = "veh_price",
+  numMultiStarts = 10,
+  numCores = 1
+)
+
+full_summary <- broom::tidy(full_model)
+full_coefs <- full_summary %>% select(term, estimate, std.error)
+
+# 2. Get unique respondent IDs
+resp_ids <- unique(data_dce_dummy$respID)
+
+# 3. Loop over respondents, re-run model without each
+results_list <- list()
+
+for (i in seq_along(resp_ids)) {
+  resp_to_remove <- resp_ids[i]
+  # cat("Running model without respondent:", resp_to_remove, "(", i, "of", length(resp_ids), ")\n")
+
+  # Subset data
+  data_subset <- data_dce_dummy %>% filter(respID != resp_to_remove)
+
+  model <- tryCatch(
+    {
+      model <- logitr(
+        data = data_dce_dummy,
+        outcome = "choice",
+        obsID = "obsID",
+        pars = c(
+          "veh_mileage",
+          "battery_range_year0",
+          "battery_degradation",
+          "battery_refurbishpackreplace",
+          "battery_refurbishcellreplace",
+          "no_choice"
+        ),
+        scalePar = "veh_price",
+        numMultiStarts = 10,
+        numCores = 1
+      )
+    },
+    error = function(e) NULL
+  )
+
+  # Skip failed models
+  if (is.null(model)) {
+    next
+  }
+
+  # Extract coefficients and SEs
+
+  tidy_model <- broom::tidy(model)
+
+  results_list[[i]] <- tidy_model %>%
+    mutate(
+      resp_removed = resp_to_remove
+    ) %>%
+    select(resp_removed, term, estimate, std.error)
+}
+
+# 4. Combine all results
+all_results <- bind_rows(results_list)
+
+# 5. Compare each coefficient to full-sample estimates
+comparison <- all_results %>%
+  left_join(full_coefs, by = "term", suffix = c("_loo", "_full")) %>%
+  mutate(
+    diff_estimate = round(estimate_loo - estimate_full, 5),
+    diff_std = round(std.error_loo - std.error_full, 5)
+  )
+
+# 6. Identify respondents who change results substantially
+influential <- comparison %>%
+  group_by(resp_removed) %>%
+  summarise(
+    max_abs_coef_change = max(abs(diff_estimate), na.rm = TRUE),
+    max_abs_se_change = max(abs(diff_std), na.rm = TRUE)
+  ) %>%
+  arrange(desc(max_abs_coef_change))
+
+head(influential)
+
+write_csv(
+  influential,
+  here(
+    "code",
+    "main",
+    "model_output",
+    "logitr",
+    "dce_influential_respID.csv"
+  )
+)
+
 
 ## --- Subgroup comparison ----
 ### ---- Define subgroups as a named list of filters ----

@@ -39,19 +39,35 @@ data_dce <- data_dce %>%
     age = age * 10, # 2 - 8
     operating_cost = operating_cost # 3 - 18,
   ) %>%
+  mutate(
+    veh_price_cate = case_when(
+      is.na(price) ~ NA,
+      price < 1.5 ~ "price_1",
+      price < 2.5 ~ "price_2",
+      price < 3.5 ~ "price_3",
+      price < 4.5 ~ "price_4",
+      price < 5.5 ~ "price_5",
+      T ~ "price_6",
+    )
+  ) %>%
   select(-range, -operating_cost_text, -session_id, -vehicle_type)
 
 ## ----Dummy encode----
 
 data_dce_dummy <- cbc_encode(
   data_dce %>%
-    select(!psid),
+    select(!c(psid, price)),
   coding = 'dummy',
-  ref_levels = list(powertrain = 'gas')
+  ref_levels = list(powertrain = 'gas', veh_price_cate = 'price_1')
 ) %>%
   as.data.frame()
 
-data_dce_dummy <- cbind(data_dce_dummy, data_dce %>% select(psid))
+data_dce_dummy <- cbind(
+  data_dce_dummy,
+  data_dce %>%
+    select(psid, price) %>%
+    mutate(price = case_when(is.na(price) ~ 0, T ~ price))
+)
 
 data_covariate <- data_dce_dummy %>%
   left_join(data_variable, by = "psid")
@@ -72,19 +88,6 @@ data_covariate <- cbc_encode(
       knowledge_subsidy = as.character(knowledge_subsidy)
     ),
   coding = 'dummy',
-  # categorical_attrs =
-  #   c(
-  #   "Veh_hh_fuel",
-  #   "gender_cate",
-  #   "ethnicity_cate"
-  #   # names(select(
-  #   #   data_covariate,
-  #   #   ends_with("_cate"),
-  #   #   starts_with("ATT_"),
-  #   #   starts_with("knowledge_"),
-  #   #   starts_with("EV_")
-  #   # ))
-  # )),
   ref_levels = list(
     gender_cate = 'female',
     ethnicity_cate = 'hispanic',
@@ -120,7 +123,7 @@ data_covariate <- cbc_encode(
 # ---- Estimate MNL model (range:yr0 + degradation) ----
 ## --- Preference Space ----
 mnl_pref <- logitr(
-  data = data_dce,
+  data = data_dce_dummy,
   outcome = "choice",
   obsID = "obsID",
   pars = c(
@@ -150,10 +153,72 @@ eigen(mnl_pref$hessian)$values
 
 wtp(mnl_pref, scalePar = "price")
 
+### --- Price categories ----
+mnl_pref_pricecate <- logitr(
+  data = data_dce_dummy,
+  outcome = "choice",
+  obsID = "obsID",
+  pars = c(
+    "veh_price_cateprice_2",
+    "veh_price_cateprice_3",
+    "veh_price_cateprice_4",
+    "veh_price_cateprice_5",
+    "veh_price_cateprice_6",
+    "mileage",
+    "age",
+    "operating_cost",
+    "range_bev",
+    "range_phev",
+    "powertrainbev",
+    "powertrainphev",
+    "powertrainhev",
+    "no_choice"
+  )
+)
+
+summary(mnl_pref_pricecate)
+# plot
+veh_price_coefs_df <- data.frame(
+  coef_name = names(mnl_pref_pricecate$coefficients),
+  estimate = mnl_pref_pricecate$coefficients
+) %>%
+  dplyr::filter(grepl("^veh_price", coef_name)) %>%
+  add_row(coef_name = "veh_price_cateprice_1", estimate = 0) %>%
+  mutate(
+    coef_name = c(
+      "price2_15_25k",
+      "price3_25_35k",
+      "price4_35_45k",
+      "price5_45_55k",
+      "price6_55_65k",
+      "price1_4_15k"
+    )
+  )
+
+veh_price_coefs_df
+
+
+ggplot(veh_price_coefs_df, aes(x = coef_name, y = estimate, group = 1)) +
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "blue", size = 3) +
+  geom_text(aes(label = round(estimate, 2)), vjust = -0.8, size = 3) +
+  labs(
+    title = "Coefficients in Preference Space (Vehicle Survey)",
+    x = "Vehicle Price Category",
+    y = "Coefficient"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.minor = element_blank()
+  )
+
+
 ## --- WTP Space ----
 
 mnl_wtp <- logitr(
-  data = data_dce,
+  data = data_dce_dummy,
   outcome = "choice",
   obsID = "obsID",
   pars = c(
@@ -188,7 +253,7 @@ wtpCompare(mnl_pref, mnl_wtp, scalePar = "price")
 ## --- WTP Space ----
 ### --- full ----
 mxl_wtp_full <- logitr(
-  data = data_dce,
+  data = data_dce_dummy,
   outcome = "choice",
   obsID = "obsID",
   pars = c(
@@ -219,37 +284,3 @@ mxl_wtp_full <- logitr(
 
 # View summary of results
 summary(mxl_wtp_full)
-
-### --- No range ----
-mxl_wtp_reduced <- logitr(
-  data = data_dce,
-  outcome = "choice",
-  obsID = "obsID",
-  pars = c(
-    "mileage",
-    "age",
-    "operating_cost",
-    # "range_bev",
-    # "range_phev",
-    "powertrainbev",
-    "powertrainphev",
-    "powertrainhev",
-    "no_choice"
-  ),
-  scalePar = "price",
-  randPars = c(
-    mileage = "n",
-    age = "n",
-    operating_cost = "n",
-    # range_bev = "n",
-    # range_phev = "n",
-    powertrainbev = "n",
-    powertrainphev = "n",
-    powertrainhev = "n"
-  ),
-  numMultiStarts = 10,
-  numCores = 1
-)
-
-# View summary of results
-summary(mxl_wtp_reduced)
