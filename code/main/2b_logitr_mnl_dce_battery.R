@@ -339,8 +339,8 @@ comparison <- all_results %>%
 influential <- comparison %>%
   group_by(resp_removed) %>%
   summarise(
-    coef_change = max(abs(diff_estimate), na.rm = TRUE),
-    se_change = max(abs(diff_std), na.rm = TRUE)
+    max_abs_coef_change = max(abs(diff_estimate), na.rm = TRUE),
+    max_abs_se_change = max(abs(diff_std), na.rm = TRUE)
   ) %>%
   arrange(desc(max_abs_coef_change))
 
@@ -353,7 +353,7 @@ write_csv(
     "main",
     "model_output",
     "logitr",
-    "dce_influential_comparison.csv"
+    "dce_coef_se_comparison_battery.csv"
   )
 )
 
@@ -364,7 +364,7 @@ write_csv(
     "main",
     "model_output",
     "logitr",
-    "dce_influential_respID.csv"
+    "dce_influential_respID_battery.csv"
   )
 )
 

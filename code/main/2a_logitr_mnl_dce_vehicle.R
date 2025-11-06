@@ -248,6 +248,137 @@ eigen(mnl_wtp$hessian)$values
 ## ---- WTP comparison ----
 wtpCompare(mnl_pref, mnl_wtp, scalePar = "price")
 
+## ---- Detecting outlier ----
+#leave-one-out influence analysis (similar to jackknife diagnostics)
+# 1. Run full model
+full_model <- logitr(
+  data = data_dce_dummy,
+  outcome = "choice",
+  obsID = "obsID",
+  pars = c(
+    "mileage",
+    "age",
+    "operating_cost",
+    "range_bev",
+    "range_phev",
+    "powertrainbev",
+    "powertrainphev",
+    "powertrainhev",
+    "no_choice"
+  ),
+  scalePar = "price",
+  numMultiStarts = 10,
+  numCores = 1
+)
+
+full_summary <- broom::tidy(full_model)
+full_coefs <- full_summary %>% select(term, estimate, std.error)
+
+# 2. Get unique respondent IDs
+resp_ids <- unique(data_dce_dummy$respID)
+
+# 3. Loop over respondents, re-run model without each
+results_list <- list()
+
+for (i in seq_along(resp_ids)) {
+  resp_to_remove <- resp_ids[i]
+  # cat("Running model without respondent:", resp_to_remove, "(", i, "of", length(resp_ids), ")\n")
+
+  # Subset data
+  data_subset <- data_dce_dummy %>% filter(respID != resp_to_remove)
+
+  model <- tryCatch(
+    {
+      model <- logitr(
+        data = data_dce_dummy,
+        outcome = "choice",
+        obsID = "obsID",
+        pars = c(
+          "mileage",
+          "age",
+          "operating_cost",
+          "range_bev",
+          "range_phev",
+          "powertrainbev",
+          "powertrainphev",
+          "powertrainhev",
+          "no_choice"
+        ),
+        scalePar = "price",
+        numMultiStarts = 10,
+        numCores = 1
+      )
+    },
+    error = function(e) NULL
+  )
+
+  # Skip failed models
+  if (is.null(model)) {
+    next
+  }
+
+  # Extract coefficients and SEs
+
+  tidy_model <- broom::tidy(model)
+
+  results_list[[i]] <- tidy_model %>%
+    mutate(
+      resp_removed = resp_to_remove
+    ) %>%
+    select(resp_removed, term, estimate, std.error)
+}
+
+# 4. Combine all results
+all_results <- bind_rows(results_list)
+
+# 5. Compare each coefficient to full-sample estimates
+comparison <- all_results %>%
+  left_join(full_coefs, by = "term", suffix = c("_loo", "_full")) %>%
+  mutate(
+    diff_estimate = round(estimate_loo - estimate_full, 5),
+    diff_std = round(std.error_loo - std.error_full, 5),
+    diff_estimate_perc = round(
+      ((estimate_loo - estimate_full) / estimate_full) * 100,
+      3
+    ),
+    diff_std_perc = round(
+      ((std.error_loo - std.error_full) / std.error_full) * 100,
+      3
+    )
+  )
+
+# 6. Identify respondents who change results substantially
+influential <- comparison %>%
+  group_by(resp_removed) %>%
+  summarise(
+    max_abs_coef_change = max(abs(diff_estimate), na.rm = TRUE),
+    max_abs_se_change = max(abs(diff_std), na.rm = TRUE)
+  ) %>%
+  arrange(desc(max_abs_coef_change))
+
+head(influential)
+
+write_csv(
+  comparison,
+  here(
+    "code",
+    "main",
+    "model_output",
+    "logitr",
+    "dce_coef_se_comparison_vehicle.csv"
+  )
+)
+
+write_csv(
+  influential,
+  here(
+    "code",
+    "main",
+    "model_output",
+    "logitr",
+    "dce_influential_respID_vehicle.csv"
+  )
+)
 
 # ---- Estimate MXL model ----
 ## --- WTP Space ----
