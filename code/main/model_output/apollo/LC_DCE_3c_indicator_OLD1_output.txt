@@ -1,0 +1,1631 @@
+Model run by xnw17 using Apollo 0.3.4 on R 4.4.2 for Darwin.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : LC_DCE_3c_indicator
+Model description                           : LC model with 3 classes with indicator (ATT and knowledge)
+Model run at                                : 2025-11-07 14:10:15.269944
+Estimation method                           : bgw
+Model diagnosis                             : Singular convergence
+Number of individuals                       : 372
+Number of rows in database                  : 2232
+Number of modelled outcomes                 : 2232
+
+Number of cores used                        :  2 
+Model without mixing
+
+LL(start)                                   : -3094.21
+LL (whole model) at equal shares, LL(0)     : -3094.21
+LL (whole model) at observed shares, LL(C)  : -2987.63
+LL(final, whole model)                      : -2592.19
+Rho-squared vs equal shares                  :  0.1622 
+Adj.Rho-squared vs equal shares              :  0.1525 
+Rho-squared vs observed shares               :  0.1324 
+Adj.Rho-squared vs observed shares           :  0.1253 
+AIC                                         :  5244.38 
+BIC                                         :  5415.7 
+
+LL(0,Class_1)                    : -3094.21
+LL(final,Class_1)                : -12819.72
+LL(0,Class_2)                    : -3094.21
+LL(final,Class_2)                : -3797.55
+LL(0,Class_3)                    : -3094.21
+LL(final,Class_3)                : -2850.04
+
+Estimated parameters                        : 30
+Time taken (hh:mm:ss)                       :  00:00:6.36 
+     pre-estimation                         :  00:00:2.58 
+     estimation                             :  00:00:3.76 
+     post-estimation                        :  00:00:0.03 
+Iterations                                  :  140 (Singular convergence) 
+
+Unconstrained optimisation.
+
+Estimates:
+                        Estimate        s.e.   t.rat.(0)  p(2-sided)    Rob.s.e.
+asc_no_choice            0.00000          NA          NA          NA          NA
+b_mileage_a              2.27608          NA          NA          NA          NA
+b_range_year0_a         -0.16122          NA          NA          NA          NA
+b_degradation_a         -2.58931          NA          NA          NA          NA
+b_packreplace_a          5.53313          NA          NA          NA          NA
+b_cellreplace_a          0.22385          NA          NA          NA          NA
+b_price_a               -0.88962          NA          NA          NA          NA
+b_mileage_b             -0.21409          NA          NA          NA          NA
+b_range_year0_b          0.77114          NA          NA          NA          NA
+b_degradation_b         -0.21476          NA          NA          NA          NA
+b_packreplace_b         -1.57336          NA          NA          NA          NA
+b_cellreplace_b         -1.36845          NA          NA          NA          NA
+b_price_b               -0.35117          NA          NA          NA          NA
+b_mileage_c             -0.05085          NA          NA          NA          NA
+b_range_year0_c          0.93904          NA          NA          NA          NA
+b_degradation_c         -0.21401          NA          NA          NA          NA
+b_packreplace_c         -0.01638          NA          NA          NA          NA
+b_cellreplace_c         -0.08834          NA          NA          NA          NA
+b_price_c               -0.01981          NA          NA          NA          NA
+delta_a                  0.00000          NA          NA          NA          NA
+delta_b                -31.06352          NA          NA          NA          NA
+delta_c                -31.56854          NA          NA          NA          NA
+gamma_used_bev_a         0.00000          NA          NA          NA          NA
+gamma_EVB_environ_a      0.00000          NA          NA          NA          NA
+gamma_EVB_function_a     0.00000          NA          NA          NA          NA
+gamma_EV_benefit_a       0.00000          NA          NA          NA          NA
+gamma_EV_anxiety_a       0.00000          NA          NA          NA          NA
+gamma_used_bev_b        30.95945          NA          NA          NA          NA
+gamma_EVB_environ_b      0.12236          NA          NA          NA          NA
+gamma_EVB_function_b     0.42948          NA          NA          NA          NA
+gamma_EV_benefit_b      -0.56153          NA          NA          NA          NA
+gamma_EV_anxiety_b      -0.78790          NA          NA          NA          NA
+gamma_used_bev_c        31.45463          NA          NA          NA          NA
+gamma_EVB_environ_c      0.63271          NA          NA          NA          NA
+gamma_EVB_function_c     0.18039          NA          NA          NA          NA
+gamma_EV_benefit_c      -0.43684          NA          NA          NA          NA
+gamma_EV_anxiety_c      -1.18418          NA          NA          NA          NA
+                     Rob.t.rat.(0)  p(2-sided)
+asc_no_choice                   NA          NA
+b_mileage_a                     NA          NA
+b_range_year0_a                 NA          NA
+b_degradation_a                 NA          NA
+b_packreplace_a                 NA          NA
+b_cellreplace_a                 NA          NA
+b_price_a                       NA          NA
+b_mileage_b                     NA          NA
+b_range_year0_b                 NA          NA
+b_degradation_b                 NA          NA
+b_packreplace_b                 NA          NA
+b_cellreplace_b                 NA          NA
+b_price_b                       NA          NA
+b_mileage_c                     NA          NA
+b_range_year0_c                 NA          NA
+b_degradation_c                 NA          NA
+b_packreplace_c                 NA          NA
+b_cellreplace_c                 NA          NA
+b_price_c                       NA          NA
+delta_a                         NA          NA
+delta_b                         NA          NA
+delta_c                         NA          NA
+gamma_used_bev_a                NA          NA
+gamma_EVB_environ_a             NA          NA
+gamma_EVB_function_a            NA          NA
+gamma_EV_benefit_a              NA          NA
+gamma_EV_anxiety_a              NA          NA
+gamma_used_bev_b                NA          NA
+gamma_EVB_environ_b             NA          NA
+gamma_EVB_function_b            NA          NA
+gamma_EV_benefit_b              NA          NA
+gamma_EV_anxiety_b              NA          NA
+gamma_used_bev_c                NA          NA
+gamma_EVB_environ_c             NA          NA
+gamma_EVB_function_c            NA          NA
+gamma_EV_benefit_c              NA          NA
+gamma_EV_anxiety_c              NA          NA
+
+
+Summary of class allocation for model component :
+         Mean prob.
+Class_1     0.02204
+Class_2     0.17920
+Class_3     0.79877
+
+
+Overview of choices for MNL model component Class_1:
+                                    alt1    alt2    alt3 no_choice
+Times available                  2232.00 2232.00 2232.00   2232.00
+Times chosen                      615.00  669.00  666.00    282.00
+Percentage chosen overall          27.55   29.97   29.84     12.63
+Percentage chosen when available   27.55   29.97   29.84     12.63
+
+
+
+Overview of choices for MNL model component Class_2:
+                                    alt1    alt2    alt3 no_choice
+Times available                  2232.00 2232.00 2232.00   2232.00
+Times chosen                      615.00  669.00  666.00    282.00
+Percentage chosen overall          27.55   29.97   29.84     12.63
+Percentage chosen when available   27.55   29.97   29.84     12.63
+
+
+
+Overview of choices for MNL model component Class_3:
+                                    alt1    alt2    alt3 no_choice
+Times available                  2232.00 2232.00 2232.00   2232.00
+Times chosen                      615.00  669.00  666.00    282.00
+Percentage chosen overall          27.55   29.97   29.84     12.63
+Percentage chosen when available   27.55   29.97   29.84     12.63
+
+
+
+Classical covariance matrix:
+                              b_mileage_a      b_range_year0_a      b_degradation_a
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_a      b_cellreplace_a            b_price_a
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                              b_mileage_b      b_range_year0_b      b_degradation_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_b      b_cellreplace_b            b_price_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                              b_mileage_c      b_range_year0_c      b_degradation_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_c      b_cellreplace_c            b_price_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                                  delta_b              delta_c     gamma_used_bev_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                      gamma_EVB_environ_b gamma_EVB_function_b   gamma_EV_benefit_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                       gamma_EV_anxiety_b     gamma_used_bev_c  gamma_EVB_environ_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                     gamma_EVB_function_c   gamma_EV_benefit_c   gamma_EV_anxiety_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+
+Robust covariance matrix:
+                              b_mileage_a      b_range_year0_a      b_degradation_a
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_a      b_cellreplace_a            b_price_a
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                              b_mileage_b      b_range_year0_b      b_degradation_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_b      b_cellreplace_b            b_price_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                              b_mileage_c      b_range_year0_c      b_degradation_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_c      b_cellreplace_c            b_price_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                                  delta_b              delta_c     gamma_used_bev_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                      gamma_EVB_environ_b gamma_EVB_function_b   gamma_EV_benefit_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                       gamma_EV_anxiety_b     gamma_used_bev_c  gamma_EVB_environ_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                     gamma_EVB_function_c   gamma_EV_benefit_c   gamma_EV_anxiety_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+
+Classical correlation matrix:
+                              b_mileage_a      b_range_year0_a      b_degradation_a
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_a      b_cellreplace_a            b_price_a
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                              b_mileage_b      b_range_year0_b      b_degradation_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_b      b_cellreplace_b            b_price_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                              b_mileage_c      b_range_year0_c      b_degradation_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_c      b_cellreplace_c            b_price_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                                  delta_b              delta_c     gamma_used_bev_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                      gamma_EVB_environ_b gamma_EVB_function_b   gamma_EV_benefit_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                       gamma_EV_anxiety_b     gamma_used_bev_c  gamma_EVB_environ_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                     gamma_EVB_function_c   gamma_EV_benefit_c   gamma_EV_anxiety_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+
+Robust correlation matrix:
+                              b_mileage_a      b_range_year0_a      b_degradation_a
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_a      b_cellreplace_a            b_price_a
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                              b_mileage_b      b_range_year0_b      b_degradation_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_b      b_cellreplace_b            b_price_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                              b_mileage_c      b_range_year0_c      b_degradation_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                          b_packreplace_c      b_cellreplace_c            b_price_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                                  delta_b              delta_c     gamma_used_bev_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                      gamma_EVB_environ_b gamma_EVB_function_b   gamma_EV_benefit_b
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                       gamma_EV_anxiety_b     gamma_used_bev_c  gamma_EVB_environ_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+                     gamma_EVB_function_c   gamma_EV_benefit_c   gamma_EV_anxiety_c
+b_mileage_a                            NA                   NA                   NA
+b_range_year0_a                        NA                   NA                   NA
+b_degradation_a                        NA                   NA                   NA
+b_packreplace_a                        NA                   NA                   NA
+b_cellreplace_a                        NA                   NA                   NA
+b_price_a                              NA                   NA                   NA
+b_mileage_b                            NA                   NA                   NA
+b_range_year0_b                        NA                   NA                   NA
+b_degradation_b                        NA                   NA                   NA
+b_packreplace_b                        NA                   NA                   NA
+b_cellreplace_b                        NA                   NA                   NA
+b_price_b                              NA                   NA                   NA
+b_mileage_c                            NA                   NA                   NA
+b_range_year0_c                        NA                   NA                   NA
+b_degradation_c                        NA                   NA                   NA
+b_packreplace_c                        NA                   NA                   NA
+b_cellreplace_c                        NA                   NA                   NA
+b_price_c                              NA                   NA                   NA
+delta_b                                NA                   NA                   NA
+delta_c                                NA                   NA                   NA
+gamma_used_bev_b                       NA                   NA                   NA
+gamma_EVB_environ_b                    NA                   NA                   NA
+gamma_EVB_function_b                   NA                   NA                   NA
+gamma_EV_benefit_b                     NA                   NA                   NA
+gamma_EV_anxiety_b                     NA                   NA                   NA
+gamma_used_bev_c                       NA                   NA                   NA
+gamma_EVB_environ_c                    NA                   NA                   NA
+gamma_EVB_function_c                   NA                   NA                   NA
+gamma_EV_benefit_c                     NA                   NA                   NA
+gamma_EV_anxiety_c                     NA                   NA                   NA
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+  ID Avg prob per choice
+ 116           0.1452474
+ 369           0.1463601
+ 225           0.1486006
+ 170           0.1488673
+ 139           0.1578594
+ 167           0.1630813
+  24           0.1689956
+ 269           0.1692257
+ 221           0.1707554
+ 294           0.1709827
+ 207           0.1721826
+ 151           0.1744973
+ 236           0.1752347
+ 238           0.1766025
+ 105           0.1769986
+  29           0.1776475
+ 264           0.1792874
+ 161           0.1808448
+  75           0.1817071
+ 278           0.1826577
+
+Changes in parameter estimates from starting values:
+                         Initial    Estimate  Difference
+asc_no_choice              0.000     0.00000     0.00000
+b_mileage_a                0.000     2.27608     2.27608
+b_range_year0_a            0.000    -0.16122    -0.16122
+b_degradation_a            0.000    -2.58931    -2.58931
+b_packreplace_a            0.000     5.53313     5.53313
+b_cellreplace_a            0.000     0.22385     0.22385
+b_price_a                  0.000    -0.88962    -0.88962
+b_mileage_b                0.000    -0.21409    -0.21409
+b_range_year0_b            0.000     0.77114     0.77114
+b_degradation_b            0.000    -0.21476    -0.21476
+b_packreplace_b            0.000    -1.57336    -1.57336
+b_cellreplace_b            0.000    -1.36845    -1.36845
+b_price_b                  0.000    -0.35117    -0.35117
+b_mileage_c                0.000    -0.05085    -0.05085
+b_range_year0_c            0.000     0.93904     0.93904
+b_degradation_c            0.000    -0.21401    -0.21401
+b_packreplace_c            0.000    -0.01638    -0.01638
+b_cellreplace_c            0.000    -0.08834    -0.08834
+b_price_c                  0.000    -0.01981    -0.01981
+delta_a                    0.000     0.00000     0.00000
+delta_b                    0.000   -31.06352   -31.06352
+delta_c                    0.000   -31.56854   -31.56854
+gamma_used_bev_a           0.000     0.00000     0.00000
+gamma_EVB_environ_a        0.000     0.00000     0.00000
+gamma_EVB_function_a       0.000     0.00000     0.00000
+gamma_EV_benefit_a         0.000     0.00000     0.00000
+gamma_EV_anxiety_a         0.000     0.00000     0.00000
+gamma_used_bev_b           0.000    30.95945    30.95945
+gamma_EVB_environ_b        0.000     0.12236     0.12236
+gamma_EVB_function_b       0.000     0.42948     0.42948
+gamma_EV_benefit_b         0.000    -0.56153    -0.56153
+gamma_EV_anxiety_b         0.000    -0.78790    -0.78790
+gamma_used_bev_c           0.000    31.45463    31.45463
+gamma_EVB_environ_c        0.000     0.63271     0.63271
+gamma_EVB_function_c       0.000     0.18039     0.18039
+gamma_EV_benefit_c         0.000    -0.43684    -0.43684
+gamma_EV_anxiety_c         0.000    -1.18418    -1.18418
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value                                                                            
+modelName              "LC_DCE_3c_indicator"                                                            
+modelDescr             "LC model with 3 classes with indicator (ATT and knowledge)"                     
+indivID                "respID"                                                                         
+nCores                 "2"                                                                              
+panelData              "TRUE"                                                                           
+outputDirectory        "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/code/main/model_output/apollo/"
+debug                  "FALSE"                                                                          
+workInLogs             "FALSE"                                                                          
+seed                   "13"                                                                             
+mixing                 "FALSE"                                                                          
+HB                     "FALSE"                                                                          
+noValidation           "FALSE"                                                                          
+noDiagnostics          "FALSE"                                                                          
+calculateLLC           "TRUE"                                                                           
+analyticHessian        "FALSE"                                                                          
+memorySaver            "FALSE"                                                                          
+analyticGrad           "TRUE"                                                                           
+analyticGrad_manualSet "FALSE"                                                                          
+overridePanel          "FALSE"                                                                          
+preventOverridePanel   "FALSE"                                                                          
+noModification         "FALSE"                                                                          
+
+Hessian routines attempted
+--------------------------
+none
+
+
+apollo_lcPars
+---------------
+function(apollo_beta, apollo_inputs) {
+  lcpars = list()
+  lcpars[["b_mileage"]] = list(b_mileage_a, b_mileage_b, b_mileage_c)
+  lcpars[["b_range_year0"]] = list(b_range_year0_a, b_range_year0_b, b_range_year0_c)
+  lcpars[["b_degradation"]] = list(b_degradation_a, b_degradation_b, b_degradation_c)
+  lcpars[["b_packreplace"]] = list(b_packreplace_a, b_packreplace_b, b_packreplace_c)
+  lcpars[["b_cellreplace"]] = list(b_cellreplace_a, b_cellreplace_b, b_cellreplace_c)
+  lcpars[["b_price"]] = list(b_price_a, b_price_b, b_price_c)
+  
+  ### Utilities of class allocation model: ow likely a person is to belong to each class based on indicators
+  V = list()
+  V[["class_a"]] = delta_a +
+    gamma_used_bev_a * next_veh_fuel_used_bev +
+    gamma_EVB_environ_a * ATT_EVB_environment +
+    gamma_EVB_function_a * ATT_EVB_function +
+    gamma_EV_benefit_a * FA_EV_benefit +
+    gamma_EV_anxiety_a * FA_EV_anxiety
+  # gamma_knowledge_gas_a * knowledge_gas +
+  # gamma_knowledge_plugin_a * knowledge_plugin +
+  # gamma_knowledge_ev_a * knowledge_ev +
+  # gamma_knowledge_subsidy_a * knowledge_subsidy
+  V[["class_b"]] = delta_b +
+    gamma_used_bev_b * next_veh_fuel_used_bev +
+    gamma_EVB_environ_b * ATT_EVB_environment +
+    gamma_EVB_function_b * ATT_EVB_function +
+    gamma_EV_benefit_b * FA_EV_benefit +
+    gamma_EV_anxiety_b * FA_EV_anxiety
+  # gamma_knowledge_gas_b * knowledge_gas +
+  # gamma_knowledge_plugin_b * knowledge_plugin +
+  # gamma_knowledge_ev_b * knowledge_ev +
+  # gamma_knowledge_subsidy_b * knowledge_subsidy
+  
+  V[["class_c"]] = delta_c +
+    gamma_used_bev_c * next_veh_fuel_used_bev +
+    gamma_EVB_environ_c * ATT_EVB_environment +
+    gamma_EVB_function_c * ATT_EVB_function +
+    gamma_EV_benefit_c * FA_EV_benefit +
+    gamma_EV_anxiety_c * FA_EV_anxiety
+  
+  ### Settings for class allocation models
+  classAlloc_settings = list(
+    classes = c(class_a = 1, class_b = 2,class_c = 3),
+    utilities = V
+  )
+  # computes the class membership probabilities (π) for each person
+  lcpars[["pi_values"]] = apollo_classAlloc(classAlloc_settings)
+  
+  return(lcpars)
+}
+<bytecode: 0xa8d32ecf0>
+
+
+apollo_probabilities
+----------------------
+function(
+    apollo_beta,
+    apollo_inputs,
+    functionality = "estimate"
+) {
+  ### Attach inputs and detach after function exit
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+  
+  ### Create list of probabilities P
+  P = list()
+  
+  ### Define settings for MNL model component that are generic across classes
+  mnl_settings = list(
+    alternatives = c(alt1 = 1, alt2 = 2, alt3 = 3, no_choice = 4),
+    avail = list(alt1 = 1, alt2 = 1, alt3 = 1, no_choice = 1), ## Availability of alternatives
+    choiceVar = choice
+  )
+  
+  ### Loop over classes
+  for (s in 1:3) {
+    ### Compute class-specific utilities
+    V = list()
+    V[["alt1"]] <-
+      b_mileage[[s]] *
+      veh_mileage_1 +
+      b_range_year0[[s]] * battery_range_year0_1 +
+      b_degradation[[s]] * battery_degradation_1 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_1 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_1 +
+      b_price[[s]] * veh_price_1
+    
+    V[["alt2"]] <-
+      b_mileage[[s]] *
+      veh_mileage_2 +
+      b_range_year0[[s]] * battery_range_year0_2 +
+      b_degradation[[s]] * battery_degradation_2 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_2 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_2 +
+      b_price[[s]] * veh_price_2
+    
+    V[["alt3"]] <-
+      b_mileage[[s]] *
+      veh_mileage_3 +
+      b_range_year0[[s]] * battery_range_year0_3 +
+      b_degradation[[s]] * battery_degradation_3 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_3 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_3 +
+      b_price[[s]] * veh_price_3
+    
+    V[["no_choice"]] <- asc_no_choice
+    
+    # Model settings
+    mnl_settings$utilities = V
+    
+    ### Compute within-class choice probabilities using MNL model
+    P[[paste0("Class_", s)]] = apollo_mnl(mnl_settings, functionality)
+    
+    ### Take product across observation for same individual
+    P[[paste0("Class_", s)]] = apollo_panelProd(
+      P[[paste0("Class_", s)]],
+      apollo_inputs,
+      functionality
+    )
+  }
+  
+  ### Compute latent class model probabilities
+  lc_settings = list(inClassProb = P, classProb = pi_values)
+  # mixes the class‐specific probabilities with class‐membership probabilities pi_values.
+  P[["model"]] = apollo_lc(lc_settings, apollo_inputs, functionality)
+  
+  ### Prepare and return outputs of function: finalizes the probability vector
+  P = apollo_prepareProb(P, apollo_inputs, functionality)
+  return(P)
+}

@@ -73,7 +73,8 @@ data <- data %>%
       attitudes_1_b,
       attitudes_2_a,
       attitudes_2_b,
-      battery_attribute
+      battery_attribute,
+      next_veh_fuel
     )
   ) %>%
 
