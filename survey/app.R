@@ -679,7 +679,7 @@ server <- function(input, output, session) {
   # Define any conditional skip logic here (skip to page if a condition is true)
   sd_skip_if(
     # Screen out if the respondent doesn't have valid start
-    #!is_valid_start() ~ "screenout", # Fix it
+    !is_valid_start() ~ "screenout", # Fix it
 
     input$next_veh_when %in% c("24", "not_sure") ~ "screenout",
     input$next_veh_market %in% c("new") ~ "screenout",
@@ -710,17 +710,21 @@ server <- function(input, output, session) {
       length(input$household_veh_fuel) == 1) ~
       "primary_veh_fuel",
 
-    input$household_veh_count == "1"  &
+    input$household_veh_count == "1" &
       length(input$household_veh_fuel) == 1 &
-       ( str_detect(input$household_veh_fuel, "icev") |
-           str_detect(input$household_veh_fuel, "phev") |
-           str_detect(input$household_veh_fuel, "hev")
-      ) ~ "primary_veh_mpg",
-      
-    input$primary_veh_obtain_how %in%
-      c("bought_dealership", "leased_dealership", "bought_private", "bought_online") ~
-      "primary_veh_cost",
+      (str_detect(input$household_veh_fuel, "icev") |
+        str_detect(input$household_veh_fuel, "phev") |
+        str_detect(input$household_veh_fuel, "hev")) ~
+      "primary_veh_mpg",
 
+    input$primary_veh_obtain_how %in%
+      c(
+        "bought_dealership",
+        "leased_dealership",
+        "bought_private",
+        "bought_online"
+      ) ~
+      "primary_veh_cost",
 
     input$primary_veh_fuel %in% c("icev", "hev", "phev") ~ "primary_veh_mpg",
 
