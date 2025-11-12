@@ -191,8 +191,8 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$veh_mileage)}</span><br>
         <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt1$battery_condition} </span><br>
         <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
-        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health - {alt1$battery_health_year3}) </span><br>
-        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt1$battery_health_year8}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health: {alt1$battery_health_year3}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health: {alt1$battery_health_year8}) </span><br>
         <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt1$price)}</span><br>
       </div>
     "
@@ -204,8 +204,8 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$veh_mileage)}</span><br>
         <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt2$battery_condition} </span><br>
         <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
-        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health - {alt2$battery_health_year3}) </span><br>
-        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt2$battery_health_year8}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health: {alt2$battery_health_year3}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health: {alt2$battery_health_year8}) </span><br>
         <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt2$price)}</span><br>
       </div>
     "
@@ -217,8 +217,8 @@ battery_cbc_options <- function(df, budget_select) {
         <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$veh_mileage)}</span><br>
         <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt3$battery_condition} </span><br>
         <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
-        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health - {alt3$battery_health_year3}) </span><br>
-        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health - {alt3$battery_health_year8}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health: {alt3$battery_health_year3}) </span><br>
+        <b><span style='font-size: 13px;'>&nbsp; &nbsp; Expected in 5 years:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year8} miles<br>&nbsp; &nbsp; (Battery Health: {alt3$battery_health_year8}) </span><br>
         <b><span style='font-size: 13px;'><u>Purchase price:</u></span></b><br> <span style='font-size: 13px;'>$ {scales::comma(alt3$price)}</span><br>
       </div>
     "
@@ -710,10 +710,21 @@ server <- function(input, output, session) {
       length(input$household_veh_fuel) == 1) ~
       "primary_veh_fuel",
 
-    input$primary_veh_obtain_how %in%
-      c("bought_dealership", "leased_dealership", "bought_private", "bought_online") ~
-      "primary_veh_cost",
+    input$household_veh_count == "1" &
+      length(input$household_veh_fuel) == 1 &
+      (str_detect(input$household_veh_fuel, "icev") |
+        str_detect(input$household_veh_fuel, "phev") |
+        str_detect(input$household_veh_fuel, "hev")) ~
+      "primary_veh_mpg",
 
+    input$primary_veh_obtain_how %in%
+      c(
+        "bought_dealership",
+        "leased_dealership",
+        "bought_private",
+        "bought_online"
+      ) ~
+      "primary_veh_cost",
 
     input$primary_veh_fuel %in% c("icev", "hev", "phev") ~ "primary_veh_mpg",
 
