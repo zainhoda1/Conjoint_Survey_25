@@ -14,6 +14,7 @@ library(psych)
 library(nFactors)
 library(rlang)
 library(openxlsx)
+library(xlsx)
 
 `%notin%` <- Negate(`%in%`)
 
