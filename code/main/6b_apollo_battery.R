@@ -228,11 +228,11 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "MNL_DCE_pref",
+  modelName = "LC_1c_indicator",
   modelDescr = "MNL model",
   indivID = "respID",
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo"),
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery"),
   mixing = FALSE
 )
 
@@ -325,7 +325,7 @@ apollo_probabilities <- function(
 }
 
 #### 6. Estimate model
-mnl_pref_apollo <- apollo_estimate(
+LC_1c_indicator <- apollo_estimate(
   apollo_beta,
   apollo_fixed,
   apollo_probabilities,
@@ -335,13 +335,13 @@ mnl_pref_apollo <- apollo_estimate(
 
 #### 7. Output results
 apollo_modelOutput(
-  mnl_pref_apollo,
+  LC_1c_indicator,
   modelOutput_settings = list(printPVal = TRUE)
 )
 
 #### 7. Save results
 apollo_saveOutput(
-  mnl_pref_apollo,
+  LC_1c_indicator,
   saveOutput_settings = list(printPVal = 2)
 )
 
@@ -361,7 +361,7 @@ for (i in c(
     parName2 = "b_price",
     multPar1 = -1
   )
-  apollo_deltaMethod(mnl_pref_apollo, deltaMethod_settings)
+  apollo_deltaMethod(LC_1c_indicator, deltaMethod_settings)
 }
 
 ### ----Latent class (c=2)----
@@ -370,12 +370,12 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "LC_DCE_2c_indicator",
+  modelName = "LC_2c_indicator",
   modelDescr = "LC model with 2 classes with indicator (ATT and knowledge)",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo")
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
 database <- database
@@ -756,12 +756,12 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "LC_DCE_3c_indicator",
+  modelName = "LC_3c_indicator",
   modelDescr = "LC model with 3 classes with indicator (ATT and knowledge)",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo")
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
 
@@ -849,7 +849,7 @@ apollo_fixed = c(
 # apollo_beta = apollo_readBeta(
 #   apollo_beta,
 #   apollo_fixed,
-#   "LC_DCE_3c_indicator",
+#   "LC_3c_indicator",
 #   overwriteFixed = FALSE
 # )
 
@@ -1196,12 +1196,12 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "LC_DCE_3c_indicator_logprice",
+  modelName = "LC_3c_indicator_logprice",
   modelDescr = "LC model with 3 classes with indicator (ATT and knowledge)",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo")
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
 
@@ -1289,7 +1289,7 @@ apollo_fixed = c(
 apollo_beta = apollo_readBeta(
   apollo_beta,
   apollo_fixed,
-  "LC_DCE_3c_indicator",
+  "LC_3c_indicator",
   overwriteFixed = FALSE
 )
 
@@ -1454,7 +1454,7 @@ apollo_probabilities = function(
 
 
 #### MODEL ESTIMATION
-lc_mnl_3c_indicator_logprice1 = apollo_estimate(
+lc_mnl_3c_indicator_logprice = apollo_estimate(
   apollo_beta,
   apollo_fixed,
   apollo_probabilities,
@@ -1719,12 +1719,12 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "LC_DCE_4c_indicator",
+  modelName = "LC_4c_indicator",
   modelDescr = "LC model with 4 classes with indicator (ATT and knowledge)",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo")
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
 
@@ -1832,7 +1832,7 @@ apollo_fixed = c(
 apollo_beta = apollo_readBeta(
   apollo_beta,
   apollo_fixed,
-  "LC_DCE_4c_indicator",
+  "LC_4c_indicator",
   overwriteFixed = FALSE
 )
 # apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
@@ -2184,12 +2184,12 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "LC_DCE_4c_indicator1",
+  modelName = "LC_4c_indicator1",
   modelDescr = "LC model with 4 classes with indicator (ATT and knowledge)",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo")
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
 
@@ -2635,12 +2635,12 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "LC_DCE_4c_indicator2",
+  modelName = "LC_4c_indicator2",
   modelDescr = "LC model with 4 classes with indicator (ATT and knowledge)",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo")
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
 
@@ -3094,12 +3094,12 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "LC_DCE_4c_indicator3",
+  modelName = "LC_4c_indicator3",
   modelDescr = "LC model with 4 classes with indicator (ATT and knowledge)",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo")
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
 
@@ -3554,12 +3554,12 @@ apollo_initialise()
 
 # Define core controls
 apollo_control = list(
-  modelName = "LC_DCE_5c_indicator",
+  modelName = "LC_5c_indicator",
   modelDescr = "LC model with 5 classes with indicator (ATT and knowledge)",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo")
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
 
@@ -4050,8 +4050,8 @@ model_combine <- data.frame()
 for (i in c(1:4)) {
   model_coef <- read_csv(paste0(
     here::here(),
-    "/code/main/model_output/apollo",
-    "/LC_DCE_",
+    "/code/main/model_output/apollo/battery",
+    "/LC_",
     i,
     "c_indicator_estimates.csv"
   )) %>%
@@ -4080,8 +4080,8 @@ for (i in c(1:4)) {
 
   model_fit <- as.data.frame(readLines(paste0(
     here::here(),
-    "/code/main/model_output/apollo",
-    "/LC_DCE_",
+    "/code/main/model_output/apollo/battery",
+    "/LC_",
     i,
     "c_indicator_output.txt"
   ))) %>%
@@ -4121,7 +4121,7 @@ write.xlsx(
   model_combine_output,
   paste0(
     here::here(),
-    "/code/main/model_output/apollo",
+    "/code/main/model_output/apollo/battery",
     "/0_battery_model_combine_output.xlsx"
   ),
   sheetName = "coef_fit",
@@ -4138,7 +4138,7 @@ apollo_control = list(
   modelDescr = "MNL model in WTP-space",
   indivID = "respID",
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo"),
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery"),
   mixing = FALSE
 )
 
