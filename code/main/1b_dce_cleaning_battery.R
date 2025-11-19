@@ -73,7 +73,7 @@ data <- data %>%
   select(-cbc_all_same)
 # nrow(data)
 
-# Create choice data ---------
+# Create choice data ----
 
 # First convert the data to long format
 choice_data <- data %>%
@@ -125,6 +125,8 @@ choice_data <- choice_data %>%
   select(ends_with("ID"), "choice", everything())
 
 head(choice_data)
+
+# Only those saw BEVs at least two vehicle price among all----
 
 # Save cleaned data for modeling
 write_csv(

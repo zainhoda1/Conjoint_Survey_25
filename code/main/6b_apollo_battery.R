@@ -7,16 +7,35 @@ data_dce <- read_csv(here(
   "data",
   "main",
   "battery_choice_data.csv"
-))
+)) %>%
+  mutate(respID_qID = paste0(respID, "_", qID))
 
-# resp_remove <- read_csv(here(
-#   "data",
-#   "main",
-#   "battery_choice_data_removerespID.csv"
-# ))
+###  BEV price >20K
+bev_price <- data_dce %>%
+  filter(!is.na(veh_price) & veh_price >= 30000)
 
-# data_dce <- data_dce %>%
-# filter(respID %notin% resp_remove$ID)
+### at least see different price
+veh_price_variation <- data_dce %>%
+  filter(!is.na(veh_price)) %>%
+  filter(
+    respID_qID %in% bev_price$respID_qID
+  ) %>%
+  group_by(respID, veh_price) %>%
+  count() %>%
+  group_by(respID) %>%
+  count() %>%
+  filter(n >= 3) %>%
+  as.data.frame()
+
+data_dce <- data_dce %>%
+  filter(
+    respID %in%
+      veh_price_variation$respID &
+      respID_qID %in% bev_price$respID_qID
+  ) %>%
+  select(-respID_qID)
+
+# n_distinct(data_dce$respID)
 
 data_variable <- read_csv(here(
   "data",
@@ -27,6 +46,7 @@ data_variable <- read_csv(here(
 data_variable <- data_variable %>%
   select(
     psid,
+    next_veh_budget,
     ends_with("_num"),
     ends_with("_cate"),
     starts_with("ATT_"),
@@ -73,7 +93,7 @@ data_dce_dummy <- cbc_encode(
   coding = 'dummy',
   ref_levels = list(
     battery_refurbish = 'original',
-    veh_price_cate = 'price_1'
+    veh_price_cate = 'price_2'
   )
 ) %>%
   as.data.frame()
@@ -148,6 +168,7 @@ data_covariate_num <- data_covariate %>%
     ),
     across(
       any_of(c(
+        "next_veh_fuel_new_bev",
         "next_veh_fuel_used_bev"
       )),
       ~ case_when(
@@ -204,9 +225,10 @@ data_covariate_dummy <- cbc_encode(
   as.data.frame()
 
 ### Loading data from package
-database = data_covariate_num %>%
+database_full <- data_covariate_num %>%
   filter(
-    !is.na(next_veh_fuel_used_bev) &
+    !is.na(hhincome_num) &
+      !is.na(next_veh_fuel_used_bev) &
       !is.na(FA_EV_benefit) &
       !is.na(FA_EV_anxiety)
     # !is.na(knowledge_gas) &
@@ -219,6 +241,7 @@ database = data_covariate_num %>%
     log_veh_price_2 = log(veh_price_2),
     log_veh_price_3 = log(veh_price_3)
   )
+
 
 # ---- ****Apollo**** ----
 ## ----Preference space----
@@ -236,7 +259,7 @@ apollo_control = list(
   mixing = FALSE
 )
 
-database <- database
+database <- database_full
 # mean(data_covariate_num$next_veh_fuel_used_bev)
 
 #### 2. Parameter starting values
@@ -378,7 +401,7 @@ apollo_control = list(
   outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
 )
 
-database <- database
+database <- database_full
 
 ### Vector of parameters, including any that are kept fixed in estimation
 apollo_beta = c(
@@ -437,9 +460,12 @@ apollo_fixed = c(
   # "gamma_knowledge_subsidy_a"
 )
 
+# apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
+#   apollo_beta[!names(apollo_beta) %in% apollo_fixed] +
+#   rnorm(sum(!names(apollo_beta) %in% apollo_fixed), 0, 0.5)
+
 apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
-  apollo_beta[!names(apollo_beta) %in% apollo_fixed] +
-  rnorm(sum(!names(apollo_beta) %in% apollo_fixed), 0, 0.5)
+  runif(sum(!names(apollo_beta) %in% apollo_fixed), -1, 1)
 
 #### DEFINE LATENT CLASS COMPONENTS
 
@@ -766,7 +792,7 @@ apollo_control = list(
 
 
 ### Loading data from package
-database <- database
+database <- database_full
 
 ### Vector of parameters, including any that are kept fixed in estimation
 apollo_beta = c(
@@ -1206,7 +1232,7 @@ apollo_control = list(
 
 
 ### Loading data from package
-database <- database
+database <- database_full
 
 ### Vector of parameters, including any that are kept fixed in estimation
 apollo_beta = c(
@@ -1712,6 +1738,442 @@ ggplot(wtp_long, aes(x = price_level, y = WTP, color = class)) +
 
 
 #---- switch off writing to file
+
+### ----Latent class (c=3) reduced sample----
+# Initialize
+apollo_initialise()
+
+# Define core controls
+apollo_control = list(
+  modelName = "LC_3c_indicator_reducedsample",
+  modelDescr = "LC model with 3 classes with indicator (ATT and knowledge)",
+  indivID = "respID",
+  nCores = 2,
+  panelData = TRUE,
+  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+)
+
+
+### Loading data from package
+# table(database$next_veh_budget)
+# prop.table(table(database$next_veh_budget))*100
+database <- database_full %>%
+  filter(as.numeric(next_veh_budget) >= 20000)
+
+### Vector of parameters, including any that are kept fixed in estimation
+apollo_beta = c(
+  # attributes for each class
+  b_no_choice_a = 0,
+  b_mileage_a = 0,
+  b_range_year0_a = 0,
+  b_degradation_a = 0,
+  b_packreplace_a = 0,
+  b_cellreplace_a = 0,
+  b_price_a = 0,
+  b_no_choice_b = 0,
+  b_mileage_b = 0,
+  b_range_year0_b = 0,
+  b_degradation_b = 0,
+  b_packreplace_b = 0,
+  b_cellreplace_b = 0,
+  b_price_b = 0,
+  b_no_choice_c = 0,
+  b_mileage_c = 0,
+  b_range_year0_c = 0,
+  b_degradation_c = 0,
+  b_packreplace_c = 0,
+  b_cellreplace_c = 0,
+  b_price_c = 0,
+
+  # coefficients for covariates in class‐allocation
+  delta_a = 0,
+  gamma_hhincome_a = 0,
+  gamma_used_bev_a = 0,
+  # gamma_EVB_environ_a = 0,
+  # gamma_EVB_function_a = 0,
+  gamma_EV_benefit_a = 0,
+  gamma_EV_anxiety_a = 0,
+  # gamma_knowledge_gas_a = 0,
+  # gamma_knowledge_plugin_a = 0,
+  # gamma_knowledge_ev_a = 0,
+  # gamma_knowledge_subsidy_a = 0,
+  delta_b = 0,
+  gamma_hhincome_b = 0,
+  gamma_used_bev_b = 0,
+  # gamma_EVB_environ_b = 0,
+  # gamma_EVB_function_b = 0,
+  gamma_EV_benefit_b = 0,
+  gamma_EV_anxiety_b = 0,
+  # gamma_knowledge_gas_b = 0,
+  # gamma_knowledge_plugin_b = 0,
+  # gamma_knowledge_ev_b = 0,
+  # gamma_knowledge_subsidy_b = 0
+  delta_c = 0,
+  gamma_hhincome_c = 0,
+  gamma_used_bev_c = 0,
+  # gamma_EVB_environ_c = 0,
+  # gamma_EVB_function_c = 0,
+  gamma_EV_benefit_c = 0,
+  gamma_EV_anxiety_c = 0
+)
+
+### Vector with names (in quotes) of parameters to be kept fixed at their starting value in apollo_beta, use apollo_beta_fixed = c() if none
+apollo_fixed = c(
+  "delta_a",
+  "gamma_hhincome_a",
+  "gamma_used_bev_a",
+  # "gamma_used_bev_b",
+  # "gamma_used_bev_c",
+  # "gamma_EVB_environ_a",
+  # "gamma_EVB_environ_b",
+  # "gamma_EVB_environ_c",
+  # "gamma_EVB_function_a",
+  # "gamma_EVB_function_b",
+  # "gamma_EVB_function_c",
+  "gamma_EV_benefit_a",
+  # "gamma_EV_benefit_b",
+  # "gamma_EV_benefit_c",
+  "gamma_EV_anxiety_a"
+  # "gamma_EV_anxiety_b",
+  # "gamma_EV_anxiety_c"
+  # "gamma_knowledge_gas_a",
+  # "gamma_knowledge_plugin_a",
+  # "gamma_knowledge_ev_a",
+  # "gamma_knowledge_subsidy_a"
+)
+
+apollo_beta = apollo_readBeta(
+  apollo_beta,
+  apollo_fixed,
+  "LC_DCE_3c_indicator",
+  overwriteFixed = FALSE
+)
+
+# apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
+#   apollo_beta[!names(apollo_beta) %in% apollo_fixed] +
+#   rnorm(sum(!names(apollo_beta) %in% apollo_fixed), 0, 0.5)
+
+# apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
+#   runif(sum(!names(apollo_beta) %in% apollo_fixed), -1, 1)
+
+#### DEFINE LATENT CLASS COMPONENTS
+
+apollo_lcPars = function(apollo_beta, apollo_inputs) {
+  lcpars = list()
+  lcpars[["b_no_choice"]] = list(
+    b_no_choice_a,
+    b_no_choice_b,
+    b_no_choice_c
+  )
+  lcpars[["b_mileage"]] = list(b_mileage_a, b_mileage_b, b_mileage_c)
+  lcpars[["b_range_year0"]] = list(
+    b_range_year0_a,
+    b_range_year0_b,
+    b_range_year0_c
+  )
+  lcpars[["b_degradation"]] = list(
+    b_degradation_a,
+    b_degradation_b,
+    b_degradation_c
+  )
+  lcpars[["b_packreplace"]] = list(
+    b_packreplace_a,
+    b_packreplace_b,
+    b_packreplace_c
+  )
+  lcpars[["b_cellreplace"]] = list(
+    b_cellreplace_a,
+    b_cellreplace_b,
+    b_cellreplace_c
+  )
+  lcpars[["b_price"]] = list(b_price_a, b_price_b, b_price_c)
+
+  ### Utilities of class allocation model: ow likely a person is to belong to each class based on indicators
+  V = list()
+  V[["class_a"]] = delta_a +
+    gamma_hhincome_a * hhincome_num +
+    gamma_used_bev_a * next_veh_fuel_used_bev +
+    # gamma_EVB_environ_a * ATT_EVB_environment +
+    # gamma_EVB_function_a * ATT_EVB_function +
+    gamma_EV_benefit_a * FA_EV_benefit +
+    gamma_EV_anxiety_a * FA_EV_anxiety
+  # gamma_knowledge_gas_a * knowledge_gas +
+  # gamma_knowledge_plugin_a * knowledge_plugin +
+  # gamma_knowledge_ev_a * knowledge_ev +
+  # gamma_knowledge_subsidy_a * knowledge_subsidy
+  V[["class_b"]] = delta_b +
+    gamma_hhincome_b * hhincome_num +
+    gamma_used_bev_b * next_veh_fuel_used_bev +
+    # gamma_EVB_environ_b * ATT_EVB_environment +
+    # gamma_EVB_function_b * ATT_EVB_function +
+    gamma_EV_benefit_b * FA_EV_benefit +
+    gamma_EV_anxiety_b * FA_EV_anxiety
+  # gamma_knowledge_gas_b * knowledge_gas +
+  # gamma_knowledge_plugin_b * knowledge_plugin +
+  # gamma_knowledge_ev_b * knowledge_ev +
+  # gamma_knowledge_subsidy_b * knowledge_subsidy
+
+  V[["class_c"]] = delta_c +
+    gamma_hhincome_c * hhincome_num +
+    gamma_used_bev_c * next_veh_fuel_used_bev +
+    # gamma_EVB_environ_c * ATT_EVB_environment +
+    # gamma_EVB_function_c * ATT_EVB_function +
+    gamma_EV_benefit_c * FA_EV_benefit +
+    gamma_EV_anxiety_c * FA_EV_anxiety
+
+  ### Settings for class allocation models
+  classAlloc_settings = list(
+    classes = c(class_a = 1, class_b = 2, class_c = 3),
+    utilities = V
+  )
+  # computes the class membership probabilities (π) for each person
+  lcpars[["pi_values"]] = apollo_classAlloc(classAlloc_settings)
+
+  return(lcpars)
+}
+
+#### GROUP AND VALIDATE INPUTS
+
+apollo_inputs = apollo_validateInputs()
+
+
+#### DEFINE MODEL AND LIKELIHOOD FUNCTION
+apollo_probabilities = function(
+  apollo_beta,
+  apollo_inputs,
+  functionality = "estimate"
+) {
+  ### Attach inputs and detach after function exit
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+
+  ### Create list of probabilities P
+  P = list()
+
+  ### Define settings for MNL model component that are generic across classes
+  mnl_settings = list(
+    alternatives = c(alt1 = 1, alt2 = 2, alt3 = 3, no_choice = 4),
+    avail = list(alt1 = 1, alt2 = 1, alt3 = 1, no_choice = 1), ## Availability of alternatives
+    choiceVar = choice
+  )
+
+  ### Loop over classes
+  for (s in 1:3) {
+    ### Compute class-specific utilities
+    V = list()
+    V[["alt1"]] <-
+      b_mileage[[s]] *
+      veh_mileage_1 +
+      b_range_year0[[s]] * battery_range_year0_1 +
+      b_degradation[[s]] * battery_degradation_1 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_1 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_1 +
+      b_price[[s]] * veh_price_1
+
+    V[["alt2"]] <-
+      b_mileage[[s]] *
+      veh_mileage_2 +
+      b_range_year0[[s]] * battery_range_year0_2 +
+      b_degradation[[s]] * battery_degradation_2 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_2 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_2 +
+      b_price[[s]] * veh_price_2
+
+    V[["alt3"]] <-
+      b_mileage[[s]] *
+      veh_mileage_3 +
+      b_range_year0[[s]] * battery_range_year0_3 +
+      b_degradation[[s]] * battery_degradation_3 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_3 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_3 +
+      b_price[[s]] * veh_price_3
+
+    V[["no_choice"]] <- b_no_choice[[s]]
+
+    # Model settings
+    mnl_settings$utilities = V
+
+    ### Compute within-class choice probabilities using MNL model
+    P[[paste0("Class_", s)]] = apollo_mnl(mnl_settings, functionality)
+
+    ### Take product across observation for same individual
+    P[[paste0("Class_", s)]] = apollo_panelProd(
+      P[[paste0("Class_", s)]],
+      apollo_inputs,
+      functionality
+    )
+  }
+
+  ### Compute latent class model probabilities
+  lc_settings = list(inClassProb = P, classProb = pi_values)
+  # mixes the class‐specific probabilities with class‐membership probabilities pi_values.
+  P[["model"]] = apollo_lc(lc_settings, apollo_inputs, functionality)
+
+  ### Prepare and return outputs of function: finalizes the probability vector
+  P = apollo_prepareProb(P, apollo_inputs, functionality)
+  return(P)
+}
+
+
+#### MODEL ESTIMATION
+lc_mnl_3c_indicator_reducedsample = apollo_estimate(
+  apollo_beta,
+  apollo_fixed,
+  apollo_probabilities,
+  apollo_inputs
+)
+### Estimate model
+# results_list <- list()
+# for (i in 1:10) {
+#   names <- names(apollo_beta)
+#   start_vals <- runif(length(apollo_beta), -1, 1)
+#   names(start_vals) <- names
+#   model_i <- apollo_estimate(
+#     apollo_beta = start_vals,
+#     apollo_fixed = apollo_fixed,
+#     apollo_probabilities = apollo_probabilities,
+#     apollo_inputs = apollo_inputs,
+#     estimate_settings = list(maxIterations = 10000)
+#   )
+#   results_list[[i]] <- model_i
+# }
+#
+# lc_mnl_3c_indicator <- results_list[[which.max(sapply(
+#   results_list,
+#   function(x) x$LLfinal
+# ))]]
+
+### Show output in screen
+apollo_modelOutput(
+  lc_mnl_3c_indicator_reducedsample,
+  modelOutput_settings = list(printPVal = TRUE)
+)
+
+### Save output to file(s)
+apollo_saveOutput(
+  lc_mnl_3c_indicator_reducedsample,
+  saveOutput_settings = list(printPVal = 2)
+)
+
+
+##### POST-PROCESSING
+
+### Print outputs of additional diagnostics to new output file (remember to close file writing when complete)
+# apollo_sink()
+
+#---- OUT OF SAMPLE TESTING
+
+apollo_outOfSample(
+  apollo_beta,
+  apollo_fixed,
+  apollo_probabilities,
+  apollo_inputs
+)
+
+
+#---- BOOTSTRAP ESTIMATION
+
+apollo_bootstrap(
+  apollo_beta,
+  apollo_fixed,
+  apollo_probabilities,
+  apollo_inputs,
+  bootstrap_settings = list(nRep = 3)
+)
+
+
+####### POSTERIOR ANALYSIS
+
+### Compute unconditional estimates (averaged over classes) of parameters.
+### Unconditional means averaged across classes using the population-level class probabilities
+unconditionals = apollo_unconditionals(
+  lc_mnl_3c_indicator_reducedsample,
+  apollo_probabilities,
+  apollo_inputs
+)
+
+
+# computes value of travel time (VTT) for each class (ratio of beta_tt to beta_tc).
+## for each class
+
+# List of attributes for which we want WTP
+attributes <- c(
+  "no_choice",
+  "mileage",
+  "range_year0",
+  "degradation",
+  "packreplace",
+  "cellreplace"
+)
+
+# Number of classes
+n_classes <- length(unconditionals[["pi_values"]])
+
+# Create an empty list to store WTPs
+wtp_list <- list()
+
+# Loop over attributes
+for (attr in attributes) {
+  wtp_attr <- numeric(n_classes) # store class-specific WTP
+  for (class in 1:n_classes) {
+    beta_attr <- unconditionals[[paste0("b_", attr)]][[class]]
+    beta_price <- unconditionals[["b_price"]][[class]]
+    wtp_attr[class] <- beta_attr / (-beta_price) # WTP = beta_attr / beta_price
+  }
+  wtp_list[[attr]] <- wtp_attr
+}
+
+# Convert to a data frame for easy viewing
+wtp_df <- as.data.frame(wtp_list)
+rownames(wtp_df) <- paste0("class_", 1:n_classes)
+wtp_df
+
+## for each individual
+# mileage_unconditional = unconditionals[["pi_values"]][[1]] *
+#   vtt_class_a +
+#   unconditionals[["pi_values"]][[2]] * vtt_class_b
+
+### Compute conditional class probability that each individual belongs to each class, given their observed choices
+### Conditional means individualized using each person’s posterior
+### These conditional probabilities let you assign individuals to classes or at least identify which class they’re more likely to belong to.
+conditionals = apollo_conditionals(
+  lc_mnl_3c_indicator_reducedsample,
+  apollo_probabilities,
+  apollo_inputs
+)
+
+# summary(conditionals)
+# summary(as.data.frame(unconditionals[["pi_values"]]))
+
+conditionals_fixed <- conditionals %>%
+  mutate(
+    class_allocation = case_when(
+      pmax(X1, X2, X3) == X1 ~ "X1",
+      pmax(X1, X2, X3) == X2 ~ "X2",
+      pmax(X1, X2, X3) == X3 ~ "X3"
+    )
+  )
+
+data_output <- database %>%
+  left_join(
+    conditionals_fixed %>% select(ID, class_allocation),
+    by = c("respID" = "ID")
+  )
+
+class_character <- data_output %>%
+  group_by(class_allocation) %>%
+  summarise(across(
+    c(
+      hhincome_num,
+      FA_EV_benefit,
+      FA_EV_anxiety,
+      next_veh_fuel_used_bev,
+      ATT_EVB_environment,
+      ATT_EVB_function
+    ), # replace with your variable names
+    ~ mean(.x, na.rm = TRUE)
+  ))
+
 
 ### ----Latent class (c=4)----
 # Initialize
@@ -3564,7 +4026,7 @@ apollo_control = list(
 
 
 ### Loading data from package
-database <- database
+database <- database_full
 
 
 ### Vector of parameters, including any that are kept fixed in estimation

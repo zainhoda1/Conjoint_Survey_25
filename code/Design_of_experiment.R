@@ -60,12 +60,12 @@ dt_mpg <- dt_mpg %>%
         (phev_uf_car *
           (electricity_rate_low * (kwh_q10)) +
           (1 - phev_uf_car) * (gasoline_rate_low / mpg_q90)) *
-          100,
+        100,
       powertrain == "phev" & vehicle_type == "suv" ~
         (phev_uf_suv *
           (electricity_rate_low * (kwh_q10)) +
           (1 - phev_uf_suv) * (gasoline_rate_low / mpg_q90)) *
-          100
+        100
     ),
     cents_mile_max = case_when(
       powertrain == "bev" ~ electricity_rate_high * (kwh_q90) * 100,
@@ -75,12 +75,12 @@ dt_mpg <- dt_mpg %>%
         (phev_uf_car *
           (electricity_rate_high * (kwh_q90)) +
           (1 - phev_uf_car) * (gasoline_rate_high / mpg_q10)) *
-          100,
+        100,
       powertrain == "phev" & vehicle_type == "suv" ~
         (phev_uf_suv *
           (electricity_rate_high * (kwh_q90)) +
           (1 - phev_uf_suv) * (gasoline_rate_high / mpg_q10)) *
-          100
+        100
     )
   ) %>%
   mutate(
@@ -437,7 +437,7 @@ saveRDS(
 
 profiles_battery <- cbc_profiles(
   veh_mileage = seq(1.5, 5, 0.5), # unit: 10000
-  veh_price = seq(0.8, 1.1, 0.1), # unit: 20000
+  veh_price = seq(0.8, 1.1, 0.1), # unit: 10000
   battery_refurbish = c('original', 'cellreplace', 'packreplace'),
   battery_range_year0 = seq(2, 3.6, 0.4), # unit: 100
   battery_degradation = seq(1, 8, 1) # %
