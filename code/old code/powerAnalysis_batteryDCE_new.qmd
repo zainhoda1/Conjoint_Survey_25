@@ -203,13 +203,13 @@ design_battery_suv <- cbc_design(
 
 ## Design comparisons
 ```{r}
-cbc_compare(
-  "Random"= design_random,
-  "Random_fixed_parameter" = design_random_fixed_parameter,
-  "Random_random_parameter" = design_random_random_parameter
-  # "Shortcut" = design_shortcut,
-  # "Shortcut_fixed_parameter" = design_shortcut_fixed_parameter
-)
+# cbc_compare(
+#   "Random"= design_random,
+#   "Random_fixed_parameter" = design_random_fixed_parameter,
+#   "Random_random_parameter" = design_random_random_parameter
+#   # "Shortcut" = design_shortcut,
+#   # "Shortcut_fixed_parameter" = design_shortcut_fixed_parameter
+# )
 ```
 
 
@@ -222,16 +222,16 @@ cbc_compare(
 - Profile usage: Higher percentages indicate better use of available profiles
 
 ```{r}
-cbc_inspect(design_random)
+# cbc_inspect(design_random)
 ```
 
 ```{r}
 # cbc_inspect(design_random)
-cbc_inspect(design_random_fixed_parameter)
+# cbc_inspect(design_battery_car)
 ```
 
 ```{r}
-cbc_inspect(design_random_random_parameter)
+# cbc_inspect(design_random_random_parameter)
 ```
 
 
@@ -246,8 +246,8 @@ cbc_inspect(design_random_random_parameter)
 # Step 5: Simulate Choices
 
 ```{r}
-choices_random_fixed_parameter <- cbc_choices(design_random_fixed_parameter, priors = priors_fixed)
-choices_random_random_parameter <- cbc_choices(design_random_random_parameter, priors = priors_random_parameter)
+choices_random_fixed_battery_car <- cbc_choices(design_battery_car, priors = priors_fixed_battery_car)
+choices_random_fixed_battery_suv <- cbc_choices(design_battery_car, priors = priors_fixed_battery_suv)
 
 # choices_shortcut <- cbc_choices(design_shortcut)
 # choices_shortcut_fixed_parameter <- cbc_choices(design_shortcut_fixed_parameter,priors = priors_fixed)
@@ -321,8 +321,8 @@ choices_random_random_parameter <- cbc_choices(design_random_random_parameter, p
 
 ## random_fixed_parameter
 ```{r}
-power_random_fixed_parameter <- cbc_power(
-  data=choices_random_fixed_parameter,
+power_random_fixed_battery_car <- cbc_power(
+  data=choices_random_fixed_battery_car,
   outcome = "choice",
   obsID = "obsID",
   n_q = 6,
@@ -330,9 +330,9 @@ power_random_fixed_parameter <- cbc_power(
   )
 
 
-plot(power_random_fixed_parameter, type = "power", power_threshold = 0.9)
-plot(power_random_fixed_parameter, type = "se")
-summary(power_random_fixed_parameter, power_threshold = 0.9)
+plot(power_random_fixed_battery_car, type = "power", power_threshold = 0.9)
+plot(power_random_fixed_battery_car, type = "se")
+summary(power_random_fixed_battery_car, power_threshold = 0.9)
 
 ```
 

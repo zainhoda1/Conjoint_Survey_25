@@ -1,4 +1,4 @@
-# --- Car Survey ----
+# (1) For Car Survey
 
 # Make conjoint surveys using the cbcTools package
 
@@ -16,8 +16,7 @@ library(here)
 library(data.table)
 # library(readxl)
 
-## --- Quantiles of MPG  ----
-#for the 2024 model year vehicles by for different powertrains and vehicle types. Data source: EPA or fuel_economic_gov
+# quantiles of MPG for the 2024 model year vehicles by for different powertrains and vehicle types. Data source: EPA or fuel_economic_gov
 
 dt_mpg <- read.csv(here('data', 'mpg_by_segment_fuel.csv')) %>%
   # kwh per 100 miles --> kwh per mile
@@ -206,7 +205,7 @@ dt_mpg_expanded %>%
   summarise(counts = n(), .groups = "drop")
 
 
-## --- DCE   ----
+### For car
 
 # Define profiles with attributes and levels
 profiles_car <- cbc_profiles(
@@ -317,6 +316,101 @@ by <- join_by(vehicle_type, powertrain, operating_cost == cents_mile)
 design_car_data <- left_join(design_car_data, dt_mpg_expanded, by)
 
 
+################################################################################################
+
+### For SUV
+
+# Define profiles with attributes and levels
+profiles_suv <- cbc_profiles(
+  powertrain = c('gas', 'bev', 'phev', 'hev'),
+  price = seq(0.8, 1.1, 0.1),
+  range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
+  range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
+  mileage = seq(0.2, 0.6, 0.05), # x 100000
+  age = seq(0.2, 1.0, 0.2), # make_year changed to age  x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x10
+)
+
+
+# Restrictions
+
+profiles_restricted_suv <- cbc_restrict(
+  profiles_suv,
+  # BEV range restrictions
+  (powertrain == "gas") & (range_bev != 0),
+  (powertrain == "hev") & (range_bev != 0),
+  (powertrain == "phev") & (range_bev != 0),
+  (powertrain == "bev") & (range_bev == 0),
+  # PHEV range restrictions
+  (powertrain == "gas") & (range_phev != 0),
+  (powertrain == "hev") & (range_phev != 0),
+  (powertrain == "bev") & (range_phev != 0),
+  (powertrain == "phev") & (range_phev == 0),
+  # Gas efficiency restrictions
+  (powertrain == "gas") & (operating_cost < 0.8),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.8),
+  (powertrain == "phev") & (operating_cost < 0.8)
+)
+
+
+# checking restrictions:
+profiles_restricted_suv %>%
+  group_by(powertrain) %>%
+  count(operating_cost)
+
+## Set up priors
+
+priors_fixed_parameter_suv <- cbc_priors(
+  profiles = profiles_restricted_suv,
+  # powertrain: categorical (effects coded or dummy)
+  powertrain = c("bev" = -1.0, "phev" = -0.5, "hev" = 0.1),
+  price = -0.2,
+  range_bev = 0.1,
+  range_phev = 0.1,
+  mileage = -0.5,
+  age = -0.2,
+  operating_cost = -0.3,
+  no_choice = 0.5
+)
+
+
+## Generate Designs
+
+design_suv <- cbc_design(
+  profiles = profiles_restricted_suv,
+  method = 'random',
+  n_resp = 4000, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_parameter_suv,
+  balance_by = c('powertrain'),
+  remove_dominant = FALSE
+)
+
+cbc_inspect(design_suv)
+
+design_suv_data <- design_suv %>%
+  mutate(
+    range_phev = range_phev * 100,
+    range_bev = range_bev * 100,
+    range = case_when(
+      powertrain == 'phev' ~ paste0(range_phev, ' miles on a full charge'),
+      powertrain == 'bev' ~ paste0(range_bev, ' miles on a full charge'),
+      TRUE ~ NA
+    ),
+    vehicle_type = 'suv',
+    operating_cost = operating_cost * 10
+  )
+
+
+by <- join_by(vehicle_type, powertrain, operating_cost == cents_mile)
+design_suv_data <- left_join(design_suv_data, dt_mpg_expanded, by)
+
+
+##############
+
 design_combined <- rbind(design_car_data, design_suv_data)
 
 
@@ -334,101 +428,48 @@ saveRDS(
 )
 
 
-# ---- Battery Survey ----
+##############
 
-profiles_battery_car <- cbc_profiles(
+################################################################################################
+################################################################################################
+
+# (2) For Battery Survey
+
+profiles_battery <- cbc_profiles(
   veh_mileage = seq(1.5, 5, 0.5), # unit: 10000
-  veh_price = c(1.5, 2, 2.5, 3), # unit: 10000
+  veh_price = seq(0.8, 1.1, 0.1), # unit: 10000
   battery_refurbish = c('original', 'cellreplace', 'packreplace'),
-  battery_range_year0 = c(0.5, 1, 1.5, 2, 2.5), # unit: 100
+  battery_range_year0 = seq(2, 3.6, 0.4), # unit: 100
   battery_degradation = seq(1, 8, 1) # %
 )
 
-profiles_battery_suv <- cbc_profiles(
-  veh_mileage = seq(1.5, 5, 0.5), # unit: 10000
-  veh_price = c(2, 2.5, 3, 3.5), # unit: 10000
-  battery_refurbish = c('original', 'cellreplace', 'packreplace'),
-  battery_range_year0 = c(1.5, 2, 2.5, 3, 3.5), # unit: 100
-  battery_degradation = seq(1, 8, 1) # %
-)
-
-profiles_restricted_battery_car <- cbc_restrict(
-  profiles_battery_car,
-  # BEV range- price restrictions
-  (veh_price < 2) & (battery_range_year0 > 1.5),
-  (veh_price >= 2) & (battery_range_year0 < 1)
-)
-
-profiles_restricted_battery_suv <- cbc_restrict(
-  profiles_battery_car,
-  # BEV range- price restrictions
-  (veh_price < 2.5) & (battery_range_year0 > 2.5),
-  (veh_price >= 2.5) & (battery_range_year0 < 2)
-)
-
-# profiles_restricted_battery_car %>%
-#   filter(veh_price<2) %>%
-#   # filter(veh_price>=2) %>%
-#   summarise(min=min(battery_range_year0),
-#             mean=mean(battery_range_year0),
-#             max=max(battery_range_year0))
-
-# profiles_restricted_battery_suv %>%
-#   # filter(veh_price<2.5) %>%
-#   filter(veh_price>=2.5) %>%
-#   summarise(min=min(battery_range_year0),
-#             mean=mean(battery_range_year0),
-#             max=max(battery_range_year0))
-
-priors_fixed_battery_car <- cbc_priors(
-  profiles = profiles_restricted_battery_car,
+priors_fixed_battery <- cbc_priors(
+  profiles = profiles_battery,
   veh_mileage = -0.5, # Each 10000 mile increase reduces utility by 0.5
-  veh_price = -1, # Each $10000 increase reduces utility by 0.1
-  battery_refurbish = c(-0.4, -0.2), # Cell refurbishment least preferred
-  battery_range_year0 = 0.5, # Each 100 mile of range adds utility by 0.5
-  battery_degradation = -0.25, # Each 1% of degradation increases subtracts utility by 0.5
-  no_choice = -2.0 # There is a strong positive preference for EV, so positive for "no_choice"
-)
-
-priors_fixed_battery_suv <- cbc_priors(
-  profiles = profiles_restricted_battery_suv,
-  veh_mileage = -0.5, # Each 10000 mile increase reduces utility by 0.5
-  veh_price = -0.1, # Each $10000 increase reduces utility by 0.1
+  veh_price = -0.1, # Each $20000 increase reduces utility by 0.1
   battery_refurbish = c(-1.0, -0.5), # Cell refurbishment least preferred
   battery_range_year0 = 0.5, # Each 100 mile of range adds utility by 0.5
   battery_degradation = -0.5, # Each 1% of degradation increases subtracts utility by 0.5
-  no_choice = -2.0 # There is a strong positive preference for EV, so positive for "no_choice"
+  no_choice = 1.0 # There is a strong negative preference for EV, so positive for "no_choice"
 )
 
-# priors_fixed_battery_car
-# priors_fixed_battery_suv
-
-design_battery_car <- cbc_design(
-  profiles = profiles_restricted_battery_car,
-  priors = priors_fixed_battery_car,
+design_battery <- cbc_design(
+  profiles = profiles_battery,
+  priors = priors_fixed_battery,
   method = "random", # randomized full-factorial design
   n_resp = 3000, # Number of respondents
   n_alts = 3, # Number of alternatives per question
   n_q = 6, # Number of questions per respondent #6
   no_choice = TRUE,
-  remove_dominant = TRUE
+  remove_dominant = FALSE
 )
 
-design_battery_suv <- cbc_design(
-  profiles = profiles_restricted_battery_suv,
-  priors = priors_fixed_battery_suv,
-  method = "random", # randomized full-factorial design
-  n_resp = 3000, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent #6
-  no_choice = TRUE,
-  remove_dominant = TRUE
-)
+cbc_inspect(design_battery)
 
-# cbc_inspect(design_battery_car)
-# cbc_inspect(design_battery_suv)
+#design_random_fixed_parameter_origin<-design_random_fixed_parameter
+#design_random_fixed_parameter<-cbc_decode(design_random_fixed_parameter)
 
-design_rand_output_battery_car <- design_battery_car %>%
+design_rand_output_battery <- design_battery %>%
   mutate(
     veh_mileage = veh_mileage * 10000,
     battery_degradation = battery_degradation / 100,
@@ -464,61 +505,25 @@ design_rand_output_battery_car <- design_battery_car %>%
     )
   )
 
-design_rand_output_battery_suv <- design_battery_suv %>%
-  mutate(
-    veh_mileage = veh_mileage * 10000,
-    battery_degradation = battery_degradation / 100,
-    battery_range_year0 = battery_range_year0 * 100
-  ) %>%
-  mutate(
-    battery_health_year0 = paste0(round(1 * 100, 0), "%"),
-    battery_health_year3 = (1 - battery_degradation)^3,
-    battery_health_year8 = (1 - battery_degradation)^8, # round to the closest 5
-    battery_range_year3 = round(
-      battery_range_year0 * battery_health_year3 / 5
-    ) *
-      5,
-    battery_range_year8 = round(
-      battery_range_year0 * battery_health_year8 / 5
-    ) *
-      5,
-    battery_health_year3 = paste0(
-      round((1 - battery_degradation)^3 * 100, 0),
-      "%"
-    ),
-    battery_health_year8 = paste0(
-      round((1 - battery_degradation)^8 * 100, 0),
-      "%"
-    )
-  ) %>%
-  mutate(
-    battery_condition = case_when(
-      battery_refurbish == 'cellreplace' ~ 'Refurbished Cell-Replaced',
-      battery_refurbish == 'packreplace' ~ 'Refurbished Pack-Replaced',
-      battery_refurbish == 'original' ~ 'Original Battery',
-      TRUE ~ NA
-    )
-  )
 
-design_combined_battery <- rbind(
-  design_rand_output_battery_car,
-  design_rand_output_battery_suv
-)
+#write.csv(design_rand_output_battery, here('survey', 'data', 'battery_choice_questions.csv'))
 
 arrow::write_parquet(
-  design_combined_battery,
+  design_rand_output_battery,
   here('survey', 'data', 'design_battery.parquet')
 )
 
 saveRDS(
-  design_combined_battery,
+  design_rand_output_battery,
   here('data', 'design_battery.Rds')
 )
 
 
-#----Power Analysis----
-##  ---- Vehicle----
-###  ---- Car----
+################################################################################################
+################################################################################################
+
+#Power Analysis Car:
+
 cbc_inspect(design_car)
 
 choices_priors_car <- cbc_choices(
@@ -555,7 +560,7 @@ summary(power_car, power_threshold = 0.9)
 plot(power_car, type = "se")
 
 
-###  ---- SUV----
+# Power Analysis SUV:
 
 cbc_inspect(design_suv)
 
@@ -593,18 +598,20 @@ summary(power_suv, power_threshold = 0.9)
 
 plot(power_suv, type = "se")
 
-##  ---- Battery ----
-### ---- CAR ----
+#####
 
-# cbc_inspect(design_combined_battery)
+# Power Analysis Battery
 
-choices_priors_battery_car <- cbc_choices(
-  cbc_encode(design_battery_car, 'dummy'),
-  priors = priors_fixed_battery_car
+cbc_inspect(design_battery)
+
+
+choices_priors_battery <- cbc_choices(
+  cbc_encode(design_battery, 'dummy'),
+  priors = priors_fixed_battery
 )
 
-model_battery_car <- logitr(
-  data = choices_priors_battery_car,
+model_battery <- logitr(
+  data = choices_priors_battery,
   outcome = 'choice',
   obsID = 'obsID',
   pars = c(
@@ -618,48 +625,14 @@ model_battery_car <- logitr(
   )
 )
 
-summary(model_battery_car)
-wtp(model_battery_car, scalePar = "veh_price")
+summary(model_battery)
 
-power_battery_car <- cbc_power(choices_priors_battery_car)
+power_battery <- cbc_power(choices_priors_battery)
 
 
-plot(power_battery_car, type = "power", power_threshold = 0.9)
-summary(power_battery_car, power_threshold = 0.9)
+plot(power_battery, type = "power", power_threshold = 0.9)
+summary(power_battery, power_threshold = 0.9)
 
 plot(power_battery, type = "se")
 
-### ---- SUV ----
-
-# cbc_inspect(design_combined_battery_)
-
-choices_priors_battery_suv <- cbc_choices(
-  cbc_encode(design_battery_suv, 'dummy'),
-  priors = priors_fixed_battery_suv
-)
-
-model_battery_suv <- logitr(
-  data = choices_priors_battery_suv,
-  outcome = 'choice',
-  obsID = 'obsID',
-  pars = c(
-    'veh_price',
-    'veh_mileage',
-    'battery_refurbishcellreplace',
-    'battery_refurbishpackreplace',
-    'battery_range_year0',
-    'battery_degradation',
-    'no_choice'
-  )
-)
-
-summary(model_battery_suv)
-wtp(model_battery_suv, scalePar = "veh_price")
-
-power_battery_suv <- cbc_power(choices_priors_battery_suv)
-
-
-plot(power_battery_suv, type = "power", power_threshold = 0.9)
-summary(power_battery_suv, power_threshold = 0.9)
-
-plot(power_battery_suv, type = "se")
+#####
