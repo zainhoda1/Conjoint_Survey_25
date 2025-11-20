@@ -129,11 +129,11 @@ head(choice_data)
 # Only those saw BEVs at least two vehicle price among all----
 
 # Save cleaned data for modeling
-write_csv(
+write_parquet(
   choice_data,
   here(
     "data",
     "main",
-    "battery_choice_data.csv"
+    "battery_choice_data.parquet"
   )
 )

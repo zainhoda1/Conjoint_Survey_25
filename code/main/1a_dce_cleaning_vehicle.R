@@ -2,10 +2,10 @@ source(here::here('code', 'setup.R'))
 
 # Import raw data
 
-data_raw <- read_csv(here(
+data_raw <- read_parquet(here(
   "data",
   "main",
-  "survey_data.csv"
+  "survey_data.parquet"
 ))
 
 # Read in choice questions and join it to the choice_data
@@ -98,7 +98,10 @@ choice_data <- data %>%
 
 # head(choice_data)
 
-choice_data <- choice_data %>%
+choice_data <- choice_data %>% 
+  mutate(
+    respID = as.numeric(respID),
+    next_veh_budget = as.numeric(next_veh_budget)) %>% 
   left_join(survey, by = c("vehicle_type", "respID", "qID"))
 
 
@@ -131,11 +134,11 @@ choice_data <- choice_data %>%
 # head(choice_data)
 
 # Save cleaned data for modeling
-write_csv(
+write_parquet(
   choice_data,
   here(
     "data",
     "main",
-    "vehicle_choice_data.csv"
+    "vehicle_choice_data.parquet"
   )
 )
