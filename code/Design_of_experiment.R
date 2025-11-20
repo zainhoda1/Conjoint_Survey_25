@@ -207,6 +207,7 @@ dt_mpg_expanded %>%
 
 
 ## --- DCE   ----
+###---- For car----
 
 # Define profiles with attributes and levels
 profiles_car <- cbc_profiles(
@@ -316,6 +317,99 @@ design_car_data <- design_car %>%
 by <- join_by(vehicle_type, powertrain, operating_cost == cents_mile)
 design_car_data <- left_join(design_car_data, dt_mpg_expanded, by)
 
+
+###---- For SUV----
+
+# Define profiles with attributes and levels
+profiles_suv <- cbc_profiles(
+  powertrain = c('gas', 'bev', 'phev', 'hev'),
+  price = seq(0.8, 1.1, 0.1),
+  range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
+  range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
+  mileage = seq(0.2, 0.6, 0.05), # x 100000
+  age = seq(0.2, 1.0, 0.2), # make_year changed to age  x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x10
+)
+
+
+# Restrictions
+
+profiles_restricted_suv <- cbc_restrict(
+  profiles_suv,
+  # BEV range restrictions
+  (powertrain == "gas") & (range_bev != 0),
+  (powertrain == "hev") & (range_bev != 0),
+  (powertrain == "phev") & (range_bev != 0),
+  (powertrain == "bev") & (range_bev == 0),
+  # PHEV range restrictions
+  (powertrain == "gas") & (range_phev != 0),
+  (powertrain == "hev") & (range_phev != 0),
+  (powertrain == "bev") & (range_phev != 0),
+  (powertrain == "phev") & (range_phev == 0),
+  # Gas efficiency restrictions
+  (powertrain == "gas") & (operating_cost < 0.8),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.8),
+  (powertrain == "phev") & (operating_cost < 0.8)
+)
+
+
+# checking restrictions:
+profiles_restricted_suv %>%
+  group_by(powertrain) %>%
+  count(operating_cost)
+
+## Set up priors
+
+priors_fixed_parameter_suv <- cbc_priors(
+  profiles = profiles_restricted_suv,
+  # powertrain: categorical (effects coded or dummy)
+  powertrain = c("bev" = -1.0, "phev" = -0.5, "hev" = 0.1),
+  price = -0.2,
+  range_bev = 0.1,
+  range_phev = 0.1,
+  mileage = -0.5,
+  age = -0.2,
+  operating_cost = -0.3,
+  no_choice = 0.5
+)
+
+
+## Generate Designs
+
+design_suv <- cbc_design(
+  profiles = profiles_restricted_suv,
+  method = 'random',
+  n_resp = 4000, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_parameter_suv,
+  balance_by = c('powertrain'),
+  remove_dominant = FALSE
+)
+
+cbc_inspect(design_suv)
+
+design_suv_data <- design_suv %>%
+  mutate(
+    range_phev = range_phev * 100,
+    range_bev = range_bev * 100,
+    range = case_when(
+      powertrain == 'phev' ~ paste0(range_phev, ' miles on a full charge'),
+      powertrain == 'bev' ~ paste0(range_bev, ' miles on a full charge'),
+      TRUE ~ NA
+    ),
+    vehicle_type = 'suv',
+    operating_cost = operating_cost * 10
+  )
+
+
+by <- join_by(vehicle_type, powertrain, operating_cost == cents_mile)
+design_suv_data <- left_join(design_suv_data, dt_mpg_expanded, by)
+
+
+### ---- combined ----
 
 design_combined <- rbind(design_car_data, design_suv_data)
 
@@ -594,7 +688,7 @@ summary(power_suv, power_threshold = 0.9)
 plot(power_suv, type = "se")
 
 ##  ---- Battery ----
-### ---- CAR ----
+### ---- Car ----
 
 # cbc_inspect(design_combined_battery)
 

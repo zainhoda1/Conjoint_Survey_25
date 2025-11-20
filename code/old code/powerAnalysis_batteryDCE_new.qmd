@@ -29,7 +29,7 @@ library(here)
 # Step 1: Generate Profiles
 
 ```{r}
-profiles_battery_car <- cbc_profiles(
+profiles_battery_car_20K_above <- cbc_profiles(
   veh_mileage = seq(1.5, 5, 0.5), # unit: 10000
   veh_price = c(1.5, 2, 2.5, 3), # unit: 10000
   battery_refurbish = c('original', 'cellreplace', 'packreplace'),
@@ -37,7 +37,23 @@ profiles_battery_car <- cbc_profiles(
   battery_degradation = seq(1, 8, 1) # %
 )
 
-profiles_battery_suv <- cbc_profiles(
+profiles_battery_car_20K_below <- cbc_profiles(
+  veh_mileage = seq(1.5, 5, 0.5), # unit: 10000
+  veh_price = c(1.5, 2, 2.5, 3), # unit: 10000
+  battery_refurbish = c('original', 'cellreplace', 'packreplace'),
+  battery_range_year0 = c(0.5,1,1.5,2,2.5), # unit: 100
+  battery_degradation = seq(1, 8, 1) # %
+)
+
+profiles_battery_suv_20K_above <- cbc_profiles(
+  veh_mileage = seq(1.5, 5, 0.5), # unit: 10000
+  veh_price = c(2, 2.5, 3,3.5), # unit: 10000
+  battery_refurbish = c('original', 'cellreplace', 'packreplace'),
+  battery_range_year0 = c(1.5,2,2.5,3,3.5), # unit: 100
+  battery_degradation = seq(1, 8, 1) # %
+)
+
+profiles_battery_suv_20K_below <- cbc_profiles(
   veh_mileage = seq(1.5, 5, 0.5), # unit: 10000
   veh_price = c(2, 2.5, 3,3.5), # unit: 10000
   battery_refurbish = c('original', 'cellreplace', 'packreplace'),
@@ -54,13 +70,25 @@ profiles_battery_suv <- cbc_profiles(
 correlate range and price
 ```{r,echo=FALSE}
 
-profiles_restricted_battery_car <- cbc_restrict(
+profiles_restricted_battery_car_20K_above <- cbc_restrict(
+  profiles_battery_car,
+  # BEV range- price restrictions
+  (veh_price <2) & (battery_range_year0>1.5),
+  (veh_price >=2) & (battery_range_year0<1))
+
+profiles_restricted_battery_car_20K_below <- cbc_restrict(
   profiles_battery_car,
   # BEV range- price restrictions
   (veh_price <2) & (battery_range_year0>1.5),
   (veh_price >=2) & (battery_range_year0<1))
   
-profiles_restricted_battery_suv <- cbc_restrict(
+profiles_restricted_battery_suv_20K_above <- cbc_restrict(
+  profiles_battery_car,
+  # BEV range- price restrictions
+  (veh_price <2.5) & (battery_range_year0>2.5),
+  (veh_price >=2.5) & (battery_range_year0<2))
+
+profiles_restricted_battery_suv_20K_below <- cbc_restrict(
   profiles_battery_car,
   # BEV range- price restrictions
   (veh_price <2.5) & (battery_range_year0>2.5),
@@ -102,7 +130,7 @@ For example, if the coefficient of battery degradation is -10, then:
 
 In DCE models, utilities usually range between -2 and +2, so a utility loss of -0.7 is noticeable, but not extreme. It reflects that battery degradation is an important factor in evaluating a used EV.
 ```{r}
-priors_fixed_battery_car <- cbc_priors(
+priors_fixed_battery_car_20K_above <- cbc_priors(
   profiles = profiles_restricted_battery_car,
   veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
   veh_price            = -0.1,      # Each $10000 increase reduces utility by 0.1
@@ -112,7 +140,27 @@ priors_fixed_battery_car <- cbc_priors(
   no_choice = -1.0                      # There is a strong positive preference for EV, so positive for "no_choice"
 )
 
-priors_fixed_battery_suv <- cbc_priors(
+priors_fixed_battery_car_20K_below <- cbc_priors(
+  profiles = profiles_restricted_battery_car,
+  veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
+  veh_price            = -0.1,      # Each $10000 increase reduces utility by 0.1
+  battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
+  battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
+  battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
+  no_choice = -1.0                      # There is a strong positive preference for EV, so positive for "no_choice"
+)
+
+priors_fixed_battery_suv_20K_above <- cbc_priors(
+  profiles = profiles_restricted_battery_suv,
+  veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
+  veh_price            = -0.1,      # Each $10000 increase reduces utility by 0.1
+  battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
+  battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
+  battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
+  no_choice = -1.0                      # There is a strong positive preference for EV, so positive for "no_choice"
+)
+
+priors_fixed_battery_suv_20K_below <- cbc_priors(
   profiles = profiles_restricted_battery_suv,
   veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
   veh_price            = -0.1,      # Each $10000 increase reduces utility by 0.1

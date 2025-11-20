@@ -724,11 +724,6 @@ sd_next()
 ## Battery Educational Page
 
 ```{r}
-battery_cbc0_options <- c(
-  "Option 1" = "option_1",
-  "Option 2" = "option_2",
-  "Option 3" = "option_3"
-)
 battery_cbc_options <- c(
   "Option 1" = "option_1",
   "Option 2" = "option_2",
@@ -887,7 +882,9 @@ sd_question(
     "Vehicle mileage" = "veh_mile",
     "Purchase price"     = "purchase_price",
     "Battery refurbishment history"    = "battery_refurbish",
-    "Battery range and health"          = "battery_health"
+    "Vehicle range"          = "veh_range",
+    "Battery health"          = "battery_health",
+    
   ),
   option = c(
     "Unimportant" = "unimportant",

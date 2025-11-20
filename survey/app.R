@@ -37,23 +37,6 @@ demo_options <- tibble(
 )
 
 
-demo_battery_options <- tibble(
-  qID = c(1, 1, 1, 1),
-  altID = c(1, 2, 3, 4),
-  veh_mileage = c(30000, 30000, 30000, 30000),
-  battery_condition = c(
-    'Original',
-    'Refurbished Cell-Replaced',
-    'Refurbished Pack-Replaced',
-    ''
-  ),
-  battery_range_year3 = c(185, 240, 320, 0),
-  battery_health_year3 = c('91%', '86%', '88%', '0%'),
-  battery_range_year8 = c(155, 185, 260, 0),
-  battery_health_year8 = c('78%', '66%', '72%', '0%'),
-  veh_price = c(1.1, 1, 0.5, 0.5)
-)
-
 electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
@@ -241,9 +224,13 @@ battery_cbc_options <- function(df, budget_select) {
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_parquet(here('data', 'design_vehicle.parquet'))
+  survey <- read_parquet(here('survey', 'data', 'design_vehicle.parquet'))
   survey$range[is.na(survey$range)] <- ''
-  battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
+  battery_survey <- read_parquet(here(
+    'survey',
+    'data',
+    'design_battery.parquet'
+  ))
   respondentID <- sample(survey$respID, 1)
   battery_respondentID <- sample(battery_survey$respID, 1)
 
@@ -586,10 +573,6 @@ server <- function(input, output, session) {
       req(budget_val) # Ensure budget is available
 
       # Create the options for each choice question
-      battery_cbc0_options <- battery_cbc_options(
-        demo_battery_options,
-        budget_val
-      )
       battery_cbc1_options <- battery_cbc_options(
         battery_df |> filter(qID == 1),
         budget_val
@@ -616,14 +599,6 @@ server <- function(input, output, session) {
       )
 
       # Create each choice question - display these in your survey using sd_output()
-      sd_question(
-        type = 'mc_buttons',
-        id = 'battery_cbc_q0_button',
-        label = "If these were your only options, which would you choose?",
-        option = battery_cbc0_options,
-        width = "100%",
-        direction = "horizontal"
-      )
 
       sd_question(
         type = 'mc_buttons',
@@ -693,6 +668,7 @@ server <- function(input, output, session) {
     input$household_veh_count == "0" ~ "next_veh_info",
 
     !is.null(input$next_veh_car_images) ~ "cbc_intro",
+
     input$next_veh_style == "SUV / crossover" &
       ((!is.null(input$next_veh_nobev)) |
         (input$next_veh_fuel_new_bev %in%
