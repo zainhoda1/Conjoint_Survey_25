@@ -90,11 +90,11 @@ data <- data %>%
 
 #n_distinct(data$session_id)  # 98
 
-write_csv(
+write_parquet(
   data,
   here(
     "data",
     "main",
-    "survey_data.csv"
+    "survey_data.parquet"
   )
 )
