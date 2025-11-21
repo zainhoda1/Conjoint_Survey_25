@@ -56,63 +56,63 @@ dt_mpg <- dt_mpg %>%
     cents_mile_min = case_when(
       powertrain == "bev" ~ electricity_rate_low * (kwh_q10) * 100,
       powertrain %in% c("cv", "hev") ~ gasoline_rate_low / mpg_q90 * 100,
-      
+
       powertrain == "phev" & vehicle_type == "car" ~
         (phev_uf_car *
-           (electricity_rate_low * (kwh_q10)) +
-           (1 - phev_uf_car) * (gasoline_rate_low / mpg_q90)) *
+          (electricity_rate_low * (kwh_q10)) +
+          (1 - phev_uf_car) * (gasoline_rate_low / mpg_q90)) *
         100,
       powertrain == "phev" & vehicle_type == "suv" ~
         (phev_uf_suv *
-           (electricity_rate_low * (kwh_q10)) +
-           (1 - phev_uf_suv) * (gasoline_rate_low / mpg_q90)) *
+          (electricity_rate_low * (kwh_q10)) +
+          (1 - phev_uf_suv) * (gasoline_rate_low / mpg_q90)) *
         100
     ),
     cents_mile_max = case_when(
       powertrain == "bev" ~ electricity_rate_high * (kwh_q90) * 100,
       powertrain %in% c("cv", "hev") ~ gasoline_rate_high / mpg_q10 * 100,
-      
+
       powertrain == "phev" & vehicle_type == "car" ~
         (phev_uf_car *
-           (electricity_rate_high * (kwh_q90)) +
-           (1 - phev_uf_car) * (gasoline_rate_high / mpg_q10)) *
+          (electricity_rate_high * (kwh_q90)) +
+          (1 - phev_uf_car) * (gasoline_rate_high / mpg_q10)) *
         100,
       powertrain == "phev" & vehicle_type == "suv" ~
         (phev_uf_suv *
-           (electricity_rate_high * (kwh_q90)) +
-           (1 - phev_uf_suv) * (gasoline_rate_high / mpg_q10)) *
+          (electricity_rate_high * (kwh_q90)) +
+          (1 - phev_uf_suv) * (gasoline_rate_high / mpg_q10)) *
         100
     )
   ) %>%
   mutate(
     MPGe_min = case_when(
       powertrain %in% c("bev", "cv", "hev") ~ mpg_q10,
-      
+
       powertrain == "phev" & vehicle_type == "car" ~
         (1 /
-           (phev_uf_car *
-              (kwh_q10 / gas_electricity) +
-              (1 - phev_uf_car) * (1 / mpg_q90))),
+          (phev_uf_car *
+            (kwh_q10 / gas_electricity) +
+            (1 - phev_uf_car) * (1 / mpg_q90))),
       powertrain == "phev" & vehicle_type == "suv" ~
         (1 /
-           (phev_uf_suv *
-              (kwh_q10 / gas_electricity) +
-              (1 - phev_uf_suv) * (1 / mpg_q90)))
+          (phev_uf_suv *
+            (kwh_q10 / gas_electricity) +
+            (1 - phev_uf_suv) * (1 / mpg_q90)))
     ),
-    
+
     MPGe_max = case_when(
       powertrain %in% c("bev", "cv", "hev") ~ mpg_q90,
-      
+
       powertrain == "phev" & vehicle_type == "car" ~
         (1 /
-           (phev_uf_car *
-              (kwh_q90 / gas_electricity) +
-              (1 - phev_uf_car) * (1 / mpg_q10))),
+          (phev_uf_car *
+            (kwh_q90 / gas_electricity) +
+            (1 - phev_uf_car) * (1 / mpg_q10))),
       powertrain == "phev" & vehicle_type == "suv" ~
         (1 /
-           (phev_uf_suv *
-              (kwh_q90 / gas_electricity) +
-              (1 - phev_uf_suv) * (1 / mpg_q10)))
+          (phev_uf_suv *
+            (kwh_q90 / gas_electricity) +
+            (1 - phev_uf_suv) * (1 / mpg_q10)))
     )
   )
 
@@ -148,7 +148,7 @@ dt_mpg_expanded <- dt_mpg %>%
   #   cents_mile_value = map2(cents_mile_min_round, cents_mile_max_round, ~ .x:.y)
   # ) %>%
   # unnest(cents_mile_value) %>%
-  
+
   ## Only display min, avg, max values
   pivot_longer(
     starts_with("cents_mile_value_") | starts_with("MPGe_value_"),
@@ -206,7 +206,6 @@ dt_mpg_expanded %>%
   summarise(counts = n(), .groups = "drop")
 
 
-
 ## --- DCE   ----
 ###---- For car----
 
@@ -214,7 +213,7 @@ n_respondents = 100
 
 # Define profiles with attributes and levels
 profiles_car_low <- cbc_profiles(
-  powertrain = c('gas', 'bev','hev'),
+  powertrain = c('gas', 'bev', 'hev'),
   price = seq(1.0, 2.0, 0.2), # unit: 10000
   range_bev = c(0, seq(0.5, 1.5, 0.5)), # unit: 100
   mileage = seq(2, 6, 0.5), # unit: 10000
@@ -222,7 +221,7 @@ profiles_car_low <- cbc_profiles(
   operating_cost = seq(0.3, 1.8, 0.3) # unit: 10
 )
 
-# Restrictions 
+# Restrictions
 
 profiles_restricted_car <- cbc_restrict(
   profiles_car_low,
@@ -233,7 +232,7 @@ profiles_restricted_car <- cbc_restrict(
   # Gas efficiency restrictions
   (powertrain == "gas") & (operating_cost < 0.8),
   (powertrain == "bev") & (operating_cost > 1.2),
-  (powertrain == "hev") & (operating_cost < 0.6), 
+  (powertrain == "hev") & (operating_cost < 0.6),
   (powertrain == "hev") & (operating_cost > 1.2)
 )
 
@@ -241,7 +240,7 @@ profiles_restricted_car <- cbc_restrict(
 
 priors_fixed_parameter_car <- cbc_priors(
   profiles = profiles_restricted_car,
-  powertrain = c("bev" = -1.0,  "hev" = 0.1),
+  powertrain = c("bev" = -1.0, "hev" = 0.1),
   price = -0.2,
   range_bev = 0.1,
   mileage = -0.5,
@@ -297,7 +296,7 @@ design_car_random_label <- cbc_design(
   no_choice = TRUE,
   priors = priors_fixed_parameter_car,
   remove_dominant = FALSE,
-  label= 'powertrain'
+  label = 'powertrain'
 )
 
 design_car_minoverlap_label <- cbc_design(
@@ -309,7 +308,7 @@ design_car_minoverlap_label <- cbc_design(
   no_choice = TRUE,
   priors = priors_fixed_parameter_car,
   remove_dominant = FALSE,
-  label= 'powertrain'
+  label = 'powertrain'
 )
 
 design_car_shortcut_label <- cbc_design(
@@ -321,7 +320,7 @@ design_car_shortcut_label <- cbc_design(
   no_choice = TRUE,
   priors = priors_fixed_parameter_car,
   remove_dominant = FALSE,
-  label= 'powertrain'
+  label = 'powertrain'
 )
 
 cbc_compare(
@@ -334,14 +333,36 @@ cbc_compare(
 )
 
 
-saveRDS(design_car_random, here('data', 'design_car_random.Rds'))
-saveRDS(design_car_shortcut, here('data', 'design_car_shortcut.Rds'))
-saveRDS(design_car_minoverlap, here('data', 'design_car_minoverlap.Rds'))
-saveRDS(design_car_random_label, here('data', 'design_car_random_label.Rds'))
-saveRDS(design_car_shortcut_label, here('data', 'design_car_shortcut_label.Rds'))
-saveRDS(design_car_minoverlap_label, here('data', 'design_car_minoverlap_label.Rds'))
-
-
+saveRDS(
+  design_car_random,
+  here('data', 'doe', 'design_new', 'profiles', 'design_car_random.Rds')
+)
+saveRDS(
+  design_car_shortcut,
+  here('data', 'doe', 'design_new', 'profiles', 'design_car_shortcut.Rds')
+)
+saveRDS(
+  design_car_minoverlap,
+  here('data', 'doe', 'design_new', 'profiles', 'design_car_minoverlap.Rds')
+)
+saveRDS(
+  design_car_random_label,
+  here('data', 'doe', 'design_new', 'profiles', 'design_car_random_label.Rds')
+)
+saveRDS(
+  design_car_shortcut_label,
+  here('data', 'doe', 'design_new', 'profiles', 'design_car_shortcut_label.Rds')
+)
+saveRDS(
+  design_car_minoverlap_label,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'design_car_minoverlap_label.Rds'
+  )
+)
 
 
 cbc_inspect(design_car_random)
@@ -349,15 +370,24 @@ cbc_inspect(design_car_random)
 
 design_car_random <- cbc_encode(design_car_random, coding = "dummy")
 
-choices_priors <- cbc_choices(design_car_random, priors = priors_fixed_parameter_car)
+choices_priors <- cbc_choices(
+  design_car_random,
+  priors = priors_fixed_parameter_car
+)
 
 model <- logitr(
-  data = choices_priors, 
-  outcome = 'choice', 
-  obsID = 'obsID', 
+  data = choices_priors,
+  outcome = 'choice',
+  obsID = 'obsID',
   pars = c(
-    'price', 'range_bev', 'mileage', 'age', 'operating_cost',
-    'powertrainbev', 'powertrainhev')
+    'price',
+    'range_bev',
+    'mileage',
+    'age',
+    'operating_cost',
+    'powertrainbev',
+    'powertrainhev'
+  )
 )
 
 summary(model)
@@ -368,6 +398,5 @@ plot(power, type = "power", power_threshold = 0.9)
 summary(power, power_threshold = 0.9)
 
 plot(power, type = "se")
-
 
 #############################################

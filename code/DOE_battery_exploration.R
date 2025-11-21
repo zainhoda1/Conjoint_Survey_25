@@ -14,7 +14,7 @@ library(here)
 library(data.table)
 # library(readxl)
 
-n_respondents = 1500
+n_respondents = 1000
 
 # ---- Battery Survey----
 ## ---- profile ----
@@ -47,7 +47,7 @@ profiles_suv_low <- cbc_profiles(
   battery_degradation = seq(1, 8, 1) # %
 )
 
-# budget > 20k
+####---- budget > 20k----
 profiles_suv_high <- cbc_profiles(
   veh_mileage = seq(2, 6, 0.5), # unit: 10000
   veh_price = seq(2.5, 4.5, 0.5), # unit: 10000
@@ -111,7 +111,7 @@ design_car_low_random <- cbc_design(
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
   priors = priors_fixed_car_low,
-  remove_dominant = FALSE
+  remove_dominant = TRUE
 )
 
 design_car_low_minoverlap <- cbc_design(
@@ -122,7 +122,7 @@ design_car_low_minoverlap <- cbc_design(
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
   priors = priors_fixed_car_low,
-  remove_dominant = FALSE
+  remove_dominant = TRUE
 )
 
 design_car_low_shortcut <- cbc_design(
@@ -133,7 +133,7 @@ design_car_low_shortcut <- cbc_design(
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
   priors = priors_fixed_car_low,
-  remove_dominant = FALSE
+  remove_dominant = TRUE
 )
 
 cbc_compare(
@@ -144,22 +144,256 @@ cbc_compare(
 
 saveRDS(
   design_car_low_random,
-  here('data', 'battery_design_car_low_random.Rds')
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_car_low_random.Rds'
+  )
 )
 saveRDS(
   design_car_low_shortcut,
-  here('data', 'battery_design_car_low_shortcut.Rds')
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_car_low_shortcut.Rds'
+  )
 )
 saveRDS(
   design_car_low_minoverlap,
-  here('data', 'battery_design_car_low_minoverlap.Rds')
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_car_low_minoverlap.Rds'
+  )
+)
+
+
+###---- car-high----
+design_car_high_random <- cbc_design(
+  profiles = profiles_car_high,
+  method = 'random',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_car_high,
+  remove_dominant = TRUE
+)
+
+design_car_high_minoverlap <- cbc_design(
+  profiles = profiles_car_high,
+  method = 'minoverlap',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_car_high,
+  remove_dominant = TRUE
+)
+
+design_car_high_shortcut <- cbc_design(
+  profiles = profiles_car_high,
+  method = 'shortcut',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_car_high,
+  remove_dominant = TRUE
+)
+
+cbc_compare(
+  "Random" = design_car_high_random,
+  "Shortcut" = design_car_high_shortcut,
+  "Min Overlap" = design_car_high_minoverlap
+)
+
+saveRDS(
+  design_car_high_random,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_car_high_random.Rds'
+  )
+)
+saveRDS(
+  design_car_high_shortcut,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_car_high_shortcut.Rds'
+  )
+)
+saveRDS(
+  design_car_low_minoverlap,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_car_low_minoverlap.Rds'
+  )
+)
+
+
+###---- SUV-low----
+design_suv_low_random <- cbc_design(
+  profiles = profiles_suv_low,
+  method = 'random',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_suv_low,
+  remove_dominant = TRUE
+)
+
+design_suv_low_minoverlap <- cbc_design(
+  profiles = profiles_suv_low,
+  method = 'minoverlap',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_suv_low,
+  remove_dominant = TRUE
+)
+
+design_suv_low_shortcut <- cbc_design(
+  profiles = profiles_suv_low,
+  method = 'shortcut',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_suv_low,
+  remove_dominant = TRUE
+)
+
+cbc_compare(
+  "Random" = design_suv_low_random,
+  "Shortcut" = design_suv_low_shortcut,
+  "Min Overlap" = design_suv_low_minoverlap
+)
+
+saveRDS(
+  design_suv_low_random,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_suv_low_random.Rds'
+  )
+)
+saveRDS(
+  design_suv_low_shortcut,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_suv_low_shortcut.Rds'
+  )
+)
+saveRDS(
+  design_suv_low_minoverlap,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_suv_low_minoverlap.Rds'
+  )
+)
+
+
+###---- SUV-high----
+design_suv_high_random <- cbc_design(
+  profiles = profiles_suv_high,
+  method = 'random',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_suv_high,
+  remove_dominant = TRUE
+)
+
+design_suv_high_minoverlap <- cbc_design(
+  profiles = profiles_suv_high,
+  method = 'minoverlap',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_suv_high,
+  remove_dominant = TRUE
+)
+
+design_suv_high_shortcut <- cbc_design(
+  profiles = profiles_suv_high,
+  method = 'shortcut',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_suv_high,
+  remove_dominant = TRUE
+)
+
+cbc_compare(
+  "Random" = design_suv_high_random,
+  "Shortcut" = design_suv_high_shortcut,
+  "Min Overlap" = design_suv_high_minoverlap
+)
+
+saveRDS(
+  design_suv_high_random,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_suv_high_random.Rds'
+  )
+)
+saveRDS(
+  design_suv_high_shortcut,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_suv_high_shortcut.Rds'
+  )
+)
+saveRDS(
+  design_suv_low_minoverlap,
+  here(
+    'data',
+    'doe',
+    'design_new',
+    'profiles',
+    'battery_design_suv_low_minoverlap.Rds'
+  )
 )
 
 
 ##---- Inspect Design----
-cbc_inspect(design_car_low_random)
-cbc_inspect(design_car_low_shortcut)
-cbc_inspect(design_car_low_minoverlap)
+# cbc_inspect(design_car_low_random)
+# cbc_inspect(design_car_low_shortcut)
+# cbc_inspect(design_car_low_minoverlap)
 
 ##---- Simulate Choices----
 choices_car_low_random <- cbc_choices(
