@@ -45,8 +45,6 @@ vehicle_cbc_options <- function(df, budget_select) {
     mutate(
       powertrain = case_when(
         powertrain == 'bev' ~ paste0(electric_icon, 'Battery electric'),
-        powertrain == 'phev' ~
-          paste0(gas_icon, electric_icon, 'Plug-in hybrid'), # 'Plug-in hybrid electric'
         powertrain == 'hev' ~ paste0(gas_icon, 'Gas hybrid'), # 'Gas hybrid electric'
         powertrain == 'gas' ~ paste0(gas_icon, 'Conventional')
       ),
@@ -61,10 +59,6 @@ vehicle_cbc_options <- function(df, budget_select) {
   # Use only the first value of budget_select if it has multiple values
   budget_val <- budget_select[1]
 
-  alt1$price <- alt1$price[1] * budget_val
-  alt2$price <- alt2$price[1] * budget_val
-  alt3$price <- alt3$price[1] * budget_val
-  alt4$price <- alt4$price[1] * budget_val
   options <- c("option_1", "option_2", "option_3", "option_4")
 
   names(options) <- c(
@@ -156,11 +150,6 @@ battery_cbc_options <- function(df, budget_select) {
   # Use only the first value of budget_select if it has multiple values
   budget_val <- budget_select[1]
 
-  # alt1$price <- alt1$veh_price[1] * budget_val
-  # alt2$price <- alt2$veh_price[1] * budget_val
-  # alt3$price <- alt3$veh_price[1] * budget_val
-  # alt4$price <- alt3$veh_price[1] * budget_val
-
   options <- c("option_1", "option_2", "option_3", "option_4")
 
   #  <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
@@ -171,7 +160,7 @@ battery_cbc_options <- function(df, budget_select) {
       "
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
-        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$veh_mileage)}</span><br>
+        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$mileage)}</span><br>
         <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt1$battery_condition} </span><br>
         <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt1$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health: {alt1$battery_health_year3}) </span><br>
@@ -184,7 +173,7 @@ battery_cbc_options <- function(df, budget_select) {
       "
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 2</b><br>
-        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$veh_mileage)}</span><br>
+        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$mileage)}</span><br>
         <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt2$battery_condition} </span><br>
         <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt2$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health: {alt2$battery_health_year3}) </span><br>
@@ -197,7 +186,7 @@ battery_cbc_options <- function(df, budget_select) {
       "
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 3</b><br>
-        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$veh_mileage)}</span><br>
+        <b><span style='font-size: 13px;'><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$mileage)}</span><br>
         <b><span style='font-size: 13px;'><u>Battery condition:</u></span></b><br> <span style='font-size: 13px;'>{alt3$battery_condition} </span><br>
         <b><span style='font-size: 13px;'><u>Range on a full charge:</u></span></b><br>
         <b><span style='font-size: 13px;'>&nbsp; &nbsp; Current:</span></b><br> <span style='font-size: 13px;'>&nbsp; &nbsp; {alt3$battery_range_year3} miles<br>&nbsp; &nbsp; (Battery Health: {alt3$battery_health_year3}) </span><br>
@@ -385,6 +374,7 @@ server <- function(input, output, session) {
   df_filtered <- reactive({
     # Try to get vehicle style from input first
     vehicle_style <- input$next_veh_style
+    vehicle_budget <- input$next_veh_style
 
     # If not available, try from stored data
     if (is.null(vehicle_style)) {
@@ -399,13 +389,22 @@ server <- function(input, output, session) {
     }
 
     req(vehicle_style) # ensures we have a vehicle style
+    req(vehicle_budget) # ensures we have a budget
 
     df %>%
       {
+        # Determine vehicle type
         if (vehicle_style == "Car / sedan / hatchback") {
-          filter(., vehicle_type == "car")
+          temp <- filter(., vehicle_type == "car")
         } else {
-          filter(., vehicle_type == "suv")
+          temp <- filter(., vehicle_type == "suv")
+        }
+
+        # Apply budget filter
+        if (vehicle_budget %in% c("5000", "10000", "15000", "20000")) {
+          filter(temp, budget == "low")
+        } else {
+          filter(temp, budget == "high")
         }
       }
   })

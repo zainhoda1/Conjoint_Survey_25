@@ -209,7 +209,6 @@ dt_mpg_expanded %>%
 ## --- DCE   ----
 ###---- For car----
 
-
 # Define profiles with attributes and levels
 profiles_car <- cbc_profiles(
   powertrain = c('gas', 'bev', 'phev', 'hev'),
@@ -317,12 +316,7 @@ by <- join_by(vehicle_type, powertrain, operating_cost == cents_mile)
 design_car_data <- left_join(design_car_data, dt_mpg_expanded, by)
 
 
-################################################################################################
-
-
 ###---- For SUV----
-
-
 
 # Define profiles with attributes and levels
 profiles_suv <- cbc_profiles(
@@ -334,8 +328,6 @@ profiles_suv <- cbc_profiles(
   age = seq(0.2, 1.0, 0.2), # make_year changed to age  x10
   operating_cost = seq(0.3, 1.8, 0.3) # x10
 )
-
-
 
 
 # Restrictions
