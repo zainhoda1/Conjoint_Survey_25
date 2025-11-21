@@ -317,22 +317,30 @@ by <- join_by(vehicle_type, powertrain, operating_cost == cents_mile)
 design_car_data <- left_join(design_car_data, dt_mpg_expanded, by)
 
 
-################################################################################################
-
+#########################################################################
+#########################################################################
 
 ###---- For SUV----
 
 
 
 # Define profiles with attributes and levels
-profiles_suv <- cbc_profiles(
-  powertrain = c('gas', 'bev', 'phev', 'hev'),
-  price = seq(0.8, 1.1, 0.1),
-  range_bev = c(0, seq(0.5, 2.5, 0.5)), # x 100
-  range_phev = c(0, seq(0.1, 0.4, 0.1)), # x 100
+profiles_suv_low <- cbc_profiles(
+  powertrain = c('gas', 'bev','hev'),
+  price = seq(15,20, 1), # x 1000
+  range_bev = seq(1.5, 2.5, 0.5), # x 100
   mileage = seq(0.2, 0.6, 0.05), # x 100000
   age = seq(0.2, 1.0, 0.2), # make_year changed to age  x10
-  operating_cost = seq(0.3, 1.8, 0.3) # x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x 10
+)
+
+profiles_suv_high <- cbc_profiles(
+  powertrain = c('gas', 'bev','hev'),
+  price = seq(25,50, 5), # x 1000
+  range_bev = seq(2.0, 3.0, 0.5), # x 100
+  mileage = seq(0.2, 0.6, 0.05), # x 100000
+  age = seq(0.2, 1.0, 0.2), # make_year changed to age  x10
+  operating_cost = seq(0.3, 1.8, 0.3) # x 10
 )
 
 
