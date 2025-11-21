@@ -132,42 +132,42 @@ In DCE models, utilities usually range between -2 and +2, so a utility loss of -
 ```{r}
 priors_fixed_battery_car_20K_above <- cbc_priors(
   profiles = profiles_restricted_battery_car,
-  veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
-  veh_price            = -0.1,      # Each $10000 increase reduces utility by 0.1
-  battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
-  battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
-  battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
-  no_choice = -1.0                      # There is a strong positive preference for EV, so positive for "no_choice"
+  veh_mileage = -0.2, # Each 10000 mile increase reduces utility by 0.5
+  veh_price = -1.0, # Each $10000 increase reduces utility by 1
+  battery_refurbish = c(-0.4, -0.2), # Cell refurbishment least preferred
+  battery_range_year0 = 0.3, # Each 100 mile of range adds utility by 0.3
+  battery_degradation = -0.2, # Each 1% of degradation increases subtracts utility by 0.2
+  no_choice = -2.0 # There is a strong positive preference for EV, so positive for "no_choice"
 )
 
 priors_fixed_battery_car_20K_below <- cbc_priors(
   profiles = profiles_restricted_battery_car,
-  veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
-  veh_price            = -0.1,      # Each $10000 increase reduces utility by 0.1
-  battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
-  battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
-  battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
-  no_choice = -1.0                      # There is a strong positive preference for EV, so positive for "no_choice"
+  veh_mileage          = -0.1,     
+  veh_price            = -1.2,      
+  battery_refurbish = c(-0.3, -0.1),
+  battery_range_year0  = 0.4,       
+  battery_degradation  = -0.3,      
+  no_choice = -1.0                   
 )
 
 priors_fixed_battery_suv_20K_above <- cbc_priors(
   profiles = profiles_restricted_battery_suv,
-  veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
-  veh_price            = -0.1,      # Each $10000 increase reduces utility by 0.1
-  battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
-  battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
-  battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
-  no_choice = -1.0                      # There is a strong positive preference for EV, so positive for "no_choice"
+  veh_mileage          = -0.25,     
+  veh_price            = -0.9,      
+  battery_refurbish = c(-0.45, -0.25),
+  battery_range_year0  = 0.35,        
+  battery_degradation  = -0.25,       
+  no_choice = -1.5                    
 )
 
 priors_fixed_battery_suv_20K_below <- cbc_priors(
   profiles = profiles_restricted_battery_suv,
-  veh_mileage          = -0.5,     # Each 10000 mile increase reduces utility by 0.5
-  veh_price            = -0.1,      # Each $10000 increase reduces utility by 0.1
-  battery_refurbish = c(-1.0, -0.5),   # Cell refurbishment least preferred
-  battery_range_year0  = 0.5,         # Each 100 mile of range adds utility by 0.5
-  battery_degradation  = -0.5,         # Each 1% of degradation increases subtracts utility by 0.5
-  no_choice = -1.0                      # There is a strong positive preference for EV, so positive for "no_choice"
+  veh_mileage          = -0.15,     
+  veh_price            = -1.1,      
+  battery_refurbish = c(-0.35, -0.15),
+  battery_range_year0  = 0.45,        
+  battery_degradation  = -0.35,       
+  no_choice = -0.5                  
 )
 
 priors_fixed_battery_car

@@ -156,10 +156,10 @@ battery_cbc_options <- function(df, budget_select) {
   # Use only the first value of budget_select if it has multiple values
   budget_val <- budget_select[1]
 
-  alt1$price <- alt1$veh_price[1] * budget_val
-  alt2$price <- alt2$veh_price[1] * budget_val
-  alt3$price <- alt3$veh_price[1] * budget_val
-  alt4$price <- alt3$veh_price[1] * budget_val
+  # alt1$price <- alt1$veh_price[1] * budget_val
+  # alt2$price <- alt2$veh_price[1] * budget_val
+  # alt3$price <- alt3$veh_price[1] * budget_val
+  # alt4$price <- alt3$veh_price[1] * budget_val
 
   options <- c("option_1", "option_2", "option_3", "option_4")
 

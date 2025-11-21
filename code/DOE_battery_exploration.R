@@ -1,0 +1,279 @@
+# Make conjoint surveys using the cbcTools package
+
+# Install packages
+# install.packages("remotes")
+# install.packages("tidyverse")
+# remotes::install_github("jhelvy/cbcTools")
+
+# Load libraries
+
+library(tidyverse)
+library(cbcTools)
+library(logitr)
+library(here)
+library(data.table)
+# library(readxl)
+
+n_respondents = 1500
+
+# ---- Battery Survey----
+## ---- profile ----
+### ----car----
+#### ---- budget <= 20k----
+profiles_car_low <- cbc_profiles(
+  veh_mileage = seq(2, 6, 0.5), # unit: 10000
+  veh_price = seq(1.0, 2.0, 0.2), # unit: 10000
+  battery_refurbish = c('original', 'cellreplace', 'packreplace'),
+  battery_range_year0 = c(0.5, 1.0, 1.5), # unit: 100
+  battery_degradation = seq(1, 8, 1) # %
+)
+
+#### ----budget > 20k----
+profiles_car_high <- cbc_profiles(
+  veh_mileage = seq(2, 6, 0.5), # unit: 10000
+  veh_price = seq(2.0, 4.0, 0.5), # unit: 10000
+  battery_refurbish = c('original', 'cellreplace', 'packreplace'),
+  battery_range_year0 = c(1.0, 1.5, 2.0, 2.5), # unit: 100
+  battery_degradation = seq(1, 8, 1) # %
+)
+
+###----SUV----
+####----budget <= 20k----
+profiles_suv_low <- cbc_profiles(
+  veh_mileage = seq(2, 6, 0.5), # unit: 10000
+  veh_price = seq(1.5, 2.5, 0.2), # unit: 10000
+  battery_refurbish = c('original', 'cellreplace', 'packreplace'),
+  battery_range_year0 = seq(1.5, 2.5, 0.5), # unit: 100
+  battery_degradation = seq(1, 8, 1) # %
+)
+
+# budget > 20k
+profiles_suv_high <- cbc_profiles(
+  veh_mileage = seq(2, 6, 0.5), # unit: 10000
+  veh_price = seq(2.5, 4.5, 0.5), # unit: 10000
+  battery_refurbish = c('original', 'cellreplace', 'packreplace'),
+  battery_range_year0 = seq(2.0, 3.5, 0.5), # unit: 100
+  battery_degradation = seq(1, 8, 1) # %
+)
+
+## ---- Restrictions----
+
+## ---- Set up priors----
+
+priors_fixed_car_low <- cbc_priors(
+  profiles = profiles_car_low,
+  veh_mileage = -0.1,
+  veh_price = -1.2,
+  battery_refurbish = c(-0.3, -0.1),
+  battery_range_year0 = 0.4,
+  battery_degradation = -0.3,
+  no_choice = -1.0
+)
+
+priors_fixed_car_high <- cbc_priors(
+  profiles = profiles_car_high,
+  veh_mileage = -0.2, # Each 10000 mile increase reduces utility by 0.5
+  veh_price = -1.0, # Each $10000 increase reduces utility by 1
+  battery_refurbish = c(-0.4, -0.2), # Cell refurbishment least preferred
+  battery_range_year0 = 0.3, # Each 100 mile of range adds utility by 0.3
+  battery_degradation = -0.2, # Each 1% of degradation increases subtracts utility by 0.2
+  no_choice = -2.0 # There is a strong positive preference for EV, so positive for "no_choice"
+)
+
+
+priors_fixed_suv_low <- cbc_priors(
+  profiles = profiles_suv_low,
+  veh_mileage = -0.15,
+  veh_price = -1.1,
+  battery_refurbish = c(-0.35, -0.15),
+  battery_range_year0 = 0.45,
+  battery_degradation = -0.35,
+  no_choice = -0.5
+)
+
+priors_fixed_suv_high <- cbc_priors(
+  profiles = profiles_suv_high,
+  veh_mileage = -0.25,
+  veh_price = -0.9,
+  battery_refurbish = c(-0.45, -0.25),
+  battery_range_year0 = 0.35,
+  battery_degradation = -0.25,
+  no_choice = -1.5
+)
+
+##---- Generate Designs----
+###---- car-low----
+design_car_low_random <- cbc_design(
+  profiles = profiles_car_low,
+  method = 'random',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_car_low,
+  remove_dominant = FALSE
+)
+
+design_car_low_minoverlap <- cbc_design(
+  profiles = profiles_car_low,
+  method = 'minoverlap',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_car_low,
+  remove_dominant = FALSE
+)
+
+design_car_low_shortcut <- cbc_design(
+  profiles = profiles_car_low,
+  method = 'shortcut',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_car_low,
+  remove_dominant = FALSE
+)
+
+cbc_compare(
+  "Random" = design_car_low_random,
+  "Shortcut" = design_car_low_shortcut,
+  "Min Overlap" = design_car_low_minoverlap
+)
+
+saveRDS(
+  design_car_low_random,
+  here('data', 'battery_design_car_low_random.Rds')
+)
+saveRDS(
+  design_car_low_shortcut,
+  here('data', 'battery_design_car_low_shortcut.Rds')
+)
+saveRDS(
+  design_car_low_minoverlap,
+  here('data', 'battery_design_car_low_minoverlap.Rds')
+)
+
+
+##---- Inspect Design----
+cbc_inspect(design_car_low_random)
+cbc_inspect(design_car_low_shortcut)
+cbc_inspect(design_car_low_minoverlap)
+
+##---- Simulate Choices----
+choices_car_low_random <- cbc_choices(
+  design_car_low_random,
+  priors = priors_fixed_car_low
+)
+choices_car_low_shortcut <- cbc_choices(
+  design_car_low_shortcut,
+  priors = priors_fixed_car_low
+)
+choices_car_low_minoverlap <- cbc_choices(
+  design_car_low_minoverlap,
+  priors = priors_fixed_car_low
+)
+##---- Assess Power----
+
+design_car_low_random <- cbc_encode(design_car_low_random, coding = "dummy")
+design_car_low_shortcut <- cbc_encode(design_car_low_shortcut, coding = "dummy")
+design_car_low_minoverlap <- cbc_encode(
+  design_car_low_minoverlap,
+  coding = "dummy"
+)
+
+power_car_low_random <- cbc_power(
+  data = choices_car_low_random,
+  outcome = "choice",
+  obsID = "obsID",
+  n_q = 6,
+  n_breaks = 10
+)
+
+power_car_low_shortcut <- cbc_power(
+  data = choices_car_low_shortcut,
+  outcome = "choice",
+  obsID = "obsID",
+  n_q = 6,
+  n_breaks = 10
+)
+
+power_car_low_minoverlap <- cbc_power(
+  data = choices_car_low_minoverlap,
+  outcome = "choice",
+  obsID = "obsID",
+  n_q = 6,
+  n_breaks = 10
+)
+
+
+par(mfrow = c(1, 3))
+plot(power_car_low_random, type = "power", power_threshold = 0.9)
+plot(power_car_low_shortcut, type = "power", power_threshold = 0.9)
+plot(power_car_low_minoverlap, type = "power", power_threshold = 0.9)
+par(mfrow = c(1, 1))
+
+plot(power_car_low_random, type = "se", ylim = c(0, 0.5))
+plot(power_car_low_shortcut, type = "se", ylim = c(0, 0.5))
+plot(power_car_low_minoverlap, type = "se", ylim = c(0, 0.5))
+
+
+summary(power_car_low_random, power_threshold = 0.9)
+
+## ---- Modeling----
+model_car_low_random <- logitr(
+  data = choices_car_low_random,
+  outcome = 'choice',
+  obsID = 'obsID',
+  pars = c(
+    'veh_price',
+    'veh_mileage',
+    'battery_refurbishcellreplace',
+    'battery_refurbishpackreplace',
+    'battery_range_year0',
+    'battery_degradation',
+    'no_choice'
+  )
+)
+
+summary(model_car_low_random)
+wtp(model_car_low_random, scalePar = "veh_price")
+
+
+model_car_low_shortcut <- logitr(
+  data = choices_car_low_shortcut,
+  outcome = 'choice',
+  obsID = 'obsID',
+  pars = c(
+    'veh_price',
+    'veh_mileage',
+    'battery_refurbishcellreplace',
+    'battery_refurbishpackreplace',
+    'battery_range_year0',
+    'battery_degradation',
+    'no_choice'
+  )
+)
+
+summary(model_car_low_shortcut)
+wtp(model_car_low_shortcut, scalePar = "veh_price")
+
+
+model_car_low_minoverlap <- logitr(
+  data = choices_car_low_minoverlap,
+  outcome = 'choice',
+  obsID = 'obsID',
+  pars = c(
+    'veh_price',
+    'veh_mileage',
+    'battery_refurbishcellreplace',
+    'battery_refurbishpackreplace',
+    'battery_range_year0',
+    'battery_degradation',
+    'no_choice'
+  )
+)
+
+summary(model_car_low_minoverlap)
+wtp(model_car_low_minoverlap, scalePar = "veh_price")
