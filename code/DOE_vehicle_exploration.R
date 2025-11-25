@@ -205,13 +205,13 @@ dt_mpg_expanded %>%
   group_by(powertrain, vehicle_type) %>%
   summarise(counts = n(), .groups = "drop")
 
+n_respondents = 1000
 
-## --- DCE   ----
-###---- For car----
+# ---- Vehicle Survey----
+## ---- profile ----
+### ----car----
+#### ---- budget <= 20k----
 
-n_respondents = 100
-
-# Define profiles with attributes and levels
 profiles_car_low <- cbc_profiles(
   powertrain = c('gas', 'bev', 'hev'),
   price = seq(1.0, 2.0, 0.2), # unit: 10000
@@ -220,6 +220,39 @@ profiles_car_low <- cbc_profiles(
   age = seq(0.2, 1.0, 0.2), # make_year changed to age / unit: 10
   operating_cost = seq(0.3, 1.8, 0.3) # unit: 10
 )
+
+#### ----budget > 20k----
+profiles_car_high <- cbc_profiles(
+  powertrain = c('gas', 'bev', 'hev'),
+  price = seq(2.0, 4.0, 0.5), # unit: 10000
+  range_bev = c(0, seq(1.0, 2.5, 0.5)), # unit: 100
+  mileage = seq(2, 6, 0.5), # unit: 10000
+  age = seq(0.2, 1.0, 0.2), # make_year changed to age / unit: 10
+  operating_cost = seq(0.3, 1.8, 0.3) # unit: 10
+)
+
+###----SUV----
+####----budget <= 20k----
+profiles_suv_low <- cbc_profiles(
+  powertrain = c('gas', 'bev', 'hev'),
+  price = seq(1.5, 2.5, 0.5), # unit: 10000
+  range_bev = c(0, seq(1.0, 2.5, 0.5)), # unit: 100
+  mileage = seq(2, 6, 0.5), # unit: 10000
+  age = seq(0.2, 1.0, 0.2), # make_year changed to age / unit: 10
+  operating_cost = seq(0.3, 1.8, 0.3) # unit: 10
+)
+
+#### ----budget > 20k----
+profiles_suv_high <- cbc_profiles(
+  powertrain = c('gas', 'bev', 'hev'),
+  price = seq(2.5, 4.5, 0.5), # unit: 10000
+  range_bev = c(0, seq(2.0, 3.5, 0.5)), # unit: 100
+  mileage = seq(2, 6, 0.5), # unit: 10000
+  age = seq(0.2, 1.0, 0.2), # make_year changed to age / unit: 10
+  operating_cost = seq(0.3, 1.8, 0.3) # unit: 10
+)
+
+#########################################
 
 # Restrictions
 
@@ -251,7 +284,7 @@ priors_fixed_parameter_car <- cbc_priors(
 
 ## Generate Designs
 
-design_car_random <- cbc_design(
+design_random_car_low <- cbc_design(
   profiles = profiles_restricted_car,
   method = 'random',
   n_resp = n_respondents, # Number of respondents
@@ -263,140 +296,314 @@ design_car_random <- cbc_design(
   remove_dominant = FALSE
 )
 
-design_car_minoverlap <- cbc_design(
-  profiles = profiles_car_low,
-  method = 'minoverlap',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_car,
-  balance_by = c('powertrain'),
-  remove_dominant = FALSE
+#############################################
+
+# design_car_minoverlap <- cbc_design(
+#   profiles = profiles_car_low,
+#   method = 'minoverlap',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car,
+#   balance_by = c('powertrain'),
+#   remove_dominant = FALSE
+# )
+# 
+# design_car_shortcut <- cbc_design(
+#   profiles = profiles_car_low,
+#   method = 'shortcut',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car,
+#   balance_by = c('powertrain'),
+#   remove_dominant = FALSE
+# )
+# 
+# design_car_random_label <- cbc_design(
+#   profiles = profiles_car_low,
+#   method = 'random',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car,
+#   remove_dominant = FALSE,
+#   label = 'powertrain'
+# )
+# 
+# design_car_minoverlap_label <- cbc_design(
+#   profiles = profiles_car_low,
+#   method = 'minoverlap',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car,
+#   remove_dominant = FALSE,
+#   label = 'powertrain'
+# )
+# 
+# design_car_shortcut_label <- cbc_design(
+#   profiles = profiles_car_low,
+#   method = 'shortcut',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car,
+#   remove_dominant = FALSE,
+#   label = 'powertrain'
+# )
+# 
+# cbc_compare(
+#   "Random" = design_car_random,
+#   "Shortcut" = design_car_shortcut,
+#   "Min Overlap" = design_car_minoverlap,
+#   "Random_label" = design_car_random_label,
+#   "Shortcut_label" = design_car_shortcut_label,
+#   "Min Overlap_label" = design_car_minoverlap_label
+# )
+# 
+# 
+# saveRDS(
+#   design_car_random,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_car_random.Rds')
+# )
+# saveRDS(
+#   design_car_shortcut,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_car_shortcut.Rds')
+# )
+# saveRDS(
+#   design_car_minoverlap,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_car_minoverlap.Rds')
+# )
+# saveRDS(
+#   design_car_random_label,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_car_random_label.Rds')
+# )
+# saveRDS(
+#   design_car_shortcut_label,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_car_shortcut_label.Rds')
+# )
+# saveRDS(
+#   design_car_minoverlap_label,
+#   here(
+#     'data',
+#     'doe',
+#     'design_new',
+#     'profiles',
+#     'design_car_minoverlap_label.Rds'
+#   )
+# )
+# 
+# 
+# cbc_inspect(design_car_random)
+# 
+# 
+# design_car_random <- cbc_encode(design_car_random, coding = "dummy")
+# 
+# choices_priors <- cbc_choices(
+#   design_car_random,
+#   priors = priors_fixed_parameter_car
+# )
+# 
+# model <- logitr(
+#   data = choices_priors,
+#   outcome = 'choice',
+#   obsID = 'obsID',
+#   pars = c(
+#     'price',
+#     'range_bev',
+#     'mileage',
+#     'age',
+#     'operating_cost',
+#     'powertrainbev',
+#     'powertrainhev'
+#   )
+# )
+# 
+# summary(model)
+# 
+# power <- cbc_power(choices_priors)
+# 
+# plot(power, type = "power", power_threshold = 0.9)
+# summary(power, power_threshold = 0.9)
+# 
+# plot(power, type = "se")
+
+#############################################
+
+# Restrictions
+
+profiles_restricted_car_high <- cbc_restrict(
+  profiles_car_high,
+  # BEV range restrictions
+  (powertrain == "gas") & (range_bev != 0),
+  (powertrain == "hev") & (range_bev != 0),
+  (powertrain == "bev") & (range_bev == 0),
+  # Gas efficiency restrictions
+  (powertrain == "gas") & (operating_cost < 0.8),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.6),
+  (powertrain == "hev") & (operating_cost > 1.2)
 )
 
-design_car_shortcut <- cbc_design(
-  profiles = profiles_car_low,
-  method = 'shortcut',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_car,
-  balance_by = c('powertrain'),
-  remove_dominant = FALSE
+## Set up priors
+
+priors_fixed_parameter_car <- cbc_priors(
+  profiles = profiles_restricted_car_high,
+  powertrain = c("bev" = -1.0, "hev" = 0.1),
+  price = -0.2,
+  range_bev = 0.1,
+  mileage = -0.5,
+  age = -0.2,
+  operating_cost = -0.3,
+  no_choice = 0.5
 )
 
-design_car_random_label <- cbc_design(
-  profiles = profiles_car_low,
+## Generate Designs
+
+design_random_car_high <- cbc_design(
+  profiles = profiles_restricted_car_high,
   method = 'random',
   n_resp = n_respondents, # Number of respondents
   n_alts = 3, # Number of alternatives per question
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
   priors = priors_fixed_parameter_car,
-  remove_dominant = FALSE,
-  label = 'powertrain'
+  balance_by = c('powertrain'),
+  remove_dominant = FALSE
 )
 
-design_car_minoverlap_label <- cbc_design(
-  profiles = profiles_car_low,
-  method = 'minoverlap',
+
+############################################
+
+# Restrictions
+
+profiles_restricted_suv_low <- cbc_restrict(
+  profiles_suv_low,
+  # BEV range restrictions
+  (powertrain == "gas") & (range_bev != 0),
+  (powertrain == "hev") & (range_bev != 0),
+  (powertrain == "bev") & (range_bev == 0),
+  # Gas efficiency restrictions
+  (powertrain == "gas") & (operating_cost < 0.8),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.8)
+)
+
+## Set up priors
+
+priors_fixed_parameter_suv <- cbc_priors(
+  profiles = profiles_restricted_suv_low,
+  powertrain = c("bev" = -1.0, "hev" = 0.1),
+  price = -0.2,
+  range_bev = 0.1,
+  mileage = -0.5,
+  age = -0.2,
+  operating_cost = -0.3,
+  no_choice = 0.5
+)
+
+## Generate Designs
+
+design_random_suv_low <- cbc_design(
+  profiles = profiles_restricted_suv_low,
+  method = 'random',
   n_resp = n_respondents, # Number of respondents
   n_alts = 3, # Number of alternatives per question
   n_q = 6, # Number of questions per respondent
   no_choice = TRUE,
-  priors = priors_fixed_parameter_car,
-  remove_dominant = FALSE,
-  label = 'powertrain'
+  priors = priors_fixed_parameter_suv,
+  balance_by = c('powertrain'),
+  remove_dominant = FALSE
 )
 
-design_car_shortcut_label <- cbc_design(
-  profiles = profiles_car_low,
-  method = 'shortcut',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_car,
-  remove_dominant = FALSE,
-  label = 'powertrain'
-)
-
-cbc_compare(
-  "Random" = design_car_random,
-  "Shortcut" = design_car_shortcut,
-  "Min Overlap" = design_car_minoverlap,
-  "Random_label" = design_car_random_label,
-  "Shortcut_label" = design_car_shortcut_label,
-  "Min Overlap_label" = design_car_minoverlap_label
-)
-
-
-saveRDS(
-  design_car_random,
-  here('data', 'doe', 'design_new', 'profiles', 'design_car_random.Rds')
-)
-saveRDS(
-  design_car_shortcut,
-  here('data', 'doe', 'design_new', 'profiles', 'design_car_shortcut.Rds')
-)
-saveRDS(
-  design_car_minoverlap,
-  here('data', 'doe', 'design_new', 'profiles', 'design_car_minoverlap.Rds')
-)
-saveRDS(
-  design_car_random_label,
-  here('data', 'doe', 'design_new', 'profiles', 'design_car_random_label.Rds')
-)
-saveRDS(
-  design_car_shortcut_label,
-  here('data', 'doe', 'design_new', 'profiles', 'design_car_shortcut_label.Rds')
-)
-saveRDS(
-  design_car_minoverlap_label,
-  here(
-    'data',
-    'doe',
-    'design_new',
-    'profiles',
-    'design_car_minoverlap_label.Rds'
-  )
-)
-
-
-cbc_inspect(design_car_random)
-
-
-design_car_random <- cbc_encode(design_car_random, coding = "dummy")
-
-choices_priors <- cbc_choices(
-  design_car_random,
-  priors = priors_fixed_parameter_car
-)
-
-model <- logitr(
-  data = choices_priors,
-  outcome = 'choice',
-  obsID = 'obsID',
-  pars = c(
-    'price',
-    'range_bev',
-    'mileage',
-    'age',
-    'operating_cost',
-    'powertrainbev',
-    'powertrainhev'
-  )
-)
-
-summary(model)
-
-power <- cbc_power(choices_priors)
-
-plot(power, type = "power", power_threshold = 0.9)
-summary(power, power_threshold = 0.9)
-
-plot(power, type = "se")
 
 #############################################
+
+
+# Restrictions
+
+profiles_restricted_suv_high <- cbc_restrict(
+  profiles_suv_low,
+  # BEV range restrictions
+  (powertrain == "gas") & (range_bev != 0),
+  (powertrain == "hev") & (range_bev != 0),
+  (powertrain == "bev") & (range_bev == 0),
+  # Gas efficiency restrictions
+  (powertrain == "gas") & (operating_cost < 0.8),
+  (powertrain == "bev") & (operating_cost > 1.2),
+  (powertrain == "hev") & (operating_cost < 0.8)
+)
+
+
+## Set up priors
+
+priors_fixed_parameter_suv <- cbc_priors(
+  profiles = profiles_restricted_suv_low,
+  powertrain = c("bev" = -1.0, "hev" = 0.1),
+  price = -0.2,
+  range_bev = 0.1,
+  mileage = -0.5,
+  age = -0.2,
+  operating_cost = -0.3,
+  no_choice = 0.5
+)
+
+## Generate Designs
+
+design_random_suv_high <- cbc_design(
+  profiles = profiles_restricted_suv_high,
+  method = 'random',
+  n_resp = n_respondents, # Number of respondents
+  n_alts = 3, # Number of alternatives per question
+  n_q = 6, # Number of questions per respondent
+  no_choice = TRUE,
+  priors = priors_fixed_parameter_suv,
+  balance_by = c('powertrain'),
+  remove_dominant = FALSE
+)
+
+
+#####################################################
+
+
+design_vehicle <- rbind(
+  design_random_car_low %>% mutate(vehicle_type = "car", budget = "low"),
+  design_random_car_high %>% mutate(vehicle_type = "car", budget = "high"),
+  design_random_suv_low %>% mutate(vehicle_type = "suv", budget = "low"),
+  design_random_suv_high %>% mutate(vehicle_type = "suv", budget = "high")
+)
+
+
+design_vehicle <- design_vehicle %>%
+  mutate(
+    price = price * 10000,
+    mileage = mileage * 10000,
+    age = age * 10,
+    range_bev = range_bev * 100,
+    range = case_when(
+      powertrain == 'bev' ~ paste0(range_bev, ' miles on a full charge'),
+      TRUE ~ NA
+    ),
+    operating_cost = operating_cost * 10
+  )
+
+
+by <- join_by(vehicle_type, powertrain, operating_cost == cents_mile)
+design_vehicle <- left_join(design_vehicle, dt_mpg_expanded, by)
+
+arrow::write_parquet(
+  design_vehicle,
+  here('survey', 'data', 'design_vehicle_testing.parquet')
+)
+
+# saveRDS(
+#   design_combined,
+#   here('data', 'design_vehicle.Rds')
+# )
+

@@ -883,8 +883,7 @@ sd_question(
     "Purchase price"     = "purchase_price",
     "Battery refurbishment history"    = "battery_refurbish",
     "Vehicle range"          = "veh_range",
-    "Battery health"          = "battery_health",
-    
+    "Battery health"          = "battery_health"
   ),
   option = c(
     "Unimportant" = "unimportant",
@@ -994,8 +993,7 @@ sd_question(
     "Somewhat disagree"  = "somewhat_disagree",
     "Neither agree nor disagree"  = "neutral",
     "Somewhat agree"  = "somewhat_agree",
-    "Strongly agree"  = "strongly_agree"
-  )
+    "Strongly agree"  = "strongly_agree")
 )
 
 sd_question(
