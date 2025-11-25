@@ -56,7 +56,6 @@ vehicle_cbc_options <- function(df) {
   alt3 <- df |> filter(altID == 3)
   alt4 <- df |> filter(altID == 4)
 
-
   options <- c("option_1", "option_2", "option_3", "option_4")
 
   names(options) <- c(
@@ -211,7 +210,7 @@ battery_cbc_options <- function(df) {
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_parquet(here( 'data', 'design_vehicle_testing.parquet'))
+  survey <- read_parquet(here('data', 'design_vehicle_testing.parquet'))
   survey$range[is.na(survey$range)] <- ''
   battery_survey <- read_parquet(here(
     'data',
@@ -597,8 +596,6 @@ server <- function(input, output, session) {
   # Battery DCE -- Button Format
   observe(
     {
-
-
       # budget_val <- budget()
       # req(budget_val) # Ensure budget is available
 
@@ -713,9 +710,8 @@ server <- function(input, output, session) {
       length(input$household_veh_fuel) == 1) ~
       "primary_veh_fuel",
 
-    ( !(input$household_veh_count == "0")  &
-      ! ( str_detect(input$household_veh_fuel, "bev") )
-     )   ~ "primary_veh_mpg",
+    (!(input$household_veh_count == "0") &
+      !(str_detect(input$household_veh_fuel, "bev"))) ~ "primary_veh_mpg",
 
     input$primary_veh_obtain_how %in%
       c(
@@ -726,7 +722,7 @@ server <- function(input, output, session) {
       ) ~
       "primary_veh_cost",
 
-  #  input$primary_veh_fuel %in% c("icev", "hev", "phev") ~ "primary_veh_mpg",
+    #  input$primary_veh_fuel %in% c("icev", "hev", "phev") ~ "primary_veh_mpg",
 
     input$next_veh_fuel_new_bev %in%
       c("very_unlikely", "somewhat_unlikely") &
@@ -751,7 +747,7 @@ server <- function(input, output, session) {
   # Database designation and other settings
   sd_server(
     db = db,
-    #all_questions_required = TRUE, # fix it
+    all_questions_required = TRUE, # fix it
     # required_questions = c("images", "budget", "next_vehicle_purchase",
     #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
     #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
