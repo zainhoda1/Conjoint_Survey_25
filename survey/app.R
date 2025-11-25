@@ -681,6 +681,7 @@ server <- function(input, output, session) {
     !is.null(input$completion_code) ~ "attention_check_toyota",
 
     input$household_veh_count != "0" ~ "household_veh_fuel",
+
     !(input$household_veh_count == "1" &
       length(input$household_veh_fuel) == 1) ~
       "primary_veh_fuel",
