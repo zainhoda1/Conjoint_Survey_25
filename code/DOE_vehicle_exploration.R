@@ -293,8 +293,43 @@ design_random_car_low <- cbc_design(
   no_choice = TRUE,
   priors = priors_fixed_parameter_car,
   balance_by = c('powertrain'),
-  remove_dominant = FALSE
+  remove_dominant = TRUE
 )
+
+cbc_inspect(design_random_car_low)
+
+choices_priors_car <- cbc_choices(
+  cbc_encode(design_random_car_low, 'dummy'),
+  priors = priors_fixed_parameter_car
+)
+
+model_car <- logitr(
+  data = choices_priors_car,
+  outcome = 'choice',
+  obsID = 'obsID',
+  pars = c(
+    'price',
+    'range_bev',
+    'mileage',
+    'age',
+    'operating_cost',
+    'powertrainbev',
+    'powertrainhev',
+    'no_choice'
+  )
+)
+
+summary(model_car)
+
+power_car <- cbc_power(choices_priors_car)
+
+
+plot(power_car, type = "power", power_threshold = 0.9)
+summary(power_car, power_threshold = 0.9)
+
+plot(power_car, type = "se")
+
+
 
 #############################################
 
@@ -475,7 +510,7 @@ design_random_car_high <- cbc_design(
   no_choice = TRUE,
   priors = priors_fixed_parameter_car,
   balance_by = c('powertrain'),
-  remove_dominant = FALSE
+  remove_dominant = TRUE
 )
 
 
@@ -519,7 +554,7 @@ design_random_suv_low <- cbc_design(
   no_choice = TRUE,
   priors = priors_fixed_parameter_suv,
   balance_by = c('powertrain'),
-  remove_dominant = FALSE
+  remove_dominant = TRUE
 )
 
 
@@ -529,7 +564,7 @@ design_random_suv_low <- cbc_design(
 # Restrictions
 
 profiles_restricted_suv_high <- cbc_restrict(
-  profiles_suv_low,
+  profiles_suv_high,
   # BEV range restrictions
   (powertrain == "gas") & (range_bev != 0),
   (powertrain == "hev") & (range_bev != 0),
@@ -544,7 +579,7 @@ profiles_restricted_suv_high <- cbc_restrict(
 ## Set up priors
 
 priors_fixed_parameter_suv <- cbc_priors(
-  profiles = profiles_restricted_suv_low,
+  profiles = profiles_restricted_suv_high,
   powertrain = c("bev" = -1.0, "hev" = 0.1),
   price = -0.2,
   range_bev = 0.1,

@@ -350,6 +350,7 @@ server <- function(input, output, session) {
   sd_store_value(prime_group_label, "prime_group_label")
 
   ## data
+
   df <- survey %>%
     filter(respID == respondentID) |> #filter(respID == 2169)
     mutate(
@@ -710,8 +711,7 @@ server <- function(input, output, session) {
       length(input$household_veh_fuel) == 1) ~
       "primary_veh_fuel",
 
-    (!(input$household_veh_count == "0") &
-      !(str_detect(input$household_veh_fuel, "bev"))) ~ "primary_veh_mpg",
+    input$household_veh_count != "0"   ~ "primary_veh_mpg",
 
     input$primary_veh_obtain_how %in%
       c(
@@ -719,10 +719,8 @@ server <- function(input, output, session) {
         "leased_dealership",
         "bought_private",
         "bought_online"
-      ) ~
-      "primary_veh_cost",
+      ) ~ "primary_veh_cost",
 
-    #  input$primary_veh_fuel %in% c("icev", "hev", "phev") ~ "primary_veh_mpg",
 
     input$next_veh_fuel_new_bev %in%
       c("very_unlikely", "somewhat_unlikely") &
