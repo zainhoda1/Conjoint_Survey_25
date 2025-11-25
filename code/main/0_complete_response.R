@@ -74,7 +74,8 @@ data <- data %>%
       attitudes_2_a,
       attitudes_2_b,
       battery_attribute,
-      next_veh_fuel
+      next_veh_fuel,
+      battery_cbc_q0_button
     )
   ) %>%
 
@@ -98,3 +99,7 @@ write_parquet(
     "survey_data.parquet"
   )
 )
+
+
+a <- data %>%
+  filter(time_end >= '2025-11-11')
