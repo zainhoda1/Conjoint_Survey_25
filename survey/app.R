@@ -750,7 +750,7 @@ server <- function(input, output, session) {
     #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
     #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
     #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    use_cookies = FALSE # fix it
+    use_cookies = TRUE # fix it
   )
 }
 
