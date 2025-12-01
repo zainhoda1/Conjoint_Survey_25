@@ -1308,7 +1308,7 @@ sd_question(
 
 ```
 
-<p style="color: whitesmoke;">please end the sentence with “I really enjoyed taking this survey!</p>
+<p style="color: whitesmoke;">please end the sentence with “I really enjoyed taking this survey!"</p>
 
 ```{r}
 
