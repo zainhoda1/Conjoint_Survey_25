@@ -50,7 +50,10 @@ data_dce <- data_dce %>%
       T ~ "price_6",
     )
   ) %>%
+  #filter(vehicle_type == 'suv') %>% 
+  #filter(price > 1.5) %>% 
   select(-range, -operating_cost_text, -session_id, -vehicle_type)
+
 
 ## ----Dummy encode----
 

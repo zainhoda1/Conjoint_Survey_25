@@ -210,7 +210,7 @@ battery_cbc_options <- function(df) {
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_parquet(here('data', 'design_vehicle_testing.parquet'))
+  survey <- read_parquet(here('data', 'design_vehicle.parquet'))
   survey$range[is.na(survey$range)] <- ''
   battery_survey <- read_parquet(here(
     'data',

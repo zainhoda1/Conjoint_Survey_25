@@ -263,43 +263,43 @@ design_random_car_low <- cbc_design(
   remove_dominant = TRUE
 )
 
-design_minoverlap_car_low <- cbc_design(
-  profiles = profiles_restricted_car_low,
-  method = 'minoverlap',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_car_low,
-  balance_by = c('powertrain'),
-  remove_dominant = TRUE
-)
-
-design_shortcut_car_low <- cbc_design(
-  profiles = profiles_restricted_car_low,
-  method = 'shortcut',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_car_low,
-  balance_by = c('powertrain'),
-  remove_dominant = TRUE
-)
+# design_minoverlap_car_low <- cbc_design(
+#   profiles = profiles_restricted_car_low,
+#   method = 'minoverlap',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car_low,
+#   balance_by = c('powertrain'),
+#   remove_dominant = TRUE
+# )
+# 
+# design_shortcut_car_low <- cbc_design(
+#   profiles = profiles_restricted_car_low,
+#   method = 'shortcut',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car_low,
+#   balance_by = c('powertrain'),
+#   remove_dominant = TRUE
+# )
 
 saveRDS(
   design_random_car_low,
   here('data', 'doe', 'design_new', 'profiles', 'design_random_car_low.Rds')
 )
 
-saveRDS(
-  design_shortcut_car_low,
-  here('data', 'doe', 'design_new', 'profiles', 'design_shortcut_car_low.Rds')
-)
-saveRDS(
-  design_minoverlap_car_low,
-  here('data', 'doe', 'design_new', 'profiles', 'design_minoverlap_car_low.Rds')
-)
+# saveRDS(
+#   design_shortcut_car_low,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_shortcut_car_low.Rds')
+# )
+# saveRDS(
+#   design_minoverlap_car_low,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_minoverlap_car_low.Rds')
+# )
 
 
 
@@ -356,43 +356,43 @@ design_random_car_high <- cbc_design(
   remove_dominant = TRUE
 )
 
-design_minoverlap_car_high <- cbc_design(
-  profiles = profiles_restricted_car_high,
-  method = 'minoverlap',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_car_high,
-  balance_by = c('powertrain'),
-  remove_dominant = TRUE
-)
-
-design_shortcut_car_high <- cbc_design(
-  profiles = profiles_restricted_car_high,
-  method = 'shortcut',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_car_high,
-  balance_by = c('powertrain'),
-  remove_dominant = TRUE
-)
+# design_minoverlap_car_high <- cbc_design(
+#   profiles = profiles_restricted_car_high,
+#   method = 'minoverlap',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car_high,
+#   balance_by = c('powertrain'),
+#   remove_dominant = TRUE
+# )
+# 
+# design_shortcut_car_high <- cbc_design(
+#   profiles = profiles_restricted_car_high,
+#   method = 'shortcut',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_car_high,
+#   balance_by = c('powertrain'),
+#   remove_dominant = TRUE
+# )
 
 saveRDS(
   design_random_car_high,
   here('data', 'doe', 'design_new', 'profiles', 'design_random_car_high.Rds')
 )
 
-saveRDS(
-  design_shortcut_car_high,
-  here('data', 'doe', 'design_new', 'profiles', 'design_shortcut_car_high.Rds')
-)
-saveRDS(
-  design_minoverlap_car_high,
-  here('data', 'doe', 'design_new', 'profiles', 'design_minoverlap_car_high.Rds')
-)
+# saveRDS(
+#   design_shortcut_car_high,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_shortcut_car_high.Rds')
+# )
+# saveRDS(
+#   design_minoverlap_car_high,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_minoverlap_car_high.Rds')
+# )
 
 
 
@@ -450,43 +450,43 @@ design_random_suv_low <- cbc_design(
   remove_dominant = TRUE
 )
 
-design_minoverlap_suv_low <- cbc_design(
-  profiles = profiles_restricted_suv_low,
-  method = 'minoverlap',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_suv_low,
-  balance_by = c('powertrain'),
-  remove_dominant = TRUE
-)
-
-design_shortcut_suv_low <- cbc_design(
-  profiles = profiles_restricted_suv_low,
-  method = 'shortcut',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_suv_low,
-  balance_by = c('powertrain'),
-  remove_dominant = TRUE
-)
+# design_minoverlap_suv_low <- cbc_design(
+#   profiles = profiles_restricted_suv_low,
+#   method = 'minoverlap',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_suv_low,
+#   balance_by = c('powertrain'),
+#   remove_dominant = TRUE
+# )
+# 
+# design_shortcut_suv_low <- cbc_design(
+#   profiles = profiles_restricted_suv_low,
+#   method = 'shortcut',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_suv_low,
+#   balance_by = c('powertrain'),
+#   remove_dominant = TRUE
+# )
 
 saveRDS(
   design_random_suv_low,
   here('data', 'doe', 'design_new', 'profiles', 'design_random_suv_low.Rds')
 )
 
-saveRDS(
-  design_shortcut_suv_low,
-  here('data', 'doe', 'design_new', 'profiles', 'design_shortcut_suv_low.Rds')
-)
-saveRDS(
-  design_minoverlap_suv_low,
-  here('data', 'doe', 'design_new', 'profiles', 'design_minoverlap_suv_low.Rds')
-)
+# saveRDS(
+#   design_shortcut_suv_low,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_shortcut_suv_low.Rds')
+# )
+# saveRDS(
+#   design_minoverlap_suv_low,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_minoverlap_suv_low.Rds')
+# )
 
 
 
@@ -544,43 +544,43 @@ design_random_suv_high <- cbc_design(
   remove_dominant = TRUE
 )
 
-design_minoverlap_suv_high <- cbc_design(
-  profiles = profiles_restricted_suv_high,
-  method = 'minoverlap',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_suv_high,
-  balance_by = c('powertrain'),
-  remove_dominant = TRUE
-)
-
-design_shortcut_suv_high <- cbc_design(
-  profiles = profiles_restricted_suv_high,
-  method = 'shortcut',
-  n_resp = n_respondents, # Number of respondents
-  n_alts = 3, # Number of alternatives per question
-  n_q = 6, # Number of questions per respondent
-  no_choice = TRUE,
-  priors = priors_fixed_parameter_suv_high,
-  balance_by = c('powertrain'),
-  remove_dominant = TRUE
-)
+# design_minoverlap_suv_high <- cbc_design(
+#   profiles = profiles_restricted_suv_high,
+#   method = 'minoverlap',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_suv_high,
+#   balance_by = c('powertrain'),
+#   remove_dominant = TRUE
+# )
+# 
+# design_shortcut_suv_high <- cbc_design(
+#   profiles = profiles_restricted_suv_high,
+#   method = 'shortcut',
+#   n_resp = n_respondents, # Number of respondents
+#   n_alts = 3, # Number of alternatives per question
+#   n_q = 6, # Number of questions per respondent
+#   no_choice = TRUE,
+#   priors = priors_fixed_parameter_suv_high,
+#   balance_by = c('powertrain'),
+#   remove_dominant = TRUE
+# )
 
 saveRDS(
   design_random_suv_high,
   here('data', 'doe', 'design_new', 'profiles', 'design_random_suv_high.Rds')
 )
 
-saveRDS(
-  design_shortcut_suv_high,
-  here('data', 'doe', 'design_new', 'profiles', 'design_shortcut_suv_high.Rds')
-)
-saveRDS(
-  design_minoverlap_suv_high,
-  here('data', 'doe', 'design_new', 'profiles', 'design_minoverlap_suv_high.Rds')
-)
+# saveRDS(
+#   design_shortcut_suv_high,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_shortcut_suv_high.Rds')
+# )
+# saveRDS(
+#   design_minoverlap_suv_high,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_minoverlap_suv_high.Rds')
+# )
 
 
 #### Joining all designs----
@@ -614,7 +614,7 @@ design_vehicle <- left_join(design_vehicle, dt_mpg_expanded, by)
 
 arrow::write_parquet(
   design_vehicle,
-  here('survey', 'data', 'design_vehicle_testing.parquet')
+  here('survey', 'data', 'design_vehicle.parquet')
 )
 
 # saveRDS(
@@ -738,8 +738,6 @@ plot(power_suv_low, type = "se")
 
 
 ### ----inspect SUV high --------
-
-
 
 
 cbc_inspect(design_random_suv_high)

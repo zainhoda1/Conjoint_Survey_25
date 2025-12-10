@@ -210,7 +210,7 @@ battery_cbc_options <- function(df) {
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_parquet(here('data', 'design_vehicle_testing.parquet'))
+  survey <- read_parquet(here('data', 'design_vehicle.parquet'))
   survey$range[is.na(survey$range)] <- ''
   battery_survey <- read_parquet(here(
     'data',
@@ -681,12 +681,12 @@ server <- function(input, output, session) {
   # Database designation and other settings
   sd_server(
     db = db,
-    all_questions_required = TRUE, # fix it
+    all_questions_required = TRUE, # fixed
     # required_questions = c("images", "budget", "next_vehicle_purchase",
     #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
     #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
     #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    use_cookies = TRUE # fix it
+    use_cookies = TRUE # fixed
   )
 }
 
