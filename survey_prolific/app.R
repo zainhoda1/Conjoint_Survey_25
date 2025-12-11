@@ -7,9 +7,13 @@ library(kableExtra)
 library(digest)
 library(arrow)
 
+ui <- sd_ui()
+
 # Database setup
 db <- sd_db_connect()
 
+survey <- read_parquet(here('data', 'design_vehicle.parquet'))
+battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
 
 demo_options <- tibble(
   profileID = c(1, 1, 1, 1), # or c(1, 2, 3) if you want different IDs
@@ -210,16 +214,10 @@ battery_cbc_options <- function(df) {
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_parquet(here('data', 'design_vehicle.parquet'))
+
   survey$range[is.na(survey$range)] <- ''
-  battery_survey <- read_parquet(here(
-    'data',
-    'design_battery.parquet'
-  ))
   respondentID <- sample(survey$respID, 1)
   battery_respondentID <- sample(battery_survey$respID, 1)
-
-
 
   ### Prolific Setup ###
 
@@ -238,14 +236,14 @@ server <- function(input, output, session) {
   })
 
 
-  session_id <- reactive({
+  prolific_session_id <- reactive({
     url_pars()["SESSION_ID"]  # Session ID (optional)
   })
 
   # Store Prolific IDs in your database
   sd_store_value(prolific_pid(), "prolific_pid")
   sd_store_value(study_id(), "study_id")
-  sd_store_value(session_id(), "session_id")
+  sd_store_value(prolific_session_id(), "prolific_session_id")
 
   # Create completion redirect URL
   completion_url <- reactive({
@@ -266,8 +264,6 @@ server <- function(input, output, session) {
     button = TRUE,
     label = "Back to panel"
   )
-
-
 
   ### End of Prolific Setup ###
   # Make a 10-digit random number completion code
@@ -378,25 +374,6 @@ server <- function(input, output, session) {
           filter(temp, budget == "high")
         }
       }
-  })
-
-  budget <- reactive({
-    if (!is.null(input$next_veh_budget)) {
-      return(as.numeric(input$next_veh_budget))
-    }
-
-    stored_data <- isolate(sd_get_data(db))
-    session_id <- session$userData$all_data$session_id
-    session_budget <- stored_data[
-      stored_data$session_id == session_id,
-    ]$next_veh_budget
-    valid_budget <- session_budget[!is.na(session_budget)]
-
-    if (length(valid_budget) > 0) {
-      as.numeric(valid_budget[length(valid_budget)])
-    } else {
-      NULL
-    }
   })
 
   chosen_input <- reactive({
@@ -680,16 +657,10 @@ server <- function(input, output, session) {
 
   # Database designation and other settings
   sd_server(
-    db = db,
-    all_questions_required = TRUE, # fixed
-    # required_questions = c("images", "budget", "next_vehicle_purchase",
-    #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
-    #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
-    #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    use_cookies = TRUE # fixed
+    db = db
   )
 }
 
 
 # shinyApp() initiates your app - don't change it
-shiny::shinyApp(ui = sd_ui(), server = server)
+shiny::shinyApp(ui = ui, server = server)

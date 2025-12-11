@@ -1,6 +1,7 @@
 ---
-echo: false
-warning: false
+survey-settings:
+  use-cookies: yes
+  all-questions-required: yes
 css: css/survey_theme.css
 ---
 
