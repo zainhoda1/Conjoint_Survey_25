@@ -354,7 +354,17 @@ server <- function(input, output, session) {
 
   df <- survey %>%
     filter(respID == respondentID) |> #filter(respID == 2169)
-
+    mutate(
+      `range` = case_when(
+        str_detect(`range`, "\\(") ~ str_replace(`range`, "\\s*\\(", "<br>("),
+        TRUE ~ paste0(`range`, "<br>")
+      ),
+      operating_cost = case_when(
+        str_detect(operating_cost, "\\(") ~
+          str_replace(operating_cost, "\\s*\\(", "<br>("),
+        TRUE ~ paste0(operating_cost, "<br>")
+      )
+    )
 
   battery_df <- battery_survey |>
     filter(respID == battery_respondentID)
@@ -375,7 +385,7 @@ server <- function(input, output, session) {
         }
       }
     }
-
+    
     # If not available, try from stored data
     if (is.null(vehicle_budget)) {
       stored_data <- isolate(sd_get_data(db))
@@ -387,6 +397,7 @@ server <- function(input, output, session) {
         }
       }
     }
+
 
 
     req(vehicle_style) # ensures we have a vehicle style
@@ -426,7 +437,7 @@ df %>%
         }
       }
     }
-
+    
     # If not available, try from stored data
     if (is.null(vehicle_budget)) {
       stored_data <- isolate(sd_get_data(db))

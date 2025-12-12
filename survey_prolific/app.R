@@ -15,6 +15,9 @@ db <- sd_db_connect()
 survey <- read_parquet(here('data', 'design_vehicle.parquet'))
 battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
 
+completion_code <- 'CWTFNPQX'
+screenout_code <- 'C127J9EM'
+
 demo_options <- tibble(
   profileID = c(1, 1, 1, 1), # or c(1, 2, 3) if you want different IDs
   respID = c(1620, 1621, 1622, 1623), # Different response IDs
@@ -245,9 +248,22 @@ server <- function(input, output, session) {
   sd_store_value(study_id(), "study_id")
   sd_store_value(prolific_session_id(), "prolific_session_id")
 
-  # Create completion redirect URL
+  # # Create completion redirect URL
+  # completion_url <- reactive({
+  #   paste0("https://app.prolific.com/submissions/complete?cc=",completion_code)
+  # })
+
+
+  # Create completion redirect URL - using Prolific code
   completion_url <- reactive({
     paste0("https://app.prolific.com/submissions/complete?cc=",completion_code)
+  })
+
+
+
+  # Create screenout redirect URL - using Prolific code
+  screenout_url <- reactive({
+    paste0("https://app.prolific.com/submissions/complete?cc=",screenout_code)
   })
 
   # Redirect buttons for Prolific
@@ -260,7 +276,7 @@ server <- function(input, output, session) {
 
   sd_redirect(
     id = "redirect_screenout",
-    url = completion_url(),
+    url = screenout_url(),
     button = TRUE,
     label = "Back to panel"
   )
@@ -284,18 +300,8 @@ server <- function(input, output, session) {
   ## data
 
   df <- survey %>%
-    filter(respID == respondentID) |> #filter(respID == 2169)
-    mutate(
-      `range` = case_when(
-        str_detect(`range`, "\\(") ~ str_replace(`range`, "\\s*\\(", "<br>("),
-        TRUE ~ paste0(`range`, "<br>")
-      ),
-      operating_cost = case_when(
-        str_detect(operating_cost, "\\(") ~
-          str_replace(operating_cost, "\\s*\\(", "<br>("),
-        TRUE ~ paste0(operating_cost, "<br>")
-      )
-    )
+    filter(respID == respondentID)
+
 
   battery_df <- battery_survey |>
     filter(respID == battery_respondentID)
@@ -305,7 +311,7 @@ server <- function(input, output, session) {
     vehicle_style <- input$next_veh_style
     vehicle_budget <- input$next_veh_budget
 
-    # If not available, try from stored data
+    #If not available, try from stored data
     if (is.null(vehicle_style)) {
       stored_data <- isolate(sd_get_data(db))
       if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
@@ -316,34 +322,45 @@ server <- function(input, output, session) {
         }
       }
     }
+    # If not available, try from stored data
+    if (is.null(vehicle_budget)) {
+      stored_data <- isolate(sd_get_data(db))
+      if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
+        budget_values <- stored_data$next_veh_budget
+        valid_budgets <- budget_values[!is.na(budget_values)]
+        if (length(valid_budgets) > 0) {
+          vehicle_budget <- valid_budgets[length(valid_budgets)]
+        }
+      }
+    }
 
     req(vehicle_style) # ensures we have a vehicle style
     req(vehicle_budget) # ensures we have a budget
 
-    df %>%
-      {
-        # Determine vehicle type
-        if (vehicle_style == "Car / sedan / hatchback") {
-          temp <- filter(., vehicle_type == "car")
-        } else {
-          temp <- filter(., vehicle_type == "suv")
-        }
+df %>%
+  {
+    if (vehicle_style == "Car / sedan / hatchback") {
+      filter(., vehicle_type == "car")
+    } else {
+      filter(., vehicle_type == "suv")
+    }
+  } %>%
+  {
+    if (vehicle_budget %in% c("5000", "10000", "15000", "20000")) {
+      filter(., budget == "low")
+    } else {
+      filter(., budget == "high")
+    }
+  }
 
-        # Apply budget filter
-        if (vehicle_budget %in% c("5000", "10000", "15000", "20000")) {
-          filter(temp, budget == "low")
-        } else {
-          filter(temp, budget == "high")
-        }
-      }
-  })
+})
 
   df_battery_filtered <- reactive({
     # Try to get vehicle style from input first
     vehicle_style <- input$next_veh_style
     vehicle_budget <- input$next_veh_budget
 
-    # If not available, try from stored data
+    #If not available, try from stored data
     if (is.null(vehicle_style)) {
       stored_data <- isolate(sd_get_data(db))
       if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
@@ -351,6 +368,17 @@ server <- function(input, output, session) {
         valid_styles <- style_values[!is.na(style_values)]
         if (length(valid_styles) > 0) {
           vehicle_style <- valid_styles[length(valid_styles)]
+        }
+      }
+    }
+    # If not available, try from stored data
+    if (is.null(vehicle_budget)) {
+      stored_data <- isolate(sd_get_data(db))
+      if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
+        budget_values <- stored_data$next_veh_budget
+        valid_budgets <- budget_values[!is.na(budget_values)]
+        if (length(valid_budgets) > 0) {
+          vehicle_budget <- valid_budgets[length(valid_budgets)]
         }
       }
     }

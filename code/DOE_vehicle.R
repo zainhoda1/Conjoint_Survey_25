@@ -287,10 +287,10 @@ design_random_car_low <- cbc_design(
 #   remove_dominant = TRUE
 # )
 
-saveRDS(
-  design_random_car_low,
-  here('data', 'doe', 'design_new', 'profiles', 'design_random_car_low.Rds')
-)
+# saveRDS(
+#   design_random_car_low,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_random_car_low.Rds')
+# )
 
 # saveRDS(
 #   design_shortcut_car_low,
@@ -380,10 +380,10 @@ design_random_car_high <- cbc_design(
 #   remove_dominant = TRUE
 # )
 
-saveRDS(
-  design_random_car_high,
-  here('data', 'doe', 'design_new', 'profiles', 'design_random_car_high.Rds')
-)
+# saveRDS(
+#   design_random_car_high,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_random_car_high.Rds')
+# )
 
 # saveRDS(
 #   design_shortcut_car_high,
@@ -474,10 +474,10 @@ design_random_suv_low <- cbc_design(
 #   remove_dominant = TRUE
 # )
 
-saveRDS(
-  design_random_suv_low,
-  here('data', 'doe', 'design_new', 'profiles', 'design_random_suv_low.Rds')
-)
+# saveRDS(
+#   design_random_suv_low,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_random_suv_low.Rds')
+# )
 
 # saveRDS(
 #   design_shortcut_suv_low,
@@ -568,10 +568,10 @@ design_random_suv_high <- cbc_design(
 #   remove_dominant = TRUE
 # )
 
-saveRDS(
-  design_random_suv_high,
-  here('data', 'doe', 'design_new', 'profiles', 'design_random_suv_high.Rds')
-)
+# saveRDS(
+#   design_random_suv_high,
+#   here('data', 'doe', 'design_new', 'profiles', 'design_random_suv_high.Rds')
+# )
 
 # saveRDS(
 #   design_shortcut_suv_high,
@@ -602,11 +602,13 @@ design_vehicle <- design_vehicle %>%
     age = age * 10,
     range_bev = range_bev * 100,
     range = case_when(
-      powertrain == 'bev' ~ paste0(range_bev, ' miles on a full charge'),
+      powertrain == 'bev' ~ paste0(range_bev, ' miles on a full charge', '<br>' ),
       TRUE ~ NA
     ),
     operating_cost = operating_cost * 10
   )
+
+
 
 
 by <- join_by(vehicle_type, powertrain, operating_cost == cents_mile)

@@ -7,10 +7,16 @@ library(kableExtra)
 library(digest)
 library(arrow)
 
+ui <- sd_ui()
 
 # Database setup
 db <- sd_db_connect()
 
+survey <- read_parquet(here('data', 'design_vehicle.parquet'))
+battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
+
+completion_code <- 'CWTFNPQX'
+screenout_code <- 'C127J9EM'
 
 demo_options <- tibble(
   profileID = c(1, 1, 1, 1), # or c(1, 2, 3) if you want different IDs
@@ -211,130 +217,71 @@ battery_cbc_options <- function(df) {
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_parquet(here('data', 'design_vehicle.parquet'))
+
   survey$range[is.na(survey$range)] <- ''
-  battery_survey <- read_parquet(here(
-    'data',
-    'design_battery.parquet'
-  ))
   respondentID <- sample(survey$respID, 1)
   battery_respondentID <- sample(battery_survey$respID, 1)
 
-  ### Start of Dynata setup ###
-
-  # Secret key
-  secret_key <- Sys.getenv("SECRET_KEY")
+  ### Prolific Setup ###
 
   # Obtain parameters from the URL
   url_pars <- reactive({
     sd_get_url_pars()
   })
-  psid <- reactive({
-    url_pars()["psid"]
-  })
-  keyid <- reactive({
-    url_pars()["_k"]
-  })
-  signature_start <- reactive({
-    url_pars()["_s"]
+
+  # Get Prolific IDs from URL parameters
+  prolific_pid <- reactive({
+    url_pars()["PROLIFIC_PID"]  # Participant ID
   })
 
-  # Starting Link Validation
-  is_valid_start <- reactive({
-    # Get the current URL path (everything after the domain)
-    url_path <- session$clientData$url_pathname
-    text_start <- paste0(url_path, "?psid=", psid(), "&_k=", keyid())
-    signature_start_validate <- hmac(
-      key = secret_key,
-      object = text_start,
-      algo = "sha256",
-      serialize = FALSE
-    )
-    !is.na(psid()) &&
-      psid() != "" &&
-      (signature_start() == signature_start_validate)
+  study_id <- reactive({
+    url_pars()["STUDY_ID"]  # Study ID (optional)
   })
 
-  # Create ending links
-  ending_links <- reactive({
-    # Ending texts for "Complete", "Screenout", and "Quotafull"
-    text_end_1 <- paste0("/projects/end?rst=1&psid=", psid(), "&_k=", keyid())
-    text_end_2 <- paste0("/projects/end?rst=2&psid=", psid(), "&_k=", keyid())
-    text_end_3 <- paste0("/projects/end?rst=3&psid=", psid(), "&_k=", keyid())
 
-    # Ending signatures (_s) for "Complete", "Screenout", and "Quotafull"
-    signature_end_1 <- hmac(
-      key = secret_key,
-      object = text_end_1,
-      algo = "sha256",
-      serialize = FALSE
-    )
-    signature_end_2 <- hmac(
-      key = secret_key,
-      object = text_end_2,
-      algo = "sha256",
-      serialize = FALSE
-    )
-    signature_end_3 <- hmac(
-      key = secret_key,
-      object = text_end_3,
-      algo = "sha256",
-      serialize = FALSE
-    )
-
-    # Ending links of "Complete", "Screenout", and "Quotafull"
-    list(
-      complete = paste0(
-        "https://dkr1.ssisurveys.com/projects/end?rst=1&psid=",
-        psid(),
-        "&_k=",
-        keyid(),
-        "&_s=",
-        signature_end_1
-      ),
-      screenout = paste0(
-        "https://dkr1.ssisurveys.com/projects/end?rst=2&psid=",
-        psid(),
-        "&_k=",
-        keyid(),
-        "&_s=",
-        signature_end_2
-      ),
-      quotafull = paste0(
-        "https://dkr1.ssisurveys.com/projects/end?rst=3&psid=",
-        psid(),
-        "&_k=",
-        keyid(),
-        "&_s=",
-        signature_end_3
-      )
-    )
+  prolific_session_id <- reactive({
+    url_pars()["SESSION_ID"]  # Session ID (optional)
   })
 
-  ## Redirect buttons
+  # Store Prolific IDs in your database
+  sd_store_value(prolific_pid(), "prolific_pid")
+  sd_store_value(study_id(), "study_id")
+  sd_store_value(prolific_session_id(), "prolific_session_id")
+
+  # # Create completion redirect URL
+  # completion_url <- reactive({
+  #   paste0("https://app.prolific.com/submissions/complete?cc=",completion_code)
+  # })
+
+
+  # Create completion redirect URL - using Prolific code
+  completion_url <- reactive({
+    paste0("https://app.prolific.com/submissions/complete?cc=",completion_code)
+  })
+
+
+
+  # Create screenout redirect URL - using Prolific code
+  screenout_url <- reactive({
+    paste0("https://app.prolific.com/submissions/complete?cc=",screenout_code)
+  })
+
+  # Redirect buttons for Prolific
   sd_redirect(
     id = "redirect_complete",
-    url = ending_links()$complete,
+    url = completion_url(),
     button = TRUE,
-    label = "Back to panel"
+    label = "Complete and return to Prolific"
   )
 
   sd_redirect(
     id = "redirect_screenout",
-    url = ending_links()$screenout,
+    url = screenout_url(),
     button = TRUE,
     label = "Back to panel"
   )
 
-  sd_redirect(
-    id = "redirect_quotafull",
-    url = ending_links()$quotafull,
-    button = TRUE,
-    label = "Back to panel"
-  )
-
-  ### End of Dynata set up ###
-
+  ### End of Prolific Setup ###
   # Make a 10-digit random number completion code
   completion_code <- sd_completion_code(10)
 
@@ -345,7 +292,7 @@ server <- function(input, output, session) {
 
   # Store necessary values in the survey data
   sd_store_value(completion_code)
-  sd_store_value(psid(), "psid")
+  #sd_store_value(psid(), "psid")
   sd_store_value(respondentID, "respID")
   sd_store_value(battery_respondentID, "battery_respID")
   sd_store_value(prime_group_label, "prime_group_label")
@@ -353,7 +300,7 @@ server <- function(input, output, session) {
   ## data
 
   df <- survey %>%
-    filter(respID == respondentID) |> #filter(respID == 2169)
+    filter(respID == respondentID)
 
 
   battery_df <- battery_survey |>
@@ -364,7 +311,7 @@ server <- function(input, output, session) {
     vehicle_style <- input$next_veh_style
     vehicle_budget <- input$next_veh_budget
 
-    # If not available, try from stored data
+    #If not available, try from stored data
     if (is.null(vehicle_style)) {
       stored_data <- isolate(sd_get_data(db))
       if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
@@ -375,7 +322,6 @@ server <- function(input, output, session) {
         }
       }
     }
-
     # If not available, try from stored data
     if (is.null(vehicle_budget)) {
       stored_data <- isolate(sd_get_data(db))
@@ -387,7 +333,6 @@ server <- function(input, output, session) {
         }
       }
     }
-
 
     req(vehicle_style) # ensures we have a vehicle style
     req(vehicle_budget) # ensures we have a budget
@@ -415,7 +360,7 @@ df %>%
     vehicle_style <- input$next_veh_style
     vehicle_budget <- input$next_veh_budget
 
-    # If not available, try from stored data
+    #If not available, try from stored data
     if (is.null(vehicle_style)) {
       stored_data <- isolate(sd_get_data(db))
       if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
@@ -426,20 +371,6 @@ df %>%
         }
       }
     }
-
-    # If not available, try from stored data
-    if (is.null(vehicle_budget)) {
-      stored_data <- isolate(sd_get_data(db))
-      if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
-        budget_values <- stored_data$next_veh_budget
-        valid_budgets <- budget_values[!is.na(budget_values)]
-        if (length(valid_budgets) > 0) {
-          vehicle_budget <- valid_budgets[length(valid_budgets)]
-        }
-      }
-    }
-
-
 
     req(vehicle_style) # ensures we have a vehicle style
     req(vehicle_budget) # ensures we have a budget
@@ -460,25 +391,6 @@ df %>%
           filter(temp, budget == "high")
         }
       }
-  })
-
-  budget <- reactive({
-    if (!is.null(input$next_veh_budget)) {
-      return(as.numeric(input$next_veh_budget))
-    }
-
-    stored_data <- isolate(sd_get_data(db))
-    session_id <- session$userData$all_data$session_id
-    session_budget <- stored_data[
-      stored_data$session_id == session_id,
-    ]$next_veh_budget
-    valid_budget <- session_budget[!is.na(session_budget)]
-
-    if (length(valid_budget) > 0) {
-      as.numeric(valid_budget[length(valid_budget)])
-    } else {
-      NULL
-    }
   })
 
   chosen_input <- reactive({
@@ -515,8 +427,8 @@ df %>%
   observe(
     {
       # Force reactivity on budget changes
-      budget_val <- budget()
-      req(budget_val) # Ensure budget is available
+      # budget_val <- budget()
+      # req(budget_val) # Ensure budget is available
 
       df_vehicle <- df_filtered()
 
@@ -615,8 +527,8 @@ df %>%
   # Battery DCE -- Button Format
   observe(
     {
-      budget_val <- budget()
-      req(budget_val) # Ensure budget is available
+      # budget_val <- budget()
+      # req(budget_val) # Ensure budget is available
 
       battery_df <- df_battery_filtered()
 
@@ -762,16 +674,10 @@ df %>%
 
   # Database designation and other settings
   sd_server(
-    db = db,
-    all_questions_required = TRUE, # fix it
-    # required_questions = c("images", "budget", "next_vehicle_purchase",
-    #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
-    #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
-    #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    use_cookies = TRUE # fix it
+    db = db
   )
 }
 
 
 # shinyApp() initiates your app - don't change it
-shiny::shinyApp(ui = sd_ui(), server = server)
+shiny::shinyApp(ui = ui, server = server)
