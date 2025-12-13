@@ -16,7 +16,7 @@ library(here)
 library(data.table)
 # library(readxl)
 
-# Function for making design 
+# Function for making design
 make_design <- function(profiles, method, priors) {
   design <- cbc_design(
     profiles = profiles,
@@ -77,12 +77,12 @@ dt_mpg <- dt_mpg %>%
         (phev_uf_car *
           (electricity_rate_low * (kwh_q10)) +
           (1 - phev_uf_car) * (gasoline_rate_low / mpg_q90)) *
-        100,
+          100,
       powertrain == "phev" & vehicle_type == "suv" ~
         (phev_uf_suv *
           (electricity_rate_low * (kwh_q10)) +
           (1 - phev_uf_suv) * (gasoline_rate_low / mpg_q90)) *
-        100
+          100
     ),
     cents_mile_max = case_when(
       powertrain == "bev" ~ electricity_rate_high * (kwh_q90) * 100,
@@ -92,12 +92,12 @@ dt_mpg <- dt_mpg %>%
         (phev_uf_car *
           (electricity_rate_high * (kwh_q90)) +
           (1 - phev_uf_car) * (gasoline_rate_high / mpg_q10)) *
-        100,
+          100,
       powertrain == "phev" & vehicle_type == "suv" ~
         (phev_uf_suv *
           (electricity_rate_high * (kwh_q90)) +
           (1 - phev_uf_suv) * (gasoline_rate_high / mpg_q10)) *
-        100
+          100
     )
   ) %>%
   mutate(
@@ -274,16 +274,12 @@ design_random_car_low <- make_design(
 #   method = 'minoverlap',
 #   priors = priors_fixed_parameter_car_low
 # )
-# 
+#
 # design_shortcut_car_low <- make_design(
 #   profiles = profiles_restricted_car_low,
 #   method = 'shortcut',
 #   priors = priors_fixed_parameter_car_low
 # )
-
-
-
-
 
 ### car low (budget > 20k) ----
 
@@ -337,14 +333,12 @@ design_random_car_high <- make_design(
 #   method = 'minoverlap',
 #   priors = priors_fixed_parameter_car_high
 # )
-# 
+#
 # design_shortcut_car_high <- make_design(
 #   profiles = profiles_restricted_car_high,
 #   method = 'shortcut',
 #   priors = priors_fixed_parameter_car_high
 # )
-
-
 
 ### suv low (budget <= 20k) ----
 
@@ -398,16 +392,12 @@ design_random_suv_low <- make_design(
 #   method = 'minoverlap',
 #   priors = priors_fixed_parameter_suv_low
 # )
-# 
+#
 # design_shortcut_suv_low <- make_design(
 #   profiles = profiles_restricted_suv_low,
 #   method = 'shortcut',
 #   priors = priors_fixed_parameter_suv_low
 # )
-
-
-
-
 
 ### suv high (budget > 20k) ----
 
@@ -461,14 +451,12 @@ design_random_suv_high <- make_design(
 #   method = 'minoverlap',
 #   priors = priors_fixed_parameter_suv_high
 # )
-# 
+#
 # design_shortcut_suv_high <- make_design(
 #   profiles = profiles_restricted_suv_high,
 #   method = 'shortcut',
 #   priors = priors_fixed_parameter_suv_high
 # )
-
-
 
 ### Join all designs ----
 
@@ -477,10 +465,7 @@ design_vehicle <- rbind(
   design_random_car_high %>% mutate(vehicle_type = "car", budget = "high"),
   design_random_suv_low %>% mutate(vehicle_type = "suv", budget = "low"),
   design_random_suv_high %>% mutate(vehicle_type = "suv", budget = "high")
-)
-
-
-design_vehicle <- design_vehicle %>%
+) %>%
   mutate(
     price = price * 10000,
     mileage = mileage * 10000,
@@ -488,18 +473,17 @@ design_vehicle <- design_vehicle %>%
     range_bev = range_bev * 100,
     range = case_when(
       powertrain == 'bev' ~ paste0(range_bev, ' miles on a full charge'),
-      TRUE ~ NA
+      TRUE ~ ''
     ),
     operating_cost = operating_cost * 10
+  ) %>%
+  left_join(
+    dt_mpg_expanded,
+    by = join_by(vehicle_type, powertrain, operating_cost == cents_mile)
   )
 
-design_vehicle <- design_vehicle %>% 
-  left_join(dt_mpg_expanded, by = join_by(vehicle_type, powertrain, operating_cost == cents_mile))
 
-
-
-### ----inspect car low ---- 
-
+### ----inspect car low ----
 
 cbc_inspect(design_random_car_low)
 
@@ -535,10 +519,7 @@ summary(power_car_low, power_threshold = 0.9)
 plot(power_car_low, type = "se")
 
 
-### ----inspect car high ---- 
-
-
-
+### ----inspect car high ----
 
 cbc_inspect(design_random_car_high)
 
@@ -576,7 +557,6 @@ plot(power_car_high, type = "se")
 
 ### ----inspect SUV low -----
 
-
 cbc_inspect(design_random_suv_low)
 
 choices_priors_suv_low <- cbc_choices(
@@ -613,7 +593,6 @@ plot(power_suv_low, type = "se")
 
 ### ----inspect SUV high --------
 
-
 cbc_inspect(design_random_suv_high)
 
 choices_priors_suv_high <- cbc_choices(
@@ -648,12 +627,7 @@ summary(power_suv_high, power_threshold = 0.9)
 plot(power_suv_high, type = "se")
 
 
-
-
-
-
-
-# Export designs ---- 
+# Export designs ----
 
 saveRDS(
   design_random_car_low,

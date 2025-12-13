@@ -7,16 +7,22 @@ library(kableExtra)
 library(digest)
 library(arrow)
 
+# Setup UI
 ui <- sd_ui()
 
 # Database setup
 db <- sd_db_connect()
 
+# Load design files
 survey <- read_parquet(here('data', 'design_vehicle.parquet'))
 battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
+survey$range[is.na(survey$range)] <- ''
 
+# Load constants
 completion_code <- 'CWTFNPQX'
 screenout_code <- 'C127J9EM'
+electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
+gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
 demo_options <- tibble(
   profileID = c(1, 1, 1, 1), # or c(1, 2, 3) if you want different IDs
@@ -43,10 +49,6 @@ demo_options <- tibble(
   vehicle_type = c("car", "car", "car", "car")
 )
 
-
-electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
-gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
-
 vehicle_cbc_options <- function(df) {
   df <- df %>%
     mutate(
@@ -61,7 +63,6 @@ vehicle_cbc_options <- function(df) {
   alt1 <- df |> filter(altID == 1)
   alt2 <- df |> filter(altID == 2)
   alt3 <- df |> filter(altID == 3)
-  alt4 <- df |> filter(altID == 4)
 
   options <- c("option_1", "option_2", "option_3", "option_4")
 
@@ -71,7 +72,7 @@ vehicle_cbc_options <- function(df) {
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 1</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt1$powertrain}</span><br>
-        <span style='font-size: 13px;'>{alt1$range}</span>
+        <span style='font-size: 13px;'>{alt1$range}</span><br>
         <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt1$age}</span><br>
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt1$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt1$operating_cost_text}</span><br>
@@ -84,7 +85,7 @@ vehicle_cbc_options <- function(df) {
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 2</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt2$powertrain}</span><br>
-        <span style='font-size: 13px;'>{alt2$range}</span>
+        <span style='font-size: 13px;'>{alt2$range}</span><br>
         <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt2$age}</span><br>
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt2$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt2$operating_cost_text}</span><br>
@@ -97,7 +98,7 @@ vehicle_cbc_options <- function(df) {
       <div style='text-align: left;'>
         <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 3</b><br>
         <b><span style='font-size: 13px;' title='Does the vehicle run on gas or electricity?' ><u>Powertrain:</u></span></b><br> <span style='font-size: 13px;'>{alt3$powertrain}</span><br>
-        <span style='font-size: 13px;'>{alt3$range}</span>
+        <span style='font-size: 13px;'>{alt3$range}</span><br>
         <b><span style='font-size: 13px;' title='Model/Manufacturing year is the actual year the vehicle was built.' ><u>Model year:</u></span></b><br> <span style='font-size: 13px;'>{alt3$age}</span><br>
         <b><span style='font-size: 13px;' title='The number of miles vehicle has travelled while in operation.' ><u>Mileage:</u></span></b><br> <span style='font-size: 13px;'>{scales::comma(alt3$mileage)}</span><br>
         <b><span style='font-size: 13px;' title='Cost in cents per mile driven of fueling the vehicle.' ><u>Operating cost:</u></span></b><br> <span style='font-size: 13px;'>{alt3$operating_cost_text}</span><br>
@@ -149,7 +150,6 @@ battery_cbc_options <- function(df) {
   alt1 <- df |> filter(altID == 1)
   alt2 <- df |> filter(altID == 2)
   alt3 <- df |> filter(altID == 3)
-  alt4 <- df |> filter(altID == 4) # Line added
 
   # Use only the first value of budget_select if it has multiple values
   #budget_val <- budget_select[1]
@@ -217,11 +217,6 @@ battery_cbc_options <- function(df) {
 
 # Server setup
 server <- function(input, output, session) {
-
-  survey$range[is.na(survey$range)] <- ''
-  respondentID <- sample(survey$respID, 1)
-  battery_respondentID <- sample(battery_survey$respID, 1)
-
   ### Prolific Setup ###
 
   # Obtain parameters from the URL
@@ -231,16 +226,15 @@ server <- function(input, output, session) {
 
   # Get Prolific IDs from URL parameters
   prolific_pid <- reactive({
-    url_pars()["PROLIFIC_PID"]  # Participant ID
+    url_pars()["PROLIFIC_PID"] # Participant ID
   })
 
   study_id <- reactive({
-    url_pars()["STUDY_ID"]  # Study ID (optional)
+    url_pars()["STUDY_ID"] # Study ID (optional)
   })
 
-
   prolific_session_id <- reactive({
-    url_pars()["SESSION_ID"]  # Session ID (optional)
+    url_pars()["SESSION_ID"] # Session ID (optional)
   })
 
   # Store Prolific IDs in your database
@@ -248,22 +242,14 @@ server <- function(input, output, session) {
   sd_store_value(study_id(), "study_id")
   sd_store_value(prolific_session_id(), "prolific_session_id")
 
-  # # Create completion redirect URL
-  # completion_url <- reactive({
-  #   paste0("https://app.prolific.com/submissions/complete?cc=",completion_code)
-  # })
-
-
   # Create completion redirect URL - using Prolific code
   completion_url <- reactive({
-    paste0("https://app.prolific.com/submissions/complete?cc=",completion_code)
+    paste0("https://app.prolific.com/submissions/complete?cc=", completion_code)
   })
-
-
 
   # Create screenout redirect URL - using Prolific code
   screenout_url <- reactive({
-    paste0("https://app.prolific.com/submissions/complete?cc=",screenout_code)
+    paste0("https://app.prolific.com/submissions/complete?cc=", screenout_code)
   })
 
   # Redirect buttons for Prolific
@@ -282,10 +268,13 @@ server <- function(input, output, session) {
   )
 
   ### End of Prolific Setup ###
-  # Make a 10-digit random number completion code
+
+  # Make IDs and 10-digit random number completion code
+  respondentID <- sample(survey$respID, 1)
+  battery_respondentID <- sample(battery_survey$respID, 1)
   completion_code <- sd_completion_code(10)
 
-  # Create random assignment when session starts
+  # Create random assignment
   prime_groups <- c('prime_short', 'prime_long')
   prime_group_label <- sample(c('prime_short', 'prime_long'), 1)
   names(prime_groups) <- prime_group_label
@@ -297,111 +286,81 @@ server <- function(input, output, session) {
   sd_store_value(battery_respondentID, "battery_respID")
   sd_store_value(prime_group_label, "prime_group_label")
 
+  # Reactive values for storing vehicle type and budget
+
+  vehicle_style <- reactive({
+    # Try to get vehicle style from input first
+    vehicle_style <- input$next_veh_style
+
+    # If not available, try from stored data for current session
+    if (is.null(vehicle_style)) {
+      stored_data <- isolate(sd_get_data(db))
+      if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
+        session_id <- session$userData$all_data$session_id
+        session_data <- stored_data[stored_data$session_id == session_id, ]
+
+        style_values <- session_data$next_veh_style
+        valid_styles <- style_values[!is.na(style_values)]
+        if (length(valid_styles) > 0) {
+          vehicle_style <- valid_styles[length(valid_styles)]
+        }
+      }
+    }
+
+    return(vehicle_style)
+  })
+
+  vehicle_budget <- reactive({
+    # Try to get vehicle budget from input first
+    vehicle_budget <- input$next_veh_budget
+
+    # If not available, try from stored data for current session
+    if (is.null(vehicle_budget)) {
+      stored_data <- isolate(sd_get_data(db))
+      if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
+        session_id <- session$userData$all_data$session_id
+        session_data <- stored_data[stored_data$session_id == session_id, ]
+
+        budget_values <- session_data$next_veh_budget
+        valid_budgets <- budget_values[!is.na(budget_values)]
+        if (length(valid_budgets) > 0) {
+          vehicle_budget <- valid_budgets[length(valid_budgets)]
+        }
+      }
+    }
+
+    # Return NULL if no valid budget found
+    if (is.null(vehicle_budget)) {
+      return(NULL)
+    }
+
+    # Map budget values to low/high
+    if (vehicle_budget %in% c("5000", "10000", "15000", "20000")) {
+      return("low")
+    }
+    return("high")
+  })
+
   ## data
 
   df <- survey %>%
     filter(respID == respondentID)
 
-
   battery_df <- battery_survey |>
     filter(respID == battery_respondentID)
 
   df_filtered <- reactive({
-    # Try to get vehicle style from input first
-    vehicle_style <- input$next_veh_style
-    vehicle_budget <- input$next_veh_budget
-
-    #If not available, try from stored data
-    if (is.null(vehicle_style)) {
-      stored_data <- isolate(sd_get_data(db))
-      if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
-        style_values <- stored_data$next_veh_style
-        valid_styles <- style_values[!is.na(style_values)]
-        if (length(valid_styles) > 0) {
-          vehicle_style <- valid_styles[length(valid_styles)]
-        }
-      }
-    }
-    # If not available, try from stored data
-    if (is.null(vehicle_budget)) {
-      stored_data <- isolate(sd_get_data(db))
-      if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
-        budget_values <- stored_data$next_veh_budget
-        valid_budgets <- budget_values[!is.na(budget_values)]
-        if (length(valid_budgets) > 0) {
-          vehicle_budget <- valid_budgets[length(valid_budgets)]
-        }
-      }
-    }
-
-    req(vehicle_style) # ensures we have a vehicle style
-    req(vehicle_budget) # ensures we have a budget
-
-df %>%
-  {
-    if (vehicle_style == "Car / sedan / hatchback") {
-      filter(., vehicle_type == "car")
-    } else {
-      filter(., vehicle_type == "suv")
-    }
-  } %>%
-  {
-    if (vehicle_budget %in% c("5000", "10000", "15000", "20000")) {
-      filter(., budget == "low")
-    } else {
-      filter(., budget == "high")
-    }
-  }
-
-})
+    req(vehicle_style(), vehicle_budget())
+    df %>%
+      filter(vehicle_type == vehicle_style()) %>%
+      filter(budget == vehicle_budget())
+  })
 
   df_battery_filtered <- reactive({
-    # Try to get vehicle style from input first
-    vehicle_style <- input$next_veh_style
-    vehicle_budget <- input$next_veh_budget
-
-    #If not available, try from stored data
-    if (is.null(vehicle_style)) {
-      stored_data <- isolate(sd_get_data(db))
-      if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
-        style_values <- stored_data$next_veh_style
-        valid_styles <- style_values[!is.na(style_values)]
-        if (length(valid_styles) > 0) {
-          vehicle_style <- valid_styles[length(valid_styles)]
-        }
-      }
-    }
-    # If not available, try from stored data
-    if (is.null(vehicle_budget)) {
-      stored_data <- isolate(sd_get_data(db))
-      if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
-        budget_values <- stored_data$next_veh_budget
-        valid_budgets <- budget_values[!is.na(budget_values)]
-        if (length(valid_budgets) > 0) {
-          vehicle_budget <- valid_budgets[length(valid_budgets)]
-        }
-      }
-    }
-
-    req(vehicle_style) # ensures we have a vehicle style
-    req(vehicle_budget) # ensures we have a budget
-
+    req(vehicle_style(), vehicle_budget())
     battery_df %>%
-      {
-        # Determine vehicle type
-        if (vehicle_style == "Car / sedan / hatchback") {
-          temp <- filter(., vehicle_type == "car")
-        } else {
-          temp <- filter(., vehicle_type == "suv")
-        }
-
-        # Apply budget filter
-        if (vehicle_budget %in% c("5000", "10000", "15000", "20000")) {
-          filter(temp, budget == "low")
-        } else {
-          filter(temp, budget == "high")
-        }
-      }
+      filter(vehicle_type == vehicle_style()) %>%
+      filter(budget == vehicle_budget())
   })
 
   chosen_input <- reactive({
@@ -437,15 +396,16 @@ df %>%
   # Vehicle DCE -- Button Format
   observe(
     {
-
-
       df_vehicle <- df_filtered()
+      battery_df <- df_battery_filtered()
 
       # Run observer that updates the chosen_image when an image is chosen
 
       output$make_table_short <- create_car_table_short(chosen_input())
 
       # Create the options for each choice question
+
+      # Vehicle options
       vehicle_cbc0_options <- vehicle_cbc_options(demo_options)
       vehicle_cbc1_options <- vehicle_cbc_options(
         df_vehicle |> filter(qID == 1)
@@ -466,8 +426,30 @@ df %>%
         df_vehicle |> filter(qID == 6)
       )
 
+      # Battery options
+      battery_cbc1_options <- battery_cbc_options(
+        battery_df |> filter(qID == 1)
+      )
+      battery_cbc2_options <- battery_cbc_options(
+        battery_df |> filter(qID == 2)
+      )
+      battery_cbc3_options <- battery_cbc_options(
+        battery_df |> filter(qID == 3)
+      )
+      battery_cbc4_options <- battery_cbc_options(
+        battery_df |> filter(qID == 4)
+      )
+      battery_cbc5_options <- battery_cbc_options(
+        battery_df |> filter(qID == 5)
+      )
+      battery_cbc6_options <- battery_cbc_options(
+        battery_df |> filter(qID == 6)
+      )
+
       # Create each choice question - display these in your survey using sd_output()
       # Example: sd_output('cbc_q1', type = 'question')
+
+      # Vehicle questions
 
       sd_question(
         type = 'mc_buttons',
@@ -530,37 +512,8 @@ df %>%
         option = vehicle_cbc6_options,
         width = "100%"
       )
-    }
-  )
 
-  # Battery DCE -- Button Format
-  observe(
-    {
-
-
-      battery_df <- df_battery_filtered()
-
-      # Create the options for each choice question
-      battery_cbc1_options <- battery_cbc_options(
-        battery_df |> filter(qID == 1)
-      )
-      battery_cbc2_options <- battery_cbc_options(
-        battery_df |> filter(qID == 2)
-      )
-      battery_cbc3_options <- battery_cbc_options(
-        battery_df |> filter(qID == 3)
-      )
-      battery_cbc4_options <- battery_cbc_options(
-        battery_df |> filter(qID == 4)
-      )
-      battery_cbc5_options <- battery_cbc_options(
-        battery_df |> filter(qID == 5)
-      )
-      battery_cbc6_options <- battery_cbc_options(
-        battery_df |> filter(qID == 6)
-      )
-
-      # Create each choice question - display these in your survey using sd_output()
+      # Battery questions
 
       sd_question(
         type = 'mc_buttons',
@@ -631,7 +584,7 @@ df %>%
 
     !is.null(input$next_veh_car_images) ~ "cbc_intro",
 
-    input$next_veh_style == "SUV / crossover" &
+    input$next_veh_style == "suv" &
       ((!is.null(input$next_veh_nobev)) |
         (input$next_veh_fuel_new_bev %in%
           c("neutral", "somewhat_likely", "very_likely") |
@@ -649,7 +602,7 @@ df %>%
       length(input$household_veh_fuel) == 1) ~
       "primary_veh_fuel",
 
-    input$household_veh_count != "0"   ~ "primary_veh_mpg",
+    input$household_veh_count != "0" ~ "primary_veh_mpg",
 
     input$primary_veh_obtain_how %in%
       c(
@@ -657,8 +610,8 @@ df %>%
         "leased_dealership",
         "bought_private",
         "bought_online"
-      ) ~ "primary_veh_cost",
-
+      ) ~
+      "primary_veh_cost",
 
     input$next_veh_fuel_new_bev %in%
       c("very_unlikely", "somewhat_unlikely") &

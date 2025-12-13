@@ -14,7 +14,7 @@ library(here)
 library(data.table)
 # library(readxl)
 
-# Function for making design 
+# Function for making design
 make_design <- function(profiles, method, priors) {
   design <- cbc_design(
     profiles = profiles,
@@ -127,7 +127,7 @@ design_car_low_random <- make_design(
 #   method = 'minoverlap',
 #   priors = priors_fixed_car_low
 # )
-# 
+#
 # design_car_low_shortcut <- make_design(
 #   profiles = profiles_car_low,
 #   method = 'shortcut',
@@ -139,8 +139,6 @@ design_car_low_random <- make_design(
 #   "Shortcut" = design_car_low_shortcut,
 #   "Min Overlap" = design_car_low_minoverlap
 # )
-
-
 
 ###---- car-high----
 
@@ -155,7 +153,7 @@ design_car_high_random <- make_design(
 #   method = 'minoverlap',
 #   priors = priors_fixed_car_high
 # )
-# 
+#
 # design_car_high_shortcut <- make_design(
 #   profiles = profiles_car_high,
 #   method = 'shortcut',
@@ -167,7 +165,6 @@ design_car_high_random <- make_design(
 #   "Shortcut" = design_car_high_shortcut,
 #   "Min Overlap" = design_car_high_minoverlap
 # )
-
 
 ###---- SUV-low----
 
@@ -182,7 +179,7 @@ design_suv_low_random <- make_design(
 #   method = 'minoverlap',
 #   priors = priors_fixed_suv_low
 # )
-# 
+#
 # design_suv_low_shortcut <- make_design(
 #   profiles = profiles_suv_low,
 #   method = 'shortcut',
@@ -194,8 +191,6 @@ design_suv_low_random <- make_design(
 #   "Shortcut" = design_suv_low_shortcut,
 #   "Min Overlap" = design_suv_low_minoverlap
 # )
-
-
 
 ###---- SUV-high----
 
@@ -210,7 +205,7 @@ design_suv_high_random <- make_design(
 #   method = 'minoverlap',
 #   priors = priors_fixed_suv_high
 # )
-# 
+#
 # design_suv_high_shortcut <- make_design(
 #   profiles = profiles_suv_high,
 #   method = 'shortcut',
@@ -222,8 +217,6 @@ design_suv_high_random <- make_design(
 #   "Shortcut" = design_suv_high_shortcut,
 #   "Min Overlap" = design_suv_high_minoverlap
 # )
-
-
 
 ##---- Inspect Design----
 
@@ -485,7 +478,7 @@ design_rand_output_battery <- design_battery %>%
       round((1 - battery_degradation)^8 * 100, 0),
       "%"
     )
-  ) %>% 
+  ) %>%
   mutate(
     battery_condition = case_when(
       no_choice == 1 ~ NA,
@@ -596,7 +589,6 @@ saveRDS(
     'battery_design_suv_low_minoverlap.Rds'
   )
 )
-
 
 saveRDS(
   design_suv_high_random,
