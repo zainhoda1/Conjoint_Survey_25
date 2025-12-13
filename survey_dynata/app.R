@@ -7,10 +7,13 @@ library(kableExtra)
 library(digest)
 library(arrow)
 
+ui <- sd_ui()
 
 # Database setup
 db <- sd_db_connect()
 
+survey <- read_parquet(here('data', 'design_vehicle.parquet'))
+battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
 
 demo_options <- tibble(
   profileID = c(1, 1, 1, 1), # or c(1, 2, 3) if you want different IDs
@@ -211,12 +214,9 @@ battery_cbc_options <- function(df) {
 
 # Server setup
 server <- function(input, output, session) {
-  survey <- read_parquet(here('data', 'design_vehicle.parquet'))
+
   survey$range[is.na(survey$range)] <- ''
-  battery_survey <- read_parquet(here(
-    'data',
-    'design_battery.parquet'
-  ))
+
   respondentID <- sample(survey$respID, 1)
   battery_respondentID <- sample(battery_survey$respID, 1)
 
@@ -353,21 +353,13 @@ server <- function(input, output, session) {
   ## data
 
   df <- survey %>%
-    filter(respID == respondentID) |> #filter(respID == 2169)
-    mutate(
-      `range` = case_when(
-        str_detect(`range`, "\\(") ~ str_replace(`range`, "\\s*\\(", "<br>("),
-        TRUE ~ paste0(`range`, "<br>")
-      ),
-      operating_cost = case_when(
-        str_detect(operating_cost, "\\(") ~
-          str_replace(operating_cost, "\\s*\\(", "<br>("),
-        TRUE ~ paste0(operating_cost, "<br>")
-      )
-    )
+    filter(respID == respondentID)
 
-  battery_df <- battery_survey |>
+
+  battery_df <- battery_survey %>%
     filter(respID == battery_respondentID)
+
+
 
   df_filtered <- reactive({
     # Try to get vehicle style from input first
@@ -385,7 +377,7 @@ server <- function(input, output, session) {
         }
       }
     }
-    
+
     # If not available, try from stored data
     if (is.null(vehicle_budget)) {
       stored_data <- isolate(sd_get_data(db))
@@ -397,7 +389,6 @@ server <- function(input, output, session) {
         }
       }
     }
-
 
 
     req(vehicle_style) # ensures we have a vehicle style
@@ -437,7 +428,7 @@ df %>%
         }
       }
     }
-    
+
     # If not available, try from stored data
     if (is.null(vehicle_budget)) {
       stored_data <- isolate(sd_get_data(db))
@@ -473,25 +464,6 @@ df %>%
       }
   })
 
-  budget <- reactive({
-    if (!is.null(input$next_veh_budget)) {
-      return(as.numeric(input$next_veh_budget))
-    }
-
-    stored_data <- isolate(sd_get_data(db))
-    session_id <- session$userData$all_data$session_id
-    session_budget <- stored_data[
-      stored_data$session_id == session_id,
-    ]$next_veh_budget
-    valid_budget <- session_budget[!is.na(session_budget)]
-
-    if (length(valid_budget) > 0) {
-      as.numeric(valid_budget[length(valid_budget)])
-    } else {
-      NULL
-    }
-  })
-
   chosen_input <- reactive({
     # First try current input
     selected <- input$next_veh_car_images %||% input$next_veh_suv_images
@@ -525,9 +497,7 @@ df %>%
   # Vehicle DCE -- Button Format
   observe(
     {
-      # Force reactivity on budget changes
-      budget_val <- budget()
-      req(budget_val) # Ensure budget is available
+
 
       df_vehicle <- df_filtered()
 
@@ -626,8 +596,7 @@ df %>%
   # Battery DCE -- Button Format
   observe(
     {
-      budget_val <- budget()
-      req(budget_val) # Ensure budget is available
+
 
       battery_df <- df_battery_filtered()
 
@@ -729,6 +698,9 @@ df %>%
           input$next_veh_fuel_used_bev %in%
             c("neutral", "somewhat_likely", "very_likely"))) ~
       "next_veh_style_suv"
+
+
+
   )
 
   sd_show_if(
@@ -769,20 +741,18 @@ df %>%
       input$battery_cbc_q5_button == 'option_4' &
       input$battery_cbc_q6_button == 'option_4' ~
       'page2a'
+
+
+
   )
 
   # Database designation and other settings
   sd_server(
-    db = db,
-    all_questions_required = TRUE, # fix it
-    # required_questions = c("images", "budget", "next_vehicle_purchase",
-    #                        "which_market", "next_car_payment_source", "know_electric_vehicle",
-    #                        "cbc_q1",  "cbc_q2" , "cbc_q3",  "cbc_q4" , "cbc_q5",  "cbc_q6",
-    #                        "battery_cbc_q1",  "battery_cbc_q2" , "battery_cbc_q3",  "battery_cbc_q4" , "battery_cbc_q5",  "battery_cbc_q6"),
-    use_cookies = TRUE # fix it
+    db = db
   )
 }
 
 
 # shinyApp() initiates your app - don't change it
-shiny::shinyApp(ui = sd_ui(), server = server)
+shiny::shinyApp(ui = ui, server = server)
+

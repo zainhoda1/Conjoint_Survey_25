@@ -371,6 +371,17 @@ df %>%
         }
       }
     }
+    # If not available, try from stored data
+    if (is.null(vehicle_budget)) {
+      stored_data <- isolate(sd_get_data(db))
+      if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
+        budget_values <- stored_data$next_veh_budget
+        valid_budgets <- budget_values[!is.na(budget_values)]
+        if (length(valid_budgets) > 0) {
+          vehicle_budget <- valid_budgets[length(valid_budgets)]
+        }
+      }
+    }
 
     req(vehicle_style) # ensures we have a vehicle style
     req(vehicle_budget) # ensures we have a budget
@@ -426,9 +437,7 @@ df %>%
   # Vehicle DCE -- Button Format
   observe(
     {
-      # Force reactivity on budget changes
-      # budget_val <- budget()
-      # req(budget_val) # Ensure budget is available
+
 
       df_vehicle <- df_filtered()
 

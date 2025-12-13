@@ -437,9 +437,7 @@ df %>%
   # Vehicle DCE -- Button Format
   observe(
     {
-      # Force reactivity on budget changes
-      # budget_val <- budget()
-      # req(budget_val) # Ensure budget is available
+
 
       df_vehicle <- df_filtered()
 
@@ -538,8 +536,7 @@ df %>%
   # Battery DCE -- Button Format
   observe(
     {
-      # budget_val <- budget()
-      # req(budget_val) # Ensure budget is available
+
 
       battery_df <- df_battery_filtered()
 
