@@ -3,8 +3,6 @@ survey-settings:
   use-cookies: yes
   all-questions-required: true
 css: css/survey_theme.css
-warning: false
-echo: false
 ---
 
 ```{r}
@@ -15,8 +13,8 @@ library(kableExtra)
 library(glue)
 ```
 
+--- welcome 
 
-::: {#welcome .sd-page}
 # Welcome to our survey!
 
 Hi! We are a research team at George Washington University. This survey will ask you questions regarding your purchase preference for **used cars**.
@@ -41,13 +39,8 @@ subdivided in six sub-sections:
 
 **We greatly appreciate your participation!**
 
-```{r}
-sd_nav()
-```
+--- consent 
 
-:::
-
-::: {#consent .sd-page}
 # Consent
 
 ## Informed Consent for Participation in a Research Study
@@ -79,41 +72,40 @@ page, and agree to participate in the survey.
 ```{r}
 sd_nav(label_next = 'I Agree')
 ```
-:::
 
-::: {#filter .sd-page}
+--- filter
 
 ## This study is about the purchase of your next vehicle.
 
 ```{r}
 sd_question(
-  type  = 'mc',
-  id    = 'next_veh_when',
+  type = 'mc',
+  id = 'next_veh_when',
   label = "**To your best estimate, when will you likely need to purchase your next vehicle?**",
   option = c(
-    "Within the next 3 months"  = "0",
+    "Within the next 3 months" = "0",
     "In 3-6 months" = "3",
-    "In 6-12 months"  = "6",
-    "In 1-2 years"  = "12",
-    "After 2 years"  = "24",
-    "I'm not sure"  = "not_sure"
+    "In 6-12 months" = "6",
+    "In 1-2 years" = "12",
+    "After 2 years" = "24",
+    "I'm not sure" = "not_sure"
   )
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'next_veh_market',
+  type = 'mc',
+  id = 'next_veh_market',
   label = "**Are you interested in buying a new or used vehicle?**",
   option = c(
     "New vehicle only" = "new",
-    "Used vehicle only"  = "used",
+    "Used vehicle only" = "used",
     "I’m looking at both markets" = "both"
   )
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'next_veh_style',
+  type = 'mc',
+  id = 'next_veh_style',
   label = "**Which vehicle body style would you consider for your next vehicle?**",
   option = c(
     "Car / sedan / hatchback" = "car",
@@ -124,35 +116,24 @@ sd_question(
   )
 )
 
-
 sd_question(
-  type  = 'mc',
-  id    = 'attention_check_toyota',
+  type = 'mc',
+  id = 'attention_check_toyota',
   label = "**Have you ever owned a Toyota vehicle?**",
   option = c(
     "Yes, currently" = "yes_current",
     "Yes, in the past" = "yes_past",
     "No" = "no"
   )
-  # ,
-  # hidden = TRUE
 )
 ```
 
+--- household_veh 
 
-```{r}
-sd_nav(label_next = 'Next')
-
-```
-
-
-:::
-
-
-::: {#household_veh .sd-page}
 <center>
 ## Section 1 of 6
 </center>
+
 ## Below are some questions about your household.
 
 **We’ll start with a few questions about the vehicles your household owns or leases.** 
@@ -176,85 +157,77 @@ sd_nav(label_next = 'Next')
 
 ```{r}
 sd_question(
-  type  = 'mc',
-  id    = 'household_veh_count',
+  type = 'mc',
+  id = 'household_veh_count',
   label = "**How many passenger vehicles are currently owned or leased by your household?**",
   option = c(
     "0" = "0",
-    "1"  = "1",
-    "2"  = "2",
+    "1" = "1",
+    "2" = "2",
     "3" = "3",
-    "4"  = "4",
-    "5"  = "5",
-    "6 or more"  = "6"
+    "4" = "4",
+    "5" = "5",
+    "6 or more" = "6"
   )
 )
 
 sd_question(
-  type  = 'mc_multiple',
-  id    = 'household_veh_fuel',
+  type = 'mc_multiple',
+  id = 'household_veh_fuel',
   label = "**Which of the following types of vehicles are currently owned or leased by your household?** *Select all that apply.*",
-  option = c("Conventional" = "icev",
-    "Gas hybrid"     = "hev",
-    "Plug-in hybrid"    = "phev",
-    "Battery electric"          = "bev",
+  option = c(
+    "Conventional" = "icev",
+    "Gas hybrid" = "hev",
+    "Plug-in hybrid" = "phev",
+    "Battery electric" = "bev",
     "Other" = "other"
   )
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'charger_access',
+  type = 'mc',
+  id = 'charger_access',
   label = "**Do you have access to an electrical outlet where your vehicle is typically parked at your primary residence or workplace?**",
   option = c(
     "Yes" = "yes",
-    "No"   = "no",
-    "I'm not sure"  = "not_sure"
+    "No" = "no",
+    "I'm not sure" = "not_sure"
   )
 )
 
-
 sd_question(
-  type  = 'mc',
-  id    = 'neighbor_ev_info',
+  type = 'mc',
+  id = 'neighbor_ev_info',
   label = "**Do any of your neighbors own or lease a plug-in hybrid or a battery electric vehicle?**",
   option = c(
     "Yes" = "yes",
-    "No"  = "no",
-    "I'm not sure"  = "not_sure"
+    "No" = "no",
+    "I'm not sure" = "not_sure"
   )
 )
-
-
 ```
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-::: {#primary_veh .sd-page}
+--- primary_veh
 
 ## The following questions are about the household vehicle you drive most often.
 
 ```{r}
 sd_question(
-  type  = 'mc',
-  id    = 'primary_veh_fuel',
+  type = 'mc',
+  id = 'primary_veh_fuel',
   label = "**What is the fuel type of this vehicle?**",
   option = c(
     "Conventional" = "icev",
-    "Gas hybrid"     = "hev",
-    "Plug-in hybrid"    = "phev",
-    "Battery electric"          = "bev",
-    "Other" =  "other"
+    "Gas hybrid" = "hev",
+    "Plug-in hybrid" = "phev",
+    "Battery electric" = "bev",
+    "Other" = "other"
   )
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'primary_veh_new_used',
+  type = 'mc',
+  id = 'primary_veh_new_used',
   label = "**Was this vehicle obtained as a new or used vehicle?**",
   option = c(
     "New" = "new",
@@ -263,8 +236,8 @@ sd_question(
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'primary_veh_obtain_how',
+  type = 'mc',
+  id = 'primary_veh_obtain_how',
   label = "**How was this vehicle obtained?**",
   option = c(
     "Bought from a dealership" = "bought_dealership",
@@ -272,34 +245,34 @@ sd_question(
     "Bought from an online retailer (e.g., Carvana)" = "bought_online",
     "Bought from a private seller" = "bought_private",
     "Received it as a gift" = "received_gift",
-    "Other" ="other",
-    "Do not remember / do not know"  = "do_not_know"
+    "Other" = "other",
+    "Do not remember / do not know" = "do_not_know"
   )
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'primary_veh_cost',
+  type = 'mc',
+  id = 'primary_veh_cost',
   label = "**To your best estimate, what was the total purchase or lease price for this vehicle?** *Please **include** all related expenses (such as the down payment, monthly payments, taxes, and any additional fees), but **do not include** any trade-in value or credits from selling another vehicle.*",
   option = c(
     "$9,999 or less" = "5000",
     "$10,000 - $19,999" = "15000",
-    "$20,000 - $29,999"= "25000",
+    "$20,000 - $29,999" = "25000",
     "$30,000 - $39,999" = "35000",
-    "$40,000 - $49,999"= "45000",
-    "$50,000 - $59,999"= "55000",
+    "$40,000 - $49,999" = "45000",
+    "$50,000 - $59,999" = "55000",
     "$60,000 - $69,999" = "65000",
-    "$70,000 - $79,999"= "75000",
-    "$80,000 - $89,999"= "85000",
-    "$90,000 - $99,999"= "95000",
+    "$70,000 - $79,999" = "75000",
+    "$80,000 - $89,999" = "85000",
+    "$90,000 - $99,999" = "95000",
     "$100,000 or more" = "105000",
     "Do not remember / do not know" = "do_not_know"
   )
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'primary_veh_payment',
+  type = 'mc',
+  id = 'primary_veh_payment',
   label = "**What is your current monthly payment for this vehicle?**",
   option = c(
     "Paid in full/ No loan" = "0",
@@ -319,8 +292,8 @@ sd_question(
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'primary_veh_mpg',
+  type = 'mc',
+  id = 'primary_veh_mpg',
   label = "**What is the average gas mileage (in miles per gallon, MPG) of this vehicle?** *Please provide your best estimate and select **I'm not sure** if your primary vehicle is a Battery Electric Vehicle.*",
   option = c(
     "9.99 MPG or less" = "5",
@@ -334,11 +307,9 @@ sd_question(
   )
 )
 
-
-
 sd_question(
-  type  = 'mc',
-  id    = 'primary_veh_refuel',
+  type = 'mc',
+  id = 'primary_veh_refuel',
   label = "**How often do you refuel or recharge this vehicle?**",
   option = c(
     "Once a month" = "1",
@@ -352,12 +323,12 @@ sd_question(
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'primary_veh_range',
+  type = 'mc',
+  id = 'primary_veh_range',
   label = "**How many miles can this vehicle travel on a full tank or full battery charge?**",
   option = c(
     "49 miles or less" = "25",
-    "50 - 99 miles" = "75" , 
+    "50 - 99 miles" = "75",
     "100 - 149 miles" = "125",
     "150 - 199 miles" = "175",
     "200 - 249 miles" = "225",
@@ -368,32 +339,22 @@ sd_question(
     "450 miles or more" = "475"
   )
 )
-
 ```
 
+--- next_veh_info
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-
-
-::: {#next_veh_info .sd-page}
 <center>
 ## Section 2 of 6
 </center>
+
 ## This section asks a few questions about your future vehicle.
 
 **You indicated earlier that you are interested in a used `r sd_output("next_veh_style", type ="value")` for your next vehicle.**
 
-
 ```{r}
-
 sd_question(
-  type  = 'mc',
-  id    = 'next_veh_budget',
+  type = 'mc',
+  id = 'next_veh_budget',
   label = '**What is your budget for the vehicle?**',
   option = c(
     "$4,999 or less" = "5000",
@@ -406,123 +367,101 @@ sd_question(
     "$35,000 - $39,999" = "40000",
     "$40,000 - $44,999" = "45000",
     "$45,000 - $49,999" = "50000",
-    "$50,000 or more"= "55000"
+    "$50,000 or more" = "55000"
   )
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'next_veh_payment',
+  type = 'mc',
+  id = 'next_veh_payment',
   label = "**How do you intend to pay for the vehicle?**",
   option = c(
-    "Pay in full"= "pay_full",
+    "Pay in full" = "pay_full",
     "Finance" = "finance"
   )
 )
 
-
 sd_question(
-  type  = 'matrix',
-  id    = 'next_veh_fuel',
+  type = 'matrix',
+  id = 'next_veh_fuel',
   label = "**How likely are you to purchase the following types of vehicles as your next vehicle?**",
   row = c(
-    "New plug-in hybrid electric vehicle"     = "new_phev",
-    "Used plug-in hybrid electric vehicle"    = "used_phev",
-    "New battery electric vehicle"          = "new_bev",
-    "Used battery electric vehicle" =  "used_bev"
+    "New plug-in hybrid electric vehicle" = "new_phev",
+    "Used plug-in hybrid electric vehicle" = "used_phev",
+    "New battery electric vehicle" = "new_bev",
+    "Used battery electric vehicle" = "used_bev"
   ),
   option = c(
     "Very unlikely" = "very_unlikely",
-    "Somewhat unlikely"  = "somewhat_unlikely",
-    "Neither likely nor unlikely"  = "neutral",
-    "Somewhat likely"  = "somewhat_likely",
-    "Very likely"  = "very_likely"
+    "Somewhat unlikely" = "somewhat_unlikely",
+    "Neither likely nor unlikely" = "neutral",
+    "Somewhat likely" = "somewhat_likely",
+    "Very likely" = "very_likely"
   )
 )
 ```
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-::: {#next_veh_info_nobev .sd-page}
+--- next_veh_info_nobev
 
 ```{r}
 sd_question(
-  type  = 'textarea',
-  id    = 'next_veh_nobev',
+  type = 'textarea',
+  id = 'next_veh_nobev',
   label = "**You mentioned that you are unlikely to purchase a battery electric vehicle as your next vehicle. What is your biggest concern or reason for this?**"
 )
-
 ```
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-:::
-
-
-
-::: {#next_veh_style_car .sd-page}
+--- next_veh_style_car 
 
 ```{r}
-
 # Car image options
-car_images <- sample(c("1_new_car_sedan_compact",
-                       "2_new_car_hatchback_subcompact",
-                       "3_new_car_sedan_subcompact",
-                       "4_new_car_sedan_fullsize",
-                       "5_new_car_sedan_fullsize_luxury",
-                       "6_new_car_hatchback_compact",
-                       "7_new_car_hatchback_compact_luxury",
-                       "8_new_car_sedan_midsize",
-                       "9_new_car_hatchback_subcompact_luxury"))
+car_images <- sample(c(
+  "1_new_car_sedan_compact",
+  "2_new_car_hatchback_subcompact",
+  "3_new_car_sedan_subcompact",
+  "4_new_car_sedan_fullsize",
+  "5_new_car_sedan_fullsize_luxury",
+  "6_new_car_hatchback_compact",
+  "7_new_car_hatchback_compact_luxury",
+  "8_new_car_sedan_midsize",
+  "9_new_car_hatchback_subcompact_luxury"
+))
 
-
-  #Choosing Car/SUV type
+#Choosing Car/SUV type
 all_cars <- car_images
 
 car_src <- glue::glue(
   '<img src="images/car-images/{all_cars}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">'
- )
+)
 
 names(all_cars) <- car_src
 
 # Define first choice question
 sd_question(
-    type  = 'mc_buttons',
-    id    = 'next_veh_car_images',
-    label = "**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
-    option = all_cars
+  type = 'mc_buttons',
+  id = 'next_veh_car_images',
+  label = "**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
+  option = all_cars
 )
-  
 ```
 
+--- next_veh_style_suv 
 
 ```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-::: {#next_veh_style_suv .sd-page}
-
-```{r}
-
 # Car image options
-suv_images <- sample(c("1_new_crossover_compact",
-                       "2_new_crossover_midsize",
-                       "3_new_suv_fullsize",
-                       "4_new_crossover_midsize",
-                       "5_new_suv_fullsize",
-                       "6_new_crossover_subcompact",
-                       "7_new_crossover_subcompact",
-                       "8_new_suv_fullsize",
-                       "9_new_crossover_compact"))
+suv_images <- sample(c(
+  "1_new_crossover_compact",
+  "2_new_crossover_midsize",
+  "3_new_suv_fullsize",
+  "4_new_crossover_midsize",
+  "5_new_suv_fullsize",
+  "6_new_crossover_subcompact",
+  "7_new_crossover_subcompact",
+  "8_new_suv_fullsize",
+  "9_new_crossover_compact"
+))
 
-  #Choosing Car/SUV type
+#Choosing Car/SUV type
 
 all_suv <- suv_images
 
@@ -531,26 +470,17 @@ suv_src <- glue::glue(
 )
 
 names(all_suv) <- suv_src
-  
 
 sd_question(
-    type  = 'mc_buttons',
-    id    = 'next_veh_suv_images',
-    label = "**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
-    option = all_suv
+  type = 'mc_buttons',
+  id = 'next_veh_suv_images',
+  label = "**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**",
+  option = all_suv
 )
-
-
 ```
 
+--- cbc_intro 
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-::: {#cbc_intro .sd-page}
 <center>
 ## Section 3 of 6
 </center>
@@ -561,14 +491,12 @@ Great Work! Now that you have shared a bit about yourself, we'd like you to cons
 
 Let's learn about the attributes.
 
-
 | Types of Powertrain   | Powertrain Definition   | Examples  |
 |-------------------------|-------------------------------------|-----------|
 | Conventional ![](images/gas_pump.png) | Gasoline or other liquid-fuel engine, such as diesel or flex-fuel.| Honda Civic, Ford Explorer |
 | Gas hybrid electric vehicle (HEV)![](images/gas_pump.png) | Smaller gasoline engine + electric motor + small battery. The gasoline engine recharges the battery to improve fuel efficiency. | Toyota Prius, Ford Escape Hybrid |
 | Plug-in hybrid electric vehicle (PHEV)![](images/gas_pump.png) ![](images/electric_plug.png) | Hybrid that can also be plugged into an electrical outlet to charge the battery. Runs on electricity for a short range (10 – 40 miles), then switches to gasoline. | Kia Niro, Toyota RAV4 Prime |
 | Battery electric vehicle (BEV) ![](images/electric_plug.png)| Electric motor only. Must be plugged into an electrical outlet to be refueled.  | Nissan Leaf, Tesla Model Y
-
 
 |                                                                                                                         
 |-------------|----------------------------------------------------------|
@@ -580,18 +508,10 @@ Let's learn about the attributes.
 
 <!-- (Assumes [gasoline costs\$3.30/gallon](https://www.eia.gov/todayinenergy/detail.php?id=64164#:~:text=The%20U.S.%20retail%20price%20for,Gasoline%20and%20Diesel%20Fuel%20Update.) and [electricity costs \$0.16/kWh](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a)).   -->
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-
-
-::: {#cbc_demo .sd-page}
+--- cbc_demo 
 
 ```{r}
-vehicle_cbc0_options<- c(
+vehicle_cbc0_options <- c(
   "Option 1" = "option_1",
   "Option 2" = "option_2",
   "Option 3" = "option_3"
@@ -613,101 +533,87 @@ We will now begin the choice tasks. We will show you **six** choice questions, s
 sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q0_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
 
-:::
 
+--- vehicle_pageQ1_button 
 
-::: {#vehicle_pageQ1_button .sd-page}
 ### Question 1 of 6
+
 ```{r}
 sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q1_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#vehicle_pageQ2_button .sd-page}
+--- vehicle_pageQ2_button 
+
 ### Question 2 of 6
+
 ```{r}
 sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q2_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#vehicle_pageQ3_button .sd-page}
+--- vehicle_pageQ3_button 
+
 ### Question 3 of 6
+
 ```{r}
 sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q3_button", type = "question")
 
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#vehicle_pageQ4_button .sd-page}
+--- vehicle_pageQ4_button 
+
 ### Question 4 of 6
+
 ```{r}
 sd_output("make_table_short")
-
 sd_output("vehicle_cbc_q4_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#vehicle_pageQ5_button .sd-page}
+--- vehicle_pageQ5_button 
+
 ### Question 5 of 6
+
 ```{r}
 sd_output("make_table_short")
-
 sd_output("vehicle_cbc_q5_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#vehicle_pageQ6_button .sd-page}
+--- vehicle_pageQ6_button 
+
 ### Question 6 of 6
+
 ```{r}
 sd_output("make_table_short")
-
 sd_output("vehicle_cbc_q6_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#battery_prime_short .sd-page}
+--- battery_prime_short 
+
 <center>
 ## Section 4 of 6
 </center>
+
 ## Battery Educational Page
 
 Next, we’d like you to consider a scenario in which you can choose a **used battery electric vehicle (BEV)** from a set of BEVs with different attributes. Please review some important facts about BEVs and their batteries.
-
 
 |
 |-------------|----------------------------------------------------------|
 | ![](images/battery_survey_battery.png){fig-align="center" width="80"} | <span style="font-size: 18px;">**Vehicle Driving Range and Battery Health**</span><br>- EV batteries **gradually lose capacity over time (battery degradation)**, which reduces the vehicle's driving range and increases charging time.<br>- The condition of an EV battery is often described using **State of Health (SOH)**, expressed as a percentage.|
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-:::
+--- battery_prime_long 
 
-::: {#battery_prime_long .sd-page}
 <center>
 ## Section 4 of 6
 </center>
+
 ## Battery Educational Page
 
 Next, we’d like you to consider a scenario in which you can choose a **used battery electric vehicle (BEV)** from a set of BEVs with different attributes. Please review some important facts about BEVs and their batteries.
@@ -718,14 +624,8 @@ Next, we’d like you to consider a scenario in which you can choose a **used ba
 |![](images/battery_survey_veh_maintenance.jpg){fig-align="center" width="100"} | <span style="font-size: 20px;">**Battery Maintenance**</span><br>- **Battery replacements** are rare but can be expensive, costing **between \$5,000 and \$20,000** depending on the model and labor costs.<br>- However, most modern EV batteries are **designed to last the lifetime** of the vehicle under normal use. |
 |![](images/battery_survey_veh_warranty.png){fig-align="center" width="100"} | <span style="font-size: 20px;">**Battery Warranty**</span><br>- BEVs come with a **battery warranty** of at least **8 years or 100,000 miles**, whichever comes first.<br>- Many batteries continue to perform well **beyond the warranty period**, though some performance degradation is expected over time.<br>- Most manufacturers will replace the battery **at no cost** when the SOH falls **below 70-75%** while under warranty. |
 
+--- battery_cbc_intro
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-::: {#battery_cbc_intro .sd-page}
 ## Battery Educational Page
 
 ```{r}
@@ -734,7 +634,6 @@ battery_cbc_options <- c(
   "Option 2" = "option_2",
   "Option 3" = "option_3"
 )
-
 ```
 
 Let’s take a moment to learn about the specific attributes of the BEVs that you’ll see in the upcoming choices.
@@ -746,149 +645,90 @@ Let’s take a moment to learn about the specific attributes of the BEVs that yo
 | ![](images/battery_survey_battery.png){fig-align="center" width="60"} | **Battery refurbishment history -** The repair or replacement work that has been done on the vehicle’s main battery.<br>![](images/battery_survey_battery_combined.png){fig-align="center" width="300"}|
 | ![](images/battery_survey_battery_degradation1.png){fig-align="center" width="300"} | **Electric range -** The maximum distance (in miles) the vehicle can travel on a full battery charge, under typical driving conditions.<br>**Battery Health -** How much (in percentages) of the battery’s original capacity remains.|
 
-
-
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-
-
-::: {#battery_cbc_demo .sd-page}
+--- battery_cbc_demo 
 
 ## Battery Choice Question 
 
 We will now show you **six** choice questions, starting on the next page.
 **For all choice questions, please assume the used vehicle was built in 2022 and is currently three years old.**
 
+--- battery_pageQ1_button 
 
-
-
-```{r}
-
-#Below is an example of the type of questions you will be asked.
-
-#sd_output("battery_cbc_q0_button", type = "question")
-
-sd_nav(label_next = 'Next')
-```
-:::
-
-::: {#battery_pageQ1_button .sd-page}
-
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
 ### Question 1 of 6
+
 ```{r}
-sd_output("make_table_short")
+sd_output("make_table_short_battery")
 sd_output("battery_cbc_q1_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#battery_pageQ2_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
+--- battery_pageQ2_button 
+
 ### Question 2 of 6
+
 ```{r}
-sd_output("make_table_short")
+sd_output("make_table_short_battery")
 sd_output("battery_cbc_q2_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#battery_pageQ3_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
+--- battery_pageQ3_button 
+
 ### Question 3 of 6
+
 ```{r}
-sd_output("make_table_short")
+sd_output("make_table_short_battery")
 sd_output("battery_cbc_q3_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#battery_pageQ4_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
+--- battery_pageQ4_button
+
 ### Question 4 of 6
+
 ```{r}
-sd_output("make_table_short")
+sd_output("make_table_short_battery")
 sd_output("battery_cbc_q4_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#battery_pageQ5_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
+--- battery_pageQ5_button
+
 ### Question 5 of 6
+
 ```{r}
-sd_output("make_table_short")
+sd_output("make_table_short_battery")
 sd_output("battery_cbc_q5_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#battery_pageQ6_button .sd-page}
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
+--- battery_pageQ6_button
+
 ### Question 6 of 6
+
 ```{r}
-sd_output("make_table_short")
+sd_output("make_table_short_battery")
 sd_output("battery_cbc_q6_button", type = "question")
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#page2a .sd-page}
-
+--- page2a
 
 ```{r}
-
-
 sd_question(
-  type  = "textarea",
-  id    = "no_bev_selected0",
+  type = "textarea",
+  id = "no_bev_selected0",
   label = "**We noticed you did not choose any of the electric vehicle options in the last few questions. Could you tell us any reasons why?**"
 )
-
-sd_nav(label_next = 'Next')
 ```
 
-:::
+--- battery_attribute_rank
 
-
-
-::: {#battery_attribute_rank .sd-page}
-<!-- <center> -->
-<!-- ## Section 4 of 6 -->
-</center>
 ```{r}
 sd_question(
-  type  = 'matrix',
-  id    = 'battery_attribute',
+  type = 'matrix',
+  id = 'battery_attribute',
   label = "**How important are the following attributes to you when selecting a used battery electric vehicle?**",
   row = c(
     "Vehicle mileage" = "veh_mile",
-    "Purchase price"     = "purchase_price",
-    "Battery refurbishment history"    = "battery_refurbish",
-    "Vehicle range"          = "veh_range",
-    "Battery health"          = "battery_health"
+    "Purchase price" = "purchase_price",
+    "Battery refurbishment history" = "battery_refurbish",
+    "Vehicle range" = "veh_range",
+    "Battery health" = "battery_health"
   ),
   option = c(
     "Unimportant" = "unimportant",
@@ -896,15 +736,12 @@ sd_question(
     "Moderately important" = "moderately_important",
     "Important" = "important",
     "Very important" = "very_important"
-
   )
 )
-
-sd_nav(label_next = 'Next')
 ```
-:::
 
-::: {#ev_knowledge .sd-page}
+--- ev_knowledge 
+
 <center>
 ## Section 5 of 6
 </center>
@@ -912,348 +749,321 @@ sd_nav(label_next = 'Next')
 ## We'd like to learn more about your views on vehicle technologies and related topics.
 
 ```{r}
-
 sd_question(
-  type  = 'mc_multiple',
-  id    = 'run_on_gasoline',
+  type = 'mc_multiple',
+  id = 'run_on_gasoline',
   label = "**Please select which vehicle(s) can run on gasoline.** *Select all that apply.*",
   option = c(
     "Gas hybrid electric vehicle" = "hev",
-    "Plug-in hybrid electric vehicle"  = "phev",
-    "Battery electric vehicle"    = "bev",
-    "I’m not sure"   = "not_sure"
+    "Plug-in hybrid electric vehicle" = "phev",
+    "Battery electric vehicle" = "bev",
+    "I’m not sure" = "not_sure"
   )
 )
 
 sd_question(
-  type  = 'mc_multiple',
-  id    = 'plugged_in',
+  type = 'mc_multiple',
+  id = 'plugged_in',
   label = "**Please select which vehicles can be plugged in.** *Select all that apply.*",
   option = c(
     "Gas hybrid electric vehicle" = "hev",
-    "Plug-in hybrid electric vehicle"  = "phev",
-    "Battery electric vehicle"    = "bev",
-    "I’m not sure"   = "not_sure"
+    "Plug-in hybrid electric vehicle" = "phev",
+    "Battery electric vehicle" = "bev",
+    "I’m not sure" = "not_sure"
   )
 )
 
 # Conditional Question
 sd_question(
-  type  = 'mc',
-  id    = 'know_electric_vehicle',
+  type = 'mc',
+  id = 'know_electric_vehicle',
   label = "**Can you name the make and model of at least one vehicle powered completely by electricity (a battery electric vehicle)?**",
   option = c(
     "Yes" = "yes",
-    "No"  = "no"
+    "No" = "no"
   )
 )
 
 # Target Question
 sd_question(
-  type  = "text",
-  id    = "write_electric_name",
+  type = "text",
+  id = "write_electric_name",
   label = "**Please name the make and model of the vehicle.**"
 )
 
-
 sd_question(
-  type  = 'mc',
-  id    = 'max_subsidy',
+  type = 'mc',
+  id = 'max_subsidy',
   label = "**To the best of your knowledge, what was the previous maximum federal tax credit (up till 09/30/2025) available in the US for purchasing a new electric vehicle?**",
   option = c(
     "$1,000" = "1000",
-    "$2,500"  = "2500",
+    "$2,500" = "2500",
     "$5,000" = "5000",
-    "$7,500"  = "7500",
+    "$7,500" = "7500",
     "$10,000" = "10000",
-    "I'm not sure"  = "not_sure"
+    "I'm not sure" = "not_sure"
   )
 )
-
-
 ```
 
-
-
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-::: {#attitudes_page1 .sd-page}
+--- attitudes_page1 
 
 ```{r}
 sd_question(
-  type  = 'matrix',
-  id    = 'attitudes_1_a',
+  type = 'matrix',
+  id = 'attitudes_1_a',
   label = "**Please indicate the extent to which you agree or disagree with the following statements.**",
   row = c(
-    "People who are important to me think that I should buy an EV."     = "ev_norm",
-    "Driving an EV would eventually result in cost savings."    = "ev_cost",
-    "Driving an EV would be beneficial to the environment in the long term."          = "ev_environment"
+    "People who are important to me think that I should buy an EV." = "ev_norm",
+    "Driving an EV would eventually result in cost savings." = "ev_cost",
+    "Driving an EV would be beneficial to the environment in the long term." = "ev_environment"
   ),
   option = c(
     "Strongly disagree" = "strongly_disagree",
-    "Somewhat disagree"  = "somewhat_disagree",
-    "Neither agree nor disagree"  = "neutral",
-    "Somewhat agree"  = "somewhat_agree",
-    "Strongly agree"  = "strongly_agree")
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  )
 )
 
 sd_question(
-  type  = 'matrix',
-  id    = 'attitudes_1_b',
+  type = 'matrix',
+  id = 'attitudes_1_b',
   label = " ",
   row = c(
-    "If I owned a BEV, I would often worry about running out of charge." =  "ev_range",
-    "BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing." =  "ev_resale",
-    "The price of an EV is too high." =  "ev_price"
+    "If I owned a BEV, I would often worry about running out of charge." = "ev_range",
+    "BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing." = "ev_resale",
+    "The price of an EV is too high." = "ev_price"
   ),
   option = c(
     "Strongly disagree" = "strongly_disagree",
-    "Somewhat disagree"  = "somewhat_disagree",
-    "Neither agree nor disagree"  = "neutral",
-    "Somewhat agree"  = "somewhat_agree",
-    "Strongly agree"  = "strongly_agree"
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
   )
 )
 ```
 
+--- attitudes_page2 
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-:::
-
-::: {#attitudes_page2 .sd-page}
 ```{r}
 sd_question(
-  type  = 'matrix',
-  id    = 'attitudes_2_a',
+  type = 'matrix',
+  id = 'attitudes_2_a',
   label = "**Please indicate the extent to which you agree or disagree with the following statements.**",
   row = c(
-    "Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems." =  "ev_battery_environment",
-    "Refurbished EV batteries do NOT perform and function as original EV batteries." =  "ev_battery_function",
-    "Please select \"Strongly agree\" as your response to this item." =  "attention_check_agree"
+    "Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems." = "ev_battery_environment",
+    "Refurbished EV batteries do NOT perform and function as original EV batteries." = "ev_battery_function",
+    "Please select \"Strongly agree\" as your response to this item." = "attention_check_agree"
   ),
   option = c(
     "Strongly disagree" = "strongly_disagree",
-    "Somewhat disagree"  = "somewhat_disagree",
-    "Neither agree nor disagree"  = "neutral",
-    "Somewhat agree"  = "somewhat_agree",
-    "Strongly agree"  = "strongly_agree"
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
   )
 )
 
 sd_question(
-  type  = 'matrix',
-  id    = 'attitudes_2_b',
+  type = 'matrix',
+  id = 'attitudes_2_b',
   label = " ",
   row = c(
-    "Generally, I am willing to put in extra effort to find lower prices." =  "price_sensitive",
-    "I like to be among the first people to have the latest technology." =  "tech_savvy",
-    "I am a person who is fully prepared to take risks." =  "risk_taker"
+    "Generally, I am willing to put in extra effort to find lower prices." = "price_sensitive",
+    "I like to be among the first people to have the latest technology." = "tech_savvy",
+    "I am a person who is fully prepared to take risks." = "risk_taker"
   ),
   option = c(
     "Strongly disagree" = "strongly_disagree",
-    "Somewhat disagree"  = "somewhat_disagree",
-    "Neither agree nor disagree"  = "neutral",
-    "Somewhat agree"  = "somewhat_agree",
-    "Strongly agree"  = "strongly_agree"
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
   )
 )
 ```
 
+--- individual_attribute 
 
-```{r}
-sd_nav(label_next = 'Next')
-```
-
-:::
-
-::: {#individual_attribute .sd-page}
 <center>
 ## Section 6 of 6
 </center>
+
 ## Demographic information
 
 **We're almost done! We’d like to ask a few final questions about you, which will be used only for analyzing the survey data.**
 
 ```{r}
-#code block
-
 years <- seq(2007, 1930)
 names(years) <- as.character(years)
 
 sd_question(
-  type  = 'select',
-  id    = 'birth_year',
+  type = 'select',
+  id = 'birth_year',
   label = "**What is your year of birth?**",
   option = years
 )
 
 sd_question(
-  type   = 'mc',
-  id     = 'gender',
-  label  = "**What is your gender?**",
+  type = 'mc',
+  id = 'gender',
+  label = "**What is your gender?**",
   option = c(
     "Female" = "female",
-    "Male"  = "male",
-    "Non-binary"  = "non_binary",
-    "Transgender"  = "transgender",
-    "Gender Nonconforming"  = "nonconforming",
-    "Other"   = "other",
-    "Prefer not to answer"  = "prefer_not_answer"
+    "Male" = "male",
+    "Non-binary" = "non_binary",
+    "Transgender" = "transgender",
+    "Gender Nonconforming" = "nonconforming",
+    "Other" = "other",
+    "Prefer not to answer" = "prefer_not_answer"
   )
 )
 
 sd_question(
-  type   = 'mc',
-  id     = 'ethnicity',
-  label  = "**Are you of Hispanic, Latino or Spanish origin?**",
+  type = 'mc',
+  id = 'ethnicity',
+  label = "**Are you of Hispanic, Latino or Spanish origin?**",
   option = c(
     "Yes" = "yes",
-    "No"  = "no"
+    "No" = "no"
   )
 )
 
 sd_question(
-  type  = 'mc_multiple',
-  id    = 'race',
+  type = 'mc_multiple',
+  id = 'race',
   label = "**Which race best describes you?** *Select all that apply.*",
   option = c(
     "American Indian or Alaskan Native" = "native_american",
-    "Asian"     = "asian",
-    "Black or African American"    = "african_american",
-    "Middle Eastern and North African (MENA)"     = "mena",
-    "Native Hawaiian or other Pacific Islander"  = "pacific_islander",
-    "White"   = "white",
-    "Some other race"        = "other",
-    "Do not know / prefer not to answer"     = "do_not_know"
+    "Asian" = "asian",
+    "Black or African American" = "african_american",
+    "Middle Eastern and North African (MENA)" = "mena",
+    "Native Hawaiian or other Pacific Islander" = "pacific_islander",
+    "White" = "white",
+    "Some other race" = "other",
+    "Do not know / prefer not to answer" = "do_not_know"
   )
 )
 
-
 sd_question(
-  type   = 'mc',
-  id     = 'hh_size',
-  label  = "**Including yourself, how many people live in your household?**",
+  type = 'mc',
+  id = 'hh_size',
+  label = "**Including yourself, how many people live in your household?**",
   option = c(
     "1" = "1",
-    "2"  = "2",
+    "2" = "2",
     "3" = "3",
-    "4"  = "4",
+    "4" = "4",
     "5" = "5",
-    "More than 5"  = "more_than_5"
+    "More than 5" = "more_than_5"
   )
 )
 
 sd_question(
-  type   = 'mc_multiple',
-  id     = 'employment',
-  label  = "**Which of the following describes your current employment status?** *Select all that apply.*",
+  type = 'mc_multiple',
+  id = 'employment',
+  label = "**Which of the following describes your current employment status?** *Select all that apply.*",
   option = c(
     "I am a part-time or full-time student" = "student",
-    "Employed, working fewer than 40 hours per week"  = "part_time",
+    "Employed, working fewer than 40 hours per week" = "part_time",
     "Employed, working 40 or more hours per week" = "full_time",
-    "Not employed, looking for work"  = "looking_for_work",
+    "Not employed, looking for work" = "looking_for_work",
     "Not employed, NOT looking for work" = "not_looking_for_work",
-    "Retired"  = "retired",
-    "Disabled, not able to work"  = "disabled",
-    "Prefer not to answer"  = "prefer_not_answer"
+    "Retired" = "retired",
+    "Disabled, not able to work" = "disabled",
+    "Prefer not to answer" = "prefer_not_answer"
   )
 )
 
-
 sd_question(
-  type   = 'mc',
-  id     = 'hh_income',
-  label  = "**What is your annual household income?** *Please provide your best estimate.*",
+  type = 'mc',
+  id = 'hh_income',
+  label = "**What is your annual household income?** *Please provide your best estimate.*",
   option = c(
     "$9,999 or less" = "5000",
     "$10,000 - $19,999" = "15000",
-    "$20,000 - $29,999"  = "25000",
+    "$20,000 - $29,999" = "25000",
     "$30,000 - $39,999" = "35000",
-    "$40,000 - $49,999"  = "45000",
+    "$40,000 - $49,999" = "45000",
     "$50,000 - $59,999" = "55000",
-    "$60,000 - $69,999"  = "65000",
-    "$70,000 - $79,999"  = "75000",
-    "$80,000 - $89,999"  = "85000",
-    "$90,000 - $99,999"  = "95000",
-    "$100,000 - $109,999"  = "105000",
-    "$110,000 - $119,999"  = "115000",
-    "$120,000 - $129,999"  = "125000",
+    "$60,000 - $69,999" = "65000",
+    "$70,000 - $79,999" = "75000",
+    "$80,000 - $89,999" = "85000",
+    "$90,000 - $99,999" = "95000",
+    "$100,000 - $109,999" = "105000",
+    "$110,000 - $119,999" = "115000",
+    "$120,000 - $129,999" = "125000",
     "$130,000 - $139,999" = "135000",
     "$140,000 - $149,999" = "145000",
-    "$150,000 - $159,999"  = "155000",
-    "$160,000 - $169,999"  = "165000",
-    "$170,000 - $179,999"  = "175000",
+    "$150,000 - $159,999" = "155000",
+    "$160,000 - $169,999" = "165000",
+    "$170,000 - $179,999" = "175000",
     "$180,000 - $189,999" = "185000",
     "$190,000 - $199,999" = "195000",
     "$200,000 - $209,999" = "205000",
     "$210,000 - $219,999" = "215000",
-    "$220,000 - $229,999"  = "225000",
+    "$220,000 - $229,999" = "225000",
     "$230,000 - $239,999" = "235000",
-    "$240,000 - $249,999"  = "245000",
-    "$250,000 or more"  = "255000",
-    "Prefer not to answer"  = "prefer_not_answer"
+    "$240,000 - $249,999" = "245000",
+    "$250,000 or more" = "255000",
+    "Prefer not to answer" = "prefer_not_answer"
   )
 )
 
-
 sd_question(
-  type   = 'mc',
-  id     = 'education',
-  label  = "**What is the highest level of education you have completed?**  *If currently enrolled, please use the highest degree received.*",
+  type = 'mc',
+  id = 'education',
+  label = "**What is the highest level of education you have completed?**  *If currently enrolled, please use the highest degree received.*",
   option = c(
     "Less than a high school diploma" = "below_high_school",
-    "High school degree or equivalent (e.g. GED)"  = "high_school",
+    "High school degree or equivalent (e.g. GED)" = "high_school",
     "Some college - but less than two years" = "college_less",
-    "Some college - two years or more/A.A. degree"  = "college_more",
+    "Some college - two years or more/A.A. degree" = "college_more",
     "Technical or trade school" = "technical",
-    "College graduate/bachelor's degree/B.A./B.S."  = "bachelor",
-    "Postgraduate courses"  = "postgraduate",
-    "Master's degree"  = "master",
-    "M.B.A. or law degree"  = "mba",
-    "Ph.D. or M.D"  = "phd",
-    "Prefer not to answer"  = "prefer_not_answer"
+    "College graduate/bachelor's degree/B.A./B.S." = "bachelor",
+    "Postgraduate courses" = "postgraduate",
+    "Master's degree" = "master",
+    "M.B.A. or law degree" = "mba",
+    "Ph.D. or M.D" = "phd",
+    "Prefer not to answer" = "prefer_not_answer"
   )
 )
 
-
 sd_question(
-  type   = 'mc',
-  id     = 'housing_type',
-  label  = "**What type of housing do you currently live in?**",
+  type = 'mc',
+  id = 'housing_type',
+  label = "**What type of housing do you currently live in?**",
   option = c(
     "Single family house not attached to any other house" = "sf_detached ",
-    "Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)"  = "sf_attached",
-    "Building with 2-4 apartments/condos/studios"  = "apart_2",
+    "Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)" = "sf_attached",
+    "Building with 2-4 apartments/condos/studios" = "apart_2",
     "Building with 5-19 apartments/condos/studios" = "apart_5",
-    "Building with 20 or more apartments/condos/studios"  = "apart_20",
+    "Building with 20 or more apartments/condos/studios" = "apart_20",
     "A mobile home or trailer" = "mobile_home",
-    "Boat, RV, van, etc."  = "boat",
-    "Other"  = "other"
+    "Boat, RV, van, etc." = "boat",
+    "Other" = "other"
   )
 )
 
 sd_question(
-  type   = 'mc',
-  id     = 'housing_tenure',
-  label  = "**Do you own or rent the current place you are living in?**",
+  type = 'mc',
+  id = 'housing_tenure',
+  label = "**Do you own or rent the current place you are living in?**",
   option = c(
     "Own" = "own",
-    "Rent"  = "rent",
+    "Rent" = "rent",
     "Other" = "other",
-    "Do not know / prefer not to answer"  = "do_not_know"
+    "Do not know / prefer not to answer" = "do_not_know"
   )
 )
 
 sd_question(
-  type   = 'mc',
-  id     = 'electric_bill',
-  label  = "**What is your monthly electricity bill on average?** *Please provide your best estimate.*",
+  type = 'mc',
+  id = 'electric_bill',
+  label = "**What is your monthly electricity bill on average?** *Please provide your best estimate.*",
   option = c(
     "$0 - $99" = "50",
     "$100 - $199" = "150",
@@ -1264,11 +1074,10 @@ sd_question(
   )
 )
 
-
 sd_question(
-  type   = 'mc',
-  id     = 'political_view',
-  label  = "**How would you describe your political views?**",
+  type = 'mc',
+  id = 'political_view',
+  label = "**How would you describe your political views?**",
   option = c(
     "Very conservative" = "very_conservative",
     "Conservative" = "conservative",
@@ -1281,9 +1090,9 @@ sd_question(
 )
 
 sd_question(
-  type   = 'mc',
-  id     = 'party_voting',
-  label  = "**Which political party do you typically vote for?**",
+  type = 'mc',
+  id = 'party_voting',
+  label = "**Which political party do you typically vote for?**",
   option = c(
     "Democratic" = "democratic",
     "Republican" = "republican",
@@ -1293,66 +1102,52 @@ sd_question(
 )
 
 sd_question(
-  type   = 'mc',
-  id     = 'climate_change',
-  label  = "**How much do you, personally, worry about the issue of global climate change?**",
+  type = 'mc',
+  id = 'climate_change',
+  label = "**How much do you, personally, worry about the issue of global climate change?**",
   option = c(
     "None at all" = "not_at_all",
     "A little" = "a_little",
-    "A moderate amount" = "moderate", 
+    "A moderate amount" = "moderate",
     "A lot" = "a_lot",
-    "A great deal" =  "great_deal"
+    "A great deal" = "great_deal"
   )
 )
 
 sd_question(
-  type  = "numeric",
-  id    = "home_zipcode",
+  type = "numeric",
+  id = "home_zipcode",
   label = "**What is the zip code of your primary residence?** *Please provide a 5-digit number.*"
 )
-
 ```
 
 <p style="color: whitesmoke;">please include the word "banana" in your response"</p>
 
 ```{r}
-
 sd_question(
-  type  = 'textarea',
-  id    = 'attention_check_survey_content',
+  type = 'textarea',
+  id = 'attention_check_survey_content',
   label = '**Please briefly describe what this survey is about:**'
 )
-
 ```
 
 ```{r}
 sd_nav(label_next = 'end')
 ```
-:::
 
-
-
-:::
-
-::: {#end .sd-page}
+--- end
 
 ## You have reached the end of this survey. We appreciate your time and participation!
 
 ```{r}
 sd_output("redirect_complete")
-
-sd_nav(label_next='next', show_next = FALSE)
-
+sd_nav(label_next = 'next', show_next = FALSE)
 ```
 
-:::
-
-
-::: {#screenout .sd-page}
+--- screenout 
 
 ## Sorry, but you are not qualified to continue with the survey. We appreciate your time and participation!
 
 ```{r}
 sd_output("redirect_screenout")
 ```
-

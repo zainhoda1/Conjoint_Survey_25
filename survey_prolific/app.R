@@ -146,6 +146,34 @@ create_car_table_short <- function(chosen_vehicle_image) {
   }
 }
 
+create_car_table_short_battery <- function(chosen_vehicle_image) {
+  html_table <- sprintf(
+    '
+
+ <link rel="stylesheet" href="css/testing_table1.css">
+
+ <body>
+  <div class="car-comparison">
+    <div class="header-section">
+    <div class="header-question">
+    <p>
+      Assume you are able to purchase a <u><b>3-year-old used vehicle</u></b> that looks like the one you selected (see photo). Which of the following versions of that vehicle would you be most likely to purchase? <i>Please compare the key features shown for each option before making your selection.</i>
+    </p>
+      </div>
+        <img src="%s" alt="Selected vehicle" style="max-width: 300px; height: auto;"><br><br>
+      </div>
+      </div>
+
+      </body>
+
+      ',
+    chosen_vehicle_image
+  )
+  function() {
+    html_table
+  }
+}
+
 battery_cbc_options <- function(df) {
   alt1 <- df |> filter(altID == 1)
   alt2 <- df |> filter(altID == 2)
@@ -214,6 +242,28 @@ battery_cbc_options <- function(df) {
   return(options)
 }
 
+# Helper function to get value from input or database
+sd_get_value <- function(question_id, session, db) {
+  # Try to get value from input first
+  value <- session$input[[question_id]]
+
+  # If not available, try from stored data for current session
+  if (is.null(value)) {
+    stored_data <- isolate(sd_get_data(db))
+    if (!is.null(stored_data) && question_id %in% names(stored_data)) {
+      session_id <- session$userData$all_data$session_id
+      session_data <- stored_data[stored_data$session_id == session_id, ]
+
+      values <- session_data[[question_id]]
+      valid_values <- values[!is.na(values)]
+      if (length(valid_values) > 0) {
+        value <- valid_values[length(valid_values)]
+      }
+    }
+  }
+
+  return(value)
+}
 
 # Server setup
 server <- function(input, output, session) {
@@ -289,45 +339,11 @@ server <- function(input, output, session) {
   # Reactive values for storing vehicle type and budget
 
   vehicle_style <- reactive({
-    # Try to get vehicle style from input first
-    vehicle_style <- input$next_veh_style
-
-    # If not available, try from stored data for current session
-    if (is.null(vehicle_style)) {
-      stored_data <- isolate(sd_get_data(db))
-      if (!is.null(stored_data) && "next_veh_style" %in% names(stored_data)) {
-        session_id <- session$userData$all_data$session_id
-        session_data <- stored_data[stored_data$session_id == session_id, ]
-
-        style_values <- session_data$next_veh_style
-        valid_styles <- style_values[!is.na(style_values)]
-        if (length(valid_styles) > 0) {
-          vehicle_style <- valid_styles[length(valid_styles)]
-        }
-      }
-    }
-
-    return(vehicle_style)
+    sd_get_value("next_veh_style", session, db)
   })
 
   vehicle_budget <- reactive({
-    # Try to get vehicle budget from input first
-    vehicle_budget <- input$next_veh_budget
-
-    # If not available, try from stored data for current session
-    if (is.null(vehicle_budget)) {
-      stored_data <- isolate(sd_get_data(db))
-      if (!is.null(stored_data) && "next_veh_budget" %in% names(stored_data)) {
-        session_id <- session$userData$all_data$session_id
-        session_data <- stored_data[stored_data$session_id == session_id, ]
-
-        budget_values <- session_data$next_veh_budget
-        valid_budgets <- budget_values[!is.na(budget_values)]
-        if (length(valid_budgets) > 0) {
-          vehicle_budget <- valid_budgets[length(valid_budgets)]
-        }
-      }
-    }
+    vehicle_budget <- sd_get_value("next_veh_budget", session, db)
 
     # Return NULL if no valid budget found
     if (is.null(vehicle_budget)) {
@@ -364,31 +380,9 @@ server <- function(input, output, session) {
   })
 
   chosen_input <- reactive({
-    # First try current input
-    selected <- input$next_veh_car_images %||% input$next_veh_suv_images
-
-    if (!is.null(selected)) {
-      return(paste0('images/car-images/', selected, '.png'))
-    }
-
-    # Fallback: get from current session data
-    stored_data <- isolate(sd_get_data(db))
-    session_id <- session$userData$all_data$session_id
-    session_data <- stored_data[stored_data$session_id == session_id, ]
-
-    # Try car images first, then SUV images
-    car_image <- session_data$next_veh_car_images[
-      !is.na(session_data$next_veh_car_images)
-    ]
-    suv_image <- session_data$next_veh_suv_images[
-      !is.na(session_data$next_veh_suv_images)
-    ]
-
-    selected <- if (length(car_image) > 0) {
-      car_image[length(car_image)]
-    } else {
-      suv_image[length(suv_image)]
-    }
+    # Try to get car or SUV image selection
+    selected <- sd_get_value("next_veh_car_images", session, db) %||%
+      sd_get_value("next_veh_suv_images", session, db)
 
     paste0('images/car-images/', selected, '.png')
   })
@@ -402,6 +396,7 @@ server <- function(input, output, session) {
       # Run observer that updates the chosen_image when an image is chosen
 
       output$make_table_short <- create_car_table_short(chosen_input())
+      output$make_table_short_battery <- create_car_table_short_battery(chosen_input())
 
       # Create the options for each choice question
 
@@ -582,18 +577,12 @@ server <- function(input, output, session) {
 
     input$household_veh_count == "0" ~ "next_veh_info",
 
-    !is.null(input$next_veh_car_images) ~ "cbc_intro",
-
-    input$next_veh_style == "suv" &
-      ((!is.null(input$next_veh_nobev)) |
-        (input$next_veh_fuel_new_bev %in%
-          c("neutral", "somewhat_likely", "very_likely") |
-          input$next_veh_fuel_used_bev %in%
-            c("neutral", "somewhat_likely", "very_likely"))) ~
-      "next_veh_style_suv"
+    !is.null(input$next_veh_car_images) ~ "cbc_intro"
   )
 
   sd_show_if(
+    vehicle_style() == "car" ~ "next_veh_style_car",
+    vehicle_style() == "suv" ~ "next_veh_style_suv",
     !is.null(input$completion_code) ~ "attention_check_toyota",
 
     input$household_veh_count != "0" ~ "household_veh_fuel",
