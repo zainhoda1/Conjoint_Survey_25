@@ -264,7 +264,7 @@ server <- function(input, output, session) {
     id = "redirect_screenout",
     url = screenout_url(),
     button = TRUE,
-    label = "Back to panel"
+    label = "Return to Prolific"
   )
 
   ### End of Prolific Setup ###

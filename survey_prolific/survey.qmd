@@ -229,7 +229,7 @@ sd_question(
 ```
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -373,7 +373,7 @@ sd_question(
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -442,7 +442,7 @@ sd_question(
 ```
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -459,7 +459,7 @@ sd_question(
 ```
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -502,7 +502,7 @@ sd_question(
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -545,7 +545,7 @@ sd_question(
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -581,7 +581,7 @@ Let's learn about the attributes.
 <!-- (Assumes [gasoline costs\$3.30/gallon](https://www.eia.gov/todayinenergy/detail.php?id=64164#:~:text=The%20U.S.%20retail%20price%20for,Gasoline%20and%20Diesel%20Fuel%20Update.) and [electricity costs \$0.16/kWh](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a)).   -->
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -614,7 +614,7 @@ sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q0_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -627,7 +627,7 @@ sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q1_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -638,7 +638,7 @@ sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q2_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -649,7 +649,7 @@ sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q3_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -660,7 +660,7 @@ sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q4_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -671,7 +671,7 @@ sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q5_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -682,7 +682,7 @@ sd_output("make_table_short")
 
 sd_output("vehicle_cbc_q6_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -700,7 +700,7 @@ Next, we’d like you to consider a scenario in which you can choose a **used ba
 | ![](images/battery_survey_battery.png){fig-align="center" width="80"} | <span style="font-size: 18px;">**Vehicle Driving Range and Battery Health**</span><br>- EV batteries **gradually lose capacity over time (battery degradation)**, which reduces the vehicle's driving range and increases charging time.<br>- The condition of an EV battery is often described using **State of Health (SOH)**, expressed as a percentage.|
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -720,7 +720,7 @@ Next, we’d like you to consider a scenario in which you can choose a **used ba
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -749,7 +749,7 @@ Let’s take a moment to learn about the specific attributes of the BEVs that yo
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -772,7 +772,7 @@ We will now show you **six** choice questions, starting on the next page.
 
 #sd_output("battery_cbc_q0_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -786,7 +786,7 @@ sd_next()
 sd_output("make_table_short")
 sd_output("battery_cbc_q1_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -799,7 +799,7 @@ sd_next()
 sd_output("make_table_short")
 sd_output("battery_cbc_q2_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -812,7 +812,7 @@ sd_next()
 sd_output("make_table_short")
 sd_output("battery_cbc_q3_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -825,7 +825,7 @@ sd_next()
 sd_output("make_table_short")
 sd_output("battery_cbc_q4_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -838,7 +838,7 @@ sd_next()
 sd_output("make_table_short")
 sd_output("battery_cbc_q5_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -851,7 +851,7 @@ sd_next()
 sd_output("make_table_short")
 sd_output("battery_cbc_q6_button", type = "question")
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -867,7 +867,7 @@ sd_question(
   label = "**We noticed you did not choose any of the electric vehicle options in the last few questions. Could you tell us any reasons why?**"
 )
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -900,7 +900,7 @@ sd_question(
   )
 )
 
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -976,7 +976,7 @@ sd_question(
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -1022,7 +1022,7 @@ sd_question(
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 
@@ -1067,7 +1067,7 @@ sd_question(
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -1326,8 +1326,12 @@ sd_question(
 ```
 
 ```{r}
-sd_next(next_page = 'end')
+sd_nav(label_next = 'end')
 ```
+:::
+
+
+
 :::
 
 ::: {#end .sd-page}
@@ -1336,9 +1340,13 @@ sd_next(next_page = 'end')
 
 ```{r}
 sd_output("redirect_complete")
+
+sd_nav(label_next='next', show_next = FALSE)
+
 ```
 
 :::
+
 
 ::: {#screenout .sd-page}
 
@@ -1348,4 +1356,3 @@ sd_output("redirect_complete")
 sd_output("redirect_screenout")
 ```
 
-:::

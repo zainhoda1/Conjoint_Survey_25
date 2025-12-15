@@ -115,8 +115,8 @@ sd_question(
   id    = 'next_veh_style',
   label = "**Which vehicle body style would you consider for your next vehicle?**",
   option = c(
-    "Car / sedan / hatchback" = "Car / sedan / hatchback",
-    "SUV / crossover" = "SUV / crossover",
+    "Car / sedan / hatchback" = "car",
+    "SUV / crossover" = "suv",
     "Minivan / van" = "van",
     "Truck" = "truck",
     "Other" = "other"
@@ -227,7 +227,7 @@ sd_question(
 ```
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -371,7 +371,7 @@ sd_question(
 
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -440,7 +440,7 @@ sd_question(
 ```
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 
 :::
@@ -457,7 +457,7 @@ sd_question(
 ```
 
 ```{r}
-sd_next()
+sd_nav(label_next = 'Next')
 ```
 :::
 

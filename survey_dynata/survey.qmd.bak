@@ -1,7 +1,10 @@
 ---
-echo: false
-warning: false
+survey-settings:
+  use-cookies: yes
+  all-questions-required: true
 css: css/survey_theme.css
+warning: false
+echo: false
 ---
 
 ```{r}
@@ -39,7 +42,7 @@ subdivided in six sub-sections:
 **We greatly appreciate your participation!**
 
 ```{r}
-sd_next(next_page = 'consent')
+sd_nav()
 ```
 :::
 
@@ -73,7 +76,7 @@ By clicking on "**I Agree**", you confirm that you have reviewed and understood 
 page, and agree to participate in the survey.
 
 ```{r}
-sd_next(next_page = 'filter', label = 'I Agree')
+sd_nav(label_next = 'I Agree')
 ```
 :::
 
@@ -137,7 +140,7 @@ sd_question(
 
 
 ```{r}
-sd_next(next_page = 'household_veh', label = 'Next')
+sd_nav(label_next = 'Next')
 ```
 
 

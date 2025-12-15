@@ -253,28 +253,28 @@ next_veh_car_images:
     with the next vehicle you are considering purchasing.
   options:
     6_new_car_hatchback_compact: 6_new_car_hatchback_compact
-    7_new_car_hatchback_compact_luxury: 7_new_car_hatchback_compact_luxury
-    1_new_car_sedan_compact: 1_new_car_sedan_compact
-    9_new_car_hatchback_subcompact_luxury: 9_new_car_hatchback_subcompact_luxury
-    3_new_car_sedan_subcompact: 3_new_car_sedan_subcompact
-    4_new_car_sedan_fullsize: 4_new_car_sedan_fullsize
     5_new_car_sedan_fullsize_luxury: 5_new_car_sedan_fullsize_luxury
-    2_new_car_hatchback_subcompact: 2_new_car_hatchback_subcompact
     8_new_car_sedan_midsize: 8_new_car_sedan_midsize
+    9_new_car_hatchback_subcompact_luxury: 9_new_car_hatchback_subcompact_luxury
+    7_new_car_hatchback_compact_luxury: 7_new_car_hatchback_compact_luxury
+    4_new_car_sedan_fullsize: 4_new_car_sedan_fullsize
+    3_new_car_sedan_subcompact: 3_new_car_sedan_subcompact
+    2_new_car_hatchback_subcompact: 2_new_car_hatchback_subcompact
+    1_new_car_sedan_compact: 1_new_car_sedan_compact
 next_veh_suv_images:
   type: mc_buttons
   label: Select a vehicle based on its segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
-    2_new_crossover_midsize: 2_new_crossover_midsize
-    8_new_suv_fullsize: 8_new_suv_fullsize
-    9_new_crossover_compact: 9_new_crossover_compact
-    4_new_crossover_midsize: 4_new_crossover_midsize
-    7_new_crossover_subcompact: 7_new_crossover_subcompact
-    1_new_crossover_compact: 1_new_crossover_compact
-    5_new_suv_fullsize: 5_new_suv_fullsize
     3_new_suv_fullsize: 3_new_suv_fullsize
+    1_new_crossover_compact: 1_new_crossover_compact
     6_new_crossover_subcompact: 6_new_crossover_subcompact
+    5_new_suv_fullsize: 5_new_suv_fullsize
+    4_new_crossover_midsize: 4_new_crossover_midsize
+    8_new_suv_fullsize: 8_new_suv_fullsize
+    2_new_crossover_midsize: 2_new_crossover_midsize
+    9_new_crossover_compact: 9_new_crossover_compact
+    7_new_crossover_subcompact: 7_new_crossover_subcompact
 vehicle_cbc_q0_button:
   type: unknown
   label: []
