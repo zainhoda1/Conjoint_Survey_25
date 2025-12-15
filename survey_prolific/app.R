@@ -19,8 +19,8 @@ battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
 survey$range[is.na(survey$range)] <- ''
 
 # Load constants
-prolific_completion_code <- 'CWTFNPQX'
-prolific_screenout_code <- 'C127J9EM'
+prolific_completion_code <- 'C18VHIP5'
+prolific_screenout_code <- 'CZRDXOU2'
 electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
@@ -294,12 +294,18 @@ server <- function(input, output, session) {
 
   # Create completion redirect URL - using Prolific code
   completion_url <- reactive({
-    paste0("https://app.prolific.com/submissions/complete?cc=", prolific_completion_code)
+    paste0(
+      "https://app.prolific.com/submissions/complete?cc=",
+      completion_code
+    )
   })
 
   # Create screenout redirect URL - using Prolific code
   screenout_url <- reactive({
-    paste0("https://app.prolific.com/submissions/complete?cc=", prolific_screenout_code)
+    paste0(
+      "https://app.prolific.com/submissions/complete?cc=",
+      prolific_screenout_code
+    )
   })
 
   # Redirect buttons for Prolific

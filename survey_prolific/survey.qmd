@@ -36,7 +36,6 @@ subdivided in six sub-sections:
 
 -   Demographic Information
 
-
 **We greatly appreciate your participation!**
 
 --- consent 
@@ -91,7 +90,9 @@ sd_question(
     "I'm not sure" = "not_sure"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'next_veh_market',
@@ -102,7 +103,9 @@ sd_question(
     "I’m looking at both markets" = "both"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'next_veh_style',
@@ -115,7 +118,9 @@ sd_question(
     "Other" = "other"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'attention_check_toyota',
@@ -170,7 +175,9 @@ sd_question(
     "6 or more" = "6"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc_multiple',
   id = 'household_veh_fuel',
@@ -183,7 +190,9 @@ sd_question(
     "Other" = "other"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'charger_access',
@@ -194,7 +203,9 @@ sd_question(
     "I'm not sure" = "not_sure"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'neighbor_ev_info',
@@ -224,7 +235,9 @@ sd_question(
     "Other" = "other"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'primary_veh_new_used',
@@ -234,7 +247,9 @@ sd_question(
     "Used" = "used"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'primary_veh_obtain_how',
@@ -249,7 +264,9 @@ sd_question(
     "Do not remember / do not know" = "do_not_know"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'primary_veh_cost',
@@ -269,7 +286,9 @@ sd_question(
     "Do not remember / do not know" = "do_not_know"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'primary_veh_payment',
@@ -290,7 +309,9 @@ sd_question(
     "Do not remember / do not know" = "do_not_know"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'primary_veh_mpg',
@@ -306,7 +327,9 @@ sd_question(
     "I'm not sure" = "not_sure"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'primary_veh_refuel',
@@ -321,7 +344,9 @@ sd_question(
     "Five or more times a week" = "24"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'primary_veh_range',
@@ -370,7 +395,9 @@ sd_question(
     "$50,000 or more" = "55000"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'next_veh_payment',
@@ -380,7 +407,9 @@ sd_question(
     "Finance" = "finance"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'matrix',
   id = 'next_veh_fuel',
@@ -528,13 +557,13 @@ vehicle_cbc_options <- c(
 
 We will now begin the choice tasks. We will show you **six** choice questions, starting on the next page. Below is an example of the type of questions you will be asked.
 
-
 ```{r}
 sd_output("make_table_short")
-
-sd_output("vehicle_cbc_q0_button", type = "question")
 ```
 
+```{r}
+sd_output("vehicle_cbc_q0_button", type = "question")
+```
 
 --- vehicle_pageQ1_button 
 
@@ -542,7 +571,9 @@ sd_output("vehicle_cbc_q0_button", type = "question")
 
 ```{r}
 sd_output("make_table_short")
+```
 
+```{r}
 sd_output("vehicle_cbc_q1_button", type = "question")
 ```
 
@@ -552,7 +583,9 @@ sd_output("vehicle_cbc_q1_button", type = "question")
 
 ```{r}
 sd_output("make_table_short")
+```
 
+```{r}
 sd_output("vehicle_cbc_q2_button", type = "question")
 ```
 
@@ -562,9 +595,10 @@ sd_output("vehicle_cbc_q2_button", type = "question")
 
 ```{r}
 sd_output("make_table_short")
+```
 
+```{r}
 sd_output("vehicle_cbc_q3_button", type = "question")
-
 ```
 
 --- vehicle_pageQ4_button 
@@ -573,6 +607,9 @@ sd_output("vehicle_cbc_q3_button", type = "question")
 
 ```{r}
 sd_output("make_table_short")
+```
+
+```{r}
 sd_output("vehicle_cbc_q4_button", type = "question")
 ```
 
@@ -582,6 +619,9 @@ sd_output("vehicle_cbc_q4_button", type = "question")
 
 ```{r}
 sd_output("make_table_short")
+```
+
+```{r}
 sd_output("vehicle_cbc_q5_button", type = "question")
 ```
 
@@ -591,6 +631,9 @@ sd_output("vehicle_cbc_q5_button", type = "question")
 
 ```{r}
 sd_output("make_table_short")
+```
+
+```{r}
 sd_output("vehicle_cbc_q6_button", type = "question")
 ```
 
@@ -658,6 +701,9 @@ We will now show you **six** choice questions, starting on the next page.
 
 ```{r}
 sd_output("make_table_short_battery")
+```
+
+```{r}
 sd_output("battery_cbc_q1_button", type = "question")
 ```
 
@@ -667,6 +713,9 @@ sd_output("battery_cbc_q1_button", type = "question")
 
 ```{r}
 sd_output("make_table_short_battery")
+```
+
+```{r}
 sd_output("battery_cbc_q2_button", type = "question")
 ```
 
@@ -676,6 +725,9 @@ sd_output("battery_cbc_q2_button", type = "question")
 
 ```{r}
 sd_output("make_table_short_battery")
+```
+
+```{r}
 sd_output("battery_cbc_q3_button", type = "question")
 ```
 
@@ -685,6 +737,9 @@ sd_output("battery_cbc_q3_button", type = "question")
 
 ```{r}
 sd_output("make_table_short_battery")
+```
+
+```{r}
 sd_output("battery_cbc_q4_button", type = "question")
 ```
 
@@ -694,6 +749,9 @@ sd_output("battery_cbc_q4_button", type = "question")
 
 ```{r}
 sd_output("make_table_short_battery")
+```
+
+```{r}
 sd_output("battery_cbc_q5_button", type = "question")
 ```
 
@@ -703,6 +761,9 @@ sd_output("battery_cbc_q5_button", type = "question")
 
 ```{r}
 sd_output("make_table_short_battery")
+```
+
+```{r}
 sd_output("battery_cbc_q6_button", type = "question")
 ```
 
@@ -760,7 +821,9 @@ sd_question(
     "I’m not sure" = "not_sure"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc_multiple',
   id = 'plugged_in',
@@ -772,8 +835,9 @@ sd_question(
     "I’m not sure" = "not_sure"
   )
 )
+```
 
-# Conditional Question
+```{r}
 sd_question(
   type = 'mc',
   id = 'know_electric_vehicle',
@@ -783,14 +847,17 @@ sd_question(
     "No" = "no"
   )
 )
+```
 
-# Target Question
+```{r}
 sd_question(
   type = "text",
   id = "write_electric_name",
   label = "**Please name the make and model of the vehicle.**"
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'max_subsidy',
@@ -826,7 +893,9 @@ sd_question(
     "Strongly agree" = "strongly_agree"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'matrix',
   id = 'attitudes_1_b',
@@ -866,7 +935,9 @@ sd_question(
     "Strongly agree" = "strongly_agree"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'matrix',
   id = 'attitudes_2_b',
@@ -897,16 +968,15 @@ sd_question(
 **We're almost done! We’d like to ask a few final questions about you, which will be used only for analyzing the survey data.**
 
 ```{r}
-years <- seq(2007, 1930)
-names(years) <- as.character(years)
-
 sd_question(
   type = 'select',
   id = 'birth_year',
   label = "**What is your year of birth?**",
   option = years
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'gender',
@@ -921,7 +991,9 @@ sd_question(
     "Prefer not to answer" = "prefer_not_answer"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'ethnicity',
@@ -931,7 +1003,9 @@ sd_question(
     "No" = "no"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc_multiple',
   id = 'race',
@@ -947,7 +1021,9 @@ sd_question(
     "Do not know / prefer not to answer" = "do_not_know"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'hh_size',
@@ -961,7 +1037,9 @@ sd_question(
     "More than 5" = "more_than_5"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc_multiple',
   id = 'employment',
@@ -977,7 +1055,9 @@ sd_question(
     "Prefer not to answer" = "prefer_not_answer"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'hh_income',
@@ -1012,7 +1092,9 @@ sd_question(
     "Prefer not to answer" = "prefer_not_answer"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'education',
@@ -1031,7 +1113,9 @@ sd_question(
     "Prefer not to answer" = "prefer_not_answer"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'housing_type',
@@ -1047,7 +1131,9 @@ sd_question(
     "Other" = "other"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'housing_tenure',
@@ -1059,7 +1145,9 @@ sd_question(
     "Do not know / prefer not to answer" = "do_not_know"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'electric_bill',
@@ -1073,7 +1161,9 @@ sd_question(
     "$500 or more" = "550"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'political_view',
@@ -1088,7 +1178,9 @@ sd_question(
     "Prefer not to answer" = "prefer_not_answer"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'party_voting',
@@ -1100,7 +1192,9 @@ sd_question(
     "Prefer not to answer" = "prefer_not_answer"
   )
 )
+```
 
+```{r}
 sd_question(
   type = 'mc',
   id = 'climate_change',
@@ -1113,7 +1207,9 @@ sd_question(
     "A great deal" = "great_deal"
   )
 )
+```
 
+```{r}
 sd_question(
   type = "numeric",
   id = "home_zipcode",
@@ -1141,6 +1237,9 @@ sd_nav(label_next = 'end')
 
 ```{r}
 sd_output("redirect_complete")
+```
+
+```{r}
 sd_nav(label_next = 'next', show_next = FALSE)
 ```
 
