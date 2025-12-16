@@ -3,6 +3,7 @@ survey-settings:
   use-cookies: yes
   all-questions-required: true
 css: css/survey_theme.css
+
 ---
 
 ```{r}
@@ -12,6 +13,7 @@ library(here)
 library(kableExtra)
 library(glue)
 ```
+
 
 --- welcome 
 
@@ -473,8 +475,8 @@ sd_question(
   option = all_cars
 )
 ```
-
 --- next_veh_style_suv 
+
 
 ```{r}
 # Car image options
@@ -968,6 +970,8 @@ sd_question(
 **We're almost done! We’d like to ask a few final questions about you, which will be used only for analyzing the survey data.**
 
 ```{r}
+years <- seq(2007, 1930)
+names(years) <- as.character(years)
 sd_question(
   type = 'select',
   id = 'birth_year',
