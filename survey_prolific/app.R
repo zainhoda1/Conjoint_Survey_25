@@ -395,7 +395,6 @@ server <- function(input, output, session) {
   # Vehicle DCE -- Button Format
   observe(
     {
-
       df_vehicle <- df_filtered()
       battery_df <- df_battery_filtered()
 
