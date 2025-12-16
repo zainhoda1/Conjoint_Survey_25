@@ -63,7 +63,6 @@ vehicle_cbc_options <- function(df) {
   alt2 <- df |> filter(altID == 2)
   alt3 <- df |> filter(altID == 3)
 
-
   options <- c("option_1", "option_2", "option_3", "option_4")
 
   names(options) <- c(
@@ -178,7 +177,6 @@ battery_cbc_options <- function(df) {
   alt1 <- df |> filter(altID == 1)
   alt2 <- df |> filter(altID == 2)
   alt3 <- df |> filter(altID == 3)
-
 
   # Use only the first value of budget_select if it has multiple values
   #budget_val <- budget_select[1]
@@ -402,7 +400,6 @@ server <- function(input, output, session) {
 
   # Reactive values for storing vehicle type and budget
 
-
   vehicle_style <- reactive({
     sd_get_value("next_veh_style", session, db)
   })
@@ -455,7 +452,6 @@ server <- function(input, output, session) {
   # Vehicle DCE -- Button Format
   observe(
     {
-
       df_vehicle <- df_filtered()
       battery_df <- df_battery_filtered()
 
