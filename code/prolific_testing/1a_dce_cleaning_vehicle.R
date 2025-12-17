@@ -29,8 +29,6 @@ data_raw %>%
 data <- data_raw %>%
   # Select important columns
   select(
-    session_id,
-    time_start,
     time_min_total,
     time_min_vehicle_cbc,
     respID,
@@ -136,6 +134,6 @@ write_csv(
   here(
     "data",
     "prolific_testing",
-    "prolific_sample_vehicle_choice_data.csv"
+    "choice_data_vehicle.csv"
   )
 )

@@ -136,6 +136,6 @@ write_csv(
   here(
     "data",
     "prolific_testing",
-    "prolific_sample_battery_choice_data.csv"
+    "choice_data_battery.csv"
   )
 )

@@ -6,8 +6,9 @@ source(here::here('code', 'setup.R'))
 data <- read_csv(here(
   "data",
   "prolific_testing",
-  "prolific_sample_vehicle_choice_data.csv"
-))
+  "choice_data_vehicle.csv"
+)) %>%
+  select(-next_veh_budget)
 
 head(data)
 
@@ -20,46 +21,55 @@ data <- data %>%
     mileage = mileage / 10000, # 2 - 6
     age = age, # 2 - 8
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
-  ) %>%
-  select(-session_id, -vehicle_type, -budget)
+  )
 
 # Dummy encode
 data <- cbc_encode(
   data,
   coding = 'dummy',
   ref_levels = list(powertrain = 'gas')
-) %>%
-  as.data.frame()
+)
+
+head(data)
+
+data_car_low <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 1)
+data_car_high <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 0)
+data_suv_low <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 1)
+data_suv_high <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 0)
 
 glimpse(data)
 
-# Estimate MNL model
+# Estimate models
 
-# First create some dummy coded variables for categorical variables
-#data <- dummy_cols(data, c('powertrain'))
-
-data %>%
-  count(choice, qID)
-
-data %>%
-  count(no_choice, choice)
+run_model <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "price",
+      "mileage",
+      "age",
+      "range_bev",
+      "operating_cost",
+      "powertrainbev",
+      "powertrainhev",
+      "no_choice"
+    )
+  )
+  cat('N =', length(unique(data$respID)))
+  return(model)
+}
 
 # Estimate the model
-model <- logitr(
-  data = data,
-  outcome = "choice",
-  obsID = "obsID",
-  pars = c(
-    "price",
-    "mileage",
-    "age",
-    "operating_cost",
-    "range_bev",
-    "powertrainbev",
-    "powertrainhev",
-    "no_choice"
-  )
-)
+model <- run_model(data_car_low)
+model <- run_model(data_car_high)
+model <- run_model(data_suv_low)
+model <- run_model(data_suv_high)
 
 # View summary of results
 summary(model)
