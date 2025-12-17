@@ -5,7 +5,7 @@ source(here::here('code', 'setup.R'))
 
 data <- read_csv(here(
   "data",
-  "prolific_testing",
+  "dynata_testing",
   "choice_data_vehicle.csv"
 )) %>%
   select(-next_veh_budget)
@@ -23,6 +23,8 @@ data <- data %>%
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
   )
 
+glimpse(data)
+
 # Dummy encode
 data <- cbc_encode(
   data,
@@ -33,15 +35,15 @@ data <- cbc_encode(
 glimpse(data)
 
 data_car_low <- data %>%
-  filter(vehicle_typecar == 1, budgetlow == 1)
+  filter(vehicle_typesuv == 1, budgetlow == 1)
 data_car_high <- data %>%
-  filter(vehicle_typecar == 1, budgetlow == 0)
+  filter(vehicle_typesuv == 1, budgetlow == 0)
 data_suv_low <- data %>%
-  filter(vehicle_typecar == 0, budgetlow == 1)
+  filter(vehicle_typesuv == 0, budgetlow == 1)
 data_suv_high <- data %>%
-  filter(vehicle_typecar == 0, budgetlow == 0)
+  filter(vehicle_typesuv == 0, budgetlow == 0)
 
-
+glimpse(data)
 
 # Estimate models
 
