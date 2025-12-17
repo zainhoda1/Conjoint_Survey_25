@@ -42,7 +42,6 @@ data_suv_high <- data %>%
   filter(vehicle_typecar == 0, budgetlow == 0)
 
 
-
 # Estimate models
 
 run_model <- function(data) {
