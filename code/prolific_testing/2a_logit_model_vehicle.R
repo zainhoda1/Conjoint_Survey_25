@@ -8,10 +8,8 @@ data <- read_csv(here(
   "prolific_testing",
   "prolific_sample_vehicle_choice_data.csv"
 ))
+
 head(data)
-
-
-
 
 glimpse(data)
 
@@ -23,18 +21,17 @@ data <- data %>%
     age = age, # 2 - 8
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
   ) %>%
-  select(-range, -operating_cost_text, -session_id, -vehicle_type, -budget)
+  select(-session_id, -vehicle_type, -budget)
 
 # Dummy encode
-data <- cbc_encode(data, coding = 'dummy', ref_levels = list(powertrain='gas')) %>%
+data <- cbc_encode(
+  data,
+  coding = 'dummy',
+  ref_levels = list(powertrain = 'gas')
+) %>%
   as.data.frame()
 
 glimpse(data)
-
-data1<- data %>% 
-  select(obsID, choice)
-
-
 
 # Estimate MNL model
 
@@ -64,7 +61,6 @@ model <- logitr(
   )
 )
 
-
 # View summary of results
 summary(model)
 
@@ -74,4 +70,3 @@ model$gradient
 # 2nd order condition: Is the hessian negative definite?
 # (If all the eigenvalues are negative, the hessian is negative definite)
 eigen(model$hessian)$values
-

@@ -5,18 +5,18 @@ source(here::here('code', 'setup.R'))
 
 data <- read_csv(here(
   "data",
-  "pilot",
-  "battery_choice_data.csv"
+  "prolific_testing",
+  "prolific_sample_battery_choice_data.csv"
 ))
-#head(data)
+
+head(data)
 
 glimpse(data)
 
-
 data <- data %>%
   mutate(
-    veh_mileage = veh_mileage / 10000, #3 - 6
-    veh_price = veh_price / 10000, # 0.5 - 6
+    mileage = mileage / 10000, #3 - 6
+    price = price / 10000, # 0.5 - 6
     battery_range_year0 = battery_range_year0 / 100, # 1-3
     battery_range_year3 = battery_range_year3 / 100, # 1-3
     battery_range_year8 = battery_range_year8 / 100, # 0.5 - 2
@@ -54,18 +54,15 @@ model1 <- logitr(
   outcome = "choice",
   obsID = "obs_id",
   pars = c(
-    "veh_mileage",
-    "veh_price",
-    #### ranges are highly correlated, so only include one year.
-    #### Keeping year8 generates higher R2
-    # "battery_range_year3",
+    "price",
+    "mileage",
+    "battery_range_year3",
     "battery_range_year8",
     "battery_refurbishpackreplace",
     "battery_refurbishcellreplace",
     "no_choice"
   )
 )
-
 
 # View summary of results
 summary(model1)
@@ -83,8 +80,8 @@ model2 <- logitr(
   outcome = "choice",
   obsID = "obs_id",
   pars = c(
-    "veh_mileage",
-    "veh_price",
+    "price",
+    "mileage",
     "battery_range_year0",
     "battery_degradation",
     "battery_refurbishpackreplace",
@@ -95,5 +92,3 @@ model2 <- logitr(
 
 # View summary of results
 summary(model2)
-
-
