@@ -9,17 +9,15 @@ source(here::here('code', 'setup.R'))
 
 # original db
 #data_raw <- sd_get_data(db)
+# write_csv(data_raw, here('data', 'prolific_testing', 'data_raw.csv'))
 
-data_raw <- read.csv(here(
-  'data',
-  'prolific_testing',
-  'prolific_new_design_final_rows.csv'
-))
+data_raw <- read_csv(here('data', 'prolific_testing', 'data_raw.csv'))
 
 # removing testing entries
 data_raw <- data_raw %>%
   filter(!is.na(prolific_pid), nchar(prolific_pid) >= 10)
 
+nrow(data_raw)
 
 # Some special variables:
 # session_id = a unique ID for the Run - should be the same across all surveys
@@ -75,45 +73,58 @@ data <- data %>%
     )
   )
 
-
 nrow(data)
 
-
+# Drop those who missed attention checks
 data <- data %>%
   # Bot
-  filter(is.na(attention_check_toyota)) %>%
-
-  # Survey question removed
-  select(
-    !c(
-      attention_check_toyota,
-      attitudes_1_a,
-      attitudes_1_b,
-      attitudes_2_a,
-      attitudes_2_b,
-      battery_attribute
-    )
-  ) %>%
-
-  # Drop people who got screened out
-  filter(!is.na(current_page), current_page == "end") %>%
-  select(-current_page) %>%
-
-  # Drop those who completed before the adjustments
-  #filter(time_start >= pilot_start) %>%
-  #filter(time_start <= pilot_end) %>%
-  # Drop respondents that had a missing budget (somehow)
-  filter(!is.na(next_veh_budget))
+  filter(is.na(attention_check_toyota))
 
 nrow(data)
 
-#n_distinct(data$session_id)  # 98
+# Drop people who got screened out
+
+data <- data %>%
+  filter(!is.na(current_page), current_page == "end") %>%
+  select(-current_page)
+
+nrow(data)
+
+# Join demographics and check for approvals
+
+demos <- read_csv(here(
+  'data',
+  'prolific_testing',
+  'prolific_demographics.csv'
+)) %>%
+  clean_names() %>%
+  filter(status != 'SCREENED OUT')
+
+nrow(demos)
+
+data %>%
+  mutate(completion_code = as.character(completion_code)) %>%
+  select(participant_id = prolific_pid, completion_code) %>%
+  left_join(
+    demos,
+    by = c('participant_id', 'completion_code')
+  ) %>%
+  select(participant_id) %>%
+  write_csv(
+    here(
+      "data",
+      "prolific_testing",
+      "approve.csv"
+    )
+  )
+
+# Save
 
 write_csv(
   data,
   here(
     "data",
     "prolific_testing",
-    "prolific_sample.csv"
+    "data.csv"
   )
 )
