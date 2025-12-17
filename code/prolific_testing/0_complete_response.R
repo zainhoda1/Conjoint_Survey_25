@@ -143,13 +143,23 @@ nrow(data_approval)
 
 # Join demographics and check for approvals
 
-demos <- read_csv(here(
+demos1 <- read_csv(here(
   'data',
   'prolific_testing',
-  'prolific_demographics.csv'
+  'prolific_demographics1.csv'
 )) %>%
   clean_names() %>%
-  filter(status != 'SCREENED OUT')
+  filter(status != 'SCREENED OUT') %>%
+  mutate(source = 'demos1')
+demos2 <- read_csv(here(
+  'data',
+  'prolific_testing',
+  'prolific_demographics2.csv'
+)) %>%
+  clean_names() %>%
+  filter(status != 'SCREENED OUT') %>%
+  mutate(source = 'demos2')
+demos <- rbind(demos1, demos2)
 
 nrow(demos)
 
@@ -160,7 +170,8 @@ data_approval %>%
     demos,
     by = c('participant_id', 'completion_code')
   ) %>%
-  select(participant_id) %>%
+  select(participant_id, source) %>%
+  filter(source == 'demos2') %>%
   write_csv(
     here(
       "data",
