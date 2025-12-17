@@ -5,7 +5,7 @@ source(here::here('code', 'setup.R'))
 data_raw <- read_csv(here(
   "data",
   "prolific_testing",
-  "prolific_sample.csv"
+  "data.csv"
 ))
 
 # Read in choice questions and join it to the choice_data
