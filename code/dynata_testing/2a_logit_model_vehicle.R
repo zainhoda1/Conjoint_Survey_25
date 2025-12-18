@@ -1,6 +1,5 @@
 source(here::here('code', 'setup.R'))
 
-# --------------------------------------------------------------------------
 # Load the data set:
 
 data <- read_csv(here(
@@ -23,27 +22,24 @@ data <- data %>%
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
   )
 
-glimpse(data)
-
 # Dummy encode
 data <- cbc_encode(
   data,
   coding = 'dummy',
-  ref_levels = list(powertrain = 'gas')
+  ref_levels = list(powertrain = 'gas', vehicle_type = 'suv', budget = 'high')
 )
 
 glimpse(data)
 
 data_car_low <- data %>%
-  filter(vehicle_typesuv == 1, budgetlow == 1)
+  filter(vehicle_typecar == 1, budgetlow == 1)
 data_car_high <- data %>%
-  filter(vehicle_typesuv == 1, budgetlow == 0)
+  filter(vehicle_typecar == 1, budgetlow == 0)
 data_suv_low <- data %>%
-  filter(vehicle_typesuv == 0, budgetlow == 1)
+  filter(vehicle_typecar == 0, budgetlow == 1)
 data_suv_high <- data %>%
-  filter(vehicle_typesuv == 0, budgetlow == 0)
+  filter(vehicle_typecar == 0, budgetlow == 0)
 
-glimpse(data)
 
 # Estimate models
 
@@ -72,6 +68,7 @@ model <- run_model(data_car_low)
 model <- run_model(data_car_high)
 model <- run_model(data_suv_low)
 model <- run_model(data_suv_high)
+model <- run_model(data)
 
 # View summary of results
 summary(model)
