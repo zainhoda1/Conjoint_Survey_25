@@ -19,8 +19,8 @@ battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
 survey$range[is.na(survey$range)] <- ''
 
 # Load constants
-prolific_completion_code <- 'CXO0VPHQ'
-prolific_screenout_code <- 'C1N42823'
+prolific_completion_code <- 'CZS0NYE9'
+prolific_screenout_code <- 'C65JEJ1S'
 electric_icon <- '<img src="images/electric_plug.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 gas_icon <- '<img src="images/gas_pump.png" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">'
 
