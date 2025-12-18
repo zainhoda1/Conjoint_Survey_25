@@ -1,15 +1,14 @@
 source(here::here('code', 'setup.R'))
 
-# -----------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # Load the data set:
 
 data <- read_csv(here(
   "data",
   "prolific_testing",
-  "prolific_sample_battery_choice_data.csv"
-))
-
-head(data)
+  "choice_data_battery.csv"
+)) %>%
+  select(-next_veh_budget)
 
 glimpse(data)
 
@@ -24,10 +23,7 @@ data <- data %>%
   ) %>%
   select(
     -starts_with("battery_health"),
-    -starts_with("time"),
-    -session_id,
-    -vehicle_type,
-    -battery_condition
+    -starts_with("time")
   )
 
 # Dummy encode
@@ -35,9 +31,16 @@ data <- cbc_encode(
   data,
   coding = 'dummy',
   ref_levels = list(battery_refurbish = 'original')
-) %>%
-  as.data.frame() %>%
-  clean_names()
+)
+
+data_car_low <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 1)
+data_car_high <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 0)
+data_suv_low <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 1)
+data_suv_high <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 0)
 
 # Estimate MNL model
 
@@ -48,47 +51,62 @@ data <- cbc_encode(
 
 glimpse(data)
 
-# Estimate the model
-model1 <- logitr(
-  data = data,
-  outcome = "choice",
-  obsID = "obs_id",
-  pars = c(
-    "price",
-    "mileage",
-    "battery_range_year3",
-    "battery_range_year8",
-    "battery_refurbishpackreplace",
-    "battery_refurbishcellreplace",
-    "no_choice"
+# Estimate models
+
+run_model1 <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "price",
+      "mileage",
+      "battery_range_year3",
+      "battery_range_year8",
+      "battery_refurbishpackreplace",
+      "battery_refurbishcellreplace",
+      "no_choice"
+    )
   )
-)
+  cat('N =', length(unique(data$respID)))
+  return(model)
+}
+
+run_model2 <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "price",
+      "mileage",
+      "battery_range_year0",
+      "battery_degradation",
+      "battery_refurbishpackreplace",
+      "battery_refurbishcellreplace",
+      "no_choice"
+    )
+  )
+  cat('N =', length(unique(data$respID)))
+  return(model)
+}
+
+# Estimate the model
+model <- run_model1(data_car_low)
+model <- run_model1(data_car_high)
+model <- run_model1(data_suv_low)
+model <- run_model1(data_suv_high)
+model <- run_model1(data)
 
 # View summary of results
-summary(model1)
-
-# Check the 1st order condition: Is the gradient at the solution zero?
-model1$gradient
-
-# 2nd order condition: Is the hessian negative definite?
-# (If all the eigenvalues are negative, the hessian is negative definite)
-eigen(model1$hessian)$values
+summary(model)
 
 # Estimate the model
-model2 <- logitr(
-  data = data,
-  outcome = "choice",
-  obsID = "obs_id",
-  pars = c(
-    "price",
-    "mileage",
-    "battery_range_year0",
-    "battery_degradation",
-    "battery_refurbishpackreplace",
-    "battery_refurbishcellreplace",
-    "no_choice"
-  )
-)
+model <- run_model2(data_car_low)
+model <- run_model2(data_car_high)
+model <- run_model2(data_suv_low)
+model <- run_model2(data_suv_high)
+model <- run_model2(data)
 
 # View summary of results
-summary(model2)
+summary(model)

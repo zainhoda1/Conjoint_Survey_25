@@ -8,27 +8,16 @@ data_raw <- read_csv(here(
   "data.csv"
 ))
 
-# Read in choice questions and join it to the choice_data
-
-survey_vehicle <- read_parquet(here(
-  "data",
-  "doe",
-  "12-10-25",
-  'design_vehicle.parquet'
-))
-
-nrow(data_raw)
-
 ## Checking input data:
 
 data_raw %>%
   group_by(next_veh_style, budget) %>%
   count()
 
-# Compute time values for each page
+# Select important columns
 data <- data_raw %>%
-  # Select important columns
   select(
+    prolific_pid,
     time_min_total,
     time_min_vehicle_cbc,
     respID,
@@ -40,16 +29,22 @@ data <- data_raw %>%
 
 nrow(data)
 
-# Vehicle filtering ----
+# Summary of reasons to drop respondents
 
-# Drop anyone who didn't complete all choice questions
+data_approval <- check_all_approvals(data_raw)
+data_approval %>%
+  count(status, reason)
+
+# Drop bad respondents
+
 data_vehicle <- data %>%
-  filter(!is.na(vehicle_cbc_q1_button)) %>%
-  filter(!is.na(vehicle_cbc_q2_button)) %>%
-  filter(!is.na(vehicle_cbc_q3_button)) %>%
-  filter(!is.na(vehicle_cbc_q4_button)) %>%
-  filter(!is.na(vehicle_cbc_q5_button)) %>%
-  filter(!is.na(vehicle_cbc_q6_button))
+  left_join(
+    data_approval %>%
+      select(prolific_pid, status),
+    by = "prolific_pid"
+  ) %>%
+  filter(status == "good")
+
 nrow(data_vehicle)
 
 # Drop anyone who got the demo question wrong:
@@ -57,20 +52,6 @@ nrow(data_vehicle)
 data_vehicle <- data_vehicle %>%
   filter(vehicle_cbc_q0_button %in% c('option_1', 'option_4')) %>%
   select(-vehicle_cbc_q0_button)
-
-nrow(data_vehicle)
-
-# Drop anyone who answered the same question for all choice questions
-data_vehicle <- data_vehicle %>%
-  mutate(
-    cbc_all_same = (vehicle_cbc_q1_button == vehicle_cbc_q2_button) &
-      (vehicle_cbc_q2_button == vehicle_cbc_q3_button) &
-      (vehicle_cbc_q3_button == vehicle_cbc_q4_button) &
-      (vehicle_cbc_q4_button == vehicle_cbc_q5_button) &
-      (vehicle_cbc_q5_button == vehicle_cbc_q6_button)
-  ) %>%
-  filter(!cbc_all_same) %>%
-  select(-cbc_all_same)
 
 nrow(data_vehicle)
 
@@ -88,6 +69,15 @@ data_vehicle <- data_vehicle %>%
 nrow(data_vehicle)
 
 # Create vehicle choice data ---------
+
+# Read in choice questions and join it to the choice_data
+
+survey_vehicle <- read_parquet(here(
+  "data",
+  "doe",
+  "12-10-25",
+  'design_vehicle.parquet'
+))
 
 # First convert the data to long format
 choice_data_vehicle <- data_vehicle %>%
@@ -124,7 +114,7 @@ choice_data_vehicle$obsID <- rep(seq(nRespondents * nQuestions), each = nAlts)
 # Reorder columns - it's nice to have the "ID" variables first
 choice_data_vehicle <- choice_data_vehicle %>%
   select(ends_with("ID"), "choice", everything()) %>%
-  select(-operating_cost_text, -range)
+  select(-operating_cost_text, -range, -prolific_pid)
 
 head(choice_data_vehicle)
 

@@ -1,4 +1,5 @@
 source(here::here('code', 'setup.R'))
+source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 
 #pilot_start <- ymd_hms('2025-10-14 21:00:00')
 #pilot_end <- ymd_hms('2025-10-21 16:00:00')
@@ -73,73 +74,20 @@ data <- data %>%
     )
   )
 
-nrow(data)
+# Save
 
-# Drop those who missed attention checks
-data <- data %>%
-  # Bot
-  filter(is.na(attention_check_toyota))
+write_csv(
+  data,
+  here(
+    "data",
+    "prolific_testing",
+    "data.csv"
+  )
+)
 
-nrow(data)
+# Check for approvals
 
-# Drop people who got screened out
-
-data <- data %>%
-  filter(!is.na(current_page), current_page == "end") %>%
-  select(-current_page)
-
-nrow(data)
-
-# Approval drops ----
-
-# These are being dropped to not approve them only
-# Further data cleaning happens later
-
-# Drop anyone who didn't complete all choice questions
-data_approval <- data %>%
-  filter(!is.na(vehicle_cbc_q1_button)) %>%
-  filter(!is.na(vehicle_cbc_q2_button)) %>%
-  filter(!is.na(vehicle_cbc_q3_button)) %>%
-  filter(!is.na(vehicle_cbc_q4_button)) %>%
-  filter(!is.na(vehicle_cbc_q5_button)) %>%
-  filter(!is.na(vehicle_cbc_q6_button)) %>%
-  filter(!is.na(battery_cbc_q1_button)) %>%
-  filter(!is.na(battery_cbc_q2_button)) %>%
-  filter(!is.na(battery_cbc_q3_button)) %>%
-  filter(!is.na(battery_cbc_q4_button)) %>%
-  filter(!is.na(battery_cbc_q5_button)) %>%
-  filter(!is.na(battery_cbc_q6_button))
-
-nrow(data_approval)
-
-# Drop anyone who answered the same question for all vehicle questions
-data_approval <- data_approval %>%
-  mutate(
-    cbc_all_same = (vehicle_cbc_q1_button == vehicle_cbc_q2_button) &
-      (vehicle_cbc_q2_button == vehicle_cbc_q3_button) &
-      (vehicle_cbc_q3_button == vehicle_cbc_q4_button) &
-      (vehicle_cbc_q4_button == vehicle_cbc_q5_button) &
-      (vehicle_cbc_q5_button == vehicle_cbc_q6_button)
-  ) %>%
-  filter(!cbc_all_same) %>%
-  select(-cbc_all_same)
-
-nrow(data_approval)
-
-# Drop anyone who answered the same question for all vehicle questions
-
-data_approval <- data_approval %>%
-  mutate(
-    cbc_all_same = (battery_cbc_q1_button == battery_cbc_q2_button) &
-      (battery_cbc_q2_button == battery_cbc_q3_button) &
-      (battery_cbc_q3_button == battery_cbc_q4_button) &
-      (battery_cbc_q4_button == battery_cbc_q5_button) &
-      (battery_cbc_q5_button == battery_cbc_q6_button)
-  ) %>%
-  filter(!cbc_all_same) %>%
-  select(-cbc_all_same)
-
-nrow(data_approval)
+data_approval <- check_all_approvals(data)
 
 # Join demographics and check for approvals
 
@@ -159,19 +107,28 @@ demos2 <- read_csv(here(
   clean_names() %>%
   filter(status != 'SCREENED OUT') %>%
   mutate(source = 'demos2')
-demos <- rbind(demos1, demos2)
+demos <- rbind(demos1, demos2) %>%
+  rename(prolific_pid = participant_id)
 
 nrow(demos)
 
 data_approval %>%
+  filter(status == 'good') %>%
+  left_join(
+    data %>%
+      select(prolific_pid, completion_code) %>%
+      distinct(),
+    by = 'prolific_pid'
+  ) %>%
   mutate(completion_code = as.character(completion_code)) %>%
-  select(participant_id = prolific_pid, completion_code) %>%
+  select(prolific_pid, completion_code) %>%
   left_join(
     demos,
-    by = c('participant_id', 'completion_code')
+    by = c('prolific_pid', 'completion_code')
   ) %>%
-  select(participant_id, source) %>%
-  filter(source == 'demos2') %>%
+  select(prolific_pid, source) %>%
+  arrange(source) %>%
+  # filter(source == 'demos2') %>%
   write_csv(
     here(
       "data",
@@ -180,13 +137,12 @@ data_approval %>%
     )
   )
 
-# Save
-
-write_csv(
-  data,
-  here(
-    "data",
-    "prolific_testing",
-    "data.csv"
+data_approval %>%
+  filter(status == 'bad') %>%
+  write_csv(
+    here(
+      "data",
+      "prolific_testing",
+      "reject.csv"
+    )
   )
-)

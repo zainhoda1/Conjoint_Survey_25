@@ -69,6 +69,7 @@ model <- run_model(data_car_low)
 model <- run_model(data_car_high)
 model <- run_model(data_suv_low)
 model <- run_model(data_suv_high)
+model <- run_model(data)
 
 # View summary of results
 summary(model)

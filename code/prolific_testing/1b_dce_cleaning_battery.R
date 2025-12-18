@@ -8,29 +8,16 @@ data_raw <- read_csv(here(
   "data.csv"
 ))
 
-# Read in choice questions and join it to the choice_data
-
-survey_battery <- read_parquet(here(
-  "data",
-  "doe",
-  "12-10-25",
-  'design_battery.parquet'
-))
-
-nrow(data_raw)
-
 ## Checking input data:
 
 data_raw %>%
   group_by(next_veh_style, budget) %>%
   count()
 
-# Compute time values for each page
+# Select important columns
 data <- data_raw %>%
-  # Select important columns
   select(
-    session_id,
-    time_start,
+    prolific_pid,
     time_min_total,
     time_min_battery_cbc,
     respID,
@@ -42,30 +29,21 @@ data <- data_raw %>%
 
 nrow(data)
 
-# Battery filtering ----
+# Summary of reasons to drop respondents
 
-# Drop anyone who didn't complete all choice questions
+data_approval <- check_all_approvals(data_raw)
+data_approval %>%
+  count(status, reason)
+
+# Drop bad respondents
+
 data_battery <- data %>%
-  filter(!is.na(battery_cbc_q1_button)) %>%
-  filter(!is.na(battery_cbc_q2_button)) %>%
-  filter(!is.na(battery_cbc_q3_button)) %>%
-  filter(!is.na(battery_cbc_q4_button)) %>%
-  filter(!is.na(battery_cbc_q5_button)) %>%
-  filter(!is.na(battery_cbc_q6_button))
-
-nrow(data_battery)
-
-# Drop anyone who answered the same question for all choice questions
-data_battery <- data_battery %>%
-  mutate(
-    cbc_all_same = (battery_cbc_q1_button == battery_cbc_q2_button) &
-      (battery_cbc_q2_button == battery_cbc_q3_button) &
-      (battery_cbc_q3_button == battery_cbc_q4_button) &
-      (battery_cbc_q4_button == battery_cbc_q5_button) &
-      (battery_cbc_q5_button == battery_cbc_q6_button)
+  left_join(
+    data_approval %>%
+      select(prolific_pid, status),
+    by = "prolific_pid"
   ) %>%
-  filter(!cbc_all_same) %>%
-  select(-cbc_all_same)
+  filter(status == "good")
 
 nrow(data_battery)
 
@@ -83,6 +61,15 @@ data_battery <- data_battery %>%
 nrow(data_battery)
 
 # Create battery choice data ---------
+
+# Read in choice questions and join it to the choice_data
+
+survey_battery <- read_parquet(here(
+  "data",
+  "doe",
+  "12-10-25",
+  'design_battery.parquet'
+))
 
 # First convert the data to long format
 choice_data_battery <- data_battery %>%
@@ -126,7 +113,8 @@ choice_data_battery <- choice_data_battery %>%
     battery_health_year0 = ifelse(no_choice, NA, battery_health_year0),
     battery_health_year3 = ifelse(no_choice, NA, battery_health_year3),
     battery_health_year8 = ifelse(no_choice, NA, battery_health_year8)
-  )
+  ) %>%
+  select(-prolific_pid, -battery_condition)
 
 head(choice_data_battery)
 
