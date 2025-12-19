@@ -1,33 +1,34 @@
 source(here::here('code', 'setup.R'))
-source(here::here('code', 'prolific_testing', 'approval_functions.R'))
+
 # Import raw data
 
 data_raw <- read_csv(here(
   "data",
-  "prolific_testing",
+  "dynata_testing",
   "data.csv"
 ))
-
 
 # Read in choice questions and join it to the choice_data
 
 survey_vehicle <- read_parquet(here(
   "data",
-  "doe",
+  "doe",;'/
   "12-10-25",
   'design_vehicle.parquet'
 ))
+
 nrow(data_raw)
+
 ## Checking input data:
 
 data_raw %>%
   group_by(next_veh_style, budget) %>%
   count()
 
-# Select important columns
+# Compute time values for each page
 data <- data_raw %>%
+  # Select important columns
   select(
-    prolific_pid,
     time_min_total,
     time_min_vehicle_cbc,
     respID,
@@ -39,29 +40,10 @@ data <- data_raw %>%
 
 nrow(data)
 
-# Summary of reasons to drop respondents
-
-data_approval <- check_all_approvals(data_raw)
-data_approval %>%
-  count(status, reason)
-
-# Drop bad respondents
-
-data_vehicle <- data %>%
-  inner_join(
-    data_approval %>%
-      select(prolific_pid, status),
-    by = "prolific_pid"
-  ) %>%
-  filter(status == "good")
-
-nrow(data_vehicle)
-
-
 # Vehicle filtering ----
 
 # Drop anyone who didn't complete all choice questions
-data_vehicle <- data_vehicle %>%
+data_vehicle <- data %>%
   filter(!is.na(vehicle_cbc_q1_button)) %>%
   filter(!is.na(vehicle_cbc_q2_button)) %>%
   filter(!is.na(vehicle_cbc_q3_button)) %>%
@@ -142,17 +124,18 @@ choice_data_vehicle$obsID <- rep(seq(nRespondents * nQuestions), each = nAlts)
 # Reorder columns - it's nice to have the "ID" variables first
 choice_data_vehicle <- choice_data_vehicle %>%
   select(ends_with("ID"), "choice", everything()) %>%
-  select(-operating_cost_text, -range, -prolific_pid)
+  select(-operating_cost_text, -range)
 
 head(choice_data_vehicle)
 
 glimpse(choice_data_vehicle)
+
 # Save cleaned data for modeling
 write_csv(
   choice_data_vehicle,
   here(
     "data",
-    "prolific_testing",
+    "dynata_testing",
     "choice_data_vehicle.csv"
   )
 )

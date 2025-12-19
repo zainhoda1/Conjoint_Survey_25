@@ -38,7 +38,8 @@ data <- data_raw %>%
     vehicle_type = next_veh_style,
     budget,
     starts_with("battery_cbc_q")
-  )
+  ) %>%
+  select(-next_veh_budget)
 
 nrow(data)
 
@@ -126,7 +127,8 @@ choice_data_battery <- choice_data_battery %>%
     battery_health_year0 = ifelse(no_choice, NA, battery_health_year0),
     battery_health_year3 = ifelse(no_choice, NA, battery_health_year3),
     battery_health_year8 = ifelse(no_choice, NA, battery_health_year8)
-  )
+  ) %>%
+  select(-session_id, -battery_condition)
 
 head(choice_data_battery)
 

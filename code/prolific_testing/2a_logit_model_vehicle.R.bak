@@ -23,8 +23,6 @@ data <- data %>%
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
   )
 
-glimpse(data)
-
 # Dummy encode
 data <- cbc_encode(
   data,
@@ -80,9 +78,9 @@ summary(model_suv_low)
 summary(model_suv_high)
 summary(model_all)
 
-# # Check the 1st order condition: Is the gradient at the solution zero?
-# model$gradient
-# 
-# # 2nd order condition: Is the hessian negative definite?
-# # (If all the eigenvalues are negative, the hessian is negative definite)
-# eigen(model$hessian)$values
+# Check the 1st order condition: Is the gradient at the solution zero?
+model$gradient
+
+# 2nd order condition: Is the hessian negative definite?
+# (If all the eigenvalues are negative, the hessian is negative definite)
+eigen(model$hessian)$values

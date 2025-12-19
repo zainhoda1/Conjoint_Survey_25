@@ -1,11 +1,11 @@
 source(here::here('code', 'setup.R'))
 
-# --------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Load the data set:
 
 data <- read_csv(here(
   "data",
-  "prolific_testing",
+  "dynata_testing",
   "choice_data_battery.csv"
 ))
 
@@ -25,10 +25,10 @@ data <- data %>%
   select(
     -starts_with("battery_health"),
     -starts_with("time"),
-    -vehicle_type
+    -session_id,
+    -vehicle_type,
+    -battery_condition
   )
-
-glimpse(data)
 
 # Dummy encode
 data <- cbc_encode(
@@ -36,6 +36,15 @@ data <- cbc_encode(
   coding = 'dummy',
   ref_levels = list(battery_refurbish = 'original')
 )
+
+data_car_low <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 1)
+data_car_high <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 0)
+data_suv_low <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 1)
+data_suv_high <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 0)
 
 # Estimate MNL model
 
@@ -87,12 +96,20 @@ run_model2 <- function(data) {
 }
 
 # Estimate the model
+model <- run_model1(data_car_low)
+model <- run_model1(data_car_high)
+model <- run_model1(data_suv_low)
+model <- run_model1(data_suv_high)
 model <- run_model1(data)
 
 # View summary of results
 summary(model)
 
 # Estimate the model
+model <- run_model2(data_car_low)
+model <- run_model2(data_car_high)
+model <- run_model2(data_suv_low)
+model <- run_model2(data_suv_high)
 model <- run_model2(data)
 
 # View summary of results

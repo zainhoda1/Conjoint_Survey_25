@@ -20,7 +20,9 @@ data <- data %>%
     mileage = mileage / 10000, # 2 - 6
     age = age, # 2 - 8
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
-  )
+  ) 
+
+glimpse(data)
 
 # Dummy encode
 data <- cbc_encode(
@@ -64,18 +66,22 @@ run_model <- function(data) {
 }
 
 # Estimate the model
-model <- run_model(data_car_low)
-model <- run_model(data_car_high)
-model <- run_model(data_suv_low)
-model <- run_model(data_suv_high)
-model <- run_model(data)
+model_car_low <- run_model(data_car_low)
+model_car_high <- run_model(data_car_high)
+model_suv_low <- run_model(data_suv_low)
+model_suv_high <- run_model(data_suv_high)
+model_all <- run_model(data)
 
 # View summary of results
-summary(model)
+summary(model_car_low)
+summary(model_car_high)
+summary(model_suv_low)
+summary(model_suv_high)
+summary(model_all)
 
-# Check the 1st order condition: Is the gradient at the solution zero?
-model$gradient
-
-# 2nd order condition: Is the hessian negative definite?
-# (If all the eigenvalues are negative, the hessian is negative definite)
-eigen(model$hessian)$values
+# # Check the 1st order condition: Is the gradient at the solution zero?
+# model$gradient
+# 
+# # 2nd order condition: Is the hessian negative definite?
+# # (If all the eigenvalues are negative, the hessian is negative definite)
+# eigen(model$hessian)$values

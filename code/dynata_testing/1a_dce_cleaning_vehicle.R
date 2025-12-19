@@ -128,6 +128,8 @@ choice_data_vehicle <- choice_data_vehicle %>%
 
 head(choice_data_vehicle)
 
+glimpse(choice_data_vehicle)
+
 # Save cleaned data for modeling
 write_csv(
   choice_data_vehicle,
@@ -137,3 +139,4 @@ write_csv(
     "choice_data_vehicle.csv"
   )
 )
+

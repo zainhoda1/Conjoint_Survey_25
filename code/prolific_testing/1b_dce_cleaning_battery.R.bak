@@ -1,5 +1,4 @@
 source(here::here('code', 'setup.R'))
-source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 
 # Import raw data
 
@@ -39,8 +38,7 @@ data <- data_raw %>%
     vehicle_type = next_veh_style,
     budget,
     starts_with("battery_cbc_q")
-  )  %>%
-  select(-next_veh_budget)
+  )
 
 nrow(data)
 
@@ -77,7 +75,7 @@ data_approval %>%
 
 # Drop bad respondents
 
-data_battery <- data_battery %>%
+data_battery <- data %>%
   left_join(
     data_approval %>%
       select(prolific_pid, status),
@@ -160,4 +158,3 @@ write_csv(
     "choice_data_battery.csv"
   )
 )
-

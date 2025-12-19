@@ -1,11 +1,10 @@
 source(here::here('code', 'setup.R'))
-source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 
 # Import raw data
 
 data_raw <- read_csv(here(
   "data",
-  "prolific_testing",
+  "dynata_testing",
   "data.csv"
 ))
 
@@ -26,11 +25,11 @@ data_raw %>%
   group_by(next_veh_style, budget) %>%
   count()
 
-# Select important columns
+# Compute time values for each page
 data <- data_raw %>%
   # Select important columns
   select(
-    prolific_pid,
+    session_id,
     time_start,
     time_min_total,
     time_min_battery_cbc,
@@ -39,7 +38,7 @@ data <- data_raw %>%
     vehicle_type = next_veh_style,
     budget,
     starts_with("battery_cbc_q")
-  )  %>%
+  ) %>%
   select(-next_veh_budget)
 
 nrow(data)
@@ -69,22 +68,6 @@ data_battery <- data_battery %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
 
-# Summary of reasons to drop respondents
-
-data_approval <- check_all_approvals(data_raw)
-data_approval %>%
-  count(status, reason)
-
-# Drop bad respondents
-
-data_battery <- data_battery %>%
-  left_join(
-    data_approval %>%
-      select(prolific_pid, status),
-    by = "prolific_pid"
-  ) %>%
-  filter(status == "good")
-
 nrow(data_battery)
 
 # Drop respondents who went too fast
@@ -101,8 +84,6 @@ data_battery <- data_battery %>%
 nrow(data_battery)
 
 # Create battery choice data ---------
-
-
 
 # First convert the data to long format
 choice_data_battery <- data_battery %>%
@@ -156,8 +137,7 @@ write_csv(
   choice_data_battery,
   here(
     "data",
-    "prolific_testing",
+    "dynata_testing",
     "choice_data_battery.csv"
   )
 )
-

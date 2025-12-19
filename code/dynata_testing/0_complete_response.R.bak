@@ -64,7 +64,6 @@ data <- data_raw %>%
     time_min_battery_cbc = time_battery_cbc_total / 60
   )
 
-
 data <- data %>%
   mutate(
     budget = case_when(
@@ -100,7 +99,84 @@ nrow(data)
 data <- data %>% 
   filter(!is.na(next_veh_style ))
 
-nrow(data)
+# Approval drops ----
+
+# These are being dropped to not approve them only
+# Further data cleaning happens later
+
+# Drop anyone who didn't complete all choice questions
+data_approval <- data %>%
+  filter(!is.na(vehicle_cbc_q1_button)) %>%
+  filter(!is.na(vehicle_cbc_q2_button)) %>%
+  filter(!is.na(vehicle_cbc_q3_button)) %>%
+  filter(!is.na(vehicle_cbc_q4_button)) %>%
+  filter(!is.na(vehicle_cbc_q5_button)) %>%
+  filter(!is.na(vehicle_cbc_q6_button)) %>%
+  filter(!is.na(battery_cbc_q1_button)) %>%
+  filter(!is.na(battery_cbc_q2_button)) %>%
+  filter(!is.na(battery_cbc_q3_button)) %>%
+  filter(!is.na(battery_cbc_q4_button)) %>%
+  filter(!is.na(battery_cbc_q5_button)) %>%
+  filter(!is.na(battery_cbc_q6_button))
+
+nrow(data_approval)
+
+# Drop anyone who answered the same question for all vehicle questions
+data_approval <- data_approval %>%
+  mutate(
+    cbc_all_same = (vehicle_cbc_q1_button == vehicle_cbc_q2_button) &
+      (vehicle_cbc_q2_button == vehicle_cbc_q3_button) &
+      (vehicle_cbc_q3_button == vehicle_cbc_q4_button) &
+      (vehicle_cbc_q4_button == vehicle_cbc_q5_button) &
+      (vehicle_cbc_q5_button == vehicle_cbc_q6_button)
+  ) %>%
+  filter(!cbc_all_same) %>%
+  select(-cbc_all_same)
+
+nrow(data_approval)
+
+# Drop anyone who answered the same question for all battery questions
+
+data_approval <- data_approval %>%
+  mutate(
+    cbc_all_same = (battery_cbc_q1_button == battery_cbc_q2_button) &
+      (battery_cbc_q2_button == battery_cbc_q3_button) &
+      (battery_cbc_q3_button == battery_cbc_q4_button) &
+      (battery_cbc_q4_button == battery_cbc_q5_button) &
+      (battery_cbc_q5_button == battery_cbc_q6_button)
+  ) %>%
+  filter(!cbc_all_same) %>%
+  select(-cbc_all_same)
+
+nrow(data_approval)
+
+# Join demographics and check for approvals
+
+# demos <- read_csv(here(
+#   'data',
+#   'dynata_testing',
+#   'prolific_demographics.csv'
+# )) %>%
+#   clean_names() %>%
+#   filter(status != 'SCREENED OUT')
+# 
+# nrow(demos)
+
+# data_approval %>%
+#   mutate(completion_code = as.character(completion_code)) %>%
+#   select(participant_id = prolific_pid, completion_code) %>%
+#   left_join(
+#     demos,
+#     by = c('participant_id', 'completion_code')
+#   ) %>%
+#   select(participant_id) %>%
+#   write_csv(
+#     here(
+#       "data",
+#       "dynata_testing",
+#       "approve.csv"
+#     )
+#   )
 
 # Save
 

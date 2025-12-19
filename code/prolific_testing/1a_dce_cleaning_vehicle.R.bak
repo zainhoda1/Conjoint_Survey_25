@@ -48,7 +48,7 @@ data_approval %>%
 # Drop bad respondents
 
 data_vehicle <- data %>%
-  inner_join(
+  left_join(
     data_approval %>%
       select(prolific_pid, status),
     by = "prolific_pid"
@@ -61,7 +61,7 @@ nrow(data_vehicle)
 # Vehicle filtering ----
 
 # Drop anyone who didn't complete all choice questions
-data_vehicle <- data_vehicle %>%
+data_vehicle <- data %>%
   filter(!is.na(vehicle_cbc_q1_button)) %>%
   filter(!is.na(vehicle_cbc_q2_button)) %>%
   filter(!is.na(vehicle_cbc_q3_button)) %>%
@@ -146,7 +146,6 @@ choice_data_vehicle <- choice_data_vehicle %>%
 
 head(choice_data_vehicle)
 
-glimpse(choice_data_vehicle)
 # Save cleaned data for modeling
 write_csv(
   choice_data_vehicle,
@@ -156,4 +155,3 @@ write_csv(
     "choice_data_vehicle.csv"
   )
 )
-

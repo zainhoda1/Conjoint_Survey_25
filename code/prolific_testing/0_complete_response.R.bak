@@ -10,6 +10,7 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 
 # original db
 #data_raw <- sd_get_data(db)
+# write_csv(data_raw, here('data', 'prolific_testing', 'data_raw.csv'))
 
 data_raw <- read_csv(here('data', 'prolific_testing', 'data_raw.csv'))
 
