@@ -1,20 +1,34 @@
+# After running both Dynata and Prolific
 source(here::here('code', 'setup.R'))
 
-# -----------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # Load the data set:
 
-data <- read_csv(here(
+data_prolific <- read_csv(here(
+  "data",
+  "prolific_testing",
+  "choice_data_battery.csv"
+))
+
+data_dynata <- read_csv(here(
   "data",
   "dynata_testing",
   "choice_data_battery.csv"
 ))
 
-head(data)
+data_dynata$obsID = data_dynata$obsID + nrow(data_prolific)/4
+
+glimpse(data_prolific)
+glimpse(data_dynata)
+
+
+data <- rbind(data_dynata, data_prolific)
+
 
 glimpse(data)
 
 data <- data %>%
-  mutate(        
+  mutate(
     mileage = mileage / 10000, #3 - 6
     price = price / 10000, # 0.5 - 6
     battery_range_year0 = battery_range_year0 / 100, # 1-3
@@ -27,11 +41,13 @@ data <- data %>%
     -starts_with("time")
   )
 
+glimpse(data)
+
 # Dummy encode
 data <- cbc_encode(
   data,
   coding = 'dummy',
-  ref_levels = list(battery_refurbish = 'original', vehicle_type = 'suv', budget = 'high')
+  ref_levels = list(battery_refurbish = 'original' , vehicle_type = 'suv', budget = 'high')
 )
 
 data_car_low <- data %>%

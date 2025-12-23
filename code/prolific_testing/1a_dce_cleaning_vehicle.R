@@ -8,6 +8,12 @@ data_raw <- read_csv(here(
   "data.csv"
 ))
 
+data_approval <- read_csv(here(
+  "data",
+  "prolific_testing",
+  "approve.csv"
+))
+
 
 # Read in choice questions and join it to the choice_data
 
@@ -41,19 +47,18 @@ nrow(data)
 
 # Summary of reasons to drop respondents
 
-data_approval <- check_all_approvals(data_raw)
-data_approval %>%
-  count(status, reason)
+# data_approval <- check_all_approvals(data_raw)
+# data_approval %>%
+#   count(status, reason)
 
 # Drop bad respondents
 
 data_vehicle <- data %>%
   inner_join(
     data_approval %>%
-      select(prolific_pid, status),
+      select(prolific_pid),
     by = "prolific_pid"
-  ) %>%
-  filter(status == "good")
+  ) 
 
 nrow(data_vehicle)
 
@@ -68,6 +73,7 @@ data_vehicle <- data_vehicle %>%
   filter(!is.na(vehicle_cbc_q4_button)) %>%
   filter(!is.na(vehicle_cbc_q5_button)) %>%
   filter(!is.na(vehicle_cbc_q6_button))
+
 nrow(data_vehicle)
 
 # Drop anyone who got the demo question wrong:

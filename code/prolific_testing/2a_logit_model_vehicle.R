@@ -66,12 +66,41 @@ run_model <- function(data) {
   return(model)
 }
 
+run_model_wtp <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "mileage",
+      "age",
+      "range_bev",
+      "operating_cost",
+      "powertrainbev",
+      "powertrainhev",
+      "no_choice"
+    ),
+    scalePar = 'price',
+    numMultiStarts = 10 # Use a multi-start since log-likelihood is nonconvex
+  )
+  cat('N =', length(unique(data$respID)))
+  return(model)
+}
+
 # Estimate the model
 model_car_low <- run_model(data_car_low)
 model_car_high <- run_model(data_car_high)
 model_suv_low <- run_model(data_suv_low)
 model_suv_high <- run_model(data_suv_high)
 model_all <- run_model(data)
+
+
+wtp_model_car_low <- run_model_wtp(data_car_low)
+wtp_model_car_high <- run_model_wtp(data_car_high)
+wtp_model_suv_low <- run_model_wtp(data_suv_low)
+wtp_model_suv_high <- run_model_wtp(data_suv_high)
+wtp_model_all <- run_model_wtp(data)
+
 
 # View summary of results
 summary(model_car_low)
@@ -80,9 +109,21 @@ summary(model_suv_low)
 summary(model_suv_high)
 summary(model_all)
 
+
+summary(wtp_model_car_low)
+summary(wtp_model_car_high)
+summary(wtp_model_suv_low)
+summary(wtp_model_suv_high)
+summary(wtp_model_all)
+
 # # Check the 1st order condition: Is the gradient at the solution zero?
 # model$gradient
 # 
 # # 2nd order condition: Is the hessian negative definite?
 # # (If all the eigenvalues are negative, the hessian is negative definite)
 # eigen(model$hessian)$values
+
+
+
+
+

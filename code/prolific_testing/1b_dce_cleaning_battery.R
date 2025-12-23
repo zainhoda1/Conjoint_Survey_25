@@ -71,19 +71,18 @@ data_battery <- data_battery %>%
 
 # Summary of reasons to drop respondents
 
-data_approval <- check_all_approvals(data_raw)
-data_approval %>%
-  count(status, reason)
+# data_approval <- check_all_approvals(data_raw)
+# data_approval %>%
+#   count(status, reason)
 
 # Drop bad respondents
 
 data_battery <- data_battery %>%
   left_join(
     data_approval %>%
-      select(prolific_pid, status),
+      select(prolific_pid),
     by = "prolific_pid"
-  ) %>%
-  filter(status == "good")
+  ) 
 
 nrow(data_battery)
 

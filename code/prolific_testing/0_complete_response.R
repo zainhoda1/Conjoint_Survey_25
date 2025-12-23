@@ -19,6 +19,13 @@ data_raw <- data_raw %>%
 
 nrow(data_raw)
 
+# Check for approvals
+
+data_approval <- check_all_approvals(data_raw)
+
+data_approval %>%
+  count(status, reason)
+
 # Some special variables:
 # session_id = a unique ID for the Run - should be the same across all surveys
 # time_start = time stamp when survey was started
@@ -88,7 +95,7 @@ data <- data %>%
   filter(!is.na(current_page), current_page == "end") %>%
   
   # Drop those who completed before the adjustments
-  filter(time_start >= pilot_start) %>% 
+  #filter(time_start >= pilot_start) %>% 
   #filter(time_start <= pilot_end) %>% 
   
   select(-current_page)
@@ -110,9 +117,7 @@ write_csv(
   )
 )
 
-# Check for approvals
 
-data_approval <- check_all_approvals(data)
 
 # Join demographics and check for approvals
 

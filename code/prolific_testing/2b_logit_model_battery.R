@@ -9,7 +9,7 @@ data <- read_csv(here(
   "choice_data_battery.csv"
 ))
 
-head(data)
+
 
 glimpse(data)
 
@@ -24,8 +24,7 @@ data <- data %>%
   ) %>%
   select(
     -starts_with("battery_health"),
-    -starts_with("time"),
-    -vehicle_type
+    -starts_with("time")
   )
 
 glimpse(data)
@@ -34,8 +33,17 @@ glimpse(data)
 data <- cbc_encode(
   data,
   coding = 'dummy',
-  ref_levels = list(battery_refurbish = 'original')
+  ref_levels = list(battery_refurbish = 'original' , vehicle_type = 'suv', budget = 'high')
 )
+
+data_car_low <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 1)
+data_car_high <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 0)
+data_suv_low <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 1)
+data_suv_high <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 0)
 
 # Estimate MNL model
 
@@ -86,14 +94,36 @@ run_model2 <- function(data) {
   return(model)
 }
 
-# Estimate the model
-model <- run_model1(data)
-
-# View summary of results
-summary(model)
+# Estimate the model 1
 
 # Estimate the model
-model <- run_model2(data)
+model_car_low <- run_model1(data_car_low)
+model_car_high <- run_model1(data_car_high)
+model_suv_low <- run_model1(data_suv_low)
+model_suv_high <- run_model1(data_suv_high)
+model_all <- run_model1(data)
 
 # View summary of results
-summary(model)
+summary(model_car_low)
+summary(model_car_high)
+summary(model_suv_low)
+summary(model_suv_high)
+summary(model_all)
+
+
+# Estimate the model 2
+
+# Estimate the model
+model_car_low <- run_model2(data_car_low)
+model_car_high <- run_model2(data_car_high)
+model_suv_low <- run_model2(data_suv_low)
+model_suv_high <- run_model2(data_suv_high)
+model_all <- run_model2(data)
+
+# View summary of results
+summary(model_car_low)
+summary(model_car_high)
+summary(model_suv_low)
+summary(model_suv_high)
+summary(model_all)
+
