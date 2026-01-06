@@ -3,10 +3,10 @@ source(here::here('code', 'setup.R'))
 # -----------------------------------------------------------------------------
 # Load the data set:
 
-data <- read_csv(here(
+data <- read_parquet(here(
   "data",
   "dynata_testing",
-  "choice_data_battery.csv"
+  "choice_data_battery.parquet"
 ))
 
 head(data)

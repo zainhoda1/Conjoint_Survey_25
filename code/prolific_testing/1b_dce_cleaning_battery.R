@@ -3,10 +3,10 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 
 # Import raw data
 
-data_raw <- read_csv(here(
+data_raw <- read_parquet(here(
   "data",
   "prolific_testing",
-  "data.csv"
+  "data.parquet"
 ))
 
 # Read in choice questions and join it to the choice_data
@@ -151,12 +151,12 @@ choice_data_battery <- choice_data_battery %>%
 head(choice_data_battery)
 
 # Save cleaned data for modeling
-write_csv(
+write_parquet(
   choice_data_battery,
   here(
     "data",
     "prolific_testing",
-    "choice_data_battery.csv"
+    "choice_data_battery.parquet"
   )
 )
 

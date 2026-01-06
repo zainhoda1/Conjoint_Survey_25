@@ -2,16 +2,16 @@ source(here::here('code', 'setup.R'))
 source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 # Import raw data
 
-data_raw <- read_csv(here(
+data_raw <- read_parquet(here(
   "data",
   "prolific_testing",
-  "data.csv"
+  "data.parquet"
 ))
 
-data_approval <- read_csv(here(
+data_approval <- read_parquet(here(
   "data",
   "prolific_testing",
-  "approve.csv"
+  "approve.parquet"
 ))
 
 
@@ -154,12 +154,12 @@ head(choice_data_vehicle)
 
 glimpse(choice_data_vehicle)
 # Save cleaned data for modeling
-write_csv(
+write_parquet(
   choice_data_vehicle,
   here(
     "data",
     "prolific_testing",
-    "choice_data_vehicle.csv"
+    "choice_data_vehicle.parquet"
   )
 )
 

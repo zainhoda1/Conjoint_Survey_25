@@ -104,12 +104,12 @@ nrow(data)
 
 # Save
 
-write_csv(
+write_parquet(
   data,
   here(
     "data",
     "dynata_testing",
-    "data.csv"
+    "data.parquet"
   )
 )
 

@@ -2,10 +2,10 @@ source(here::here('code', 'setup.R'))
 
 # Load the data set:
 
-data <- read_csv(here(
+data <- read_parquet(here(
   "data",
   "dynata_testing",
-  "choice_data_vehicle.csv"
+  "choice_data_vehicle.parquet"
 )) %>%
   select(-next_veh_budget)
 

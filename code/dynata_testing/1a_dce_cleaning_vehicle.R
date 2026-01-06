@@ -2,10 +2,10 @@ source(here::here('code', 'setup.R'))
 
 # Import raw data
 
-data_raw <- read_csv(here(
+data_raw <- read_parquet(here(
   "data",
   "dynata_testing",
-  "data.csv"
+  "data.parquet"
 ))
 
 # Read in choice questions and join it to the choice_data
@@ -131,12 +131,12 @@ head(choice_data_vehicle)
 glimpse(choice_data_vehicle)
 
 # Save cleaned data for modeling
-write_csv(
+write_parquet(
   choice_data_vehicle,
   here(
     "data",
     "dynata_testing",
-    "choice_data_vehicle.csv"
+    "choice_data_vehicle.parquet"
   )
 )
 

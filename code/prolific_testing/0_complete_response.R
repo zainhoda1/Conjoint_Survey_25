@@ -108,12 +108,12 @@ data <- data %>%
   filter(!is.na(next_veh_style ))
 # Save
 
-write_csv(
+write_parquet(
   data,
   here(
     "data",
     "prolific_testing",
-    "data.csv"
+    "data.parquet"
   )
 )
 
@@ -159,21 +159,21 @@ data_approval %>%
   select(prolific_pid, source) %>%
   arrange(source) %>%
   # filter(source == 'demos2') %>%
-  write_csv(
+  write_parquet(
     here(
       "data",
       "prolific_testing",
-      "approve.csv"
+      "approve.parquet"
     )
   )
 
 data_approval %>%
   filter(status == 'bad') %>%
-  write_csv(
+  write_parquet(
     here(
       "data",
       "prolific_testing",
-      "reject.csv"
+      "reject.parquet"
     )
   )
 
