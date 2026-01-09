@@ -1,6 +1,6 @@
 source(here::here('code', 'setup.R'))
 
-pilot_start <- ymd_hms('2025-10-14 21:00:00')  
+pilot_start <- ymd_hms('2025-10-14 21:00:00')
 pilot_end <- ymd_hms('2025-10-21 16:00:00')
 
 # Connect to database
@@ -12,7 +12,15 @@ data_raw <- sd_get_data(db)
 
 # removing testing entries
 data_raw <- data_raw %>%
-  filter(!is.na(psid), nchar(psid) >= 10)
+  filter(!is.na(psid), nchar(psid) >= 10) %>%
+
+  # Drop people who got screened out
+  filter(!is.na(current_page), current_page == "end") %>%
+  select(-current_page) %>%
+
+  # Drop those who completed before the adjustments
+  filter(time_start >= pilot_start) %>%
+  filter(time_start <= pilot_end)
 
 # Some special variables:
 # session_id = a unique ID for the Run - should be the same across all surveys
@@ -75,17 +83,9 @@ data <- data %>%
       attitudes_2_b,
       battery_attribute
     )
-  ) %>%
-
-  # Drop people who got screened out
-  filter(!is.na(current_page), current_page == "end") %>% 
-  select(-current_page) %>%
-
-  # Drop those who completed before the adjustments
-  filter(time_start >= pilot_start) %>% 
-  filter(time_start <= pilot_end) %>% 
-  # Drop respondents that had a missing budget (somehow)
-  filter(!is.na(next_veh_budget))
+  )
+# Drop respondents that had a missing budget (somehow)
+filter(!is.na(next_veh_budget))
 
 #n_distinct(data$session_id)  # 98
 

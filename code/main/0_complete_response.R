@@ -12,7 +12,13 @@ data_raw <- sd_get_data(db)
 
 # removing testing entries
 data_raw <- data_raw %>%
-  filter(!is.na(psid), nchar(psid) >= 10)
+  filter(!is.na(psid), nchar(psid) >= 10) %>%
+  # Drop people who got screened out
+  filter(!is.na(current_page), current_page == "end") %>%
+  select(-current_page) %>%
+
+  # Drop those who completed before the adjustments
+  filter(time_start >= survey_start)
 
 # Some special variables:
 # session_id = a unique ID for the Run - should be the same across all surveys
@@ -61,7 +67,7 @@ data <- data_raw %>%
   )
 
 
-data <- data %>%
+data <- data_raw %>%
   # Bot
   filter(is.na(attention_check_toyota)) %>%
 
@@ -79,13 +85,6 @@ data <- data %>%
     )
   ) %>%
 
-  # Drop people who got screened out
-  filter(!is.na(current_page), current_page == "end") %>%
-  select(-current_page) %>%
-
-  # Drop those who completed before the adjustments
-  filter(time_start >= survey_start) %>%
-  #filter(time_start <= pilot_end) %>%
   # Drop respondents that had a missing budget (somehow)
   filter(!is.na(next_veh_budget))
 
@@ -99,7 +98,3 @@ write_parquet(
     "survey_data.parquet"
   )
 )
-
-
-a <- data %>%
-  filter(time_end >= '2025-11-11')

@@ -14,7 +14,7 @@ library(here)
 library(data.table)
 # library(readxl)
 
-n_respondents = 1000
+n_respondents = 500
 
 # ---- Battery Survey----
 ## ---- profile ----
