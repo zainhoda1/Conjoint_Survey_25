@@ -19,4 +19,4 @@ library(xlsx)
 `%notin%` <- Negate(`%in%`)
 
 # Change dplyr settings so I can view all columns
-options(dplyr.widtkh = Inf)
+options(dplyr.width = Inf)

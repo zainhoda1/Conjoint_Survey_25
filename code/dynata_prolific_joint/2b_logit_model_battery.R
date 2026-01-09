@@ -1,0 +1,143 @@
+# After running both Dynata and Prolific
+source(here::here('code', 'setup.R'))
+
+# --------------------------------------------------------------------------
+# Load the data set:
+
+data_prolific <- read_csv(here(
+  "data",
+  "prolific_testing",
+  "choice_data_battery.csv"
+))
+
+data_dynata <- read_csv(here(
+  "data",
+  "dynata_testing",
+  "choice_data_battery.csv"
+))
+
+data_dynata$obsID = data_dynata$obsID + nrow(data_prolific)/4
+
+glimpse(data_prolific)
+glimpse(data_dynata)
+
+
+data <- rbind(data_dynata, data_prolific)
+
+
+glimpse(data)
+
+data <- data %>%
+  mutate(
+    mileage = mileage / 10000, #3 - 6
+    price = price / 10000, # 0.5 - 6
+    battery_range_year0 = battery_range_year0 / 100, # 1-3
+    battery_range_year3 = battery_range_year3 / 100, # 1-3
+    battery_range_year8 = battery_range_year8 / 100, # 0.5 - 2
+    battery_degradation = (battery_degradation * 10)
+  ) %>%
+  select(
+    -starts_with("battery_health"),
+    -starts_with("time")
+  )
+
+glimpse(data)
+
+# Dummy encode
+data <- cbc_encode(
+  data,
+  coding = 'dummy',
+  ref_levels = list(battery_refurbish = 'original' , vehicle_type = 'suv', budget = 'high')
+)
+
+data_car_low <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 1)
+data_car_high <- data %>%
+  filter(vehicle_typecar == 1, budgetlow == 0)
+data_suv_low <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 1)
+data_suv_high <- data %>%
+  filter(vehicle_typecar == 0, budgetlow == 0)
+
+# Estimate MNL model
+
+# First create some dummy coded variables for categorical variables
+#data <- dummy_cols(data, c('battery_refurbish', 'degradation_high'))
+
+# Clean up names of created variables
+
+glimpse(data)
+
+# Estimate models
+
+run_model1 <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "price",
+      "mileage",
+      "battery_range_year3",
+      "battery_range_year8",
+      "battery_refurbishpackreplace",
+      "battery_refurbishcellreplace",
+      "no_choice"
+    )
+  )
+  cat('N =', length(unique(data$respID)))
+  return(model)
+}
+
+run_model2 <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "price",
+      "mileage",
+      "battery_range_year0",
+      "battery_degradation",
+      "battery_refurbishpackreplace",
+      "battery_refurbishcellreplace",
+      "no_choice"
+    )
+  )
+  cat('N =', length(unique(data$respID)))
+  return(model)
+}
+
+# Estimate the model 1
+
+# Estimate the model
+model_car_low <- run_model1(data_car_low)
+model_car_high <- run_model1(data_car_high)
+model_suv_low <- run_model1(data_suv_low)
+model_suv_high <- run_model1(data_suv_high)
+model_all <- run_model1(data)
+
+# View summary of results
+summary(model_car_low)
+summary(model_car_high)
+summary(model_suv_low)
+summary(model_suv_high)
+summary(model_all)
+
+
+# Estimate the model 2
+
+# Estimate the model
+model_car_low <- run_model2(data_car_low)
+model_car_high <- run_model2(data_car_high)
+model_suv_low <- run_model2(data_suv_low)
+model_suv_high <- run_model2(data_suv_high)
+model_all <- run_model2(data)
+
+# View summary of results
+summary(model_car_low)
+summary(model_car_high)
+summary(model_suv_low)
+summary(model_suv_high)
+summary(model_all)
+
