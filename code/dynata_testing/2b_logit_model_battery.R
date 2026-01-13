@@ -9,12 +9,11 @@ data <- read_parquet(here(
   "choice_data_battery.parquet"
 ))
 
-head(data)
-
-glimpse(data)
+# head(data)
+# glimpse(data)
 
 data <- data %>%
-  mutate(        
+  mutate(
     mileage = mileage / 10000, #3 - 6
     price = price / 10000, # 0.5 - 6
     battery_range_year0 = battery_range_year0 / 100, # 1-3
@@ -31,7 +30,11 @@ data <- data %>%
 data <- cbc_encode(
   data,
   coding = 'dummy',
-  ref_levels = list(battery_refurbish = 'original', vehicle_type = 'suv', budget = 'high')
+  ref_levels = list(
+    battery_refurbish = 'original',
+    vehicle_type = 'suv',
+    budget = 'high'
+  )
 )
 
 data_car_low <- data %>%
@@ -124,4 +127,3 @@ summary(model_car_high)
 summary(model_suv_low)
 summary(model_suv_high)
 summary(model_all)
-

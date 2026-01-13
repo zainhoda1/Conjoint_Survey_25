@@ -18,9 +18,8 @@ data_approval <- read_parquet(here(
 # Read in choice questions and join it to the choice_data
 
 survey_vehicle <- read_parquet(here(
+  "survey_prolific",
   "data",
-  "doe",
-  "12-10-25",
   'design_vehicle.parquet'
 ))
 nrow(data_raw)
@@ -58,7 +57,7 @@ data_vehicle <- data %>%
     data_approval %>%
       select(prolific_pid),
     by = "prolific_pid"
-  ) 
+  )
 
 nrow(data_vehicle)
 
@@ -162,4 +161,3 @@ write_parquet(
     "choice_data_vehicle.parquet"
   )
 )
-

@@ -1,15 +1,43 @@
 source(here::here('code', 'setup.R'))
-source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 
-#pilot_start <- ymd_hms('2025-10-14 21:00:00')
-#pilot_end <- ymd_hms('2025-10-21 16:00:00')
+# --------------------------------------------------------------------------
+# Load the data set:
 
-# Connect to database
-#### surveydown::sd_db_config()
-#db <- sd_db_connect()
+data_vehicle_prolific <- read_parquet(here(
+  "data",
+  "prolific_testing",
+  "choice_data_vehicle.parquet"
+))
 
-# original db
-#data_raw <- sd_get_data(db)
+data_battery_prolific <- read_parquet(here(
+  "data",
+  "prolific_testing",
+  "choice_data_battery.parquet"
+))
+
+data_vehicle_prolific <- read_parquet(here(
+  "data",
+  "prolific_testing",
+  "choice_data_vehicle.parquet"
+))
+
+data_battery_prolific <- read_parquet(here(
+  "data",
+  "prolific_testing",
+  "choice_data_battery.parquet"
+))
+
+data_vehicle_dynata <- read_parquet(here(
+  "data",
+  "dynata_testing",
+  "choice_data_vehicle.parquet"
+))
+
+data_battery_dynata <- read_parquet(here(
+  "data",
+  "prolific_testing",
+  "choice_data_battery.parquet"
+))
 
 data_raw <- read_csv(here('data', 'prolific_testing', 'data_raw.csv'))
 
@@ -19,7 +47,7 @@ data_raw <- data_raw %>%
 
 nrow(data_raw)
 
-# Check for approvals
+# Check for approvals (need to fix this code)
 
 data_approval <- check_all_approvals(data_raw)
 
@@ -93,19 +121,19 @@ nrow(data)
 
 data <- data %>%
   filter(!is.na(current_page), current_page == "end") %>%
-  
+
   # Drop those who completed before the adjustments
-  #filter(time_start >= pilot_start) %>% 
-  #filter(time_start <= pilot_end) %>% 
-  
+  #filter(time_start >= pilot_start) %>%
+  #filter(time_start <= pilot_end) %>%
+
   select(-current_page)
 
 nrow(data)
 
 # Drop people whose next vehicle is NUll
 
-data <- data %>% 
-  filter(!is.na(next_veh_style ))
+data <- data %>%
+  filter(!is.na(next_veh_style))
 # Save
 
 write_parquet(
@@ -116,7 +144,6 @@ write_parquet(
     "data.parquet"
   )
 )
-
 
 
 # Join demographics and check for approvals
@@ -176,4 +203,3 @@ data_approval %>%
       "reject.parquet"
     )
   )
-

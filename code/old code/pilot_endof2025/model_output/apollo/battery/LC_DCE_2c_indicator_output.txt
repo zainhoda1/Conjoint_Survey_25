@@ -1,0 +1,635 @@
+Model run by xnw17 using Apollo 0.3.4 on R 4.4.2 for Darwin.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : LC_DCE_2c_indicator
+Model description                           : LC model with 2 classes with indicator (ATT and knowledge)
+Model run at                                : 2025-11-12 02:26:12.435495
+Estimation method                           : bgw
+Model diagnosis                             : Relative function convergence
+Optimisation diagnosis                      : Maximum found
+     hessian properties                     : Negative definite
+     maximum eigenvalue                     : -2.616465
+     reciprocal of condition number         : 0.000484906
+Number of individuals                       : 373
+Number of rows in database                  : 2238
+Number of modelled outcomes                 : 2238
+
+Number of cores used                        :  2 
+Model without mixing
+
+LL(start)                                   : -3291.46
+LL (whole model) at equal shares, LL(0)     : -3102.53
+LL (whole model) at observed shares, LL(C)  : -2995.04
+LL(final, whole model)                      : -2495.65
+Rho-squared vs equal shares                  :  0.1956 
+Adj.Rho-squared vs equal shares              :  0.1898 
+Rho-squared vs observed shares               :  0.1667 
+Adj.Rho-squared vs observed shares           :  0.1627 
+AIC                                         :  5027.3 
+BIC                                         :  5130.14 
+
+LL(0,Class_1)                    : -3102.53
+LL(final,Class_1)                : -2989.34
+LL(0,Class_2)                    : -3102.53
+LL(final,Class_2)                : -3708.71
+
+Estimated parameters                        : 18
+Time taken (hh:mm:ss)                       :  00:00:6.39 
+     pre-estimation                         :  00:00:4.34 
+     estimation                             :  00:00:0.35 
+     post-estimation                        :  00:00:1.7 
+Iterations                                  :  17  
+
+Unconstrained optimisation.
+
+Estimates:
+                      Estimate        s.e.   t.rat.(0)  p(2-sided)    Rob.s.e. Rob.t.rat.(0)  p(2-sided)
+asc_no_choice_a       -5.49159     0.43054    -12.7550    0.000000     0.50251      -10.9283    0.000000
+b_mileage_a           -0.17494     0.02869     -6.0967   1.082e-09     0.03316       -5.2758   1.322e-07
+b_range_year0_a        0.44404     0.05939      7.4763   7.638e-14     0.07527        5.8990   3.656e-09
+b_degradation_a       -0.25233     0.01561    -16.1692    0.000000     0.02136      -11.8144    0.000000
+b_packreplace_a       -0.18167     0.08108     -2.2404    0.025063     0.09407       -1.9312    0.053461
+b_cellreplace_a       -0.25780     0.08007     -3.2196    0.001284     0.09169       -2.8116    0.004930
+b_price_a             -0.72451     0.07547     -9.6000    0.000000     0.09232       -7.8478   4.219e-15
+asc_no_choice_b       -1.24819     0.60006     -2.0801    0.037517     0.83860       -1.4884    0.136640
+b_mileage_b           -0.23538     0.07312     -3.2193    0.001285     0.08575       -2.7452    0.006048
+b_range_year0_b        0.58751     0.15281      3.8448  1.2065e-04     0.19638        2.9917    0.002774
+b_degradation_b       -0.32314     0.04299     -7.5171   5.596e-14     0.05734       -5.6356   1.745e-08
+b_packreplace_b       -1.11831     0.21510     -5.1991   2.002e-07     0.32095       -3.4844  4.9323e-04
+b_cellreplace_b       -1.20242     0.21363     -5.6285   1.818e-08     0.27787       -4.3272   1.510e-05
+b_price_b             -0.47621     0.10055     -4.7361   2.179e-06     0.13577       -3.5074  4.5248e-04
+delta_a                0.00000          NA          NA          NA          NA            NA          NA
+gamma_used_bev_a       0.00000          NA          NA          NA          NA            NA          NA
+gamma_EV_benefit_a     0.00000          NA          NA          NA          NA            NA          NA
+gamma_EV_anxiety_a     0.00000          NA          NA          NA          NA            NA          NA
+delta_b               -0.06267     0.36561     -0.1714    0.863898     0.38710       -0.1619    0.871387
+gamma_used_bev_b      -0.52770     0.14221     -3.7106  2.0678e-04     0.14549       -3.6269  2.8683e-04
+gamma_EV_benefit_b    -0.19317     0.16837     -1.1473    0.251260     0.18201       -1.0613    0.288540
+gamma_EV_anxiety_b     0.37524     0.13779      2.7233    0.006463     0.12906        2.9075    0.003643
+
+
+Summary of class allocation for model component :
+         Mean prob.
+Class_1      0.7819
+Class_2      0.2181
+
+
+Overview of choices for MNL model component Class_1:
+                                    alt1    alt2    alt3 no_choice
+Times available                  2238.00 2238.00 2238.00    2238.0
+Times chosen                      617.00  671.00  668.00     282.0
+Percentage chosen overall          27.57   29.98   29.85      12.6
+Percentage chosen when available   27.57   29.98   29.85      12.6
+
+
+
+Overview of choices for MNL model component Class_2:
+                                    alt1    alt2    alt3 no_choice
+Times available                  2238.00 2238.00 2238.00    2238.0
+Times chosen                      617.00  671.00  668.00     282.0
+Percentage chosen overall          27.57   29.98   29.85      12.6
+Percentage chosen when available   27.57   29.98   29.85      12.6
+
+
+
+Classical covariance matrix:
+                      asc_no_choice_a        b_mileage_a    b_range_year0_a    b_degradation_a    b_packreplace_a
+asc_no_choice_a              0.185369           0.003113           0.010036         9.6228e-04           0.003374
+b_mileage_a                  0.003113         8.2330e-04         -1.600e-05          2.953e-05          3.443e-05
+b_range_year0_a              0.010036         -1.600e-05           0.003528        -1.0120e-04         -4.234e-05
+b_degradation_a            9.6228e-04          2.953e-05        -1.0120e-04         2.4354e-04          1.977e-05
+b_packreplace_a              0.003374          3.443e-05         -4.234e-05          1.977e-05           0.006575
+b_cellreplace_a              0.002925          4.663e-05         -9.036e-05          3.840e-05           0.003293
+b_price_a                    0.025266          6.456e-05         -4.927e-05          4.428e-05          8.434e-05
+asc_no_choice_b             -0.026169        -8.0464e-04          -0.003774          6.324e-05          -0.002524
+b_mileage_b                 -0.002374        -2.0307e-04        -1.2484e-04         -2.261e-05          6.784e-05
+b_range_year0_b             -0.006148         -9.894e-06          -0.001004         1.1277e-04        -1.8379e-04
+b_degradation_b            5.3711e-04         -3.698e-05         1.0099e-04         -8.230e-05         1.7411e-04
+b_packreplace_b             -0.008626         -1.889e-05        -4.2086e-04         1.4504e-04          -0.002238
+b_cellreplace_b             -0.006659          4.756e-05        -5.1128e-04         1.2230e-04        -7.9506e-04
+b_price_b                   -0.003950         -2.374e-05        -4.7034e-04          4.221e-05        -4.1489e-04
+delta_b                     -0.013261         1.4995e-04          -0.001056         1.2509e-04           0.001185
+gamma_used_bev_b          -5.7319e-04        -1.0132e-04         2.0157e-04         -2.209e-05         -9.266e-05
+gamma_EV_benefit_b          -0.002495         1.6756e-04        -5.0823e-04          9.786e-05        -2.2888e-04
+gamma_EV_anxiety_b           0.003168         1.5373e-04         -4.928e-05          8.388e-05        -2.9892e-04
+                      b_cellreplace_a          b_price_a    asc_no_choice_b        b_mileage_b    b_range_year0_b
+asc_no_choice_a              0.002925           0.025266          -0.026169          -0.002374          -0.006148
+b_mileage_a                 4.663e-05          6.456e-05        -8.0464e-04        -2.0307e-04         -9.894e-06
+b_range_year0_a            -9.036e-05         -4.927e-05          -0.003774        -1.2484e-04          -0.001004
+b_degradation_a             3.840e-05          4.428e-05          6.324e-05         -2.261e-05         1.1277e-04
+b_packreplace_a              0.003293          8.434e-05          -0.002524          6.784e-05        -1.8379e-04
+b_cellreplace_a              0.006411         -1.365e-06          -0.002297          9.272e-05        -1.2525e-04
+b_price_a                  -1.365e-06           0.005696         3.7277e-04         -4.220e-05        -3.3513e-04
+asc_no_choice_b             -0.002297         3.7277e-04           0.360076           0.019365           0.064977
+b_mileage_b                 9.272e-05         -4.220e-05           0.019365           0.005346        -1.1374e-04
+b_range_year0_b           -1.2525e-04        -3.3513e-04           0.064977        -1.1374e-04           0.023350
+b_degradation_b            1.0776e-04         1.4313e-04           0.005451         4.1185e-04        -9.2688e-04
+b_packreplace_b             -0.001071        -8.1850e-04           0.020593         6.8143e-04          -0.001582
+b_cellreplace_b             -0.001514        -2.5020e-04           0.016616          4.541e-05          -0.001899
+b_price_b                 -4.4788e-04         1.8352e-04           0.031076         7.9885e-04           0.001395
+delta_b                    7.3793e-04          -0.001190          -0.002443        -4.3016e-04           0.003187
+gamma_used_bev_b            5.081e-05         -8.963e-05           0.002458         5.5680e-04        -6.8553e-04
+gamma_EV_benefit_b        -2.9702e-04        -1.9056e-04           0.004706        -7.1505e-04           0.002553
+gamma_EV_anxiety_b        -1.3480e-04         3.4229e-04          -0.001319        -7.2350e-04         5.4396e-04
+                      b_degradation_b    b_packreplace_b    b_cellreplace_b          b_price_b            delta_b
+asc_no_choice_a            5.3711e-04          -0.008626          -0.006659          -0.003950          -0.013261
+b_mileage_a                -3.698e-05         -1.889e-05          4.756e-05         -2.374e-05         1.4995e-04
+b_range_year0_a            1.0099e-04        -4.2086e-04        -5.1128e-04        -4.7034e-04          -0.001056
+b_degradation_a            -8.230e-05         1.4504e-04         1.2230e-04          4.221e-05         1.2509e-04
+b_packreplace_a            1.7411e-04          -0.002238        -7.9506e-04        -4.1489e-04           0.001185
+b_cellreplace_a            1.0776e-04          -0.001071          -0.001514        -4.4788e-04         7.3793e-04
+b_price_a                  1.4313e-04        -8.1850e-04        -2.5020e-04         1.8352e-04          -0.001190
+asc_no_choice_b              0.005451           0.020593           0.016616           0.031076          -0.002443
+b_mileage_b                4.1185e-04         6.8143e-04          4.541e-05         7.9885e-04        -4.3016e-04
+b_range_year0_b           -9.2688e-04          -0.001582          -0.001899           0.001395           0.003187
+b_degradation_b              0.001848         1.9789e-04         4.4217e-04          7.115e-05        -1.7052e-04
+b_packreplace_b            1.9789e-04           0.046266           0.018219           0.002283           0.001711
+b_cellreplace_b            4.4217e-04           0.018219           0.045638           0.002460           0.005983
+b_price_b                   7.115e-05           0.002283           0.002460           0.010110          -0.001015
+delta_b                   -1.7052e-04           0.001711           0.005983          -0.001015           0.133669
+gamma_used_bev_b            8.606e-05          2.766e-05          -0.001377         8.4752e-04          -0.046057
+gamma_EV_benefit_b        -5.3638e-04         8.3097e-04           0.002149         5.4405e-04           0.030166
+gamma_EV_anxiety_b        -5.2164e-04          5.629e-05        -3.5201e-04         1.7716e-04          -0.008108
+                     gamma_used_bev_b gamma_EV_benefit_b gamma_EV_anxiety_b
+asc_no_choice_a           -5.7319e-04          -0.002495           0.003168
+b_mileage_a               -1.0132e-04         1.6756e-04         1.5373e-04
+b_range_year0_a            2.0157e-04        -5.0823e-04         -4.928e-05
+b_degradation_a            -2.209e-05          9.786e-05          8.388e-05
+b_packreplace_a            -9.266e-05        -2.2888e-04        -2.9892e-04
+b_cellreplace_a             5.081e-05        -2.9702e-04        -1.3480e-04
+b_price_a                  -8.963e-05        -1.9056e-04         3.4229e-04
+asc_no_choice_b              0.002458           0.004706          -0.001319
+b_mileage_b                5.5680e-04        -7.1505e-04        -7.2350e-04
+b_range_year0_b           -6.8553e-04           0.002553         5.4396e-04
+b_degradation_b             8.606e-05        -5.3638e-04        -5.2164e-04
+b_packreplace_b             2.766e-05         8.3097e-04          5.629e-05
+b_cellreplace_b             -0.001377           0.002149        -3.5201e-04
+b_price_b                  8.4752e-04         5.4405e-04         1.7716e-04
+delta_b                     -0.046057           0.030166          -0.008108
+gamma_used_bev_b             0.020225          -0.011684           0.001115
+gamma_EV_benefit_b          -0.011684           0.028348           0.002023
+gamma_EV_anxiety_b           0.001115           0.002023           0.018985
+
+Robust covariance matrix:
+                      asc_no_choice_a        b_mileage_a    b_range_year0_a    b_degradation_a    b_packreplace_a
+asc_no_choice_a              0.252519           0.005127           0.019240        -3.3519e-04           0.004046
+b_mileage_a                  0.005127           0.001099         1.9435e-04         -4.640e-05          7.269e-05
+b_range_year0_a              0.019240         1.9435e-04           0.005666        -3.8736e-04         1.8427e-04
+b_degradation_a           -3.3519e-04         -4.640e-05        -3.8736e-04         4.5617e-04        -1.2959e-04
+b_packreplace_a              0.004046          7.269e-05         1.8427e-04        -1.2959e-04           0.008849
+b_cellreplace_a              0.004221         -7.211e-05         2.7886e-04         -8.562e-05           0.005125
+b_price_a                    0.033579         2.1085e-04          7.841e-05         -4.901e-05          2.679e-05
+asc_no_choice_b             -0.063526          -0.001421          -0.012098           0.001577          -0.010488
+b_mileage_b                 -0.004759        -3.6438e-04        -4.4598e-04          1.472e-05          5.858e-05
+b_range_year0_b             -0.020024         -7.106e-05          -0.003179         5.8143e-04          -0.001162
+b_degradation_b              0.004411         -4.715e-05         5.7793e-04        -2.7055e-04         7.7483e-04
+b_packreplace_b             -0.023024          3.646e-06          -0.002578         9.5377e-04          -0.007166
+b_cellreplace_b             -0.019760         1.1508e-04          -0.002780         7.7763e-04          -0.004258
+b_price_b                   -0.005212         -4.792e-05          -0.001524         2.6084e-04          -0.001715
+delta_b                     -0.030454         6.7837e-04          -0.004272         5.9215e-04           0.001952
+gamma_used_bev_b             0.003301        -3.7950e-04         9.4363e-04         -9.842e-05         -7.411e-06
+gamma_EV_benefit_b          -0.013868         6.9360e-04          -0.002786         4.8801e-04        -2.5691e-04
+gamma_EV_anxiety_b           0.003902         2.3337e-04        -4.3534e-04         3.1727e-04          -0.001226
+                      b_cellreplace_a          b_price_a    asc_no_choice_b        b_mileage_b    b_range_year0_b
+asc_no_choice_a              0.004221           0.033579          -0.063526          -0.004759          -0.020024
+b_mileage_a                -7.211e-05         2.1085e-04          -0.001421        -3.6438e-04         -7.106e-05
+b_range_year0_a            2.7886e-04          7.841e-05          -0.012098        -4.4598e-04          -0.003179
+b_degradation_a            -8.562e-05         -4.901e-05           0.001577          1.472e-05         5.8143e-04
+b_packreplace_a              0.005125          2.679e-05          -0.010488          5.858e-05          -0.001162
+b_cellreplace_a              0.008407        -3.7073e-04          -0.010768          6.185e-05          -0.001270
+b_price_a                 -3.7073e-04           0.008523           0.002516          2.067e-05        -8.1024e-04
+asc_no_choice_b             -0.010768           0.002516           0.703249           0.033445           0.122430
+b_mileage_b                 6.185e-05          2.067e-05           0.033445           0.007352           0.002006
+b_range_year0_b             -0.001270        -8.1024e-04           0.122430           0.002006           0.038565
+b_degradation_b            5.6092e-04         5.0837e-04          -0.004104         3.0792e-04          -0.003907
+b_packreplace_b             -0.004929          -0.001795           0.081521           0.001368           0.010127
+b_cellreplace_b             -0.004718        -4.9333e-04           0.085326           0.001505           0.012247
+b_price_b                   -0.001931           0.001155           0.077015           0.001602           0.007498
+delta_b                   -5.2933e-04        -9.8584e-04           0.011118          -0.002037           0.012318
+gamma_used_bev_b           7.0140e-04          9.886e-06          -0.003158           0.001637          -0.002606
+gamma_EV_benefit_b          -0.001971        -8.3771e-04           0.038169        -8.3761e-04           0.013260
+gamma_EV_anxiety_b        -6.2675e-04         8.5640e-04           0.015193        -6.9816e-04           0.004835
+                      b_degradation_b    b_packreplace_b    b_cellreplace_b          b_price_b            delta_b
+asc_no_choice_a              0.004411          -0.023024          -0.019760          -0.005212          -0.030454
+b_mileage_a                -4.715e-05          3.646e-06         1.1508e-04         -4.792e-05         6.7837e-04
+b_range_year0_a            5.7793e-04          -0.002578          -0.002780          -0.001524          -0.004272
+b_degradation_a           -2.7055e-04         9.5377e-04         7.7763e-04         2.6084e-04         5.9215e-04
+b_packreplace_a            7.7483e-04          -0.007166          -0.004258          -0.001715           0.001952
+b_cellreplace_a            5.6092e-04          -0.004929          -0.004718          -0.001931        -5.2933e-04
+b_price_a                  5.0837e-04          -0.001795        -4.9333e-04           0.001155        -9.8584e-04
+asc_no_choice_b             -0.004104           0.081521           0.085326           0.077015           0.011118
+b_mileage_b                3.0792e-04           0.001368           0.001505           0.001602          -0.002037
+b_range_year0_b             -0.003907           0.010127           0.012247           0.007498           0.012318
+b_degradation_b              0.003288          -0.007104          -0.005026          -0.001159          -0.002689
+b_packreplace_b             -0.007104           0.103007           0.057907           0.008525           0.019457
+b_cellreplace_b             -0.005026           0.057907           0.077212           0.009325           0.027499
+b_price_b                   -0.001159           0.008525           0.009325           0.018434        -9.9617e-04
+delta_b                     -0.002689           0.019457           0.027499        -9.9617e-04           0.149846
+gamma_used_bev_b           6.5788e-04          -0.006904          -0.008972         -4.753e-05          -0.049306
+gamma_EV_benefit_b          -0.003407           0.016178           0.019858           0.004097           0.042330
+gamma_EV_anxiety_b          -0.001522           0.001552        -4.1793e-04           0.002712          -0.006596
+                     gamma_used_bev_b gamma_EV_benefit_b gamma_EV_anxiety_b
+asc_no_choice_a              0.003301          -0.013868           0.003902
+b_mileage_a               -3.7950e-04         6.9360e-04         2.3337e-04
+b_range_year0_a            9.4363e-04          -0.002786        -4.3534e-04
+b_degradation_a            -9.842e-05         4.8801e-04         3.1727e-04
+b_packreplace_a            -7.411e-06        -2.5691e-04          -0.001226
+b_cellreplace_a            7.0140e-04          -0.001971        -6.2675e-04
+b_price_a                   9.886e-06        -8.3771e-04         8.5640e-04
+asc_no_choice_b             -0.003158           0.038169           0.015193
+b_mileage_b                  0.001637        -8.3761e-04        -6.9816e-04
+b_range_year0_b             -0.002606           0.013260           0.004835
+b_degradation_b            6.5788e-04          -0.003407          -0.001522
+b_packreplace_b             -0.006904           0.016178           0.001552
+b_cellreplace_b             -0.008972           0.019858        -4.1793e-04
+b_price_b                  -4.753e-05           0.004097           0.002712
+delta_b                     -0.049306           0.042330          -0.006596
+gamma_used_bev_b             0.021169          -0.015203         4.1909e-04
+gamma_EV_benefit_b          -0.015203           0.033126           0.001198
+gamma_EV_anxiety_b         4.1909e-04           0.001198           0.016656
+
+Classical correlation matrix:
+                      asc_no_choice_a        b_mileage_a    b_range_year0_a    b_degradation_a    b_packreplace_a
+asc_no_choice_a              1.000000           0.252002           0.392462           0.143218           0.096651
+b_mileage_a                  0.252002           1.000000          -0.009392           0.065958           0.014797
+b_range_year0_a              0.392462          -0.009392           1.000000          -0.109186          -0.008791
+b_degradation_a              0.143218           0.065958          -0.109186           1.000000           0.015627
+b_packreplace_a              0.096651           0.014797          -0.008791           0.015627           1.000000
+b_cellreplace_a              0.084837           0.020294          -0.018999           0.030727           0.507221
+b_price_a                    0.777585           0.029814          -0.010991           0.037601           0.013782
+asc_no_choice_b             -0.101290          -0.046733          -0.105887           0.006753          -0.051868
+b_mileage_b                 -0.075401          -0.096795          -0.028746          -0.019811           0.011443
+b_range_year0_b             -0.093454          -0.002257          -0.110658           0.047288          -0.014833
+b_degradation_b              0.029020          -0.029982           0.039554          -0.122675           0.049950
+b_packreplace_b             -0.093147          -0.003060          -0.032944           0.043209          -0.128324
+b_cellreplace_b             -0.072397           0.007760          -0.040295           0.036684          -0.045898
+b_price_b                   -0.091244          -0.008229          -0.078758           0.026899          -0.050888
+delta_b                     -0.084247           0.014294          -0.048621           0.021923           0.039970
+gamma_used_bev_b            -0.009361          -0.024830           0.023864          -0.009954          -0.008035
+gamma_EV_benefit_b          -0.034420           0.034684          -0.050823           0.037244          -0.016765
+gamma_EV_anxiety_b           0.053408           0.038884          -0.006022           0.039009          -0.026755
+                      b_cellreplace_a          b_price_a    asc_no_choice_b        b_mileage_b    b_range_year0_b
+asc_no_choice_a              0.084837           0.777585          -0.101290          -0.075401          -0.093454
+b_mileage_a                  0.020294           0.029814          -0.046733          -0.096795          -0.002257
+b_range_year0_a             -0.018999          -0.010991          -0.105887          -0.028746          -0.110658
+b_degradation_a              0.030727           0.037601           0.006753          -0.019811           0.047288
+b_packreplace_a              0.507221           0.013782          -0.051868           0.011443          -0.014833
+b_cellreplace_a              1.000000        -2.2584e-04          -0.047804           0.015837          -0.010236
+b_price_a                 -2.2584e-04           1.000000           0.008231          -0.007648          -0.029060
+asc_no_choice_b             -0.047804           0.008231           1.000000           0.441356           0.708638
+b_mileage_b                  0.015837          -0.007648           0.441356           1.000000          -0.010180
+b_range_year0_b             -0.010236          -0.029060           0.708638          -0.010180           1.000000
+b_degradation_b              0.031307           0.044117           0.211335           0.131030          -0.141103
+b_packreplace_b             -0.062200          -0.050421           0.159546           0.043328          -0.048131
+b_cellreplace_b             -0.088519          -0.015519           0.129621           0.002907          -0.058185
+b_price_b                   -0.055629           0.024184           0.515056           0.108658           0.090775
+delta_b                      0.025207          -0.043126          -0.011133          -0.016091           0.057054
+gamma_used_bev_b             0.004462          -0.008351           0.028806           0.053547          -0.031546
+gamma_EV_benefit_b          -0.022032          -0.014997           0.046579          -0.058084           0.099221
+gamma_EV_anxiety_b          -0.012218           0.032917          -0.015954          -0.071814           0.025836
+                      b_degradation_b    b_packreplace_b    b_cellreplace_b          b_price_b            delta_b
+asc_no_choice_a               0.02902          -0.093147          -0.072397          -0.091244           -0.08425
+b_mileage_a                  -0.02998          -0.003060           0.007760          -0.008229            0.01429
+b_range_year0_a               0.03955          -0.032944          -0.040295          -0.078758           -0.04862
+b_degradation_a              -0.12268           0.043209           0.036684           0.026899            0.02192
+b_packreplace_a               0.04995          -0.128324          -0.045898          -0.050888            0.03997
+b_cellreplace_a               0.03131          -0.062200          -0.088519          -0.055629            0.02521
+b_price_a                     0.04412          -0.050421          -0.015519           0.024184           -0.04313
+asc_no_choice_b               0.21133           0.159546           0.129621           0.515056           -0.01113
+b_mileage_b                   0.13103           0.043328           0.002907           0.108658           -0.01609
+b_range_year0_b              -0.14110          -0.048131          -0.058185           0.090775            0.05705
+b_degradation_b               1.00000           0.021402           0.048148           0.016462           -0.01085
+b_packreplace_b               0.02140           1.000000           0.396481           0.105580            0.02176
+b_cellreplace_b               0.04815           0.396481           1.000000           0.114500            0.07660
+b_price_b                     0.01646           0.105580           0.114500           1.000000           -0.02761
+delta_b                      -0.01085           0.021755           0.076601          -0.027606            1.00000
+gamma_used_bev_b              0.01408         9.0427e-04          -0.045314           0.059269           -0.88581
+gamma_EV_benefit_b           -0.07411           0.022946           0.059736           0.032137            0.49005
+gamma_EV_anxiety_b           -0.08807           0.001899          -0.011959           0.012788           -0.16095
+                     gamma_used_bev_b gamma_EV_benefit_b gamma_EV_anxiety_b
+asc_no_choice_a             -0.009361           -0.03442           0.053408
+b_mileage_a                 -0.024830            0.03468           0.038884
+b_range_year0_a              0.023864           -0.05082          -0.006022
+b_degradation_a             -0.009954            0.03724           0.039009
+b_packreplace_a             -0.008035           -0.01676          -0.026755
+b_cellreplace_a              0.004462           -0.02203          -0.012218
+b_price_a                   -0.008351           -0.01500           0.032917
+asc_no_choice_b              0.028806            0.04658          -0.015954
+b_mileage_b                  0.053547           -0.05808          -0.071814
+b_range_year0_b             -0.031546            0.09922           0.025836
+b_degradation_b              0.014077           -0.07411          -0.088067
+b_packreplace_b            9.0427e-04            0.02295           0.001899
+b_cellreplace_b             -0.045314            0.05974          -0.011959
+b_price_b                    0.059269            0.03214           0.012788
+delta_b                     -0.885808            0.49005          -0.160950
+gamma_used_bev_b             1.000000           -0.48798           0.056891
+gamma_EV_benefit_b          -0.487985            1.00000           0.087223
+gamma_EV_anxiety_b           0.056891            0.08722           1.000000
+
+Robust correlation matrix:
+                      asc_no_choice_a        b_mileage_a    b_range_year0_a    b_degradation_a    b_packreplace_a
+asc_no_choice_a               1.00000            0.30772            0.50864          -0.031231           0.085589
+b_mileage_a                   0.30772            1.00000            0.07787          -0.065516           0.023305
+b_range_year0_a               0.50864            0.07787            1.00000          -0.240939           0.026024
+b_degradation_a              -0.03123           -0.06552           -0.24094           1.000000          -0.064498
+b_packreplace_a               0.08559            0.02331            0.02602          -0.064498           1.000000
+b_cellreplace_a               0.09162           -0.02372            0.04040          -0.043721           0.594217
+b_price_a                     0.72381            0.06888            0.01128          -0.024856           0.003085
+asc_no_choice_b              -0.15075           -0.05109           -0.19166           0.088054          -0.132946
+b_mileage_b                  -0.11044           -0.12816           -0.06910           0.008038           0.007262
+b_range_year0_b              -0.20291           -0.01091           -0.21507           0.138623          -0.062879
+b_degradation_b               0.15307           -0.02480            0.13390          -0.220920           0.143647
+b_packreplace_b              -0.14275         3.4265e-04           -0.10672           0.139139          -0.237366
+b_cellreplace_b              -0.14151            0.01249           -0.13293           0.131029          -0.162915
+b_price_b                    -0.07640           -0.01064           -0.14908           0.089949          -0.134283
+delta_b                      -0.15656            0.05285           -0.14662           0.071622           0.053609
+gamma_used_bev_b              0.04515           -0.07866            0.08616          -0.031670        -5.4144e-04
+gamma_EV_benefit_b           -0.15163            0.11493           -0.20335           0.125539          -0.015005
+gamma_EV_anxiety_b            0.06017            0.05453           -0.04481           0.115102          -0.100968
+                      b_cellreplace_a          b_price_a    asc_no_choice_b        b_mileage_b    b_range_year0_b
+asc_no_choice_a              0.091615           0.723811           -0.15075          -0.110442           -0.20291
+b_mileage_a                 -0.023716           0.068880           -0.05109          -0.128160           -0.01091
+b_range_year0_a              0.040403           0.011283           -0.19166          -0.069098           -0.21507
+b_degradation_a             -0.043721          -0.024856            0.08805           0.008038            0.13862
+b_packreplace_a              0.594217           0.003085           -0.13295           0.007262           -0.06288
+b_cellreplace_a              1.000000          -0.043795           -0.14004           0.007866           -0.07053
+b_price_a                   -0.043795           1.000000            0.03249           0.002611           -0.04469
+asc_no_choice_b             -0.140044           0.032493            1.00000           0.465129            0.74343
+b_mileage_b                  0.007866           0.002611            0.46513           1.000000            0.11912
+b_range_year0_b             -0.070532          -0.044691            0.74343           0.119119            1.00000
+b_degradation_b              0.106687           0.096034           -0.08535           0.062629           -0.34696
+b_packreplace_b             -0.167484          -0.060572            0.30289           0.049706            0.16067
+b_cellreplace_b             -0.185173          -0.019231            0.36617           0.063166            0.22444
+b_price_b                   -0.155071           0.092136            0.67641           0.137619            0.28121
+delta_b                     -0.014913          -0.027586            0.03425          -0.061372            0.16204
+gamma_used_bev_b             0.052576         7.3602e-04           -0.02589           0.131198           -0.09121
+gamma_EV_benefit_b          -0.118113          -0.049855            0.25008          -0.053672            0.37098
+gamma_EV_anxiety_b          -0.052964           0.071877            0.14038          -0.063090            0.19078
+                      b_degradation_b    b_packreplace_b    b_cellreplace_b          b_price_b            delta_b
+asc_no_choice_a               0.15307           -0.14275           -0.14151          -0.076397           -0.15656
+b_mileage_a                  -0.02480         3.4265e-04            0.01249          -0.010644            0.05285
+b_range_year0_a               0.13390           -0.10672           -0.13293          -0.149084           -0.14662
+b_degradation_a              -0.22092            0.13914            0.13103           0.089949            0.07162
+b_packreplace_a               0.14365           -0.23737           -0.16292          -0.134283            0.05361
+b_cellreplace_a               0.10669           -0.16748           -0.18517          -0.155071           -0.01491
+b_price_a                     0.09603           -0.06057           -0.01923           0.092136           -0.02759
+asc_no_choice_b              -0.08535            0.30289            0.36617           0.676405            0.03425
+b_mileage_b                   0.06263            0.04971            0.06317           0.137619           -0.06137
+b_range_year0_b              -0.34696            0.16067            0.22444           0.281210            0.16204
+b_degradation_b               1.00000           -0.38601           -0.31546          -0.148911           -0.12114
+b_packreplace_b              -0.38601            1.00000            0.64932           0.195636            0.15661
+b_cellreplace_b              -0.31546            0.64932            1.00000           0.247163            0.25565
+b_price_b                    -0.14891            0.19564            0.24716           1.000000           -0.01895
+delta_b                      -0.12114            0.15661            0.25565          -0.018954            1.00000
+gamma_used_bev_b              0.07886           -0.14784           -0.22193          -0.002406           -0.87544
+gamma_EV_benefit_b           -0.32644            0.27696            0.39266           0.165804            0.60081
+gamma_EV_anxiety_b           -0.20564            0.03746           -0.01165           0.154746           -0.13203
+                     gamma_used_bev_b gamma_EV_benefit_b gamma_EV_anxiety_b
+asc_no_choice_a              0.045145           -0.15163            0.06017
+b_mileage_a                 -0.078664            0.11493            0.05453
+b_range_year0_a              0.086162           -0.20335           -0.04481
+b_degradation_a             -0.031670            0.12554            0.11510
+b_packreplace_a           -5.4144e-04           -0.01501           -0.10097
+b_cellreplace_a              0.052576           -0.11811           -0.05296
+b_price_a                  7.3602e-04           -0.04986            0.07188
+asc_no_choice_b             -0.025887            0.25008            0.14038
+b_mileage_b                  0.131198           -0.05367           -0.06309
+b_range_year0_b             -0.091208            0.37098            0.19078
+b_degradation_b              0.078857           -0.32644           -0.20564
+b_packreplace_b             -0.147841            0.27696            0.03746
+b_cellreplace_b             -0.221932            0.39266           -0.01165
+b_price_b                   -0.002406            0.16580            0.15475
+delta_b                     -0.875439            0.60081           -0.13203
+gamma_used_bev_b             1.000000           -0.57412            0.02232
+gamma_EV_benefit_b          -0.574123            1.00000            0.05101
+gamma_EV_anxiety_b           0.022319            0.05101            1.00000
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+  ID Avg prob per choice
+ 116           0.1383810
+ 167           0.1405431
+  24           0.1544139
+  61           0.1556105
+ 139           0.1596297
+ 221           0.1666748
+  29           0.1677184
+ 269           0.1709207
+ 156           0.1714034
+ 161           0.1750059
+ 105           0.1767209
+ 264           0.1775561
+ 170           0.1794973
+ 122           0.1797810
+ 129           0.1817761
+ 250           0.1834310
+ 294           0.1837196
+  25           0.1846332
+ 151           0.1857807
+ 240           0.1862456
+
+Changes in parameter estimates from starting values:
+                       Initial    Estimate  Difference
+asc_no_choice_a      -0.134792    -5.49159     -5.3568
+b_mileage_a           0.075634    -0.17494     -0.2506
+b_range_year0_a      -0.263897     0.44404      0.7079
+b_degradation_a       0.108856    -0.25233     -0.3612
+b_packreplace_a       0.278589    -0.18167     -0.4603
+b_cellreplace_a       0.002636    -0.25780     -0.2604
+b_price_a             0.167312    -0.72451     -0.8918
+asc_no_choice_b       0.191361    -1.24819     -1.4395
+b_mileage_b           0.236992    -0.23538     -0.4724
+b_range_year0_b      -0.504074     0.58751      1.0916
+b_degradation_b      -0.818162    -0.32314      0.4950
+b_packreplace_b      -0.421316    -1.11831     -0.6970
+b_cellreplace_b       0.243014    -1.20242     -1.4454
+b_price_b             0.545311    -0.47621     -1.0215
+delta_a               0.000000     0.00000      0.0000
+gamma_used_bev_a      0.000000     0.00000      0.0000
+gamma_EV_benefit_a    0.000000     0.00000      0.0000
+gamma_EV_anxiety_a    0.000000     0.00000      0.0000
+delta_b               0.747654    -0.06267     -0.8103
+gamma_used_bev_b     -0.658724    -0.52770      0.1310
+gamma_EV_benefit_b   -0.398933    -0.19317      0.2058
+gamma_EV_anxiety_b   -0.024908     0.37524      0.4001
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value                                                                            
+modelName              "LC_DCE_2c_indicator"                                                            
+modelDescr             "LC model with 2 classes with indicator (ATT and knowledge)"                     
+indivID                "respID"                                                                         
+nCores                 "2"                                                                              
+panelData              "TRUE"                                                                           
+outputDirectory        "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/code/main/model_output/apollo/"
+debug                  "FALSE"                                                                          
+workInLogs             "FALSE"                                                                          
+seed                   "13"                                                                             
+mixing                 "FALSE"                                                                          
+HB                     "FALSE"                                                                          
+noValidation           "FALSE"                                                                          
+noDiagnostics          "FALSE"                                                                          
+calculateLLC           "TRUE"                                                                           
+analyticHessian        "FALSE"                                                                          
+memorySaver            "FALSE"                                                                          
+analyticGrad           "TRUE"                                                                           
+analyticGrad_manualSet "FALSE"                                                                          
+overridePanel          "FALSE"                                                                          
+preventOverridePanel   "FALSE"                                                                          
+noModification         "FALSE"                                                                          
+
+Hessian routines attempted
+--------------------------
+numerical jacobian of LL analytical gradient
+
+Scaling used in computing Hessian
+---------------------------------
+                        Value
+asc_no_choice_a    5.49158970
+b_mileage_a        0.17493537
+b_range_year0_a    0.44404199
+b_degradation_a    0.25233388
+b_packreplace_a    0.18166564
+b_cellreplace_a    0.25780104
+b_price_a          0.72451219
+asc_no_choice_b    1.24818810
+b_mileage_b        0.23538403
+b_range_year0_b    0.58750971
+b_degradation_b    0.32314413
+b_packreplace_b    1.11831283
+b_cellreplace_b    1.20241692
+b_price_b          0.47621185
+delta_b            0.06267043
+gamma_used_bev_b   0.52769628
+gamma_EV_benefit_b 0.19316742
+gamma_EV_anxiety_b 0.37523824
+
+
+apollo_lcPars
+---------------
+function(apollo_beta, apollo_inputs) {
+  lcpars = list()
+  lcpars[["asc_no_choice"]] = list(asc_no_choice_a, asc_no_choice_b)
+  lcpars[["b_mileage"]] = list(b_mileage_a, b_mileage_b)
+  lcpars[["b_range_year0"]] = list(b_range_year0_a, b_range_year0_b)
+  lcpars[["b_degradation"]] = list(b_degradation_a, b_degradation_b)
+  lcpars[["b_packreplace"]] = list(b_packreplace_a, b_packreplace_b)
+  lcpars[["b_cellreplace"]] = list(b_cellreplace_a, b_cellreplace_b)
+  lcpars[["b_price"]] = list(b_price_a, b_price_b)
+
+  ### Utilities of class allocation model: ow likely a person is to belong to each class based on indicators
+  V = list()
+  V[["class_a"]] = delta_a +
+    gamma_used_bev_a * next_veh_fuel_used_bev +
+    # gamma_EVB_environ_a * ATT_EVB_environment +
+    # gamma_EVB_function_a * ATT_EVB_function +
+    gamma_EV_benefit_a * FA_EV_benefit +
+    gamma_EV_anxiety_a * FA_EV_anxiety
+  # gamma_knowledge_gas_a * knowledge_gas +
+  # gamma_knowledge_plugin_a * knowledge_plugin +
+  # gamma_knowledge_ev_a * knowledge_ev +
+  # gamma_knowledge_subsidy_a * knowledge_subsidy
+  V[["class_b"]] = delta_b +
+    gamma_used_bev_b * next_veh_fuel_used_bev +
+    # gamma_EVB_environ_b * ATT_EVB_environment +
+    # gamma_EVB_function_b * ATT_EVB_function +
+    gamma_EV_benefit_b * FA_EV_benefit +
+    gamma_EV_anxiety_b * FA_EV_anxiety
+  # gamma_knowledge_gas_b * knowledge_gas +
+  # gamma_knowledge_plugin_b * knowledge_plugin +
+  # gamma_knowledge_ev_b * knowledge_ev +
+  # gamma_knowledge_subsidy_b * knowledge_subsidy
+
+  ### Settings for class allocation models
+  classAlloc_settings = list(
+    classes = c(class_a = 1, class_b = 2),
+    utilities = V
+  )
+  # computes the class membership probabilities (π) for each person
+  lcpars[["pi_values"]] = apollo_classAlloc(classAlloc_settings)
+
+  return(lcpars)
+}
+<bytecode: 0xa830c9c78>
+
+
+apollo_probabilities
+----------------------
+function(
+  apollo_beta,
+  apollo_inputs,
+  functionality = "estimate"
+) {
+  ### Attach inputs and detach after function exit
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+
+  ### Create list of probabilities P
+  P = list()
+
+  ### Define settings for MNL model component that are generic across classes
+  mnl_settings = list(
+    alternatives = c(alt1 = 1, alt2 = 2, alt3 = 3, no_choice = 4),
+    avail = list(alt1 = 1, alt2 = 1, alt3 = 1, no_choice = 1), ## Availability of alternatives
+    choiceVar = choice
+  )
+
+  ### Loop over classes
+  for (s in 1:2) {
+    ### Compute class-specific utilities
+    V = list()
+    V[["alt1"]] <-
+      b_mileage[[s]] *
+      veh_mileage_1 +
+      b_range_year0[[s]] * battery_range_year0_1 +
+      b_degradation[[s]] * battery_degradation_1 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_1 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_1 +
+      b_price[[s]] * veh_price_1
+
+    V[["alt2"]] <-
+      b_mileage[[s]] *
+      veh_mileage_2 +
+      b_range_year0[[s]] * battery_range_year0_2 +
+      b_degradation[[s]] * battery_degradation_2 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_2 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_2 +
+      b_price[[s]] * veh_price_2
+
+    V[["alt3"]] <-
+      b_mileage[[s]] *
+      veh_mileage_3 +
+      b_range_year0[[s]] * battery_range_year0_3 +
+      b_degradation[[s]] * battery_degradation_3 +
+      b_packreplace[[s]] * battery_refurbishpackreplace_3 +
+      b_cellreplace[[s]] * battery_refurbishcellreplace_3 +
+      b_price[[s]] * veh_price_3
+
+    V[["no_choice"]] <- asc_no_choice[[s]]
+
+    # Model settings
+    mnl_settings$utilities = V
+
+    ### Compute within-class choice probabilities using MNL model
+    P[[paste0("Class_", s)]] = apollo_mnl(mnl_settings, functionality)
+
+    ### Take product across observation for same individual
+    P[[paste0("Class_", s)]] = apollo_panelProd(
+      P[[paste0("Class_", s)]],
+      apollo_inputs,
+      functionality
+    )
+  }
+
+  ### Compute latent class model probabilities
+  lc_settings = list(inClassProb = P, classProb = pi_values)
+  # mixes the class‐specific probabilities with class‐membership probabilities pi_values.
+  P[["model"]] = apollo_lc(lc_settings, apollo_inputs, functionality)
+
+  ### Prepare and return outputs of function: finalizes the probability vector
+  P = apollo_prepareProb(P, apollo_inputs, functionality)
+  return(P)
+}

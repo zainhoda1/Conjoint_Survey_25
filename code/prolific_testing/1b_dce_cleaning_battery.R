@@ -12,13 +12,12 @@ data_raw <- read_parquet(here(
 # Read in choice questions and join it to the choice_data
 
 survey_battery <- read_parquet(here(
+  "survey_prolific",
   "data",
-  "doe",
-  "12-10-25",
   'design_battery.parquet'
 ))
 
-nrow(data_raw)
+# nrow(data_raw)
 
 ## Checking input data:
 
@@ -39,7 +38,7 @@ data <- data_raw %>%
     vehicle_type = next_veh_style,
     budget,
     starts_with("battery_cbc_q")
-  )  %>%
+  ) %>%
   select(-next_veh_budget)
 
 nrow(data)
@@ -82,7 +81,7 @@ data_battery <- data_battery %>%
     data_approval %>%
       select(prolific_pid),
     by = "prolific_pid"
-  ) 
+  )
 
 nrow(data_battery)
 
@@ -100,8 +99,6 @@ data_battery <- data_battery %>%
 nrow(data_battery)
 
 # Create battery choice data ---------
-
-
 
 # First convert the data to long format
 choice_data_battery <- data_battery %>%
@@ -159,4 +156,3 @@ write_parquet(
     "choice_data_battery.parquet"
   )
 )
-

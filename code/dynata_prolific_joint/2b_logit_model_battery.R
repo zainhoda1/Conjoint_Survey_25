@@ -3,31 +3,14 @@ source(here::here('code', 'setup.R'))
 
 # --------------------------------------------------------------------------
 # Load the data set:
-
-data_prolific <- read_csv(here(
+data_joint <- read_parquet(here(
   "data",
-  "prolific_testing",
-  "choice_data_battery.csv"
+  "dynata_prolific_joint",
+  "data_joint_battery.parquet"
 ))
 
-data_dynata <- read_csv(here(
-  "data",
-  "dynata_testing",
-  "choice_data_battery.csv"
-))
 
-data_dynata$obsID = data_dynata$obsID + nrow(data_prolific)/4
-
-glimpse(data_prolific)
-glimpse(data_dynata)
-
-
-data <- rbind(data_dynata, data_prolific)
-
-
-glimpse(data)
-
-data <- data %>%
+data <- data_joint %>%
   mutate(
     mileage = mileage / 10000, #3 - 6
     price = price / 10000, # 0.5 - 6
@@ -41,23 +24,19 @@ data <- data %>%
     -starts_with("time")
   )
 
-glimpse(data)
+# glimpse(data)
 
 # Dummy encode
 data <- cbc_encode(
   data,
   coding = 'dummy',
-  ref_levels = list(battery_refurbish = 'original' , vehicle_type = 'suv', budget = 'high')
+  ref_levels = list(
+    battery_refurbish = 'original',
+    vehicle_type = 'car',
+    budget = 'low'
+  )
 )
 
-data_car_low <- data %>%
-  filter(vehicle_typecar == 1, budgetlow == 1)
-data_car_high <- data %>%
-  filter(vehicle_typecar == 1, budgetlow == 0)
-data_suv_low <- data %>%
-  filter(vehicle_typecar == 0, budgetlow == 1)
-data_suv_high <- data %>%
-  filter(vehicle_typecar == 0, budgetlow == 0)
 
 # Estimate MNL model
 
@@ -85,7 +64,7 @@ run_model1 <- function(data) {
       "no_choice"
     )
   )
-  cat('N =', length(unique(data$respID)))
+  cat('n =', length(unique(data$respID)))
   return(model)
 }
 
@@ -104,40 +83,95 @@ run_model2 <- function(data) {
       "no_choice"
     )
   )
-  cat('N =', length(unique(data$respID)))
+  cat('n =', length(unique(data$respID)))
+  return(model)
+}
+
+data <- data %>%
+  mutate(
+    price_dynata = price * data_sourcedynata
+  )
+run_model2_datasource <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "price",
+      "price_dynata",
+      "mileage",
+      "battery_range_year0",
+      "battery_degradation",
+      "battery_refurbishpackreplace",
+      "battery_refurbishcellreplace",
+      "no_choice"
+    )
+  )
+  cat('n =', length(unique(data$respID)))
+  return(model)
+}
+
+run_model_wtp <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "no_choice",
+      "mileage",
+      "battery_range_year0",
+      "battery_degradation",
+      "battery_refurbishpackreplace",
+      "battery_refurbishcellreplace"
+    ),
+    scalePar = 'price',
+    numMultiStarts = 10 # Use a multi-start since log-likelihood is nonconvex
+  )
+  cat('n =', length(unique(data$respID)))
   return(model)
 }
 
 # Estimate the model 1
 
 # Estimate the model
-model_car_low <- run_model1(data_car_low)
-model_car_high <- run_model1(data_car_high)
-model_suv_low <- run_model1(data_suv_low)
-model_suv_high <- run_model1(data_suv_high)
-model_all <- run_model1(data)
+# model_car_low <- run_model1(data_car_low)
+# model_car_high <- run_model1(data_car_high)
+# model_suv_low <- run_model1(data_suv_low)
+# model_suv_high <- run_model1(data_suv_high)
+# model_car <- run_model1(data %>% filter(vehicle_typesuv == 0))
+# model_suv <- run_model1(data %>% filter(vehicle_typesuv == 1))
+# model_all <- run_model1(data)
+model_dynata <- run_model2(data %>% filter(data_sourcedynata == 1))
+model_prolific <- run_model2(data %>% filter(data_sourcedynata == 0))
 
 # View summary of results
-summary(model_car_low)
-summary(model_car_high)
-summary(model_suv_low)
-summary(model_suv_high)
-summary(model_all)
+# summary(model_car_low)
+# summary(model_car_high)
+# summary(model_suv_low)
+# summary(model_suv_high)
+# summary(model_car)
+# summary(model_suv)
+# summary(model_all)
+summary(model_dynata)
+summary(model_prolific)
 
 
 # Estimate the model 2
 
 # Estimate the model
-model_car_low <- run_model2(data_car_low)
-model_car_high <- run_model2(data_car_high)
-model_suv_low <- run_model2(data_suv_low)
-model_suv_high <- run_model2(data_suv_high)
+model_car <- run_model2(data %>% filter(vehicle_typesuv == 0))
+model_suv <- run_model2(data %>% filter(vehicle_typesuv == 1))
+# model_car_low <- run_model2(data_car_low)
+# model_car_high <- run_model2(data_car_high)
+# model_suv_low <- run_model2(data_suv_low)
+# model_suv_high <- run_model2(data_suv_high)
 model_all <- run_model2(data)
 
 # View summary of results
-summary(model_car_low)
-summary(model_car_high)
-summary(model_suv_low)
-summary(model_suv_high)
+# summary(model_car_low)
+# summary(model_car_high)
+# summary(model_suv_low)
+# summary(model_suv_high)
+summary(model_car)
+summary(model_suv)
 summary(model_all)
-

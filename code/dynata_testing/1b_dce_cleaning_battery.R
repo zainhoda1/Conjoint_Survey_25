@@ -9,11 +9,9 @@ data_raw <- read_parquet(here(
 ))
 
 # Read in choice questions and join it to the choice_data
-
 survey_battery <- read_parquet(here(
+  "survey_dynata",
   "data",
-  "doe",
-  "12-10-25",
   'design_battery.parquet'
 ))
 
@@ -106,7 +104,7 @@ choice_data_battery <- data_battery %>%
     choice = ifelse(choice == altID, 1, 0)
   )
 
-head(choice_data_battery)
+# head(choice_data_battery)
 
 # Remove bad respID
 

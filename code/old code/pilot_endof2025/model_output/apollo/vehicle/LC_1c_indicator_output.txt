@@ -1,0 +1,313 @@
+Model run by xnw17 using Apollo 0.3.4 on R 4.4.2 for Darwin.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : LC_1c_indicator
+Model description                           : MNL model
+Model run at                                : 2025-11-12 16:49:44.434286
+Estimation method                           : bgw
+Model diagnosis                             : Relative function convergence
+Optimisation diagnosis                      : Maximum found
+     hessian properties                     : Negative definite
+     maximum eigenvalue                     : -17.871874
+     reciprocal of condition number         : 0.000266248
+Number of individuals                       : 334
+Number of rows in database                  : 2004
+Number of modelled outcomes                 : 2004
+
+Number of cores used                        :  1 
+Model without mixing
+
+LL(start)                                   : -2778.13
+LL (whole model) at equal shares, LL(0)     : -2778.13
+LL (whole model) at observed shares, LL(C)  : -2752.33
+LL(final, whole model)                      : -2521.5
+Rho-squared vs equal shares                  :  0.0924 
+Adj.Rho-squared vs equal shares              :  0.0888 
+Rho-squared vs observed shares               :  0.0839 
+Adj.Rho-squared vs observed shares           :  0.0813 
+AIC                                         :  5063 
+BIC                                         :  5119.03 
+
+Estimated parameters                        : 10
+Time taken (hh:mm:ss)                       :  00:00:0.58 
+     pre-estimation                         :  00:00:0.45 
+     estimation                             :  00:00:0.02 
+     post-estimation                        :  00:00:0.1 
+Iterations                                  :  8  
+
+Unconstrained optimisation.
+
+Estimates:
+                    Estimate        s.e.   t.rat.(0)  p(2-sided)    Rob.s.e. Rob.t.rat.(0)  p(2-sided)
+b_no_choice         -3.49963    0.213289    -16.4079     0.00000     0.26752      -13.0818     0.00000
+b_powertrainbev     -1.49542    0.178914     -8.3583     0.00000     0.21542       -6.9418   3.871e-12
+b_powertrainphev    -1.05896    0.177926     -5.9517   2.654e-09     0.18766       -5.6430   1.671e-08
+b_powertrainhev     -0.19431    0.080105     -2.4256     0.01528     0.10017       -1.9398     0.05240
+b_range_bev          0.16625    0.095121      1.7478     0.08050     0.10175        1.6338     0.10229
+b_range_phev        -0.01596    0.060445     -0.2640     0.79175     0.05645       -0.2827     0.77738
+b_mileage           -0.17523    0.023611     -7.4218   1.155e-13     0.02354       -7.4429   9.859e-14
+b_age               -0.10887    0.010942     -9.9497     0.00000     0.01189       -9.1571     0.00000
+b_operating_cost    -0.03981    0.008701     -4.5761   4.736e-06     0.01017       -3.9138   9.085e-05
+b_price             -0.27576    0.037997     -7.2573   3.948e-13     0.06299       -4.3775   1.200e-05
+
+
+Overview of choices for MNL model component :
+                                 alt1    alt2    alt3 no_choice
+Times available                  2004 2004.00 2004.00   2004.00
+Times chosen                      501  564.00  566.00    373.00
+Percentage chosen overall          25   28.14   28.24     18.61
+Percentage chosen when available   25   28.14   28.24     18.61
+
+
+
+Classical covariance matrix:
+                      b_no_choice  b_powertrainbev b_powertrainphev  b_powertrainhev      b_range_bev
+b_no_choice              0.045492         0.009957         0.006538         0.004590      -1.2968e-04
+b_powertrainbev          0.009957         0.032010         0.004438         0.003965        -0.013850
+b_powertrainphev         0.006538         0.004438         0.031658         0.003438        8.253e-05
+b_powertrainhev          0.004590         0.003965         0.003438         0.006417       -4.990e-05
+b_range_bev           -1.2968e-04        -0.013850        8.253e-05       -4.990e-05         0.009048
+b_range_phev           1.1204e-04       -1.719e-05        -0.009224       -1.186e-05       -6.470e-06
+b_mileage                0.002287        2.727e-05       1.2722e-04       -2.357e-05        3.255e-05
+b_age                  8.0924e-04        8.571e-05        5.225e-05       -1.135e-06       -2.952e-05
+b_operating_cost         0.001028       4.8102e-04       2.0598e-04       1.3772e-04       -5.938e-06
+b_price                  0.004152       -7.060e-05       -7.675e-05       -6.159e-05       -4.989e-06
+                     b_range_phev        b_mileage            b_age b_operating_cost          b_price
+b_no_choice            1.1204e-04         0.002287       8.0924e-04         0.001028         0.004152
+b_powertrainbev        -1.719e-05        2.727e-05        8.571e-05       4.8102e-04       -7.060e-05
+b_powertrainphev        -0.009224       1.2722e-04        5.225e-05       2.0598e-04       -7.675e-05
+b_powertrainhev        -1.186e-05       -2.357e-05       -1.135e-06       1.3772e-04       -6.159e-05
+b_range_bev            -6.470e-06        3.255e-05       -2.952e-05       -5.938e-06       -4.989e-06
+b_range_phev             0.003654       -5.550e-06        5.055e-06        4.360e-06        2.644e-05
+b_mileage              -5.550e-06       5.5746e-04        8.164e-06        5.188e-06       -8.681e-06
+b_age                   5.055e-06        8.164e-06       1.1973e-04        4.186e-06        9.394e-06
+b_operating_cost        4.360e-06        5.188e-06        4.186e-06        7.570e-05       -1.233e-05
+b_price                 2.644e-05       -8.681e-06        9.394e-06       -1.233e-05         0.001444
+
+Robust covariance matrix:
+                      b_no_choice  b_powertrainbev b_powertrainphev  b_powertrainhev      b_range_bev
+b_no_choice              0.071566         0.012717         0.002915         0.003400      -9.3067e-04
+b_powertrainbev          0.012717         0.046407         0.013630         0.008449        -0.015998
+b_powertrainphev         0.002915         0.013630         0.035216         0.006756        -0.001377
+b_powertrainhev          0.003400         0.008449         0.006756         0.010033      -2.9346e-04
+b_range_bev           -9.3067e-04        -0.015998        -0.001377      -2.9346e-04         0.010354
+b_range_phev             0.001584       1.7140e-04        -0.007854       1.7801e-04       -4.633e-05
+b_mileage                0.001854       1.2403e-04       1.9752e-04       1.7784e-04       -7.857e-05
+b_age                    0.001027        2.399e-05        9.693e-05        4.355e-05        3.998e-05
+b_operating_cost         0.001240       5.8314e-04       -2.755e-05       1.3414e-04        6.405e-06
+b_price                  0.011159      -2.7385e-04      -5.0898e-04      -5.8048e-04      -1.1507e-04
+                     b_range_phev        b_mileage            b_age b_operating_cost          b_price
+b_no_choice              0.001584         0.001854         0.001027         0.001240         0.011159
+b_powertrainbev        1.7140e-04       1.2403e-04        2.399e-05       5.8314e-04      -2.7385e-04
+b_powertrainphev        -0.007854       1.9752e-04        9.693e-05       -2.755e-05      -5.0898e-04
+b_powertrainhev        1.7801e-04       1.7784e-04        4.355e-05       1.3414e-04      -5.8048e-04
+b_range_bev            -4.633e-05       -7.857e-05        3.998e-05        6.405e-06      -1.1507e-04
+b_range_phev             0.003186       -1.660e-05        9.681e-07        8.185e-05       1.3375e-04
+b_mileage              -1.660e-05       5.5431e-04        3.816e-05       -7.678e-06      -1.0857e-04
+b_age                   9.681e-07        3.816e-05       1.4135e-04       -6.762e-06        4.197e-05
+b_operating_cost        8.185e-05       -7.678e-06       -6.762e-06       1.0349e-04       -2.665e-05
+b_price                1.3375e-04      -1.0857e-04        4.197e-05       -2.665e-05         0.003968
+
+Classical correlation matrix:
+                      b_no_choice  b_powertrainbev b_powertrainphev  b_powertrainhev      b_range_bev
+b_no_choice              1.000000         0.260913         0.172290         0.268652        -0.006392
+b_powertrainbev          0.260913         1.000000         0.139414         0.276659        -0.813845
+b_powertrainphev         0.172290         0.139414         1.000000         0.241250         0.004877
+b_powertrainhev          0.268652         0.276659         0.241250         1.000000        -0.006548
+b_range_bev             -0.006392        -0.813845         0.004877        -0.006548         1.000000
+b_range_phev             0.008691        -0.001589        -0.857665        -0.002449        -0.001125
+b_mileage                0.454086         0.006456         0.030283        -0.012464         0.014494
+b_age                    0.346748         0.043783         0.026840        -0.001295        -0.028360
+b_operating_cost         0.553887         0.309012         0.133059         0.197606        -0.007175
+b_price                  0.512340        -0.010385        -0.011353        -0.020234        -0.001380
+                     b_range_phev        b_mileage            b_age b_operating_cost          b_price
+b_no_choice              0.008691         0.454086         0.346748         0.553887         0.512340
+b_powertrainbev         -0.001589         0.006456         0.043783         0.309012        -0.010385
+b_powertrainphev        -0.857665         0.030283         0.026840         0.133059        -0.011353
+b_powertrainhev         -0.002449        -0.012464        -0.001295         0.197606        -0.020234
+b_range_bev             -0.001125         0.014494        -0.028360        -0.007175        -0.001380
+b_range_phev             1.000000        -0.003889         0.007643         0.008291         0.011512
+b_mileage               -0.003889         1.000000         0.031600         0.025254        -0.009676
+b_age                    0.007643         0.031600         1.000000         0.043965         0.022596
+b_operating_cost         0.008291         0.025254         0.043965         1.000000        -0.037307
+b_price                  0.011512        -0.009676         0.022596        -0.037307         1.000000
+
+Robust correlation matrix:
+                      b_no_choice  b_powertrainbev b_powertrainphev  b_powertrainhev      b_range_bev
+b_no_choice               1.00000         0.220674          0.05806          0.12690        -0.034190
+b_powertrainbev           0.22067         1.000000          0.33717          0.39157        -0.729842
+b_powertrainphev          0.05806         0.337169          1.00000          0.35942        -0.072093
+b_powertrainhev           0.12690         0.391575          0.35942          1.00000        -0.028793
+b_range_bev              -0.03419        -0.729842         -0.07209         -0.02879         1.000000
+b_range_phev              0.10493         0.014095         -0.74142          0.03148        -0.008067
+b_mileage                 0.29441         0.024454          0.04471          0.07541        -0.032796
+b_age                     0.32277         0.009366          0.04344          0.03657         0.033047
+b_operating_cost          0.45574         0.266094         -0.01443          0.13164         0.006188
+b_price                   0.66218        -0.020180         -0.04306         -0.09200        -0.017952
+                     b_range_phev        b_mileage            b_age b_operating_cost          b_price
+b_no_choice              0.104926          0.29441         0.322772         0.455743          0.66218
+b_powertrainbev          0.014095          0.02445         0.009366         0.266094         -0.02018
+b_powertrainphev        -0.741417          0.04471         0.043445        -0.014433         -0.04306
+b_powertrainhev          0.031484          0.07541         0.036570         0.131639         -0.09200
+b_range_bev             -0.008067         -0.03280         0.033047         0.006188         -0.01795
+b_range_phev             1.000000         -0.01249         0.001443         0.142533          0.03761
+b_mileage               -0.012488          1.00000         0.136324        -0.032059         -0.07321
+b_age                    0.001443          0.13632         1.000000        -0.055910          0.05604
+b_operating_cost         0.142533         -0.03206        -0.055910         1.000000         -0.04158
+b_price                  0.037613         -0.07321         0.056036        -0.041584          1.00000
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+  ID Avg prob per choice
+ 228           0.1315687
+ 321           0.1404753
+  81           0.1475669
+ 286           0.1510487
+ 307           0.1512102
+ 163           0.1563613
+ 106           0.1584319
+ 204           0.1584365
+ 148           0.1616123
+  89           0.1616501
+ 326           0.1643774
+  28           0.1683299
+ 145           0.1691113
+  76           0.1741412
+ 102           0.1772808
+  14           0.1788583
+ 192           0.1790622
+ 171           0.1814994
+  77           0.1815379
+ 305           0.1840094
+
+Changes in parameter estimates from starting values:
+                     Initial    Estimate  Difference
+b_no_choice            0.000    -3.49963    -3.49963
+b_powertrainbev        0.000    -1.49542    -1.49542
+b_powertrainphev       0.000    -1.05896    -1.05896
+b_powertrainhev        0.000    -0.19431    -0.19431
+b_range_bev            0.000     0.16625     0.16625
+b_range_phev           0.000    -0.01596    -0.01596
+b_mileage              0.000    -0.17523    -0.17523
+b_age                  0.000    -0.10887    -0.10887
+b_operating_cost       0.000    -0.03981    -0.03981
+b_price                0.000    -0.27576    -0.27576
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value                                                                                    
+modelName              "LC_1c_indicator"                                                                        
+modelDescr             "MNL model"                                                                              
+indivID                "respID"                                                                                 
+panelData              "TRUE"                                                                                   
+outputDirectory        "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/code/main/model_output/apollo/vehicle/"
+mixing                 "FALSE"                                                                                  
+debug                  "FALSE"                                                                                  
+nCores                 "1"                                                                                      
+workInLogs             "FALSE"                                                                                  
+seed                   "13"                                                                                     
+HB                     "FALSE"                                                                                  
+noValidation           "FALSE"                                                                                  
+noDiagnostics          "FALSE"                                                                                  
+calculateLLC           "TRUE"                                                                                   
+analyticHessian        "FALSE"                                                                                  
+memorySaver            "FALSE"                                                                                  
+analyticGrad           "TRUE"                                                                                   
+analyticGrad_manualSet "FALSE"                                                                                  
+overridePanel          "FALSE"                                                                                  
+preventOverridePanel   "FALSE"                                                                                  
+noModification         "FALSE"                                                                                  
+
+Hessian routines attempted
+--------------------------
+numerical jacobian of LL analytical gradient
+
+Scaling used in computing Hessian
+---------------------------------
+                      Value
+b_no_choice      3.49963296
+b_powertrainbev  1.49542177
+b_powertrainphev 1.05895565
+b_powertrainhev  0.19430608
+b_range_bev      0.16624852
+b_range_phev     0.01596000
+b_mileage        0.17523442
+b_age            0.10886874
+b_operating_cost 0.03981477
+b_price          0.27575710
+
+
+apollo_probabilities
+----------------------
+function(
+  apollo_beta,
+  apollo_inputs,
+  functionality = "estimate"
+) {
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+
+  ### Define utility functions
+  P <- list()
+  # For each alternative, use the same variables (if attributes vary across alts)
+  # If they are alt-specific columns, adjust accordingly.
+  V <- list()
+  V[["alt1"]] <-
+    b_powertrainbev *
+    powertrainbev_1 +
+    b_powertrainphev * powertrainphev_1 +
+    b_powertrainhev * powertrainhev_1 +
+    b_range_bev * range_bev_1 +
+    b_range_phev * range_phev_1 +
+    b_mileage * mileage_1 +
+    b_age * age_1 +
+    b_operating_cost * operating_cost_1 +
+    b_price * price_1
+
+  V[["alt2"]] <-
+    b_powertrainbev *
+    powertrainbev_2 +
+    b_powertrainphev * powertrainphev_2 +
+    b_powertrainhev * powertrainhev_2 +
+    b_range_bev * range_bev_2 +
+    b_range_phev * range_phev_2 +
+    b_mileage * mileage_2 +
+    b_age * age_2 +
+    b_operating_cost * operating_cost_2 +
+    b_price * price_2
+
+  V[["alt3"]] <-
+    b_powertrainbev *
+    powertrainbev_3 +
+    b_powertrainphev * powertrainphev_3 +
+    b_powertrainhev * powertrainhev_3 +
+    b_range_bev * range_bev_3 +
+    b_range_phev * range_phev_3 +
+    b_mileage * mileage_3 +
+    b_age * age_3 +
+    b_operating_cost * operating_cost_3 +
+    b_price * price_3
+
+  V[["no_choice"]] <- b_no_choice
+
+  # Model settings
+  mnl_settings <- list(
+    # altID = altID,
+    alternatives = c(alt1 = 1, alt2 = 2, alt3 = 3, no_choice = 4),
+    avail = list(alt1 = 1, alt2 = 1, alt3 = 1, no_choice = 1), ## Availability of alternatives
+    choiceVar = choice,
+    utilities = V
+  )
+
+  # Compute probabilities
+  P[["model"]] = apollo_mnl(mnl_settings, functionality)
+  ### Take product across observation for same individual
+  P <- apollo_panelProd(P, apollo_inputs, functionality)
+  ### Prepare and return outputs of function
+  P <- apollo_prepareProb(P, apollo_inputs, functionality)
+
+  return(P)
+}

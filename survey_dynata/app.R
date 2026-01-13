@@ -267,117 +267,117 @@ sd_get_value <- function(question_id, session, db) {
 # Server setup
 server <- function(input, output, session) {
   ### Start of Dynata setup ###
-
-  # Secret key
-  secret_key <- Sys.getenv("SECRET_KEY")
-
-  # Obtain parameters from the URL
-  url_pars <- reactive({
-    sd_get_url_pars()
-  })
-  psid <- reactive({
-    url_pars()["psid"]
-  })
-  keyid <- reactive({
-    url_pars()["_k"]
-  })
-  signature_start <- reactive({
-    url_pars()["_s"]
-  })
-
-  # Starting Link Validation
-  is_valid_start <- reactive({
-    # Get the current URL path (everything after the domain)
-    url_path <- session$clientData$url_pathname
-    text_start <- paste0(url_path, "?psid=", psid(), "&_k=", keyid())
-    signature_start_validate <- hmac(
-      key = secret_key,
-      object = text_start,
-      algo = "sha256",
-      serialize = FALSE
-    )
-    !is.na(psid()) &&
-      psid() != "" &&
-      (signature_start() == signature_start_validate)
-  })
-
-  # Create ending links
-  ending_links <- reactive({
-    # Ending texts for "Complete", "Screenout", and "Quotafull"
-    text_end_1 <- paste0("/projects/end?rst=1&psid=", psid(), "&_k=", keyid())
-    text_end_2 <- paste0("/projects/end?rst=2&psid=", psid(), "&_k=", keyid())
-    text_end_3 <- paste0("/projects/end?rst=3&psid=", psid(), "&_k=", keyid())
-
-    # Ending signatures (_s) for "Complete", "Screenout", and "Quotafull"
-    signature_end_1 <- hmac(
-      key = secret_key,
-      object = text_end_1,
-      algo = "sha256",
-      serialize = FALSE
-    )
-    signature_end_2 <- hmac(
-      key = secret_key,
-      object = text_end_2,
-      algo = "sha256",
-      serialize = FALSE
-    )
-    signature_end_3 <- hmac(
-      key = secret_key,
-      object = text_end_3,
-      algo = "sha256",
-      serialize = FALSE
-    )
-
-    # Ending links of "Complete", "Screenout", and "Quotafull"
-    list(
-      complete = paste0(
-        "https://dkr1.ssisurveys.com/projects/end?rst=1&psid=",
-        psid(),
-        "&_k=",
-        keyid(),
-        "&_s=",
-        signature_end_1
-      ),
-      screenout = paste0(
-        "https://dkr1.ssisurveys.com/projects/end?rst=2&psid=",
-        psid(),
-        "&_k=",
-        keyid(),
-        "&_s=",
-        signature_end_2
-      ),
-      quotafull = paste0(
-        "https://dkr1.ssisurveys.com/projects/end?rst=3&psid=",
-        psid(),
-        "&_k=",
-        keyid(),
-        "&_s=",
-        signature_end_3
-      )
-    )
-  })
-
-  ## Redirect buttons
-  sd_redirect(
-    id = "redirect_complete",
-    url = ending_links()$complete,
-    button = TRUE,
-    label = "Back to panel"
-  )
-
-  sd_redirect(
-    id = "redirect_screenout",
-    url = ending_links()$screenout,
-    button = TRUE,
-    label = "Back to panel"
-  )
-
-  sd_redirect(
-    id = "redirect_quotafull",
-    url = ending_links()$quotafull,
-    button = TRUE,
-    label = "Back to panel"
-  )
+  #
+  # # Secret key
+  # secret_key <- Sys.getenv("SECRET_KEY")
+  #
+  # # Obtain parameters from the URL
+  # url_pars <- reactive({
+  #   sd_get_url_pars()
+  # })
+  # psid <- reactive({
+  #   url_pars()["psid"]
+  # })
+  # keyid <- reactive({
+  #   url_pars()["_k"]
+  # })
+  # signature_start <- reactive({
+  #   url_pars()["_s"]
+  # })
+  #
+  # # Starting Link Validation
+  # is_valid_start <- reactive({
+  #   # Get the current URL path (everything after the domain)
+  #   url_path <- session$clientData$url_pathname
+  #   text_start <- paste0(url_path, "?psid=", psid(), "&_k=", keyid())
+  #   signature_start_validate <- hmac(
+  #     key = secret_key,
+  #     object = text_start,
+  #     algo = "sha256",
+  #     serialize = FALSE
+  #   )
+  #   !is.na(psid()) &&
+  #     psid() != "" &&
+  #     (signature_start() == signature_start_validate)
+  # })
+  #
+  # # Create ending links
+  # ending_links <- reactive({
+  #   # Ending texts for "Complete", "Screenout", and "Quotafull"
+  #   text_end_1 <- paste0("/projects/end?rst=1&psid=", psid(), "&_k=", keyid())
+  #   text_end_2 <- paste0("/projects/end?rst=2&psid=", psid(), "&_k=", keyid())
+  #   text_end_3 <- paste0("/projects/end?rst=3&psid=", psid(), "&_k=", keyid())
+  #
+  #   # Ending signatures (_s) for "Complete", "Screenout", and "Quotafull"
+  #   signature_end_1 <- hmac(
+  #     key = secret_key,
+  #     object = text_end_1,
+  #     algo = "sha256",
+  #     serialize = FALSE
+  #   )
+  #   signature_end_2 <- hmac(
+  #     key = secret_key,
+  #     object = text_end_2,
+  #     algo = "sha256",
+  #     serialize = FALSE
+  #   )
+  #   signature_end_3 <- hmac(
+  #     key = secret_key,
+  #     object = text_end_3,
+  #     algo = "sha256",
+  #     serialize = FALSE
+  #   )
+  #
+  #   # Ending links of "Complete", "Screenout", and "Quotafull"
+  #   list(
+  #     complete = paste0(
+  #       "https://dkr1.ssisurveys.com/projects/end?rst=1&psid=",
+  #       psid(),
+  #       "&_k=",
+  #       keyid(),
+  #       "&_s=",
+  #       signature_end_1
+  #     ),
+  #     screenout = paste0(
+  #       "https://dkr1.ssisurveys.com/projects/end?rst=2&psid=",
+  #       psid(),
+  #       "&_k=",
+  #       keyid(),
+  #       "&_s=",
+  #       signature_end_2
+  #     ),
+  #     quotafull = paste0(
+  #       "https://dkr1.ssisurveys.com/projects/end?rst=3&psid=",
+  #       psid(),
+  #       "&_k=",
+  #       keyid(),
+  #       "&_s=",
+  #       signature_end_3
+  #     )
+  #   )
+  # })
+  #
+  # ## Redirect buttons
+  # sd_redirect(
+  #   id = "redirect_complete",
+  #   url = ending_links()$complete,
+  #   button = TRUE,
+  #   label = "Back to panel"
+  # )
+  #
+  # sd_redirect(
+  #   id = "redirect_screenout",
+  #   url = ending_links()$screenout,
+  #   button = TRUE,
+  #   label = "Back to panel"
+  # )
+  #
+  # sd_redirect(
+  #   id = "redirect_quotafull",
+  #   url = ending_links()$quotafull,
+  #   button = TRUE,
+  #   label = "Back to panel"
+  # )
 
   ### End of Dynata set up ###
 
@@ -393,7 +393,7 @@ server <- function(input, output, session) {
 
   # Store necessary values in the survey data
   sd_store_value(completion_code)
-  sd_store_value(psid(), "psid")
+  # sd_store_value(psid(), "psid")
   sd_store_value(respondentID, "respID")
   sd_store_value(battery_respondentID, "battery_respID")
   sd_store_value(prime_group_label, "prime_group_label")

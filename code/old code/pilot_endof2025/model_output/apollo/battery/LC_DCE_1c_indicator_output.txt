@@ -1,0 +1,239 @@
+Model run by xnw17 using Apollo 0.3.4 on R 4.4.2 for Darwin.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : MNL_DCE_pref
+Model description                           : MNL model
+Model run at                                : 2025-11-11 15:58:33.768259
+Estimation method                           : bgw
+Model diagnosis                             : Relative function convergence
+Optimisation diagnosis                      : Maximum found
+     hessian properties                     : Negative definite
+     maximum eigenvalue                     : -18.818293
+     reciprocal of condition number         : 0.00133016
+Number of individuals                       : 373
+Number of rows in database                  : 2238
+Number of modelled outcomes                 : 2238
+
+Number of cores used                        :  1 
+Model without mixing
+
+LL(start)                                   : -3102.53
+LL (whole model) at equal shares, LL(0)     : -3102.53
+LL (whole model) at observed shares, LL(C)  : -2995.04
+LL(final, whole model)                      : -2708.75
+Rho-squared vs equal shares                  :  0.1269 
+Adj.Rho-squared vs equal shares              :  0.1247 
+Rho-squared vs observed shares               :  0.0956 
+Adj.Rho-squared vs observed shares           :  0.0943 
+AIC                                         :  5431.49 
+BIC                                         :  5471.48 
+
+Estimated parameters                        : 7
+Time taken (hh:mm:ss)                       :  00:00:0.24 
+     pre-estimation                         :  00:00:0.13 
+     estimation                             :  00:00:0.02 
+     post-estimation                        :  00:00:0.09 
+Iterations                                  :  8  
+
+Unconstrained optimisation.
+
+Estimates:
+                 Estimate        s.e.   t.rat.(0)  p(2-sided)    Rob.s.e. Rob.t.rat.(0)  p(2-sided)
+b_mileage         -0.1800     0.02483      -7.250   4.177e-13     0.02771        -6.495   8.292e-11
+b_price           -0.2693     0.03886      -6.930   4.220e-12     0.06261        -4.300   1.705e-05
+b_range_year0      0.4372     0.05119       8.541       0.000     0.06126         7.137   9.535e-13
+b_degradation     -0.2484     0.01342     -18.513       0.000     0.01717       -14.472       0.000
+b_packreplace     -0.3174     0.06899      -4.601   4.207e-06     0.08153        -3.893   9.883e-05
+b_cellreplace     -0.3912     0.06918      -5.654   1.567e-08     0.07980        -4.902   9.493e-07
+asc_no_choice     -2.3027     0.22666     -10.159       0.000     0.31665        -7.272   3.544e-13
+
+
+Overview of choices for MNL model component :
+                                    alt1    alt2    alt3 no_choice
+Times available                  2238.00 2238.00 2238.00    2238.0
+Times chosen                      617.00  671.00  668.00     282.0
+Percentage chosen overall          27.57   29.98   29.85      12.6
+Percentage chosen when available   27.57   29.98   29.85      12.6
+
+
+
+Classical covariance matrix:
+                  b_mileage       b_price b_range_year0 b_degradation b_packreplace b_cellreplace asc_no_choice
+b_mileage        6.1651e-04     6.308e-06    -2.550e-05     2.151e-05     4.237e-05     3.521e-05      0.002018
+b_price           6.308e-06      0.001510    -8.388e-06     5.779e-06     1.975e-05     1.304e-05      0.004988
+b_range_year0    -2.550e-05    -8.388e-06      0.002621    -5.006e-05   -1.2879e-04   -1.6471e-04      0.007034
+b_degradation     2.151e-05     5.779e-06    -5.006e-05    1.8010e-04     4.516e-05     5.095e-05    7.1486e-04
+b_packreplace     4.237e-05     1.975e-05   -1.2879e-04     4.516e-05      0.004760      0.002272      0.002328
+b_cellreplace     3.521e-05     1.304e-05   -1.6471e-04     5.095e-05      0.002272      0.004786      0.002184
+asc_no_choice      0.002018      0.004988      0.007034    7.1486e-04      0.002328      0.002184      0.051374
+
+Robust covariance matrix:
+                  b_mileage       b_price b_range_year0 b_degradation b_packreplace b_cellreplace asc_no_choice
+b_mileage        7.6806e-04    -7.293e-05     6.653e-05    -2.307e-05    1.2547e-04     2.651e-05      0.002337
+b_price          -7.293e-05      0.003920    -7.192e-05     1.251e-05    -6.150e-05   -1.9186e-04      0.013592
+b_range_year0     6.653e-05    -7.192e-05      0.003753   -1.7397e-04   -1.8481e-04    -6.021e-05      0.009939
+b_degradation    -2.307e-05     1.251e-05   -1.7397e-04    2.9470e-04    -3.192e-05    -3.034e-06    6.6293e-04
+b_packreplace    1.2547e-04    -6.150e-05   -1.8481e-04    -3.192e-05      0.006647      0.003818      0.002199
+b_cellreplace     2.651e-05   -1.9186e-04    -6.021e-05    -3.034e-06      0.003818      0.006368      0.002021
+asc_no_choice      0.002337      0.013592      0.009939    6.6293e-04      0.002199      0.002021      0.100268
+
+Classical correlation matrix:
+                  b_mileage       b_price b_range_year0 b_degradation b_packreplace b_cellreplace asc_no_choice
+b_mileage          1.000000      0.006538     -0.020063       0.06456      0.024734      0.020497        0.3585
+b_price            0.006538      1.000000     -0.004217       0.01108      0.007369      0.004850        0.5663
+b_range_year0     -0.020063     -0.004217      1.000000      -0.07287     -0.036465     -0.046506        0.6062
+b_degradation      0.064563      0.011082     -0.072866       1.00000      0.048774      0.054879        0.2350
+b_packreplace      0.024734      0.007369     -0.036465       0.04877      1.000000      0.475934        0.1489
+b_cellreplace      0.020497      0.004850     -0.046506       0.05488      0.475934      1.000000        0.1393
+asc_no_choice      0.358513      0.566330      0.606170       0.23501      0.148869      0.139269        1.0000
+
+Robust correlation matrix:
+                  b_mileage       b_price b_range_year0 b_degradation b_packreplace b_cellreplace asc_no_choice
+b_mileage           1.00000      -0.04203       0.03918     -0.048499       0.05553      0.011988       0.26628
+b_price            -0.04203       1.00000      -0.01875      0.011638      -0.01205     -0.038399       0.68553
+b_range_year0       0.03918      -0.01875       1.00000     -0.165416      -0.03700     -0.012317       0.51235
+b_degradation      -0.04850       0.01164      -0.16542      1.000000      -0.02281     -0.002215       0.12195
+b_packreplace       0.05553      -0.01205      -0.03700     -0.022807       1.00000      0.586930       0.08518
+b_cellreplace       0.01199      -0.03840      -0.01232     -0.002215       0.58693      1.000000       0.07997
+asc_no_choice       0.26628       0.68553       0.51235      0.121953       0.08518      0.079970       1.00000
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+  ID Avg prob per choice
+ 308          0.09364871
+ 338          0.10474442
+ 273          0.10537869
+ 140          0.11270081
+ 323          0.11669308
+ 194          0.11880674
+ 161          0.12833536
+ 276          0.13103302
+ 143          0.13590395
+ 353          0.14189537
+ 364          0.14269127
+ 116          0.14429135
+ 207          0.15088391
+  62          0.15216665
+ 371          0.15219334
+  29          0.15429055
+   5          0.15544653
+ 197          0.15844636
+ 221          0.16077540
+ 289          0.16125535
+
+Changes in parameter estimates from starting values:
+                  Initial    Estimate  Difference
+b_mileage           0.000     -0.1800     -0.1800
+b_price             0.000     -0.2693     -0.2693
+b_range_year0       0.000      0.4372      0.4372
+b_degradation       0.000     -0.2484     -0.2484
+b_packreplace       0.000     -0.3174     -0.3174
+b_cellreplace       0.000     -0.3912     -0.3912
+asc_no_choice       0.000     -2.3027     -2.3027
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value                                                                            
+modelName              "MNL_DCE_pref"                                                                   
+modelDescr             "MNL model"                                                                      
+indivID                "respID"                                                                         
+panelData              "TRUE"                                                                           
+outputDirectory        "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/code/main/model_output/apollo/"
+mixing                 "FALSE"                                                                          
+debug                  "FALSE"                                                                          
+nCores                 "1"                                                                              
+workInLogs             "FALSE"                                                                          
+seed                   "13"                                                                             
+HB                     "FALSE"                                                                          
+noValidation           "FALSE"                                                                          
+noDiagnostics          "FALSE"                                                                          
+calculateLLC           "TRUE"                                                                           
+analyticHessian        "FALSE"                                                                          
+memorySaver            "FALSE"                                                                          
+analyticGrad           "TRUE"                                                                           
+analyticGrad_manualSet "FALSE"                                                                          
+overridePanel          "FALSE"                                                                          
+preventOverridePanel   "FALSE"                                                                          
+noModification         "FALSE"                                                                          
+
+Hessian routines attempted
+--------------------------
+numerical jacobian of LL analytical gradient
+
+Scaling used in computing Hessian
+---------------------------------
+                  Value
+b_mileage     0.1800077
+b_price       0.2692575
+b_range_year0 0.4372460
+b_degradation 0.2484441
+b_packreplace 0.3174175
+b_cellreplace 0.3911623
+asc_no_choice 2.3026818
+
+
+apollo_probabilities
+----------------------
+function(
+  apollo_beta,
+  apollo_inputs,
+  functionality = "estimate"
+) {
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+
+  ### Define utility functions
+  P <- list()
+  # For each alternative, use the same variables (if attributes vary across alts)
+  # If they are alt-specific columns, adjust accordingly.
+  V <- list()
+  V[["alt1"]] <-
+    b_mileage *
+    veh_mileage_1 +
+    b_range_year0 * battery_range_year0_1 +
+    b_degradation * battery_degradation_1 +
+    b_packreplace * battery_refurbishpackreplace_1 +
+    b_cellreplace * battery_refurbishcellreplace_1 +
+    b_price * veh_price_1
+
+  V[["alt2"]] <-
+    b_mileage *
+    veh_mileage_2 +
+    b_range_year0 * battery_range_year0_2 +
+    b_degradation * battery_degradation_2 +
+    b_packreplace * battery_refurbishpackreplace_2 +
+    b_cellreplace * battery_refurbishcellreplace_2 +
+    b_price * veh_price_2
+
+  V[["alt3"]] <-
+    b_mileage *
+    veh_mileage_3 +
+    b_range_year0 * battery_range_year0_3 +
+    b_degradation * battery_degradation_3 +
+    b_packreplace * battery_refurbishpackreplace_3 +
+    b_cellreplace * battery_refurbishcellreplace_3 +
+    b_price * veh_price_3
+
+  V[["no_choice"]] <- asc_no_choice
+
+  # Model settings
+  mnl_settings <- list(
+    # altID = altID,
+    alternatives = c(alt1 = 1, alt2 = 2, alt3 = 3, no_choice = 4),
+    avail = list(alt1 = 1, alt2 = 1, alt3 = 1, no_choice = 1), ## Availability of alternatives
+    choiceVar = choice,
+    utilities = V
+  )
+
+  # Compute probabilities
+  P[["model"]] = apollo_mnl(mnl_settings, functionality)
+  ### Take product across observation for same individual
+  P <- apollo_panelProd(P, apollo_inputs, functionality)
+  ### Prepare and return outputs of function
+  P <- apollo_prepareProb(P, apollo_inputs, functionality)
+
+  return(P)
+}
