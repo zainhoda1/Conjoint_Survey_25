@@ -18,8 +18,9 @@ data_approval <- read_parquet(here(
 # Read in choice questions and join it to the choice_data
 
 survey_vehicle <- read_parquet(here(
-  "survey_prolific",
   "data",
+  "shiny_download",
+  "survey_p_data",
   'design_vehicle.parquet'
 ))
 nrow(data_raw)

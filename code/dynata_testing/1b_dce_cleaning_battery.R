@@ -10,8 +10,9 @@ data_raw <- read_parquet(here(
 
 # Read in choice questions and join it to the choice_data
 survey_battery <- read_parquet(here(
-  "survey_dynata",
   "data",
+  "shiny_download",
+  "survey_d_data",
   'design_battery.parquet'
 ))
 

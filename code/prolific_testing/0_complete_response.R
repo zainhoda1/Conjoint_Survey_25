@@ -1,49 +1,43 @@
 source(here::here('code', 'setup.R'))
-
+source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 # --------------------------------------------------------------------------
 # Load the data set:
 
-data_vehicle_prolific <- read_parquet(here(
-  "data",
-  "prolific_testing",
-  "choice_data_vehicle.parquet"
-))
-
-data_battery_prolific <- read_parquet(here(
-  "data",
-  "prolific_testing",
-  "choice_data_battery.parquet"
-))
-
-data_vehicle_prolific <- read_parquet(here(
-  "data",
-  "prolific_testing",
-  "choice_data_vehicle.parquet"
-))
-
-data_battery_prolific <- read_parquet(here(
-  "data",
-  "prolific_testing",
-  "choice_data_battery.parquet"
-))
-
-data_vehicle_dynata <- read_parquet(here(
-  "data",
-  "dynata_testing",
-  "choice_data_vehicle.parquet"
-))
-
-data_battery_dynata <- read_parquet(here(
-  "data",
-  "prolific_testing",
-  "choice_data_battery.parquet"
-))
+# data_vehicle_prolific <- read_parquet(here(
+#   "data",
+#   "prolific_testing",
+#   "choice_data_vehicle.parquet"
+# ))
+# 
+# data_battery_prolific <- read_parquet(here(
+#   "data",
+#   "prolific_testing",
+#   "choice_data_battery.parquet"
+# ))
+# 
+# 
+# data_vehicle_dynata <- read_parquet(here(
+#   "data",
+#   "dynata_testing",
+#   "choice_data_vehicle.parquet"
+# ))
+# 
+# data_battery_dynata <- read_parquet(here(
+#   "data",
+#   "prolific_testing",
+#   "choice_data_battery.parquet"
+# ))
 
 data_raw <- read_csv(here('data', 'prolific_testing', 'data_raw.csv'))
 
 # removing testing entries
 data_raw <- data_raw %>%
   filter(!is.na(prolific_pid), nchar(prolific_pid) >= 10)
+
+nrow(data_raw)
+
+# Keep first occurrence
+data_raw <- data_raw %>% distinct(prolific_pid, .keep_all = TRUE)
 
 nrow(data_raw)
 
@@ -203,3 +197,4 @@ data_approval %>%
       "reject.parquet"
     )
   )
+

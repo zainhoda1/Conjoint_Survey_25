@@ -9,11 +9,18 @@ data_raw <- read_parquet(here(
   "data.parquet"
 ))
 
+data_approval <- read_parquet(here(
+  "data",
+  "prolific_testing",
+  "approve.parquet"
+))
+
 # Read in choice questions and join it to the choice_data
 
 survey_battery <- read_parquet(here(
-  "survey_prolific",
   "data",
+  "shiny_download",
+  "survey_p_data",
   'design_battery.parquet'
 ))
 
