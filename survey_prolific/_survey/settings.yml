@@ -11,7 +11,7 @@ theme-settings:
 
 survey-settings:
   show-previous: no
-  use-cookies: yes
+  use-cookies: no
   auto-scroll: no
   rate-survey: no
   all-questions-required: yes

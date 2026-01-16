@@ -32,13 +32,15 @@ data <- data_raw %>%
     time_start,
     time_min_total,
     time_min_battery_cbc,
-    respID,
+    battery_respID,
     next_veh_budget,
     vehicle_type = next_veh_style,
     budget,
     starts_with("battery_cbc_q")
   ) %>%
-  select(-next_veh_budget)
+  select(-next_veh_budget) %>% 
+  rename(respID = battery_respID)
+
 
 nrow(data)
 
@@ -62,7 +64,8 @@ data_battery <- data_battery %>%
       (battery_cbc_q2_button == battery_cbc_q3_button) &
       (battery_cbc_q3_button == battery_cbc_q4_button) &
       (battery_cbc_q4_button == battery_cbc_q5_button) &
-      (battery_cbc_q5_button == battery_cbc_q6_button)
+      (battery_cbc_q5_button == battery_cbc_q6_button) &
+      (battery_cbc_q5_button != 'option_4')
   ) %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
@@ -140,3 +143,4 @@ write_parquet(
     "choice_data_battery.parquet"
   )
 )
+

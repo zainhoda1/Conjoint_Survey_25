@@ -30,6 +30,13 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 
 data_raw <- read_csv(here('data', 'prolific_testing', 'data_raw.csv'))
 
+
+# data_raw <- read_csv(here(
+#   "data",
+#   "prolific_testing",
+#   "preview_data.csv"
+# ))
+
 # removing testing entries
 data_raw <- data_raw %>%
   filter(!is.na(prolific_pid), nchar(prolific_pid) >= 10)

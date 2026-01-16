@@ -13,6 +13,7 @@ ui <- sd_ui()
 # Database setup
 db <- sd_db_connect()
 
+
 # Load design files
 survey <- read_parquet(here('data', 'design_vehicle.parquet'))
 battery_survey <- read_parquet(here('data', 'design_battery.parquet'))
