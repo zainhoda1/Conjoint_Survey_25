@@ -28,6 +28,7 @@ data_raw %>%
 data <- data_raw %>%
   # Select important columns
   select(
+    psid,
     time_min_total,
     time_min_vehicle_cbc,
     respID,

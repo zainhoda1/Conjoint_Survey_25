@@ -2,10 +2,10 @@ source(here::here('code', 'setup.R'))
 
 # ----Load the data set----
 
-data <- read_csv(here(
+data <- data_joint <- read_parquet(here(
   "data",
-  "main",
-  "survey_data.csv"
+  "dynata_prolific_joint",
+  "data_joint_vehicle.parquet"
 ))
 # head(data)
 

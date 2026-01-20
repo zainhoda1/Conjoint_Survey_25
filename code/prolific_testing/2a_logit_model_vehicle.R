@@ -8,7 +8,7 @@ data <- read_parquet(here(
   "prolific_testing",
   "choice_data_vehicle.parquet"
 )) %>%
-  select(-next_veh_budget)
+  select(-next_veh_budget, -psid)
 
 head(data)
 
@@ -118,12 +118,7 @@ summary(wtp_model_all)
 
 # # Check the 1st order condition: Is the gradient at the solution zero?
 # model$gradient
-# 
+#
 # # 2nd order condition: Is the hessian negative definite?
 # # (If all the eigenvalues are negative, the hessian is negative definite)
 # eigen(model$hessian)$values
-
-
-
-
-

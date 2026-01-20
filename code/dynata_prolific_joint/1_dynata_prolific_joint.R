@@ -1,8 +1,7 @@
 # After running both Dynata and Prolific
 source(here::here('code', 'setup.R'))
 
-# --------------------------------------------------------------------------
-# Load the data set:
+# --- DCE data set----
 
 data_prolific_vehicle <- read_parquet(here(
   "data",
@@ -60,5 +59,54 @@ write_parquet(
     "data",
     "dynata_prolific_joint",
     "data_joint_battery.parquet"
+  )
+)
+
+
+# --- DCE data set----
+psid_prolific <- unique(c(
+  data_joint_battery$psid[data_joint_battery$data_source == "prolific"],
+  data_joint_vehicle$psid[data_joint_vehicle$data_source == "prolific"]
+))
+
+psid_dynata <- unique(c(
+  data_joint_battery$psid[data_joint_battery$data_source == "dynata"],
+  data_joint_vehicle$psid[data_joint_vehicle$data_source == "dynata"]
+))
+
+
+#---- FULL DATASET (filtered using DCE data)----
+
+data_prolific <- read_parquet(here(
+  "data",
+  "prolific_testing",
+  "data.parquet"
+)) %>%
+  mutate(
+    psid = prolific_pid,
+    data_source = "prolific",
+    birth_year = as.numeric(birth_year)
+  ) %>%
+  filter(psid %in% psid_prolific)
+
+
+data_dynata <- read_parquet(here(
+  "data",
+  "dynata_testing",
+  "data.parquet"
+)) %>%
+  mutate(data_source = "dynata") %>%
+  filter(psid %in% psid_dynata)
+
+# setdiff(names(data_prolific), names(data_dynata))
+# setdiff(names(data_dynata), names(data_prolific))
+data_joint <- bind_rows(data_prolific, data_dynata)
+
+write_parquet(
+  data_joint,
+  here(
+    "data",
+    "dynata_prolific_joint",
+    "data_joint.parquet"
   )
 )

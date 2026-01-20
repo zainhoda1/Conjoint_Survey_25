@@ -23,7 +23,8 @@ data <- data %>%
   ) %>%
   select(
     -starts_with("battery_health"),
-    -starts_with("time")
+    -starts_with("time"),
+    -psid
   )
 
 # Dummy encode

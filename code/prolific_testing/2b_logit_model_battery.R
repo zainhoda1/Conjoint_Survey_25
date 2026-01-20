@@ -10,7 +10,6 @@ data <- read_parquet(here(
 ))
 
 
-
 glimpse(data)
 
 data <- data %>%
@@ -24,7 +23,8 @@ data <- data %>%
   ) %>%
   select(
     -starts_with("battery_health"),
-    -starts_with("time")
+    -starts_with("time"),
+    -psid
   )
 
 glimpse(data)
@@ -33,7 +33,11 @@ glimpse(data)
 data <- cbc_encode(
   data,
   coding = 'dummy',
-  ref_levels = list(battery_refurbish = 'original' , vehicle_type = 'suv', budget = 'high')
+  ref_levels = list(
+    battery_refurbish = 'original',
+    vehicle_type = 'suv',
+    budget = 'high'
+  )
 )
 
 data_car_low <- data %>%
@@ -126,4 +130,3 @@ summary(model_car_high)
 summary(model_suv_low)
 summary(model_suv_high)
 summary(model_all)
-

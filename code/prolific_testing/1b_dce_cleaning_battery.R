@@ -46,7 +46,7 @@ data <- data_raw %>%
     budget,
     starts_with("battery_cbc_q")
   ) %>%
-  select(-next_veh_budget) %>% 
+  select(-next_veh_budget) %>%
   rename(respID = battery_respID)
 
 nrow(data)
@@ -154,6 +154,7 @@ choice_data_battery <- choice_data_battery %>%
     battery_health_year3 = ifelse(no_choice, NA, battery_health_year3),
     battery_health_year8 = ifelse(no_choice, NA, battery_health_year8)
   ) %>%
+  mutate(psid = prolific_pid) %>%
   select(-prolific_pid, -battery_condition)
 
 head(choice_data_battery)
@@ -167,4 +168,3 @@ write_parquet(
     "choice_data_battery.parquet"
   )
 )
-

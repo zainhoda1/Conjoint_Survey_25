@@ -15,6 +15,9 @@ library(nFactors)
 library(rlang)
 library(openxlsx)
 library(xlsx)
+library(zipcodeR) # For ZIP code coordinates
+library(viridis) # For accessible color scales
+library(maps) # For base map data
 
 `%notin%` <- Negate(`%in%`)
 

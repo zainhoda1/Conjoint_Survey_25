@@ -148,7 +148,9 @@ choice_data_vehicle$obsID <- rep(seq(nRespondents * nQuestions), each = nAlts)
 # Reorder columns - it's nice to have the "ID" variables first
 choice_data_vehicle <- choice_data_vehicle %>%
   select(ends_with("ID"), "choice", everything()) %>%
+  mutate(psid = prolific_pid) %>%
   select(-operating_cost_text, -range, -prolific_pid)
+
 
 head(choice_data_vehicle)
 

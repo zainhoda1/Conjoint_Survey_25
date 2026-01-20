@@ -28,7 +28,7 @@ data_raw %>%
 data <- data_raw %>%
   # Select important columns
   select(
-    session_id,
+    psid,
     time_start,
     time_min_total,
     time_min_battery_cbc,
@@ -38,7 +38,7 @@ data <- data_raw %>%
     budget,
     starts_with("battery_cbc_q")
   ) %>%
-  select(-next_veh_budget) %>% 
+  select(-next_veh_budget) %>%
   rename(respID = battery_respID)
 
 
@@ -130,7 +130,7 @@ choice_data_battery <- choice_data_battery %>%
     battery_health_year3 = ifelse(no_choice, NA, battery_health_year3),
     battery_health_year8 = ifelse(no_choice, NA, battery_health_year8)
   ) %>%
-  select(-session_id, -battery_condition)
+  select(-battery_condition)
 
 head(choice_data_battery)
 
@@ -143,4 +143,3 @@ write_parquet(
     "choice_data_battery.parquet"
   )
 )
-

@@ -7,7 +7,7 @@ data <- read_parquet(here(
   "dynata_testing",
   "choice_data_vehicle.parquet"
 )) %>%
-  select(-next_veh_budget)
+  select(-next_veh_budget, -psid)
 
 head(data)
 
@@ -21,7 +21,7 @@ data <- data %>%
     mileage = mileage / 10000, # 2 - 6
     age = age, # 2 - 8
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
-  ) 
+  )
 
 glimpse(data)
 
@@ -82,7 +82,7 @@ summary(model_all)
 
 # # Check the 1st order condition: Is the gradient at the solution zero?
 # model$gradient
-# 
+#
 # # 2nd order condition: Is the hessian negative definite?
 # # (If all the eigenvalues are negative, the hessian is negative definite)
 # eigen(model$hessian)$values
