@@ -100,7 +100,18 @@ data_dynata <- read_parquet(here(
 
 # setdiff(names(data_prolific), names(data_dynata))
 # setdiff(names(data_dynata), names(data_prolific))
-data_joint <- bind_rows(data_prolific, data_dynata)
+data_joint <- bind_rows(data_prolific, data_dynata) %>%
+  select(
+    !c(
+      attention_check_toyota,
+      attitudes_1_a,
+      attitudes_1_b,
+      attitudes_2_a,
+      attitudes_2_b,
+      battery_attribute,
+      next_veh_fuel
+    )
+  )
 
 write_parquet(
   data_joint,

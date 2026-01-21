@@ -5,7 +5,7 @@ source(here::here('code', 'setup.R'))
 data <- data_joint <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
-  "data_joint_vehicle.parquet"
+  "data_joint.parquet"
 ))
 # head(data)
 
@@ -119,7 +119,7 @@ fit <- factanal(
 )
 
 
-# print(fit, digits=2, cutoff=0.3, sort=TRUE)
+print(fit, digits = 2, cutoff = 0.3, sort = TRUE)
 
 l <- fit$loadings
 # l<-fit_oblimin$loadings
@@ -194,11 +194,11 @@ data <- data %>%
   )
 
 # ----Data Output----
-write_csv(
+write_parquet(
   data,
   here(
     "data",
-    "main",
-    "data_clean_variables.csv"
+    "dynata_prolific_joint",
+    "data_clean_variables.parquet"
   )
 )
