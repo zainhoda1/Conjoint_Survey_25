@@ -1,0 +1,32 @@
+Testing likelihood function.
+10 separate runs will be conducted, each using a random subset of 90% of
+  individuals for estimation, and the remainder for validation.
+Number of individuals
+- for estimation : 270
+- for forecasting : 30
+- in sample (total): 300
+Estimated parameters and log-likelihoods for each sample will be written to:
+  /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/code/output/model_output/apollo/vehicle/LC_2c_indicator_10_outOfSample_params.csv
+The matrix defining the observations used in each repetition will be written
+  to:
+  /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/code/output/model_output/apollo/vehicle/LC_2c_indicator_10_outOfSample_samples.csv
+
+Estimation cycle 1 (1620 obs.)
+Estimation results written to file.
+Estimation cycle 2 (1620 obs.)
+Estimation results written to file.
+Estimation cycle 3 (1620 obs.)
+Estimation results written to file.
+Estimation cycle 4 (1620 obs.)
+Estimation results written to file.
+Estimation cycle 5 (1620 obs.)
+Estimation results written to file.
+Estimation cycle 6 (1620 obs.)
+Unconditional distributions computed
+        no_choice powertrainbev powertrainhev range_bev    mileage        age
+class_1 -4.716241     -3.687914    -1.6307672 0.1880447 -0.2451292 -0.0428778
+class_2 -6.259014     -1.104749     0.2438379 0.2088851 -0.1452003 -0.1111521
+        operating_cost
+class_1     -0.7098120
+class_2     -0.7548027
+Calculating conditionals...
