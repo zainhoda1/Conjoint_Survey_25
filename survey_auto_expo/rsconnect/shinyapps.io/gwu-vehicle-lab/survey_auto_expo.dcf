@@ -1,0 +1,12 @@
+name: survey_auto_expo
+title: survey_auto_expo
+username: gwu-vehicle-lab
+account: gwu-vehicle-lab
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16477598
+bundleId: 11476430
+url: https://gwu-vehicle-lab.shinyapps.io/survey_auto_expo/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
