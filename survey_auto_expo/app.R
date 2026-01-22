@@ -110,7 +110,7 @@ vehicle_cbc_options <- function(df) {
     HTML(glue(
       "
       <div style='text-align: left;'>
-        <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 4</b>
+        <b style='position: absolute; top: 5px; left: 5px; margin: 0; padding: 0;'>Option 4</b><br>
         <b><span style='font-size: 13px;'>Even if these were </span></b><br>
         <b><span style='font-size: 13px;'>my best options,  </span></b><br>
         <b><span style='font-size: 13px;'>I would not choose any</span></b><br>
