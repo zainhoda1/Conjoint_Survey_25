@@ -1,3 +1,5 @@
+rm(list = ls())
+
 source(here::here('code', 'setup.R'))
 
 ### ----Latent class (c=3)----
@@ -9,8 +11,9 @@ i = 1
 apollo_initialise()
 
 # Define core controls
+### CAR
 apollo_control = list(
-  modelName = paste0("LC_3c_indicator_", i),
+  modelName = paste0("car_lc_3c_indicator_", i),
   modelDescr = "LC model with 3 classes with indicator",
   indivID = "respID",
   nCores = 2,
@@ -25,6 +28,25 @@ database <- read_parquet(here(
 )) %>%
   filter(vehicle_typesuv == 0) %>%
   filter(!is.na(hhincome_num))
+
+### SUV
+
+# apollo_control = list(
+#   modelName = paste0("suv_lc_3c_indicator_", i),
+#   modelDescr = "LC model with 3 classes with indicator",
+#   indivID = "respID",
+#   nCores = 2,
+#   panelData = TRUE,
+#   outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+# )
+#
+# database <- read_parquet(here(
+#   "data",
+#   "dynata_prolific_joint",
+#   "data_apollo_vehicle.parquet"
+# )) %>%
+#   filter(vehicle_typesuv == 1) %>%
+#   filter(!is.na(hhincome_num))
 
 ### Vector of parameters, including any that are kept fixed in estimation
 apollo_beta = c(
@@ -55,68 +77,68 @@ apollo_beta = c(
   b_price_c = 0,
 
   # base intercepts for class allocation model
-  delta_a = 0,
   # coefficients for covariates in class‐allocation
-  # gamma_EV_benefit_a = 0,
-  # gamma_EV_anxiety_a = 0,
-  # gamma_hhincome_a = 0,
-  # gamma_ev_charge_a = 0,
-  # gamma_ev_neighbor_a = 0,
-  # gamma_knowledge_ev_a = 0,
-  # gamma_knowledge_subsidy_a = 0,
-  delta_b = 0,
-  gamma_EV_benefit_b = 0,
-  gamma_EV_anxiety_b = 0,
-  gamma_hhincome_b = 0,
-  gamma_ev_charge_b = 0,
-  gamma_ev_neighbor_b = 0,
-  gamma_knowledge_ev_b = 0,
-  gamma_knowledge_subsidy_b = 0,
-  delta_c = 0,
-  gamma_EV_benefit_c = 0,
-  gamma_EV_anxiety_c = 0,
-  gamma_ev_charge_c = 0,
-  gamma_hhincome_c = 0,
-  gamma_ev_neighbor_c = 0,
-  gamma_knowledge_ev_c = 0,
-  gamma_knowledge_subsidy_c = 0
+  delta_a = 0,
+  gamma_EV_benefit_a = 0,
+  gamma_EV_anxiety_a = 0,
+  gamma_hhincome_a = 0,
+  gamma_ev_charge_a = 0,
+  gamma_ev_neighbor_a = 0,
+  gamma_knowledge_ev_a = 0,
+  gamma_knowledge_subsidy_a = 0,
+  delta_b = 0.1,
+  gamma_EV_benefit_b = 0.1,
+  gamma_EV_anxiety_b = 0.1,
+  gamma_hhincome_b = 0.1,
+  gamma_ev_charge_b = 0.1,
+  gamma_ev_neighbor_b = 0.1,
+  gamma_knowledge_ev_b = 0.1,
+  gamma_knowledge_subsidy_b = 0.1,
+  delta_c = 0.2,
+  gamma_EV_benefit_c = 0.2,
+  gamma_EV_anxiety_c = 0.2,
+  gamma_ev_charge_c = 0.2,
+  gamma_hhincome_c = 0.2,
+  gamma_ev_neighbor_c = 0.2,
+  gamma_knowledge_ev_c = 0.2,
+  gamma_knowledge_subsidy_c = 0.2
 )
 
 ### Vector with names (in quotes) of parameters to be kept fixed at their starting value in apollo_beta, use apollo_beta_fixed = c() if none
 apollo_fixed = c(
-  "delta_a"
-  # "gamma_EV_benefit_a",
-  # "gamma_EV_anxiety_a",
-  # "gamma_hhincome_a",
-  # "gamma_ev_charge_a",
-  # "gamma_ev_neighbor_a",
-  # "gamma_knowledge_ev_a",
-  # "gamma_knowledge_subsidy_a"
+  "delta_a",
+  "gamma_EV_benefit_a",
+  "gamma_EV_anxiety_a",
+  "gamma_hhincome_a",
+  "gamma_ev_charge_a",
+  "gamma_ev_neighbor_a",
+  "gamma_knowledge_ev_a",
+  "gamma_knowledge_subsidy_a"
+  # "gamma_ev_charge_b",
+  # "gamma_ev_neighbor_b",
+  # "gamma_knowledge_ev_b",
+  # "gamma_knowledge_subsidy_b",
+  # "gamma_ev_charge_c",
+  # "gamma_ev_neighbor_c",
+  # "gamma_knowledge_ev_c",
+  # "gamma_knowledge_subsidy_c"
   # "gamma_used_bev_b",
   # "gamma_EV_benefit_b",
   # "gamma_EV_anxiety_b",
   # "gamma_used_bev_c"
   # "gamma_EV_benefit_c",
   # "gamma_EV_anxiety_c"
-  # ,
-  #
-  # "b_range_bev_a",
-  # "b_range_phev_a",
-  # "b_range_bev_b",
-  # "b_range_phev_b",
-  # "b_range_bev_c",
-  # "b_range_phev_c"
 )
 
 # apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
 #   runif(sum(!names(apollo_beta) %in% apollo_fixed), -1, 1)
 
-# apollo_beta = apollo_readBeta(
-#   apollo_beta,
-#   apollo_fixed,
-#   "lc_3c_indicator_1",
-#   overwriteFixed = FALSE
-# )
+apollo_beta = apollo_readBeta(
+  apollo_beta,
+  apollo_fixed,
+  "lc_3c_indicator_1",
+  overwriteFixed = FALSE
+)
 
 #### DEFINE LATENT CLASS COMPONENTS
 apollo_lcPars = function(apollo_beta, apollo_inputs) {
@@ -145,14 +167,14 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
 
   ### Utilities of class allocation model: ow likely a person is to belong to each class based on indicators
   V = list()
-  V[["class_a"]] = delta_a
-  # gamma_EV_benefit_a * FA_EV_benefit +
-  # gamma_EV_anxiety_a * FA_EV_anxiety +
-  # gamma_hhincome_a * hhincome_num_10k +
-  # gamma_ev_charge_a * (EV_charger == "yes") +
-  # gamma_ev_neighbor_a * (EV_neighbor == "yes") +
-  # gamma_knowledge_ev_a * (knowledge_ev == 1) +
-  # gamma_knowledge_subsidy_a * (knowledge_subsidy == 1)
+  V[["class_a"]] = delta_a +
+    gamma_EV_benefit_a * FA_EV_benefit +
+    gamma_EV_anxiety_a * FA_EV_anxiety +
+    gamma_hhincome_a * hhincome_num_10k +
+    gamma_ev_charge_a * (EV_charger == "yes") +
+    gamma_ev_neighbor_a * (EV_neighbor == "yes") +
+    gamma_knowledge_ev_a * (knowledge_ev == 1) +
+    gamma_knowledge_subsidy_a * (knowledge_subsidy == 1)
 
   V[["class_b"]] = delta_b +
     gamma_EV_benefit_b * FA_EV_benefit +
@@ -299,10 +321,10 @@ best_model_name <- model_summary$model_name[i]
 lc_3c_indicator <- model_results[[best_model_name]]
 
 ### Show output in screen
-apollo_modelOutput(
-  lc_3c_indicator,
-  modelOutput_settings = list(printPVal = TRUE)
-)
+# apollo_modelOutput(
+#   lc_3c_indicator,
+#   modelOutput_settings = list(printPVal = TRUE)
+# )
 
 ### Save output to file(s)
 apollo_saveOutput(
@@ -406,18 +428,52 @@ data_output <- database %>%
     by = c("respID" = "ID")
   )
 
-class_character <- data_output %>%
+## class_character
+num_vars <- data_output %>%
+  select(where(is.numeric)) %>%
+  names()
+# colnames(database)
+
+num_vars_active <- c(
+  "FA_EV_benefit",
+  "FA_EV_anxiety",
+  "hhincome_num_10k",
+  "ATT_EVB_environment",
+  "ATT_EVB_function",
+  "next_veh_budget",
+  "next_veh_fuel_used_bev"
+)
+cate_vars_active <- c(
+  "knowledge_ev",
+  "knowledge_subsidy",
+  "EV_charger",
+  "EV_neighbor"
+)
+
+num_summary <- data_output %>%
   group_by(class_allocation) %>%
-  summarise(across(
-    c(
-      ATT_EVB_environment,
-      ATT_EVB_function,
-      FA_EV_benefit,
-      FA_EV_anxiety,
-      next_veh_fuel_used_bev,
-      hhincome_num,
-      next_veh_budget
-    ), # replace with your variable names
-    ~ mean(.x, na.rm = TRUE)
-  ))
-class_character
+  summarise(
+    across(
+      all_of(num_vars_active), # replace with your variable names
+      ~ mean(.x, na.rm = TRUE)
+    ),
+    .groups = "drop"
+  )
+
+cat_summary <- data_output %>%
+  mutate(
+    knowledge_ev = as.character(knowledge_ev),
+    knowledge_subsidy = as.character(knowledge_subsidy)
+  ) %>%
+  group_by(class_allocation) %>%
+  summarise(
+    across(
+      all_of(cate_vars_active),
+      ~ mean(as.numeric(.x %in% c("yes", "1")), na.rm = TRUE),
+      .names = "{.col}_share_yes"
+    ),
+    .groups = "drop"
+  )
+
+class_character <- class_character <- num_summary %>%
+  left_join(cat_summary, by = "class_allocation")
