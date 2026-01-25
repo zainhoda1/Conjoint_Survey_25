@@ -192,24 +192,10 @@ next_veh_payment:
   options:
     Pay in full: pay_full
     Finance: finance
-next_veh_fuel:
-  type: matrix
-  label: How likely are you to purchase the following types of vehicles as your next
-    vehicle?
-  options:
-    Very unlikely: very_unlikely
-    Somewhat unlikely: somewhat_unlikely
-    Neither likely nor unlikely: neutral
-    Somewhat likely: somewhat_likely
-    Very likely: very_likely
-  row:
-    New plug-in hybrid electric vehicle: new_phev
-    Used plug-in hybrid electric vehicle: used_phev
-    New battery electric vehicle: new_bev
-    Used battery electric vehicle: used_bev
 next_veh_fuel_new_phev:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How likely are you to purchase a ‘New plug-in hybrid electric vehicle’ as
+    your next vehicle?
   options:
     Very unlikely: very_unlikely
     Somewhat unlikely: somewhat_unlikely
@@ -217,8 +203,9 @@ next_veh_fuel_new_phev:
     Somewhat likely: somewhat_likely
     Very likely: very_likely
 next_veh_fuel_used_phev:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How likely are you to purchase a ‘Used plug-in hybrid electric vehicle’ as
+    your next vehicle?
   options:
     Very unlikely: very_unlikely
     Somewhat unlikely: somewhat_unlikely
@@ -226,8 +213,9 @@ next_veh_fuel_used_phev:
     Somewhat likely: somewhat_likely
     Very likely: very_likely
 next_veh_fuel_new_bev:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How likely are you to purchase a ‘New battery electric vehicle’ as your next
+    vehicle?
   options:
     Very unlikely: very_unlikely
     Somewhat unlikely: somewhat_unlikely
@@ -235,8 +223,9 @@ next_veh_fuel_new_bev:
     Somewhat likely: somewhat_likely
     Very likely: very_likely
 next_veh_fuel_used_bev:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How likely are you to purchase a ‘Used battery electric vehicle’ as your
+    next vehicle?
   options:
     Very unlikely: very_unlikely
     Somewhat unlikely: somewhat_unlikely
@@ -252,29 +241,29 @@ next_veh_car_images:
   label: Select a vehicle based on its segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
-    7_new_car_hatchback_compact_luxury: 7_new_car_hatchback_compact_luxury
     4_new_car_sedan_fullsize: 4_new_car_sedan_fullsize
-    1_new_car_sedan_compact: 1_new_car_sedan_compact
-    8_new_car_sedan_midsize: 8_new_car_sedan_midsize
     5_new_car_sedan_fullsize_luxury: 5_new_car_sedan_fullsize_luxury
-    2_new_car_hatchback_subcompact: 2_new_car_hatchback_subcompact
     6_new_car_hatchback_compact: 6_new_car_hatchback_compact
-    9_new_car_hatchback_subcompact_luxury: 9_new_car_hatchback_subcompact_luxury
+    7_new_car_hatchback_compact_luxury: 7_new_car_hatchback_compact_luxury
     3_new_car_sedan_subcompact: 3_new_car_sedan_subcompact
+    9_new_car_hatchback_subcompact_luxury: 9_new_car_hatchback_subcompact_luxury
+    8_new_car_sedan_midsize: 8_new_car_sedan_midsize
+    2_new_car_hatchback_subcompact: 2_new_car_hatchback_subcompact
+    1_new_car_sedan_compact: 1_new_car_sedan_compact
 next_veh_suv_images:
   type: mc_buttons
   label: Select a vehicle based on its segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
-    2_new_crossover_midsize: 2_new_crossover_midsize
-    4_new_crossover_midsize: 4_new_crossover_midsize
     7_new_crossover_subcompact: 7_new_crossover_subcompact
-    8_new_suv_fullsize: 8_new_suv_fullsize
     3_new_suv_fullsize: 3_new_suv_fullsize
-    5_new_suv_fullsize: 5_new_suv_fullsize
-    6_new_crossover_subcompact: 6_new_crossover_subcompact
-    1_new_crossover_compact: 1_new_crossover_compact
     9_new_crossover_compact: 9_new_crossover_compact
+    2_new_crossover_midsize: 2_new_crossover_midsize
+    5_new_suv_fullsize: 5_new_suv_fullsize
+    1_new_crossover_compact: 1_new_crossover_compact
+    6_new_crossover_subcompact: 6_new_crossover_subcompact
+    8_new_suv_fullsize: 8_new_suv_fullsize
+    4_new_crossover_midsize: 4_new_crossover_midsize
 vehicle_cbc_q0_button:
   type: unknown
   label: []
@@ -318,25 +307,10 @@ no_bev_selected0:
   type: unknown
   label: We noticed you did not choose any of the electric vehicle options in the
     last few questions. Could you tell us any reasons why?
-battery_attribute:
-  type: matrix
-  label: How important are the following attributes to you when selecting a used battery
-    electric vehicle?
-  options:
-    Unimportant: unimportant
-    Of little importance: little_important
-    Moderately important: moderately_important
-    Important: important
-    Very important: very_important
-  row:
-    Vehicle mileage: veh_mile
-    Purchase price: purchase_price
-    Battery refurbishment history: battery_refurbish
-    Vehicle range: veh_range
-    Battery health: battery_health
 battery_attribute_veh_mile:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How important is ‘Vehicle mileage’ to you when selecting a used battery electric
+    vehicle?
   options:
     Unimportant: unimportant
     Of little importance: little_important
@@ -344,8 +318,9 @@ battery_attribute_veh_mile:
     Important: important
     Very important: very_important
 battery_attribute_purchase_price:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How important is ‘Purchase price’ to you when selecting a used battery electric
+    vehicle?
   options:
     Unimportant: unimportant
     Of little importance: little_important
@@ -353,8 +328,9 @@ battery_attribute_purchase_price:
     Important: important
     Very important: very_important
 battery_attribute_battery_refurbish:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How important is ‘Battery refurbishment history’ to you when selecting a
+    used battery electric vehicle?
   options:
     Unimportant: unimportant
     Of little importance: little_important
@@ -362,8 +338,9 @@ battery_attribute_battery_refurbish:
     Important: important
     Very important: very_important
 battery_attribute_veh_range:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How important is ‘Vehicle range’ to you when selecting a used battery electric
+    vehicle?
   options:
     Unimportant: unimportant
     Of little importance: little_important
@@ -371,8 +348,9 @@ battery_attribute_veh_range:
     Important: important
     Very important: very_important
 battery_attribute_battery_health:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: How important is ‘Battery health’ to you when selecting a used battery electric
+    vehicle?
   options:
     Unimportant: unimportant
     Of little importance: little_important
@@ -417,23 +395,10 @@ max_subsidy:
     $7,500: '7500'
     $10,000: '10000'
     I’m not sure: not_sure
-attitudes_1_a:
-  type: matrix
-  label: Please indicate the extent to which you agree or disagree with the following
-    statements.
-  options:
-    Strongly disagree: strongly_disagree
-    Somewhat disagree: somewhat_disagree
-    Neither agree nor disagree: neutral
-    Somewhat agree: somewhat_agree
-    Strongly agree: strongly_agree
-  row:
-    People who are important to me think that I should buy an EV.: ev_norm
-    Driving an EV would eventually result in cost savings.: ev_cost
-    Driving an EV would be beneficial to the environment in the long term.: ev_environment
 attitudes_1_a_ev_norm:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘People who are important to me think that I should buy an EV.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
@@ -441,8 +406,9 @@ attitudes_1_a_ev_norm:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_a_ev_cost:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘Driving an EV would eventually result in cost savings.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
@@ -450,30 +416,20 @@ attitudes_1_a_ev_cost:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_a_ev_environment:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘Driving an EV would be beneficial to the environment in the long
+    term.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
     Neither agree nor disagree: neutral
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
-attitudes_1_b:
-  type: matrix
-  label: []
-  options:
-    Strongly disagree: strongly_disagree
-    Somewhat disagree: somewhat_disagree
-    Neither agree nor disagree: neutral
-    Somewhat agree: somewhat_agree
-    Strongly agree: strongly_agree
-  row:
-    If I owned a BEV, I would often worry about running out of charge.: ev_range
-    BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing.: ev_resale
-    The price of an EV is too high.: ev_price
 attitudes_1_b_ev_range:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘If I owned a BEV, I would often worry about running out of charge.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
@@ -481,8 +437,10 @@ attitudes_1_b_ev_range:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_b_ev_resale:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘BEVs are less valuable than gasoline cars on the resale market, because
+    the technology is always advancing.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
@@ -490,31 +448,20 @@ attitudes_1_b_ev_resale:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_b_ev_price:
-  type: mc
-  label: []
-  options:
-    Strongly disagree: strongly_disagree
-    Somewhat disagree: somewhat_disagree
-    Neither agree nor disagree: neutral
-    Somewhat agree: somewhat_agree
-    Strongly agree: strongly_agree
-attitudes_2_a:
-  type: matrix
+  type: mc_buttons
   label: Please indicate the extent to which you agree or disagree with the following
-    statements.
+    statement - ‘The price of an EV is too high’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
     Neither agree nor disagree: neutral
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
-  row:
-    Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems.: ev_battery_environment
-    Refurbished EV batteries do NOT perform and function as original EV batteries.: ev_battery_function
-    Please select "Strongly agree" as your response to this item.: attention_check_agree
 attitudes_2_a_ev_battery_environment:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘Purchasing refurbished EV batteries will minimize negative effects
+    on natural ecosystems.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
@@ -522,8 +469,10 @@ attitudes_2_a_ev_battery_environment:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_a_ev_battery_function:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘Refurbished EV batteries do NOT perform and function as original
+    EV batteries.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
@@ -531,30 +480,19 @@ attitudes_2_a_ev_battery_function:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_a_attention_check_agree:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘Please select “Strongly agree” as your response to this item.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
     Neither agree nor disagree: neutral
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
-attitudes_2_b:
-  type: matrix
-  label: []
-  options:
-    Strongly disagree: strongly_disagree
-    Somewhat disagree: somewhat_disagree
-    Neither agree nor disagree: neutral
-    Somewhat agree: somewhat_agree
-    Strongly agree: strongly_agree
-  row:
-    Generally, I am willing to put in extra effort to find lower prices.: price_sensitive
-    I like to be among the first people to have the latest technology.: tech_savvy
-    I am a person who is fully prepared to take risks.: risk_taker
 attitudes_2_b_price_sensitive:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘Generally, I am willing to put in extra effort to find lower prices.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
@@ -562,8 +500,9 @@ attitudes_2_b_price_sensitive:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_b_tech_savvy:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘I like to be among the first people to have the latest technology.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
@@ -571,8 +510,9 @@ attitudes_2_b_tech_savvy:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_b_risk_taker:
-  type: mc
-  label: []
+  type: mc_buttons
+  label: Please indicate the extent to which you agree or disagree with the following
+    statement - ‘I am a person who is fully prepared to take risks.’
   options:
     Strongly disagree: strongly_disagree
     Somewhat disagree: somewhat_disagree
