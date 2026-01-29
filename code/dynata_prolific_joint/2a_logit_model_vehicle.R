@@ -8,7 +8,9 @@ data_joint <- read_parquet(here(
   "dynata_prolific_joint",
   "data_joint_vehicle.parquet"
 ))
-
+# %>%
+# filter(vehicle_typesuv == 1) %>%
+# filter(!is.na(hhincome_num))
 
 data <- data_joint %>%
   mutate(
@@ -106,8 +108,8 @@ run_model_wtp <- function(data) {
 }
 
 # Estimate the model
-# model_car <- run_model(data %>% filter(vehicle_typesuv == 0))
-# model_suv <- run_model(data %>% filter(vehicle_typesuv == 1))
+model_car <- run_model(data %>% filter(vehicle_typesuv == 0))
+model_suv <- run_model(data %>% filter(vehicle_typesuv == 1))
 # model_car_low <- run_model(data_car_low)
 # model_car_high <- run_model(data_car_high)
 # model_suv_low <- run_model(data_suv_low)
@@ -135,10 +137,10 @@ wtp_model_suv_high <- run_model_wtp(
 wtp_model_all <- run_model_wtp(data)
 
 ### View summary of results
-# summary(model_car)
+summary(model_car)
 # summary(model_car_low)
 # summary(model_car_high)
-# summary(model_suv)
+summary(model_suv)
 # summary(model_suv_low)
 # summary(model_suv_high)
 # summary(model_all)

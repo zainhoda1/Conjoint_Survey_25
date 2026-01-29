@@ -1,17 +1,22 @@
+rm(list = ls())
 source(here::here('code', 'setup.R'))
 
 # ----DCE only----
 # Initialize
 apollo_initialise()
 
+model_results <- list()
+i = 1
+
 # Define core controls
+### CAR
 apollo_control = list(
-  modelName = "LC_1c_indicator",
-  modelDescr = "MNL model",
+  modelName = paste0("preference_car_lc_1c_indicator_", i),
+  modelDescr = "LC model with 1 classes with indicator",
   indivID = "respID",
+  nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle"),
-  mixing = FALSE
+  outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
 )
 
 database <- read_parquet(here(
@@ -19,7 +24,27 @@ database <- read_parquet(here(
   "dynata_prolific_joint",
   "data_apollo_vehicle.parquet"
 )) %>%
-  filter(vehicle_typesuv == 0)
+  filter(vehicle_typesuv == 0) %>%
+  filter(!is.na(hhincome_num))
+
+### SUV
+
+# apollo_control = list(
+#   modelName = paste0("preference_suv_lc_1c_indicator_", i),
+#   modelDescr = "LC model with 1 classes with indicator",
+#   indivID = "respID",
+#   nCores = 2,
+#   panelData = TRUE,
+#   outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+# )
+#
+# database <- read_parquet(here(
+#   "data",
+#   "dynata_prolific_joint",
+#   "data_apollo_vehicle.parquet"
+# )) %>%
+#   filter(vehicle_typesuv == 1) %>%
+#   filter(!is.na(hhincome_num))
 
 #### 2. Parameter starting values
 apollo_beta <- c(
@@ -107,28 +132,50 @@ apollo_probabilities <- function(
 }
 
 #### 6. Estimate model
-LC_1c_indicator <- apollo_estimate(
+
+model_results[[paste0("model_", i)]] = apollo_estimate(
   apollo_beta,
   apollo_fixed,
   apollo_probabilities,
   apollo_inputs,
-  estimate_settings = list(maxIterations = 1000)
+  estimate_settings = list(maxIterations = 5000)
 )
+
+# Filter to only include successfully estimated models
+valid_models <- model_results[
+  sapply(model_results, function(m) m$successfulEstimation == TRUE)
+]
+
+# Create a summary table for all 10 runs
+model_summary <- data.frame(
+  model_name = names(valid_models),
+  # LLstart = sapply(valid_models, function(x) x$LL0),
+  # LLfinal = sapply(valid_models, function(x) x$LLout),
+  AIC = sapply(valid_models, function(x) unname(x$AIC)),
+  BIC = sapply(valid_models, function(x) unname(x$BIC))
+) %>%
+  arrange((BIC))
+
+# Identify best-fitting model
+best_model_name <- model_summary$model_name[i]
+model_final <- model_results[[best_model_name]]
 
 #### 7. Output results
 apollo_modelOutput(
-  LC_1c_indicator,
+  model_final,
   modelOutput_settings = list(printPVal = TRUE)
 )
 
 #### 7. Save results
 apollo_saveOutput(
-  LC_1c_indicator,
+  model_final,
   saveOutput_settings = list(printPVal = 2)
 )
 
 
 #### 8. WTP - delta method
+wtp_result_full <- list()
+
 for (i in c(
   "b_no_choice",
   "b_powertrainbev",
@@ -142,7 +189,10 @@ for (i in c(
     operation = "ratio",
     parName1 = i,
     parName2 = "b_price",
-    multPar1 = -1
+    multPar1 = 1
   )
-  apollo_deltaMethod(LC_1c_indicator, deltaMethod_settings)
+  wtp_result_full[[i]] <- apollo_deltaMethod(model_final, deltaMethod_settings)
 }
+
+wtp_final <- unname(sapply(wtp_result_full, function(x) x[[1]]))
+wtp_final
