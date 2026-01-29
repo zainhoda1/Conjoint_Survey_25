@@ -4,14 +4,13 @@
 theme-settings:
   theme: default
   barposition: top
-  barcolor: ~
   footer-left: ''
   footer-center: ''
   footer-right: ''
 
 survey-settings:
   show-previous: no
-  use-cookies: no
+  use-cookies: yes
   auto-scroll: no
   rate-survey: no
   all-questions-required: yes
@@ -112,6 +111,7 @@ system-messages:
   previous: Previous
   next: Next
   exit: Exit Survey
+  restart: Restart Survey
   close-tab: Please close this tab manually to exit the survey.
   choose-option: Choose an option...
   click: Click here

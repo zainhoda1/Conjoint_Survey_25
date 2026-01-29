@@ -425,24 +425,82 @@ sd_question(
 ```
 
 ```{r}
+# sd_question(
+#   type = 'matrix',
+#   id = 'next_veh_fuel',
+#   label = "**How likely are you to purchase the following types of vehicles as your next vehicle?**",
+#   row = c(
+#     "New plug-in hybrid electric vehicle" = "new_phev",
+#     "Used plug-in hybrid electric vehicle" = "used_phev",
+#     "New battery electric vehicle" = "new_bev",
+#     "Used battery electric vehicle" = "used_bev"
+#   ),
+#   option = c(
+#     "Very unlikely" = "very_unlikely",
+#     "Somewhat unlikely" = "somewhat_unlikely",
+#     "Neither likely nor unlikely" = "neutral",
+#     "Somewhat likely" = "somewhat_likely",
+#     "Very likely" = "very_likely"
+#   )
+# )
+
 sd_question(
-  type = 'matrix',
-  id = 'next_veh_fuel',
-  label = "**How likely are you to purchase the following types of vehicles as your next vehicle?**",
-  row = c(
-    "New plug-in hybrid electric vehicle" = "new_phev",
-    "Used plug-in hybrid electric vehicle" = "used_phev",
-    "New battery electric vehicle" = "new_bev",
-    "Used battery electric vehicle" = "used_bev"
-  ),
+  type   = 'mc_buttons',
+  id     = 'next_veh_fuel_new_phev',
+  label  = "**How likely are you to purchase a 'New plug-in hybrid electric vehicle' as your next vehicle?**",
   option = c(
     "Very unlikely" = "very_unlikely",
     "Somewhat unlikely" = "somewhat_unlikely",
     "Neither likely nor unlikely" = "neutral",
     "Somewhat likely" = "somewhat_likely",
     "Very likely" = "very_likely"
-  )
+  ),
+  direction = "vertical"
 )
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'next_veh_fuel_used_phev',
+  label  = "**How likely are you to purchase a 'Used plug-in hybrid electric vehicle' as your next vehicle?**",
+  option = c(
+    "Very unlikely" = "very_unlikely",
+    "Somewhat unlikely" = "somewhat_unlikely",
+    "Neither likely nor unlikely" = "neutral",
+    "Somewhat likely" = "somewhat_likely",
+    "Very likely" = "very_likely"
+  ),
+  direction = "vertical"
+)
+
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'next_veh_fuel_new_bev',
+  label  = "**How likely are you to purchase a 'New battery electric vehicle' as your next vehicle?**",
+  option = c(
+    "Very unlikely" = "very_unlikely",
+    "Somewhat unlikely" = "somewhat_unlikely",
+    "Neither likely nor unlikely" = "neutral",
+    "Somewhat likely" = "somewhat_likely",
+    "Very likely" = "very_likely"
+  ),
+  direction = "vertical"
+)
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'next_veh_fuel_used_bev',
+  label  = "**How likely are you to purchase a 'Used battery electric vehicle' as your next vehicle?**",
+  option = c(
+    "Very unlikely" = "very_unlikely",
+    "Somewhat unlikely" = "somewhat_unlikely",
+    "Neither likely nor unlikely" = "neutral",
+    "Somewhat likely" = "somewhat_likely",
+    "Very likely" = "very_likely"
+  ),
+  direction = "vertical"
+)
+
 ```
 
 --- next_veh_info_nobev
@@ -795,25 +853,98 @@ sd_question(
 --- battery_attribute_rank
 
 ```{r}
+# sd_question(
+#   type = 'matrix',
+#   id = 'battery_attribute',
+#   label = "**How important are the following attributes to you when selecting a used battery electric vehicle?**",
+#   row = c(
+#     "Vehicle mileage" = "veh_mile",
+#     "Purchase price" = "purchase_price",
+#     "Battery refurbishment history" = "battery_refurbish",
+#     "Vehicle range" = "veh_range",
+#     "Battery health" = "battery_health"
+#   ),
+#   option = c(
+#     "Unimportant" = "unimportant",
+#     "Of little importance" = "little_important",
+#     "Moderately important" = "moderately_important",
+#     "Important" = "important",
+#     "Very important" = "very_important"
+#   )
+# )
+
 sd_question(
-  type = 'matrix',
-  id = 'battery_attribute',
-  label = "**How important are the following attributes to you when selecting a used battery electric vehicle?**",
-  row = c(
-    "Vehicle mileage" = "veh_mile",
-    "Purchase price" = "purchase_price",
-    "Battery refurbishment history" = "battery_refurbish",
-    "Vehicle range" = "veh_range",
-    "Battery health" = "battery_health"
-  ),
+  type   = 'mc_buttons',
+  id     = 'battery_attribute_veh_mile',
+  label  = "**How important is 'Vehicle mileage' to you when selecting a used battery electric vehicle?**",
   option = c(
     "Unimportant" = "unimportant",
     "Of little importance" = "little_important",
     "Moderately important" = "moderately_important",
     "Important" = "important",
     "Very important" = "very_important"
-  )
+  ),
+  direction = "vertical"
 )
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'battery_attribute_purchase_price',
+  label  = "**How important is 'Purchase price' to you when selecting a used battery electric vehicle?**",
+  option = c(
+    "Unimportant" = "unimportant",
+    "Of little importance" = "little_important",
+    "Moderately important" = "moderately_important",
+    "Important" = "important",
+    "Very important" = "very_important"
+  ),
+  direction = "vertical"
+)
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'battery_attribute_battery_refurbish',
+  label  = "**How important is 'Battery refurbishment history' to you when selecting a used battery electric vehicle?**",
+  option = c(
+    "Unimportant" = "unimportant",
+    "Of little importance" = "little_important",
+    "Moderately important" = "moderately_important",
+    "Important" = "important",
+    "Very important" = "very_important"
+  ),
+  direction = "vertical"
+)
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'battery_attribute_veh_range',
+  label  = "**How important is 'Vehicle range' to you when selecting a used battery electric vehicle?**",
+  option = c(
+    "Unimportant" = "unimportant",
+    "Of little importance" = "little_important",
+    "Moderately important" = "moderately_important",
+    "Important" = "important",
+    "Very important" = "very_important"
+  ),
+  direction = "vertical"
+)
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'battery_attribute_battery_health',
+  label  = "**How important is 'Battery health' to you when selecting a used battery electric vehicle?**",
+  option = c(
+    "Unimportant" = "unimportant",
+    "Of little importance" = "little_important",
+    "Moderately important" = "moderately_important",
+    "Important" = "important",
+    "Very important" = "very_important"
+  ),
+  direction = "vertical"
+)
+
+
+
 ```
 
 --- ev_knowledge 
@@ -891,85 +1022,259 @@ sd_question(
 --- attitudes_page1 
 
 ```{r}
+# sd_question(
+#   type = 'matrix',
+#   id = 'attitudes_1_a',
+#   label = "**Please indicate the extent to which you agree or disagree with the following statements.**",
+#   row = c(
+#     "People who are important to me think that I should buy an EV." = "ev_norm",
+#     "Driving an EV would eventually result in cost savings." = "ev_cost",
+#     "Driving an EV would be beneficial to the environment in the long term." = "ev_environment"
+#   ),
+#   option = c(
+#     "Strongly disagree" = "strongly_disagree",
+#     "Somewhat disagree" = "somewhat_disagree",
+#     "Neither agree nor disagree" = "neutral",
+#     "Somewhat agree" = "somewhat_agree",
+#     "Strongly agree" = "strongly_agree"
+#   )
+# )
+
 sd_question(
-  type = 'matrix',
-  id = 'attitudes_1_a',
-  label = "**Please indicate the extent to which you agree or disagree with the following statements.**",
-  row = c(
-    "People who are important to me think that I should buy an EV." = "ev_norm",
-    "Driving an EV would eventually result in cost savings." = "ev_cost",
-    "Driving an EV would be beneficial to the environment in the long term." = "ev_environment"
-  ),
+  type   = 'mc_buttons',
+  id     = 'attitudes_1_a_ev_norm',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'People who are important to me think that I should buy an EV.'**",
   option = c(
     "Strongly disagree" = "strongly_disagree",
     "Somewhat disagree" = "somewhat_disagree",
     "Neither agree nor disagree" = "neutral",
     "Somewhat agree" = "somewhat_agree",
     "Strongly agree" = "strongly_agree"
-  )
+  ),
+  direction = "vertical"
 )
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'attitudes_1_a_ev_cost',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'Driving an EV would eventually result in cost savings.'**",
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  ),
+  direction = "vertical"
+)
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'attitudes_1_a_ev_environment',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'Driving an EV would be beneficial to the environment in the long term.'**",
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  ),
+  direction = "vertical"
+)
+
 ```
 
 ```{r}
+# sd_question(
+#   type = 'matrix',
+#   id = 'attitudes_1_b',
+#   label = " ",
+#   row = c(
+#     "If I owned a BEV, I would often worry about running out of charge." = "ev_range",
+#     "BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing." = "ev_resale",
+#     "The price of an EV is too high." = "ev_price"
+#   ),
+#   option = c(
+#     "Strongly disagree" = "strongly_disagree",
+#     "Somewhat disagree" = "somewhat_disagree",
+#     "Neither agree nor disagree" = "neutral",
+#     "Somewhat agree" = "somewhat_agree",
+#     "Strongly agree" = "strongly_agree"
+#   )
+# )
+
 sd_question(
-  type = 'matrix',
-  id = 'attitudes_1_b',
-  label = " ",
-  row = c(
-    "If I owned a BEV, I would often worry about running out of charge." = "ev_range",
-    "BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing." = "ev_resale",
-    "The price of an EV is too high." = "ev_price"
-  ),
+  type   = 'mc_buttons',
+  id     = 'attitudes_1_b_ev_range',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'If I owned a BEV, I would often worry about running out of charge.'**",
   option = c(
     "Strongly disagree" = "strongly_disagree",
     "Somewhat disagree" = "somewhat_disagree",
     "Neither agree nor disagree" = "neutral",
     "Somewhat agree" = "somewhat_agree",
     "Strongly agree" = "strongly_agree"
-  )
+  ),
+  direction = "vertical"
 )
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'attitudes_1_b_ev_resale',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing.'**",
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  ),
+  direction = "vertical"
+)
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'attitudes_1_b_ev_price',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'The price of an EV is too high'**",
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  ),
+  direction = "vertical"
+)
+
 ```
 
 --- attitudes_page2 
 
 ```{r}
+# sd_question(
+#   type = 'matrix',
+#   id = 'attitudes_2_a',
+#   label = "**Please indicate the extent to which you agree or disagree with the following statements.**",
+#   row = c(
+#     "Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems." = "ev_battery_environment",
+#     "Refurbished EV batteries do NOT perform and function as original EV batteries." = "ev_battery_function",
+#     "Please select \"Strongly agree\" as your response to this item." = "attention_check_agree"
+#   ),
+#   option = c(
+#     "Strongly disagree" = "strongly_disagree",
+#     "Somewhat disagree" = "somewhat_disagree",
+#     "Neither agree nor disagree" = "neutral",
+#     "Somewhat agree" = "somewhat_agree",
+#     "Strongly agree" = "strongly_agree"
+#   )
+# )
+
 sd_question(
-  type = 'matrix',
-  id = 'attitudes_2_a',
-  label = "**Please indicate the extent to which you agree or disagree with the following statements.**",
-  row = c(
-    "Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems." = "ev_battery_environment",
-    "Refurbished EV batteries do NOT perform and function as original EV batteries." = "ev_battery_function",
-    "Please select \"Strongly agree\" as your response to this item." = "attention_check_agree"
-  ),
+  type   = 'mc_buttons',
+  id     = 'attitudes_2_a_ev_battery_environment',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems.'**",
   option = c(
     "Strongly disagree" = "strongly_disagree",
     "Somewhat disagree" = "somewhat_disagree",
     "Neither agree nor disagree" = "neutral",
     "Somewhat agree" = "somewhat_agree",
     "Strongly agree" = "strongly_agree"
-  )
+  ),
+  direction = "vertical"
 )
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'attitudes_2_a_ev_battery_function',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'Refurbished EV batteries do NOT perform and function as original EV batteries.'**",
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  ),
+  direction = "vertical"
+)
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'attitudes_2_a_attention_check_agree',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'Please select \"Strongly agree\" as your response to this item.'**",
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  ),
+  direction = "vertical"
+)
+
 ```
 
 ```{r}
+# sd_question(
+#   type = 'matrix',
+#   id = 'attitudes_2_b',
+#   label = " ",
+#   row = c(
+#     "Generally, I am willing to put in extra effort to find lower prices." = "price_sensitive",
+#     "I like to be among the first people to have the latest technology." = "tech_savvy",
+#     "I am a person who is fully prepared to take risks." = "risk_taker"
+#   ),
+#   option = c(
+#     "Strongly disagree" = "strongly_disagree",
+#     "Somewhat disagree" = "somewhat_disagree",
+#     "Neither agree nor disagree" = "neutral",
+#     "Somewhat agree" = "somewhat_agree",
+#     "Strongly agree" = "strongly_agree"
+#   )
+# )
+
 sd_question(
-  type = 'matrix',
-  id = 'attitudes_2_b',
-  label = " ",
-  row = c(
-    "Generally, I am willing to put in extra effort to find lower prices." = "price_sensitive",
-    "I like to be among the first people to have the latest technology." = "tech_savvy",
-    "I am a person who is fully prepared to take risks." = "risk_taker"
-  ),
+  type   = 'mc_buttons',
+  id     = 'attitudes_2_b_price_sensitive',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'Generally, I am willing to put in extra effort to find lower prices.'**",
   option = c(
     "Strongly disagree" = "strongly_disagree",
     "Somewhat disagree" = "somewhat_disagree",
     "Neither agree nor disagree" = "neutral",
     "Somewhat agree" = "somewhat_agree",
     "Strongly agree" = "strongly_agree"
-  )
+  ),
+  direction = "vertical"
 )
+
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'attitudes_2_b_tech_savvy',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'I like to be among the first people to have the latest technology.'**",
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  ),
+  direction = "vertical"
+)
+
+
+sd_question(
+  type   = 'mc_buttons',
+  id     = 'attitudes_2_b_risk_taker',
+  label  = "**Please indicate the extent to which you agree or disagree with the following statement - 'I am a person who is fully prepared to take risks.'**",
+  option = c(
+    "Strongly disagree" = "strongly_disagree",
+    "Somewhat disagree" = "somewhat_disagree",
+    "Neither agree nor disagree" = "neutral",
+    "Somewhat agree" = "somewhat_agree",
+    "Strongly agree" = "strongly_agree"
+  ),
+  direction = "vertical"
+)
+
 ```
 
 --- individual_attribute 
