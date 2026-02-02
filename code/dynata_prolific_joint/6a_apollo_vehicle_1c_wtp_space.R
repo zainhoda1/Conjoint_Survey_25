@@ -82,7 +82,7 @@ apollo_probabilities <- function(
   V <- list()
   V[["alt1"]] <-
     b_price *
-    (price_1 +
+    (-price_1 +
       b_powertrainbev * powertrainbev_1 +
       b_powertrainhev * powertrainhev_1 +
       b_range_bev * range_bev_1 +
@@ -92,7 +92,7 @@ apollo_probabilities <- function(
 
   V[["alt2"]] <-
     b_price *
-    (price_2 +
+    (-price_2 +
       b_powertrainbev * powertrainbev_2 +
       b_powertrainhev * powertrainhev_2 +
       b_range_bev * range_bev_2 +
@@ -102,7 +102,7 @@ apollo_probabilities <- function(
 
   V[["alt3"]] <-
     b_price *
-    (price_3 +
+    (-price_3 +
       b_powertrainbev * powertrainbev_3 +
       b_powertrainhev * powertrainhev_3 +
       b_range_bev * range_bev_3 +

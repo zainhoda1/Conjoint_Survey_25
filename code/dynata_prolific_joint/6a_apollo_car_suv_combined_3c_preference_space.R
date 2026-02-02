@@ -13,7 +13,7 @@ apollo_initialise()
 # Define core controls
 ### CAR
 apollo_control = list(
-  modelName = paste0("wtp_car_lc_3c_indicator_", i),
+  modelName = paste0("combined_lc_3c_indicator_", i),
   modelDescr = "LC model with 3 classes with indicator",
   indivID = "respID",
   nCores = 2,
@@ -26,7 +26,7 @@ database <- read_parquet(here(
   "dynata_prolific_joint",
   "data_apollo_vehicle.parquet"
 )) %>%
-  filter(vehicle_typesuv == 0) %>%
+  # filter(vehicle_typesuv == 0) %>%
   filter(!is.na(hhincome_num))
 
 ### SUV
@@ -86,6 +86,7 @@ apollo_beta = c(
   gamma_ev_neighbor_a = 0,
   gamma_knowledge_ev_a = 0,
   gamma_knowledge_subsidy_a = 0,
+  gamma_suv_a = 0,
   delta_b = 0.1,
   gamma_EV_benefit_b = 0.1,
   gamma_EV_anxiety_b = 0.1,
@@ -94,6 +95,7 @@ apollo_beta = c(
   gamma_ev_neighbor_b = 0.1,
   gamma_knowledge_ev_b = 0.1,
   gamma_knowledge_subsidy_b = 0.1,
+  gamma_suv_b = 0.1,
   delta_c = 0.2,
   gamma_EV_benefit_c = 0.2,
   gamma_EV_anxiety_c = 0.2,
@@ -101,7 +103,8 @@ apollo_beta = c(
   gamma_hhincome_c = 0.2,
   gamma_ev_neighbor_c = 0.2,
   gamma_knowledge_ev_c = 0.2,
-  gamma_knowledge_subsidy_c = 0.2
+  gamma_knowledge_subsidy_c = 0.2,
+  gamma_suv_c = 0.2
 )
 
 ### Vector with names (in quotes) of parameters to be kept fixed at their starting value in apollo_beta, use apollo_beta_fixed = c() if none
@@ -114,6 +117,7 @@ apollo_fixed = c(
   "gamma_ev_neighbor_a",
   "gamma_knowledge_ev_a",
   "gamma_knowledge_subsidy_a",
+  "gamma_suv_a",
   "gamma_EV_benefit_b",
   "gamma_EV_anxiety_b",
   "gamma_hhincome_b",
@@ -136,7 +140,7 @@ apollo_fixed = c(
 apollo_beta = apollo_readBeta(
   apollo_beta,
   apollo_fixed,
-  "wtp_car_lc_3c_indicator_1",
+  "lc_3c_indicator_1",
   overwriteFixed = FALSE
 )
 
@@ -174,7 +178,8 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_ev_charge_a * (EV_charger == "yes") +
     gamma_ev_neighbor_a * (EV_neighbor == "yes") +
     gamma_knowledge_ev_a * (knowledge_ev == 1) +
-    gamma_knowledge_subsidy_a * (knowledge_subsidy == 1)
+    gamma_knowledge_subsidy_a * (knowledge_subsidy == 1) +
+    gamma_suv_a * (vehicle_typesuv == 1)
 
   V[["class_b"]] = delta_b +
     gamma_EV_benefit_b * FA_EV_benefit +
@@ -183,7 +188,8 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_ev_charge_b * (EV_charger == "yes") +
     gamma_ev_neighbor_b * (EV_neighbor == "yes") +
     gamma_knowledge_ev_b * (knowledge_ev == 1) +
-    gamma_knowledge_subsidy_b * (knowledge_subsidy == 1)
+    gamma_knowledge_subsidy_b * (knowledge_subsidy == 1) +
+    gamma_suv_b * (vehicle_typesuv == 1)
 
   V[["class_c"]] = delta_c +
     gamma_EV_benefit_c * FA_EV_benefit +
@@ -192,7 +198,8 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_ev_charge_c * (EV_charger == "yes") +
     gamma_ev_neighbor_c * (EV_neighbor == "yes") +
     gamma_knowledge_ev_c * (knowledge_ev == 1) +
-    gamma_knowledge_subsidy_c * (knowledge_subsidy == 1)
+    gamma_knowledge_subsidy_c * (knowledge_subsidy == 1) +
+    gamma_suv_c * (vehicle_typesuv == 1)
 
   ### Settings for class allocation models
   classAlloc_settings = list(
@@ -234,37 +241,34 @@ apollo_probabilities = function(
     ### Compute class-specific utilities
     V = list()
     V[["alt1"]] <-
-      b_price[[s]] *
-      (-price_1 +
-        b_powertrainbev[[s]] *
-          powertrainbev_1 +
-        b_powertrainhev[[s]] * powertrainhev_1 +
-        b_range_bev[[s]] * range_bev_1 +
-        b_mileage[[s]] * mileage_1 +
-        b_age[[s]] * age_1 +
-        b_operating_cost[[s]] * operating_cost_1)
+      b_powertrainbev[[s]] *
+      powertrainbev_1 +
+      b_powertrainhev[[s]] * powertrainhev_1 +
+      b_range_bev[[s]] * range_bev_1 +
+      b_mileage[[s]] * mileage_1 +
+      b_age[[s]] * age_1 +
+      b_operating_cost[[s]] * operating_cost_1 +
+      b_price[[s]] * price_1
 
     V[["alt2"]] <-
-      b_price[[s]] *
-      (-price_2 +
-        b_powertrainbev[[s]] *
-          powertrainbev_2 +
-        b_powertrainhev[[s]] * powertrainhev_2 +
-        b_range_bev[[s]] * range_bev_2 +
-        b_mileage[[s]] * mileage_2 +
-        b_age[[s]] * age_2 +
-        b_operating_cost[[s]] * operating_cost_2)
+      b_powertrainbev[[s]] *
+      powertrainbev_2 +
+      b_powertrainhev[[s]] * powertrainhev_2 +
+      b_range_bev[[s]] * range_bev_2 +
+      b_mileage[[s]] * mileage_2 +
+      b_age[[s]] * age_2 +
+      b_operating_cost[[s]] * operating_cost_2 +
+      b_price[[s]] * price_2
 
     V[["alt3"]] <-
-      b_price[[s]] *
-      (-price_3 +
-        b_powertrainbev[[s]] *
-          powertrainbev_3 +
-        b_powertrainhev[[s]] * powertrainhev_3 +
-        b_range_bev[[s]] * range_bev_3 +
-        b_mileage[[s]] * mileage_3 +
-        b_age[[s]] * age_3 +
-        b_operating_cost[[s]] * operating_cost_3)
+      b_powertrainbev[[s]] *
+      powertrainbev_3 +
+      b_powertrainhev[[s]] * powertrainhev_3 +
+      b_range_bev[[s]] * range_bev_3 +
+      b_mileage[[s]] * mileage_3 +
+      b_age[[s]] * age_3 +
+      b_operating_cost[[s]] * operating_cost_3 +
+      b_price[[s]] * price_3
 
     V[["no_choice"]] <- b_no_choice[[s]]
 
@@ -321,18 +325,17 @@ model_summary <- data.frame(
 
 # Identify best-fitting model
 best_model_name <- model_summary$model_name[i]
-final_model <- model_results[[best_model_name]]
+model_final <- model_results[[best_model_name]]
 
-final_model <- model_results[["model_1"]]
 ### Show output in screen
 apollo_modelOutput(
-  final_model,
+  model_final,
   modelOutput_settings = list(printPVal = TRUE)
 )
 
 ### Save output to file(s)
 apollo_saveOutput(
-  final_model,
+  model_final,
   saveOutput_settings = list(printPVal = 2)
 )
 
@@ -366,7 +369,7 @@ apollo_saveOutput(
 ### Compute unconditional estimates (averaged over classes) of parameters.
 ### Unconditional means averaged across classes using the population-level class probabilities
 unconditionals = apollo_unconditionals(
-  final_model,
+  model_final,
   apollo_probabilities,
   apollo_inputs
 )
@@ -412,7 +415,7 @@ wtp_df
 ### Conditional means individualized using each person’s posterior
 ### These conditional probabilities let you assign individuals to classes or at least identify which class they’re more likely to belong to.
 conditionals = apollo_conditionals(
-  final_model,
+  model_final,
   apollo_probabilities,
   apollo_inputs
 )
@@ -451,7 +454,8 @@ cate_vars_active <- c(
   "knowledge_ev",
   "knowledge_subsidy",
   "EV_charger",
-  "EV_neighbor"
+  "EV_neighbor",
+  "vehicle_typesuv"
 )
 
 num_summary <- data_output %>%
