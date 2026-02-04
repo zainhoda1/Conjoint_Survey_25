@@ -12,8 +12,16 @@ apollo_initialise()
 
 # Define core controls
 ### CAR
+# apollo_control = list(
+#   modelName = paste0("car_lc_3c_indicator_", i),
+#   modelDescr = "LC model with 3 classes with indicator",
+#   indivID = "respID",
+#   nCores = 2,
+#   panelData = TRUE,
+#   outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+# )
 apollo_control = list(
-  modelName = paste0("car_lc_3c_indicator_", i),
+  modelName = paste0("standard_car_lc_3c_indicator_", i),
   modelDescr = "LC model with 3 classes with indicator",
   indivID = "respID",
   nCores = 2,

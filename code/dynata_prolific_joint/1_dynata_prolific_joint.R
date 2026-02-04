@@ -121,3 +121,12 @@ write_parquet(
     "data_joint.parquet"
   )
 )
+
+write_csv(
+  data_joint,
+  here(
+    "data",
+    "dynata_prolific_joint",
+    "data_joint.csv"
+  )
+)
