@@ -1,7 +1,7 @@
 ---
 survey-settings:
   use-cookies: yes
-  all-questions-required: true
+  questions-required: true
 css: css/survey_theme.css
 
 ---

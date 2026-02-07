@@ -1,6 +1,7 @@
 # ! JUST READ - don't change the content of this file
 # Question structure extracted from survey.html
 next_veh_when:
+  index: 1
   type: mc
   label: To your best estimate, when will you likely need to purchase your next vehicle?
   options:
@@ -11,6 +12,7 @@ next_veh_when:
     After 2 years: '24'
     I’m not sure: not_sure
 next_veh_market:
+  index: 2
   type: mc
   label: Are you interested in buying a new or used vehicle?
   options:
@@ -18,6 +20,7 @@ next_veh_market:
     Used vehicle only: used
     I’m looking at both markets: both
 next_veh_style:
+  index: 3
   type: mc
   label: Which vehicle body style would you consider for your next vehicle?
   options:
@@ -27,6 +30,7 @@ next_veh_style:
     Truck: truck
     Other: other
 attention_check_toyota:
+  index: 4
   type: mc
   label: Have you ever owned a Toyota vehicle?
   options:
@@ -34,6 +38,7 @@ attention_check_toyota:
     Yes, in the past: yes_past
     'No': 'no'
 household_veh_count:
+  index: 5
   type: mc
   label: How many passenger vehicles are currently owned or leased by your household?
   options:
@@ -45,6 +50,7 @@ household_veh_count:
     '5': '5'
     6 or more: '6'
 household_veh_fuel:
+  index: 6
   type: mc_multiple
   label: Which of the following types of vehicles are currently owned or leased by
     your household? Select all that apply.
@@ -55,6 +61,7 @@ household_veh_fuel:
     Battery electric: bev
     Other: other
 charger_access:
+  index: 7
   type: mc
   label: Do you have access to an electrical outlet where your vehicle is typically
     parked at your primary residence or workplace?
@@ -63,6 +70,7 @@ charger_access:
     'No': 'no'
     I’m not sure: not_sure
 neighbor_ev_info:
+  index: 8
   type: mc
   label: Do any of your neighbors own or lease a plug-in hybrid or a battery electric
     vehicle?
@@ -71,6 +79,7 @@ neighbor_ev_info:
     'No': 'no'
     I’m not sure: not_sure
 primary_veh_fuel:
+  index: 9
   type: mc
   label: What is the fuel type of this vehicle?
   options:
@@ -80,12 +89,14 @@ primary_veh_fuel:
     Battery electric: bev
     Other: other
 primary_veh_new_used:
+  index: 10
   type: mc
   label: Was this vehicle obtained as a new or used vehicle?
   options:
     New: new
     Used: used
 primary_veh_obtain_how:
+  index: 11
   type: mc
   label: How was this vehicle obtained?
   options:
@@ -97,6 +108,7 @@ primary_veh_obtain_how:
     Other: other
     Do not remember / do not know: do_not_know
 primary_veh_cost:
+  index: 12
   type: mc
   label: To your best estimate, what was the total purchase or lease price for this
     vehicle? Please include all related expenses (such as the down payment, monthly
@@ -116,6 +128,7 @@ primary_veh_cost:
     $100,000 or more: '105000'
     Do not remember / do not know: do_not_know
 primary_veh_payment:
+  index: 13
   type: mc
   label: What is your current monthly payment for this vehicle?
   options:
@@ -133,6 +146,7 @@ primary_veh_payment:
     $1,000 or more: '1200'
     Do not remember / do not know: do_not_know
 primary_veh_mpg:
+  index: 14
   type: mc
   label: What is the average gas mileage (in miles per gallon, MPG) of this vehicle?
     Please provide your best estimate and select I’m not sure if your primary vehicle
@@ -147,6 +161,7 @@ primary_veh_mpg:
     60 MPG or more: '65'
     I’m not sure: not_sure
 primary_veh_refuel:
+  index: 15
   type: mc
   label: How often do you refuel or recharge this vehicle?
   options:
@@ -158,6 +173,7 @@ primary_veh_refuel:
     Four times a week: '16'
     Five or more times a week: '24'
 primary_veh_range:
+  index: 16
   type: mc
   label: How many miles can this vehicle travel on a full tank or full battery charge?
   options:
@@ -172,6 +188,7 @@ primary_veh_range:
     400 - 449 miles: '425'
     450 miles or more: '475'
 next_veh_budget:
+  index: 17
   type: mc
   label: What is your budget for the vehicle?
   options:
@@ -187,27 +204,25 @@ next_veh_budget:
     $45,000 - $49,999: '50000'
     $50,000 or more: '55000'
 next_veh_payment:
+  index: 18
   type: mc
   label: How do you intend to pay for the vehicle?
   options:
     Pay in full: pay_full
     Finance: finance
 next_veh_fuel:
+  index: 19
   type: matrix
   label: How likely are you to purchase the following types of vehicles as your next
     vehicle?
-  options:
-    Very unlikely: very_unlikely
-    Somewhat unlikely: somewhat_unlikely
-    Neither likely nor unlikely: neutral
-    Somewhat likely: somewhat_likely
-    Very likely: very_likely
   row:
     New plug-in hybrid electric vehicle: new_phev
     Used plug-in hybrid electric vehicle: used_phev
     New battery electric vehicle: new_bev
     Used battery electric vehicle: used_bev
+  options: []
 next_veh_fuel_new_phev:
+  index: 20
   type: mc
   label: []
   options:
@@ -217,6 +232,7 @@ next_veh_fuel_new_phev:
     Somewhat likely: somewhat_likely
     Very likely: very_likely
 next_veh_fuel_used_phev:
+  index: 21
   type: mc
   label: []
   options:
@@ -226,6 +242,7 @@ next_veh_fuel_used_phev:
     Somewhat likely: somewhat_likely
     Very likely: very_likely
 next_veh_fuel_new_bev:
+  index: 22
   type: mc
   label: []
   options:
@@ -235,6 +252,7 @@ next_veh_fuel_new_bev:
     Somewhat likely: somewhat_likely
     Very likely: very_likely
 next_veh_fuel_used_bev:
+  index: 23
   type: mc
   label: []
   options:
@@ -244,97 +262,111 @@ next_veh_fuel_used_bev:
     Somewhat likely: somewhat_likely
     Very likely: very_likely
 next_veh_nobev:
-  type: unknown
+  index: 24
+  type: textarea
   label: You mentioned that you are unlikely to purchase a battery electric vehicle
     as your next vehicle. What is your biggest concern or reason for this?
 next_veh_car_images:
+  index: 25
   type: mc_buttons
   label: Select a vehicle based on its segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
-    6_new_car_hatchback_compact: 6_new_car_hatchback_compact
-    3_new_car_sedan_subcompact: 3_new_car_sedan_subcompact
-    5_new_car_sedan_fullsize_luxury: 5_new_car_sedan_fullsize_luxury
     1_new_car_sedan_compact: 1_new_car_sedan_compact
     7_new_car_hatchback_compact_luxury: 7_new_car_hatchback_compact_luxury
-    9_new_car_hatchback_subcompact_luxury: 9_new_car_hatchback_subcompact_luxury
     4_new_car_sedan_fullsize: 4_new_car_sedan_fullsize
+    6_new_car_hatchback_compact: 6_new_car_hatchback_compact
+    5_new_car_sedan_fullsize_luxury: 5_new_car_sedan_fullsize_luxury
     8_new_car_sedan_midsize: 8_new_car_sedan_midsize
     2_new_car_hatchback_subcompact: 2_new_car_hatchback_subcompact
+    3_new_car_sedan_subcompact: 3_new_car_sedan_subcompact
+    9_new_car_hatchback_subcompact_luxury: 9_new_car_hatchback_subcompact_luxury
 next_veh_suv_images:
+  index: 26
   type: mc_buttons
   label: Select a vehicle based on its segment / style that is most closely aligned
     with the next vehicle you are considering purchasing.
   options:
+    5_new_suv_fullsize: 5_new_suv_fullsize
+    9_new_crossover_compact: 9_new_crossover_compact
+    2_new_crossover_midsize: 2_new_crossover_midsize
     7_new_crossover_subcompact: 7_new_crossover_subcompact
-    8_new_suv_fullsize: 8_new_suv_fullsize
+    1_new_crossover_compact: 1_new_crossover_compact
     4_new_crossover_midsize: 4_new_crossover_midsize
     3_new_suv_fullsize: 3_new_suv_fullsize
-    9_new_crossover_compact: 9_new_crossover_compact
-    5_new_suv_fullsize: 5_new_suv_fullsize
-    1_new_crossover_compact: 1_new_crossover_compact
+    8_new_suv_fullsize: 8_new_suv_fullsize
     6_new_crossover_subcompact: 6_new_crossover_subcompact
-    2_new_crossover_midsize: 2_new_crossover_midsize
 vehicle_cbc_q0_button:
+  index: 27
   type: unknown
   label: []
 vehicle_cbc_q1_button:
+  index: 28
   type: unknown
   label: []
 vehicle_cbc_q2_button:
+  index: 29
   type: unknown
   label: []
 vehicle_cbc_q3_button:
+  index: 30
   type: unknown
   label: []
 vehicle_cbc_q4_button:
+  index: 31
   type: unknown
   label: []
 vehicle_cbc_q5_button:
+  index: 32
   type: unknown
   label: []
 vehicle_cbc_q6_button:
+  index: 33
   type: unknown
   label: []
 battery_cbc_q1_button:
+  index: 34
   type: unknown
   label: []
 battery_cbc_q2_button:
+  index: 35
   type: unknown
   label: []
 battery_cbc_q3_button:
+  index: 36
   type: unknown
   label: []
 battery_cbc_q4_button:
+  index: 37
   type: unknown
   label: []
 battery_cbc_q5_button:
+  index: 38
   type: unknown
   label: []
 battery_cbc_q6_button:
+  index: 39
   type: unknown
   label: []
 no_bev_selected0:
-  type: unknown
+  index: 40
+  type: textarea
   label: We noticed you did not choose any of the electric vehicle options in the
     last few questions. Could you tell us any reasons why?
 battery_attribute:
+  index: 41
   type: matrix
   label: How important are the following attributes to you when selecting a used battery
     electric vehicle?
-  options:
-    Unimportant: unimportant
-    Of little importance: little_important
-    Moderately important: moderately_important
-    Important: important
-    Very important: very_important
   row:
     Vehicle mileage: veh_mile
     Purchase price: purchase_price
     Battery refurbishment history: battery_refurbish
     Vehicle range: veh_range
     Battery health: battery_health
+  options: []
 battery_attribute_veh_mile:
+  index: 42
   type: mc
   label: []
   options:
@@ -344,6 +376,7 @@ battery_attribute_veh_mile:
     Important: important
     Very important: very_important
 battery_attribute_purchase_price:
+  index: 43
   type: mc
   label: []
   options:
@@ -353,6 +386,7 @@ battery_attribute_purchase_price:
     Important: important
     Very important: very_important
 battery_attribute_battery_refurbish:
+  index: 44
   type: mc
   label: []
   options:
@@ -362,6 +396,7 @@ battery_attribute_battery_refurbish:
     Important: important
     Very important: very_important
 battery_attribute_veh_range:
+  index: 45
   type: mc
   label: []
   options:
@@ -371,6 +406,7 @@ battery_attribute_veh_range:
     Important: important
     Very important: very_important
 battery_attribute_battery_health:
+  index: 46
   type: mc
   label: []
   options:
@@ -380,6 +416,7 @@ battery_attribute_battery_health:
     Important: important
     Very important: very_important
 run_on_gasoline:
+  index: 47
   type: mc_multiple
   label: Please select which vehicle(s) can run on gasoline. Select all that apply.
   options:
@@ -388,6 +425,7 @@ run_on_gasoline:
     Battery electric vehicle: bev
     I’m not sure: not_sure
 plugged_in:
+  index: 48
   type: mc_multiple
   label: Please select which vehicles can be plugged in. Select all that apply.
   options:
@@ -396,6 +434,7 @@ plugged_in:
     Battery electric vehicle: bev
     I’m not sure: not_sure
 know_electric_vehicle:
+  index: 49
   type: mc
   label: Can you name the make and model of at least one vehicle powered completely
     by electricity (a battery electric vehicle)?
@@ -403,9 +442,11 @@ know_electric_vehicle:
     'Yes': 'yes'
     'No': 'no'
 write_electric_name:
+  index: 50
   type: text
   label: Please name the make and model of the vehicle.
 max_subsidy:
+  index: 51
   type: mc
   label: To the best of your knowledge, what was the previous maximum federal tax
     credit (up till 09/30/2025) available in the US for purchasing a new electric
@@ -418,20 +459,17 @@ max_subsidy:
     $10,000: '10000'
     I’m not sure: not_sure
 attitudes_1_a:
+  index: 52
   type: matrix
   label: Please indicate the extent to which you agree or disagree with the following
     statements.
-  options:
-    Strongly disagree: strongly_disagree
-    Somewhat disagree: somewhat_disagree
-    Neither agree nor disagree: neutral
-    Somewhat agree: somewhat_agree
-    Strongly agree: strongly_agree
   row:
     People who are important to me think that I should buy an EV.: ev_norm
     Driving an EV would eventually result in cost savings.: ev_cost
     Driving an EV would be beneficial to the environment in the long term.: ev_environment
+  options: []
 attitudes_1_a_ev_norm:
+  index: 53
   type: mc
   label: []
   options:
@@ -441,6 +479,7 @@ attitudes_1_a_ev_norm:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_a_ev_cost:
+  index: 54
   type: mc
   label: []
   options:
@@ -450,6 +489,7 @@ attitudes_1_a_ev_cost:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_a_ev_environment:
+  index: 55
   type: mc
   label: []
   options:
@@ -459,19 +499,16 @@ attitudes_1_a_ev_environment:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_b:
+  index: 56
   type: matrix
   label: []
-  options:
-    Strongly disagree: strongly_disagree
-    Somewhat disagree: somewhat_disagree
-    Neither agree nor disagree: neutral
-    Somewhat agree: somewhat_agree
-    Strongly agree: strongly_agree
   row:
     If I owned a BEV, I would often worry about running out of charge.: ev_range
     BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing.: ev_resale
     The price of an EV is too high.: ev_price
+  options: []
 attitudes_1_b_ev_range:
+  index: 57
   type: mc
   label: []
   options:
@@ -481,6 +518,7 @@ attitudes_1_b_ev_range:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_b_ev_resale:
+  index: 58
   type: mc
   label: []
   options:
@@ -490,6 +528,7 @@ attitudes_1_b_ev_resale:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_1_b_ev_price:
+  index: 59
   type: mc
   label: []
   options:
@@ -499,20 +538,17 @@ attitudes_1_b_ev_price:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_a:
+  index: 60
   type: matrix
   label: Please indicate the extent to which you agree or disagree with the following
     statements.
-  options:
-    Strongly disagree: strongly_disagree
-    Somewhat disagree: somewhat_disagree
-    Neither agree nor disagree: neutral
-    Somewhat agree: somewhat_agree
-    Strongly agree: strongly_agree
   row:
     Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems.: ev_battery_environment
     Refurbished EV batteries do NOT perform and function as original EV batteries.: ev_battery_function
     Please select "Strongly agree" as your response to this item.: attention_check_agree
+  options: []
 attitudes_2_a_ev_battery_environment:
+  index: 61
   type: mc
   label: []
   options:
@@ -522,6 +558,7 @@ attitudes_2_a_ev_battery_environment:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_a_ev_battery_function:
+  index: 62
   type: mc
   label: []
   options:
@@ -531,6 +568,7 @@ attitudes_2_a_ev_battery_function:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_a_attention_check_agree:
+  index: 63
   type: mc
   label: []
   options:
@@ -540,19 +578,16 @@ attitudes_2_a_attention_check_agree:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_b:
+  index: 64
   type: matrix
   label: []
-  options:
-    Strongly disagree: strongly_disagree
-    Somewhat disagree: somewhat_disagree
-    Neither agree nor disagree: neutral
-    Somewhat agree: somewhat_agree
-    Strongly agree: strongly_agree
   row:
     Generally, I am willing to put in extra effort to find lower prices.: price_sensitive
     I like to be among the first people to have the latest technology.: tech_savvy
     I am a person who is fully prepared to take risks.: risk_taker
+  options: []
 attitudes_2_b_price_sensitive:
+  index: 65
   type: mc
   label: []
   options:
@@ -562,6 +597,7 @@ attitudes_2_b_price_sensitive:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_b_tech_savvy:
+  index: 66
   type: mc
   label: []
   options:
@@ -571,6 +607,7 @@ attitudes_2_b_tech_savvy:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 attitudes_2_b_risk_taker:
+  index: 67
   type: mc
   label: []
   options:
@@ -580,6 +617,7 @@ attitudes_2_b_risk_taker:
     Somewhat agree: somewhat_agree
     Strongly agree: strongly_agree
 birth_year:
+  index: 68
   type: select
   label: What is your year of birth?
   options:
@@ -662,6 +700,7 @@ birth_year:
     '1931': '1931'
     '1930': '1930'
 gender:
+  index: 69
   type: mc
   label: What is your gender?
   options:
@@ -673,12 +712,14 @@ gender:
     Other: other
     Prefer not to answer: prefer_not_answer
 ethnicity:
+  index: 70
   type: mc
   label: Are you of Hispanic, Latino or Spanish origin?
   options:
     'Yes': 'yes'
     'No': 'no'
 race:
+  index: 71
   type: mc_multiple
   label: Which race best describes you? Select all that apply.
   options:
@@ -691,6 +732,7 @@ race:
     Some other race: other
     Do not know / prefer not to answer: do_not_know
 hh_size:
+  index: 72
   type: mc
   label: Including yourself, how many people live in your household?
   options:
@@ -701,6 +743,7 @@ hh_size:
     '5': '5'
     More than 5: more_than_5
 employment:
+  index: 73
   type: mc_multiple
   label: Which of the following describes your current employment status? Select all
     that apply.
@@ -714,6 +757,7 @@ employment:
     Disabled, not able to work: disabled
     Prefer not to answer: prefer_not_answer
 hh_income:
+  index: 74
   type: mc
   label: What is your annual household income? Please provide your best estimate.
   options:
@@ -745,6 +789,7 @@ hh_income:
     $250,000 or more: '255000'
     Prefer not to answer: prefer_not_answer
 education:
+  index: 75
   type: mc
   label: What is the highest level of education you have completed?  If currently
     enrolled, please use the highest degree received.
@@ -761,6 +806,7 @@ education:
     Ph.D. or M.D: phd
     Prefer not to answer: prefer_not_answer
 housing_type:
+  index: 76
   type: mc
   label: What type of housing do you currently live in?
   options:
@@ -773,6 +819,7 @@ housing_type:
     Boat, RV, van, etc.: boat
     Other: other
 housing_tenure:
+  index: 77
   type: mc
   label: Do you own or rent the current place you are living in?
   options:
@@ -781,6 +828,7 @@ housing_tenure:
     Other: other
     Do not know / prefer not to answer: do_not_know
 electric_bill:
+  index: 78
   type: mc
   label: What is your monthly electricity bill on average? Please provide your best
     estimate.
@@ -792,6 +840,7 @@ electric_bill:
     $400 - $499: '450'
     $500 or more: '550'
 political_view:
+  index: 79
   type: mc
   label: How would you describe your political views?
   options:
@@ -803,6 +852,7 @@ political_view:
     Other: other
     Prefer not to answer: prefer_not_answer
 party_voting:
+  index: 80
   type: mc
   label: Which political party do you typically vote for?
   options:
@@ -811,6 +861,7 @@ party_voting:
     I am independent: independent
     Prefer not to answer: prefer_not_answer
 climate_change:
+  index: 81
   type: mc
   label: How much do you, personally, worry about the issue of global climate change?
   options:
@@ -820,10 +871,12 @@ climate_change:
     A lot: a_lot
     A great deal: great_deal
 home_zipcode:
+  index: 82
   type: text
   label: What is the zip code of your primary residence? Please provide a 5-digit
     number.
 attention_check_survey_content:
-  type: unknown
+  index: 83
+  type: textarea
   label: 'Please briefly describe what this survey is about:'
 
