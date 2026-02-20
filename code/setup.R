@@ -1,23 +1,15 @@
 # Load libraries
-library(fastDummies)
-library(here)
-library(lubridate)
-library(tidyverse)
-library(arrow)
-library(dotenv)
-library(surveydown)
-library(logitr)
-library(cbcTools)
-library(janitor)
-library(apollo)
-library(psych)
-library(nFactors)
-library(rlang)
-library(openxlsx)
-library(xlsx)
-library(zipcodeR) # For ZIP code coordinates
-library(viridis) # For accessible color scales
-library(maps) # For base map data
+
+pkgs <- c(
+  "fastDummies", "here", "lubridate", "tidyverse", "arrow", "dotenv",
+  "surveydown", "logitr", "cbcTools", "janitor", "apollo", "psych",
+  "nFactors", "rlang", "openxlsx", "xlsx", "zipcodeR", "viridis", "maps"
+)
+
+installed <- pkgs %in% rownames(installed.packages())
+if (any(!installed)) install.packages(pkgs[!installed])
+
+invisible(lapply(pkgs, library, character.only = TRUE))
 
 `%notin%` <- Negate(`%in%`)
 

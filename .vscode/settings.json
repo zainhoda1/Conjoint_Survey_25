@@ -1,0 +1,7 @@
+{
+    "positron.assistant.enable": true,
+    "positron.assistant.alwaysEnableApplyInEditorAction": true,
+    "positron.assistant.followups.enable": true,
+    "workbench.colorTheme": "Default Positron Dark",
+    "window.autoDetectColorScheme": true
+}
