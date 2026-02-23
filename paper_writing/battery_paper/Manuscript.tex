@@ -1,0 +1,659 @@
+\documentclass[a4paper,fleqn]{cas-sc}   %{article}
+%remove ORCID footnote
+\renewcommand{\printorcid}{}
+
+
+%\usepackage{natbib}
+\usepackage{float}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[style=authoryear-icomp,
+uniquelist=false,
+maxnames=2,
+minnames=1,
+maxbibnames=99,
+    backend=biber, giveninits=true,
+    ibidtracker=false,
+    uniquename=false]{biblatex}
+\addbibresource{references.bib}
+\addbibresource{references_shared.bib}
+\DeclareNameAlias{default}{family-given}
+
+\usepackage{hyperref}
+\usepackage{graphicx} 
+
+% add line number
+\usepackage{lineno}
+\pagewiselinenumbers
+
+%\usepackage{titlesec}
+%\titlespacing*{\section}{0pt}{6pt}{3pt}  
+%\titlespacing*{\subsection}{0pt}{6pt}{3pt} 
+%\titlespacing*{\subsubsection}{0pt}{6pt}{3pt}
+
+% remove the "preprint"
+\ExplSyntaxOn \cs_gset:Npn \__first_footerline: { \group_begin: \small \sffamily \__short_authors: \group_end: } \ExplSyntaxOff
+
+\shortauthors{}
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+\tsc{EP}
+\tsc{PMS}
+\tsc{BEC}
+\tsc{DE}
+%%%
+
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+\shorttitle{}
+%\shortauthors{X. Iogansen et~al.}
+
+%\begin{frontmatter}
+
+\title [mode = title]{Exploring Perception, Knowledge Gaps, and Adoption Patterns of Battery Electric Vehicles Among U.S. Consumers}                      
+
+
+% \author[1,2]{Xiatian {Iogansen}}
+% \fnmark[1]
+% \credit{Conceptualization, Data curation, Methodology, Software, Formal analysis, Writing - Original Draft, Writing - Review \& Editing}
+
+% \author[1]{Christina {Gore}}
+% \credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Original draft preparation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
+% \fnmark[2]
+% \cormark[1]
+% \cortext[cor1]{Corresponding author}
+
+% \author[1]{Joshua D. {Kneifel}}
+% \credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
+% \fnmark[3]
+
+% \author[1,2]{Sindhu {Ranganath}}
+% \credit{Data curation, Writing - Original Draft, Writing - Review \& Editing}
+% \fnmark[4]
+
+% \author[2]{John {Helveston}}
+% \credit{Conceptualization, Methodology, Writing - Review \& Editing, Supervision}
+% \fnmark[5]
+
+% \affiliation[1]{organization={Applied Economics Office, Engineering Laboratory, National Institute of Standards and Technology},
+%                 country={USA}}     
+                
+% \affiliation[2]{organization={Department of Engineering Management and Systems Engineering, George Washington University},
+%                 city={Washington D.C.},
+%                 country={USA}}
+                
+
+
+% \fntext[fn1]{xiatian.iogansen@gwu.edu \& xiatian.iogansen@nist.gov, https://orcid.org/0000-0002-4851-1323}
+% \fntext[fn2]{christina.gore@nist.gov, https://orcid.org/0000-0002-3586-6918}
+% \fntext[fn3]{joshua.kneifel@nist.gov}
+% \fntext[fn4]{sindhu.ranganath@nist.gov, https://orcid.org/0000-0001-5764-9773}
+% \fntext[fn5]{jph@gwu.edu, https://orcid.org/0000-0002-2657-9191}
+
+
+\begin{abstract}
+This study examines consumer perceptions, knowledge, and adoption patterns of battery electric vehicles (BEVs), using survey data from 1,443 U.S. residents. Findings reveal persistent informational and psychological barriers that hinder adoption among current non-adopters and challenge sustained use among current adopters. A binary logit model distinguishes \textit{BEV-only users} and \textit{BEV-mixed-fuel users}, uncovering distinct socio-demographic profiles, motivations, vehicle usage, and charging behaviors often obscured in aggregate analyses. \textit{BEV-only users} are typically younger, urban, and price-sensitive, often lacking dedicated charging access, whereas \textit{mixed-fuel users} place greater value on BEVs’ symbolic appeal and mitigate range concerns through access to conventional vehicles. A multinomial logit model of non-adopters shows that BEV-related perceptions, knowledge, incentives, infrastructure access, and personal traits affect adoption intentions in asymmetric ways. These findings highlight the need for flexible modeling and measurement of adoption to capture the complex and varied drivers of BEV resistance and uptake across different consumer groups.
+\end{abstract}
+
+%\begin{highlights}
+%\item Research highlights item 1
+%\item Research highlights item 2
+%\item Research highlights item 3
+%\item Research highlights item 4
+%\item Research highlights item 5
+%\end{highlights}
+
+\begin{keywords}
+Electric vehicle \sep Adoption intention \sep Vehicle fleet composition \sep Fuel type choice \sep Perception \sep Knowledge 
+\end{keywords}
+
+\maketitle
+
+\renewcommand{\baselinestretch}{2}\normalsize
+\section{Introduction}
+\label{section:intro}
+
+Electric vehicles (EVs) --- battery electric vehicles (BEVs), plug-in hybrid electric vehicles (PHEVs) and hybrid electric vehicles (HEVs) --- have seen significant adoption growth in recent years \parencite{us_department_of_energy_alternative_2025}. Among all EV types, BEVs are distinct in being fully electric, having no tailpipe emissions, and requiring dedicated charging infrastructure. In the United States (U.S.), new EV sales reached nearly 3.2 million in 2024, with BEVs accounting for almost 40\% of those sales \parencite{bureau_of_transportation_statistics_hybrid-electric_2025}. BEVs also represent the fastest-growing segment of the EV market in the US, with sales more than tripling  between 2020 and 2024 \parencite{sugihara_electrifying_2022}. Yet recent data suggest that the growth rate of BEVs appears to be slowing \parencite{bureau_of_transportation_statistics_hybrid-electric_2025}. At the same time, the BEV rental and leasing market continues to under-perform relative to industry expectations. For example, a rental car company announced a rollback of its electrification plans, citing low customer demand and repair challenges \parencite{shakir_hertz_2024}. This confluence of rapid uptake and emerging barriers makes the BEV market in the U.S. a critical focus for both industry and academic research.
+
+A comprehensive review by \textcite{gore_consumer_2024} highlights a wide range of demographic, socio-economic, environmental, technological, infrastructural, and attitudinal factors that influence consumers' acceptance and long-term adoption of BEVs. Two major research gaps emerge from the literature. First, most studies treat BEV adopters and non-adopters as internally homogeneous groups \parencite{li_review_2017}, even though some recent works begin to challenge this assumption. For instance, \textcite{hardman_comparing_2016} differentiate between high-end and low-end BEV adopters, showing that these groups differ significantly in socio-economic profiles and long-term adoption intention. Similarly, \textcite{burs_are_2020} segment potential BEV adopters into three groups based on  hypothetical product attributes and personal characteristics. Despite this growing recognition of heterogeneity, few studies rigorously model BEV adoption behavior in relation to the fuel-type composition of existing household vehicle fleets, even though prior research has shown that individuals grouped by their current vehicle fuel type exhibit distinct demographic traits, motivations, and barriers to BEV adoption:
+
+\begin{itemize}
+    \item \textit{\textbf{BEV-only owners}}: Households that own only BEVs. Research on this population group is quite limited, largely due to the low prevalence of BEV-only households. Studies show that over 90\% of BEV owners in the U.S. live in multi-vehicle households \parencite{li_ownership_2019,davis_electric_2022}, and an Automotive Consumer Trends Report \parencite{experian_automotive_2024} suggests that 81\% of EV owners also own a gasoline-powered vehicle. Using a small sample of 33 households from the 2017 U.S. National Household Travel Survey (NHTS), \textcite{feng_battery_2024} found that \textit{BEV-only owners} tend to be younger, have smaller household sizes, own fewer vehicles, and are more likely to have more drivers than vehicles. These households also generate fewer and shorter vehicle trips. Based on these insights, it appears that these BEV adopters are primarily motivated by economic considerations, with the desire to reduce the total cost of ownership (TCO).
+    
+    \item  \textit{\textbf{BEV-mixed-fuel owners}}: Households that own BEVs in combination with other fuel types, including PHEVs, HEVs, and internal combustion engine vehicles (ICEVs) that operate on conventional fuels like gasoline, diesel, compressed natural gas, or flex-fuel. With a sample of 361 households, \textcite{feng_battery_2024} suggests that compared to \textit{BEV-only owners} and \textit{non-BEV owners}, \textit{BEV-mixed-fuel owners} tend to be non-Hispanic, high-income, have more household vehicles, be more likely to own homes, and report slightly more daily trips. It appears that they may seek to accommodate different household members' preferences, or meet diverse travel needs. For instance, conventional vehicles may be used for long-distance trips as a strategy to mitigate range anxiety --- the fear that the limited range of a BEV will prevent them from completing trips. Studies also suggest that BEVs might be driven less than other vehicle types within these households \parencite{davis_how_2019,burlig_low_2021}.      
+    \item \textit{\textbf{PHEV owners}}: This group often comprises tech-oriented pragmatists who view PHEVs as a transitional solution toward full electrification \parencite{axsen_hybrid_2013}. They value the economic benefits of electrification while remaining concerned about range limitations and the availability of charging infrastructure. Notably, \textcite{jia_are_2021} finds that, in contrast to BEVs, battery range has a limited effect on perceived utility for PHEV users.
+    
+    \item \textit{\textbf{HEV and ICEV owners}}: This group consists of households that rely exclusively on conventional fuel vehicles. A range of technological, financial, infrastructural, and psychological barriers are often cited as key factors hindering their adoption of plug-in electric vehicles (PEVs) \parencite{krishna_understanding_2021}. These individuals are generally less tech-savvy, more risk-averse, more car-dependent, and more likely to prioritize practical features when evaluating a vehicle \parencite{iogansen_deciphering_2023}. 
+\end{itemize}
+
+The second research gap concerns the limited integration of informational and psychological factors into models of BEV adoption behavior. While most existing studies emphasize socio-demographic characteristics and infrastructure availability \parencite{gore_consumer_2024}, less attention has been given to how consumers’ knowledge, perceptions, and attitudes shape adoption decisions. Key dimensions --- such as knowledge of BEV attributes, perceptions of driving range and battery durability, awareness of ownership costs, and trust in new technologies --- remain underexplored. Growing evidence suggests that information asymmetries, situation where one party (e.g., battery manufacturers) possesses more or better information than another (e.g., BEV consumers), can potentially influence consumer decision-making and slow the uptake of new technologies \parencite{zhang_information_2022}. By not accounting for these factors, previous models risk overlooking critical mechanisms that could affect adoption outcomes in the BEV market.
+
+Our study addresses these two gaps by exploring two complementary research topics. First, we incorporate segmentation of BEV adopters into modeling framework. \textbf{Among current BEV owners}, we aim to identify the factors that distinguish \textit{BEV-only owners} from \textit{BEV-mixed-fuel owners}, and further compare their adoption motivations as well as BEV usage patterns. Understanding these differences can provide insights into how household vehicle fuel type composition impacts BEV adoption and usage, which ultimately carries important implications for overall vehicle efficiency and energy consumption \parencite{srinivasa_raghavan_behavioral_2021}. Second, \textbf{among current non-BEV owners}, we aim to examine the factors that encourage or impede their likelihood of adopting a BEV as the next household vehicle. We explicitly examine underexplored informational and psychological factors in the existing literature, including BEV-related knowledge, perceptions, and attitudes, to highlight differences across fuel-type user groups and their impact on BEV adoption intentions in the future. To investigate these two research questions, we estimate two logit regression models and conduct various statistical tests using data from a household vehicle survey of 1,443 U.S. residents, which was collected online in 2023.  
+
+Findings from this study highlight the presence of information asymmetry in the context of EV adoption, as many individuals lack accurate knowledge about BEV attributes, performance, and cost of ownership. Nevertheless, compared to non-BEV users, current BEV users tend to be better informed about BEV features, experience lower anxiety about driving range, charging infrastructure, and resale value, and are more likely to perceive BEVs as cost-effective. However, contrary to the common assumption that BEV adopters are a uniform group \parencite{li_review_2017}, our findings demonstrate substantial variation in demographics, motivations, usage behaviors, and infrastructure needs based on their household vehicle fuel type compositions. The differences in charging behavior by different BEV owners are important to estimate in order to plan for electricity generation needs as BEV adoption increases. 
+
+This study is also among the few to disaggregate BEV users by household vehicle fuel portfolio, offering a more refined typology of BEV ownership and use. This distinction offers unique insights into how BEVs are integrated into daily life under different household vehicle configurations. Among current non-adopters, we find that BEV-related knowledge, perceptions, attitudes, access to charging infrastructure, and socio-demographic factors all significantly influence adoption intentions. 
+
+The study further advances the literature by moving beyond traditional binary adoption models (e.g., potential BEV adopters vs. non-adopters). Instead, we categorize non-BEV owners as "likely adopters," "indifferent," or "unlikely adopters," based on their stated future BEV purchase intentions and model these categories using a multinomial logit model. This approach provides a more granular understanding of the factors that drive or hinder adoption. This approach also better reflects the reality of consumer decision-making, which is often gradual and transitional rather than binary, supported by the Diffusion of Innovations Theory \parencite{rogers_diffusion_2003} and the Theory of Planned Behavior \parencite{ajzen_theory_1991}. The results also reveal a nuanced decision-making process in which some factors exert symmetric effects --- simultaneously increasing the likelihood of BEV adoption and decreasing the likelihood of rejection --- while others show asymmetric effects, influencing only one side of the decision spectrum. This asymmetry may be rooted in behavioral mechanisms such as prospect theory \parencite{levy_introduction_1992}, and bounded rationality \parencite{camerer_bounded_1998}.
+    
+The remainder of the paper is structured as follows. Section 2 provides a review of the literature on household vehicle composition and usage (among BEV users), as well as factors influencing BEV adoption. Section 3 provides an overview of the survey data, and presents both descriptive statistics and comparative analyses. Section 4 outlines the statistical method employed in the analysis. Section 5 presents the key findings, discusses their implications, outlines study limitations, and suggests directions for future research. Finally, Section 6 concludes the paper.
+
+
+
+\section{Literature Review}
+\subsection{Household vehicle fleet composition and utilization}
+Modeling household vehicle fleet composition and utilization has garnered increasing attention in travel behavior research. The types of vehicles owned and the frequency with which they are used have important implications not only for energy consumption and emissions, but also for vehicle market forecasting, supply chain management, infrastructure funding (e.g., gas tax revenues), and long-term transportation planning. Early studies focused on vehicle choice based on dimensions such as body type (e.g., car, SUV, truck), size (e.g., compact, midsize, large), and vintage (e.g., new vs. old) \parencite{bhat_impact_2009,paleti_modeling_2013,garikapati_characterizing_2014}. With the growing adoption of alternative fuel vehicles, fuel type has increasingly been incorporated into models of vehicle choice. Several studies have demonstrated that vehicle type and fuel type tend to be interrelated decisions, influenced by household preferences, constraints, and usage needs \parencite{hess_joint_2012,hossain_what_2023}. However, fewer studies have examined fuel type choices within the household fleet among BEV adopters. Existing research suggests that BEVs are often better suited, both technically and economically, as secondary vehicles in multi-vehicle households to serve more frequent but shorter trips where range limitations are less constraining \parencite{tamor_electric_2015, jakobsson_are_2016}. Even fewer studies have compared the household characteristics, vehicle purchasing behavior, and vehicle usage patterns between \textit{BEV-only users} and \textit{BEV-mixed-fuel users}. 
+
+Two relevant studies using the 2017 NHTS data shed some light on this gap. \textcite{chowdhury_electric_2024} analyzes EV usage through the lens of vehicle choice, finding that EVs are more likely to be adopted by households with fewer workers (fewer than two), low (under \$50K) or middle (\$50--\$150K) income levels, and for discretionary trips. However, the study focuses solely on multi-vehicle households and does not distinguish between BEVs, PHEVs, and HEVs, potentially conflating behavioral differences among these vehicle types. \textcite{feng_battery_2024} makes a clear distinction between \textit{BEV-only} households, \textit{BEV-mixed-fuel} households, and \textit{non-BEV} households. However, the authors caution against overgeneralization due to the limited sample size of \textit{BEV-only} households in the dataset. In summary, more studies with larger sample sizes are needed to fill in the research gap in the U.S. context. 
+
+\subsection{Determinants of BEV adoption}
+
+A substantially larger body of research has examined the factors impacting current BEV adoption and future adoption intentions. \textcite{gore_consumer_2024} offers a thorough literature review complementing this present study. Therefore, the following review focuses on factors of main interest of this study, including financial, informational, and psychological factors. 
+
+\vspace{6pt}
+\noindent\textbf{\textit{Financial and economic factors}}\par
+Financial considerations capture the economic costs and benefits associated with BEV adoption.
+\textcite{pamidimukkala_evaluation_2023} ranked the various barriers to EV adoption, identifying financial and economic barriers --- particularly high purchase prices and battery replacement costs --- as the most significant concerns. The TCO of an EV consists of upfront costs (e.g., purchase price, taxes, and fees), recurring operational costs (e.g., electricity for BEVs, electricity plus gasoline for PHEVs, maintenance, insurance), and end-of-life costs (resale or scrappage value, or potential second-life battery applications \parencite{letmathe_consumer-oriented_2017}). While EVs typically have higher purchase prices but lower operating costs compared to ICEVs in the same vehicle class \parencite{gore_consumer_2024}, the economics are multifaceted. Despite an 85\% decline in battery prices over the past decade, first-time EV buyers may still encounter extra expenses, such as the installation of home chargers \parencite{rapson_economics_2021}. Additionally, research by \textcite{hagman_total_2016} highlights that many car buyers do not prioritize fuel economy when making purchase decisions, suggesting that the prospect of lower operating costs may have little impact on their decision. Furthermore, the potentially steeper depreciation rates for BEVs with outdated battery technologies may offset these operational savings \parencite{breetz_electric_2018,roberson_battery-powered_2024}. However, \textcite{dumortier_effects_2015} show that when consumers are well informed about the TCO, they become more inclined to consider EVs. Despite the importance of TCO in evaluating EV feasibility, there is still no standardized set of TCO components (e.g., taxes, insurance, fees, resale value, etc.), making cross-comparisons difficult across regions and studies \parencite{breetz_electric_2018,letmathe_consumer-oriented_2017}. \textcite{woody_electric_2024} note that TCO analyses became increasingly comprehensive between 2017 and 2022, with more components incorporated in more recent publications.
+
+Tax credits, tax exemptions, and other purchase or recurring incentives can lower the upfront cost of EVs to the purchasers, helping EVs reach cost parity with ICEV sooner \parencite{woody_electric_2024}. \textcite{mekky_impact_2024} highlight that increasing the income tax credit by \$1,000 results in a 9.1\% increase in EV adoption, and \textcite{roberson_not_2022} shows that making those incentives available at the dealership can increase their value to customers. However, \textcite{sanders_north_2020} reports that in North America, subsidies have had a limited effect on TCO. Beyond direct incentives, studies also found that BEVs are more cost-effective when owners drive more miles annually, retain the vehicle longer, and benefit from lower depreciation for certain high-demand models with advanced battery technologies and software systems \parencite{woody_electric_2024,breetz_electric_2018,hagman_total_2016}.
+
+\vspace{6pt}
+\noindent\textbf{\textit{Information, knowledge, and customer experience}}\par
+Informational factors refer to the extent of consumers’ knowledge about BEV attributes (e.g., driving range, battery lifespan, charging requirements) and their personal or observed experience with BEVs.  \textcite{krause_perception_2013} found that nearly two-thirds of respondents failed to estimate basic features of PEVs correctly, and among them, approximately 75\% underestimated their values or advantages. \textcite{zhang_information_2022} further suggests that access to high-quality information about BEV performance, attributes, and environmental impacts is positively associated with consumers’ perceived value and perceived trust in EVs. In contrast, consumer EV experience has been shown to promote greater openness to alternative-fuel vehicles \parencite{iogansen_deciphering_2023}. However, overall consumer experience with EVs in the U.S. remains low. The EV Experience Index developed by \textcite{tanaka_consumers_2014} --- which accounts for whether respondents had seen an EV in their neighborhood, knew someone who owned one, had been a passenger in one, or had driven one --- shows that only 5\% of Americans scored a 4, indicating high exposure, while 64\% scored 1 or less.
+
+\vspace{6pt}
+\noindent\textbf{\textit{Perceptions, attitudes, and psychological factors}}\par
+Perceptual and psychological factors capture subjective evaluations, beliefs, and attitudes toward BEVs. EV range anxiety remains one of the most frequently cited barriers to EV adoption \parencite{gore_consumer_2024,pamidimukkala_evaluation_2023}, although studies have shown that current EV ranges are sufficient for most trips \parencite{chakraborty_addressing_2022, rainieri_psychological_2023}. Indeed, \textcite{carley_intent_2013} report a 16.78\% decrease in the likelihood of purchasing an EV among those viewing limited range as a serious disadvantage. The anxiety is often exacerbated by the infrastructural barriers, with limited public charging infrastructure, the need for travel detours to find chargers, and long charging durations \parencite{chakraborty_addressing_2022}. Battery performance issues and temperature-related constraints can impact actual EV range and contribute to adoption hesitancy \parencite{gore_consumer_2024}. 
+
+Proposed remedies for range anxiety include more accurate range estimation and optimized energy consumption technologies \parencite{shrestha_measures_2022}. However, the effectiveness of these improvements also depends on factors beyond the battery’s state of charge—such as driving behavior and ambient temperatures \parencite{rastani_effects_2019,wai_simulation_2015}. More advanced strategies to mitigate battery-related concerns include Vehicle-to-Vehicle (V2V) energy sharing \parencite{you_efficient_2014}, online V2V energy swapping \parencite{wang_spatio-temporal_2018}, battery exchange at dedicated swapping stations \parencite{wu_optimization_2018}, and peer-to-peer car charging systems \parencite{chakraborty_addressing_2022}. \textcite{chakraborty_addressing_2022} compare these approaches based on cost, ease of deployment, and impacts on mobility, concluding that each offers some potential to partially alleviate range anxiety. In addition to these technological innovations, expanding access to workplace and public charging infrastructure can be instrumental to overcoming range anxiety \parencite{neubauer_impact_2014}. Furthermore, optimizing public charging locations — placing them closer to trip origins and along frequently traveled routes — can enhance convenience and support EV adoption \parencite{yang_modeling_2016}.\par
+
+Another psychological barrier is the resale anxiety. Although it ranks lower among commonly cited barriers to EV adoption \parencite{bruckmann_is_2021,pamidimukkala_evaluation_2023}, it is likely to become a more prominent concern as a growing number of EVs enter the used-car market. Despite its increasing relevance, this topic remains relatively understudied. Traditionally, a vehicle’s resale value often hinges on factors such as vehicle specifications, original price, age, mileage, and the history of maintenance and repair. However, as \textcite{hagman_total_2016} point out, the limited historical usage data and technological uncertainty surrounding BEVs initially led to conservative depreciation estimates. Recent survey evidence from \textcite{bruckmann_is_2021} suggests that BEVs may now be perceived as having higher resale values than ICEVs --- a shift potentially driven by supportive policies and evolving social attitudes towards electrification. \textcite{roberson_battery-powered_2024} also report that while EVs have historically depreciated faster than ICEVs, newer models equipped with longer battery ranges are retaining value more effectively than earlier models with shorter ranges. In addition, \textcite{zhang_resale_2023} explore the potential of resale value guaranteed as a strategy to reduce resale-related concerns. However, the study notes that incentivizing information sharing --- such as exchanging EV market demand forecasts, cost structures, and other proprietary data between supply chain partners --- does not necessarily boost sales volumes.
+
+
+\section{Survey Design, Data Collection, and Descriptive Analyses}
+
+\subsection{Household Vehicle Survey}
+
+The data used in this paper comes from an online survey adopted from several previous household vehicle surveys \parencite{carrel_subscribing_2024,gore_what_2021}, with additional questions designed to explore BEV adoption in greater detail. The survey gathers a comprehensive set of data, including household vehicle ownership, current fuel type choices, perceptions and knowledge of BEVs, future vehicle purchasing intentions, decision-making processes when buying a used BEV, personal attitudes, demographic characteristics, and access to infrastructure. Specific question sets were presented to current BEV owners/leasers to collect detailed BEV vehicle information (e.g., make, model, year, range) and insights into their driving and charging behaviors. \footnote{The National Institute of Standards and Technology Research Protections Office determined this project meets the criteria for exempt human subjects research.} 
+
+Before data collection, the survey underwent pilot testing among colleagues with a research background on social science, planning, and engineering as well as among a few BEV owners, leading to further refinements on survey questions, flow, and length. The survey was officially conducted in the U.S. from March 2023 to June 2023 through a third-party online survey platform that recruited participants from an online opinion panel, targeting adults in households with at least one vehicle. Consistent with the definition in the American Community Survey (ACS), a household includes all the persons who occupy the housing unit as their usual place of residence.
+
+Multiple attention checks were included throughout the survey to identify and filter out unreliable responses. In addition, certain survey questions were intentionally designed to enhance response validity. For instance, when respondents reported information about their BEVs, their selections for vehicle make and model were required to match entries in a predefined inventory. Responses with mismatched combinations (e.g., "Toyota, Model 3") were considered invalid. The participants were offered remuneration for their time. The median survey completion time was approximately 10 minutes. The data collection yielded 1,490 completed responses. During the data cleaning process, the team identified six respondents (potentially bots) who appeared to have taken the survey multiple times with highly similar response patterns. An additional five respondents provided inconsistent or nonsensical responses throughout the survey. After filtering out these respondents from the dataset, the final sample size for this study is 1,443. Further details on the survey content, data collection, data cleaning, and prior analyses are available in \textcite{gore_data_2025} and \textcite{webb_consumer_2025}.
+
+ It is important to note that the survey was not designed to produce a nationally representative sample of the U.S. population, and the data were not weighted. This decision was based on following considerations: (1) the primary goal of the study is to examine variation in behavioral patterns and decision-making processes related to BEV adoption using statistical modeling, rather than to estimate population-level adoption rates; and (2) given the relatively low rate of BEV adoption in the general population, a representative sample would yield too few BEV owners or likely adopters to support robust subgroup analysis.
+
+
+\subsection{Descriptive Analyses}
+The following subsections describe the two dependent variables introduced in the Introduction, along with a set of independent variables—summarized in Table~\ref{table_cross_tabs}—that are hypothesized to influence fuel type combinations and future intentions for BEV adoption, based on insights from the literature. These variables draw from both survey responses and supplementary data from external sources. These descriptive statistics provide context for the sample and highlight key patterns before presenting the main methods, results, and discussions of the statistical models in Section \ref{section:method} and \ref{section:result}.
+
+
+\subsubsection{Household current vehicle ownership and fuel type composition}
+
+The first dependent variable of interest is \textit{the fuel type composition of BEV users}. Respondents reported the total number of household vehicles owned or leased by them or their household members, along with the fuel type of each vehicle. Note that respondents were not required to report the vehicles in any specific order, although they may have naturally listed them based on frequency of use. Nearly half of the respondents (46.2\%) live in single-vehicle households, while 38.8\% have two vehicles and 15.0\% have three or more. 
+ 
+We categorized the respondents into five user groups: \textit{BEV users} (including the \textit{BEV-only users} and the \textit{BEV-mixed fuel users}), \textit{PHEV users}, \textit{HEV users}, and \textit{ICEV users}. Most respondents (80\%) owned vehicles of only one fuel type. For households owning multiple vehicle types, categorization was based on the highest-priority vehicle present, following this order: BEV > PHEV > HEV > ICEV. For example, a household owning both a BEV and a PHEV was classified as a BEV household, while a household with a PHEV, HEV, and ICEV was classified as a PHEV household. About one-third of respondents (n=494; 34.2\%) lived in households with at least one BEV. For simplicity, these individuals are referred to as \textit{BEV users} hereafter, regardless of whether they personally own, lease, or regularly drive the BEV. Of these, 55.5\% (n=274) are \textit{BEV-only users} and the rest (n=220) are \textit{BEV-mixed-fuel users}. Collectively, they reported a total of 539 unique BEVs. Additionally, 4.0\% (n=57) are categorized as \textit{PHEV users}, 5.9\% (n=85) as \textit{HEV users}, and 55.9\% (n=807) as \textit{ICEV users}.
+
+\subsubsection{Future intentions for BEV adoption}
+
+The second dependent variable of interest in this study concerns \textit{the likelihood of adopting a BEV as the next household vehicle}. The variable was derived from a 7-point Likert-scale question and subsequently consolidated into three categories. Responses of "extremely unlikely" and "moderately unlikely" were combined into the "unlikely" category (n=302; 20.9\%). Responses of "slightly unlikely", "neither likely nor unlikely", and "slightly likely" were grouped as "neither likely nor unlikely" (n=427; 29.6\%). Finally, "moderately likely" and "extremely likely" responses were combined into the "likely" category (n=714; 49.5\%). As suggested in Figure \ref{figure_BEVadoption_current_fuel}, the likelihood of obtaining a BEV in the future follows this order: BEV users > PHEV users > HEV users > ICEV users. The differences among BEV and PHEV users are not statistically significant. While unsurprising, it is noteworthy that current BEV users tend to continue preferring BEVs and a vast majority of PHEV users appear ready to transition to BEVs in the near future. Both patterns align with findings from prior literature  \parencite{saaksjarvi_consumer_2003,nazari_simultaneous_2019,hossain_what_2023}. Because of this, the statistical model will only focus on HEV and ICEV users as they tend to be the lagged BEV adopters.
+
+\begin{figure}[pos=H]
+	\centering
+	\includegraphics[width=1\textwidth]{BEV_adoption/Future BEV adoption_5fuel-1.png}
+	\caption{Likelihood of BEV adoption by current vehicle type choice.}
+	\label{figure_BEVadoption_current_fuel}
+\end{figure}
+
+
+\subsubsection{BEV knowledge, perceptions, and general attitudes}
+\noindent\textbf{\textit{BEV knowledge}}\par
+The survey asks respondents to report their assessments on BEV battery performance and costs, specifically regarding (a) the expected driving range of a fully charged BEV, (b) battery lifespan before replacement, and (c) estimated battery replacement costs (including both the cost of the battery price and installation labor). The accuracy of their responses is evaluated against benchmarks derived from actual BEV performance data, industry standards, literature, reports, and blog posts.
+
+For electric range, we reference the EPA-estimated range of 762 BEVs (distinguished by make, model, year, trim, body size, body style and drivetrain) released from 2013 to 2025, as compiled by \textcite{carsheetio_ultimate_2025}. The median range among these vehicles is 256 miles, with over 80\% falling between 200 miles and 350 miles. Therefore, we define 200 to 350 miles as a reasonable estimate for BEV driving range, while values above or below this interval are categorized as overestimation or underestimation. For battery lifespan and replacement costs, official statistics are limited, as they vary dramatically depending on factors such as vehicle specifications, battery chemistry/size, and driving conditions. Many EV manufacturers offer 8-year/100,000-mile battery warranties \parencite{clarke_car_2024}. Predictive modeling by the National Renewable Energy Laboratory \parencite{smith_predictive_2014} estimates that BEV batteries last 12 to 15 years in moderate climates, but their lifespan may be reduced to 8 to 12 years in extreme climates. \textcite{schulz-monninghoff_integration_2021} suggests that the average lifespan of a BEV is 8 to 10 years. Based on these insights, we consider 8-12 years a reasonable estimate for battery longevity. Finally, drawing from real-world experience compiled from a few online sources \parencite{kothari_battery_2024,witt_electric_2024}, battery replacement costs typically range from \$5,000 to \$20,000, covering the expense of a new battery pack and labor.
+
+Overall, when considering these three aspects of BEVs --- range, battery lifespan, and battery replacement costs) --- 42.3\% of respondents provided reasonable estimates in one aspect, 28.4\% in two aspects, and only 9.3\% across all three aspects. This is consistent with prior studies that emphasize the widespread lack of consumer knowledge about EV performance\parencite{krause_perception_2013,axsen_confusion_2017}. As shown in Figure~\ref{figure_knowledge}, respondents are most knowledgeable about driving range, yet a large proportion underestimate both battery lifespan and battery replacement costs. Chi-square tests suggest that current BEV users demonstrate better knowledge across all three aspects compared to non-BEV users, although the level of misconception still remains higher than our expectation. While this could reflect a real-world situation, it is also possible that some respondents were neither the owners nor the primary users of the BEVs in their households. As a result, their knowledge could still be limited. Compared to \textit{BEV-mixed-fuel users}, \textit{BEV-only users} demonstrate better knowledge on battery costs, but less understanding of battery lifespan. This may be because they rely exclusively on their BEVs for travel without access to alternative vehicle types --- leading to the perception that their battery may degrade more quickly. Further discussion of this topic is provided in the following sections. PHEV/HEV users do not necessarily have better knowledge than ICEV users. In addition, it is possible that non-BEV users could have projected their experience on their vehicle to BEVs. For instance, PHEVs/HEVs tend to get extended electric range in addition to their gas range; as a result, a higher proportion of those users overestimate the range of a BEV. In contrast, the average lifespan and costs of a lower-voltage battery in non-BEVs tend to be shorter than a BEV battery, thus more individuals underestimate battery lifespan and costs.
+
+\begin{figure}[pos=H]
+	\centering
+        \includegraphics[width=1\textwidth]{BEV_adoption/BEV knowledge_5 fuel-1.png}
+	\caption{BEV knowledge related to driving range, battery lifespan and battery replacement costs}
+	\label{figure_knowledge}
+\end{figure}
+
+
+\vspace{6pt}
+\noindent\textbf{\textit{BEV anxiety}}\par
+ The survey evaluates respondents’ concerns about BEVs using four attitudinal statements related to \textit{range anxiety}, \textit{charging accessibility}, and \textit{resale value}. These items were originally measured on a 7-point Likert scale but were consolidated into three categories to ensure sufficient sample size for each fuel-type user group. Responses of "strongly disagree" and "disagree" were combined into "disagree." "Somewhat disagree," "neither agree nor disagree," and "somewhat agree" were grouped into "neither agree nor disagree." Finally, "agree" and "strongly agree" were combined into "agree." The distribution of responses for each statement is shown in Figure~\ref{figure_anxiety}.
+
+ Since the level of agreement is ordinal, we apply the \textit{Kruskal-Wallis test} \parencite{conover_practical_1999} to further assess whether the response distribution differs among the five fuel-type user groups. If the Kruskal-Wallis test is statistically significant, we conduct \textit{Dunn’s post-hoc test} \parencite{hollander_nonparametric_2015} to identify specific group differences \footnote{\label{Kruskal-Wallis test} The Kruskal-Wallis test is a non-parametric method that ranks data points and determines if the data in each group originates from the same distribution. Dunn’s test, which relies on the same ranked data, is used for pairwise comparisons. The z-test approximation is calculated as the difference in mean rank scores divided by the pooled variance estimate, and Bonferroni correction is applied to adjust p-values for multiple comparisons.}. Testing results indicate that \textit{BEV-mixed-fuel users} report significantly lower level of anxiety across all three dimensions compared to all non-BEV user groups. In contrast, \textit{BEV-only users} show a significantly lower anxiety only when compared to ICEV users. Furthermore, \textit{BEV-mixed-fuel users} exhibit fewer concerns about range and resale value than \textit{BEV-only users}. Differences among PHEV, HEV, and ICEV users are not statistically significant.
+
+To identify the underlying structure of these statements, we conducted an exploratory factor analysis (EFA), which revealed a latent variable termed "\textit{BEV anxiety}." For detailed results, refer to Table~\ref{table_factor_analysis} in the Appendix. This factor was incorporated into our statistical models. 
+
+\begin{figure}[pos=H]
+	\centering
+	\includegraphics[width=1\textwidth]{BEV_adoption/BEV anxiety-5fuel-1.png}
+	\caption{Anxieties related to range limitations, charging availability, and resale value}
+	\label{figure_anxiety}
+\end{figure}
+
+\vspace{6pt}
+\noindent\textbf{\textit{Perceived BEV and gasoline vehicle costs}}\par
+ 
+The survey explores respondents’ expectations regarding the future costs associated with BEVs and gasoline vehicles (of the same type and size) over the next five years. It assesses perceptions of BEV electricity costs relative to gasoline fuel costs as well as perceptions of BEV TCO, including depreciation, insurance, fuel, and maintenance. Additionally, the survey examines expectations about future gasoline prices, BEV battery costs, and purchase prices for both new and pre-owned BEVs and gasoline vehicles. These items were originally measured on a 5-point Likert scale but were consolidated into three categories: "less" (combining "much less" and "somewhat less"), "about the same," and "more" (combining "somewhat more" and "much more"). The distribution of responses for each statement is shown in Figure~\ref{figure_cost}. The Kruskal-Wallis test and Dunn’s post-hoc test suggest that current BEV users --- especially BEV-mixed-fuel users --- estimate significantly lower purchase prices, battery replacement costs and TCO for BEVs compared to ICEV users (and in some cases, HEV users as well). At the same time, most respondents expect an increased cost of gasoline and ICEVs in the future.
+
+Similarly, an EFA was implemented among these statements, which extracted two latent variables termed ``perceived BEV costs'' and ``perceived ICEV costs'' (see Table~\ref{table_factor_analysis} in the Appendix).
+
+\begin{figure}[pos=H]
+	\centering
+	\includegraphics[width=1\textwidth]{BEV_adoption/pecerived_costs_5fuel-1.pdf}
+	\caption{Expected cost change for BEVs and gasoline vehicles.}
+	\label{figure_cost}
+\end{figure}
+
+
+
+\vspace{6pt}
+\noindent\textbf{\textit{General attitudes}}\par
+The survey also evaluates respondents’ general risk tolerance and their level of concern about global climate change. Risk tolerance was measured on a scale from 1 (risk-averse) to 10 (risk-taking), and is treated as a continuous variable. Climate change concern was assessed on a five-point Likert-scale and subsequently grouped into three broader levels: level 1 (combing "not at all" and "a little"), level 2 ("a moderate amount"), and level 3 (combing "a lot" and "a great deal").
+
+\subsubsection{EV infrastructure, clean vehicle mandates and incentives}
+Regarding home EV infrastructure, more than two-thirds (68.2\%) of respondents report having access to an electrical outlet at their residence, while less than one-third have solar panels installed. To assess the availability of public EV infrastructure, we compiled data on all EV public chargers in the U.S. as of March 2023 \parencite{us_department_of_energy_alternative_2025} and aggregated the counts at the ZIP code level. Based on this data, we estimate an average charger density of approximately 0.5 chargers per 1,000 people within the ZIP codes corresponding to respondents' residential locations. Note that some variables estimated at the ZIP code level have missing values, as 71 respondents did not provide a valid U.S. ZIP code.
+
+Prior research demonstrates that public polices play a pivotal role in accelerating BEV adoption by increasing EV market supply, reducing up-front costs, and expanding charging infrastructure \parencite{narassimhan_role_2018,jenn_effectiveness_2018}. For example, Zero-Emission Vehicle (ZEV) mandates and Low-Emission Vehicle (LEV) standards require automakers to sell a minimum share of low- or zero-emission vehicles, while state purchase incentives directly lower the cost of ownership for consumers. Because these policy instruments are implemented unevenly across states, they create distinct policy contexts that may influence consumer behavior. To examine this, we categorize respondents based on whether they reside in a state that implements ZEV mandates, LEV standards, or offers BEV purchase incentives \parencite{center_for_climate_and_energy_solutions_us_2022}. This allows us to test whether policy environments are associated with differences in consumers’ BEV adoption intentions.
+ 
+ \subsubsection{Individual, household, and built-environment characteristics}
+ Finally, respondents provided information on various socio-economic and demographic characteristics, as summarized in Table~\ref{table_cross_tabs}. Note that household income was originally measured using 26 income brackets, starting from “Less than \$10,000” and increasing in \$10,000 increments up to “\$250,000 or more.” For analysis, we converted the categorical responses to a continuous variable by assigning the midpoint of each income bracket to respondents who selected that category. For the highest open-ended category (“\$250,000 or more”), we conservatively assigned \$255,000 as the midpoint estimate. Additionally, population density within the ZIP codes of respondents’ residential locations was obtained from the 2022 ACS data \parencite{us_census_bureau_b01003_2023}.
+
+
+
+\newpage
+\renewcommand{\arraystretch}{1.15}
+\renewcommand{\baselinestretch}{1}\normalsize
+\begin{table}[pos=H]
+\centering
+{\small  % Reduce font size
+\caption{Data description}
+\label{table_cross_tabs}
+\begin{tabular}{p{2.5cm}p{5.5cm}p{3.5cm}p{1cm}p{1.5cm} l llrr}
+\toprule
+\textbf{Variable group} & \textbf{Variable} & \textbf{Category} & \textbf{Sample size \textsuperscript{1}} & \textbf{Percentage / Mean (s.d.) \textsuperscript{2}} \\
+\bottomrule
+ 
+\multirow{3}{2.5cm}{Perceptions, knowledge, attitudes} & Reasonable estimate on BEV performance and costs & None & 273 & 18.9\% \\
+ &  & One aspect & 645 & 44.7\% \\
+ &  & Two aspects & 398 & 27.6\% \\
+ &  & All three aspects & 127 & 8.8\% \\
+ & BEV anxiety (factor score) &  & 1443 & 0.0(1.09) \\
+ & Perceived BEV cost (factor score) &  & 1443 & 0.00(1.14) \\
+ & Perceived ICEV cost (factor score) &  & 1443 & 0.00(1.15) \\
+ & Risk-taking mindset (1 to 10) &  & 1443 & 5.64(2.55) \\
+ & Concern about climate change & None at all or a little & 392 & 27.2\% \\
+ &  & A moderate amount & 397 & 27.5\% \\
+ &  & A lot or a great deal & 654 & 45.3\% \\\hline
+
+ EV infrastructure & Access to an electrical outlet at residence & No/unsure & 459 & 31.8\% \\
+ & & Yes & 984 & 68.2\% \\
+ & Solar panels installed at residence & No & 1002 & 69.4\% \\
+ & & Yes & 441 & 30.6\% \\
+ & \# EV chargers per 1000 people &  & 1371 & 0.49(1.22) \\\hline
+
+ \multirow{2}{2.5cm}{EV supports in the state} & ZEV mandates or LEV standards &  No & 865 & 59.9\% \\
+ &  & Yes & 578 & 40.1\% \\
+ & EV purchase incentive & No & 800 & 55.4\% \\
+ &  &  Yes & 643 & 44.6\%\\\hline
+ 
+\multirow{3}{2.5cm}{Individual, household, built-environment characteristics} & Age &  & 1443 & 43.65(14.36) \\
+ & Sex & Male & 709 & 49.2\% \\
+ &  & Non-male & 733 & 50.8\% \\
+ & Race & White-only & 1260 & 87.3\% \\
+ &  & Not White-only & 183 & 12.7\% \\
+ & Ethnicity & Non-Hispanic & 1280 & 88.7\% \\
+ &  & Hispanic & 163 & 11.3\% \\
+ & Education & High School/GED & 224 & 15.5\% \\
+ &  & Some college/Associate & 465 & 32.2\% \\
+ &  & Bachelor or above & 754 & 52.3\% \\
+ & Household income {[}\$10,000{]} &  & 1443 & 10.37(6.21) \\
+ & Housing tenure & Own & 1123 & 77.8\% \\
+ &  & Rent & 320 & 22.2\% \\
+ & Housing type & Single-family home, townhouse & 1170 & 81.1\% \\
+ &  & Multi-family home, duplex, triplex, or 4-plex & 273 & 18.9\% \\
+ & Household size &  & 1443 & 3.02(1.16) \\
+ & \# of household vehicles &  & 1443 & 1.75(0.88) \\
+ & Population density {[}1000 per sqmi{]} &  & 1371 & 5.54(13.38) \\ 
+
+ \bottomrule
+\end{tabular}
+}
+\end{table}
+\end{singlespace}
+{\footnotesize \textsuperscript{1} One respondent did not report sex, and an additional 72 did not report a valid residential ZIP code, resulting in missing values for certain variables.}\par
+{\footnotesize \textsuperscript{2} Percentage for discrete variables, and mean (standard deviation) for continuous variables.}
+
+
+
+\renewcommand{\baselinestretch}{2}\normalsize
+\section{Method}
+\label{section:method}
+We estimate a binary logistic (BL) regression and a multinomial logit (MNL) regression to investigate the factors associated with the fuel-type combinations among current BEV users and the likelihood of BEV adoption among HEV/ICEV users, respectively. The models are formulated as follows:
+
+\[
+P(Y=i) = \frac{\exp\left[\beta_{(i)} X_{in} \right]}{\sum_{\forall I} \exp\left(\beta_{(i)} X_{in} \right)}
+\]
+
+In the BL model, \textit{Y} is the dependent variable [0="BEV-mixed-fuel users" (reference group), 1="BEV-only users"] and \textit{X} is a vector of predictors, including general attitudes and individual/household characteristics. We chose not to include BEV-related knowledge and perceptions in this model due to concerns about potential reverse causality. Specifically, individuals’ knowledge and attitudes toward BEVs may not only influence their ownership choices but could also be shaped by their prior user experience with BEVs. For instance, BEV-only users may develop more nuanced perceptions over time shaped by their exclusive use of BEVs, while those in BEV-mixed-fuel households may form different views informed by direct comparisons with other vehicle types. We also decided not to include variables related to EV infrastructure and support programs, as we are uncertain whether these factors were in place at the time respondents adopted their BEVs. The misalignment in timing could lead to inaccuracies in capturing the impact of such variables. The sample size of the BL model is 494. 
+
+In the MNL model, \textit{Y} is the dependent variable [1="unlikely", 2="neither unlikely nor likely" (reference group), 3="likely"]. Even though the three levels of this variable have a natural order, which makes an ordered logit (OL) regression an alternative, the OL regression has a proportional odds assumption, suggesting that the effects of explanatory variables are the same across different thresholds. This assumption was tested and was violated. Although a generalized OL model can relax the assumption when necessary, it complicates interpretation. Therefore, we consider the MNL model a more suitable alternative. In this model, \textit{X} is a vector of predictors, including the whole list of variables in Table~\ref{table_cross_tabs}. 
+
+In both models, \textit{n} is the number of predictors and $\beta_{(i)}$ is a vector of coefficients to be estimated corresponding to the \textit{i}th choice. The MNL model includes 1,370 respondents, after excluding cases with missing values on the independent variables.
+
+Before estimating the model, we examined bivariate correlations among all variables listed in Table~\ref{table_cross_tabs} to avoid potential multicollinearity issues. Spearman correlation tests were conducted for pairs of continuous variables, Kruskal-Wallis tests were used to assess relationships between continuous and discrete variables, and Chi-square tests were performed for categorical variable pairs, with Cramér's V was calculated to measure the strength of association \parencite{cramer_mathematical_1946}. For variables exhibiting medium to high correlations, we evaluated their impacts on the model performance and interpretability and determined whether to retain or exclude. Otherwise, variables were retained based on theoretical relevance, rather than solely on statistical significance.
+
+
+\section {Results and Discussions}
+\label{section:result}
+\subsection{Vehicle Fuel Type Combination among BEV Users}
+
+Table~\ref{table_bl_model_coefficents} presents the results for the BL model only among BEV users. The odds ratio (OR) indicates how a one-unit change in an independent variable affects the relative odds of choosing one outcome category (i.e., \textit{BEV-only users}) over the reference category (i.e., \textit{BEV-mixed-fuel users}), \textit{holding all else constant}. An OR greater than 1 indicates increased odds, whereas an OR less than 1 indicates decreased odds. Where relevant in the following discussion, we also report the 95\% confidence intervals for the ORs to convey the precision and statistical uncertainty of the estimates. To further explore the heterogeneity between these two groups, Table~\ref{table_BL_comparison} compares their household vehicle ownership, characteristics of their BEVs\footnote{The BEV referenced is the first vehicle they reported in the survey. Only 11 respondents reported owning multiple BEVs, and for those cases, we assume respondents listed their vehicles in order of usage intensity.} and behavioral patterns related to BEV usage.
+
+Relative to \textit{BEV-mixed fuel users}, \textit{BEV-only users} are more likely to be younger, non-Hispanic White, and hold higher levels of educational attainment in our sample. \textit{BEV-only users} tend to live in smaller households, report lower household incomes, and are less likely to live in single-family dwellings. Among these variables, race/ethnicity, education level, and housing type exhibit the strongest effects. These reflect the distinct profile of \textit{BEV-only users}, who typically own fewer household vehicles --- on average, half as many as \textit{BEV-mixed-fuel users} --- and are more likely to prioritize cost savings or reside in urban areas, where smaller household sizes and multi-family housing are more common. \textit{BEV-only users} could be more motivated by functional benefits of BEVs, including saving on fuel cost and avoiding trips to the gas station. In contrast, \textit{BEV-mixed-fuel users} are more influenced by symbolic values of BEVs, including technology innovation and environmental benefits.
+
+Overall, there are no significant differences between the groups in terms of BEV vehicle profiles, including vehicle age, size, ownership (owned vs. rented), or condition when acquired (new vs. pre-owned). Across both groups, the reported BEVs are relatively new, with an average vehicle age of approximately 1.5 years. The only difference is that the BEVs reported by \textit{BEV-only users} tend to have slightly shorter driving range. 
+
+Regarding driving behavior, although \textit{BEV-mixed-fuel users} report a slightly higher annual frequency of long-distance travel (i.e., trips longer than 2.5 hours one way) than \textit{BEV-only users} (5.6 vs. 5.2 trips per year), they are slightly less likely to use their BEVs for those trips (5.0 vs. 5.2). This may be attributed to their access to non-BEV alternatives, which help mitigate concerns about range anxiety for long-distance trips. Correspondingly, \textit{BEV-only users} are more likely to drive on local streets, where range is less of a concern, while \textit{BEV-mixed-fuel users} spend more time on interstates or highways --- highlighting another reason they retain non-BEV vehicles for flexibility in terms of trip planning.
+
+These travel behaviors appear closely tied to charging patterns. Overall, \textit{BEV-only users} charge their BEVs less frequently. While home charging remains the dominant method for both groups, it is less prevalent among \textit{BEV-only users}, who are less likely to live in single-family homes. Instead, nearly 20\% of them report charging their vehicles during the day at their worksite, in contrast to \textit{BEV-mixed-fuel users}, who more often charge overnight at home. These also influence the type of chargers used: \textit{BEV-only users} are more likely to rely on direct current fast chargers (DCFCs), which are more commonly located at worksites and apartment complexes. The findings underscore that charging demand is not limited to single-family home settings, but is also substantial in urban, multi-family, and workplace environments. Understanding when EVs are charged throughout the day allows electricity producers to better plan for energy usage and update supply accordingly. Unsurprisingly, \textit{BEV-mixed-fuel users} --- many of whom have dedicated home chargers --- are more likely to leave their BEVs plugged in even after charging is complete. This presents opportunities for smarter and more efficient grid management through the use of smart chargers in residential location, which enable schedule or delayed charging, making it possible to align charging times with periods of low grid demand to balance power demand and supply \parencite{bjorndal_smart_2023}. 
+
+ 
+
+\renewcommand{\arraystretch}{1.15}
+\renewcommand{\baselinestretch}{1}\normalsize
+\begin{table}[pos=H]
+\caption{Binary logistic regression model results}
+\label{table_bl_model_coefficents}
+\begin{tabular}{p{2cm}p{8cm}p{1.5cm}p{1.5cm}p{0.8cm}p{1.5cm}lll|rrr}
+
+\toprule
+\multirow{2}{*}{\textbf{Variable group}} & \multirow{2}{*}{\textbf{Variable}} & \multicolumn{4}{l}{\textbf{Household vehicle fuel type combination}} \\
+ &  & \multicolumn{4}{l}{BEV-only users (ref: BEV-mixed-fuel users)} \\ \cmidrule(lr){3-6}
+ &  & \textbf{Est.}\textsuperscript{1} & \textbf{SE}\textsuperscript{1} & \textbf{Sig.}\textsuperscript{1} & \textbf{OR}\textsuperscript{1}  \\
+ \bottomrule
+ 
+Constant & Constant & 2.385 & 0.835 & ** & 10.854 \\ \hline
+
+\multirow{2}{2cm}{General attitudes} & Risk-taking mindset & 0.031 & 0.045 &   & 1.031 \\
+ & Concern about climate change: Moderate  (ref: low) & 0.252 & 0.303 &   & 1.286 \\
+ & Concern about climate change: High (ref: low) & -0.299 & 0.289 &   & 0.742 \\ \hline
+ 
+\multirow{3}{2cm}{Individual/ household characteristics} & Age {[}every 10 years{]} & -0.307 & 0.093 & *** & 0.735 \\
+ & Non-male (ref: male) & -0.108 & 0.214 &   & 0.898 \\
+ & Non-Hispanic White (ref: other) & 1.299 & 0.327 & *** & 3.665 \\
+ & Household income {[}every \$10,000{]} & -0.058 & 0.022 & ** & 0.943 \\
+ & Education: Some college or Associate's degree (ref: high school/GED) & 1.235 & 0.436 & ** & 3.438 \\
+ & Education: Master's degree or higher (ref: high school/GED) & 0.496 & 0.436 &   & 1.642 \\
+ & Housing tenure: own (ref: rent) & -0.454 & 0.502 &   & 0.635\\
+ & Housing type: Single-family home, townhouse (ref: Multi-family home, duplex, triplex or 4-plex) & -0.822 & 0.345 & * & 0.439 \\
+ & \# of household members & -0.283 & 0.105 & ** & 0.754 \\
+
+\toprule
+\multicolumn{2}{l}{Estimated parameters} & \multicolumn{4}{c}{13} \\
+\multicolumn{2}{l}{Number of individuals} & \multicolumn{4}{c}{494} \\
+%\multicolumn{2}{l}{LL at equal shares, LL(0)} & \multicolumn{4}{c}{-342} \\
+\multicolumn{2}{l}{Log-likelihood (observed shares)} & \multicolumn{4}{c}{-339} \\
+\multicolumn{2}{l}{Log-likelihood (final)} & \multicolumn{4}{c}{-291} \\
+\multicolumn{2}{l}{Adj.Rho-squared vs equal shares} & \multicolumn{4}{c}{0.113} \\
+\multicolumn{2}{l}{Adj.Rho-squared vs observed shares} & \multicolumn{4}{c}{0.109} \\
+%\multicolumn{2}{l}{AIC} & \multicolumn{4}{c}{607} \\
+%\multicolumn{2}{l}{BIC} & \multicolumn{4}{c}{662}\\
+\bottomrule
+
+\end{tabular}
+\vspace{1mm}
+\footnotesize{
+\begin{flushleft}
+\textsuperscript{1} The values in the table represent model coefficient estimates, corresponding standard errors, significance levels (.p\textless{}0.10, *p\textless{}0.05, **p\textless{}0.01, ***p\textless{}0.001), and odds ratios. 
+\end{flushleft}
+}
+\end{table}
+
+
+\newpage
+\renewcommand{\baselinestretch}{1}\normalsize
+\begin{table}[pos=H]
+\caption{Behavioral comparison between BEV-only and BEV-mixed-fuel users}
+\label{table_BL_comparison}
+\begin{tabular}{p{1.5cm}p{3cm}p{5cm}p{1.8cm}p{1.8cm}p{1.5cm}lll|rrr}
+\toprule
+\multirow{2}{1.5cm}{\textbf{Variable Group}} & \multirow{2}{3cm}{\textbf{Variable}} & \multirow{2}{5cm}{\textbf{Category}} & \multicolumn{2}{l}{\textbf{Percentage / Mean (s.d.) \textsuperscript{1} }} & \multirow{2}{0.5cm}{\textbf{Difference test} (p-value)}  \\ \cmidrule(lr){4-5}
+ &  &  & \textbf{BEV-only users} & \textbf{BEV-mixed-fuel users} &  \\
+ \bottomrule
+ 
+ Household vehicle count &  &  & 1.11(0.38) & 2.36(0.63) & \textless{}0.001 \\ 
+ \hline
+
+ \multirow{3}{1.5cm}{Primary reason of purchase} & \multirow{4}{3cm}{} & To save money on gasoline & 37.2\% & 27.3\% & \textless{}0.001 \\
+ &  & To reduce trips to the gas station & 13.9\% & 7.7\% &  \\
+ &  & To have a technologically innovative vehicle & 33.2\% & 32.7\% &  \\
+ &  & To reduce environmental footprint & 15.7\% & 32.3\% &  \\
+ \hline
+ 
+\multirow{3}{1.5cm}{BEV vehicle profile} & Age &  & 1.58(0.49) & 1.58(0.50) & 0.95 \\
+ & \multirow{1}{3cm}{Size} & Coupe, hatchback, sedan & 49.6\% & 55.0\% & 0.17 \\
+ &  & Small SUV & 17.2\% & 19.5\% &  \\
+ &  & SUV, minivan, van, truck & 33.2\% & 25.5\% &  \\
+ & \multirow{1}{3cm}{Ownership} & Own & 94.9\% & 91.8\% & 0.23 \\
+ &  & Rent & 5.1\% & 8.2\% &  \\
+ & \multirow{1}{3cm}{Condition when acquired} & New & 94.2\% & 90.5\% & 0.17 \\
+ &  & Pre-owned & 5.8\% & 9.5\% &  \\
+ & Manufacture-rated EV range &  & 272.49(101.18) & 276.02(118.91) & \textless{}0.001 \\
+ \hline
+ 
+\multirow{2}{1.5cm}{BEV driving behavior} & Annual frequency of long-distance travel &  & 5.24(3.07) & 4.97(3.89) & \textless{}0.001 \\
+%\multirow{4}{1.5cm}{BEV driving behavior (\% of time)} & 
+ & \multirow{2}{3cm}{\% of time driving in interstate or highway} & Less than 25\% & 36.9\% & 22.3\% & \textless{}0.001 \\
+ &  & 25\% to 49\% & 38\% & 41.8\% &  \\
+ &  & 50\% to 74\% & 22.3\% & 31.8\% &  \\
+ &  & 75\% or more & 2.9\% & 4.1\% &  \\
+ %& \multirow{4}{3cm}{Stop and go traffic} & Less than 25\% & 13.9\% & 20\% & 0.06 \\
+ %&  & 25\% to 49\% & 51.5\% & 46.8\% &  \\
+ %&  & 50\% to 74\% & 29.9\% & 24.5\% &  \\
+ %&  & 75\% or more & 4.7\% & 8.6\% &  \\
+ %& \multirow{4}{3cm}{Stop sign or traffic light within every 2-3 minutes of driving} & Less than 25\% & 17.5\% & 23.6\% & 0.09 \\
+ %&  & 25\% to 49\% & 47.8\% & 38.6\% &  \\
+ %&  & 50\% to 74\% & 29.6\% & 29.5\% &  \\
+ %&  & 75\% or more & 5.1\% & 8.2\% &  \\
+ %& \multirow{3}{3cm}{Driving style} & Aggressive & 21.5\% & 29.1\% & 0.10 \\
+ %&  & Neutral & 43.8\% & 43.2\% &  \\
+ %&  & Passive & 34.7\% & 27.7\% &  \\
+ \hline
+\multirow{3}{1.5cm}{BEV charging behavior} & Weekly charging frequency &  & 3.39(1.45) & 4.22(1.98) & \textless{}0.001 \\
+ & \multirow{3}{*}{Typical charging location} & At home & 71.2\% & 79.5\% & \textless{}0.001 \\
+ &  & At worksite & 18.6\% & 7.7\% &  \\
+ &  & In public & 10.2\% & 12.7\% &  \\
+ & \multirow{4}{3cm}{Level of home charger} & Level 1 & 8.8\% & 20.5\% & \textless{}0.001 \\
+ &  & Level 2 & 60.6\% & 60\% &  \\
+ &  & Level 3 / DCFC & 28.1\% & 17.7\% &  \\
+ &  & Do not charge at my residence & 2.6\% & 1.8\% &  \\
+ & \multirow{4}{3cm}{Typical charging time} & Mornings & 8.8\% & 7.3\% & \textless{}0.001 \\
+ &  & Middle of the day & 22.3\% & 14.5\% &  \\
+ &  & Evenings & 50\% & 32.7\% &  \\
+ &  & Overnight & 19\% & 45.5\% &  \\
+ & Typical charging duration &  & 4.62(1.68) & 4.68(2.47) & \textless{}0.001 \\
+ & \multirow{4}{3cm}{Unplug once fully charged} & Yes, most of the time & 40.9\% & 57.3\% & \textless{}0.001 \\
+ &  & Yes, some of the time & 40.5\% & 25.5\% &  \\
+ &  & Yes, but rarely & 16.8\% & 8.6\% &  \\
+ &  & No, never & 1.8\% & 8.6\% & \\
+\bottomrule
+ 
+\end{tabular}
+
+\vspace{1mm}
+\footnotesize{
+\begin{flushleft}
+\textsuperscript{1} Percentage for discrete variables and mean (standard deviation) for continuous variables.
+\end{flushleft}
+}
+\end{table}
+
+
+\renewcommand{\baselinestretch}{2}\normalsize
+\subsection{Future Intentions for BEV Adoption among HEV and ICEV Users}
+
+Table~\ref{table_mnl_model_coefficents} shows the results for the MNL model among HEV and ICEV users. The Hausman-McFadden method \parencite{hausman_specification_1984} was implemented based on the final model and suggests that the Independence of Irrelevant Alternatives assumption of MNL model holds.\par
+
+After controlling for other variables, current fuel type --- whether the household owns HEV(s) or only owns ICEV(s) --- does not appear to significantly impact the likelihood of adopting BEVs. However, perceptional barriers related to BEV performance and costs strongly shape adoption likelihood. Specifically, underestimating BEV benefits, such as electric driving range and battery lifespan, alongside overestimating the cost of battery replacement, significantly increases the perceived unlikelihood of BEV adoption. Those who underestimate one aspect have higher odds of perceived unlikelihood, while those who underestimate two or more aspects show an even greater, though marginally significant, increase in perceived unlikelihood. Therefore, clearer communication of BEV capabilities could reduce misconceptions that are a psychological barrier to EV technology adoption.
+
+Anxiety around BEVs --- whether related to driving range, charging accessibility, or resale values --- acts as a major barrier. Those with higher levels of anxiety have higher odds of perceived unlikelihood, as well as lower odds of perceived likelihood. Perceived BEV costs including purchase price, battery replacement costs, and operation costs increase the unlikelihood of BEV adoption, although the effect is only marginally significant. In contrast, perceived ICEV costs show no significant impact. Consistent with \textcite{iogansen_deciphering_2023}, individuals with a greater propensity for risk-taking mindset --- those more comfortable with uncertainty and innovation --- are significantly more likely to adopt BEVs. BEV leasing programs may help mitigate the perceived financial risks of BEV ownership for more risk-averse individuals. Moreover, individuals expressing higher levels of environmental consciousness are more likely to consider BEVs, with the strongest observed effects among all predictors. Those with high levels of concern have significantly increased odds of considering a BEV, while even moderate levels of concern are associated with elevated, though marginally significant. This finding aligns with prior studies that emphasize environmental concern as a key motivator for adopting low-emission vehicles \parencite{mustafa_role_2024,gore_consumer_2024,gore_what_2021}.
+
+Access to home charging infrastructure, particularly having an electrical outlet or solar panels installed at one’s residence, significantly increases the likelihood of BEV adoption. These factors enhance charging convenience and reduce electricity costs. Additionally, a higher number of public charging stations per capita is positively associated with BEV adoption likelihood \parencite{javid_comprehensive_2017}, reinforcing the importance of a charging network for likely BEV adopters that is visible, accessible, and reliable. Recent industry developments underscore this shift: for instance, Rivian has announced that it will open its EV charging network to non-Rivian vehicles \parencite{shaw_rivian_2024}, Hyundai plans to provide free adapters for Tesla Superchargers, which will significantly expand fast-charging options for Hyundai EV owners \parencite{johnson_hyundai_2024}. Moreover, partnerships between EV automakers and EV supply equipment (EVSE) providers are further strengthening the charging ecosystem; notably, General Motors \textcite{general_motors_gm_2024} and EVgo have announced plans to install co-branded EV chargers across the U.S., aiming to expand the reach and visibility of charging stations.
+
+State-level EV policies such as ZEV mandates, LEV standards, and purchase incentives did not show a statistically significant effect on BEV adoption in our model. However, this may reflect low public awareness or understanding of these initiatives. The results suggest that the effectiveness of incentives may depend not only on their availability but also on consumers' awareness. This aligns with prior work highlighting the role of program visibility and information dissemination in EV adoption \parencite{abdul_qadir_navigating_2024, zhao_media_2024}.
+
+From a socio-demographic perspective, increasing age is associated with greater unlikelihood of BEV adoption, consistent with previous research showing generational differences in technology uptake \parencite{iogansen_deciphering_2023}. Non-male respondents show a higher likelihood of adoption, possibly due to different priorities in vehicle evaluation or less affinity with traditional car culture, though further research is needed to unpack these differences. Attaining a bachelor's degree or higher is linked to lower unlikelihood of adoption. As expected, household income remains a key enabler of BEV adoption, with wealthier households showing a higher likelihood of acquiring BEVs due to reduced price sensitivity. Similar patterns are observed for housing tenure and household vehicle ownership, although these effects are only marginally significant. Homeowners have a higher likelihood of adopting a BEV than renters, while individuals in households with more vehicles tend to have a lower likelihood of adopting BEVs, possibly reflecting more entrenched preferences for conventional vehicle types or less perceived need for fuel diversification. Finally, residents of higher-density urban areas exhibit lower unlikelihood of  adopting BEVs, likely due to shorter travel distances and better access to charging infrastructure.
+
+Overall, our results underscore the importance of measuring and modeling BEV adoption in a flexible way to reflect the nuanced and staged nature of consumer decision-making. Rather than treating BEV adoption as a binary outcome (adopt vs. not adopt), our findings suggest that many individuals move through transitional stages—from being unlikely to adopt, to feeling neutral, and only later to becoming likely adopters—before making a final decision. This observation aligns with prior research on behavioral change processes in sustainable technologies \parencite{noppers_adoption_2014} and is consistent with both Diffusion of Innovations Theory \parencite{rogers_diffusion_2003} and the Theory of Planned Behavior \parencite{ajzen_theory_1991}. In Diffusion of Innovations Theory, potential adopters pass through stages of knowledge, persuasion, decision, implementation, and confirmation, which mirrors the transitional patterns observed in our data. Similarly, Theory of Planned Behavior highlights the role of attitudes, subjective norms, and perceived behavioral control in shaping intentions, suggesting that changes in any of these constructs may first shift consumers from negative to neutral perceptions before tipping them toward adoption. 
+
+Moreover, the asymmetric effects of certain factors suggest that the decision to adopt a BEV is not simply the inverse of the decision to reject one. This asymmetry can be explained by behavioral mechanisms such as prospect theory, particularly loss aversion \parencite{heutel_prospect_2019, jia_why_2025}, and bounded rationality \parencite{gounaris_adoption_2012} which suggest that consumers may weight potential losses more heavily than equivalent gains and prioritize certain salient or immediate barriers over more abstract or delayed benefits. For example, consumers may focus on the high upfront purchase cost or the inconvenience of charging rather than on long-term operational savings, leading to stronger effects on reducing “unlikelihood” than on increasing “likelihood” judgments.
+
+
+
+
+
+\newpage
+\renewcommand{\arraystretch}{1.15}
+\renewcommand{\baselinestretch}{1}\normalsize
+\begin{table}[pos=H]
+    \centering
+    {\small
+    \caption{Multinomial logit regression model results}
+    \label{table_mnl_model_coefficents}
+    \begin{tabular}{p{1.5cm}p{5cm}|p{1cm}p{0.8cm}p{0.4cm}p{0.7cm}p{0.1cm}p{1cm}p{0.8cm}p{0.5cm}p{0.7cm} l l|r r l r lr r l r}
+    
+    \toprule
+        \multirow{3}{*}{\textbf{Variable group}} & \multicolumn{1}{l|}{\multirow{3}{*}{\textbf{Variable}}} & \multicolumn{9}{c}{\begin{tabular}[c]{@{}c@{}}\textbf{Likelihood of adopting a BEV as next vehicle} \\ (ref: neither likely nor unlikely, n=301)\end{tabular}}   \\ \cmidrule(lr){3-11}
+        & \multicolumn{1}{l}{}                                                      & \multicolumn{4}{|c}{\textbf{Unlikely (n=281)}}                                                                                & \multicolumn{1}{l}{} & \multicolumn{4}{c}{\textbf{Likely (n=274)}}  \\ \cmidrule(lr){3-6}  \cmidrule(lr){8-11}
+        & \multicolumn{1}{l}{} & \multicolumn{1}{|l}{\textbf{Est.}\textsuperscript{1}}   & \multicolumn{1}{l}{\textbf{SE}\textsuperscript{1}} & \multicolumn{1}{l}{\textbf{Sig.}\textsuperscript{1}}    & \multicolumn{1}{l}{\textbf{OR}\textsuperscript{1}}    & \multicolumn{1}{l}{} & \multicolumn{1}{l}{\textbf{Est.}}   & \multicolumn{1}{l}{\textbf{SE}} & \multicolumn{1}{l}{\textbf{Sig.}}    & \textbf{OR}    \\ 
+
+    \bottomrule
+        Constant & Constant & 0.019 & 0.624 &   & 1.019 &  ~ &-3.393 & 0.814 & *** & 0.034 \\ \hline
+        Current vehicle & HEV (ref: ICEV) & -0.103 & 0.377 &   & 0.902 &  ~ &0.138 & 0.337 &   & 1.148 \\ \hline
+        
+        \multirow{3}{1.5cm}{Perceptions, knowledge, attitudes} & Underestimation: one (ref: none) & 0.564 & 0.244 & * & 1.758 &  ~ &0.047 & 0.266 &   & 1.048 \\
+        ~ & Underestimation: two or more (ref: none) & 0.610 & 0.321 & . & 1.840 &  ~ &-0.052 & 0.381 &   & 0.949 \\
+        ~ & Overestimation: one(ref: none) & -0.183 & 0.215 &   & 0.833 &  ~ &0.232 & 0.263 &   & 1.261 \\
+        ~ & Overestimation: two or more (ref: none) & -0.325 & 0.373 &   & 0.723 &  ~ &0.179 & 0.386 &   & 1.196 \\
+
+        ~ & BEV anxiety & 0.405 & 0.132 & ** & 1.499 &  ~ &-0.378 & 0.113 & *** & 0.685 \\ 
+        ~ & Perceived BEV cost & 0.159 & 0.094 & . & 1.172 &  ~ &-0.038 & 0.093 &   & 0.962 \\ 
+        ~ & Perceived ICEV cost & 0.021 & 0.089 &   & 1.021 &  ~ &-0.045 & 0.090 &   & 0.956 \\ 
+        ~ & Risk-taking mindset & -0.136 & 0.041 & *** & 0.873 &  ~ &0.117 & 0.047 & * & 1.124 \\ 
+        ~ & Concern about climate change: Moderate  (ref: low) & -0.461 & 0.216 & * & 0.631 &  ~ &0.551 & 0.288 & . & 1.735 \\ 
+        ~ & Concern about climate change: High (ref: low) & -0.589 & 0.236 & * & 0.555 &  ~ &1.480 & 0.268 & *** & 4.392 \\ \hline
+
+        \multirow{2}{1.5cm}{EV Infrastructure} & Access to an outlet (ref: no)& -0.598 & 0.200 & ** & 0.550 &  ~ &0.925 & 0.233 & *** & 2.522 \\ 
+        ~ & Solar panels installed (ref: no) & 0.341 & 0.424 &   & 1.407 &  ~ &1.517 & 0.337 & *** & 4.559 \\ 
+        ~ & \# of EV chargers per 1000  & -0.102 & 0.173 &   & 0.903 &  ~ &0.254 & 0.150 & . & 1.290 \\ \hline
+
+        \multirow{2}{1.5cm}{EV supports} & ZEV/LEV standards (ref: no) & 0.083 & 0.217 &   & 1.086 &  ~ &0.390 & 0.251 &   & 1.477 \\ 
+        ~ & EV purchase incentive (ref: no) & -0.201 & 0.205 &   & 0.818 &  ~ &-0.253 & 0.241 &   & 0.776 \\ \hline
+        
+        \multirow{3}{1.5cm}{Individual, household, built-environment characteristics} & Age [every 10 years] & 0.190 & 0.064 & ** & 1.210 &  ~ &-0.009 & 0.079 &   & 0.991 \\ 
+        ~ & Non-male (ref: male) & 0.087 & 0.206 &   & 1.091 &  ~ &0.866 & 0.215 & *** & 2.377 \\ 
+        ~ & Hispanic non-White (ref: other) & 0.028 & 0.239 &   & 1.029 &  ~ &-0.138 & 0.245 &   & 0.871 \\ 
+        ~ & Some college/Associate (ref: high school/GED) & -0.277 & 0.248 &   & 0.758 &  ~ &0.099 & 0.324 &   & 1.104 \\ 
+        ~ & Bachelor or higher (ref: high school/GED) & -0.665 & 0.276 & * & 0.514 &  ~ & -0.249 & 0.310 &   & 0.779 \\ 
+        ~ & Household income [every \$10,000] & -0.003 & 0.022 &   & 0.997 &  ~ &0.045 & 0.022 & * & 1.046 \\ 
+        ~ & Housing tenure: own (ref: rent) & 0.132 & 0.228 &   & 1.142 &  ~ &0.512 & 0.271 & . & 1.669 \\ 
+        ~ & \# of household vehicles & 0.124 & 0.139 &   & 1.132 &  ~ & -0.293 & 0.156 & . & 0.746 \\ 
+         & Population density [every 1000 per sqmi]  & -0.090 & 0.038 & * & 0.914 &  ~ &0.010 & 0.012 &   & 1.010 \\
+        
+    \bottomrule
+        \multicolumn{4}{l}{Number of parameters} & \multicolumn{7}{c}{52} \\ 
+        \multicolumn{4}{l}{Sample size}    & \multicolumn{7}{c}{856} \\  
+        \multicolumn{4}{l}{Log-likelihood (observed shares)} & \multicolumn{7}{c}{-940} \\ 
+        \multicolumn{4}{l}{Log-likelihood (final)}   & \multicolumn{7}{c}{-674} \\ 
+        \multicolumn{4}{l}{Adj.Rho-squared vs equal shares}  & \multicolumn{7}{c}{0.229} \\ 
+        \multicolumn{4}{l}{Adj.Rho-squared vs observed shares}  & \multicolumn{7}{c}{0.230} \\ 
+        %\multicolumn{4}{l}{AIC}  & \multicolumn{7}{c}{2030} \\ 
+        %\multicolumn{4}{l}{BIC}  & %\multicolumn{7}{c}{2281} \\ 
+    \bottomrule
+    \end{tabular}
+   }
+  \vspace{1mm}
+\footnotesize{
+\begin{flushleft}
+\textsuperscript{1} The values in the table represent model coefficient estimates, corresponding standard errors, significance levels (.p\textless{}0.10, *p\textless{}0.05, **p\textless{}0.01, ***p\textless{}0.001), and odds ratios. 
+\end{flushleft}
+}
+\end{table}
+
+
+\renewcommand{\baselinestretch}{2}\normalsize
+\section{Conclusion}
+Using survey data from 1,443 U.S. residents collected online in 2023, this study investigates consumers’ perceptions and knowledge of BEVs, revealing persistent psychological and informational barriers that impact BEV adoption and use. Many individuals lack an accurate understanding of BEV performance and cost of ownership. While current BEV users are generally more knowledgeable, express fewer concerns about driving range, charging infrastructure, and resale value, and are more likely to perceive BEVs as economically advantageous, some of these concerns and barriers persist even after adoption.
+
+While BEV users often share more common characteristics than users of other fuel types, the study also uncovers meaningful demographic and behavioral heterogeneity within the BEV user group itself. By estimating a binary logit model, we differentiate between \textit{BEV-only users}, who have exclusively BEVs in their household, and \textit{BEV-mixed-fuel users}, who maintain a mixed-fuel vehicle portfolio. Compared with \textit{BEV-mixed-fuel users}, \textit{BEV-only users} appear to be younger, more educated, and more urban, but also have lower household incomes, fewer vehicles, and are less likely to live in single-family homes. Fuel cost savings and functional convenience play a more important role in driving BEV adoption for this group. In contrast, \textit{BEV-mixed-fuel users} tend to be more motivated by the symbolic values of BEVs, including their association with technological innovation and perceived environmental benefits. Their continued access to conventional vehicles helps mitigate range anxiety, enabling them to engage in more long-distance travel and use interstates or highways more frequently. It is possible that BEV usage could increase if these vehicles offered attributes more comparable to those of users' conventional vehicles --- such as driving range, size, seating capacity, and storage space. Observed differences in vehicle preferences suggest that alignment between BEV characteristics and household needs may influence usage patterns. Understanding vehicle adoption and charging behavior is important for electricity generation and infrastructure planning.
+
+The study further explores the likelihood of BEV adoption in the future among current non-adopters. We estimate a multinomial logit model incorporating current vehicle fuel type (HEV vs. ICEV), BEV-related perceptions and knowledge, charging infrastructure access, state-level initiatives, as well as individual, household, and built-environment characteristics as explanatory variables. The results indicate that, compared to those who are "neither likely nor unlikely" to adopt a BEV, certain variables exert \textit{symmetric effects} --- simultaneously increasing the likelihood of adoption and decreasing the unlikelihood (or the other way around). Notable examples include \textit{BEV-related anxiety}, a \textit{risk-taking mindset}, \textit{environmental concerns}, and \textit{access to a home charging outlet}. In contrast, more frequently, other factors demonstrate asymmetric effects, influencing only one side of the decision spectrum --- for example, decreasing the unlikelihood of adoption without significantly increasing the likelihood (or the other way around). Such variables include \textit{BEV knowledge}, \textit{perceived BEV costs}, and \textit{access to public chargers}. These findings challenge the common assumption that the same factors that encourage BEV adoption also discourage rejection in equal measure \parencite{fatah_uddin_driving_2024, yadav_are_2024}, highlighting the complexity of consumer decision-making processes in the context of the EV market. Additionally, this pattern indicates that BEV adoption should be measured and modeled in a flexible way to account for these asymmetric effects.
+
+This study makes several important contributions to the field. First, it provides new evidence on the demographic, behavioral, and perceptual heterogeneity of BEV users differentiated by household vehicle composition, revealing that BEV users are far from uniform. Second, by explicitly modeling transitional categories (from unlikely to neutral to likely adopters), this study advances the theoretical understanding of technology adoption as a staged and dynamic process rather than a binary outcome. Third, it distinguishes between symmetric and asymmetric effects in vehicle adoption, moving beyond the conventional assumption that adoption and rejection are mirror opposites.
+
+Several limitations of this study should be acknowledged, which can help inform future research. First, the survey did not ask respondents to report their household vehicles in order of usage intensity --- either for themselves or for all the household members. As a result, we segmented individuals based solely on fuel type composition, without accounting for how frequently each vehicle is used or which household members are the primary users. This introduces potential noise into our analyses: some respondents identified as BEV users may rarely drive the BEV in their household or may lack direct experience with it, which could dilute observed patterns in knowledge, perceptions, or usage. For instance, BEV-related knowledge and attitudes among frequent BEV drivers are likely more accurate and nuanced than what is captured by the general averages in our study. Additionally, we assumed that the first BEV reported was the primary vehicle, but this may not always be the case — particularly for the small subset of respondents who reported owning multiple BEVs. Future surveys could be improved by asking respondents to rank household vehicles by usage frequency or driving time, either for themselves or across the household, depending on the specific research questions. Future research could also benefit from person-level data to better understand how decisions about BEV adoption and usage are distributed within multi-driver households. 
+
+Second, while the study incorporates a wide range of explanatory variables, some relevant factors were not explored in depth. For example, detailed insights into respondents’ daily travel routines \parencite{jakobsson_how_2022}, commute distances \parencite{khan_type_2017}, and localized EV incentives --- such as employer-sponsored EV charging programs \parencite{shahrier_econometric_2025} and EV-ready infrastructure in apartment complexes \parencite{lusk_if_2023} --- would provide important context for understanding both perceived and actual BEV utility, as well as usage and charging behaviors. Also, even through our model accounts for the effect of individual attitudes toward BEV driving range and cost on adoption decisions, other vehicle characteristics --- such as brand, body style, seating capacity, reliability, safety ratings, and even exterior color --- may also play a role in shaping consumer preferences. These factors, while potentially important, are not directly captured in the current analysis. Future research could benefit from a discrete choice experiment that incorporates these additional attributes to more precisely quantify their impact on BEV adoption decisions.
+
+Regarding data limitations, our sample is not representative of EV owners nor the general U.S. population, which constrains the generalizability of the descriptive statistics presented in this study. The online data collection may also introduce sample bias, potentially over-representing individuals with strong interests in transportation, technology, or environmental issues. Future research could complement these findings with hybrid data collection strategies to ensure broader representativeness. Moreover, a slight temporal mismatch exists among the datasets used in our analyses. For instance, although the survey data (collected from March to June, 2023), population figures (primarily collected in December 2022), and public charger data (as of March 2023) are closely aligned in time, the discrepancies may introduce minor inconsistencies, particularly if population or infrastructure characteristics changed during the intervening months. Future research could address this limitation by using harmonized datasets collected within the same time frame. Finally, the cross-sectional nature of the data limits our ability to infer causal relationships or track changes in consumer perceptions and behaviors over time. Longitudinal data would offer a more robust understanding of how individual attitudes evolve across different stages of BEV consideration, adoption, and continued use. 
+
+
+\newpage
+\appendix
+\section{Appendix}
+
+\renewcommand{\arraystretch}{1.25}
+\renewcommand{\baselinestretch}{1}\normalsize
+\begin{table}[pos=H]
+\caption{Attitudinal statements and factor loadings from exploratory factor analyses\footnotesize\textsuperscript{1} (n=1,443)}
+\label{table_factor_analysis}
+\begin{tabular}{p{7cm}p{2cm}p{1.5cm}p{1.5cm}p{1.5cm}llrrr}
+\toprule
+\multirow{2}{*}{\textbf{Attitudinal Statements}} & \multirow{2}{*}{\textbf{Levels}} & \multicolumn{3}{c}{\textbf{Latent Factors}} \\ \cmidrule(lr){3-5}
+ &  & \textbf{BEV anxiety}\footnotesize\textsuperscript{2} & \textbf{Perceived BEV costs}\footnotesize\textsuperscript{3} & \textbf{Perceived ICEV costs}\footnotesize\textsuperscript{3} \\ \hline
+If I owned a BEV, I would often worry about running out of charge. & \multirow{4}{2cm}{7-point Likert-scale ranging from "strongly disagree" to "strongly agree"} & 0.84 &  &  \\
+If I owned a BEV, I would worry about finding places to charge it if I wanted to drive somewhere new. &  & 0.82 &  &  \\
+Range is a major disadvantage of owning a BEV. &  & 0.73 &  &  \\
+BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing. &  & 0.46 &  &  \\
+\hline
+\multicolumn{5}{l}{} \\
+Compared to the annual fuel cost for a gasoline vehicle of the same type and size, how do think the annual cost of electricity for a BEV is? & \multirow{7}{2cm}{5-point Likert-scale ranging from "much less" to "much more"} &  & 0.55 &  \\
+Compared to a gasoline vehicle of the same type and size, how do you think the Total Cost of Ownership of a BEV would be? &  &  & 0.56 &  \\
+How do you expect BEV battery prices to change in the next 5 years? &  &  & 0.78 &  \\
+How do you expect BEV purchase prices to change the next 5 years? &  &  & 0.72 &  \\
+How do you expect new gasoline vehicle purchase prices to change the next 5 years? &  &  &  & 0.83 \\
+How do you expect pre-owned gasoline vehicle purchase prices to change the next 5 years? &  &  &  & 0.66 \\
+How do you expect gasoline prices to change in the next 5 years? &  &  &  & 0.48 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{1pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+\textsuperscript{1} Exploratory factor analyses were performed with the \textit{psych} package in R using "promax" rotation and Bartlett score computation.\\  
+\textsuperscript{2} This factor was derived from the first factor analysis, explaining 52\% of the total variance. \\ 
+\textsuperscript{3} These two factors were derived from the second factor analysis, explaining 46\% of the total variance.
+\end{minipage}
+
+
+\printcredits
+
+
+\printbibliography
+
+
+\end{document}
+

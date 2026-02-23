@@ -1,0 +1,228 @@
+\documentclass[a4paper,fleqn]{cas-sc}   %{article}
+%remove ORCID footnote
+\renewcommand{\printorcid}{}
+
+
+%\usepackage{natbib}
+\usepackage{float}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs}
+% \usepackage[style=authoryear-icomp,
+% uniquelist=false,
+% maxnames=2,
+% minnames=1,
+% maxbibnames=99,
+%     backend=biber, giveninits=true,
+%     ibidtracker=false,
+%     uniquename=false]{biblatex}
+% \addbibresource{references.bib}
+% \addbibresource{references_shared.bib}
+% \DeclareNameAlias{default}{family-given}
+
+\usepackage{hyperref}
+\usepackage{graphicx} 
+
+% add line number
+\usepackage{lineno}
+\pagewiselinenumbers
+
+%\usepackage{titlesec}
+%\titlespacing*{\section}{0pt}{6pt}{3pt}  
+%\titlespacing*{\subsection}{0pt}{6pt}{3pt} 
+%\titlespacing*{\subsubsection}{0pt}{6pt}{3pt}
+
+% remove the "preprint"
+\ExplSyntaxOn \cs_gset:Npn \__first_footerline: { \group_begin: \small \sffamily \__short_authors: \group_end: } \ExplSyntaxOff
+
+\shortauthors{}
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+\tsc{EP}
+\tsc{PMS}
+\tsc{BEC}
+\tsc{DE}
+%%%
+
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+\shorttitle{}
+%\shortauthors{X. Iogansen et~al.}
+
+%\begin{frontmatter}
+
+\title [mode = title]{Exploring Perception, Knowledge Gaps, and Adoption Patterns of Battery Electric Vehicles Among U.S. Consumers}                      
+
+
+% \author[1,2]{Xiatian {Iogansen}}
+% \fnmark[1]
+% \credit{Conceptualization, Data curation, Methodology, Software, Formal analysis, Writing - Original Draft, Writing - Review \& Editing}
+
+% \author[1]{Christina {Gore}}
+% \credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Original draft preparation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
+% \fnmark[2]
+% \cormark[1]
+% \cortext[cor1]{Corresponding author}
+
+% \author[1]{Joshua D. {Kneifel}}
+% \credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
+% \fnmark[3]
+
+% \author[1,2]{Sindhu {Ranganath}}
+% \credit{Data curation, Writing - Original Draft, Writing - Review \& Editing}
+% \fnmark[4]
+
+% \author[2]{John {Helveston}}
+% \credit{Conceptualization, Methodology, Writing - Review \& Editing, Supervision}
+% \fnmark[5]
+
+% \affiliation[1]{organization={Applied Economics Office, Engineering Laboratory, National Institute of Standards and Technology},
+%                 country={USA}}     
+                
+% \affiliation[2]{organization={Department of Engineering Management and Systems Engineering, George Washington University},
+%                 city={Washington D.C.},
+%                 country={USA}}
+                
+
+
+% \fntext[fn1]{xiatian.iogansen@gwu.edu \& xiatian.iogansen@nist.gov, https://orcid.org/0000-0002-4851-1323}
+% \fntext[fn2]{christina.gore@nist.gov, https://orcid.org/0000-0002-3586-6918}
+% \fntext[fn3]{joshua.kneifel@nist.gov}
+% \fntext[fn4]{sindhu.ranganath@nist.gov, https://orcid.org/0000-0001-5764-9773}
+% \fntext[fn5]{jph@gwu.edu, https://orcid.org/0000-0002-2657-9191}
+
+
+\begin{abstract}
+This data collection instrument provides guideline and some example survey questions aimed at understanding consumer preferences and willingness to pay for battery health information in the used battery electric vehicle (BEV) market. The potential survey design includes questions about current vehicle information, future vehicle preferences, a discrete choice experiment (DCE), EV knowledge, and demographics. The DCE systematically varies both standard vehicle attributes (e.g., price, mileage) and battery-specific features (e.g., state-of-health, refurbishment history) to quantify the economic value consumers place on battery-related information. Findings from this research project will improve the understanding of second-life battery markets, and guide future research in the evolving used EV landscape.
+
+\end{abstract}
+
+%\begin{highlights}
+%\item Research highlights item 1
+%\item Research highlights item 2
+%\item Research highlights item 3
+%\item Research highlights item 4
+%\item Research highlights item 5
+%\end{highlights}
+
+\begin{keywords}
+
+Battery electric vehicle; battery information; discrete choice experiment; willingness-to-pay; consumer preferences;  survey design  
+\end{keywords}
+
+\maketitle
+\renewcommand{\baselinestretch}{1}\normalsize
+\section{Introduction}
+\label{section:intro}
+
+Electric vehicles (EVs)  are gaining momentum in the automotive market. While much of the focus of industry professionals and academics has been on promoting new EVs, the used EV market has received comparatively little attention. Meanwhile, the used vehicle market in the U.S. has reached record highs in recent years and is projected to grow steadily over the coming decade (Market Research Future, 2025). As more EVs reach the end of their initial ownership, they are increasingly entering the used market. According to February 2025 sales data (Cox Automotive Inc., 2025), used EV sales rose by 34.2\% year-over-year, while the average days' supply fell by 21.5\%, signaling strong and accelerating demand. 
+
+The growth of the used EV market is crucial from environmental, economic, and market development perspectives. It contributes to a circular economy by extending the useful life of vehicles and batteries, thereby reducing lifecycle emissions (Guzek et al., 2024). Used EVs also lower the financial barriers for middle- and lower-income households to enter the EV market (Hagman et al., 2016), although the affordable models remain relatively limited in availability (Sheykhfard et al., 2025). Furthermore, a healthy resale market boosts value retention of new EVs, enhancing consumer confidence in their long-term investment (Brückmann et al., 2021; Lim et al., 2015). 
+
+To support future research and strategy development on the acceptance of used EVs requires a deeper understanding of consumer preferences and concerns. Despite rising supply, consumers still perceive used EVs as scarce in the marketplace (Krishna, 2021). Survey data (Fernandes, 2023) also reflect lingering consumer hesitation: 52\% of U.S. adults reported being unlikely to consider buying a used EV, compared to only 28\% who were open to the idea. In addition to challenges common to both new and used EV, such as range anxiety, limited charging infrastructure, and high purchase costs (Sheykhfard et al., 2025), used EVs come with added concerns. Key issues include uncertainty about the vehicle history and condition (cited by 41\% of respondents in Fernades' study), as well as perceptions of lower reliability compared to new EVs (23\%). Based on Sheykhfard et al. (2025), more than half (55.1\%) of current used EV owners reported having pre-purchase concerns about battery longevity, primarily due to the perceived risk of frequent and costly battery replacements. However, while nearly two thirds (65.5\%) of respondents reported some degree of battery decline over time, only 5.1\% experienced a substantial loss in battery performance. Moreover, 39.2\% and 26.3\% of them indicated they are likely or very likely, respectively, to buy a used BEV in the future. These findings suggest that the pre-purchase concerns appear to be overstated in practice, and most used EV owners had a positive ownership experience. 
+
+These studies highlight that the used EV market faces a significant information asymmetry problem centered on battery— the most critical and expensive component affecting a used EV’s value, in terms of its unobserved maintenance history, current “State of Health” (SOH), and remaining useful life (RUL). Unlike conventional vehicles, where age and mileage serve as reasonable proxies for engine condition and overall wear (Prieto et al., 2015), the battery degradation path and RUL of the battery can vary substantially even among EVs of the same model year and mileage, making the vehicle's true condition far more difficult to assess and increasing the level of risk in the purchase for consumers. This information gap creates economic inefficiencies. Buyers may undervalue well-maintained EVs or unknowingly overpay for poorly maintained ones. Sellers with well-maintained batteries may struggle to recoup the true value of their vehicles at resale. More broadly, market uncertainty may dampen new EV sales, as buyers hesitate to purchase due to “resale anxiety”.
+Understanding the key determinants of used EV purchase decisions — particularly for battery electric vehicles (BEVs) — and how consumers evaluate battery health information is critical for policymakers, industry stakeholders, and researchers. This study would be the first attempt to quantify the economic value consumers place on battery health information (i.e., WTP) in the used BEV market. At the core of the study is a discrete choice experiment (DCE), which presents respondents with repeated choices between hypothetical used BEVs. Drawing on insights from the existing literature, the research team identifies key factors influencing used BEV adoption. The DCE systematically varies both conventional vehicle attributes (e.g., mileage, purchase price) and battery-specific attributes (e.g., range, refurbishment history, SOH) to determine which characteristics most influence consumer preferences and to estimate their WTP for specific aspects of battery performance. Ultimately, this study supports future advancements in BEV technology, the effective communication of critical battery information at the point of sale, and a better understanding of consumer priorities, demographic differences, and decision-making factors in the used BEV market.
+
+The remainder of the paper is structured as follows. Section 2 provides a review of literature on household vehicle composition and usage (among BEV users), as well as factors influencing BEV adoption. Section 3 provides an overview of the survey data, and presents both descriptive statistics and comparative analyses. Section 4 outlines the statistical method employed in the analysis. Section 5 presents the key findings, discusses their implications, outlines study limitations, and suggests directions for future research. Finally, Section 6 concludes the paper.
+
+\section{Literature Review}
+
+This section reviews key literature informing survey design and analyses of this study. The first subsection examines the main drivers and barriers to the adoption of used BEVs, while the second subsection focuses on EV battery technology and how it shapes consumer perceptions and decision-making.
+
+\subsection{Used Electric Vehicle Adoption}
+
+Gore et al. (2024) provided a comprehensive review on consumer perspectives on EVs and the factors influencing EV adoption, identifying a broad range of determinants including attitudinal, demographic, societal, environmental, technological, and economic variables (Iogansen et al., 2023; Naseri et al., 2024; Sonar et al., 2023). However, most existing studies focused on new EV markets, with comparatively limited attention given to the used EV markets, which is rapidly expanding and playing an increasingly important role in the broader diffusion of electric mobility.
+
+Though some preferences may carry over between new and used vehicle buyers—for instance, longer driving range consistently correlates with stronger EV preference—emerging evidence suggests that these two consumer groups differ in meaningful ways. For instance, used EV buyers are more sensitive to the availability of public charging infrastructure than new EV buyers, likely due to lower rates of home charging access (Zou et al., 2020). Moreover, purchasing behavior for used vehicles is often more risk-averse and budget-conscious, reflecting different decision-making processes than those found in the new car market. This indicates that used EV adoption is not simply a scaled-down version of new EV adoption and warrants independent investigation.
+Several studies have begun to profile the typical used EV buyer. Canepa et al. (2019) found that used car buyers are commonly cost-conscious. Compared to the general population, used EV buyers are more likely to be younger, male, White, and better educated. However, compared to those new-EV buyers, used EV buyers tend to have lower household incomes and be renters, with lower access to private garages with EV chargers (Khaloei et al., 2020; Sheykhfard et al., 2025). These characteristics differ from the traditional early adopter profile seen in the new EV market (typically wealthier, homeowners with garages), suggesting that used EVs may serve as a more accessible entry point into EV ownership for broader population segments.
+
+Although range is a common concern for EV users, Sheykhfard et al. (2025) found that the majority of used EV owners drive well within the range capabilities of most existing EV models: 59.4\% reported driving fewer than 100 miles per day and 29.4\% drove less than 50 miles per day. This implies that range anxiety may be less of a barrier for used EV buyers, who tend to have shorter commutes or use their vehicles in more limited travel contexts. Therefore, range may serve as a less decisive factor in used EV adoption compared to other attributes such as battery condition, charging accessibility, and price.
+
+Electric Vehicle Battery Technology and Consumer Perception
+The electric vehicle batteries (EVBs) present new risks and opportunities for consumers and the automotive industry. Despite progress in battery technology, consumer concerns about battery health, replacement cost, and resale value persist, especially in the used EV market. A major concern is battery cost—it can represent up to 30\% of an EV's total price (Boudway, 2020). Because of this, battery longevity and reliability play a crucial role in determining the economic viability of EV ownership and attractiveness of used EV.
+
+\subsection{Battery Degradation and State-of-Health}
+
+In the adoption literature, battery-related considerations for BEVs have largely centered on driving range (Yuan et al., 2018). Similarly, the common hesitation among prospective used EV buyers stems from battery degradation, SOH uncertainty and the unreliability of older technology (Pedrosa and Nobre, 2018).
+Battery degradation is typically manifested by a decrease in energy capacity, driving range, and increased charging time over time (Attia et al., 2022). The rate of degradation depends on multiple factors, including charging patterns (e.g., fast versus slow charging, charging frequency), driving patterns, depth of discharge cycles, and operation conditions (e.g., climate and temperature exposure) (Bashash et al., 2011; Neubauer et al., 2012). Yang et al. (2018) suggests that the BEV batteries can last five years to thirteen years depending on the climate. Studies suggest that battery aging trajectories are often linear or sublinear, meaning that the degradation either occurs at a constant rate or a reduced rate over time, likely due to the stabilization of battery chemistry after initial use (Attia et al., 2020, 2022). Batteries are generally considered to reach their End‑of‑Life (EoL) for vehicle use when their SOH drops to approximately 70–80\% of the original capacity (Canals Casals et al., 2019, 2022). Battery degradation has been shown to reduce consumers’ perceived future value of the vehicle and heighten resale anxiety.
+
+\subsection{Battery Replacement, Cost, and Warranty Considerations}
+While the existing literature has considered the longevity of the batteries when calculating the overall cost of EVs (Hagman et al., 2016; Letmathe and Suares, 2017), there is a lack of studies that directly examined the cost of EVBs.
+Most modern EVBs are designed to last the lifetime of the vehicle under normal use. Dnistran (2024) studied almost 5,000 EVs and revealed that the average annual degradation rate to be just 1.8\%, making the battery lifespan often outlasts the vehicle’s  useful life. However, Sheykhfard et al. (2025) report that although battery performance loss to the point that they need to be replaced are rare but can be expensive. Drawing from real-world experience compiled from a few online sources, the replacement costs can range between \$5,000 and \$20,000 or more depending on the vehicle model and labor (Kothari, 2024; Witt, 2024).
+
+To improve consumer confidence, most EV manufacturers offer warranties covering 8 years or 100,000 miles –-- whichever comes first (Clarke, 2024). This suggests that consumer purchase intentions can be closely linked to how long they expect to keep the vehicle and whether the battery's SOH will fall below the threshold (70\%~75\%) within the ownership window. Hitting this threshold can trigger a free battery replacement, which adds economic value and reassurance. This is supported by prior literature suggesting that the cost of BEVs varies widely by how long someone is expected to own the vehicle (Hagman et al., 2016). Letmathe and Suares (2017) also specifically consider reselling the battery separately from the resale cost of the vehicle when calculating the total cost of ownership .
+
+Second-Life and Refurbished Batteries
+As the number of used EVBs increases, opportunities for reuse and recycling become critical components of a circular battery economy (Skeete et al., 2020; Tankou et al., 2023). Many circular business models emphasize two main second-life pathways for EVBs: one is to exploit deteriorated batteries for less demanding applications, such as stationary energy storage for homes or grids (Christensen et al., 2021), and the other one is to refurbish those batteries and reintegrate into the EV market. This review focuses on the latter --– refurbishing batteries for continued use in EVs.
+
+Refurbishing batteries at the cell or module level can offer cost savings and support the economic viability of BEVs. For example, Jiao and Evans (2016) suggest that repurposing EoL EVBs could reduce the cost differential between BEVs and conventional vehicles. Similarly, Shaikh et al. (2023) conducted a simulation showing that refurbished EVBs are more affordable than new ones. Moreover, the refurbishment costs are lowest when batteries are sold locally, compared to regional and national markets. These findings indicate clear advantages for both automotive manufactures and customers. However, existing studies on second-life EVBs have largely focused on technical and economic feasibility, often outside of the US contexts where EV penetration is higher and EoL battery volumes are projected to increase significantly. In contrast, relatively little attention has been paid to consumer preferences and WTP for refurbished EVBs, which are essential to the success of refurbishment-based business models.
+
+One of the few relevant studies, conducted by Pedrosa and Nobre (2018) in Portugal found that all interviewees expressed positive attitudes toward refurbished EVs—particularly those fitted with replacement batteries backed by dealership warranties. Participants viewed these vehicles as more reliable, with the potential for extended driving range and greater peace of mind, and even indicated a higher WTP compared to used EVs retaining their original batteries. The main limitation of this study is that it is a qualitative interview based on a very small sample and may not be generalizable to the US market. Moreover, while the study suggests a consumer preference for BEVs with brand-new batteries than original ones, to the best of the authors' knowledge, no studies have directly examined consumer attitudes towards more nuanced refurbishment options, such as partial battery replacements where only some cells are replaced to address performance issues or extend battery life while the rest cells remain original, or full pack replacements where  the entire battery is swapped with a new pack after the original battery's performance declines below a certain threshold. Understanding consumer acceptance of these varying levels of refurbishment is essential for informing viable second-life battery strategies in the used EV market.
+
+\subsection{Willness to Pay for Battery Information}
+
+
+\section{Survey Design, Data Collection, and Descriptive Analyses}
+
+\subsection{Used EV Survey}
+
+
+
+BEV Knowledge and Attitudes
+This section of the survey assesses respondents' knowledge, attitudes, and perceptions related toEVs, battery technologies, and related topics. It begins with a series of factual questions that evaluate understanding of which vehicles can run on gasoline or be plugged in, whether respondents can name a BEV, and their knowledge of the current U.S. federal tax credit for new EV purchases. These items help establish respondents' baseline knowledge, which may influence their preferences in earlier choice tasks. The section then presents a series of attitudinal statements covering topics such as social norms, environmental beliefs, cost perceptions, battery concerns, and personality traits like risk-taking and price sensitivity. Respondents rate their agreement using a 5-point Likert scale. This section provides key context for interpreting behavioral patterns and supports more nuanced analysis of factors influencing EV adoption.
+
+
+The final section of the survey collects demographic and attitudinal information to support subgroup analyses and contextualize respondents' choices. It includes standard demographic questions such as year of birth, gender, race/ethnicity, household size, income, education level, employment status, and housing type. These variables are crucial for understanding how socio-demographic factors influence preferences and attitudes toward EVs. Additional questions explore home ownership and average electricity bills, factors that may shape EV adoption decisions. The survey also asks for the respondent's ZIP code to support geographic and spatial analyses. This section concludes with an open-ended question inviting them to describe, in their own words, what they believe the survey is about. These open-ended responses can help to validate the overall survey design and identify potential misinterpretations. This question can also serve to identify inattentive respondents who provide nonsensical or irrelevant answers.
+
+
+\subsection{Descriptive Analyses}
+
+Following the choice experiments, the survey includes a self-assessment question asking respondents to rate the importance of each attribute using a Likert scale, ranging from “Not at all important” to “Extremely important.” This question serves multiple purposes: (1) Validating choice behavior – It provides a way to cross-check whether the attributes respondents claim to value (i.e., stated importance) align with the trade-offs revealed in their actual choices (i.e., derived importance) (Chu, 2002; Huster et al., 2024). Inconsistencies may signal issues such as misunderstanding or inattention. (2) Understanding perceived salience – Because respondents may focus on different attributes during the experiment, self-reported ratings help identify which attributes were most influential in their decision-making process. (3) Segmenting respondents – These ratings can be used to group participants based on their stated priorities (e.g., price-sensitive vs. battery-conscious consumers), enabling more targeted analysis or class-specific modeling. (4) Survey diagnostics and data quality checks – Discrepancies between stated importance and revealed preferences may indicate low engagement, confusion, or misinterpretation of the attribute descriptions, helping researchers assess the overall quality of the data.
+
+\begin{figure}[pos=H]
+	\centering
+	\includegraphics[width=1\textwidth]{../../code/output/images/barplot_bev_attribute_rank.png}
+    \caption{Self-reported importance of BEV attributes}	
+    \label{figure_bev_attribute_rank}
+\end{figure}
+
+\begin{figure}[pos=H]
+	\centering
+	\includegraphics[width=1\textwidth]{../../code/output/images/barplot_bev_attribute_rank_veh_type.png}
+    \caption{Self-reported importance of BEV attributes}	
+    \label{figure_bev_attribute_rank_veh_type}
+\end{figure}
+
+\begin{figure}[pos=H]
+	\centering
+	\includegraphics[width=1\textwidth]{../../code/output/images/barplot_bev_attribute_rank_income.png}
+    \caption{Self-reported importance of BEV attributes}	
+    \label{figure_bev_attribute_rank_income}
+\end{figure}
+
+
+\section{Method}
+
+We estimated a series of DC models with increasing complexity. We started with a multinomial logit specification including the relevant demographic variables,
+
+\section{Results and Discussion}
+
+\section{Conclusion}
+As more EVs reach the end of their first ownership cycle, understanding the dynamics of the used EV market—particularly the unique concerns surrounding battery condition—has become both timely and essential. Yet the lack of transparent, standardized battery health information at the point of sale continues to fuel uncertainty and undervaluation, which may impact adoption of pre-owned EVs. This DCI provides guidelines to survey design and data collection effort that could address a major gap in the literature by focusing on how consumers evaluate used battery electric vehicles (BEVs), what factors influence their willingness to adopt them, and how information asymmetries, particularly around battery health, impact market confidence and transaction outcomes.
+
+This survey-based study represents a novel and rigorous approach to addressing these challenges. By combining insights from prior literature with a discrete choice experiment (DCE), the survey design allows researchers to empirically estimate the value consumers place on different forms of battery information and vehicle characteristics. Looking ahead, this DCI and the results from this research project can help shape the next phase of research and innovation in the second-life EV battery space. For example, further studies could explore consumer attitudes toward more complex refurbishment scenarios—such as partial vs. full battery replacements—and investigate how different warranty structures influence willingness to pay. Additionally, integrating insights from behavioral economics and data from telematics or vehicle diagnostics could enhance our understanding of how consumers interpret and act upon battery health information.
+
+\printcredits
+
+
+% \printbibliography
+
+
+\end{document}

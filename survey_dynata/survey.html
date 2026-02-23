@@ -177,16 +177,16 @@ The following object is masked from 'package:dplyr':
 <h2 class="anchored" data-anchor-id="this-study-is-about-the-purchase-of-your-next-vehicle.">This study is about the purchase of your next vehicle.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'next_veh_when'</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_when'</span>,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**To your best estimate, when will you likely need to purchase your next vehicle?**"</span>,</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Within the next 3 months"</span>  <span class="ot">=</span> <span class="st">"0"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Within the next 3 months"</span> <span class="ot">=</span> <span class="st">"0"</span>,</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"In 3-6 months"</span> <span class="ot">=</span> <span class="st">"3"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"In 6-12 months"</span>  <span class="ot">=</span> <span class="st">"6"</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"In 1-2 years"</span>  <span class="ot">=</span> <span class="st">"12"</span>,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"After 2 years"</span>  <span class="ot">=</span> <span class="st">"24"</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I'm not sure"</span>  <span class="ot">=</span> <span class="st">"not_sure"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"In 6-12 months"</span> <span class="ot">=</span> <span class="st">"6"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"In 1-2 years"</span> <span class="ot">=</span> <span class="st">"12"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"After 2 years"</span> <span class="ot">=</span> <span class="st">"24"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I'm not sure"</span> <span class="ot">=</span> <span class="st">"not_sure"</span></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -237,12 +237,12 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'next_veh_market'</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_market'</span>,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Are you interested in buying a new or used vehicle?**"</span>,</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"New vehicle only"</span> <span class="ot">=</span> <span class="st">"new"</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Used vehicle only"</span>  <span class="ot">=</span> <span class="st">"used"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Used vehicle only"</span> <span class="ot">=</span> <span class="st">"used"</span>,</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I’m looking at both markets"</span> <span class="ot">=</span> <span class="st">"both"</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -278,8 +278,8 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'next_veh_style'</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_style'</span>,</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Which vehicle body style would you consider for your next vehicle?**"</span>,</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Car / sedan / hatchback"</span> <span class="ot">=</span> <span class="st">"car"</span>,</span>
@@ -422,17 +422,17 @@ The following object is masked from 'package:dplyr':
 <p><br></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'household_veh_count'</span>,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'household_veh_count'</span>,</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How many passenger vehicles are currently owned or leased by your household?**"</span>,</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"0"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1"</span>  <span class="ot">=</span> <span class="st">"1"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2"</span>  <span class="ot">=</span> <span class="st">"2"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"1"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"2"</span>,</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"3"</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"4"</span>  <span class="ot">=</span> <span class="st">"4"</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"5"</span>  <span class="ot">=</span> <span class="st">"5"</span>,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"6 or more"</span>  <span class="ot">=</span> <span class="st">"6"</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"4"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"5"</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"6 or more"</span> <span class="ot">=</span> <span class="st">"6"</span></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -489,16 +489,17 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc_multiple'</span>,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'household_veh_fuel'</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc_multiple'</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'household_veh_fuel'</span>,</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Which of the following types of vehicles are currently owned or leased by your household?** *Select all that apply.*"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(<span class="st">"Conventional"</span> <span class="ot">=</span> <span class="st">"icev"</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gas hybrid"</span><span class="ot">=</span> <span class="st">"hev"</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plug-in hybrid"</span><span class="ot">=</span> <span class="st">"phev"</span>,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery electric"</span><span class="ot">=</span> <span class="st">"bev"</span>,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span> <span class="ot">=</span> <span class="st">"other"</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Conventional"</span> <span class="ot">=</span> <span class="st">"icev"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gas hybrid"</span> <span class="ot">=</span> <span class="st">"hev"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plug-in hybrid"</span> <span class="ot">=</span> <span class="st">"phev"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery electric"</span> <span class="ot">=</span> <span class="st">"bev"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span> <span class="ot">=</span> <span class="st">"other"</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="container-household_veh_fuel" data-question-id="household_veh_fuel" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('household_veh_fuel_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('household_veh_fuel_interacted', true, {priority: 'event'});">
 <div id="household_veh_fuel" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="household_veh_fuel-label">
@@ -543,13 +544,13 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'charger_access'</span>,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'charger_access'</span>,</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Do you have access to an electrical outlet where your vehicle is typically parked at your primary residence or workplace?**"</span>,</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Yes"</span> <span class="ot">=</span> <span class="st">"yes"</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No"</span>   <span class="ot">=</span> <span class="st">"no"</span>,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I'm not sure"</span>  <span class="ot">=</span> <span class="st">"not_sure"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No"</span> <span class="ot">=</span> <span class="st">"no"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I'm not sure"</span> <span class="ot">=</span> <span class="st">"not_sure"</span></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -582,13 +583,13 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'neighbor_ev_info'</span>,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'neighbor_ev_info'</span>,</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Do any of your neighbors own or lease a plug-in hybrid or a battery electric vehicle?**"</span>,</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Yes"</span> <span class="ot">=</span> <span class="st">"yes"</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No"</span>  <span class="ot">=</span> <span class="st">"no"</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I'm not sure"</span>  <span class="ot">=</span> <span class="st">"not_sure"</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No"</span> <span class="ot">=</span> <span class="st">"no"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I'm not sure"</span> <span class="ot">=</span> <span class="st">"not_sure"</span></span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -627,8 +628,8 @@ The following object is masked from 'package:dplyr':
 <h2 class="anchored" data-anchor-id="the-following-questions-are-about-the-household-vehicle-you-drive-most-often.">The following questions are about the household vehicle you drive most often.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'primary_veh_fuel'</span>,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'primary_veh_fuel'</span>,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is the fuel type of this vehicle?**"</span>,</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Conventional"</span> <span class="ot">=</span> <span class="st">"icev"</span>,</span>
@@ -680,8 +681,8 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'primary_veh_new_used'</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'primary_veh_new_used'</span>,</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Was this vehicle obtained as a new or used vehicle?**"</span>,</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"New"</span> <span class="ot">=</span> <span class="st">"new"</span>,</span>
@@ -712,8 +713,8 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'primary_veh_obtain_how'</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'primary_veh_obtain_how'</span>,</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How was this vehicle obtained?**"</span>,</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bought from a dealership"</span> <span class="ot">=</span> <span class="st">"bought_dealership"</span>,</span>
@@ -721,8 +722,8 @@ The following object is masked from 'package:dplyr':
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bought from an online retailer (e.g., Carvana)"</span> <span class="ot">=</span> <span class="st">"bought_online"</span>,</span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bought from a private seller"</span> <span class="ot">=</span> <span class="st">"bought_private"</span>,</span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Received it as a gift"</span> <span class="ot">=</span> <span class="st">"received_gift"</span>,</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span> <span class="ot">=</span><span class="st">"other"</span>,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not remember / do not know"</span>  <span class="ot">=</span> <span class="st">"do_not_know"</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span> <span class="ot">=</span> <span class="st">"other"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not remember / do not know"</span> <span class="ot">=</span> <span class="st">"do_not_know"</span></span>
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -779,20 +780,20 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'primary_veh_cost'</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'primary_veh_cost'</span>,</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**To your best estimate, what was the total purchase or lease price for this vehicle?** *Please **include** all related expenses (such as the down payment, monthly payments, taxes, and any additional fees), but **do not include** any trade-in value or credits from selling another vehicle.*"</span>,</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$9,999 or less"</span> <span class="ot">=</span> <span class="st">"5000"</span>,</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$10,000 - $19,999"</span> <span class="ot">=</span> <span class="st">"15000"</span>,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$20,000 - $29,999"</span><span class="ot">=</span> <span class="st">"25000"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$20,000 - $29,999"</span> <span class="ot">=</span> <span class="st">"25000"</span>,</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$30,000 - $39,999"</span> <span class="ot">=</span> <span class="st">"35000"</span>,</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$40,000 - $49,999"</span><span class="ot">=</span> <span class="st">"45000"</span>,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$50,000 - $59,999"</span><span class="ot">=</span> <span class="st">"55000"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$40,000 - $49,999"</span> <span class="ot">=</span> <span class="st">"45000"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$50,000 - $59,999"</span> <span class="ot">=</span> <span class="st">"55000"</span>,</span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$60,000 - $69,999"</span> <span class="ot">=</span> <span class="st">"65000"</span>,</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$70,000 - $79,999"</span><span class="ot">=</span> <span class="st">"75000"</span>,</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$80,000 - $89,999"</span><span class="ot">=</span> <span class="st">"85000"</span>,</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$90,000 - $99,999"</span><span class="ot">=</span> <span class="st">"95000"</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$70,000 - $79,999"</span> <span class="ot">=</span> <span class="st">"75000"</span>,</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$80,000 - $89,999"</span> <span class="ot">=</span> <span class="st">"85000"</span>,</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$90,000 - $99,999"</span> <span class="ot">=</span> <span class="st">"95000"</span>,</span>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$100,000 or more"</span> <span class="ot">=</span> <span class="st">"105000"</span>,</span>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not remember / do not know"</span> <span class="ot">=</span> <span class="st">"do_not_know"</span></span>
 <span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  )</span>
@@ -881,8 +882,8 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'primary_veh_payment'</span>,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'primary_veh_payment'</span>,</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is your current monthly payment for this vehicle?**"</span>,</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Paid in full/ No loan"</span> <span class="ot">=</span> <span class="st">"0"</span>,</span>
@@ -990,8 +991,8 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'primary_veh_mpg'</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'primary_veh_mpg'</span>,</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is the average gas mileage (in miles per gallon, MPG) of this vehicle?** *Please provide your best estimate and select **I'm not sure** if your primary vehicle is a Battery Electric Vehicle.*"</span>,</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"9.99 MPG or less"</span> <span class="ot">=</span> <span class="st">"5"</span>,</span>
@@ -1064,8 +1065,8 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'primary_veh_refuel'</span>,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'primary_veh_refuel'</span>,</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How often do you refuel or recharge this vehicle?**"</span>,</span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Once a month"</span> <span class="ot">=</span> <span class="st">"1"</span>,</span>
@@ -1131,12 +1132,12 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'primary_veh_range'</span>,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'primary_veh_range'</span>,</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How many miles can this vehicle travel on a full tank or full battery charge?**"</span>,</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"49 miles or less"</span> <span class="ot">=</span> <span class="st">"25"</span>,</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"50 - 99 miles"</span> <span class="ot">=</span> <span class="st">"75"</span> , </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"50 - 99 miles"</span> <span class="ot">=</span> <span class="st">"75"</span>,</span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"100 - 149 miles"</span> <span class="ot">=</span> <span class="st">"125"</span>,</span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"150 - 199 miles"</span> <span class="ot">=</span> <span class="st">"175"</span>,</span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"200 - 249 miles"</span> <span class="ot">=</span> <span class="st">"225"</span>,</span>
@@ -1231,8 +1232,8 @@ The following object is masked from 'package:dplyr':
 <p><strong>You indicated earlier that you are interested in a used <span id="next_veh_style_value" class="shiny-text-output"></span> for your next vehicle.</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'next_veh_budget'</span>,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_budget'</span>,</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">'**What is your budget for the vehicle?**'</span>,</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$4,999 or less"</span> <span class="ot">=</span> <span class="st">"5000"</span>,</span>
@@ -1245,7 +1246,7 @@ The following object is masked from 'package:dplyr':
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$35,000 - $39,999"</span> <span class="ot">=</span> <span class="st">"40000"</span>,</span>
 <span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$40,000 - $44,999"</span> <span class="ot">=</span> <span class="st">"45000"</span>,</span>
 <span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$45,000 - $49,999"</span> <span class="ot">=</span> <span class="st">"50000"</span>,</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$50,000 or more"</span><span class="ot">=</span> <span class="st">"55000"</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$50,000 or more"</span> <span class="ot">=</span> <span class="st">"55000"</span></span>
 <span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1326,11 +1327,11 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'next_veh_payment'</span>,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_payment'</span>,</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How do you intend to pay for the vehicle?**"</span>,</span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pay in full"</span><span class="ot">=</span> <span class="st">"pay_full"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pay in full"</span> <span class="ot">=</span> <span class="st">"pay_full"</span>,</span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Finance"</span> <span class="ot">=</span> <span class="st">"finance"</span></span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1358,21 +1359,21 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'matrix'</span>,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'next_veh_fuel'</span>,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'matrix'</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_fuel'</span>,</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How likely are you to purchase the following types of vehicles as your next vehicle?**"</span>,</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> <span class="fu">c</span>(</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"New plug-in hybrid electric vehicle"</span>     <span class="ot">=</span> <span class="st">"new_phev"</span>,</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Used plug-in hybrid electric vehicle"</span>    <span class="ot">=</span> <span class="st">"used_phev"</span>,</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"New battery electric vehicle"</span>          <span class="ot">=</span> <span class="st">"new_bev"</span>,</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Used battery electric vehicle"</span> <span class="ot">=</span>  <span class="st">"used_bev"</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"New plug-in hybrid electric vehicle"</span> <span class="ot">=</span> <span class="st">"new_phev"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Used plug-in hybrid electric vehicle"</span> <span class="ot">=</span> <span class="st">"used_phev"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"New battery electric vehicle"</span> <span class="ot">=</span> <span class="st">"new_bev"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Used battery electric vehicle"</span> <span class="ot">=</span> <span class="st">"used_bev"</span></span>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Very unlikely"</span> <span class="ot">=</span> <span class="st">"very_unlikely"</span>,</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat unlikely"</span>  <span class="ot">=</span> <span class="st">"somewhat_unlikely"</span>,</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither likely nor unlikely"</span>  <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat likely"</span>  <span class="ot">=</span> <span class="st">"somewhat_likely"</span>,</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Very likely"</span>  <span class="ot">=</span> <span class="st">"very_likely"</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat unlikely"</span> <span class="ot">=</span> <span class="st">"somewhat_unlikely"</span>,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither likely nor unlikely"</span> <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat likely"</span> <span class="ot">=</span> <span class="st">"somewhat_likely"</span>,</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Very likely"</span> <span class="ot">=</span> <span class="st">"very_likely"</span></span>
 <span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1516,8 +1517,8 @@ The following object is masked from 'package:dplyr':
 <p>— next_veh_info_nobev</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'textarea'</span>,</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'next_veh_nobev'</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'textarea'</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_nobev'</span>,</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**You mentioned that you are unlikely to purchase a battery electric vehicle as your next vehicle. What is your biggest concern or reason for this?**"</span></span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1534,33 +1535,35 @@ The following object is masked from 'package:dplyr':
 <p>— next_veh_style_car</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Car image options</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>car_images <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"1_new_car_sedan_compact"</span>,</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2_new_car_hatchback_subcompact"</span>,</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"3_new_car_sedan_subcompact"</span>,</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"4_new_car_sedan_fullsize"</span>,</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"5_new_car_sedan_fullsize_luxury"</span>,</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"6_new_car_hatchback_compact"</span>,</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"7_new_car_hatchback_compact_luxury"</span>,</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"8_new_car_sedan_midsize"</span>,</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"9_new_car_hatchback_subcompact_luxury"</span>))</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Choosing Car/SUV type</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>all_cars <span class="ot">&lt;-</span> car_images</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>car_src <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">'&lt;img src="images/car-images/{all_cars}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;"&gt;'</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a> )</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(all_cars) <span class="ot">&lt;-</span> car_src</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>car_images <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"1_new_car_sedan_compact"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2_new_car_hatchback_subcompact"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"3_new_car_sedan_subcompact"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"4_new_car_sedan_fullsize"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"5_new_car_sedan_fullsize_luxury"</span>,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"6_new_car_hatchback_compact"</span>,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"7_new_car_hatchback_compact_luxury"</span>,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"8_new_car_sedan_midsize"</span>,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"9_new_car_hatchback_subcompact_luxury"</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Choosing Car/SUV type</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>all_cars <span class="ot">&lt;-</span> car_images</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>car_src <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">'&lt;img src="images/car-images/{all_cars}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;"&gt;'</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Define first choice question</span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">type  =</span> <span class="st">'mc_buttons'</span>,</span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">id    =</span> <span class="st">'next_veh_car_images'</span>,</span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**"</span>,</span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> all_cars</span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(all_cars) <span class="ot">&lt;-</span> car_src</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Define first choice question</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc_buttons'</span>,</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_car_images'</span>,</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**"</span>,</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> all_cars</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="container-next_veh_car_images" data-question-id="next_veh_car_images" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('next_veh_car_images_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('next_veh_car_images_interacted', true, {priority: 'event'});">
 <div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
@@ -1571,8 +1574,8 @@ The following object is masked from 'package:dplyr':
 <div aria-labelledby="next_veh_car_images-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
 <div class="btn-group btn-group-toggle" role="group">
 <button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_car_images" value="6_new_car_hatchback_compact">
-<img src="images/car-images/6_new_car_hatchback_compact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+<input type="radio" autocomplete="off" name="next_veh_car_images" value="8_new_car_sedan_midsize">
+<img src="images/car-images/8_new_car_sedan_midsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
 </button>
 </div>
 <div class="btn-group btn-group-toggle" role="group">
@@ -1583,14 +1586,20 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="btn-group btn-group-toggle" role="group">
 <button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_car_images" value="9_new_car_hatchback_subcompact_luxury">
-<img src="images/car-images/9_new_car_hatchback_subcompact_luxury.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+<input type="radio" autocomplete="off" name="next_veh_car_images" value="6_new_car_hatchback_compact">
+<img src="images/car-images/6_new_car_hatchback_compact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
 </button>
 </div>
 <div class="btn-group btn-group-toggle" role="group">
 <button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_car_images" value="2_new_car_hatchback_subcompact">
-<img src="images/car-images/2_new_car_hatchback_subcompact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+<input type="radio" autocomplete="off" name="next_veh_car_images" value="1_new_car_sedan_compact">
+<img src="images/car-images/1_new_car_sedan_compact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="next_veh_car_images" value="9_new_car_hatchback_subcompact_luxury">
+<img src="images/car-images/9_new_car_hatchback_subcompact_luxury.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
 </button>
 </div>
 <div class="btn-group btn-group-toggle" role="group">
@@ -1607,20 +1616,14 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="btn-group btn-group-toggle" role="group">
 <button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_car_images" value="8_new_car_sedan_midsize">
-<img src="images/car-images/8_new_car_sedan_midsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
-</button>
-</div>
-<div class="btn-group btn-group-toggle" role="group">
-<button class="btn radiobtn btn-default">
 <input type="radio" autocomplete="off" name="next_veh_car_images" value="5_new_car_sedan_fullsize_luxury">
 <img src="images/car-images/5_new_car_sedan_fullsize_luxury.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
 </button>
 </div>
 <div class="btn-group btn-group-toggle" role="group">
 <button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_car_images" value="1_new_car_sedan_compact">
-<img src="images/car-images/1_new_car_sedan_compact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+<input type="radio" autocomplete="off" name="next_veh_car_images" value="2_new_car_hatchback_subcompact">
+<img src="images/car-images/2_new_car_hatchback_subcompact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
 </button>
 </div>
 </div>
@@ -1648,33 +1651,35 @@ The following object is masked from 'package:dplyr':
 <p>— next_veh_style_suv</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Car image options</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>suv_images <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"1_new_crossover_compact"</span>,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2_new_crossover_midsize"</span>,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"3_new_suv_fullsize"</span>,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"4_new_crossover_midsize"</span>,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"5_new_suv_fullsize"</span>,</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"6_new_crossover_subcompact"</span>,</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"7_new_crossover_subcompact"</span>,</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"8_new_suv_fullsize"</span>,</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"9_new_crossover_compact"</span>))</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Choosing Car/SUV type</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>suv_images <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"1_new_crossover_compact"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2_new_crossover_midsize"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"3_new_suv_fullsize"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"4_new_crossover_midsize"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"5_new_suv_fullsize"</span>,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"6_new_crossover_subcompact"</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"7_new_crossover_subcompact"</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"8_new_suv_fullsize"</span>,</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"9_new_crossover_compact"</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>))</span>
 <span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>all_suv <span class="ot">&lt;-</span> suv_images</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Choosing Car/SUV type</span></span>
 <span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>suv_src <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">'&lt;img src="images/car-images/{all_suv}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;"&gt;'</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(all_suv) <span class="ot">&lt;-</span> suv_src</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">type  =</span> <span class="st">'mc_buttons'</span>,</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">id    =</span> <span class="st">'next_veh_suv_images'</span>,</span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**"</span>,</span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> all_suv</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>all_suv <span class="ot">&lt;-</span> suv_images</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>suv_src <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">'&lt;img src="images/car-images/{all_suv}.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;"&gt;'</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(all_suv) <span class="ot">&lt;-</span> suv_src</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc_buttons'</span>,</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'next_veh_suv_images'</span>,</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Select a vehicle based on its segment / style that is most closely aligned with the next vehicle you are considering purchasing.**"</span>,</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> all_suv</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="container-next_veh_suv_images" data-question-id="next_veh_suv_images" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('next_veh_suv_images_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('next_veh_suv_images_interacted', true, {priority: 'event'});">
 <div class="form-group shiny-input-container shiny-input-radiogroup shiny-input-container-inline">
@@ -1685,44 +1690,8 @@ The following object is masked from 'package:dplyr':
 <div aria-labelledby="next_veh_suv_images-label" class="btn-group btn-group-container-sw" data-toggle="buttons" role="group">
 <div class="btn-group btn-group-toggle" role="group">
 <button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_suv_images" value="1_new_crossover_compact">
-<img src="images/car-images/1_new_crossover_compact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
-</button>
-</div>
-<div class="btn-group btn-group-toggle" role="group">
-<button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_suv_images" value="9_new_crossover_compact">
-<img src="images/car-images/9_new_crossover_compact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
-</button>
-</div>
-<div class="btn-group btn-group-toggle" role="group">
-<button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_suv_images" value="8_new_suv_fullsize">
-<img src="images/car-images/8_new_suv_fullsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
-</button>
-</div>
-<div class="btn-group btn-group-toggle" role="group">
-<button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_suv_images" value="2_new_crossover_midsize">
-<img src="images/car-images/2_new_crossover_midsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
-</button>
-</div>
-<div class="btn-group btn-group-toggle" role="group">
-<button class="btn radiobtn btn-default">
 <input type="radio" autocomplete="off" name="next_veh_suv_images" value="4_new_crossover_midsize">
 <img src="images/car-images/4_new_crossover_midsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
-</button>
-</div>
-<div class="btn-group btn-group-toggle" role="group">
-<button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_suv_images" value="5_new_suv_fullsize">
-<img src="images/car-images/5_new_suv_fullsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
-</button>
-</div>
-<div class="btn-group btn-group-toggle" role="group">
-<button class="btn radiobtn btn-default">
-<input type="radio" autocomplete="off" name="next_veh_suv_images" value="3_new_suv_fullsize">
-<img src="images/car-images/3_new_suv_fullsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
 </button>
 </div>
 <div class="btn-group btn-group-toggle" role="group">
@@ -1733,8 +1702,44 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="btn-group btn-group-toggle" role="group">
 <button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="next_veh_suv_images" value="8_new_suv_fullsize">
+<img src="images/car-images/8_new_suv_fullsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="next_veh_suv_images" value="3_new_suv_fullsize">
+<img src="images/car-images/3_new_suv_fullsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="next_veh_suv_images" value="1_new_crossover_compact">
+<img src="images/car-images/1_new_crossover_compact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="next_veh_suv_images" value="5_new_suv_fullsize">
+<img src="images/car-images/5_new_suv_fullsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
 <input type="radio" autocomplete="off" name="next_veh_suv_images" value="7_new_crossover_subcompact">
 <img src="images/car-images/7_new_crossover_subcompact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="next_veh_suv_images" value="2_new_crossover_midsize">
+<img src="images/car-images/2_new_crossover_midsize.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
+</button>
+</div>
+<div class="btn-group btn-group-toggle" role="group">
+<button class="btn radiobtn btn-default">
+<input type="radio" autocomplete="off" name="next_veh_suv_images" value="9_new_crossover_compact">
+<img src="images/car-images/9_new_crossover_compact.png" class="responsive-image" style="max-width: 200px; height: auto; object-fit: contain;">
 </button>
 </div>
 </div>
@@ -3049,8 +3054,8 @@ The following object is masked from 'package:dplyr':
 <p>— page2a</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">"textarea"</span>,</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">"no_bev_selected0"</span>,</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"textarea"</span>,</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"no_bev_selected0"</span>,</span>
 <span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**We noticed you did not choose any of the electric vehicle options in the last few questions. Could you tell us any reasons why?**"</span></span>
 <span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3067,15 +3072,15 @@ The following object is masked from 'package:dplyr':
 <p>— battery_attribute_rank</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'matrix'</span>,</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'battery_attribute'</span>,</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'matrix'</span>,</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'battery_attribute'</span>,</span>
 <span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How important are the following attributes to you when selecting a used battery electric vehicle?**"</span>,</span>
 <span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> <span class="fu">c</span>(</span>
 <span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Vehicle mileage"</span> <span class="ot">=</span> <span class="st">"veh_mile"</span>,</span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Purchase price"</span>     <span class="ot">=</span> <span class="st">"purchase_price"</span>,</span>
-<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery refurbishment history"</span>    <span class="ot">=</span> <span class="st">"battery_refurbish"</span>,</span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Vehicle range"</span>          <span class="ot">=</span> <span class="st">"veh_range"</span>,</span>
-<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery health"</span>          <span class="ot">=</span> <span class="st">"battery_health"</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Purchase price"</span> <span class="ot">=</span> <span class="st">"purchase_price"</span>,</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery refurbishment history"</span> <span class="ot">=</span> <span class="st">"battery_refurbish"</span>,</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Vehicle range"</span> <span class="ot">=</span> <span class="st">"veh_range"</span>,</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery health"</span> <span class="ot">=</span> <span class="st">"battery_health"</span></span>
 <span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unimportant"</span> <span class="ot">=</span> <span class="st">"unimportant"</span>,</span>
@@ -3083,9 +3088,8 @@ The following object is masked from 'package:dplyr':
 <span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Moderately important"</span> <span class="ot">=</span> <span class="st">"moderately_important"</span>,</span>
 <span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Important"</span> <span class="ot">=</span> <span class="st">"important"</span>,</span>
 <span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Very important"</span> <span class="ot">=</span> <span class="st">"very_important"</span></span>
-<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="container-battery_attribute" data-question-id="battery_attribute" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('battery_attribute_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('battery_attribute_interacted', true, {priority: 'event'});">
 <div class="matrix-question-container">
@@ -3262,14 +3266,14 @@ The following object is masked from 'package:dplyr':
 <h2 class="anchored" data-anchor-id="wed-like-to-learn-more-about-your-views-on-vehicle-technologies-and-related-topics.">We’d like to learn more about your views on vehicle technologies and related topics.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc_multiple'</span>,</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'run_on_gasoline'</span>,</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc_multiple'</span>,</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'run_on_gasoline'</span>,</span>
 <span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Please select which vehicle(s) can run on gasoline.** *Select all that apply.*"</span>,</span>
 <span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gas hybrid electric vehicle"</span> <span class="ot">=</span> <span class="st">"hev"</span>,</span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plug-in hybrid electric vehicle"</span>  <span class="ot">=</span> <span class="st">"phev"</span>,</span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery electric vehicle"</span>    <span class="ot">=</span> <span class="st">"bev"</span>,</span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I’m not sure"</span>   <span class="ot">=</span> <span class="st">"not_sure"</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plug-in hybrid electric vehicle"</span> <span class="ot">=</span> <span class="st">"phev"</span>,</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery electric vehicle"</span> <span class="ot">=</span> <span class="st">"bev"</span>,</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I’m not sure"</span> <span class="ot">=</span> <span class="st">"not_sure"</span></span>
 <span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3308,14 +3312,14 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc_multiple'</span>,</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'plugged_in'</span>,</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc_multiple'</span>,</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'plugged_in'</span>,</span>
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Please select which vehicles can be plugged in.** *Select all that apply.*"</span>,</span>
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gas hybrid electric vehicle"</span> <span class="ot">=</span> <span class="st">"hev"</span>,</span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plug-in hybrid electric vehicle"</span>  <span class="ot">=</span> <span class="st">"phev"</span>,</span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery electric vehicle"</span>    <span class="ot">=</span> <span class="st">"bev"</span>,</span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I’m not sure"</span>   <span class="ot">=</span> <span class="st">"not_sure"</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plug-in hybrid electric vehicle"</span> <span class="ot">=</span> <span class="st">"phev"</span>,</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battery electric vehicle"</span> <span class="ot">=</span> <span class="st">"bev"</span>,</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I’m not sure"</span> <span class="ot">=</span> <span class="st">"not_sure"</span></span>
 <span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3355,12 +3359,12 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conditional Question</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'know_electric_vehicle'</span>,</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'know_electric_vehicle'</span>,</span>
 <span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Can you name the make and model of at least one vehicle powered completely by electricity (a battery electric vehicle)?**"</span>,</span>
 <span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Yes"</span> <span class="ot">=</span> <span class="st">"yes"</span>,</span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No"</span>  <span class="ot">=</span> <span class="st">"no"</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No"</span> <span class="ot">=</span> <span class="st">"no"</span></span>
 <span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3388,8 +3392,8 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Target Question</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">"text"</span>,</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">"write_electric_name"</span>,</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"text"</span>,</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"write_electric_name"</span>,</span>
 <span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Please name the make and model of the vehicle.**"</span></span>
 <span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3403,16 +3407,16 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc'</span>,</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'max_subsidy'</span>,</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'max_subsidy'</span>,</span>
 <span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**To the best of your knowledge, what was the previous maximum federal tax credit (up till 09/30/2025) available in the US for purchasing a new electric vehicle?**"</span>,</span>
 <span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$1,000"</span> <span class="ot">=</span> <span class="st">"1000"</span>,</span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$2,500"</span>  <span class="ot">=</span> <span class="st">"2500"</span>,</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$2,500"</span> <span class="ot">=</span> <span class="st">"2500"</span>,</span>
 <span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$5,000"</span> <span class="ot">=</span> <span class="st">"5000"</span>,</span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$7,500"</span>  <span class="ot">=</span> <span class="st">"7500"</span>,</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$7,500"</span> <span class="ot">=</span> <span class="st">"7500"</span>,</span>
 <span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$10,000"</span> <span class="ot">=</span> <span class="st">"10000"</span>,</span>
-<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I'm not sure"</span>  <span class="ot">=</span> <span class="st">"not_sure"</span></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I'm not sure"</span> <span class="ot">=</span> <span class="st">"not_sure"</span></span>
 <span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3466,21 +3470,22 @@ The following object is masked from 'package:dplyr':
 <p>— attitudes_page1</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'matrix'</span>,</span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'attitudes_1_a'</span>,</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'matrix'</span>,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'attitudes_1_a'</span>,</span>
 <span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Please indicate the extent to which you agree or disagree with the following statements.**"</span>,</span>
 <span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> <span class="fu">c</span>(</span>
-<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"People who are important to me think that I should buy an EV."</span>     <span class="ot">=</span> <span class="st">"ev_norm"</span>,</span>
-<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Driving an EV would eventually result in cost savings."</span>    <span class="ot">=</span> <span class="st">"ev_cost"</span>,</span>
-<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Driving an EV would be beneficial to the environment in the long term."</span>          <span class="ot">=</span> <span class="st">"ev_environment"</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"People who are important to me think that I should buy an EV."</span> <span class="ot">=</span> <span class="st">"ev_norm"</span>,</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Driving an EV would eventually result in cost savings."</span> <span class="ot">=</span> <span class="st">"ev_cost"</span>,</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Driving an EV would be beneficial to the environment in the long term."</span> <span class="ot">=</span> <span class="st">"ev_environment"</span></span>
 <span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly disagree"</span> <span class="ot">=</span> <span class="st">"strongly_disagree"</span>,</span>
-<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat disagree"</span>  <span class="ot">=</span> <span class="st">"somewhat_disagree"</span>,</span>
-<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither agree nor disagree"</span>  <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
-<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat agree"</span>  <span class="ot">=</span> <span class="st">"somewhat_agree"</span>,</span>
-<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly agree"</span>  <span class="ot">=</span> <span class="st">"strongly_agree"</span>)</span>
-<span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat disagree"</span> <span class="ot">=</span> <span class="st">"somewhat_disagree"</span>,</span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither agree nor disagree"</span> <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
+<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat agree"</span> <span class="ot">=</span> <span class="st">"somewhat_agree"</span>,</span>
+<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly agree"</span> <span class="ot">=</span> <span class="st">"strongly_agree"</span></span>
+<span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="container-attitudes_1_a" data-question-id="attitudes_1_a" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('attitudes_1_a_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('attitudes_1_a_interacted', true, {priority: 'event'});">
 <div class="matrix-question-container">
@@ -3595,20 +3600,20 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'matrix'</span>,</span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'attitudes_1_b'</span>,</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'matrix'</span>,</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'attitudes_1_b'</span>,</span>
 <span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">" "</span>,</span>
 <span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> <span class="fu">c</span>(</span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"If I owned a BEV, I would often worry about running out of charge."</span> <span class="ot">=</span>  <span class="st">"ev_range"</span>,</span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing."</span> <span class="ot">=</span>  <span class="st">"ev_resale"</span>,</span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The price of an EV is too high."</span> <span class="ot">=</span>  <span class="st">"ev_price"</span></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"If I owned a BEV, I would often worry about running out of charge."</span> <span class="ot">=</span> <span class="st">"ev_range"</span>,</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BEVs are less valuable than gasoline cars on the resale market, because the technology is always advancing."</span> <span class="ot">=</span> <span class="st">"ev_resale"</span>,</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The price of an EV is too high."</span> <span class="ot">=</span> <span class="st">"ev_price"</span></span>
 <span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly disagree"</span> <span class="ot">=</span> <span class="st">"strongly_disagree"</span>,</span>
-<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat disagree"</span>  <span class="ot">=</span> <span class="st">"somewhat_disagree"</span>,</span>
-<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither agree nor disagree"</span>  <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
-<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat agree"</span>  <span class="ot">=</span> <span class="st">"somewhat_agree"</span>,</span>
-<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly agree"</span>  <span class="ot">=</span> <span class="st">"strongly_agree"</span></span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat disagree"</span> <span class="ot">=</span> <span class="st">"somewhat_disagree"</span>,</span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither agree nor disagree"</span> <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
+<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat agree"</span> <span class="ot">=</span> <span class="st">"somewhat_agree"</span>,</span>
+<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly agree"</span> <span class="ot">=</span> <span class="st">"strongly_agree"</span></span>
 <span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb70-17"><a href="#cb70-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3725,20 +3730,20 @@ The following object is masked from 'package:dplyr':
 <p>— attitudes_page2</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'matrix'</span>,</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'attitudes_2_a'</span>,</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'matrix'</span>,</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'attitudes_2_a'</span>,</span>
 <span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Please indicate the extent to which you agree or disagree with the following statements.**"</span>,</span>
 <span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> <span class="fu">c</span>(</span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems."</span> <span class="ot">=</span>  <span class="st">"ev_battery_environment"</span>,</span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Refurbished EV batteries do NOT perform and function as original EV batteries."</span> <span class="ot">=</span>  <span class="st">"ev_battery_function"</span>,</span>
-<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please select </span><span class="sc">\"</span><span class="st">Strongly agree</span><span class="sc">\"</span><span class="st"> as your response to this item."</span> <span class="ot">=</span>  <span class="st">"attention_check_agree"</span></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Purchasing refurbished EV batteries will minimize negative effects on natural ecosystems."</span> <span class="ot">=</span> <span class="st">"ev_battery_environment"</span>,</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Refurbished EV batteries do NOT perform and function as original EV batteries."</span> <span class="ot">=</span> <span class="st">"ev_battery_function"</span>,</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Please select </span><span class="sc">\"</span><span class="st">Strongly agree</span><span class="sc">\"</span><span class="st"> as your response to this item."</span> <span class="ot">=</span> <span class="st">"attention_check_agree"</span></span>
 <span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly disagree"</span> <span class="ot">=</span> <span class="st">"strongly_disagree"</span>,</span>
-<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat disagree"</span>  <span class="ot">=</span> <span class="st">"somewhat_disagree"</span>,</span>
-<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither agree nor disagree"</span>  <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
-<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat agree"</span>  <span class="ot">=</span> <span class="st">"somewhat_agree"</span>,</span>
-<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly agree"</span>  <span class="ot">=</span> <span class="st">"strongly_agree"</span></span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat disagree"</span> <span class="ot">=</span> <span class="st">"somewhat_disagree"</span>,</span>
+<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither agree nor disagree"</span> <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
+<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat agree"</span> <span class="ot">=</span> <span class="st">"somewhat_agree"</span>,</span>
+<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly agree"</span> <span class="ot">=</span> <span class="st">"strongly_agree"</span></span>
 <span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb71-17"><a href="#cb71-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3855,20 +3860,20 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'matrix'</span>,</span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'attitudes_2_b'</span>,</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'matrix'</span>,</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'attitudes_2_b'</span>,</span>
 <span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">" "</span>,</span>
 <span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> <span class="fu">c</span>(</span>
-<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Generally, I am willing to put in extra effort to find lower prices."</span> <span class="ot">=</span>  <span class="st">"price_sensitive"</span>,</span>
-<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I like to be among the first people to have the latest technology."</span> <span class="ot">=</span>  <span class="st">"tech_savvy"</span>,</span>
-<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I am a person who is fully prepared to take risks."</span> <span class="ot">=</span>  <span class="st">"risk_taker"</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Generally, I am willing to put in extra effort to find lower prices."</span> <span class="ot">=</span> <span class="st">"price_sensitive"</span>,</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I like to be among the first people to have the latest technology."</span> <span class="ot">=</span> <span class="st">"tech_savvy"</span>,</span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I am a person who is fully prepared to take risks."</span> <span class="ot">=</span> <span class="st">"risk_taker"</span></span>
 <span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly disagree"</span> <span class="ot">=</span> <span class="st">"strongly_disagree"</span>,</span>
-<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat disagree"</span>  <span class="ot">=</span> <span class="st">"somewhat_disagree"</span>,</span>
-<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither agree nor disagree"</span>  <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
-<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat agree"</span>  <span class="ot">=</span> <span class="st">"somewhat_agree"</span>,</span>
-<span id="cb72-15"><a href="#cb72-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly agree"</span>  <span class="ot">=</span> <span class="st">"strongly_agree"</span></span>
+<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat disagree"</span> <span class="ot">=</span> <span class="st">"somewhat_disagree"</span>,</span>
+<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neither agree nor disagree"</span> <span class="ot">=</span> <span class="st">"neutral"</span>,</span>
+<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Somewhat agree"</span> <span class="ot">=</span> <span class="st">"somewhat_agree"</span>,</span>
+<span id="cb72-15"><a href="#cb72-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly agree"</span> <span class="ot">=</span> <span class="st">"strongly_agree"</span></span>
 <span id="cb72-16"><a href="#cb72-16" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb72-17"><a href="#cb72-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3997,8 +4002,8 @@ The following object is masked from 'package:dplyr':
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(years) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(years)</span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'select'</span>,</span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'birth_year'</span>,</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'select'</span>,</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'birth_year'</span>,</span>
 <span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is your year of birth?**"</span>,</span>
 <span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> years</span>
 <span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4094,17 +4099,17 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'gender'</span>,</span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**What is your gender?**"</span>,</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'gender'</span>,</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is your gender?**"</span>,</span>
 <span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"female"</span>,</span>
-<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Male"</span>  <span class="ot">=</span> <span class="st">"male"</span>,</span>
-<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Non-binary"</span>  <span class="ot">=</span> <span class="st">"non_binary"</span>,</span>
-<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Transgender"</span>  <span class="ot">=</span> <span class="st">"transgender"</span>,</span>
-<span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gender Nonconforming"</span>  <span class="ot">=</span> <span class="st">"nonconforming"</span>,</span>
-<span id="cb74-11"><a href="#cb74-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span>   <span class="ot">=</span> <span class="st">"other"</span>,</span>
-<span id="cb74-12"><a href="#cb74-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prefer not to answer"</span>  <span class="ot">=</span> <span class="st">"prefer_not_answer"</span></span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"male"</span>,</span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Non-binary"</span> <span class="ot">=</span> <span class="st">"non_binary"</span>,</span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Transgender"</span> <span class="ot">=</span> <span class="st">"transgender"</span>,</span>
+<span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gender Nonconforming"</span> <span class="ot">=</span> <span class="st">"nonconforming"</span>,</span>
+<span id="cb74-11"><a href="#cb74-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span> <span class="ot">=</span> <span class="st">"other"</span>,</span>
+<span id="cb74-12"><a href="#cb74-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prefer not to answer"</span> <span class="ot">=</span> <span class="st">"prefer_not_answer"</span></span>
 <span id="cb74-13"><a href="#cb74-13" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb74-14"><a href="#cb74-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4161,12 +4166,12 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'ethnicity'</span>,</span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**Are you of Hispanic, Latino or Spanish origin?**"</span>,</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'ethnicity'</span>,</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Are you of Hispanic, Latino or Spanish origin?**"</span>,</span>
 <span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Yes"</span> <span class="ot">=</span> <span class="st">"yes"</span>,</span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No"</span>  <span class="ot">=</span> <span class="st">"no"</span></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No"</span> <span class="ot">=</span> <span class="st">"no"</span></span>
 <span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4193,18 +4198,18 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'mc_multiple'</span>,</span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'race'</span>,</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc_multiple'</span>,</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'race'</span>,</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Which race best describes you?** *Select all that apply.*"</span>,</span>
 <span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"American Indian or Alaskan Native"</span> <span class="ot">=</span> <span class="st">"native_american"</span>,</span>
-<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Asian"</span>     <span class="ot">=</span> <span class="st">"asian"</span>,</span>
-<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Black or African American"</span>    <span class="ot">=</span> <span class="st">"african_american"</span>,</span>
-<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Middle Eastern and North African (MENA)"</span>     <span class="ot">=</span> <span class="st">"mena"</span>,</span>
-<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Native Hawaiian or other Pacific Islander"</span>  <span class="ot">=</span> <span class="st">"pacific_islander"</span>,</span>
-<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"White"</span>   <span class="ot">=</span> <span class="st">"white"</span>,</span>
-<span id="cb76-12"><a href="#cb76-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Some other race"</span>        <span class="ot">=</span> <span class="st">"other"</span>,</span>
-<span id="cb76-13"><a href="#cb76-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not know / prefer not to answer"</span>     <span class="ot">=</span> <span class="st">"do_not_know"</span></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Asian"</span> <span class="ot">=</span> <span class="st">"asian"</span>,</span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Black or African American"</span> <span class="ot">=</span> <span class="st">"african_american"</span>,</span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Middle Eastern and North African (MENA)"</span> <span class="ot">=</span> <span class="st">"mena"</span>,</span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Native Hawaiian or other Pacific Islander"</span> <span class="ot">=</span> <span class="st">"pacific_islander"</span>,</span>
+<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"White"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
+<span id="cb76-12"><a href="#cb76-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Some other race"</span> <span class="ot">=</span> <span class="st">"other"</span>,</span>
+<span id="cb76-13"><a href="#cb76-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not know / prefer not to answer"</span> <span class="ot">=</span> <span class="st">"do_not_know"</span></span>
 <span id="cb76-14"><a href="#cb76-14" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb76-15"><a href="#cb76-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4267,16 +4272,16 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'hh_size'</span>,</span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**Including yourself, how many people live in your household?**"</span>,</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'hh_size'</span>,</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Including yourself, how many people live in your household?**"</span>,</span>
 <span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"1"</span>,</span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2"</span>  <span class="ot">=</span> <span class="st">"2"</span>,</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"2"</span>,</span>
 <span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"3"</span>,</span>
-<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"4"</span>  <span class="ot">=</span> <span class="st">"4"</span>,</span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"4"</span>,</span>
 <span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"5"</span>,</span>
-<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"More than 5"</span>  <span class="ot">=</span> <span class="st">"more_than_5"</span></span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"More than 5"</span> <span class="ot">=</span> <span class="st">"more_than_5"</span></span>
 <span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4327,18 +4332,18 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc_multiple'</span>,</span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'employment'</span>,</span>
-<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**Which of the following describes your current employment status?** *Select all that apply.*"</span>,</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc_multiple'</span>,</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'employment'</span>,</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Which of the following describes your current employment status?** *Select all that apply.*"</span>,</span>
 <span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I am a part-time or full-time student"</span> <span class="ot">=</span> <span class="st">"student"</span>,</span>
-<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Employed, working fewer than 40 hours per week"</span>  <span class="ot">=</span> <span class="st">"part_time"</span>,</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Employed, working fewer than 40 hours per week"</span> <span class="ot">=</span> <span class="st">"part_time"</span>,</span>
 <span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Employed, working 40 or more hours per week"</span> <span class="ot">=</span> <span class="st">"full_time"</span>,</span>
-<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Not employed, looking for work"</span>  <span class="ot">=</span> <span class="st">"looking_for_work"</span>,</span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Not employed, looking for work"</span> <span class="ot">=</span> <span class="st">"looking_for_work"</span>,</span>
 <span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Not employed, NOT looking for work"</span> <span class="ot">=</span> <span class="st">"not_looking_for_work"</span>,</span>
-<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Retired"</span>  <span class="ot">=</span> <span class="st">"retired"</span>,</span>
-<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Disabled, not able to work"</span>  <span class="ot">=</span> <span class="st">"disabled"</span>,</span>
-<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prefer not to answer"</span>  <span class="ot">=</span> <span class="st">"prefer_not_answer"</span></span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Retired"</span> <span class="ot">=</span> <span class="st">"retired"</span>,</span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Disabled, not able to work"</span> <span class="ot">=</span> <span class="st">"disabled"</span>,</span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prefer not to answer"</span> <span class="ot">=</span> <span class="st">"prefer_not_answer"</span></span>
 <span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb78-15"><a href="#cb78-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4401,37 +4406,37 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'hh_income'</span>,</span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**What is your annual household income?** *Please provide your best estimate.*"</span>,</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'hh_income'</span>,</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is your annual household income?** *Please provide your best estimate.*"</span>,</span>
 <span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$9,999 or less"</span> <span class="ot">=</span> <span class="st">"5000"</span>,</span>
 <span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$10,000 - $19,999"</span> <span class="ot">=</span> <span class="st">"15000"</span>,</span>
-<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$20,000 - $29,999"</span>  <span class="ot">=</span> <span class="st">"25000"</span>,</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$20,000 - $29,999"</span> <span class="ot">=</span> <span class="st">"25000"</span>,</span>
 <span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$30,000 - $39,999"</span> <span class="ot">=</span> <span class="st">"35000"</span>,</span>
-<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$40,000 - $49,999"</span>  <span class="ot">=</span> <span class="st">"45000"</span>,</span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$40,000 - $49,999"</span> <span class="ot">=</span> <span class="st">"45000"</span>,</span>
 <span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$50,000 - $59,999"</span> <span class="ot">=</span> <span class="st">"55000"</span>,</span>
-<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$60,000 - $69,999"</span>  <span class="ot">=</span> <span class="st">"65000"</span>,</span>
-<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$70,000 - $79,999"</span>  <span class="ot">=</span> <span class="st">"75000"</span>,</span>
-<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$80,000 - $89,999"</span>  <span class="ot">=</span> <span class="st">"85000"</span>,</span>
-<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$90,000 - $99,999"</span>  <span class="ot">=</span> <span class="st">"95000"</span>,</span>
-<span id="cb79-16"><a href="#cb79-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$100,000 - $109,999"</span>  <span class="ot">=</span> <span class="st">"105000"</span>,</span>
-<span id="cb79-17"><a href="#cb79-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$110,000 - $119,999"</span>  <span class="ot">=</span> <span class="st">"115000"</span>,</span>
-<span id="cb79-18"><a href="#cb79-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$120,000 - $129,999"</span>  <span class="ot">=</span> <span class="st">"125000"</span>,</span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$60,000 - $69,999"</span> <span class="ot">=</span> <span class="st">"65000"</span>,</span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$70,000 - $79,999"</span> <span class="ot">=</span> <span class="st">"75000"</span>,</span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$80,000 - $89,999"</span> <span class="ot">=</span> <span class="st">"85000"</span>,</span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$90,000 - $99,999"</span> <span class="ot">=</span> <span class="st">"95000"</span>,</span>
+<span id="cb79-16"><a href="#cb79-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$100,000 - $109,999"</span> <span class="ot">=</span> <span class="st">"105000"</span>,</span>
+<span id="cb79-17"><a href="#cb79-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$110,000 - $119,999"</span> <span class="ot">=</span> <span class="st">"115000"</span>,</span>
+<span id="cb79-18"><a href="#cb79-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$120,000 - $129,999"</span> <span class="ot">=</span> <span class="st">"125000"</span>,</span>
 <span id="cb79-19"><a href="#cb79-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$130,000 - $139,999"</span> <span class="ot">=</span> <span class="st">"135000"</span>,</span>
 <span id="cb79-20"><a href="#cb79-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$140,000 - $149,999"</span> <span class="ot">=</span> <span class="st">"145000"</span>,</span>
-<span id="cb79-21"><a href="#cb79-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$150,000 - $159,999"</span>  <span class="ot">=</span> <span class="st">"155000"</span>,</span>
-<span id="cb79-22"><a href="#cb79-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$160,000 - $169,999"</span>  <span class="ot">=</span> <span class="st">"165000"</span>,</span>
-<span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$170,000 - $179,999"</span>  <span class="ot">=</span> <span class="st">"175000"</span>,</span>
+<span id="cb79-21"><a href="#cb79-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$150,000 - $159,999"</span> <span class="ot">=</span> <span class="st">"155000"</span>,</span>
+<span id="cb79-22"><a href="#cb79-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$160,000 - $169,999"</span> <span class="ot">=</span> <span class="st">"165000"</span>,</span>
+<span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$170,000 - $179,999"</span> <span class="ot">=</span> <span class="st">"175000"</span>,</span>
 <span id="cb79-24"><a href="#cb79-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$180,000 - $189,999"</span> <span class="ot">=</span> <span class="st">"185000"</span>,</span>
 <span id="cb79-25"><a href="#cb79-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$190,000 - $199,999"</span> <span class="ot">=</span> <span class="st">"195000"</span>,</span>
 <span id="cb79-26"><a href="#cb79-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$200,000 - $209,999"</span> <span class="ot">=</span> <span class="st">"205000"</span>,</span>
 <span id="cb79-27"><a href="#cb79-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$210,000 - $219,999"</span> <span class="ot">=</span> <span class="st">"215000"</span>,</span>
-<span id="cb79-28"><a href="#cb79-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$220,000 - $229,999"</span>  <span class="ot">=</span> <span class="st">"225000"</span>,</span>
+<span id="cb79-28"><a href="#cb79-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$220,000 - $229,999"</span> <span class="ot">=</span> <span class="st">"225000"</span>,</span>
 <span id="cb79-29"><a href="#cb79-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$230,000 - $239,999"</span> <span class="ot">=</span> <span class="st">"235000"</span>,</span>
-<span id="cb79-30"><a href="#cb79-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$240,000 - $249,999"</span>  <span class="ot">=</span> <span class="st">"245000"</span>,</span>
-<span id="cb79-31"><a href="#cb79-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$250,000 or more"</span>  <span class="ot">=</span> <span class="st">"255000"</span>,</span>
-<span id="cb79-32"><a href="#cb79-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prefer not to answer"</span>  <span class="ot">=</span> <span class="st">"prefer_not_answer"</span></span>
+<span id="cb79-30"><a href="#cb79-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$240,000 - $249,999"</span> <span class="ot">=</span> <span class="st">"245000"</span>,</span>
+<span id="cb79-31"><a href="#cb79-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$250,000 or more"</span> <span class="ot">=</span> <span class="st">"255000"</span>,</span>
+<span id="cb79-32"><a href="#cb79-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prefer not to answer"</span> <span class="ot">=</span> <span class="st">"prefer_not_answer"</span></span>
 <span id="cb79-33"><a href="#cb79-33" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb79-34"><a href="#cb79-34" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4608,21 +4613,21 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'education'</span>,</span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**What is the highest level of education you have completed?**  *If currently enrolled, please use the highest degree received.*"</span>,</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'education'</span>,</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is the highest level of education you have completed?**  *If currently enrolled, please use the highest degree received.*"</span>,</span>
 <span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Less than a high school diploma"</span> <span class="ot">=</span> <span class="st">"below_high_school"</span>,</span>
-<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"High school degree or equivalent (e.g. GED)"</span>  <span class="ot">=</span> <span class="st">"high_school"</span>,</span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"High school degree or equivalent (e.g. GED)"</span> <span class="ot">=</span> <span class="st">"high_school"</span>,</span>
 <span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Some college - but less than two years"</span> <span class="ot">=</span> <span class="st">"college_less"</span>,</span>
-<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Some college - two years or more/A.A. degree"</span>  <span class="ot">=</span> <span class="st">"college_more"</span>,</span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Some college - two years or more/A.A. degree"</span> <span class="ot">=</span> <span class="st">"college_more"</span>,</span>
 <span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Technical or trade school"</span> <span class="ot">=</span> <span class="st">"technical"</span>,</span>
-<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"College graduate/bachelor's degree/B.A./B.S."</span>  <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Postgraduate courses"</span>  <span class="ot">=</span> <span class="st">"postgraduate"</span>,</span>
-<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Master's degree"</span>  <span class="ot">=</span> <span class="st">"master"</span>,</span>
-<span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M.B.A. or law degree"</span>  <span class="ot">=</span> <span class="st">"mba"</span>,</span>
-<span id="cb80-15"><a href="#cb80-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Ph.D. or M.D"</span>  <span class="ot">=</span> <span class="st">"phd"</span>,</span>
-<span id="cb80-16"><a href="#cb80-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prefer not to answer"</span>  <span class="ot">=</span> <span class="st">"prefer_not_answer"</span></span>
+<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"College graduate/bachelor's degree/B.A./B.S."</span> <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Postgraduate courses"</span> <span class="ot">=</span> <span class="st">"postgraduate"</span>,</span>
+<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Master's degree"</span> <span class="ot">=</span> <span class="st">"master"</span>,</span>
+<span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M.B.A. or law degree"</span> <span class="ot">=</span> <span class="st">"mba"</span>,</span>
+<span id="cb80-15"><a href="#cb80-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Ph.D. or M.D"</span> <span class="ot">=</span> <span class="st">"phd"</span>,</span>
+<span id="cb80-16"><a href="#cb80-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prefer not to answer"</span> <span class="ot">=</span> <span class="st">"prefer_not_answer"</span></span>
 <span id="cb80-17"><a href="#cb80-17" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb80-18"><a href="#cb80-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4703,18 +4708,18 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'housing_type'</span>,</span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**What type of housing do you currently live in?**"</span>,</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'housing_type'</span>,</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What type of housing do you currently live in?**"</span>,</span>
 <span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Single family house not attached to any other house"</span> <span class="ot">=</span> <span class="st">"sf_detached "</span>,</span>
-<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)"</span>  <span class="ot">=</span> <span class="st">"sf_attached"</span>,</span>
-<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Building with 2-4 apartments/condos/studios"</span>  <span class="ot">=</span> <span class="st">"apart_2"</span>,</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Single family house attached to one or more houses (townhouse, rowhome, condo, duplex, triplex, etc.)"</span> <span class="ot">=</span> <span class="st">"sf_attached"</span>,</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Building with 2-4 apartments/condos/studios"</span> <span class="ot">=</span> <span class="st">"apart_2"</span>,</span>
 <span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Building with 5-19 apartments/condos/studios"</span> <span class="ot">=</span> <span class="st">"apart_5"</span>,</span>
-<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Building with 20 or more apartments/condos/studios"</span>  <span class="ot">=</span> <span class="st">"apart_20"</span>,</span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Building with 20 or more apartments/condos/studios"</span> <span class="ot">=</span> <span class="st">"apart_20"</span>,</span>
 <span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A mobile home or trailer"</span> <span class="ot">=</span> <span class="st">"mobile_home"</span>,</span>
-<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Boat, RV, van, etc."</span>  <span class="ot">=</span> <span class="st">"boat"</span>,</span>
-<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span>  <span class="ot">=</span> <span class="st">"other"</span></span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Boat, RV, van, etc."</span> <span class="ot">=</span> <span class="st">"boat"</span>,</span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span> <span class="ot">=</span> <span class="st">"other"</span></span>
 <span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4777,14 +4782,14 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'housing_tenure'</span>,</span>
-<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**Do you own or rent the current place you are living in?**"</span>,</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'housing_tenure'</span>,</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Do you own or rent the current place you are living in?**"</span>,</span>
 <span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Own"</span> <span class="ot">=</span> <span class="st">"own"</span>,</span>
-<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rent"</span>  <span class="ot">=</span> <span class="st">"rent"</span>,</span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rent"</span> <span class="ot">=</span> <span class="st">"rent"</span>,</span>
 <span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span> <span class="ot">=</span> <span class="st">"other"</span>,</span>
-<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not know / prefer not to answer"</span>  <span class="ot">=</span> <span class="st">"do_not_know"</span></span>
+<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Do not know / prefer not to answer"</span> <span class="ot">=</span> <span class="st">"do_not_know"</span></span>
 <span id="cb82-10"><a href="#cb82-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb82-11"><a href="#cb82-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -4823,9 +4828,9 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'electric_bill'</span>,</span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**What is your monthly electricity bill on average?** *Please provide your best estimate.*"</span>,</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'electric_bill'</span>,</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is your monthly electricity bill on average?** *Please provide your best estimate.*"</span>,</span>
 <span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$0 - $99"</span> <span class="ot">=</span> <span class="st">"50"</span>,</span>
 <span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$100 - $199"</span> <span class="ot">=</span> <span class="st">"150"</span>,</span>
@@ -4883,9 +4888,9 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'political_view'</span>,</span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**How would you describe your political views?**"</span>,</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'political_view'</span>,</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How would you describe your political views?**"</span>,</span>
 <span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Very conservative"</span> <span class="ot">=</span> <span class="st">"very_conservative"</span>,</span>
 <span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Conservative"</span> <span class="ot">=</span> <span class="st">"conservative"</span>,</span>
@@ -4950,9 +4955,9 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'party_voting'</span>,</span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**Which political party do you typically vote for?**"</span>,</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'party_voting'</span>,</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**Which political party do you typically vote for?**"</span>,</span>
 <span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Democratic"</span> <span class="ot">=</span> <span class="st">"democratic"</span>,</span>
 <span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Republican"</span> <span class="ot">=</span> <span class="st">"republican"</span>,</span>
@@ -4998,15 +5003,15 @@ The following object is masked from 'package:dplyr':
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type   =</span> <span class="st">'mc'</span>,</span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="st">'climate_change'</span>,</span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label  =</span> <span class="st">"**How much do you, personally, worry about the issue of global climate change?**"</span>,</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'mc'</span>,</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'climate_change'</span>,</span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**How much do you, personally, worry about the issue of global climate change?**"</span>,</span>
 <span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="fu">c</span>(</span>
 <span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"None at all"</span> <span class="ot">=</span> <span class="st">"not_at_all"</span>,</span>
 <span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A little"</span> <span class="ot">=</span> <span class="st">"a_little"</span>,</span>
-<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A moderate amount"</span> <span class="ot">=</span> <span class="st">"moderate"</span>, </span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A moderate amount"</span> <span class="ot">=</span> <span class="st">"moderate"</span>,</span>
 <span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A lot"</span> <span class="ot">=</span> <span class="st">"a_lot"</span>,</span>
-<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A great deal"</span> <span class="ot">=</span>  <span class="st">"great_deal"</span></span>
+<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A great deal"</span> <span class="ot">=</span> <span class="st">"great_deal"</span></span>
 <span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -5051,8 +5056,8 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">"numeric"</span>,</span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">"home_zipcode"</span>,</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"numeric"</span>,</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"home_zipcode"</span>,</span>
 <span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"**What is the zip code of your primary residence?** *Please provide a 5-digit number.*"</span></span>
 <span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -5147,8 +5152,8 @@ please include the word “banana” in your response”
 </p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd_question</span>(</span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type  =</span> <span class="st">'textarea'</span>,</span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id    =</span> <span class="st">'attention_check_survey_content'</span>,</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'textarea'</span>,</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'attention_check_survey_content'</span>,</span>
 <span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">'**Please briefly describe what this survey is about:**'</span></span>
 <span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
