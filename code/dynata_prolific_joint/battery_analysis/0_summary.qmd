@@ -1,0 +1,123 @@
+---
+title: "Willingness to Pay for Battery Information on Used BEVs "
+format: 
+  html:
+    toc-title: Table of contents
+    toc: true
+    toc-depth: 4 # (Optional) Defines the depth of headings included
+    toc-floating: true  # (Optional) Makes ToC float on the side
+    toc-expand: true
+    number-sections: true
+    highlight-style: github
+    cap-location: top
+    page-layout: full
+    embed-resources: true
+    self-contained-math: false
+knitr:
+  opts_chunk:
+    fig-path: "code/output/images/qmd_figures/"  # Saves all figures in the "figures" directory
+execute:
+  echo: false      # Show code
+  warning: false  # Hide warnings
+  message: false  # Hide messages
+  error: false     # Show errors in output
+  cache: false    # Avoids caching issues
+  freeze: true    # Re-use previous results if unchanged
+  # pdf:
+  #   toc: true      # Also enables ToC for PDF output
+  # docx:
+  #   toc: true      # Also enables ToC for Word output
+---
+
+```{r}
+source(here::here('code', 'setup.R'))
+```
+
+```{r}
+load(here(
+  "code",
+  "output",
+  "model_output",
+  "logitr",
+  "battery",
+  "mxl_pref_model_car.RData"
+))
+
+load(here(
+  "code",
+  "output",
+  "model_output",
+  "logitr",
+  "battery",
+  "mxl_pref_model_suv.RData"
+))
+
+load(here(
+  "code",
+  "output",
+  "model_output",
+  "logitr",
+  "battery",
+  "mxl_wtp_model_car.RData"
+))
+
+load(here(
+  "code",
+  "output",
+  "model_output",
+  "logitr",
+  "battery",
+  "mxl_wtp_model_suv.RData"
+))
+```
+# Summary of MXL Model Results
+## Preference Space
+### Car
+```{r}
+summary(pref_model_car)
+```
+
+### SUV
+```{r}
+summary(pref_model_car)
+```
+
+## WTP Space
+### Car
+```{r}
+summary(wtp_model_car)
+```
+
+### SUV
+```{r}
+summary(wtp_model_suv)
+```
+
+## Compare between two spaces
+### Car
+```{r}
+wtpCompare(pref_model_car, wtp_model_car, scalePar = 'price')
+
+```
+
+### SUV
+```{r}
+wtpCompare(pref_model_suv, wtp_model_suv, scalePar = 'price')
+
+```
+
+# Plots of WTP Estimates
+## Mean WTP by Vehicle Segment
+```{r}
+knitr::include_graphics(here::here("code","output","images","battery_mean_wtp_plot.png"))
+```
+
+##  Heterogeneity (Mean WTP ± 1 SD)
+```{r}
+knitr::include_graphics(here::here("code","output","images","battery_hetegoneity_plot.png"))
+```
+
+## Simulated individual WTP distributions
+```{r}
+knitr::include_graphics(here::here("code","output","images","battery_simulated_wtp_plot.png"))
+```
