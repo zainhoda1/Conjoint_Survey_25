@@ -33,7 +33,10 @@ execute:
 source(here::here('code', 'setup.R'))
 ```
 
+
+# Summary of MXL Model Results
 ```{r}
+# no_interaction
 load(here(
   "code",
   "output",
@@ -69,8 +72,9 @@ load(here(
   "battery",
   "mxl_wtp_model_suv.RData"
 ))
+
 ```
-# Summary of MXL Model Results
+
 ## Preference Space
 ### Car
 ```{r}
@@ -108,16 +112,142 @@ wtpCompare(pref_model_suv, wtp_model_suv, scalePar = 'price')
 
 # Plots of WTP Estimates
 ## Mean WTP by Vehicle Segment
+95% confidence intervals are calculated using the standard errors of the mean WTP estimates, which are derived from the MXL model. These intervals provide a range within which we can be 95% confident that the true mean WTP for each attribute lies, allowing us to assess the statistical significance of the estimates and compare them across attributes and vehicle segments.
 ```{r}
-knitr::include_graphics(here::here("code","output","images","battery_mean_wtp_plot.png"))
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "battery_mean_wtp_plot.png"
+))
 ```
 
 ##  Heterogeneity (Mean WTP ± 1 SD)
+The implied distribution of each random parameter across the population. 
 ```{r}
-knitr::include_graphics(here::here("code","output","images","battery_hetegoneity_plot.png"))
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "battery_hetegoneity_plot.png"
+))
 ```
 
 ## Simulated individual WTP distributions
+The distribution can be simulated using the estimated mean and standard deviation parameters from the MXL model. This allows us to visualize the heterogeneity in WTP across individuals, showing how much variation there is in the population's preferences for each attribute.
 ```{r}
-knitr::include_graphics(here::here("code","output","images","battery_simulated_wtp_plot.png"))
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "battery_simulated_wtp_plot.png"
+))
+```
+
+# Summary of MXL+Interaction Model Results
+```{r}
+# with_interaction
+load(here(
+  "code",
+  "output",
+  "model_output",
+  "logitr",
+  "battery",
+  "mxl_pref_interact_model_car.RData"
+))
+
+load(here(
+  "code",
+  "output",
+  "model_output",
+  "logitr",
+  "battery",
+  "mxl_pref_interact_model_suv.RData"
+))
+
+load(here(
+  "code",
+  "output",
+  "model_output",
+  "logitr",
+  "battery",
+  "mxl_wtp_interact_model_car.RData"
+))
+
+load(here(
+  "code",
+  "output",
+  "model_output",
+  "logitr",
+  "battery",
+  "mxl_wtp_interact_model_suv.RData"
+))
+```
+
+## Preference Space
+### Car
+```{r}
+summary(pref_model_car)
+```
+
+### SUV
+```{r}
+summary(pref_model_car)
+```
+
+## WTP Space
+### Car
+- Wealthier individuals value driving range more (drive longer distances, range as quality signal)
+- People with home charging value range more (more committed EV adopters,planning regular usage,understand range better).
+- Wealthier individuals dislike battery degradation more strongly (more quality sensitive,less tolerant of performance decay).
+- As risk-taking perception increases, dislike of refurbished batteries becomes smaller. However, it is only significant in pack-level replcement, not cell-level replacement.
+
+```{r}
+summary(wtp_model_car)
+```
+
+### SUV
+```{r}
+summary(wtp_model_suv)
+```
+
+## Compare between two spaces
+### Car
+```{r}
+wtpCompare(pref_model_car, wtp_model_car, scalePar = 'price')
+
+```
+
+### SUV
+```{r}
+wtpCompare(pref_model_suv, wtp_model_suv, scalePar = 'price')
+
+```
+
+# Self-reported importance of battery information
+```{r}
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "barplot_bev_attribute_rank.png"
+))
+```
+
+```{r}
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "barplot_bev_attribute_rank_veh_type.png"
+))
+```
+
+```{r}
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "barplot_bev_attribute_rank_income.png"
+))
 ```

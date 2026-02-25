@@ -2,14 +2,76 @@ source(here::here('code', 'setup.R'))
 
 # Data Upload----
 
-data_dce <- read_parquet(here(
+data_dce_covariate <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
-  "data_logitr_dce_only_battery.parquet"
+  "data_logitr_dce_covariate_battery.parquet"
 ))
 
+data_dce_covariate <- data_dce_covariate %>%
+  mutate(
+    hhincome_num_10k = hhincome_num / 10000,
+    hhtenure_num = case_when(
+      hhtenure_cate == "own" ~ 1,
+      hhtenure_cate == "rent" ~ 0,
+      TRUE ~ 2
+    ),
+    EV_charger_num = case_when(
+      EV_charger == "yes" ~ 1,
+      EV_charger == "no" ~ 0,
+      TRUE ~ 2
+    ),
+    ATT_risktaker_agree = case_when(
+      ATT_risktaker %in% c("somewhat_agree", "strongly_agree") ~ 1,
+      TRUE ~ 0
+    ),
+    ATT_risktaker_disagree = case_when(
+      ATT_risktaker %in% c("somewhat_disagree", "strongly_disagree") ~ 1,
+      TRUE ~ 0
+    )
+  )
+
 # Estimate MXL model----
-## Define random parameters for MXL model
+## Define interaction terms----
+data_interact <- data_dce_covariate %>%
+  filter(!is.na(hhincome_num_10k) & !is.na(EV_charger_num)) %>%
+  mutate(
+    interact_range_income = battery_range_year0 * hhincome_num_10k,
+    interact_range_charger = battery_range_year0 * EV_charger_num,
+    interact_degradation_income = battery_degradation * hhincome_num_10k,
+    interact_refurbishpack_risk = battery_refurbishpackreplace *
+      ATT_risktaker_agree,
+    interact_refurbishcell_risk = battery_refurbishcellreplace *
+      ATT_risktaker_agree
+  )
+## Define parameters----
+pars_pref = c(
+  "price",
+  "mileage",
+  "battery_range_year0",
+  "battery_degradation",
+  "battery_refurbishpackreplace",
+  "battery_refurbishcellreplace",
+  "no_choice",
+  "interact_range_income",
+  "interact_range_charger",
+  "interact_degradation_income",
+  "interact_refurbishpack_risk",
+  "interact_refurbishcell_risk"
+)
+pars_wtp = c(
+  "mileage",
+  "battery_range_year0",
+  "battery_degradation",
+  "battery_refurbishpackreplace",
+  "battery_refurbishcellreplace",
+  "no_choice",
+  "interact_range_income",
+  "interact_range_charger",
+  "interact_degradation_income",
+  "interact_refurbishpack_risk",
+  "interact_refurbishcell_risk"
+)
 randPars <- c(
   mileage = "n",
   battery_range_year0 = "n",
@@ -17,7 +79,10 @@ randPars <- c(
   battery_refurbishpackreplace = "n",
   battery_refurbishcellreplace = "n"
 )
-numDraws <- 300 # increase for publication
+
+
+## Model functions----
+numDraws <- 200 # increase for publication
 
 mxl_model_pref <- function(data) {
   model <- logitr(
@@ -25,15 +90,7 @@ mxl_model_pref <- function(data) {
     outcome = "choice",
     obsID = "obsID",
     panelID = "respID",
-    pars = c(
-      "price",
-      "mileage",
-      "battery_range_year0",
-      "battery_degradation",
-      "battery_refurbishpackreplace",
-      "battery_refurbishcellreplace",
-      "no_choice"
-    ),
+    pars = pars_pref,
     randPars = randPars,
     numMultiStarts = 10,
     drawType = "sobol",
@@ -51,14 +108,7 @@ mxl_model_wtp <- function(data, wtp_pref_model) {
     outcome = "choice",
     obsID = "obsID",
     panelID = "respID",
-    pars = c(
-      "mileage",
-      "battery_range_year0",
-      "battery_degradation",
-      "battery_refurbishpackreplace",
-      "battery_refurbishcellreplace",
-      "no_choice"
-    ),
+    pars = pars_wtp,
     scalePar = 'price',
     randPars = randPars,
     numMultiStarts = 10,
@@ -104,10 +154,10 @@ mxl_model_wtp <- function(data, wtp_pref_model) {
 
 # Estimate the pref model
 pref_model_car <- mxl_model_pref(
-  data_dce_dummy %>% filter(vehicle_typesuv == 0)
+  data_interact %>% filter(vehicle_typesuv == 0)
 )
 pref_model_suv <- mxl_model_pref(
-  data_dce_dummy %>% filter(vehicle_typesuv == 1)
+  data_interact %>% filter(vehicle_typesuv == 1)
 )
 # pref_model_all <- mxl_model_pref(data_dce_dummy)
 summary(pref_model_car)
@@ -119,11 +169,11 @@ wtp_pref_model_suv <- wtp(pref_model_suv, scalePar = "price")
 
 # Estimate the wtp model
 wtp_model_car <- mxl_model_wtp(
-  data_dce_dummy %>% filter(vehicle_typesuv == 0),
+  data_interact %>% filter(vehicle_typesuv == 0),
   wtp_pref_model_car
 )
 wtp_model_suv <- mxl_model_wtp(
-  data_dce_dummy %>% filter(vehicle_typesuv == 1),
+  data_interact %>% filter(vehicle_typesuv == 1),
   wtp_pref_model_suv
 )
 # wtp_model_all <- mxl_model_wtp(data_dce_dummy)
@@ -161,7 +211,7 @@ save(
     "model_output",
     "logitr",
     "battery",
-    "mxl_pref_model_car.RData"
+    "mxl_pref_interact_model_car.RData"
   )
 )
 
@@ -173,7 +223,7 @@ save(
     "model_output",
     "logitr",
     "battery",
-    "mxl_pref_model_suv.RData"
+    "mxl_pref_interact_model_suv.RData"
   )
 )
 
@@ -185,7 +235,7 @@ save(
     "model_output",
     "logitr",
     "battery",
-    "mxl_wtp_model_car.RData"
+    "mxl_wtp_interact_model_car.RData"
   )
 )
 
@@ -197,6 +247,6 @@ save(
     "model_output",
     "logitr",
     "battery",
-    "mxl_wtp_model_suv.RData"
+    "mxl_wtp_interact_model_suv.RData"
   )
 )
