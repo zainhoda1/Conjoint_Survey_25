@@ -1,0 +1,12 @@
+name: Battery_Information_WTP
+title:
+username: xiatian-iogansen
+account: xiatian-iogansen
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16765213
+bundleId: 11630744
+url: https://xiatian-iogansen.shinyapps.io/Battery_Information_WTP/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

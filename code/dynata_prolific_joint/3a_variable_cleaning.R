@@ -193,6 +193,15 @@ data <- data %>%
     )
   )
 
+# ----Information treatment----
+data <- data %>%
+  mutate(
+    battery_info_treat = case_when(
+      prime_group_label == "prime_long" ~ 1,
+      T ~ 0
+    )
+  )
+
 # ----Data Output----
 write_parquet(
   data,

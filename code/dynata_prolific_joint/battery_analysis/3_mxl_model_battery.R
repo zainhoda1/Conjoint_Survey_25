@@ -104,12 +104,12 @@ mxl_model_wtp <- function(data, wtp_pref_model) {
 
 # Estimate the pref model
 pref_model_car <- mxl_model_pref(
-  data_dce_dummy %>% filter(vehicle_typesuv == 0)
+  data_dce %>% filter(vehicle_typesuv == 0)
 )
 pref_model_suv <- mxl_model_pref(
-  data_dce_dummy %>% filter(vehicle_typesuv == 1)
+  data_dce %>% filter(vehicle_typesuv == 1)
 )
-# pref_model_all <- mxl_model_pref(data_dce_dummy)
+# pref_model_all <- mxl_model_pref(data_dce)
 summary(pref_model_car)
 summary(pref_model_suv)
 # summary(pref_model_all)
@@ -119,14 +119,14 @@ wtp_pref_model_suv <- wtp(pref_model_suv, scalePar = "price")
 
 # Estimate the wtp model
 wtp_model_car <- mxl_model_wtp(
-  data_dce_dummy %>% filter(vehicle_typesuv == 0),
+  data_dce %>% filter(vehicle_typesuv == 0),
   wtp_pref_model_car
 )
 wtp_model_suv <- mxl_model_wtp(
-  data_dce_dummy %>% filter(vehicle_typesuv == 1),
+  data_dce %>% filter(vehicle_typesuv == 1),
   wtp_pref_model_suv
 )
-# wtp_model_all <- mxl_model_wtp(data_dce_dummy)
+# wtp_model_all <- mxl_model_wtp(data_dce)
 summary(wtp_model_car)
 summary(wtp_model_suv)
 # summary(wtp_model_all)
@@ -136,14 +136,14 @@ wtpCompare(pref_model_suv, wtp_model_suv, scalePar = 'price')
 
 ### Estimate the correkated wtp model
 # wtp_model_car_cor <- mxl_model_wtp_cor(
-#   data_dce_dummy %>% filter(vehicle_typesuv == 0),
+#   data_dce %>% filter(vehicle_typesuv == 0),
 #   wtp_pref_model_car
 # )
 # wtp_model_suv_cor <- mxl_model_wtp_cor(
-#   data_dce_dummy %>% filter(vehicle_typesuv == 1),
+#   data_dce %>% filter(vehicle_typesuv == 1),
 #   wtp_pref_model_suv
 # )
-# # wtp_model_all <- mxl_model_wtp(data_dce_dummy)
+# # wtp_model_all <- mxl_model_wtp(data_dce)
 # summary(wtp_model_car_cor)
 # summary(wtp_model_suv_cor)
 
