@@ -66,7 +66,8 @@ data_variable <- data_variable %>%
     starts_with("knowledge_"),
     Veh_hh_fuel,
     starts_with("EV_"),
-    starts_with("next_veh_fuel_")
+    starts_with("next_veh_fuel_"),
+    battery_info_treat
   ) %>%
   mutate(
     hhincome_num_10k = hhincome_num / 10000,

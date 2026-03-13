@@ -251,3 +251,41 @@ knitr::include_graphics(here::here(
   "barplot_bev_attribute_rank_income.png"
 ))
 ```
+
+# Heatmaps
+- SUVs consistently show more negative WTP at higher degradation rates. SUVs are heavier and generally less efficient, so the "disutility" (the amount they want discounted) is much higher.
+- For SUV users: warranty information sensitivity to degradation risk
+- For Car users: Instead of reassuring consumers, providing warranty information likely:
+	•	Heighten sensitivity to degradation risk. 
+	•	Increases consumers’ awareness of long-term performance risk
+	•	Anchors attention on the 70–75% SOH threshold
+
+## Combined
+```{r}
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "battery_heatmap_plot.png"
+))
+```
+
+## With information treatment
+```{r}
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "battery_heatmap_plot_treat.png"
+))
+```
+
+## Without information treatment
+```{r}
+knitr::include_graphics(here::here(
+  "code",
+  "output",
+  "images",
+  "battery_heatmap_plot_notreat.png"
+))
+```
