@@ -131,7 +131,7 @@ uncertainty_degradation_plot <- ggplot(
     y = "WTP ($1000)",
     color = "Degradation\n(% per year)",
     fill = "Degradation\n(% per year)",
-    title = "Estimated WTP for Vehicle Range and Battery Degradation Rate by Vehicle Type\n(95% Uncertainty Intervals)"
+    title = "Estimated WTP for Vehicle Range and Battery Degradation Rate by Vehicle Type\n(95% Confidence Intervals)"
   ) +
   theme_minimal()
 
@@ -216,7 +216,7 @@ uncertainty_refurb_plot <- ggplot(
     y = "WTP ($1000)",
     color = "Refurbishment",
     fill = "Refurbishment",
-    title = "Estimated WTP for Vehicle Range, Battery Degradation, and Refurbishment\n(95% Uncertainty Intervals)"
+    title = "Estimated WTP for Vehicle Range, Battery Degradation, and Refurbishment\n(95% Confidence Intervals)"
   ) +
   theme_minimal()
 
