@@ -3,32 +3,9 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 # --------------------------------------------------------------------------
 # Load the data set:
 
-# data_vehicle_prolific <- read_parquet(here(
-#   "data",
-#   "prolific_testing",
-#   "choice_data_vehicle.parquet"
-# ))
-# 
-# data_battery_prolific <- read_parquet(here(
-#   "data",
-#   "prolific_testing",
-#   "choice_data_battery.parquet"
-# ))
-# 
-# 
-# data_vehicle_dynata <- read_parquet(here(
-#   "data",
-#   "dynata_testing",
-#   "choice_data_vehicle.parquet"
-# ))
-# 
-# data_battery_dynata <- read_parquet(here(
-#   "data",
-#   "prolific_testing",
-#   "choice_data_battery.parquet"
-# ))
 
-data_raw <- read_csv(here('data', 'prolific_testing', 'data_raw.csv'))
+
+data_raw <- read_csv(here('data', 'prolific_testing', 'data_round2_feb_26.csv'))
 
 
 # data_raw <- read_csv(here(
@@ -142,31 +119,43 @@ write_parquet(
   here(
     "data",
     "prolific_testing",
-    "data.parquet"
+    "data_round2_feb26.parquet"
   )
 )
 
 
 # Join demographics and check for approvals
 
-demos1 <- read_csv(here(
-  'data',
-  'prolific_testing',
-  'prolific_demographics1.csv'
-)) %>%
+# demos1 <- read_csv(here(
+#   'data',
+#   'prolific_testing',
+#   'prolific_demographics1.csv'
+# )) %>%
+#   clean_names() %>%
+#   filter(status != 'SCREENED OUT') %>%
+#   mutate(source = 'demos1')
+# demos2 <- read_csv(here(
+#   'data',
+#   'prolific_testing',
+#   'prolific_demographics2.csv'
+# )) %>%
+#   clean_names() %>%
+#   filter(status != 'SCREENED OUT') %>%
+#   mutate(source = 'demos2')
+# demos <- rbind(demos1, demos2) %>%
+#   rename(prolific_pid = participant_id)
+
+
+demos <-  read_csv(here(
+  'fielding',
+  'prolific-feb-2026',
+  'prolific-studies',
+  'prolific_demographic_export_69972f6c3f130386dee62c91.csv')) %>%
   clean_names() %>%
   filter(status != 'SCREENED OUT') %>%
-  mutate(source = 'demos1')
-demos2 <- read_csv(here(
-  'data',
-  'prolific_testing',
-  'prolific_demographics2.csv'
-)) %>%
-  clean_names() %>%
-  filter(status != 'SCREENED OUT') %>%
-  mutate(source = 'demos2')
-demos <- rbind(demos1, demos2) %>%
-  rename(prolific_pid = participant_id)
+  rename(prolific_pid = participant_id) %>% 
+  mutate(source = 'round2')
+  
 
 nrow(demos)
 
@@ -191,7 +180,7 @@ data_approval %>%
     here(
       "data",
       "prolific_testing",
-      "approve.parquet"
+      "approve_round2.parquet"
     )
   )
 
@@ -201,7 +190,7 @@ data_approval %>%
     here(
       "data",
       "prolific_testing",
-      "reject.parquet"
+      "reject_round2.parquet"
     )
   )
 

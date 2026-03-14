@@ -16,7 +16,7 @@ pkgs <- c(
   "nFactors",
   "rlang",
   "openxlsx",
-  "xlsx",
+ # "xlsx",
   "zipcodeR",
   "viridis",
   "maps",

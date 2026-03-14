@@ -5,13 +5,13 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 data_raw <- read_parquet(here(
   "data",
   "prolific_testing",
-  "data.parquet"
+  "data_round2_feb26.parquet"
 ))
 
 data_approval <- read_parquet(here(
   "data",
   "prolific_testing",
-  "approve.parquet"
+  "approve_round2.parquet"
 ))
 
 
@@ -47,11 +47,13 @@ nrow(data)
 
 # Summary of reasons to drop respondents
 
-# data_approval <- check_all_approvals(data_raw)
+#data_approval <- check_all_approvals(data_raw)
 # data_approval %>%
 #   count(status, reason)
 
 # Drop bad respondents
+
+
 
 data_vehicle <- data %>%
   inner_join(
@@ -61,6 +63,7 @@ data_vehicle <- data %>%
   )
 
 nrow(data_vehicle)
+
 
 
 # Vehicle filtering ----
@@ -161,6 +164,6 @@ write_parquet(
   here(
     "data",
     "prolific_testing",
-    "choice_data_vehicle.parquet"
+    "choice_data_vehicle_round2_feb_26.parquet"
   )
 )

@@ -8,6 +8,7 @@ data_joint <- read_parquet(here(
   "dynata_prolific_joint",
   "data_joint_vehicle.parquet"
 ))
+
 # %>%
 # filter(vehicle_typesuv == 1) %>%
 # filter(!is.na(hhincome_num))
@@ -19,7 +20,7 @@ data <- data_joint %>%
     mileage = mileage / 10000, # 2 - 6
     age = age, # 2 - 8
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
-  )
+  ) %>% select (-psid)
 
 # glimpse(data)
 
