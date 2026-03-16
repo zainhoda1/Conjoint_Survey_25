@@ -1,14 +1,14 @@
 # After running both Dynata and Prolific
 source(here::here('code', 'setup.R'))
 
-# ----Load the data set----
+# Load the data set----
 data_joint <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
   "data_joint.parquet"
 ))
 
-# ----zipcode cleaning----
+# zipcode cleaning----
 df <- data_joint %>%
   mutate(
     home_zipcode = case_when(
@@ -26,14 +26,14 @@ df <- data_joint %>%
   # Remove Invalid ZIPs (NA or not 5 digits)
   filter(clean_zip %notin% c("NA", "00000"), nchar(clean_zip) == 5)
 
-# ---- Aggregation & Geocoding----
+# Aggregation & Geocoding----
 # Count respondents per ZIP code
 zip_counts_dynata <- df %>%
   filter(data_source == "dynata") %>%
   count(clean_zip, name = "respondent_count")
 
 zip_counts_prolific <- df %>%
-  filter(data_source == "prolific") %>%
+  filter(data_source %in% c("prolific", "prolific_round2")) %>%
   count(clean_zip, name = "respondent_count")
 
 # Join with zipcoder database to get Lat/Lon
@@ -45,7 +45,7 @@ geo_data_prolific <- zip_counts_prolific %>%
   inner_join(zipcodeR::zip_code_db, by = c("clean_zip" = "zipcode"))
 
 
-# ---- 4. Visualization ----
+# 4. Visualization ----
 
 # Retrieve US state boundaries for map context
 us_states <- map_data("state")
@@ -55,7 +55,13 @@ integer_breaks <- function(x) {
   unique(floor(pretty(x)))
 }
 
-## ---- prolific ----
+max_count <- max(
+  max(geo_data_prolific$respondent_count),
+  max(geo_data_dynata$respondent_count)
+)
+
+## prolific ----
+
 total_zips <- nrow(geo_data_prolific) # Number of unique ZIP codes
 total_respondents <- sum(geo_data_prolific$respondent_count)
 
@@ -82,10 +88,15 @@ map_prolific <- ggplot() +
     option = "viridis",
     name = "Respondent Count",
     # Force the scale to calculate integer-only breaks
+    limits = c(1, max_count),
     breaks = integer_breaks,
     guide = guide_colorbar(barwidth = 10, barheight = 0.5)
   ) +
-  scale_size_continuous(range = c(1, 8), guide = "none") + # Hide size legend
+  scale_size_continuous(
+    range = c(1, 3),
+    limits = c(1, max_count),
+    guide = "none"
+  ) + # Hide size legend
 
   # Map Theme adjustments
   theme_void() + # Removes axes and standard grid
@@ -120,7 +131,7 @@ map_prolific <- ggplot() +
     )
   )
 
-## ---- dynata ----
+## dynata ----
 total_zips <- nrow(geo_data_dynata) # Number of unique ZIP codes
 total_respondents <- sum(geo_data_dynata$respondent_count)
 map_dynata <- ggplot() +
@@ -146,10 +157,15 @@ map_dynata <- ggplot() +
     option = "viridis",
     name = "Respondent Count",
     # Force the scale to calculate integer-only breaks
+    limits = c(1, max_count),
     breaks = integer_breaks,
     guide = guide_colorbar(barwidth = 10, barheight = 0.5)
   ) +
-  scale_size_continuous(range = c(1, 8), guide = "none") + # Hide size legend
+  scale_size_continuous(
+    range = c(1, 3),
+    limits = c(1, max_count),
+    guide = "none"
+  ) + # Hide size legend
 
   # Map Theme adjustments
   theme_void() + # Removes axes and standard grid
@@ -184,7 +200,32 @@ map_dynata <- ggplot() +
     )
   )
 
-# --- 5. Output ---
+## combine
+## combine ----
+library(patchwork)
+
+# Strip title from both plots, keep subtitles
+map_prolific2 <- map_prolific +
+  labs(title = NULL) +
+  theme(legend.position = "bottom")
+
+map_dynata2 <- map_dynata +
+  labs(title = NULL) +
+  theme(legend.position = "bottom")
+
+# Combine with shared legend and overall title
+combined_map <- (map_prolific2 | map_dynata2) +
+  plot_layout(guides = "collect") +
+  plot_annotation(
+    title = "Geographic Distribution of Respondents",
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 16, hjust = 0.5)
+    )
+  ) &
+  theme(legend.position = "bottom")
+
+
+# 5. Output ----
 # print(map_prolific)
 # print(map_dynata)
 
@@ -205,3 +246,10 @@ ggsave(
   dpi = 300
 )
 
+ggsave(
+  paste0(path_images, "map_combined.png"),
+  plot = combined_map,
+  width = 14,
+  height = 5,
+  dpi = 300
+)

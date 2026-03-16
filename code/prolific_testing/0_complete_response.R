@@ -3,8 +3,6 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 # --------------------------------------------------------------------------
 # Load the data set:
 
-
-
 data_raw <- read_csv(here('data', 'prolific_testing', 'data_round2_feb_26.csv'))
 
 
@@ -145,17 +143,17 @@ write_parquet(
 # demos <- rbind(demos1, demos2) %>%
 #   rename(prolific_pid = participant_id)
 
-
-demos <-  read_csv(here(
+demos <- read_csv(here(
   'fielding',
   'prolific-feb-2026',
   'prolific-studies',
-  'prolific_demographic_export_69972f6c3f130386dee62c91.csv')) %>%
+  'prolific_demographic_export_69972f6c3f130386dee62c91.csv'
+)) %>%
   clean_names() %>%
   filter(status != 'SCREENED OUT') %>%
-  rename(prolific_pid = participant_id) %>% 
+  rename(prolific_pid = participant_id) %>%
   mutate(source = 'round2')
-  
+
 
 nrow(demos)
 
@@ -193,4 +191,3 @@ data_approval %>%
       "reject_round2.parquet"
     )
   )
-

@@ -79,14 +79,13 @@ att <- data %>%
   ) %>%
   mutate(across(
     starts_with("attitudes_"),
-    ~ case_match(
+    ~ recode_values(
       .,
-      "strongly_disagree" ~ 1,
-      "somewhat_disagree" ~ 2,
-      "neutral" ~ 3,
-      "somewhat_agree" ~ 4,
-      "strongly_agree" ~ 5,
-      .default = NA_integer_
+      "strongly_disagree" ~ 1L,
+      "somewhat_disagree" ~ 2L,
+      "neutral" ~ 3L,
+      "somewhat_agree" ~ 4L,
+      "strongly_agree" ~ 5L
     )
   ))
 

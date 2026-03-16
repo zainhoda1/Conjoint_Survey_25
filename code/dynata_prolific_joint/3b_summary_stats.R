@@ -20,6 +20,7 @@ data <- data %>%
       age_num >= 65 ~ "65+"
     ),
     hh_income_group = case_when(
+      is.na(hhincome_num) ~ "prefer_not_answer",
       hhincome_num <= 15000 ~ "< $15,000",
       hhincome_num <= 25000 ~ "$15,000 - $24,999",
       hhincome_num <= 45000 ~ "$25,000 - $49,999",
@@ -29,7 +30,6 @@ data <- data %>%
       TRUE ~ "$150,000+"
     )
   ) %>%
-  mutate() %>%
   mutate(
     age_group = factor(
       age_group,
@@ -44,13 +44,14 @@ data <- data %>%
         "$50,000 - $74,999",
         "$75,000 - $99,999",
         "$100,000 - $149,999",
-        "$150,000+"
+        "$150,000+",
+        "prefer_not_answer"
       )
     )
   )
 
-table(data$hh_income_group, data$data_source)
-table(data$age_group, data$data_source)
+table(data$hh_income_group, data$data_source, useNA = "ifany")
+table(data$age_group, data$data_source, useNA = "ifany")
 
 # ----summary_dt----
 summary_dt <- data %>%

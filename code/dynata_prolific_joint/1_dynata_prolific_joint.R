@@ -54,8 +54,10 @@ data_dynata_battery$respID <- data_dynata_battery$respID +
 data_dynata_battery$obsID <- data_dynata_battery$obsID +
   nrow(data_prolific_battery) / 4
 
-complete_first_run_vehicle <- nrow(data_prolific_vehicle) +nrow(data_dynata_vehicle)
-complete_first_run_battery <- nrow(data_prolific_battery) +nrow(data_dynata_battery)
+complete_first_run_vehicle <- nrow(data_prolific_vehicle) +
+  nrow(data_dynata_vehicle)
+complete_first_run_battery <- nrow(data_prolific_battery) +
+  nrow(data_dynata_battery)
 
 data_prolific_vehicle_round2$respID <- data_prolific_vehicle_round2$respID +
   complete_first_run_vehicle / 24
@@ -66,8 +68,14 @@ data_prolific_battery_round2$respID <- data_prolific_battery_round2$respID +
 data_prolific_battery_round2$obsID <- data_prolific_battery_round2$obsID +
   complete_first_run_battery / 4
 
-data_joint_vehicle <- rbind(rbind(data_prolific_vehicle, data_dynata_vehicle), data_prolific_vehicle_round2)
-data_joint_battery <- rbind(rbind(data_prolific_battery, data_dynata_battery), data_prolific_battery_round2) 
+data_joint_vehicle <- rbind(
+  rbind(data_prolific_vehicle, data_dynata_vehicle),
+  data_prolific_vehicle_round2
+)
+data_joint_battery <- rbind(
+  rbind(data_prolific_battery, data_dynata_battery),
+  data_prolific_battery_round2
+)
 
 write_parquet(
   data_joint_vehicle,
@@ -90,8 +98,12 @@ write_parquet(
 
 # --- DCE data set----
 psid_prolific <- unique(c(
-  data_joint_battery$psid[data_joint_battery$data_source %in% c( 'prolific', 'prolific_round2')],
-  data_joint_vehicle$psid[data_joint_vehicle$data_source %in% c( 'prolific', 'prolific_round2')]
+  data_joint_battery$psid[
+    data_joint_battery$data_source %in% c('prolific', 'prolific_round2')
+  ],
+  data_joint_vehicle$psid[
+    data_joint_vehicle$data_source %in% c('prolific', 'prolific_round2')
+  ]
 ))
 
 psid_dynata <- unique(c(
@@ -106,34 +118,36 @@ data_prolific <- read_parquet(here(
   "data",
   "prolific_testing",
   "data.parquet"
-))  %>%
-  mutate(data_source = "prolific") 
+)) %>%
+  mutate(data_source = "prolific")
 
-  
+
 data_prolific_round2 <- read_parquet(here(
   "data",
   "prolific_testing",
   "data_round2_feb26.parquet"
 )) %>%
-  mutate(data_source = "prolific_round2") 
+  mutate(data_source = "prolific_round2")
 
 
 #####
-#Duplicate check 
-test<- inner_join(data_prolific, data_prolific_round2, by= c('prolific_pid', 'respID'))
+#Duplicate check
+test <- inner_join(
+  data_prolific,
+  data_prolific_round2,
+  by = c('prolific_pid', 'respID')
+)
 nrow(test)
 
 #######
-
-data_prolific_both <- rbind(data_prolific, data_prolific_round2) %>% 
+# table(data_prolific$birth_year)
+data_prolific_both <- rbind(data_prolific, data_prolific_round2) %>%
   mutate(
     psid = prolific_pid,
     birth_year = as.numeric(birth_year)
   ) %>%
-  #select(-prolific_pid) %>% 
+  #select(-prolific_pid) %>%
   filter(psid %in% psid_prolific)
-
-  
 
 
 data_dynata <- read_parquet(here(
