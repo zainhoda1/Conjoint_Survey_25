@@ -38,8 +38,17 @@ data_raw_prolific_round2 <- read_parquet(here(
   select(-study_id, -prolific_session_id, -prolific_pid)
 
 
+data_joint %>% 
+  group_by( data_source) %>% 
+  count()
+
 #########
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 data <- data_joint %>%
   mutate(
     price = price / 10000, # 0.5-6
@@ -47,7 +56,7 @@ data <- data_joint %>%
     mileage = mileage / 10000, # 2 - 6
     age = age, # 2 - 8
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
-  )
+  ) 
 
 data_raw_joined <- rbind(
   rbind(data_raw_dynata, data_raw_prolific),
@@ -170,3 +179,53 @@ summary(wtp_model_positive_group_car)
 summary(wtp_model_negative_group_car)
 summary(wtp_model_positive_group_suv)
 summary(wtp_model_negative_group_suv)
+
+
+wtp_model_positive_group_car_low <- run_model_wtp(
+  positive_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
+)
+
+wtp_model_negative_group_car_low <- run_model_wtp(
+  negative_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
+)
+
+wtp_model_positive_group_car_high <- run_model_wtp(
+  positive_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 1 )
+)
+
+wtp_model_negative_group_car_high <- run_model_wtp(
+  negative_group_encoded %>% filter(vehicle_typesuv == 0,  budgethigh == 1 )
+)
+
+wtp_model_positive_group_suv_low <- run_model_wtp(
+  positive_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
+)
+
+wtp_model_negative_group_suv_low <- run_model_wtp(
+  negative_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
+)
+
+wtp_model_positive_group_suv_high <- run_model_wtp(
+  positive_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
+)
+
+wtp_model_negative_group_suv_high <- run_model_wtp(
+  negative_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
+)
+
+
+
+
+summary(wtp_model_positive_group_car_low)
+summary(wtp_model_negative_group_car_low)
+summary(wtp_model_positive_group_car_high)
+summary(wtp_model_negative_group_car_high)
+
+summary(wtp_model_positive_group_suv_low)
+summary(wtp_model_negative_group_suv_low)
+summary(wtp_model_positive_group_suv_high)
+summary(wtp_model_negative_group_suv_high)
+
+
+
+

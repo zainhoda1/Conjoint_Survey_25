@@ -19,8 +19,8 @@ data_approval <- read_parquet(here(
 
 survey_battery <- read_parquet(here(
   "data",
-  "shiny_download",
-  "survey_p_data",
+  "doe",
+  "02-06-26",
   'design_battery.parquet'
 ))
 

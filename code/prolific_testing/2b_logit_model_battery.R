@@ -6,7 +6,7 @@ source(here::here('code', 'setup.R'))
 data <- read_parquet(here(
   "data",
   "prolific_testing",
-  "choice_data_battery.parquet"
+  "choice_data_battery_round2_feb_26.parquet"
 ))
 
 

@@ -13,6 +13,11 @@ data_joint <- read_parquet(here(
 # filter(vehicle_typesuv == 1) %>%
 # filter(!is.na(hhincome_num))
 
+data_joint %>%
+  group_by(data_source) %>%
+  count()
+
+
 data <- data_joint %>%
   mutate(
     price = price / 10000, # 0.5-6
@@ -30,6 +35,12 @@ data <- cbc_encode(
   coding = 'dummy',
   ref_levels = list(powertrain = 'gas', vehicle_type = 'car', budget = 'low')
 )
+
+
+data %>%
+  group_by(data_source) %>%
+  count()
+
 
 ## grouping
 # data %>%
@@ -111,6 +122,21 @@ run_model_wtp <- function(data) {
 # Estimate the model
 #model_car <- run_model(data %>% filter(vehicle_typesuv == 0))
 #model_suv <- run_model(data %>% filter(vehicle_typesuv == 1))
+
+model_car_prolific_r1 <- run_model(data
+                                   %>% filter(vehicle_typesuv == 0,
+                                              data_sourcedynata == 0,
+                                              data_sourceprolific_round2 == 0)
+                                   )
+
+
+model_car_prolific_r2 <- run_model(data %>% filter(vehicle_typesuv == 0,
+                                                   data_sourcedynata == 0,
+                                                   data_sourceprolific_round2 == 1)
+                                   )
+
+summary(model_car_prolific_r1)
+summary(model_car_prolific_r2)
 
 model_car_low <- run_model(
   data %>% filter(vehicle_typesuv == 0 & budgethigh == 0)
@@ -237,4 +263,8 @@ conf_model_car_high
 conf_model_suv_low
 
 conf_model_suv_high
+
+#######################
+
+
 

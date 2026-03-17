@@ -19,8 +19,8 @@ data_approval <- read_parquet(here(
 
 survey_vehicle <- read_parquet(here(
   "data",
-  "shiny_download",
-  "survey_p_data",
+  "doe",
+  "02-06-26",
   'design_vehicle.parquet'
 ))
 nrow(data_raw)
@@ -167,3 +167,4 @@ write_parquet(
     "choice_data_vehicle_round2_feb_26.parquet"
   )
 )
+
