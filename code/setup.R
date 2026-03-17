@@ -35,3 +35,23 @@ invisible(lapply(pkgs, library, character.only = TRUE))
 
 # Change dplyr settings so I can view all columns
 options(dplyr.width = Inf)
+
+create_confidence_intervals <- function(model) {
+  # Description:
+  # This function takes logit model and returns confidence interval.
+  
+  coefs <- coef(model)
+  # Get the model coefficients and covariance matrix
+  covariance <- vcov(model)
+  
+  # Take 10,000 draws of the coefficients
+  coef_draws <- as.data.frame(MASS::mvrnorm(10^4, coefs, covariance))
+  
+  # Compute WTP for each coefficient draw
+  wtp_draws = -1 * (coef_draws[,] / coef_draws[, 'price'])
+  
+  # For each coefficient, get the mean and 95% confidence interval of WTP
+  wtp_ci <- ci(wtp_draws, level = 0.95)
+  
+  return(wtp_ci)
+}

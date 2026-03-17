@@ -109,9 +109,25 @@ run_model_wtp <- function(data) {
 }
 
 # Estimate the model
-model_car <- run_model(data %>% filter(vehicle_typesuv == 0))
-model_suv <- run_model(data %>% filter(vehicle_typesuv == 1))
-# model_car_low <- run_model(data_car_low)
+#model_car <- run_model(data %>% filter(vehicle_typesuv == 0))
+#model_suv <- run_model(data %>% filter(vehicle_typesuv == 1))
+
+model_car_low <- run_model(
+  data %>% filter(vehicle_typesuv == 0 & budgethigh == 0)
+  )
+
+model_car_high <- run_model(
+  data %>% filter(vehicle_typesuv == 0 & budgethigh == 1)
+)
+
+model_suv_low <- run_model(
+  data %>% filter(vehicle_typesuv == 1 & budgethigh == 0)
+)
+
+model_suv_high <- run_model(
+  data %>% filter(vehicle_typesuv == 1 & budgethigh == 1)
+)
+
 # model_car_high <- run_model(data_car_high)
 # model_suv_low <- run_model(data_suv_low)
 # model_suv_high <- run_model(data_suv_high)
@@ -123,6 +139,8 @@ wtp_model_dynata <- run_model_wtp(data %>% filter(data_sourcedynata == 1))
 wtp_model_prolific <- run_model_wtp(data %>% filter(data_sourcedynata == 0))
 wtp_model_car <- run_model_wtp(data %>% filter(vehicle_typesuv == 0))
 wtp_model_suv <- run_model_wtp(data %>% filter(vehicle_typesuv == 1))
+
+
 wtp_model_car_low <- run_model_wtp(
   data %>% filter(vehicle_typesuv == 0 & budgethigh == 0)
 )
@@ -138,10 +156,10 @@ wtp_model_suv_high <- run_model_wtp(
 wtp_model_all <- run_model_wtp(data)
 
 ### View summary of results
-summary(model_car)
+#summary(model_car)
 # summary(model_car_low)
 # summary(model_car_high)
-summary(model_suv)
+#summary(model_suv)
 # summary(model_suv_low)
 # summary(model_suv_high)
 # summary(model_all)
@@ -156,3 +174,67 @@ summary(wtp_model_car_high)
 summary(wtp_model_suv_low)
 summary(wtp_model_suv_high)
 summary(wtp_model_all)
+
+######################################
+
+# Save model object
+
+save(
+  model_car_low,
+  file = here("models", "model_car_low.RData")
+)
+
+save(
+  model_car_high,
+  file = here("models", "model_car_high.RData")
+)
+
+save(
+  model_suv_low,
+  file = here("models", "model_suv_low.RData")
+)
+
+save(
+  model_suv_high,
+  file = here("models", "model_suv_high.RData")
+)
+
+save(
+  wtp_model_car_low,
+  file = here("models", "wtp_model_car_low.RData")
+)
+
+save(
+  wtp_model_car_high,
+  file = here("models", "wtp_model_car_high.RData")
+)
+
+save(
+  wtp_model_suv_low,
+  file = here("models", "wtp_model_suv_low.RData")
+)
+
+save(
+  wtp_model_suv_high,
+  file = here("models", "wtp_model_suv_high.RData")
+)
+
+
+
+#####################
+
+#Generate confidence intervals:
+  
+conf_model_car_low <- create_confidence_intervals(model_car_low)
+conf_model_car_high <- create_confidence_intervals(model_car_high)
+conf_model_suv_low <- create_confidence_intervals(model_suv_low)
+conf_model_suv_high <- create_confidence_intervals(model_suv_high)
+
+conf_model_car_low
+
+conf_model_car_high
+
+conf_model_suv_low
+
+conf_model_suv_high
+
