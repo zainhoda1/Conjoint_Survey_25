@@ -2,6 +2,26 @@ rm(list = ls())
 
 source(here::here('code', 'setup.R'))
 
+data_model <- read_parquet(here(
+  "data",
+  "dynata_prolific_joint",
+  "data_apollo_vehicle.parquet"
+)) %>%
+  filter(
+    !is.na(hhincome_num) &
+      !is.na(FA_EV_benefit) &
+      !is.na(FA_EV_anxiety) &
+      !is.na(hhincome_num_10k) &
+      !is.na(EV_charger) &
+      !is.na(EV_neighbor) &
+      !is.na(knowledge_ev) &
+      !is.na(knowledge_subsidy) &
+      !is.na(Veh_hh_count) &
+      !is.na(Veh_hh_fuel) &
+      !is.na(Veh_primary_refuel_monthly) &
+      !is.na(Veh_primary_range)
+  )
+
 ### ----Latent class (c=3)----
 # Create an empty list to store the results of each model run
 model_results <- list()
@@ -12,16 +32,8 @@ apollo_initialise()
 
 # Define core controls
 ### CAR
-# apollo_control = list(
-#   modelName = paste0("car_lc_3c_indicator_", i),
-#   modelDescr = "LC model with 3 classes with indicator",
-#   indivID = "respID",
-#   nCores = 2,
-#   panelData = TRUE,
-#   outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
-# )
 apollo_control = list(
-  modelName = paste0("standard_car_lc_3c_indicator_", i),
+  modelName = paste0("car_lc_3c_indicator_", i),
   modelDescr = "LC model with 3 classes with indicator",
   indivID = "respID",
   nCores = 2,
@@ -29,14 +41,8 @@ apollo_control = list(
   outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
 )
 
-database <- read_parquet(here(
-  "data",
-  "dynata_prolific_joint",
-  "data_apollo_vehicle.parquet"
-)) %>%
-  filter(vehicle_typesuv == 0) %>%
-  filter(!is.na(hhincome_num))
-
+database <- data_model %>%
+  filter(vehicle_typesuv == 0)
 ### SUV
 
 # apollo_control = list(
@@ -48,13 +54,8 @@ database <- read_parquet(here(
 #   outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
 # )
 #
-# database <- read_parquet(here(
-#   "data",
-#   "dynata_prolific_joint",
-#   "data_apollo_vehicle.parquet"
-# )) %>%
-#   filter(vehicle_typesuv == 1) %>%
-#   filter(!is.na(hhincome_num))
+# database <- data_model %>%
+# filter(vehicle_typesuv == 1)
 
 ### Vector of parameters, including any that are kept fixed in estimation
 apollo_beta = c(
@@ -94,6 +95,10 @@ apollo_beta = c(
   gamma_ev_neighbor_a = 0,
   gamma_knowledge_ev_a = 0,
   gamma_knowledge_subsidy_a = 0,
+  gamma_veh_count_a = 0,
+  gamma_veh_has_bev_a = 0,
+  gamma_veh_refuel_a = 0,
+  gamma_veh_range_a = 0,
   delta_b = 0.1,
   gamma_EV_benefit_b = 0.1,
   gamma_EV_anxiety_b = 0.1,
@@ -102,6 +107,10 @@ apollo_beta = c(
   gamma_ev_neighbor_b = 0.1,
   gamma_knowledge_ev_b = 0.1,
   gamma_knowledge_subsidy_b = 0.1,
+  gamma_veh_count_b = 0,
+  gamma_veh_has_bev_b = 0,
+  gamma_veh_refuel_b = 0,
+  gamma_veh_range_b = 0,
   delta_c = 0.2,
   gamma_EV_benefit_c = 0.2,
   gamma_EV_anxiety_c = 0.2,
@@ -109,7 +118,11 @@ apollo_beta = c(
   gamma_hhincome_c = 0.2,
   gamma_ev_neighbor_c = 0.2,
   gamma_knowledge_ev_c = 0.2,
-  gamma_knowledge_subsidy_c = 0.2
+  gamma_knowledge_subsidy_c = 0.2,
+  gamma_veh_count_c = 0,
+  gamma_veh_has_bev_c = 0,
+  gamma_veh_refuel_c = 0,
+  gamma_veh_range_c = 0
 )
 
 ### Vector with names (in quotes) of parameters to be kept fixed at their starting value in apollo_beta, use apollo_beta_fixed = c() if none
@@ -121,21 +134,44 @@ apollo_fixed = c(
   "gamma_ev_charge_a",
   "gamma_ev_neighbor_a",
   "gamma_knowledge_ev_a",
-  "gamma_knowledge_subsidy_a"
-  # "gamma_ev_charge_b",
-  # "gamma_ev_neighbor_b",
-  # "gamma_knowledge_ev_b",
-  # "gamma_knowledge_subsidy_b",
-  # "gamma_ev_charge_c",
-  # "gamma_ev_neighbor_c",
-  # "gamma_knowledge_ev_c",
-  # "gamma_knowledge_subsidy_c"
-  # "gamma_used_bev_b",
-  # "gamma_EV_benefit_b",
-  # "gamma_EV_anxiety_b",
-  # "gamma_used_bev_c"
-  # "gamma_EV_benefit_c",
-  # "gamma_EV_anxiety_c"
+  "gamma_knowledge_subsidy_a",
+  "gamma_veh_count_a",
+  "gamma_veh_has_bev_a",
+  "gamma_veh_refuel_a",
+  "gamma_veh_range_a",
+
+  "gamma_EV_benefit_b",
+  "gamma_EV_anxiety_b",
+  "gamma_hhincome_b",
+  "gamma_ev_charge_b",
+  "gamma_ev_neighbor_b",
+  "gamma_knowledge_ev_b",
+  "gamma_knowledge_subsidy_b",
+  "gamma_veh_count_b",
+  "gamma_veh_has_bev_b",
+  "gamma_veh_refuel_b",
+  "gamma_veh_range_b",
+
+  "gamma_EV_benefit_c",
+  "gamma_EV_anxiety_c",
+  "gamma_hhincome_c",
+  "gamma_ev_charge_c",
+  "gamma_ev_neighbor_c",
+  "gamma_knowledge_ev_c",
+  "gamma_knowledge_subsidy_c",
+  "gamma_veh_count_c",
+  "gamma_veh_has_bev_c",
+  "gamma_veh_refuel_c",
+  "gamma_veh_range_c"
+
+  # "gamma_veh_count_b",
+  # "gamma_veh_count_c",
+  # "gamma_veh_has_bev_b",
+  # "gamma_veh_has_bev_c",
+  # "gamma_veh_refuel_b",
+  # "gamma_veh_range_b",
+  # "gamma_veh_refuel_c",
+  # "gamma_veh_range_c"
 )
 
 # apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
@@ -144,7 +180,7 @@ apollo_fixed = c(
 apollo_beta = apollo_readBeta(
   apollo_beta,
   apollo_fixed,
-  "lc_3c_indicator_1",
+  "standard_car_lc_3c_indicator_1",
   overwriteFixed = FALSE
 )
 
@@ -182,7 +218,11 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_ev_charge_a * (EV_charger == "yes") +
     gamma_ev_neighbor_a * (EV_neighbor == "yes") +
     gamma_knowledge_ev_a * (knowledge_ev == 1) +
-    gamma_knowledge_subsidy_a * (knowledge_subsidy == 1)
+    gamma_knowledge_subsidy_a * (knowledge_subsidy == 1) +
+    gamma_veh_count_a * Veh_hh_count +
+    gamma_veh_has_bev_a * (Veh_hh_fuel == "has_bev") +
+    gamma_veh_refuel_a * Veh_primary_refuel_monthly +
+    gamma_veh_range_a * (Veh_primary_range / 100)
 
   V[["class_b"]] = delta_b +
     gamma_EV_benefit_b * FA_EV_benefit +
@@ -191,7 +231,11 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_ev_charge_b * (EV_charger == "yes") +
     gamma_ev_neighbor_b * (EV_neighbor == "yes") +
     gamma_knowledge_ev_b * (knowledge_ev == 1) +
-    gamma_knowledge_subsidy_b * (knowledge_subsidy == 1)
+    gamma_knowledge_subsidy_b * (knowledge_subsidy == 1) +
+    gamma_veh_count_b * Veh_hh_count +
+    gamma_veh_has_bev_b * (Veh_hh_fuel == "has_bev") +
+    gamma_veh_refuel_b * Veh_primary_refuel_monthly +
+    gamma_veh_range_b * (Veh_primary_range / 100)
 
   V[["class_c"]] = delta_c +
     gamma_EV_benefit_c * FA_EV_benefit +
@@ -200,7 +244,11 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_ev_charge_c * (EV_charger == "yes") +
     gamma_ev_neighbor_c * (EV_neighbor == "yes") +
     gamma_knowledge_ev_c * (knowledge_ev == 1) +
-    gamma_knowledge_subsidy_c * (knowledge_subsidy == 1)
+    gamma_knowledge_subsidy_c * (knowledge_subsidy == 1) +
+    gamma_veh_count_c * Veh_hh_count +
+    gamma_veh_has_bev_c * (Veh_hh_fuel == "has_bev") +
+    gamma_veh_refuel_c * Veh_primary_refuel_monthly +
+    gamma_veh_range_c * (Veh_primary_range / 100)
 
   ### Settings for class allocation models
   classAlloc_settings = list(
@@ -339,149 +387,3 @@ apollo_saveOutput(
   model_final,
   saveOutput_settings = list(printPVal = 2)
 )
-
-
-##### POST-PROCESSING
-
-### Print outputs of additional diagnostics to new output file (remember to close file writing when complete)
-# apollo_sink()
-
-#---- OUT OF SAMPLE TESTING
-
-# apollo_outOfSample(
-#   apollo_beta,
-#   apollo_fixed,
-#   apollo_probabilities,
-#   apollo_inputs
-# )
-
-#---- BOOTSTRAP ESTIMATION
-
-# apollo_bootstrap(
-#   apollo_beta,
-#   apollo_fixed,
-#   apollo_probabilities,
-#   apollo_inputs,
-#   bootstrap_settings = list(nRep = 3)
-# )
-
-####### POSTERIOR ANALYSIS
-
-### Compute unconditional estimates (averaged over classes) of parameters.
-### Unconditional means averaged across classes using the population-level class probabilities
-unconditionals = apollo_unconditionals(
-  model_final,
-  apollo_probabilities,
-  apollo_inputs
-)
-
-
-# computes value of travel time (VTT) for each class (ratio of beta_tt to beta_tc).
-## for each class
-
-# List of attributes for which we want WTP
-attributes <- c(
-  "no_choice",
-  "powertrainbev",
-  "powertrainhev",
-  "range_bev",
-  "mileage",
-  "age",
-  "operating_cost"
-)
-
-# Number of classes
-n_classes <- length(unconditionals[["pi_values"]])
-
-# Create an empty list to store WTPs
-wtp_list <- list()
-
-# Loop over attributes
-for (attr in attributes) {
-  wtp_attr <- numeric(n_classes) # store class-specific WTP
-  for (class in 1:n_classes) {
-    beta_attr <- unconditionals[[paste0("b_", attr)]][[class]]
-    beta_price <- unconditionals[["b_price"]][[class]]
-    wtp_attr[class] <- beta_attr / (-beta_price) # WTP = beta_attr / beta_price
-  }
-  wtp_list[[attr]] <- wtp_attr
-}
-
-# Convert to a data frame for easy viewing
-wtp_df <- as.data.frame(wtp_list)
-rownames(wtp_df) <- paste0("class_", 1:n_classes)
-wtp_df
-
-### Compute conditional class probability that each individual belongs to each class, given their observed choices
-### Conditional means individualized using each person’s posterior
-### These conditional probabilities let you assign individuals to classes or at least identify which class they’re more likely to belong to.
-conditionals = apollo_conditionals(
-  model_final,
-  apollo_probabilities,
-  apollo_inputs
-)
-
-conditionals_fixed <- conditionals %>%
-  mutate(
-    class_allocation = case_when(
-      pmax(X1, X2, X3) == X1 ~ "X1",
-      pmax(X1, X2, X3) == X2 ~ "X2",
-      pmax(X1, X2, X3) == X3 ~ "X3"
-    )
-  )
-
-data_output <- database %>%
-  left_join(
-    conditionals_fixed %>% select(ID, class_allocation),
-    by = c("respID" = "ID")
-  )
-
-## class_character
-num_vars <- data_output %>%
-  select(where(is.numeric)) %>%
-  names()
-# colnames(database)
-
-num_vars_active <- c(
-  "FA_EV_benefit",
-  "FA_EV_anxiety",
-  "hhincome_num_10k",
-  "ATT_EVB_environment",
-  "ATT_EVB_function",
-  "next_veh_budget",
-  "next_veh_fuel_used_bev"
-)
-cate_vars_active <- c(
-  "knowledge_ev",
-  "knowledge_subsidy",
-  "EV_charger",
-  "EV_neighbor"
-)
-
-num_summary <- data_output %>%
-  group_by(class_allocation) %>%
-  summarise(
-    across(
-      all_of(num_vars_active), # replace with your variable names
-      ~ mean(.x, na.rm = TRUE)
-    ),
-    .groups = "drop"
-  )
-
-cat_summary <- data_output %>%
-  mutate(
-    knowledge_ev = as.character(knowledge_ev),
-    knowledge_subsidy = as.character(knowledge_subsidy)
-  ) %>%
-  group_by(class_allocation) %>%
-  summarise(
-    across(
-      all_of(cate_vars_active),
-      ~ mean(as.numeric(.x %in% c("yes", "1")), na.rm = TRUE),
-      .names = "{.col}_share_yes"
-    ),
-    .groups = "drop"
-  )
-
-class_character <- class_character <- num_summary %>%
-  left_join(cat_summary, by = "class_allocation")

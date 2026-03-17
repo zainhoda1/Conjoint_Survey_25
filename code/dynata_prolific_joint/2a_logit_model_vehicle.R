@@ -9,6 +9,13 @@ data_joint <- read_parquet(here(
   "data_joint_vehicle.parquet"
 ))
 
+data_joint <- read_parquet(here(
+  "data",
+  "dynata_prolific_joint",
+  "data_joint_vehicle.parquet"
+)) %>%
+  filter(data_source == "prolific_round2")
+
 # %>%
 # filter(vehicle_typesuv == 1) %>%
 # filter(!is.na(hhincome_num))
@@ -25,7 +32,8 @@ data <- data_joint %>%
     mileage = mileage / 10000, # 2 - 6
     age = age, # 2 - 8
     operating_cost = operating_cost / 10 # 0.3 - 2.5,
-  ) %>% select (-psid)
+  ) %>%
+  select(-psid)
 
 # glimpse(data)
 
@@ -70,11 +78,11 @@ run_model <- function(data) {
   return(model)
 }
 
-data <- data %>%
-  mutate(
-    price_dynata = price * data_sourcedynata,
-    bev_dynata = powertrainbev * data_sourcedynata
-  )
+# data <- data %>%
+#   mutate(
+#     price_dynata = price * data_sourcedynata,
+#     bev_dynata = powertrainbev * data_sourcedynata
+#   )
 
 run_model_datasource <- function(data) {
   model <- logitr(
@@ -157,7 +165,7 @@ model_suv_high <- run_model(
 # model_car_high <- run_model(data_car_high)
 # model_suv_low <- run_model(data_suv_low)
 # model_suv_high <- run_model(data_suv_high)
-# model_all <- run_model(data)
+model_all <- run_model(data)
 
 model_datasource <- run_model_datasource(data)
 
@@ -188,7 +196,7 @@ wtp_model_all <- run_model_wtp(data)
 #summary(model_suv)
 # summary(model_suv_low)
 # summary(model_suv_high)
-# summary(model_all)
+summary(model_all)
 # summary(model_datasource)
 
 summary(wtp_model_dynata)

@@ -41,13 +41,14 @@ data_dce <- read_parquet(here(
 #
 # n_distinct(data_dce$respID)
 
-data_variable <- read_parquet(here(
+data_variable_full <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
   "data_clean_variables.parquet"
-))
+)) %>%
+  select(-starts_with("time_"))
 
-data_variable <- data_variable %>%
+data_variable <- data_variable_full %>%
   select(
     psid,
     next_veh_budget,
@@ -56,7 +57,7 @@ data_variable <- data_variable %>%
     starts_with("ATT_"),
     starts_with("FA_"),
     starts_with("knowledge_"),
-    Veh_hh_fuel,
+    starts_with("Veh_"),
     starts_with("EV_"),
     starts_with("next_veh_fuel_")
   ) %>%
@@ -150,6 +151,7 @@ data_covariate_num <- data_covariate %>%
       any_of(c(
         "ATT_EVB_environment",
         "ATT_EVB_function",
+        "ATT_price_sensitive",
         "ATT_techsavvy",
         "ATT_risktaker"
       )),
@@ -177,6 +179,14 @@ data_covariate_num <- data_covariate %>%
         grepl("very_likely", ., ignore.case = TRUE) ~ 5,
         TRUE ~ NA
       )
+    ),
+    ATT_climate = case_when(
+      grepl("not_at_all", ATT_climate, ignore.case = TRUE) ~ 1,
+      grepl("a_little", ATT_climate, ignore.case = TRUE) ~ 2,
+      grepl("moderate", ATT_climate, ignore.case = TRUE) ~ 3,
+      grepl("a_lot", ATT_climate, ignore.case = TRUE) ~ 4,
+      grepl("great_deal", ATT_climate, ignore.case = TRUE) ~ 5,
+      TRUE ~ NA
     )
   )
 
@@ -208,6 +218,7 @@ data_covariate_dummy <- cbc_encode(
     ATT_EVB_function = 'neutral',
     ATT_techsavvy = 'neutral',
     ATT_risktaker = 'neutral',
+    ATT_price_sensitive = 'neutral',
     ATT_climate = 'not_at_all',
     ATT_political = 'conservative',
     ATT_voting = 'democratic',
@@ -222,18 +233,13 @@ data_covariate_dummy <- cbc_encode(
 ) %>%
   as.data.frame()
 
-### Loading data from package
+
 database_all = data_covariate_num %>%
   filter(
     !is.na(next_veh_fuel_used_bev) &
       !is.na(FA_EV_benefit) &
       !is.na(FA_EV_anxiety) &
       !is.na(hhincome_num)
-  ) %>%
-  mutate(
-    log_veh_price_1 = log(price_1),
-    log_veh_price_2 = log(price_2),
-    log_veh_price_3 = log(price_3)
   )
 
 write_parquet(

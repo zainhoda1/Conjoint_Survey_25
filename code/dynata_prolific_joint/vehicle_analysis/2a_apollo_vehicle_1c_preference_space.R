@@ -194,5 +194,7 @@ for (i in c(
   wtp_result_full[[i]] <- apollo_deltaMethod(model_final, deltaMethod_settings)
 }
 
-wtp_final <- unname(sapply(wtp_result_full, function(x) x[[1]]))
-wtp_final
+wtp_final <- sapply(wtp_result_full, function(x) x[[1]] * (-1))
+
+# wtp_final_car <- wtp_final
+wtp_final_suv <- wtp_final

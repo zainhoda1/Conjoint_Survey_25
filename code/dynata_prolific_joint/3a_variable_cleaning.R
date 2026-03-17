@@ -118,7 +118,7 @@ fit <- factanal(
 )
 
 
-print(fit, digits = 2, cutoff = 0.3, sort = TRUE)
+# print(fit, digits = 2, cutoff = 0.3, sort = TRUE)
 
 l <- fit$loadings
 # l<-fit_oblimin$loadings
@@ -150,6 +150,7 @@ data <- data %>%
     ATT_EVB_function = attitudes_2_a_ev_battery_function,
     ATT_techsavvy = attitudes_2_b_tech_savvy,
     ATT_risktaker = attitudes_2_b_risk_taker,
+    ATT_price_sensitive = attitudes_2_b_price_sensitive,
     ATT_climate = climate_change,
     ATT_political = political_view,
     ATT_voting = party_voting
@@ -178,10 +179,17 @@ data <- data %>%
   mutate(
     Veh_hh_count = household_veh_count,
     Veh_hh_fuel = case_when(
-      household_veh_fuel == "other" ~ "other",
-      household_veh_fuel == "icev" ~ "icev_only",
-      str_detect(household_veh_fuel, "icev") ~ "ev_mix",
-      T ~ "ev_only"
+      is.na(household_veh_fuel) ~ NA,
+      household_veh_count == 0 ~ "no_vehicle",
+      # any BEV in household → highest priority
+      str_detect(household_veh_fuel, "bev") ~ "has_bev",
+      # HEV/PHEV but no BEV
+      str_detect(household_veh_fuel, "phev") |
+        str_detect(household_veh_fuel, "hev") ~ "has_phev_hev",
+      # pure ICEV
+      str_detect(household_veh_fuel, "icev") ~ "icev_only",
+      # catch-all: "other", unknown
+      TRUE ~ "other"
     ),
     EV_charger = charger_access,
     EV_neighbor = neighbor_ev_info,
@@ -189,7 +197,15 @@ data <- data %>%
     Veh_primary_fuel = case_when(
       is.na(primary_veh_fuel) ~ household_veh_fuel,
       T ~ primary_veh_fuel
-    )
+    ),
+    Veh_primary_fuel = case_when(
+      Veh_primary_fuel == "bev" ~ "bev",
+      str_detect(Veh_primary_fuel, "phev") |
+        str_detect(Veh_primary_fuel, "hev") ~ "phev_hev",
+      TRUE ~ "icev"
+    ),
+    Veh_primary_refuel_monthly = primary_veh_refuel,
+    Veh_primary_range = primary_veh_range
   )
 
 # ----Information treatment----
