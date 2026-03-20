@@ -51,6 +51,7 @@ data_variable_full <- read_parquet(here(
 data_variable <- data_variable_full %>%
   select(
     psid,
+    data_source,
     next_veh_budget,
     ends_with("_num"),
     ends_with("_cate"),

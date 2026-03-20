@@ -11,7 +11,7 @@ i = 1
 # Define core controls
 ### CAR
 apollo_control = list(
-  modelName = paste0("preference_car_lc_1c_indicator_", i),
+  modelName = paste0("car_lc_1c_", i),
   modelDescr = "LC model with 1 classes with indicator",
   indivID = "respID",
   nCores = 2,

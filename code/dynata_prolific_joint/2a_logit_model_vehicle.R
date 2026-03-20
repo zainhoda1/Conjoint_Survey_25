@@ -41,14 +41,18 @@ data <- data_joint %>%
 data <- cbc_encode(
   data,
   coding = 'dummy',
-  ref_levels = list(powertrain = 'gas', vehicle_type = 'car', budget = 'low')
+  ref_levels = list(
+    powertrain = 'gas',
+    vehicle_type = 'car',
+    budget = 'low',
+    data_source = 'prolific'
+  )
 )
 
 
-data %>%
-  group_by(data_source) %>%
-  count()
-
+# data %>%
+#   group_by(data_source) %>%
+#   count()
 
 ## grouping
 # data %>%
@@ -78,11 +82,11 @@ run_model <- function(data) {
   return(model)
 }
 
-# data <- data %>%
-#   mutate(
-#     price_dynata = price * data_sourcedynata,
-#     bev_dynata = powertrainbev * data_sourcedynata
-#   )
+data <- data %>%
+  mutate(
+    price_dynata = price * data_sourcedynata,
+    bev_dynata = powertrainbev * data_sourcedynata
+  )
 
 run_model_datasource <- function(data) {
   model <- logitr(
@@ -131,24 +135,31 @@ run_model_wtp <- function(data) {
 #model_car <- run_model(data %>% filter(vehicle_typesuv == 0))
 #model_suv <- run_model(data %>% filter(vehicle_typesuv == 1))
 
-model_car_prolific_r1 <- run_model(data
-                                   %>% filter(vehicle_typesuv == 0,
-                                              data_sourcedynata == 0,
-                                              data_sourceprolific_round2 == 0)
-                                   )
+model_car_prolific_r1 <- run_model(
+  data %>%
+    filter(
+      vehicle_typesuv == 0,
+      data_sourcedynata == 0,
+      data_sourceprolific_round2 == 0
+    )
+)
 
 
-model_car_prolific_r2 <- run_model(data %>% filter(vehicle_typesuv == 0,
-                                                   data_sourcedynata == 0,
-                                                   data_sourceprolific_round2 == 1)
-                                   )
+model_car_prolific_r2 <- run_model(
+  data %>%
+    filter(
+      vehicle_typesuv == 0,
+      data_sourcedynata == 0,
+      data_sourceprolific_round2 == 1
+    )
+)
 
 summary(model_car_prolific_r1)
 summary(model_car_prolific_r2)
 
 model_car_low <- run_model(
   data %>% filter(vehicle_typesuv == 0 & budgethigh == 0)
-  )
+)
 
 model_car_high <- run_model(
   data %>% filter(vehicle_typesuv == 0 & budgethigh == 1)
@@ -254,11 +265,10 @@ save(
 )
 
 
-
 #####################
 
 #Generate confidence intervals:
-  
+
 conf_model_car_low <- create_confidence_intervals(model_car_low)
 conf_model_car_high <- create_confidence_intervals(model_car_high)
 conf_model_suv_low <- create_confidence_intervals(model_suv_low)
@@ -273,6 +283,3 @@ conf_model_suv_low
 conf_model_suv_high
 
 #######################
-
-
-
