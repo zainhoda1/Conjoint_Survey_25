@@ -64,7 +64,8 @@ create_confidence_intervals <- function(model) {
     )
 
   # For each coefficient, get the mean and 95% confidence interval of WTP
-  wtp_ci <- ci(wtp_draws, level = 0.95)
+  wtp_ci <- ci(wtp_draws, level = 0.95)%>%
+    mutate(across(everything(), ~ round(.x, 2)))
 
   return(wtp_ci)
 }
