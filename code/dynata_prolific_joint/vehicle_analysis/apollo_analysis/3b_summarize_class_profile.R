@@ -93,11 +93,17 @@ sig <- read.csv(here(
 # R
 # Compute probability-weighted summaries for a model and return tidy long table
 
-# model <- suv_lc_3c
+model <- suv_lc_3c
+db <- database %>%
+  filter(vehicle_typesuv == 1)
+apollo_probabilities <- suv_lc_3c_apollo_probabilities
+apollo_inputs <- suv_lc_3c_apollo_inputs
+
+# model <- car_lc_3c
 # db <- database %>%
-#   filter(vehicle_typesuv == 1)
-# apollo_probabilities <- suv_lc_3c_apollo_probabilities
-# apollo_inputs <- suv_lc_3c_apollo_inputs
+#   filter(vehicle_typesuv == 0)
+# apollo_probabilities <- car_lc_3c_apollo_probabilities
+# apollo_inputs <- car_lc_3c_apollo_inputs
 
 summarize_lc_model <- function(
   model,
@@ -145,7 +151,9 @@ summarize_lc_model <- function(
       relocate(variable)
   )
   wtp_df <- bind_rows(wtp_df, new_rows)
-
+  #
+  k = 2
+  v = "FA_EV_benefit"
   # Numeric summaries
   num_summary <- map_dfr(num_vars, function(v) {
     map_dbl(1:n_classes, function(k) {
@@ -476,7 +484,16 @@ summarize_class_size <- function(
     ) %>%
     ungroup() %>%
     mutate(
-      class_name = c("BEV-adverse", "BEV-skeptical", "BEV-ready")
+      class = case_when(
+        class == "1" ~ "1",
+        class == "2" ~ "3",
+        class == "3" ~ "2",
+        TRUE ~ class
+      )
+    ) %>%
+    arrange(class) %>%
+    mutate(
+      class_name = c("BEV-adverse", "BEV-skeptical", "BEV-open")
     ) %>%
     mutate(
       class_label = paste0(
@@ -503,6 +520,7 @@ car_size <- summarize_class_size(
   car_lc_3c_apollo_probabilities,
   car_lc_3c_apollo_inputs
 )
+
 suv_size <- summarize_class_size(
   suv_lc_3c,
   suv_lc_3c_apollo_probabilities,
@@ -521,7 +539,7 @@ gt_car_suv_lc_3c <- gt_formatted %>%
   group_by(section) %>%
   gt(rowname_col = "label") %>%
   tab_header(
-    title = md("**Latent Class Profile Summary**"),
+    title = md("**Used Vehicle Valuation: Latent Class Profile Summary**"),
     subtitle = md("Probability-weighted means by class · Cars & SUVs")
   ) %>%
   tab_spanner(label = md("**Car**"), columns = all_of(car_cols)) %>%

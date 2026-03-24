@@ -452,7 +452,16 @@ summarize_class_size <- function(
     ) %>%
     ungroup() %>%
     mutate(
-      class_name = c("BEV-adverse", "BEV-skeptical", "BEV-ready")
+      class = case_when(
+        class == "1" ~ "3",
+        class == "2" ~ "1",
+        class == "3" ~ "2",
+        TRUE ~ class
+      )
+    ) %>%
+    arrange(class) %>%
+    mutate(
+      class_name = c("BEV-adverse", "BEV-skeptical", "BEV-open")
     ) %>%
     mutate(
       class_label = paste0(
@@ -497,7 +506,9 @@ gt_car_suv_lc_3c <- gt_formatted %>%
   group_by(section) %>%
   gt(rowname_col = "label") %>%
   tab_header(
-    title = md("**Latent Class Profile Summary**"),
+    title = md(
+      "**BEV Battery Information Valuation: Latent Class Profile Summary**"
+    ),
     subtitle = md("Probability-weighted means by class · Cars & SUVs")
   ) %>%
   tab_spanner(label = md("**Car**"), columns = all_of(car_cols)) %>%

@@ -32,21 +32,8 @@ apollo_initialise()
 
 # Define core controls
 ### CAR
-apollo_control = list(
-  modelName = paste0("car_lc_3c_", i),
-  modelDescr = "LC model with 3 classes with indicator",
-  indivID = "respID",
-  nCores = 2,
-  panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
-)
-
-database <- data_model %>%
-  filter(vehicle_typesuv == 0)
-
-### SUV
 # apollo_control = list(
-#   modelName = paste0("suv_lc_3c_", i),
+#   modelName = paste0("car_lc_3c_", i),
 #   modelDescr = "LC model with 3 classes with indicator",
 #   indivID = "respID",
 #   nCores = 2,
@@ -55,7 +42,23 @@ database <- data_model %>%
 # )
 
 # database <- data_model %>%
-#   filter(vehicle_typesuv == 1)
+#   filter(vehicle_typesuv == 0)
+
+### SUV
+apollo_control = list(
+  modelName = paste0("suv_lc_3c_", i),
+  modelDescr = "LC model with 3 classes with indicator",
+  indivID = "respID",
+  nCores = 2,
+  panelData = TRUE,
+  outputDirectory = paste0(
+    here(),
+    "/code/output/model_output/vehicle_analysis/apollo"
+  )
+)
+
+database <- data_model %>%
+  filter(vehicle_typesuv == 1)
 
 ### Vector of parameters, including any that are kept fixed in estimation
 apollo_beta = c(
@@ -395,6 +398,30 @@ apollo_saveOutput(
   saveOutput_settings = list(printPVal = 2)
 )
 
+# saveRDS(
+#   apollo_inputs,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "vehicle_analysis",
+#     "apollo",
+#     "car_lc_3c_apollo_inputs.rds"
+#   )
+# )
+
+# saveRDS(
+#   apollo_probabilities,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "vehicle_analysis",
+#     "apollo",
+#     "car_lc_3c_apollo_probabilities.rds"
+#   )
+# )
+
 saveRDS(
   apollo_inputs,
   file = here(
@@ -403,7 +430,7 @@ saveRDS(
     "model_output",
     "vehicle_analysis",
     "apollo",
-    "car_lc_3c_apollo_inputs.rds"
+    "suv_lc_3c_apollo_inputs.rds"
   )
 )
 
@@ -415,30 +442,6 @@ saveRDS(
     "model_output",
     "vehicle_analysis",
     "apollo",
-    "car_lc_3c_apollo_probabilities.rds"
+    "suv_lc_3c_apollo_probabilities.rds"
   )
 )
-
-# saveRDS(
-#   apollo_inputs,
-#   file = here(
-#     "code",
-#     "output",
-#     "model_output",
-#     "apollo",
-#     "vehicle",
-#     "suv_lc_3c_apollo_inputs.rds"
-#   )
-# )
-
-# saveRDS(
-#   apollo_probabilities,
-#   file = here(
-#     "code",
-#     "output",
-#     "model_output",
-#     "apollo",
-#     "vehicle",
-#     "suv_lc_3c_apollo_probabilities.rds"
-#   )
-# )
