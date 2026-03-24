@@ -121,8 +121,8 @@ save(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "logitr",
-    "battery",
     "mnl_car_pref_model.RData"
   )
 )
@@ -134,8 +134,8 @@ save(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "logitr",
-    "battery",
     "mnl_suv_pref_model.RData"
   )
 )
@@ -146,8 +146,8 @@ save(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "logitr",
-    "battery",
     "mnl_car_wtp_model.RData"
   )
 )
@@ -158,8 +158,8 @@ save(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "logitr",
-    "battery",
     "mnl_suv_wtp_model.RData"
   )
 )

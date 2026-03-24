@@ -5,8 +5,8 @@ load(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "logitr",
-  "battery",
   "mxl_wtp_model_car.RData"
 ))
 
@@ -14,8 +14,8 @@ load(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "logitr",
-  "battery",
   "mxl_wtp_model_suv.RData"
 ))
 
@@ -106,6 +106,7 @@ wtp_summary_degradation <- bind_rows(
 #     'code',
 #     'output',
 #     "images",
+    "battery_analysis",
 #     "uncertainty_combined_plot.png"
 #   ),
 #   width = 6,
@@ -143,6 +144,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "uncertainty_degradation_plot.png"
   ),
   width = 9,
@@ -228,6 +230,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "uncertainty_refurbishment_plot.png"
   ),
   width = 8,

@@ -24,7 +24,7 @@ apollo_control = list(
   modelDescr = "MNL model",
   indivID = "respID",
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle"),
+  outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo"),
   mixing = FALSE
 )
 
@@ -174,7 +174,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+  outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
 )
 
 database <- database_all %>%
@@ -565,7 +565,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+  outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
 )
 
 database <- database
@@ -967,7 +967,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+  outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
 )
 
 database <- database
@@ -1373,7 +1373,7 @@ model_combine <- data.frame()
 for (i in c(1:3)) {
   model_coef <- read_csv(paste0(
     here::here(),
-    "/code/output/model_output/apollo/vehicle",
+    "/code/output/model_output/vehicle_analysis/apollo",
     "/LC_",
     i,
     "c_indicator_estimates.csv"
@@ -1403,7 +1403,7 @@ for (i in c(1:3)) {
 
   model_fit <- as.data.frame(readLines(paste0(
     here::here(),
-    "/code/output/model_output/apollo/vehicle",
+    "/code/output/model_output/vehicle_analysis/apollo",
     "/LC_",
     i,
     "c_indicator_output.txt"
@@ -1444,7 +1444,7 @@ write.xlsx(
   model_combine_output,
   paste0(
     here::here(),
-    "/code/output/model_output/apollo/vehicle",
+    "/code/output/model_output/vehicle_analysis/apollo",
     "/0_vehicle_model_combine_output.xlsx"
   ),
   sheetName = "coef_fit",

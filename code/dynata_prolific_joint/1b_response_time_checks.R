@@ -402,7 +402,7 @@ hist_data_veh_duration <- ggplot(
     panel.grid.minor = element_blank()
   )
 
-path_images <- 'code/output/images/'
+path_images <- 'code/output/images/vehicle_analysis/'
 
 ggsave(
   paste0(path_images, "hist_data_veh_duration.jpg"),
@@ -455,7 +455,7 @@ hist_data_battery_duration <- ggplot(
     panel.grid.minor = element_blank()
   )
 
-path_images <- 'code/output/images/'
+path_images <- 'code/output/images/battery_analysis/'
 
 ggsave(
   paste0(path_images, "hist_data_battery_duration.jpg"),

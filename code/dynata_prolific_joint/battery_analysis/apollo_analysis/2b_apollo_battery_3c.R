@@ -40,7 +40,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/apollo/battery"),
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo"),
   noValidation = TRUE
 )
 
@@ -54,7 +54,7 @@ database <- data_model %>%
 #   indivID = "respID",
 #   nCores = 2,
 #   panelData = TRUE,
-#   outputDirectory = paste0(here(), "/code/output/model_output/apollo/battery"),
+#   outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo"),
 #   noValidation = TRUE
 # )
 
@@ -375,8 +375,8 @@ saveRDS(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "apollo",
-    "battery",
     "car_lc_3c_apollo_inputs.rds"
   )
 )
@@ -387,8 +387,8 @@ saveRDS(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "apollo",
-    "battery",
     "car_lc_3c_apollo_probabilities.rds"
   )
 )

@@ -15,7 +15,7 @@ for (i in c(1:5)) {
     indivID = "respID",
     nCores = 2,
     panelData = TRUE,
-    outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+    outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
   )
 
   ## ----Load dataset----

@@ -5,8 +5,8 @@ car_lc_3c <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "car_lc_3c_1_model.rds"
 ))
 
@@ -14,8 +14,8 @@ suv_lc_3c <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "suv_lc_3c_1_model.rds"
 ))
 
@@ -23,8 +23,8 @@ car_lc_3c_apollo_inputs <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "car_lc_3c_apollo_inputs.rds"
 ))
 
@@ -32,8 +32,8 @@ car_lc_3c_apollo_probabilities <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "car_lc_3c_apollo_probabilities.rds"
 ))
 
@@ -41,8 +41,8 @@ suv_lc_3c_apollo_inputs <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "suv_lc_3c_apollo_inputs.rds"
 ))
 
@@ -50,8 +50,8 @@ suv_lc_3c_apollo_probabilities <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "suv_lc_3c_apollo_probabilities.rds"
 ))
 
@@ -84,8 +84,8 @@ sig <- read.csv(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "0_car_suv_lc_3c_formatted_model_estimates.csv"
 )) %>%
   select(Variables, contains("Sig.")) %>%
@@ -534,8 +534,8 @@ gtsave(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "apollo",
-    "battery",
     "0_class_profile_summary_cars_suvs_lc_3c.html"
   )
 )

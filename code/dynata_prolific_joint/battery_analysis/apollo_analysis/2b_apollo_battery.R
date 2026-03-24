@@ -255,7 +255,7 @@ apollo_control = list(
   modelDescr = "MNL model",
   indivID = "respID",
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery"),
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo"),
   mixing = FALSE
 )
 
@@ -398,7 +398,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 database <- database_full
@@ -787,7 +787,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 
@@ -1227,7 +1227,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 
@@ -1750,7 +1750,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 
@@ -2186,7 +2186,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 
@@ -2651,7 +2651,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 
@@ -3102,7 +3102,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 
@@ -3561,7 +3561,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 
@@ -4021,7 +4021,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery")
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo")
 )
 
 
@@ -4512,7 +4512,7 @@ model_combine <- data.frame()
 for (i in c(1:4)) {
   model_coef <- read_csv(paste0(
     here::here(),
-    "/code/main/model_output/apollo/battery",
+    "/code/output/model_output/battery_analysis/apollo",
     "/LC_",
     i,
     "c_indicator_estimates.csv"
@@ -4542,7 +4542,7 @@ for (i in c(1:4)) {
 
   model_fit <- as.data.frame(readLines(paste0(
     here::here(),
-    "/code/main/model_output/apollo/battery",
+    "/code/output/model_output/battery_analysis/apollo",
     "/LC_",
     i,
     "c_indicator_output.txt"
@@ -4583,7 +4583,7 @@ write.xlsx(
   model_combine_output,
   paste0(
     here::here(),
-    "/code/main/model_output/apollo/battery",
+    "/code/output/model_output/battery_analysis/apollo",
     "/0_battery_model_combine_output.xlsx"
   ),
   sheetName = "coef_fit",
@@ -4600,7 +4600,7 @@ apollo_control = list(
   modelDescr = "MNL model in WTP-space",
   indivID = "respID",
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/main/model_output/apollo/battery"),
+  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo"),
   mixing = FALSE
 )
 

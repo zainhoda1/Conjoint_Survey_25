@@ -5,8 +5,8 @@ car_lc_3c <- read_csv(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "car_lc_3c_1_estimates.csv"
 ))
 colnames(car_lc_3c)[1] <- "variable"
@@ -15,8 +15,8 @@ suv_lc_3c <- read_csv(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "apollo",
-  "battery",
   "suv_lc_3c_1_estimates.csv"
 ))
 colnames(suv_lc_3c)[1] <- "variable"
@@ -120,8 +120,8 @@ write.csv(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "apollo",
-    "battery",
     "car_suv_lc_3c_formatted_model_estimates.csv"
   ),
   row.names = FALSE
@@ -198,8 +198,8 @@ gtsave(
     "code",
     "output",
     "model_output",
+    "battery_analysis",
     "apollo",
-    "battery",
     "0_model_summary_cars_suvs_lc_3c.html"
   )
 )

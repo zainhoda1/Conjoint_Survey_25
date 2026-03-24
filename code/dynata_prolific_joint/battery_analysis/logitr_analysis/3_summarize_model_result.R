@@ -5,8 +5,8 @@ car_lc_3c <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "vehicle_analysis",
   "apollo",
-  "vehicle",
   "car_lc_3c_1_model.rds"
 ))
 
@@ -14,8 +14,8 @@ suv_lc_3c <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "vehicle_analysis",
   "apollo",
-  "vehicle",
   "suv_lc_3c_1_model.rds"
 ))
 
@@ -23,8 +23,8 @@ car_lc_3c_apollo_inputs <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "vehicle_analysis",
   "apollo",
-  "vehicle",
   "car_lc_3c_apollo_inputs.rds"
 ))
 
@@ -32,8 +32,8 @@ car_lc_3c_apollo_probabilities <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "vehicle_analysis",
   "apollo",
-  "vehicle",
   "car_lc_3c_apollo_probabilities.rds"
 ))
 
@@ -41,8 +41,8 @@ suv_lc_3c_apollo_inputs <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "vehicle_analysis",
   "apollo",
-  "vehicle",
   "suv_lc_3c_apollo_inputs.rds"
 ))
 
@@ -50,8 +50,8 @@ suv_lc_3c_apollo_probabilities <- readRDS(here(
   "code",
   "output",
   "model_output",
+  "vehicle_analysis",
   "apollo",
-  "vehicle",
   "suv_lc_3c_apollo_probabilities.rds"
 ))
 
@@ -522,6 +522,7 @@ gtsave(
     "code",
     "output",
     "images",
+    "battery_analysis",
     "class_profile_summary_cars_suvs_lc_3c.html"
   )
 )
@@ -532,6 +533,7 @@ gtsave(
     "code",
     "output",
     "images",
+    "battery_analysis",
     "class_profile_summary_cars_suvs_lc_3c.png"
   ),
   expand = 20

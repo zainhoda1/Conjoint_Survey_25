@@ -38,7 +38,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+  outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
 )
 
 database <- data_model %>%
@@ -51,7 +51,7 @@ database <- data_model %>%
 #   indivID = "respID",
 #   nCores = 2,
 #   panelData = TRUE,
-#   outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+#   outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
 # )
 
 # database <- data_model %>%
@@ -401,8 +401,8 @@ saveRDS(
     "code",
     "output",
     "model_output",
+    "vehicle_analysis",
     "apollo",
-    "vehicle",
     "car_lc_3c_apollo_inputs.rds"
   )
 )
@@ -413,8 +413,8 @@ saveRDS(
     "code",
     "output",
     "model_output",
+    "vehicle_analysis",
     "apollo",
-    "vehicle",
     "car_lc_3c_apollo_probabilities.rds"
   )
 )

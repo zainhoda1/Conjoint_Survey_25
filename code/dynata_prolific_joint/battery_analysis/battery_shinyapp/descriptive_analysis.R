@@ -116,6 +116,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "barplot_bev_attribute_rank.png"
   ),
   width = 10,
@@ -227,6 +228,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "barplot_bev_attribute_rank_income.png"
   ),
   width = 20,
@@ -311,6 +313,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "barplot_bev_attribute_rank_veh_type.png"
   ),
   width = 12,

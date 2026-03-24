@@ -18,7 +18,7 @@ apollo_control = list(
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+  outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
 )
 
 database <- read_parquet(here(
@@ -37,7 +37,7 @@ database <- read_parquet(here(
 #   indivID = "respID",
 #   nCores = 2,
 #   panelData = TRUE,
-#   outputDirectory = paste0(here(), "/code/output/model_output/apollo/vehicle")
+#   outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
 # )
 #
 # database <- read_parquet(here(

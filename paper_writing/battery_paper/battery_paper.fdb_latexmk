@@ -1,9 +1,9 @@
 # Fdb version 4
-["pdflatex"] 1774277442.08148 "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex" "battery_paper.pdf" "battery_paper" 1774277443.15781 0
+["pdflatex"] 1774362243.74021 "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex" "battery_paper.pdf" "battery_paper" 1774362244.91003 0
   "../../code/output/images/barplot_bev_attribute_rank.png" 1771617157.25111 145652 fabb440c0b8d2fbdda2729e607d1fe2b ""
   "../../code/output/images/barplot_bev_attribute_rank_income.png" 1771617712.92607 208538 fcab05aa113e13734160808d3658a42c ""
   "../../code/output/images/barplot_bev_attribute_rank_veh_type.png" 1771618156.1413 154450 f2805170b19fb22764733de501bac8ab ""
-  "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex" 1774277440.51308 26497 50c0d93b6ded0b727e7a2bc88e15e2d2 ""
+  "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex" 1774362243.28556 26490 4f6ef3aabed282bf6e52e9ea94d6171f ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc" 1388795362 7013 c55cc8669071ac14036c4a0c96c16202 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -132,10 +132,10 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1771605766 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "battery_paper.abs" 1774277442.39404 768 bd5a817f6cb13a8df257c8734ea8f6ac "pdflatex"
-  "battery_paper.aux" 1774277443.09486 5288 4013fe45db1ad4d9609269af5217d450 "pdflatex"
-  "battery_paper.out" 1774277442.39055 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "battery_paper.tex" 1774277440.51308 26497 50c0d93b6ded0b727e7a2bc88e15e2d2 ""
+  "battery_paper.abs" 1774362244.11868 768 bd5a817f6cb13a8df257c8734ea8f6ac "pdflatex"
+  "battery_paper.aux" 1774362244.84302 5288 4013fe45db1ad4d9609269af5217d450 "pdflatex"
+  "battery_paper.out" 1774362244.11498 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "battery_paper.tex" 1774362243.28556 26490 4f6ef3aabed282bf6e52e9ea94d6171f ""
   (generated)
   "battery_paper.abs"
   "battery_paper.aux"

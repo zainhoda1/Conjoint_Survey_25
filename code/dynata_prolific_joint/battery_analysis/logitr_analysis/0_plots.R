@@ -11,8 +11,8 @@ load(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "logitr",
-  "battery",
   "mxl_wtp_model_car.RData"
 ))
 
@@ -20,8 +20,8 @@ load(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "logitr",
-  "battery",
   "mxl_wtp_model_suv.RData"
 ))
 
@@ -29,8 +29,8 @@ load(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "logitr",
-  "battery",
   "mxl_wtp_model_car_treat.RData"
 ))
 
@@ -38,8 +38,8 @@ load(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "logitr",
-  "battery",
   "mxl_wtp_model_suv_treat.RData"
 ))
 
@@ -47,8 +47,8 @@ load(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "logitr",
-  "battery",
   "mxl_wtp_model_car_notreat.RData"
 ))
 
@@ -56,8 +56,8 @@ load(here(
   "code",
   "output",
   "model_output",
+  "battery_analysis",
   "logitr",
-  "battery",
   "mxl_wtp_model_suv_notreat.RData"
 ))
 
@@ -152,6 +152,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "battery_mean_wtp_plot.png"
   ),
   width = 6,
@@ -223,6 +224,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "battery_hetegoneity_plot.png"
   ),
   width = 6,
@@ -271,6 +273,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "battery_simulated_wtp_plot.png"
   ),
   width = 7.5,
@@ -439,6 +442,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "battery_heatmap_plot.png"
   ),
   width = 8,
@@ -586,6 +590,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "battery_heatmap_plot_treat.png"
   ),
   width = 8,
@@ -734,6 +739,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "battery_analysis",
     "battery_heatmap_plot_notreat.png"
   ),
   width = 8,
