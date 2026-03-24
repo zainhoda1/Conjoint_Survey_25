@@ -6,7 +6,7 @@ source(here::here('code', 'setup.R'))
 data_dce <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
-  "data_joint_battery.parquet"
+  "data_joint_vehicle.parquet"
 )) %>%
   mutate(respID_qID = paste0(respID, "_", qID))
 
@@ -41,15 +41,17 @@ data_dce <- read_parquet(here(
 #
 # n_distinct(data_dce$respID)
 
-data_variable <- read_parquet(here(
+data_variable_full <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
   "data_clean_variables.parquet"
-))
+)) %>%
+  select(-starts_with("time_"))
 
-data_variable <- data_variable %>%
+data_variable <- data_variable_full %>%
   select(
     psid,
+    data_source,
     next_veh_budget,
     ends_with("_num"),
     ends_with("_cate"),
@@ -75,12 +77,11 @@ data_variable <- data_variable %>%
 ## ----Data Processing----
 data_dce <- data_dce %>%
   mutate(
-    mileage = mileage / 10000, #3 - 6
-    price = price / 10000, # 0.5 - 6
-    battery_range_year0 = battery_range_year0 / 100, # 1-3
-    battery_range_year3 = battery_range_year3 / 100, # 1-3
-    battery_range_year8 = battery_range_year8 / 100, # 0.5 - 2
-    battery_degradation = (battery_degradation * 100)
+    price = price / 10000, # 0.5-6
+    range_bev = range_bev / 100, # 0.5 - 2.5
+    mileage = mileage / 10000, # 2 - 6
+    age = age, # 2 - 8
+    operating_cost = operating_cost / 10 # 0.3 - 2.5,
   )
 
 ## ---- Dummy encode----
@@ -88,7 +89,7 @@ data_dce_dummy <- cbc_encode(
   data_dce %>%
     select(!c(psid, price, respID_qID)),
   coding = 'dummy',
-  ref_levels = list(battery_refurbish = 'original', budget = 'low')
+  ref_levels = list(powertrain = 'gas', vehicle_type = 'car', budget = 'low')
 ) %>%
   as.data.frame()
 
@@ -106,11 +107,12 @@ data_dce_dummy_apollo <- data_dce_dummy %>%
     qID,
     altID,
     choice,
+    powertrainbev,
+    powertrainhev,
+    range_bev,
+    age,
     mileage,
-    battery_range_year0,
-    battery_degradation,
-    battery_refurbishcellreplace,
-    battery_refurbishpackreplace,
+    operating_cost,
     price,
     vehicle_typesuv
   ) %>%
@@ -118,11 +120,12 @@ data_dce_dummy_apollo <- data_dce_dummy %>%
     id_cols = c(psid, respID, qID, vehicle_typesuv),
     names_from = altID,
     values_from = c(
+      powertrainbev,
+      powertrainhev,
+      range_bev,
+      age,
       mileage,
-      battery_range_year0,
-      battery_degradation,
-      battery_refurbishcellreplace,
-      battery_refurbishpackreplace,
+      operating_cost,
       price,
       choice
     ),
@@ -231,7 +234,7 @@ data_covariate_dummy <- cbc_encode(
 ) %>%
   as.data.frame()
 
-### Loading data from package
+
 database_all = data_covariate_num
 
 write_parquet(
@@ -239,6 +242,6 @@ write_parquet(
   here(
     "data",
     "dynata_prolific_joint",
-    "data_apollo_battery.parquet"
+    "data_apollo_vehicle.parquet"
   )
 )

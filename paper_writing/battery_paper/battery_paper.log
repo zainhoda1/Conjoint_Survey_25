@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  12 MAR 2026 12:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  23 MAR 2026 10:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -693,39 +693,39 @@ Overfull \hbox (117.0831pt too wide) detected at line 119
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
 
-LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 150.
+LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 152.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixscr.fd
 File: ls1stixscr.fd 2015/04/17 v1.1.2-latex STIX script LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 150.
+LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 152.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixex.fd
 File: ls2stixex.fd 2015/04/17 v1.1.2-latex STIX extentions LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 150.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 152.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 150.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 152.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 150.
+LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 152.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixfrak.fd
 File: ls1stixfrak.fd 2015/04/17 v1.1.2-latex STIX fraktur LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 150.
+LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 152.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixbb.fd
 File: ls1stixbb.fd 2015/04/17 v1.1.2-latex STIX blackboard LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 150.
+LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 152.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixcal.fd
 File: ls2stixcal.fd 2015/04/17 v1.1.2-latex STIX calligraphic LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 150.
+LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 152.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixsf.fd
 File: ls1stixsf.fd 2015/04/17 v1.1.2-latex STIX sans-serif LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 150.
+LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 152.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixtt.fd
 File: ls2stixtt.fd 2015/04/17 v1.1.2-latex STIX typewriter LS2 font definitions
 )
@@ -744,7 +744,7 @@ $[]$
 <../../code/output/images/barplot_bev_attribute_rank.png, id=27, 722.7pt x 289.08pt>
 File: ../../code/output/images/barplot_bev_attribute_rank.png Graphic file (type png)
 <use ../../code/output/images/barplot_bev_attribute_rank.png>
-Package pdftex.def Info: ../../code/output/images/barplot_bev_attribute_rank.png  used on input line 191.
+Package pdftex.def Info: ../../code/output/images/barplot_bev_attribute_rank.png  used on input line 193.
 (pdftex.def)             Requested size: 468.3324pt x 187.33516pt.
 
 
@@ -757,12 +757,12 @@ $[]$
 <../../code/output/images/barplot_bev_attribute_rank_veh_type.png, id=36, 867.24pt x 289.08pt>
 File: ../../code/output/images/barplot_bev_attribute_rank_veh_type.png Graphic file (type png)
 <use ../../code/output/images/barplot_bev_attribute_rank_veh_type.png>
-Package pdftex.def Info: ../../code/output/images/barplot_bev_attribute_rank_veh_type.png  used on input line 198.
+Package pdftex.def Info: ../../code/output/images/barplot_bev_attribute_rank_veh_type.png  used on input line 200.
 (pdftex.def)             Requested size: 468.3324pt x 156.1141pt.
 <../../code/output/images/barplot_bev_attribute_rank_income.png, id=37, 1445.4pt x 289.08pt>
 File: ../../code/output/images/barplot_bev_attribute_rank_income.png Graphic file (type png)
 <use ../../code/output/images/barplot_bev_attribute_rank_income.png>
-Package pdftex.def Info: ../../code/output/images/barplot_bev_attribute_rank_income.png  used on input line 205.
+Package pdftex.def Info: ../../code/output/images/barplot_bev_attribute_rank_income.png  used on input line 207.
 (pdftex.def)             Requested size: 468.3324pt x 93.66757pt.
 
 
@@ -775,17 +775,17 @@ $[]$
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.214 
+l.216 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.214 
+l.216 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.214 
+l.216 
        <../../code/output/images/barplot_bev_attribute_rank.png> <../../code/output/images/barplot_bev_attribute_rank_veh_type.png> <../../code/output/images/barplot_bev_attribute_rank_income.png>]
 
 
@@ -804,13 +804,13 @@ Package rerunfilecheck Info: File `battery_paper.out' has not changed.
 Here is how much of TeX's memory you used:
  16320 strings out of 473190
  246419 string characters out of 5715801
- 661266 words of memory out of 5000000
+ 661269 words of memory out of 5000000
  39297 multiletter control sequences out of 15000+600000
  613596 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,8n,93p,1641b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb>
-Output written on battery_paper.pdf (6 pages, 660475 bytes).
+Output written on battery_paper.pdf (6 pages, 660542 bytes).
 PDF statistics:
  87 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream
