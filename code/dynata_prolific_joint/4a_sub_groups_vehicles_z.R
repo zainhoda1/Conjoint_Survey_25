@@ -44,11 +44,6 @@ data_joint %>%
 
 #########
 
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 data <- data_joint %>%
   mutate(
     price = price / 10000, # 0.5-6
@@ -158,7 +153,6 @@ negative_group_encoded <- encoding(
 )
 
 
-<<<<<<< Updated upstream
 wtp_model_positive_group_car <- run_model_wtp(
   positive_group_encoded %>% filter(vehicle_typesuv == 0)
 )
@@ -180,7 +174,8 @@ summary(wtp_model_positive_group_car)
 summary(wtp_model_negative_group_car)
 summary(wtp_model_positive_group_suv)
 summary(wtp_model_negative_group_suv)
-=======
+
+
 wtp_model_positive_group_car_low <- run_model_wtp(
   positive_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
 )

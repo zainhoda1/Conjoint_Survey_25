@@ -9,12 +9,12 @@ data_joint <- read_parquet(here(
   "data_joint_vehicle.parquet"
 ))
 
-data_joint <- read_parquet(here(
-  "data",
-  "dynata_prolific_joint",
-  "data_joint_vehicle.parquet"
-)) %>%
-  filter(data_source == "prolific_round2")
+# data_joint <- read_parquet(here(
+#   "data",
+#   "dynata_prolific_joint",
+#   "data_joint_vehicle.parquet"
+# )) %>%
+#   filter(data_source == "prolific_round2")
 
 # %>%
 # filter(vehicle_typesuv == 1) %>%

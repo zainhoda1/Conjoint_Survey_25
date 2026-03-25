@@ -2,16 +2,29 @@ source(here::here('code', 'setup.R'))
 
 # ----Data----
 ## ----Load dataset----
-data_dce <- read_csv(here(
+
+data_dce <- read_parquet(here(
   "data",
-  "main",
-  "vehicle_choice_data.csv"
+  "dynata_prolific_joint",
+  "data_joint_vehicle.parquet"
 ))
 
-data_variable <- read_csv(here(
+# data_all <- read_parquet(here(
+#   "data",
+#   "dynata_prolific_joint",
+#   "data_joint.parquet"
+# ))
+
+# data_dce <- read_csv(here(
+#   "data",
+#   "main",
+#   "vehicle_choice_data.csv"
+# ))
+
+data_variable <- read_parquet(here(
   "data",
-  "main",
-  "data_clean_variables.csv"
+  "dynata_prolific_joint",
+  "data_clean_variables.parquet"
 ))
 
 data_variable <- data_variable %>%
@@ -30,26 +43,30 @@ data_variable <- data_variable %>%
 
 # glimpse(data)
 ## ----Processing----
-data_dce <- data_dce %>%
+
+data <- data_dce %>%
   mutate(
-    price = price / 10000, # 0.4-6
+    price = price / 10000, # 0.5-6
     range_bev = range_bev / 100, # 0.5 - 2.5
-    range_phev = range_phev / 10, # 1 - 4
-    mileage = mileage * 10, # 2 - 6
-    age = age * 10, # 2 - 8
-    operating_cost = operating_cost # 3 - 18,
+    mileage = mileage / 10000, # 2 - 6
+    age = age, # 2 - 8
+    operating_cost = operating_cost / 10 # 0.3 - 2.5,
   ) %>%
-  select(-range, -operating_cost_text, -session_id, -vehicle_type)
+  select(-psid)
 
-## ----Dummy encode----
+# glimpse(data)
 
-data_dce_dummy <- cbc_encode(
-  data_dce %>%
-    select(!psid),
+# Dummy encode
+data <- cbc_encode(
+  data,
   coding = 'dummy',
-  ref_levels = list(powertrain = 'gas')
-) %>%
-  as.data.frame()
+  ref_levels = list(
+    powertrain = 'gas',
+    vehicle_type = 'car',
+    budget = 'low',
+    data_source = 'prolific'
+  )
+)
 
 data_dce_dummy <- cbind(data_dce_dummy, data_dce %>% select(psid))
 
