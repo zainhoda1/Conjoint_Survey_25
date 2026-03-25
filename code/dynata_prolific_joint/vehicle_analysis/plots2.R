@@ -156,10 +156,73 @@ range_data <- range_data %>%
 
 
 range_data %>% 
-  filter(model_name == 'conf_model_car_high') %>% 
-  ggplot( aes(x=current_range, y=WTP_VEHICLE , group=vehicle_type, color=vehicle_type)) +
-  geom_line()
+  ggplot(aes(x = current_range, 
+             y = WTP_VEHICLE, 
+             color = vehicle_type)) +
+  
+  geom_line(size = 1.2) +
+  
+  # Clean facet labels
+  facet_wrap(~model_name, 
+             labeller = labeller(model_name = c(
+               "conf_model_car_high" = "Cars (High)",
+               "conf_model_car_low"  = "Cars (Low)",
+               "conf_model_suv_high" = "SUVs (High)",
+               "conf_model_suv_low"  = "SUVs (Low)"
+             ))) +
+  
+  # Color palette (BEV emphasized)
+  scale_color_manual(values = c(
+    "BEV" = "#009E73",   # green (highlight)
+    "CV"  = "black",   # muted grey
+    "HEV" = "#56B4E9"    # light blue
+  )) +
+  
+  # Clean axis scaling (important!)
+  scale_y_continuous(
+    labels = label_number(scale = 1e-3, suffix = "K"),
+    breaks = seq(-25000, 5000, by = 5000)
+  ) +
+  
+  # Labels
+  labs(
+    title = "Willingness to Pay by Vehicle Type and Driving Range",
+    subtitle = "Estimated from discrete choice model (high vs low confidence)",
+    x = "Driving Range (100s of miles)",
+    y = "Willingness to Pay (USD)",
+    color = NULL
+  ) +
+  
+  # Theme tuning
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.background  = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA),
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    
+    strip.text = element_text(face = "bold"),   # facet titles
+    strip.background = element_rect(fill = "grey90", color = NA),
+    
+    legend.position = "bottom",   # cleaner for papers
+    legend.direction = "horizontal",
+    
+    panel.grid.minor = element_blank(),
+    panel.spacing = unit(1.2, "lines")
+  ) +
+  
+  # Reference line
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey40")
 
 
-###########################
-
+ggsave(
+  filename = here::here(
+    'code',
+    'output',
+    "images",
+    "vehicle_wtp_range.png"    
+  ),
+  width = 8,
+  height = 6,
+  dpi = 300
+)

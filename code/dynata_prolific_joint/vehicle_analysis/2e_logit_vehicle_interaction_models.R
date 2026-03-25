@@ -10,6 +10,35 @@ data_joint <- read_parquet(here(
 ))
 
 
+create_confidence_intervals_interactions <- function(model) {
+  # Description:
+  # This function takes logit model and returns confidence interval.
+  
+  coefs <- coef(model)
+  # Get the model coefficients and covariance matrix
+  covariance <- vcov(model)
+  
+  # Take 10,000 draws of the coefficients
+  coef_draws <- as.data.frame(MASS::mvrnorm(10^4, coefs, covariance))
+  
+  # Compute WTP for each coefficient draw
+  wtp_draws = -1 * (coef_draws[,] / coef_draws[, 'price'])
+  
+  # Adding dollar values
+  wtp_draws <- wtp_draws %>%
+    mutate(across(where(is.numeric), ~ .x * 10^4)) 
+    # mutate(
+    #   BEV100 = (powertrainbev + range_bev ) ,
+    #   BEV200 = (powertrainbev + range_bev * 2) ,
+    #   BEV300 = (powertrainbev + range_bev * 3) 
+    # )
+  
+  # For each coefficient, get the mean and 95% confidence interval of WTP
+  wtp_ci <- ci(wtp_draws, level = 0.95)%>%
+    mutate(across(everything(), ~ round(.x, 2)))
+  
+  return(wtp_ci)
+}
 
 data_joint %>%
   group_by(data_source) %>%
@@ -202,6 +231,9 @@ model_suv_high_log_r <- run_model_log_range(
 
 
 ### View summary of results
+##########
+
+
 summary(model_car)
 summary(model_suv)
 
@@ -224,4 +256,26 @@ summary(model_car_high_log_r)
 summary(model_suv_high_log_r)
 
 
+### Confidence Intervals
+################
 
+# Confidence Intervals:
+
+conf_model_car_int_p_a <- create_confidence_intervals_interactions(model_car_int_p_a)
+conf_model_suv_int_p_a <- create_confidence_intervals_interactions(model_suv_int_p_a)
+
+conf_model_car_int_p_r <- create_confidence_intervals_interactions(model_car_int_p_r)
+conf_model_suv_int_p_r <- create_confidence_intervals_interactions(model_suv_int_p_r)
+
+conf_model_car_int_p_m <- create_confidence_intervals_interactions(model_car_int_p_m)
+conf_model_suv_int_p_m <- create_confidence_intervals_interactions(model_suv_int_p_m)
+
+
+conf_model_car_int_p_a
+conf_model_suv_int_p_a
+
+conf_model_car_int_p_r
+conf_model_suv_int_p_r
+
+conf_model_car_int_p_m
+conf_model_suv_int_p_m

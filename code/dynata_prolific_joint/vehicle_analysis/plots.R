@@ -16,14 +16,14 @@ conf_model_suv_high <- create_confidence_intervals(model_suv_high)
 
 all_models <- c("conf_model_car_low", "conf_model_car_high", "conf_model_suv_low", "conf_model_suv_high")
 
-age_list <- seq(1,8)
+age_list <- seq(2,8)
 mileage_list <- seq (1, 8, 1)
 
 plot_data <- data.frame(
   model_name = character(),
   bev_type = character(),
-  mileage_10k = numeric(), # or double()
-  age_year = numeric(),
+  mileage = numeric(), # or double()
+  age = numeric(),
   wtp_bev = numeric(),
   id = numeric(),
   stringsAsFactors = FALSE
@@ -36,7 +36,7 @@ for (current in all_models)
     glimpse(df)
     current_model <- as.data.frame(t(df %>%  
       select(mean) )) %>% 
-      select('BEV100', 'BEV200', 'BEV300', 'age_year', 'mileage_10k') %>% 
+      select('BEV100', 'BEV200', 'BEV300', 'age', 'mileage') %>% 
       pivot_longer(cols = c('BEV100', 'BEV200', 'BEV300'), names_to = 'bev_type', values_to = 'neg_bev') %>% 
       mutate (id = 1,
               model_name = current)
@@ -52,7 +52,7 @@ temp <- full_join(plot_data, df, by= 'id')
 
 temp <- temp %>%  
   mutate(
-    WTP_BEV =  neg_bev + (current_age * age_year) + (current_mileage * mileage_10k ),
+    WTP_BEV =  neg_bev + (current_age * age) + (current_mileage * mileage ),
     vehicle_type = case_when(
       str_detect(model_name, 'car') ~ 'car',
       .default = 'suv')
