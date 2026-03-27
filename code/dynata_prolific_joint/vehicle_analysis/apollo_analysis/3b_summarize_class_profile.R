@@ -331,7 +331,7 @@ var_meta <- tribble(
   "bev_350milerange"           , "BEV with 350 Mile Range"                       , "WTP (1000 USD) for BEVs with Specific Range" , "dollar" ,
   # Active variables
   "FA_EV_benefit"              , "Perceived EV Benefits (factor score)"          , "Active Indicators"                           , "number" ,
-  "FA_EV_anxiety"              , "EV Range Anxiety (factor score)"               , "Active Indicators"                           , "number" ,
+  "FA_EV_anxiety"              , "Perceived EV Anxiety (factor score)"           , "Active Indicators"                           , "number" ,
   "hhincome_num_k"             , "Household Income (1000 USD)"                   , "Active Indicators"                           , "number" ,
   "knowledge_ev"               , "EV Knowledge"                                  , "Active Indicators"                           , "pct"    ,
   "knowledge_subsidy"          , "EV Subsidy Knowledge"                          , "Active Indicators"                           , "pct"    ,
@@ -579,6 +579,27 @@ gtsave(
     "vehicle_analysis",
     "apollo",
     "0_class_profile_summary_cars_suvs_lc_3c.html"
+  )
+)
+gt_car_suv_lc_3c_latex <- gt_car_suv_lc_3c %>%
+  tab_options(
+    table.font.size = px(9)
+  ) %>%
+  cols_width(
+    everything() ~ px(80), # uniform width
+    label ~ px(140) # wider key column
+  ) %>%
+  as_latex()
+
+writeLines(
+  gt_car_suv_lc_3c_latex,
+  con = here::here(
+    "code",
+    "output",
+    "model_output",
+    "vehicle_analysis",
+    "apollo",
+    "0_class_profile_summary_cars_suvs_lc_3c.tex"
   )
 )
 

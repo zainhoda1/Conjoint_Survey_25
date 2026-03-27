@@ -18,8 +18,8 @@ data_model <- read_parquet(here(
       !is.na(knowledge_subsidy) &
       # !is.na(Veh_hh_count) &
       # !is.na(Veh_hh_fuel) &
-      # !is.na(Veh_primary_refuel_monthly) &
-      # !is.na(Veh_primary_range) &
+      !is.na(Veh_primary_refuel_monthly) &
+      !is.na(Veh_primary_range) &
       !is.na(ATT_EVB_environment) &
       !is.na(ATT_EVB_function)
   )
@@ -34,32 +34,38 @@ apollo_initialise()
 
 # Define core controls
 ### CAR
-apollo_control = list(
-  modelName = paste0("car_lc_3c_", i),
-  modelDescr = "LC model with 3 classes with indicator",
-  indivID = "respID",
-  nCores = 2,
-  panelData = TRUE,
-  outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo"),
-  noValidation = TRUE
-)
-
-database <- data_model %>%
-  filter(vehicle_typesuv == 0)
-
-### SUV
 # apollo_control = list(
-#   modelName = paste0("suv_lc_3c_", i),
+#   modelName = paste0("car_lc_3c_", i),
 #   modelDescr = "LC model with 3 classes with indicator",
 #   indivID = "respID",
 #   nCores = 2,
 #   panelData = TRUE,
-#   outputDirectory = paste0(here(), "/code/output/model_output/battery_analysis/apollo"),
+#   outputDirectory = paste0(
+#     here(),
+#     "/code/output/model_output/battery_analysis/apollo"
+#   ),
 #   noValidation = TRUE
 # )
 
 # database <- data_model %>%
-#   filter(vehicle_typesuv == 1)
+#   filter(vehicle_typesuv == 0)
+
+### SUV
+apollo_control = list(
+  modelName = paste0("suv_lc_3c_", i),
+  modelDescr = "LC model with 3 classes with indicator",
+  indivID = "respID",
+  nCores = 2,
+  panelData = TRUE,
+  outputDirectory = paste0(
+    here(),
+    "/code/output/model_output/battery_analysis/apollo"
+  ),
+  noValidation = TRUE
+)
+
+database <- data_model %>%
+  filter(vehicle_typesuv == 1)
 
 ### Vector of parameters, including any that are kept fixed in estimation
 apollo_beta = c(
@@ -100,6 +106,8 @@ apollo_beta = c(
   gamma_evb_environment_agree_a = 0,
   gamma_evb_function_disagree_a = 0,
   gamma_evb_function_agree_a = 0,
+  gamma_veh_refuel_a = 0,
+  gamma_veh_range_a = 0,
   delta_b = 0.1,
   gamma_EV_benefit_b = 0.1,
   gamma_EV_anxiety_b = 0.1,
@@ -112,6 +120,8 @@ apollo_beta = c(
   gamma_evb_environment_agree_b = 0,
   gamma_evb_function_disagree_b = 0,
   gamma_evb_function_agree_b = 0,
+  gamma_veh_refuel_b = 0,
+  gamma_veh_range_b = 0,
   delta_c = 0.2,
   gamma_EV_benefit_c = 0.2,
   gamma_EV_anxiety_c = 0.2,
@@ -123,7 +133,9 @@ apollo_beta = c(
   gamma_evb_environment_disagree_c = 0,
   gamma_evb_environment_agree_c = 0,
   gamma_evb_function_disagree_c = 0,
-  gamma_evb_function_agree_c = 0
+  gamma_evb_function_agree_c = 0,
+  gamma_veh_refuel_c = 0,
+  gamma_veh_range_c = 0
 )
 
 ### Vector with names (in quotes) of parameters to be kept fixed at their starting value in apollo_beta, use apollo_beta_fixed = c() if none
@@ -139,7 +151,9 @@ apollo_fixed = c(
   "gamma_evb_environment_disagree_a",
   "gamma_evb_environment_agree_a",
   "gamma_evb_function_disagree_a",
-  "gamma_evb_function_agree_a"
+  "gamma_evb_function_agree_a",
+  "gamma_veh_refuel_a",
+  "gamma_veh_range_a"
   # "gamma_ev_charge_b",
   # "gamma_ev_neighbor_b",
   # "gamma_knowledge_ev_b",
@@ -206,7 +220,9 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_evb_environment_disagree_a * (ATT_EVB_environment < 3) +
     gamma_evb_environment_agree_a * (ATT_EVB_environment > 3) +
     gamma_evb_function_disagree_a * (ATT_EVB_function < 3) +
-    gamma_evb_function_agree_a * (ATT_EVB_function > 3)
+    gamma_evb_function_agree_a * (ATT_EVB_function > 3) +
+    gamma_veh_refuel_a * Veh_primary_refuel_monthly +
+    gamma_veh_range_a * (Veh_primary_range / 100)
 
   V[["class_b"]] = delta_b +
     gamma_EV_benefit_b * FA_EV_benefit +
@@ -219,7 +235,9 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_evb_environment_disagree_b * (ATT_EVB_environment < 3) +
     gamma_evb_environment_agree_b * (ATT_EVB_environment > 3) +
     gamma_evb_function_disagree_b * (ATT_EVB_function < 3) +
-    gamma_evb_function_agree_b * (ATT_EVB_function > 3)
+    gamma_evb_function_agree_b * (ATT_EVB_function > 3) +
+    gamma_veh_refuel_b * Veh_primary_refuel_monthly +
+    gamma_veh_range_b * (Veh_primary_range / 100)
 
   V[["class_c"]] = delta_c +
     gamma_EV_benefit_c * FA_EV_benefit +
@@ -232,7 +250,9 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_evb_environment_disagree_c * (ATT_EVB_environment < 3) +
     gamma_evb_environment_agree_c * (ATT_EVB_environment > 3) +
     gamma_evb_function_disagree_c * (ATT_EVB_function < 3) +
-    gamma_evb_function_agree_c * (ATT_EVB_function > 3)
+    gamma_evb_function_agree_c * (ATT_EVB_function > 3) +
+    gamma_veh_refuel_c * Veh_primary_refuel_monthly +
+    gamma_veh_range_c * (Veh_primary_range / 100)
 
   ### Settings for class allocation models
   classAlloc_settings = list(
@@ -369,6 +389,30 @@ apollo_saveOutput(
   saveOutput_settings = list(printPVal = 2)
 )
 
+# saveRDS(
+#   apollo_inputs,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "battery_analysis",
+#     "apollo",
+#     "car_lc_3c_apollo_inputs.rds"
+#   )
+# )
+
+# saveRDS(
+#   apollo_probabilities,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "battery_analysis",
+#     "apollo",
+#     "car_lc_3c_apollo_probabilities.rds"
+#   )
+# )
+
 saveRDS(
   apollo_inputs,
   file = here(
@@ -377,7 +421,7 @@ saveRDS(
     "model_output",
     "battery_analysis",
     "apollo",
-    "car_lc_3c_apollo_inputs.rds"
+    "suv_lc_3c_apollo_inputs.rds"
   )
 )
 
@@ -389,30 +433,6 @@ saveRDS(
     "model_output",
     "battery_analysis",
     "apollo",
-    "car_lc_3c_apollo_probabilities.rds"
+    "suv_lc_3c_apollo_probabilities.rds"
   )
 )
-
-# saveRDS(
-#   apollo_inputs,
-#   file = here(
-#     "code",
-#     "output",
-#     "model_output",
-#     "apollo",
-#     "battery",
-#     "suv_lc_3c_apollo_inputs.rds"
-#   )
-# )
-
-# saveRDS(
-#   apollo_probabilities,
-#   file = here(
-#     "code",
-#     "output",
-#     "model_output",
-#     "apollo",
-#     "battery",
-#     "suv_lc_3c_apollo_probabilities.rds"
-#   )
-# )

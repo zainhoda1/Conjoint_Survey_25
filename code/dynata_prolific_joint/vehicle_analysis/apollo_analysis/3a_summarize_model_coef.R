@@ -96,7 +96,7 @@ var_meta <- tribble(
   # Active variables
   "ASC"                    , "ASC"                                           , "Active Indicators"  , "number" ,
   "EV_benefit"             , "Perceived EV Benefits (factor score)"          , "Active Indicators"  , "number" ,
-  "EV_anxiety"             , "EV Range Anxiety (factor score)"               , "Active Indicators"  , "number" ,
+  "EV_anxiety"             , "Perceived EV Anxiety (factor score)"           , "Active Indicators"  , "number" ,
   "evenvironment_disagree" , "EV Battery Environmentally Positive: Disagree" , "Active Indicators"  , "number" ,
   "evenvironment_agree"    , "EV Battery Environmentally Positive: Agree"    , "Active Indicators"  , "number" ,
   "evfunction_disagree"    , "EV Battery Functionally Negative: Disagree"    , "Active Indicators"  , "number" ,
@@ -104,7 +104,7 @@ var_meta <- tribble(
   "hhincome"               , "Household Income (10,000 USD)"                 , "Active Indicators"  , "number" ,
   "knowledge_ev"           , "EV Knowledge"                                  , "Active Indicators"  , "pct"    ,
   "knowledge_subsidy"      , "EV Subsidy Knowledge"                          , "Active Indicators"  , "pct"    ,
-  "ev_charge"              , "Home Charger Access"                           , "Active Indicators"  , "pct"    ,
+  "ev_charge"              , "Electrical Outlet Access"                      , "Active Indicators"  , "pct"    ,
   "ev_neighbor"            , "Neighbor Owns/Leases a BEV/PHEV"               , "Active Indicators"  , "pct"    ,
   "veh_refuel"             , "Primary Vehicle Refuel Frequency (monthly)"    , "Active Indicators"  , "number" ,
   "veh_range"              , "Primary Vehicle Typical Range (miles)"         , "Active Indicators"  , "number"

@@ -71,8 +71,8 @@ data_model <- read_parquet(here(
       !is.na(knowledge_subsidy) &
       # !is.na(Veh_hh_count) &
       # !is.na(Veh_hh_fuel) &
-      # !is.na(Veh_primary_refuel_monthly) &
-      # !is.na(Veh_primary_range)&
+      !is.na(Veh_primary_refuel_monthly) &
+      !is.na(Veh_primary_range) &
       !is.na(ATT_EVB_environment) &
       !is.na(ATT_EVB_function)
   )
@@ -94,12 +94,12 @@ sig <- read.csv(here(
 # R
 # Compute probability-weighted summaries for a model and return tidy long table
 
-# model <- suv_lc_3c
-# db <- database %>%
-#   filter(vehicle_typesuv == 1)
-# apollo_probabilities <- suv_lc_3c_apollo_probabilities
-# apollo_inputs <- suv_lc_3c_apollo_inputs
-# model_tag <- "SUV"
+model <- suv_lc_3c
+db <- database %>%
+  filter(vehicle_typesuv == 1)
+apollo_probabilities <- suv_lc_3c_apollo_probabilities
+apollo_inputs <- suv_lc_3c_apollo_inputs
+model_tag <- "SUV"
 
 summarize_lc_model <- function(
   model,
@@ -136,6 +136,8 @@ summarize_lc_model <- function(
     )
   })
 
+  v <- "Veh_primary_refuel_monthly"
+  k = 2
   # Numeric summaries
   num_summary <- map_dfr(num_vars, function(v) {
     map_dbl(1:n_classes, function(k) {
@@ -301,14 +303,16 @@ var_meta <- tribble(
 
   # Active variables
   "FA_EV_benefit"              , "Perceived EV Benefits (factor score)"       , "Active Indicators"                      , "number" ,
-  "FA_EV_anxiety"              , "EV Range Anxiety (factor score)"            , "Active Indicators"                      , "number" ,
+  "FA_EV_anxiety"              , "Perceived EV Anxiety (factor score)"        , "Active Indicators"                      , "number" ,
   "ATT_EVB_environment"        , "EV Battery Environmentally Positive"        , "Active Indicators"                      , "number" ,
   "ATT_EVB_function"           , "EV Battery Functionally Negative"           , "Active Indicators"                      , "number" ,
   "hhincome_num_k"             , "Household Income (*1000 USD)"               , "Active Indicators"                      , "number" ,
   "knowledge_ev"               , "EV Knowledge"                               , "Active Indicators"                      , "pct"    ,
   "knowledge_subsidy"          , "EV Subsidy Knowledge"                       , "Active Indicators"                      , "pct"    ,
-  "EV_charger"                 , "Home Charger Access"                        , "Active Indicators"                      , "pct"    ,
+  "EV_charger"                 , "Electrical Outlet Access"                   , "Active Indicators"                      , "pct"    ,
   "EV_neighbor"                , "Neighbor Owns/Leases a BEV/PHEV"            , "Active Indicators"                      , "pct"    ,
+  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)" , "Active Indicators"                      , "number" ,
+  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"      , "Active Indicators"                      , "number" ,
 
   # Inactive / Socioeconomic & other variables
   "age_num"                    , "Age"                                        , "Inactive Indicators: Socioeconomics"    , "number" ,
@@ -324,8 +328,6 @@ var_meta <- tribble(
   "Veh_hh_count"               , "Household Vehicle Count"                    , "Inactive Indicators: Socioeconomics"    , "number" ,
   "Veh_hh_fuel"                , "Household Vehicle Fuel Composition"         , "Inactive Indicators: Socioeconomics"    , "pct"    ,
   "Veh_primary_fuel"           , "Primary Vehicle Fuel Type"                  , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)" , "Inactive Indicators: Socioeconomics"    , "number" ,
-  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"      , "Inactive Indicators: Socioeconomics"    , "number" ,
 
   "next_veh_budget_k"          , "Next Vehicle Budget (1000 USD)"             , "Inactive Indicators: Socioeconomics"    , "dollar" ,
   "next_veh_fuel_new_phev"     , "Likelihood of buying new PHEV (1–5)"        , "Inactive Indicators: Socioeconomics"    , "number" ,
@@ -341,7 +343,7 @@ var_meta <- tribble(
   "ATT_voting"                 , "Voting Behavior"                            , "Inactive Indicators: Attitudes"         , "pct"    ,
 )
 
-section_order <- c(
+section <- c(
   "WTP (1000 USD) for Vehicle Attributes",
   "Active Indicators",
   "Inactive Indicators: Socioeconomics",
@@ -461,7 +463,11 @@ summarize_class_size <- function(
     ) %>%
     arrange(class) %>%
     mutate(
-      class_name = c("BEV-adverse", "BEV-skeptical", "BEV-open")
+      class_name = c(
+        "BEV-adverse",
+        "BEV-indifferent\nLow-knowledge",
+        "BEV-open"
+      )
     ) %>%
     mutate(
       class_label = paste0(

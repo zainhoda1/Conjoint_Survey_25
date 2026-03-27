@@ -8,6 +8,7 @@
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{adjustbox}
 % \usepackage[style=authoryear-icomp,
 % uniquelist=false,
 % maxnames=2,
@@ -57,7 +58,8 @@
 
 %\begin{frontmatter}
 
-\title [mode = title]{Exploring Perception, Knowledge Gaps, and Adoption Patterns of Battery Electric Vehicles Among U.S. Consumers}                      
+\title [mode = title]{Consumer Valuation of Battery Health Information in Used Electric Vehicle Markets: A Discrete Choice Experiment
+}                      
 
 
 % \author[1,2]{Xiatian {Iogansen}}
@@ -190,22 +192,22 @@ Following the choice experiments, the survey includes a self-assessment question
 
 \begin{figure}[pos=H]
 	\centering
-	\includegraphics[width=1\textwidth]{../../code/output/images/barplot_bev_attribute_rank.png}
+	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank.png}
     \caption{Self-reported importance of BEV attributes}	
     \label{figure_bev_attribute_rank}
 \end{figure}
 
 \begin{figure}[pos=H]
 	\centering
-	\includegraphics[width=1\textwidth]{../../code/output/images/barplot_bev_attribute_rank_veh_type.png}
-    \caption{Self-reported importance of BEV attributes}	
+	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank_veh_type.png}
+    \caption{Self-reported importance of BEV attributes by vehicle type}	
     \label{figure_bev_attribute_rank_veh_type}
 \end{figure}
 
 \begin{figure}[pos=H]
 	\centering
-	\includegraphics[width=1\textwidth]{../../code/output/images/barplot_bev_attribute_rank_income.png}
-    \caption{Self-reported importance of BEV attributes}	
+	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank_income.png}
+    \caption{Self-reported importance of BEV attributes by income}	
     \label{figure_bev_attribute_rank_income}
 \end{figure}
 
@@ -215,6 +217,14 @@ Following the choice experiments, the survey includes a self-assessment question
 We estimated a series of DC models with increasing complexity. We started with a multinomial logit specification including the relevant demographic variables,
 
 \section{Results and Discussion}
+\begin{table}[htbp]
+\centering
+\begin{adjustbox}{width=\textwidth}
+\input{../../code/output/model_output/vehicle_analysis/apollo/0_class_profile_summary_cars_suvs_lc_3c.tex} 
+\end{adjustbox}
+\end{table}
+
+
 
 \section{Conclusion}
 As more EVs reach the end of their first ownership cycle, understanding the dynamics of the used EV market—particularly the unique concerns surrounding battery condition—has become both timely and essential. Yet the lack of transparent, standardized battery health information at the point of sale continues to fuel uncertainty and undervaluation, which may impact adoption of pre-owned EVs. This DCI provides guidelines to survey design and data collection effort that could address a major gap in the literature by focusing on how consumers evaluate used battery electric vehicles (BEVs), what factors influence their willingness to adopt them, and how information asymmetries, particularly around battery health, impact market confidence and transaction outcomes.
