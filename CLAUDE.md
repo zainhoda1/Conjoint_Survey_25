@@ -1,6 +1,9 @@
 # Project Overview
 This is an R-based academic research project studying U.S. consumer preferences for battery electric vehicles (BEVs) using discrete choice experiments (DCE). 
 
+# Survey designed using `logit` R package
+1. **`survey_dynata/survey.qmd`** - survey questionnaire with survey questions and options
+2. **`survey_dynata/app.R`** - survey server, database setup, and display logics
 
 # Data Pipeline (run in order)
 1. **`code/dynata_prolific_joint/1_dynata_prolific_joint.R`** — Merges raw parquet data from all data sources, offsets `respID`/`obsID` to ensure uniqueness across sources, writes `data/dynata_prolific_joint/data_joint_battery.parquet` and `data_joint_vehicle.parquet`.
