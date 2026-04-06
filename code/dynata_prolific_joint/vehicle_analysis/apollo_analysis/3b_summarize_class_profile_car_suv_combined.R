@@ -69,7 +69,7 @@ car_suv_lc_3c_apollo_inputs <- readRDS(here(
   "model_output",
   "vehicle_analysis",
   "apollo",
-  "car_suv_lc_3c_apollo_inputs.rds"
+  "0_car_suv_lc_3c_apollo_inputs.rds"
 ))
 
 car_suv_lc_3c_apollo_probabilities <- readRDS(here(
@@ -78,7 +78,7 @@ car_suv_lc_3c_apollo_probabilities <- readRDS(here(
   "model_output",
   "vehicle_analysis",
   "apollo",
-  "car_suv_lc_3c_apollo_probabilities.rds"
+  "0_car_suv_lc_3c_apollo_probabilities.rds"
 ))
 
 data_model <- read_parquet(here(
@@ -159,10 +159,38 @@ summarize_lc_model <- function(
     apollo_inputs
   ) %>%
     rename_with(~ c("ID", paste0("prob_class", seq_len(length(.) - 1))))
+
   db_indiv <- db %>%
     left_join(conditionals, by = c("respID" = "ID")) %>%
-    distinct(respID, .keep_all = TRUE)
+    distinct(respID, .keep_all = TRUE) %>%
+    rename(
+      prob_class1 = prob_class1,
+      prob_class3 = prob_class2,
+      prob_class2 = prob_class3
+    ) %>%
+    #     SUV_class2 = SUV_class3)
+    mutate(
+      prob_class_max = pmax(prob_class1, prob_class2, prob_class3),
+      prob_class_assign = case_when(
+        prob_class1 == prob_class_max ~ "class1",
+        prob_class2 == prob_class_max ~ "class2",
+        prob_class3 == prob_class_max ~ "class3",
+        TRUE ~ NA_character_
+      )
+    )
+
   n_classes <- length(uncond[["pi_values"]])
+  write_parquet(
+    db_indiv %>% select(respID, starts_with("prob_class")),
+    here(
+      "code",
+      "output",
+      "model_output",
+      "vehicle_analysis",
+      "apollo",
+      paste0("0_", model_tag, "_", n_classes, "c_class_probabilities.parquet")
+    )
+  )
 
   # WTP
   wtp_df <- map_dfr(attributes, function(attr) {
@@ -189,8 +217,7 @@ summarize_lc_model <- function(
   )
   wtp_df <- bind_rows(wtp_df, new_rows)
   #
-  k = 2
-  v = "FA_EV_benefit"
+
   # Numeric summaries
   num_summary <- map_dfr(num_vars, function(v) {
     map_dbl(1:n_classes, function(k) {
@@ -564,14 +591,6 @@ summarize_class_size <- function(
       mean_probability = round(mean_probability, 2)
     ) %>%
     ungroup() %>%
-    mutate(
-      class = case_when(
-        class == "1" ~ "1",
-        class == "2" ~ "3",
-        class == "3" ~ "2",
-        TRUE ~ class
-      )
-    ) %>%
     arrange(class) %>%
     mutate(
       class_name = c("BEV-adverse", "BEV-skeptical", "BEV-open")
