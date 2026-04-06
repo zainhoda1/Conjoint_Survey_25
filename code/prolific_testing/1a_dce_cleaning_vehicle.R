@@ -5,13 +5,13 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 data_raw <- read_parquet(here(
   "data",
   "prolific_testing",
-  "data_round2_feb26.parquet"
+  "data_round_2+3_april26.parquet"
 ))
 
 data_approval <- read_parquet(here(
   "data",
   "prolific_testing",
-  "approve_round2.parquet"
+  "approve_round2+3.parquet"
 ))
 
 
@@ -53,14 +53,18 @@ nrow(data)
 
 # Drop bad respondents
 
+## Commented out for testing
 
+# data_vehicle <- data %>%
+#   inner_join(
+#     data_approval %>%
+#       select(prolific_pid),
+#     by = "prolific_pid"
+#   )
 
-data_vehicle <- data %>%
-  inner_join(
-    data_approval %>%
-      select(prolific_pid),
-    by = "prolific_pid"
-  )
+data_vehicle <- data  # Added for testing, to be removed
+
+## Commented out for testing
 
 nrow(data_vehicle)
 
@@ -164,7 +168,7 @@ write_parquet(
   here(
     "data",
     "prolific_testing",
-    "choice_data_vehicle_round2_feb_26.parquet"
+    "choice_data_vehicle_round2+3_april_26.parquet"
   )
 )
 

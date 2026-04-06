@@ -3,14 +3,18 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 # --------------------------------------------------------------------------
 # Load the data set:
 
-data_raw <- read_csv(here('data', 'prolific_testing', 'data_round2_feb_26.csv'))
+data_raw <- read_csv(here('data', 'prolific_testing', 'data_round_2+3_april_26.csv'))
 
 
-# data_raw <- read_csv(here(
-#   "data",
-#   "prolific_testing",
-#   "preview_data.csv"
-# ))
+# Testing April Data Pull 
+
+# data_raw <- data_raw %>%
+#   mutate(
+#   survey_taken_day = ymd_hms(time_start, tz = "UTC")
+#   ) |> 
+#   filter(survey_taken_day > '2026-03-30 00:00:00')
+
+# Testing April Data Pull 
 
 # removing testing entries
 data_raw <- data_raw %>%
@@ -117,7 +121,7 @@ write_parquet(
   here(
     "data",
     "prolific_testing",
-    "data_round2_feb26.parquet"
+    "data_round_2+3_april26.parquet"
   )
 )
 
@@ -145,7 +149,7 @@ write_parquet(
 
 demos <- read_csv(here(
   'fielding',
-  'prolific-feb-2026',
+  'prolific-april-2026',
   'prolific-studies',
   'prolific_demographic_export_69972f6c3f130386dee62c91.csv'
 )) %>%
@@ -178,7 +182,7 @@ data_approval %>%
     here(
       "data",
       "prolific_testing",
-      "approve_round2.parquet"
+      "approve_round2+3.parquet"
     )
   )
 
@@ -188,6 +192,6 @@ data_approval %>%
     here(
       "data",
       "prolific_testing",
-      "reject_round2.parquet"
+      "reject_round2+3.parquet"
     )
   )

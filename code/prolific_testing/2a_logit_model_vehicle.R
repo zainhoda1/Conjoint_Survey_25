@@ -6,7 +6,7 @@ source(here::here('code', 'setup.R'))
 data <- read_parquet(here(
   "data",
   "prolific_testing",
-  "choice_data_vehicle_round2_feb_26.parquet"
+  "choice_data_vehicle_round2+3_april_26.parquet"
 )) %>%
   select(-next_veh_budget, -psid)
 

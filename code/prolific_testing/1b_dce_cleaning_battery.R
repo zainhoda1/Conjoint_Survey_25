@@ -6,13 +6,13 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 data_raw <- read_parquet(here(
   "data",
   "prolific_testing",
-  "data_round2_feb26.parquet"
+  "data_round_2+3_april26.parquet"
 ))
 
 data_approval <- read_parquet(here(
   "data",
   "prolific_testing",
-  "approve_round2.parquet"
+  "approve_round3.parquet"
 ))
 
 # Read in choice questions and join it to the choice_data
@@ -87,12 +87,16 @@ nrow(data_battery)
 
 # Drop bad respondents
 
-data_battery <- data_battery %>%
-  left_join(
-    data_approval %>%
-      select(prolific_pid),
-    by = "prolific_pid"
-  )
+### Commented out for testing
+
+# data_battery <- data_battery %>%
+#   left_join(
+#     data_approval %>%
+#       select(prolific_pid),
+#     by = "prolific_pid"
+#   )
+
+### Commented out for testing
 
 nrow(data_battery)
 
@@ -165,6 +169,7 @@ write_parquet(
   here(
     "data",
     "prolific_testing",
-    "choice_data_battery_round2_feb_26.parquet"
+    "choice_data_battery_round2+3_april_26.parquet"
   )
 )
+
