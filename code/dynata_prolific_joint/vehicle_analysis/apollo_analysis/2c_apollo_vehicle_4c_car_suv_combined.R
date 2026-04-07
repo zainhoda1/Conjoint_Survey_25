@@ -22,6 +22,7 @@ data_model <- read_parquet(here(
       !is.na(Veh_primary_range)
   )
 
+prop.table(table(data_model$next_veh_fuel_used_bev))
 ### ----Latent class (c=3)----
 # Create an empty list to store the results of each model run
 model_results <- list()
@@ -31,25 +32,23 @@ i = 1
 apollo_initialise()
 
 # Define core controls
-## CAR
+### CAR
 # apollo_control = list(
-#   modelName = paste0("car_lc_3c_", i),
-#   modelDescr = "LC model with 3 classes with indicator",
+#   modelName = paste0("car_lc_4c_", i),
+#   modelDescr = "LC model with 4 classes with indicator",
 #   indivID = "respID",
 #   nCores = 2,
 #   panelData = TRUE,
-#   outputDirectory = paste0(
-#     here(),
-#     "/code/output/model_output/vehicle_analysis/apollo"
-#   )
+#   outputDirectory = paste0(here(), "/code/output/model_output/vehicle_analysis/apollo")
 # )
+
 # database <- data_model %>%
 #   filter(vehicle_typesuv == 0)
 
 ### SUV
 apollo_control = list(
-  modelName = paste0("suv_lc_3c_", i),
-  modelDescr = "LC model with 3 classes with indicator",
+  modelName = paste0("suv_lc_4c_", i),
+  modelDescr = "LC model with 4 classes with indicator",
   indivID = "respID",
   nCores = 2,
   panelData = TRUE,
@@ -58,13 +57,14 @@ apollo_control = list(
     "/code/output/model_output/vehicle_analysis/apollo"
   )
 )
+
 database <- data_model %>%
   filter(vehicle_typesuv == 1)
 
 ### Car+SUV
 # apollo_control = list(
-#   modelName = paste0("car_suv_lc_3c_", i),
-#   modelDescr = "LC model with 3 classes with indicator",
+#   modelName = paste0("car_suv_lc_4c_", i),
+#   modelDescr = "LC model with 4 classes with indicator",
 #   indivID = "respID",
 #   nCores = 2,
 #   panelData = TRUE,
@@ -73,6 +73,7 @@ database <- data_model %>%
 #     "/code/output/model_output/vehicle_analysis/apollo"
 #   )
 # )
+
 # database <- data_model
 
 ### Vector of parameters, including any that are kept fixed in estimation
@@ -102,6 +103,14 @@ apollo_beta = c(
   b_age_c = 0,
   b_operating_cost_c = 0,
   b_price_c = 0,
+  b_no_choice_d = 0,
+  b_powertrainbev_d = 0,
+  b_powertrainhev_d = 0,
+  b_range_bev_d = 0,
+  b_mileage_d = 0,
+  b_age_d = 0,
+  b_operating_cost_d = 0,
+  b_price_d = 0,
 
   # base intercepts for class allocation model
   # coefficients for covariates in class‐allocation
@@ -140,7 +149,24 @@ apollo_beta = c(
   gamma_veh_count_c = 0,
   gamma_veh_has_bev_c = 0,
   gamma_veh_refuel_c = 0,
-  gamma_veh_range_c = 0
+  gamma_veh_range_c = 0,
+  delta_d = 0.3,
+  gamma_EV_benefit_d = 0.3,
+  gamma_EV_anxiety_d = 0.3,
+  gamma_ev_charge_d = 0.3,
+  gamma_hhincome_d = 0.3,
+  gamma_ev_neighbor_d = 0.3,
+  gamma_knowledge_ev_d = 0.3,
+  gamma_knowledge_subsidy_d = 0.3,
+  gamma_veh_count_d = 0,
+  gamma_veh_has_bev_d = 0,
+  gamma_veh_refuel_d = 0,
+  gamma_veh_range_d = 0,
+
+  gamma_suv_a = 0,
+  gamma_suv_b = 0,
+  gamma_suv_c = 0,
+  gamma_suv_d = 0
 )
 
 ### Vector with names (in quotes) of parameters to be kept fixed at their starting value in apollo_beta, use apollo_beta_fixed = c() if none
@@ -157,15 +183,18 @@ apollo_fixed = c(
   "gamma_veh_has_bev_a",
   "gamma_veh_refuel_a",
   "gamma_veh_range_a",
+  "gamma_suv_a",
 
   "gamma_veh_count_b",
   "gamma_veh_has_bev_b",
   # "gamma_veh_refuel_b",
   # "gamma_veh_range_b",
   "gamma_veh_count_c",
-  "gamma_veh_has_bev_c"
+  "gamma_veh_has_bev_c",
   # "gamma_veh_refuel_c",
   # "gamma_veh_range_c",
+  "gamma_veh_count_d",
+  "gamma_veh_has_bev_d"
 
   # "gamma_EV_benefit_b",
   # "gamma_EV_anxiety_b",
@@ -198,41 +227,52 @@ apollo_fixed = c(
 apollo_beta = apollo_readBeta(
   apollo_beta,
   apollo_fixed,
-  "car_lc_3c_indicator_1",
+  "car_suv_lc_4c_1",
   overwriteFixed = FALSE
 )
-
-# apollo_beta = apollo_readBeta(
-#   apollo_beta,
-#   apollo_fixed,
-#   "suv_lc_3c_indicator_1",
-#   overwriteFixed = FALSE
-# )
 
 #### DEFINE LATENT CLASS COMPONENTS
 apollo_lcPars = function(apollo_beta, apollo_inputs) {
   lcpars = list()
-  lcpars[["b_no_choice"]] = list(b_no_choice_a, b_no_choice_b, b_no_choice_c)
+  lcpars[["b_no_choice"]] = list(
+    b_no_choice_a,
+    b_no_choice_b,
+    b_no_choice_c,
+    b_no_choice_d
+  )
   lcpars[["b_powertrainbev"]] = list(
     b_powertrainbev_a,
     b_powertrainbev_b,
-    b_powertrainbev_c
+    b_powertrainbev_c,
+    b_powertrainbev_d
   )
 
   lcpars[["b_powertrainhev"]] = list(
     b_powertrainhev_a,
     b_powertrainhev_b,
-    b_powertrainhev_c
+    b_powertrainhev_c,
+    b_powertrainhev_d
   )
-  lcpars[["b_range_bev"]] = list(b_range_bev_a, b_range_bev_b, b_range_bev_c)
-  lcpars[["b_mileage"]] = list(b_mileage_a, b_mileage_b, b_mileage_c)
-  lcpars[["b_age"]] = list(b_age_a, b_age_b, b_age_c)
+  lcpars[["b_range_bev"]] = list(
+    b_range_bev_a,
+    b_range_bev_b,
+    b_range_bev_c,
+    b_range_bev_d
+  )
+  lcpars[["b_mileage"]] = list(
+    b_mileage_a,
+    b_mileage_b,
+    b_mileage_c,
+    b_mileage_d
+  )
+  lcpars[["b_age"]] = list(b_age_a, b_age_b, b_age_c, b_age_d)
   lcpars[["b_operating_cost"]] = list(
     b_operating_cost_a,
     b_operating_cost_b,
-    b_operating_cost_c
+    b_operating_cost_c,
+    b_operating_cost_d
   )
-  lcpars[["b_price"]] = list(b_price_a, b_price_b, b_price_c)
+  lcpars[["b_price"]] = list(b_price_a, b_price_b, b_price_c, b_price_d)
 
   ### Utilities of class allocation model: ow likely a person is to belong to each class based on indicators
   V = list()
@@ -247,7 +287,8 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_veh_count_a * Veh_hh_count +
     gamma_veh_has_bev_a * (Veh_hh_fuel == "has_bev") +
     gamma_veh_refuel_a * Veh_primary_refuel_monthly +
-    gamma_veh_range_a * (Veh_primary_range / 100)
+    gamma_veh_range_a * (Veh_primary_range / 100) +
+    gamma_suv_a * (vehicle_typesuv == 1)
 
   V[["class_b"]] = delta_b +
     gamma_EV_benefit_b * FA_EV_benefit +
@@ -260,7 +301,8 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_veh_count_b * Veh_hh_count +
     gamma_veh_has_bev_b * (Veh_hh_fuel == "has_bev") +
     gamma_veh_refuel_b * Veh_primary_refuel_monthly +
-    gamma_veh_range_b * (Veh_primary_range / 100)
+    gamma_veh_range_b * (Veh_primary_range / 100) +
+    gamma_suv_b * (vehicle_typesuv == 1)
 
   V[["class_c"]] = delta_c +
     gamma_EV_benefit_c * FA_EV_benefit +
@@ -273,11 +315,26 @@ apollo_lcPars = function(apollo_beta, apollo_inputs) {
     gamma_veh_count_c * Veh_hh_count +
     gamma_veh_has_bev_c * (Veh_hh_fuel == "has_bev") +
     gamma_veh_refuel_c * Veh_primary_refuel_monthly +
-    gamma_veh_range_c * (Veh_primary_range / 100)
+    gamma_veh_range_c * (Veh_primary_range / 100) +
+    gamma_suv_c * (vehicle_typesuv == 1)
+
+  V[["class_d"]] = delta_d +
+    gamma_EV_benefit_d * FA_EV_benefit +
+    gamma_EV_anxiety_d * FA_EV_anxiety +
+    gamma_hhincome_d * hhincome_num_10k +
+    gamma_ev_charge_d * (EV_charger == "yes") +
+    gamma_ev_neighbor_d * (EV_neighbor == "yes") +
+    gamma_knowledge_ev_d * (knowledge_ev == 1) +
+    gamma_knowledge_subsidy_d * (knowledge_subsidy == 1) +
+    gamma_veh_count_d * Veh_hh_count +
+    gamma_veh_has_bev_d * (Veh_hh_fuel == "has_bev") +
+    gamma_veh_refuel_d * Veh_primary_refuel_monthly +
+    gamma_veh_range_d * (Veh_primary_range / 100) +
+    gamma_suv_d * (vehicle_typesuv == 1)
 
   ### Settings for class allocation models
   classAlloc_settings = list(
-    classes = c(class_a = 1, class_b = 2, class_c = 3),
+    classes = c(class_a = 1, class_b = 2, class_c = 3, class_d = 4),
     utilities = V
   )
   # computes the class membership probabilities (π) for each person
@@ -311,7 +368,7 @@ apollo_probabilities = function(
   )
 
   ### Loop over classes
-  for (s in 1:3) {
+  for (s in 1:4) {
     ### Compute class-specific utilities
     V = list()
     V[["alt1"]] <-
@@ -413,7 +470,7 @@ apollo_saveOutput(
   saveOutput_settings = list(printPVal = 2)
 )
 
-### car
+#### car
 # saveRDS(
 #   apollo_inputs,
 #   file = here(
@@ -422,7 +479,7 @@ apollo_saveOutput(
 #     "model_output",
 #     "vehicle_analysis",
 #     "apollo",
-#     "car_lc_3c_apollo_inputs.rds"
+#     "car_lc_4c_apollo_inputs.rds"
 #   )
 # )
 
@@ -434,11 +491,11 @@ apollo_saveOutput(
 #     "model_output",
 #     "vehicle_analysis",
 #     "apollo",
-#     "car_lc_3c_apollo_probabilities.rds"
+#     "car_lc_4c_apollo_probabilities.rds"
 #   )
 # )
 
-### SUV
+#### SUV
 saveRDS(
   apollo_inputs,
   file = here(
@@ -447,7 +504,7 @@ saveRDS(
     "model_output",
     "vehicle_analysis",
     "apollo",
-    "suv_lc_3c_apollo_inputs.rds"
+    "suv_lc_4c_apollo_inputs.rds"
   )
 )
 
@@ -459,7 +516,7 @@ saveRDS(
     "model_output",
     "vehicle_analysis",
     "apollo",
-    "suv_lc_3c_apollo_probabilities.rds"
+    "suv_lc_4c_apollo_probabilities.rds"
   )
 )
 
@@ -472,7 +529,7 @@ saveRDS(
 #     "model_output",
 #     "vehicle_analysis",
 #     "apollo",
-#     "car_suv_lc_3c_apollo_inputs.rds"
+#     "0_car_suv_lc_4c_apollo_inputs.rds"
 #   )
 # )
 
@@ -484,6 +541,6 @@ saveRDS(
 #     "model_output",
 #     "vehicle_analysis",
 #     "apollo",
-#     "car_suv_lc_3c_apollo_probabilities.rds"
+#     "0_car_suv_lc_4c_apollo_probabilities.rds"
 #   )
 # )

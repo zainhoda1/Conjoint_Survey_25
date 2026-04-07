@@ -1,6 +1,8 @@
 source(here::here('code', 'setup.R'))
 
+
 # UPLOAD MODELS ----
+wtp_models_origin <- wtp_models
 wtp_models <- readRDS(here(
   "code",
   "output",
@@ -186,8 +188,8 @@ summarize_class_size <- ftable(
     ),
     class_name = case_when(
       class_name == "class1" ~ "Class1\nBEV-adverse",
-      class_name == "class2" ~ "Class1\nBEV-skeptical",
-      class_name == "class3" ~ "Class2\nBEV-open"
+      class_name == "class2" ~ "Class2\nBEV-skeptical",
+      class_name == "class3" ~ "Class3\nBEV-open"
     )
   ) %>%
   mutate(
@@ -206,7 +208,7 @@ summarize_class_size <- ftable(
   select(tag, class_label) %>%
   deframe()
 
-gt_car_suv_ml_2c <- gt_formatted |>
+gt_car_suv_ml_3c <- gt_formatted |>
   group_by(section) |>
   gt(rowname_col = "label") |>
   # tab_spanner(
@@ -238,10 +240,10 @@ gt_car_suv_ml_2c <- gt_formatted |>
   ) |>
   opt_stylize(style = 1, color = "blue")
 
-gt_car_suv_ml_2c
+gt_car_suv_ml_3c
 
 gtsave(
-  gt_car_suv_ml_2c,
+  gt_car_suv_ml_3c,
   file = here::here(
     "code",
     "output",

@@ -18,6 +18,14 @@ suv_lc_3c <- readRDS(here(
   "apollo",
   "suv_lc_3c_1_model.rds"
 ))
+car_suv_lc_3c <- readRDS(here(
+  "code",
+  "output",
+  "model_output",
+  "vehicle_analysis",
+  "apollo",
+  "car_suv_lc_3c_1_model.rds"
+))
 
 car_lc_3c_apollo_inputs <- readRDS(here(
   "code",
@@ -55,6 +63,24 @@ suv_lc_3c_apollo_probabilities <- readRDS(here(
   "suv_lc_3c_apollo_probabilities.rds"
 ))
 
+car_suv_lc_4c_apollo_inputs <- readRDS(here(
+  "code",
+  "output",
+  "model_output",
+  "vehicle_analysis",
+  "apollo",
+  "0_car_suv_lc_3c_apollo_inputs.rds"
+))
+
+car_suv_lc_4c_apollo_probabilities <- readRDS(here(
+  "code",
+  "output",
+  "model_output",
+  "vehicle_analysis",
+  "apollo",
+  "0_car_suv_lc_4c_apollo_probabilities.rds"
+))
+
 data_model <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
@@ -78,13 +104,24 @@ data_model <- read_parquet(here(
 database <- data_model %>%
   mutate(hhincome_num_k = hhincome_num / 1000)
 
+# sig <- read.csv(here(
+#   "code",
+#   "output",
+#   "model_output",
+#   "vehicle_analysis",
+#   "apollo",
+#   "0_car_suv_lc_3c_formatted_model_estimates.csv"
+# )) %>%
+#   select(Variables, contains("Sig.")) %>%
+#   rename_with(~ str_remove(., "Sig._"))
+
 sig <- read.csv(here(
   "code",
   "output",
   "model_output",
   "vehicle_analysis",
   "apollo",
-  "0_car_suv_lc_3c_formatted_model_estimates.csv"
+  "0_car_suv_combined_lc_3c_formatted_model_estimates.csv"
 )) %>%
   select(Variables, contains("Sig.")) %>%
   rename_with(~ str_remove(., "Sig._"))
@@ -122,15 +159,14 @@ summarize_lc_model <- function(
     apollo_inputs
   ) %>%
     rename_with(~ c("ID", paste0("prob_class", seq_len(length(.) - 1))))
+
   db_indiv <- db %>%
     left_join(conditionals, by = c("respID" = "ID")) %>%
     distinct(respID, .keep_all = TRUE) %>%
-    rename(
-      prob_class1 = prob_class1,
-      prob_class3 = prob_class2,
-      prob_class2 = prob_class3
-    ) %>%
-    #     SUV_class2 = SUV_class3)
+    rename(temp_prob = prob_class2) %>%
+    rename(prob_class2 = prob_class3) %>%
+    rename(prob_class3 = temp_prob) %>%
+    relocate(prob_class1, prob_class2, prob_class3, .after = last_col()) %>%
     mutate(
       prob_class_max = pmax(prob_class1, prob_class2, prob_class3),
       prob_class_assign = case_when(
@@ -257,6 +293,7 @@ num_vars <- c(
   "next_veh_fuel_used_bev"
 )
 cate_vars <- c(
+  "vehicle_typesuv",
   "EV_charger",
   "EV_neighbor",
   "knowledge_ev",
@@ -300,32 +337,39 @@ suv_res <- summarize_lc_model(
   cate_vars
 )
 
+combined_res <- summarize_lc_model(
+  car_suv_lc_3c,
+  car_suv_lc_3c_apollo_probabilities,
+  car_suv_lc_3c_apollo_inputs,
+  database,
+  "Combined",
+  attributes,
+  num_vars,
+  cate_vars
+)
+
 
 # --- Merge car and suv by variable (use label if available) ---
-combined_all <- full_join(
-  car_res,
-  suv_res %>% select(-label_raw),
-  by = "variable"
-) %>%
+combined_all <- car_res %>%
+  select(-label_raw) %>%
+  full_join(
+    suv_res %>% select(-label_raw),
+    by = "variable"
+  ) %>%
+  full_join(
+    combined_res,
+    by = "variable"
+  ) %>%
   mutate(label = coalesce(label_raw, variable)) %>%
   select(
     variable,
     label,
     starts_with("Car_class"),
-    starts_with("SUV_class")
+    starts_with("SUV_class"),
+    starts_with("Combined_class")
   ) %>%
-  filter(!is.na(Car_class1)) # keep only variables that appear in at least one model
-
-# change class order
-# combined_all <- combined_all %>%
-#   rename(
-#     Car_class1 = Car_class1,
-#     Car_class3 = Car_class2,
-#     Car_class2 = Car_class3,
-#     SUV_class1 = SUV_class1,
-#     SUV_class3 = SUV_class2,
-#     SUV_class2 = SUV_class3
-#   )
+  # filter(!is.na(Car_class1)) # keep only variables that appear in at least one model
+  filter(!is.na(Combined_class1)) # keep only variables that appear in at least one model
 
 # --- change unit ---
 combined_all <- combined_all %>%
@@ -364,7 +408,7 @@ var_meta <- tribble(
   "EV_neighbor"                , "Neighbor Owns/Leases a BEV/PHEV"               , "Active Indicators"                           , "pct"    ,
   "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"    , "Active Indicators"                           , "number" ,
   "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"         , "Active Indicators"                           , "number" ,
-
+  "vehicle_typesuv"            , "SUV Segment"                                   , "Active Indicators"                           , "pct"    ,
   # Inactive / Socioeconomic & other variables
   "age_num"                    , "Age"                                           , "Inactive Indicators: Socioeconomics"         , "number" ,
   "gender_cate"                , "Gender"                                        , "Inactive Indicators: Socioeconomics"         , "pct"    ,
@@ -452,14 +496,22 @@ formatted <- combined_all %>%
       TRUE ~ "number"
     ),
     across(starts_with("Car_class"), ~ fmt_row(.x, fmt), .names = "fmt_{col}"),
-    across(starts_with("SUV_class"), ~ fmt_row(.x, fmt), .names = "fmt_{col}")
+    across(starts_with("SUV_class"), ~ fmt_row(.x, fmt), .names = "fmt_{col}"),
+    across(
+      starts_with("Combined_class"),
+      ~ fmt_row(.x, fmt),
+      .names = "fmt_{col}"
+    )
   ) %>%
   ungroup()
 
 # pick formatted columns
 car_cols <- sort(names(formatted)[grepl("^fmt_Car_class", names(formatted))])
 suv_cols <- sort(names(formatted)[grepl("^fmt_SUV_class", names(formatted))])
-
+combined_cols <- sort(names(formatted)[grepl(
+  "^fmt_Combined_class",
+  names(formatted)
+)])
 ### add significance stars to WTP table ----
 gt_formatted <- formatted %>%
   left_join(
@@ -473,7 +525,22 @@ gt_formatted <- formatted %>%
     fmt_Car_class3 = paste0(fmt_Car_class3, "\n", coalesce(Car_class3.y, "")),
     fmt_SUV_class1 = paste0(fmt_SUV_class1, "\n", coalesce(SUV_class1.y, "")),
     fmt_SUV_class2 = paste0(fmt_SUV_class2, "\n", coalesce(SUV_class2.y, "")),
-    fmt_SUV_class3 = paste0(fmt_SUV_class3, "\n", coalesce(SUV_class3.y, ""))
+    fmt_SUV_class3 = paste0(fmt_SUV_class3, "\n", coalesce(SUV_class3.y, "")),
+    fmt_Combined_class1 = paste0(
+      fmt_Combined_class1,
+      "\n",
+      coalesce(Combined_class1.y, "")
+    ),
+    fmt_Combined_class2 = paste0(
+      fmt_Combined_class2,
+      "\n",
+      coalesce(Combined_class2.y, "")
+    ),
+    fmt_Combined_class3 = paste0(
+      fmt_Combined_class3,
+      "\n",
+      coalesce(Combined_class3.y, "")
+    )
   )
 
 ### Summarize class size----
@@ -508,14 +575,6 @@ summarize_class_size <- function(
       mean_probability = round(mean_probability, 2)
     ) %>%
     ungroup() %>%
-    mutate(
-      class = case_when(
-        class == "1" ~ "1",
-        class == "2" ~ "3",
-        class == "3" ~ "2",
-        TRUE ~ class
-      )
-    ) %>%
     arrange(class) %>%
     mutate(
       class_name = c("BEV-adverse", "BEV-skeptical", "BEV-open")
@@ -551,6 +610,11 @@ suv_size <- summarize_class_size(
   suv_lc_3c_apollo_probabilities,
   suv_lc_3c_apollo_inputs
 )
+combined_size <- summarize_class_size(
+  car_suv_lc_3c,
+  car_suv_lc_3c_apollo_probabilities,
+  car_suv_lc_3c_apollo_inputs
+)
 
 # --- Build gt table with Car and SUV spanners ---
 
@@ -560,7 +624,13 @@ suv_size <- summarize_class_size(
 # build base gt table
 
 gt_car_suv_lc_3c <- gt_formatted %>%
-  select(section, label, all_of(car_cols), all_of(suv_cols)) %>%
+  select(
+    section,
+    label,
+    all_of(car_cols),
+    all_of(suv_cols),
+    all_of(combined_cols)
+  ) %>%
   group_by(section) %>%
   gt(rowname_col = "label") %>%
   tab_header(
@@ -569,9 +639,11 @@ gt_car_suv_lc_3c <- gt_formatted %>%
   ) %>%
   tab_spanner(label = md("**Car**"), columns = all_of(car_cols)) %>%
   tab_spanner(label = md("**SUV**"), columns = all_of(suv_cols)) %>%
+  tab_spanner(label = md("**Combined**"), columns = all_of(combined_cols)) %>%
   cols_label(
     !!!set_names(lapply(car_size$class_label, md), car_cols),
-    !!!set_names(lapply(suv_size$class_label, md), suv_cols)
+    !!!set_names(lapply(suv_size$class_label, md), suv_cols),
+    !!!set_names(lapply(combined_size$class_label, md), combined_cols)
   ) %>%
   cols_align(align = "right", columns = everything()) %>%
   cols_align(align = "left", columns = label) %>%
@@ -595,6 +667,18 @@ gt_car_suv_lc_3c <- gt_formatted %>%
 # render / save
 gt_car_suv_lc_3c
 
+# gtsave(
+#   gt_car_suv_lc_3c,
+#   file = here::here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "vehicle_analysis",
+#     "apollo",
+#     "0_class_profile_summary_cars_suvs_lc_3c.html"
+#   )
+# )
+
 gtsave(
   gt_car_suv_lc_3c,
   file = here::here(
@@ -603,30 +687,30 @@ gtsave(
     "model_output",
     "vehicle_analysis",
     "apollo",
-    "0_class_profile_summary_cars_suvs_lc_3c.html"
+    "0_class_profile_summary_cars_suvs_combined_lc_3c.html"
   )
 )
-gt_car_suv_lc_3c_latex <- gt_car_suv_lc_3c %>%
-  tab_options(
-    table.font.size = px(9)
-  ) %>%
-  cols_width(
-    everything() ~ px(80), # uniform width
-    label ~ px(140) # wider key column
-  ) %>%
-  as_latex()
+# gt_car_suv_lc_3c_latex <- gt_car_suv_lc_3c %>%
+#   tab_options(
+#     table.font.size = px(9)
+#   ) %>%
+#   cols_width(
+#     everything() ~ px(80), # uniform width
+#     label ~ px(140) # wider key column
+#   ) %>%
+#   as_latex()
 
-writeLines(
-  gt_car_suv_lc_3c_latex,
-  con = here::here(
-    "code",
-    "output",
-    "model_output",
-    "vehicle_analysis",
-    "apollo",
-    "0_class_profile_summary_cars_suvs_lc_3c.tex"
-  )
-)
+# writeLines(
+#   gt_car_suv_lc_3c_latex,
+#   con = here::here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "vehicle_analysis",
+#     "apollo",
+#     "0_class_profile_summary_cars_suvs_lc_3c.tex"
+#   )
+# )
 
 # gtsave(
 #   gt_car_suv_lc_3c,

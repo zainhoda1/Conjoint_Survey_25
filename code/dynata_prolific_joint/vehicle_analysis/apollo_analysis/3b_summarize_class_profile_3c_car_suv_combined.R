@@ -127,7 +127,6 @@ sig <- read.csv(here(
   rename_with(~ str_remove(., "Sig._"))
 
 
-# R
 # Compute probability-weighted summaries for a model and return tidy long table
 
 # model <- suv_lc_3c
@@ -163,12 +162,10 @@ summarize_lc_model <- function(
   db_indiv <- db %>%
     left_join(conditionals, by = c("respID" = "ID")) %>%
     distinct(respID, .keep_all = TRUE) %>%
-    rename(
-      prob_class1 = prob_class1,
-      prob_class3 = prob_class2,
-      prob_class2 = prob_class3
-    ) %>%
-    #     SUV_class2 = SUV_class3)
+    rename(temp_prob = prob_class2) %>%
+    rename(prob_class2 = prob_class3) %>%
+    rename(prob_class3 = temp_prob) %>%
+    relocate(prob_class1, prob_class2, prob_class3, .after = last_col()) %>%
     mutate(
       prob_class_max = pmax(prob_class1, prob_class2, prob_class3),
       prob_class_assign = case_when(
@@ -372,20 +369,6 @@ combined_all <- car_res %>%
   ) %>%
   # filter(!is.na(Car_class1)) # keep only variables that appear in at least one model
   filter(!is.na(Combined_class1)) # keep only variables that appear in at least one model
-# change class order
-combined_all <- combined_all %>%
-  rename(
-    Car_class1 = Car_class1,
-    Car_class3 = Car_class2,
-    Car_class2 = Car_class3,
-    SUV_class1 = SUV_class1,
-    SUV_class3 = SUV_class2,
-    SUV_class2 = SUV_class3,
-    Combined_class1 = Combined_class1,
-    Combined_class3 = Combined_class2,
-    Combined_class2 = Combined_class3
-  )
-
 
 # --- change unit ---
 combined_all <- combined_all %>%

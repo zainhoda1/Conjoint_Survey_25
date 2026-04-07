@@ -72,7 +72,7 @@ combined_all <- bind_rows(
   select(-P.Value)
 
 
-formatted <- combined_all %>%
+formatted_a <- combined_all %>%
   separate(
     col = Variables,
     into = c("Variables", "Class"),
