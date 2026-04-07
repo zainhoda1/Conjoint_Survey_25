@@ -22,6 +22,7 @@ data_model <- read_parquet(here(
       !is.na(Veh_primary_range)
   )
 
+prop.table(table(data_model$next_veh_fuel_used_bev))
 ### ----Latent class (c=3)----
 # Create an empty list to store the results of each model run
 model_results <- list()
@@ -480,7 +481,7 @@ saveRDS(
     "model_output",
     "vehicle_analysis",
     "apollo",
-    "car_suv_lc_3c_apollo_inputs.rds"
+    "0_car_suv_lc_3c_apollo_inputs.rds"
   )
 )
 
@@ -492,6 +493,6 @@ saveRDS(
     "model_output",
     "vehicle_analysis",
     "apollo",
-    "car_suv_lc_3c_apollo_probabilities.rds"
+    "0_car_suv_lc_3c_apollo_probabilities.rds"
   )
 )

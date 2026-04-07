@@ -6,7 +6,7 @@ source(here::here('code', 'setup.R'))
 data <- read_parquet(here(
   "data",
   "prolific_testing",
-  "choice_data_battery_round2_feb_26.parquet"
+  "choice_data_battery_round2+3_april_26.parquet"
 ))
 
 
@@ -130,3 +130,4 @@ summary(model_car_high)
 summary(model_suv_low)
 summary(model_suv_high)
 summary(model_all)
+

@@ -23,7 +23,8 @@ pkgs <- c(
   "ggridges",
   "purrr",
   "gt",
-  "scales"
+  "scales",
+  "fixest"
 )
 
 installed <- pkgs %in% rownames(installed.packages())
@@ -67,3 +68,4 @@ create_confidence_intervals <- function(model) {
 
   return(wtp_ci)
 }
+
