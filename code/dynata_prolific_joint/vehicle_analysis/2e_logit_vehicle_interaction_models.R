@@ -156,6 +156,28 @@ run_model_interaction_price_age <- function(data) {
   return(model)
 }
 
+run_model_interaction_pt_age <- function(data) {
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    pars = c(
+      "powertrainbev",
+      "powertrainhev",
+      "range_bev",
+      "mileage",
+      "age",
+      "operating_cost",
+      "price",
+      "no_choice",
+      "powertrainbev*mileage",
+      "powertrainhev*mileage"
+    )
+  )
+  cat('n =', length(unique(data$respID)))
+  return(model)
+}
+
 run_model_log_range <- function(data) {
   model <- logitr(
     data = data,
@@ -229,6 +251,16 @@ model_suv_high_log_r <- run_model_log_range(
   data %>% filter(vehicle_typesuv == 1 & budgethigh == 1)
 )
 
+
+model_suv_high_pt_age <- run_model_interaction_pt_age(
+  data %>% filter(vehicle_typesuv == 1 & budgethigh == 1)
+)
+model_car_high_pt_age <- run_model_interaction_pt_age(
+  data %>% filter(vehicle_typesuv == 0 & budgethigh == 1)
+)
+
+summary(model_car_high_pt_age)
+summary(model_suv_high_pt_age)
 
 ### View summary of results
 ##########

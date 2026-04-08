@@ -220,7 +220,7 @@ ggsave(
     'code',
     'output',
     "images",
-    "vehicle_wtp_range.png"    
+    "vehicle_wtp_range_old.png"    
   ),
   width = 8,
   height = 6,
