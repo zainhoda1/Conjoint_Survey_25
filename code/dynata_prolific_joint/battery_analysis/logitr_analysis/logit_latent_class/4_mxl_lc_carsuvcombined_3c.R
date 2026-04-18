@@ -8,6 +8,7 @@ data_dce_full <- read_parquet(here(
   "data_logitr_dce_covariate_battery.parquet"
 ))
 
+## Repeat sampling many times and average results
 data_class_prop <- read_parquet(here(
   "code",
   "output",
@@ -17,10 +18,44 @@ data_class_prop <- read_parquet(here(
   "0_Combined_3c_class_probabilities.parquet"
 ))
 
+data_class_prop$prob_class_max_assign <- data_class_prop$prob_class_assign
+
+n_sim <- 50
+
+class_draws <- replicate(n_sim, {
+  apply(
+    data_class_prop[, c("prob_class1", "prob_class2", "prob_class3")],
+    1,
+    function(p) sample(1:3, size = 1, prob = p)
+  )
+})
+
+class_draws <- as.data.frame(class_draws)
+
+class_draws$prob_class_assign <- apply(class_draws, 1, function(x) {
+  as.numeric(names(which.max(table(x))))
+})
+
+data_class_prop$prob_class_assign <- factor(
+  class_draws$prob_class_assign,
+  levels = 1:3,
+  labels = c("class1", "class2", "class3")
+)
+data_class_prop$same_class_assign <- data_class_prop$prob_class_assign ==
+  data_class_prop$prob_class_max_assign
+
+table(data_class_prop$same_class_assign) # 22 different
+
+## Full sample
 data_dce <- data_dce_full %>%
   left_join(data_class_prop, by = "respID") %>%
   filter(!is.na(prob_class1))
 
+## Full sample with prop>=0.5
+data_dce <- data_dce_full %>%
+  left_join(data_class_prop, by = "respID") %>%
+  filter(!is.na(prob_class1)) %>%
+  filter(prob_class_max >= 0.66)
 # ftable(data_dce$vehicle_typesuv) / 24
 # ftable(data_dce$battery_info_treat) / 24
 # ftable(data_dce$vehicle_typesuv, data_dce$battery_info_treat) / 24
@@ -97,6 +132,11 @@ mxl_model_wtp <- function(data, wtp_pref_model) {
   return(model)
 }
 
+dt <- data_dce %>% filter(prob_class_assign == "class1" & vehicle_typesuv == 0)
+# experiment
+m_pref <- mxl_model_pref(dt)
+m_wtp <- mxl_model_wtp(dt, m_pref)
+summary(m_wtp)
 
 ## model estimation ----
 # Fit pref and WTP models for all combinations of battery_info_treat x vehicle_typesuv x prob_class_assign
@@ -208,6 +248,19 @@ for (i in seq_len(nrow(grid))) {
 }
 
 # Save all models in wtp_models ----
+# saveRDS(
+#   wtp_models,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "battery_analysis",
+#     "logitr",
+#     "latent_class",
+#     "ml_3c_wtp_combined.Rds"
+#   )
+# )
+
 saveRDS(
   wtp_models,
   file = here(
@@ -217,7 +270,7 @@ saveRDS(
     "battery_analysis",
     "logitr",
     "latent_class",
-    "ml_3c_wtp_combined.Rds"
+    "ml_3c_wtp_combined_reduced.Rds"
   )
 )
 

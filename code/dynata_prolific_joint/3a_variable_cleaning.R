@@ -146,6 +146,7 @@ data <- data %>%
 ## ----Other----
 data <- data %>%
   mutate(
+    ATT_range_anxiety = attitudes_1_b_ev_range,
     ATT_EVB_environment = attitudes_2_a_ev_battery_environment,
     ATT_EVB_function = attitudes_2_a_ev_battery_function,
     ATT_techsavvy = attitudes_2_b_tech_savvy,
@@ -216,6 +217,186 @@ data <- data %>%
       T ~ 0
     )
   )
+
+
+# ---- Flag issues ----
+data <- data %>%
+  mutate(
+    flag_attention_check = attitudes_2_a_attention_check_agree !=
+      "strongly_agree",
+    survey_duration = difftime(time_end, time_start, units = "sec"),
+    flag_speeding = survey_duration < 300,
+    flag_veh_inconsistent = case_when(
+      primary_veh_fuel == "bev" &
+        !str_detect(household_veh_fuel, "bev") ~ 1,
+      primary_veh_fuel == "hev" &
+        !str_detect(household_veh_fuel, "hev") ~ 1,
+      primary_veh_fuel == "phev" & !str_detect(household_veh_fuel, "phev") ~ 1,
+      primary_veh_fuel == "icev" &
+        !str_detect(household_veh_fuel, "icev") ~ 1,
+      T ~ 0
+    ),
+    flag_veh_knowledge_inconsistent = case_when(
+      primary_veh_fuel == "hev" &
+        !str_detect(run_on_gasoline, "hev") ~ 1,
+      primary_veh_fuel == "phev" &
+        (!str_detect(run_on_gasoline, "phev") |
+          !str_detect(plugged_in, "phev")) ~ 1,
+      primary_veh_fuel == "bev" &
+        !str_detect(plugged_in, "bev") ~ 1,
+      T ~ 0
+    ),
+    flag_bev_name_dontknow = case_when(
+      primary_veh_fuel == "bev" &
+        know_electric_vehicle == "no" ~ 1,
+      T ~ 0
+    ),
+    hh_veh_household_size = case_when(
+      !is.na(household_veh_count) & !is.na(hhsize_num) ~ household_veh_count /
+        hhsize_num,
+      T ~ NA
+    ),
+    flag_veh_household_size = case_when(
+      hh_veh_household_size > 3 ~ 1,
+      T ~ 0
+    ),
+    flag_veh_income = case_when(
+      hh_veh_household_size > 2 &
+        hhincome_num < 50000 ~ 1,
+      T ~ 0
+    ),
+    flag_budget_income = case_when(
+      !is.na(next_veh_budget) &
+        is.na(hhincome_num) &
+        next_veh_budget - hhincome_num > 20000 ~ 1,
+      T ~ 0
+    ),
+    flag_opentext = case_when(
+      str_detect(
+        next_veh_nobev,
+        regex(
+          "\\bnone\\b|\\bn/a\\b|\\bna\\b|\\bidk\\b",
+          ignore_case = TRUE
+        )
+      ) ~ 1,
+      str_detect(
+        attention_check_survey_content,
+        regex(
+          "\\bnone\\b|\\bn/a\\b|\\bna\\b|\\bidk\\b",
+          ignore_case = TRUE
+        )
+      ) ~ 1,
+      T ~ 0
+    ),
+    flag_total = rowSums(select(., starts_with("flag_")), na.rm = TRUE)
+  ) %>%
+  filter(flag_total <= 1) # remove respondents with 3 or more flags (sensitivity check: can also try 2+ flags)
+
+
+# b <- data %>%
+#   select(-starts_with("time_")) %>%
+#   filter(flag_total==2)
+
+# # summarize open-text and flag low-quality answers
+# opentext_next_veh_nobev <- data %>%
+#   select(respID, next_veh_nobev)
+
+# opentext_survey <- data %>%
+#   select(respID, attention_check_survey_content)
+
+# library(stringdist)
+
+# flag_opentext <- function(
+#   df,
+#   id_col = "respID",
+#   text_col,
+#   near_dup_thresh = 0.15,
+#   dup_count_cutoff = 3
+# ) {
+#   df2 <- df %>%
+#     select(all_of(id_col), text = all_of(text_col)) %>%
+#     filter(!is.na(text)) %>%
+#     mutate(
+#       n_chars = nchar(text),
+#       n_words = str_count(text, "\\S+"),
+#       repeated_chars = str_detect(text, "(.)\\1{4,}"),
+#       alpha_prop = ifelse(
+#         n_chars > 0,
+#         str_count(text, "[A-Za-z]") / n_chars,
+#         0
+#       ),
+#       generic = str_detect(
+#         str_to_lower(text),
+#         "^\\s*(survey|about survey|about this survey|no idea|no|none|n/a|na|idk|dont know|don't know|nothing|test|asdf|qwerty)\\b"
+#       ),
+#       very_short = n_words <= 2 | n_chars <= 5,
+#       nonalpha_heavy = alpha_prop < 0.5
+#     )
+#   if (nrow(df2) == 0) {
+#     return(tibble::tibble(respID = character(), text = character()))
+#   }
+#   # exact duplicate counts
+#   dup_counts <- df2 %>%
+#     group_by(text) %>%
+#     summarise(n_same = n(), .groups = "drop")
+#   df2 <- df2 %>% left_join(dup_counts, by = "text")
+#   # near-duplicate counts via cosine distance
+#   texts <- df2$text
+#   dist_mat <- stringdist::stringdistmatrix(texts, texts, method = "cosine")
+#   neardup_counts <- rowSums(dist_mat < near_dup_thresh) - 1
+#   df2 <- df2 %>% mutate(neardup_count = neardup_counts)
+#   # flags
+#   df2 <- df2 %>%
+#     mutate(
+#       flag_exact_duplicate_majority = n_same >= dup_count_cutoff,
+#       flag_many_near_duplicates = neardup_count >= dup_count_cutoff,
+#       flag_gibberish = repeated_chars | nonalpha_heavy,
+#       flag_low_content = very_short | generic,
+#       flag_bad = flag_exact_duplicate_majority |
+#         flag_many_near_duplicates |
+#         flag_gibberish |
+#         flag_low_content
+#     ) %>%
+#     rename(respID = all_of(id_col))
+#   df2
+# }
+
+# # run flags for both questions (uses existing objects opentext_next_veh_nobev and opentext_survey)
+# flags_next <- flag_opentext(
+#   opentext_next_veh_nobev,
+#   text_col = "next_veh_nobev"
+# )
+# flags_survey <- flag_opentext(
+#   opentext_survey,
+#   text_col = "attention_check_survey_content"
+# )
+
+# # combine per-respondent: mark respondent bad if flagged on either question
+# bad_combined <- bind_rows(
+#   flags_next %>% select(respID, source = "text", everything()),
+#   flags_survey %>% select(respID, source = "text", everything())
+# ) %>%
+#   group_by(respID) %>%
+#   summarize(
+#     flagged_in_next = any(source == "text" & flag_bad),
+#     flagged_in_survey = any(source == "text" & flag_bad),
+#     flagged_any = flagged_in_next | flagged_in_survey,
+#     n_flags = sum(flag_bad),
+#     .groups = "drop"
+#   ) %>%
+#   arrange(desc(flagged_any), desc(n_flags))
+
+# a<-list(
+#   flags_next = flags_next,
+#   flags_survey = flags_survey,
+#   bad_respondents = bad_combined
+# )
+
+# b<-data %>%
+#   select(respID, next_veh_nobev, attention_check_survey_content) %>%
+#   filter(! (is.na(next_veh_nobev) & is.na(attention_check_survey_content))) %>%
+#   right_join(bad_combined, by = c("respID")) %>%
+#   mutate(flagged_any = ifelse(is.na(flagged_any), FALSE, flagged_any))
 
 # ----Data Output----
 write_parquet(

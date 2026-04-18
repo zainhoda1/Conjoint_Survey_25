@@ -1,0 +1,21 @@
+"Variables","Est._Car_class1","Est._Car_class2","Est._Car_class3","Est._SUV_class1","Est._SUV_class2","Est._SUV_class3","Est._Combined_class1","Est._Combined_class2","Est._Combined_class3","Std.Err._Car_class1","Std.Err._Car_class2","Std.Err._Car_class3","Std.Err._SUV_class1","Std.Err._SUV_class2","Std.Err._SUV_class3","Std.Err._Combined_class1","Std.Err._Combined_class2","Std.Err._Combined_class3","Sig._Car_class1","Sig._Car_class2","Sig._Car_class3","Sig._SUV_class1","Sig._SUV_class2","Sig._SUV_class3","Sig._Combined_class1","Sig._Combined_class2","Sig._Combined_class3","label","section","fmt"
+"no_choice",-4.73,0.28,-3.97,-6.12,-1.17,-3.76,-5.32,-0.85,-3.45,0.91,0.59,0.84,0.66,0.53,0.54,0.39,0.36,0.58,"***"," ","***","***","*","***","***","*","***","No-Choice Option (opt-out)","Vehicle Attributes","dollar"
+"mileage",-0.19,-0.15,-0.1,-0.29,-0.35,-0.12,-0.23,-0.27,-0.11,0.04,0.08,0.04,0.05,0.08,0.04,0.03,0.06,0.04,"***",".","*","***","***","***","***","***","*","Mileage (10,000 miles)","Vehicle Attributes","dollar"
+"range_year0",2.06,1.24,-0.26,1.08,0.76,0.27,1.19,0.76,0.08,0.57,0.3,0.11,0.15,0.23,0.14,0.14,0.15,0.14,"***","***","*","***","***",".","***","***"," ","BEV Electric Range at Year 0 (100 miles)","Vehicle Attributes","dollar"
+"degradation",-0.49,-0.33,-0.14,-0.77,-0.44,-0.1,-0.56,-0.42,-0.04,0.06,0.1,0.1,0.14,0.07,0.04,0.05,0.05,0.03,"***","***"," ","***","***","*","***","***"," ","Battery Degradation Rate (% per year)","Vehicle Attributes","dollar"
+"packreplace",-0.22,-0.89,-0.21,-0.32,-0.6,-0.32,-0.4,-0.65,-0.08,0.19,0.29,0.18,0.14,0.22,0.13,0.11,0.18,0.16," ","***"," ","*","*","*","***","***"," ","Battery Refurbishment: Pack Replace","Vehicle Attributes","dollar"
+"cellreplace",-0.18,-0.94,-0.17,-0.28,-0.54,-0.31,-0.36,-0.62,-0.12,0.17,0.24,0.16,0.16,0.24,0.14,0.1,0.18,0.16," ","***"," ",".","*","*","***","***"," ","Battery Refurbishment: Cell Replace","Vehicle Attributes","dollar"
+"price",-1.64,-0.77,-0.38,-1.19,-0.92,-0.53,-1.24,-0.86,-0.45,0.32,0.32,0.16,0.23,0.21,0.25,0.1,0.17,0.16,"***","*","*","***","***","*","***","***","***","Purchase Price (10,000 USD)","Vehicle Attributes","dollar"
+"ASC",-1.4,NA,1.57,-0.12,NA,2.19,NA,-0.59,1.21,1.07,NA,0.62,0.78,NA,0.66,NA,0.42,0.44," ",NA,"*"," ",NA,"***",NA," ","*","ASC","Active Indicators","number"
+"EV_rangeanxiety",0.3,NA,-0.59,-0.08,NA,-0.75,NA,0.24,-0.72,0.4,NA,0.41,0.31,NA,0.3,NA,0.26,0.24," ",NA," "," ",NA,"*",NA," ","***","Perceived EV Range Anxiety: Agree","Active Indicators","number"
+"risktaker",0.39,NA,0.62,0.27,NA,0.62,NA,NA,NA,0.31,NA,0.31,0.3,NA,0.36,NA,NA,NA," ",NA,"*"," ",NA,".",NA,NA,NA,"risktaker",NA,NA
+"hhincome",0.13,NA,0.09,0.11,NA,0.05,NA,-0.02,-0.04,0.03,NA,0.03,0.02,NA,0.02,NA,0.01,0.02,"***",NA,"*","***",NA,".",NA," ",".","Household Income (10,000 USD)","Active Indicators","number"
+"ev_charge",0.32,NA,0.32,0.43,NA,0.59,NA,-0.42,0.14,0.28,NA,0.31,0.23,NA,0.27,NA,0.16,0.26," ",NA," ",".",NA,"*",NA,"*"," ","Electrical Outlet Access","Active Indicators","pct"
+"ev_neighbor",0.66,NA,1.02,0.22,NA,0.21,NA,NA,NA,0.3,NA,0.3,0.23,NA,0.27,NA,NA,NA,"*",NA,"***"," ",NA," ",NA,NA,NA,"ev_neighbor",NA,NA
+"knowledge_ev",0.28,NA,-0.44,0.38,NA,0.06,NA,NA,NA,0.29,NA,0.37,0.23,NA,0.27,NA,NA,NA," ",NA," "," ",NA," ",NA,NA,NA,"knowledge_ev",NA,NA
+"evenvironment_agree",1.25,NA,0.43,0.87,NA,0.05,NA,-0.98,-0.64,0.57,NA,0.39,0.22,NA,0.25,NA,0.17,0.22,"*",NA," ","***",NA," ",NA,"***","***","EV Battery Environmentally Positive: Agree","Active Indicators","number"
+"evfunction_disagree",1.1,NA,0.02,0.47,NA,0.76,NA,-0.86,-0.17,0.4,NA,0.45,0.3,NA,0.33,NA,0.22,0.26,"*",NA," "," ",NA,"*",NA,"***"," ","EV Battery Functionally Negative: Disagree","Active Indicators","number"
+"hhveh_fuel",0.03,NA,-0.54,-0.07,NA,-0.58,NA,NA,NA,0.36,NA,0.34,0.31,NA,0.35,NA,NA,NA," ",NA," "," ",NA," ",NA,NA,NA,"hhveh_fuel",NA,NA
+"veh_refuel",0.02,NA,0.04,0.05,NA,0.08,NA,NA,NA,0.04,NA,0.04,0.04,NA,0.04,NA,NA,NA," ",NA," "," ",NA,"*",NA,NA,NA,"veh_refuel",NA,NA
+"veh_range",0.05,NA,-0.27,-0.1,NA,-0.42,NA,0.13,-0.25,0.16,NA,0.12,0.11,NA,0.12,NA,0.08,0.09," ",NA,"*"," ",NA,"***",NA,".","*","Primary Vehicle Typical Range (miles)","Active Indicators","number"
+"suv",NA,NA,NA,NA,NA,NA,NA,0.2,-0.24,NA,NA,NA,NA,NA,NA,NA,0.18,0.22,NA,NA,NA,NA,NA,NA,NA," "," ","SUV Segment","Active Indicators","pct"

@@ -24,7 +24,8 @@ pkgs <- c(
   "purrr",
   "gt",
   "scales",
-  "fixest"
+  "fixest",
+  "cowplot"
 )
 
 installed <- pkgs %in% rownames(installed.packages())
@@ -55,17 +56,16 @@ create_confidence_intervals <- function(model) {
 
   # Adding dollar values
   wtp_draws <- wtp_draws %>%
-    mutate(across(where(is.numeric), ~ .x * 10^4)) %>% 
+    mutate(across(where(is.numeric), ~ .x * 10^4)) %>%
     mutate(
-      BEV100 = (powertrainbev + range_bev) ,
-      BEV200 = (powertrainbev + range_bev * 2) ,
-      BEV300 = (powertrainbev + range_bev * 3) 
+      BEV100 = (powertrainbev + range_bev),
+      BEV200 = (powertrainbev + range_bev * 2),
+      BEV300 = (powertrainbev + range_bev * 3)
     )
 
   # For each coefficient, get the mean and 95% confidence interval of WTP
-  wtp_ci <- ci(wtp_draws, level = 0.95)%>%
+  wtp_ci <- ci(wtp_draws, level = 0.95) %>%
     mutate(across(everything(), ~ round(.x, 2)))
 
   return(wtp_ci)
 }
-

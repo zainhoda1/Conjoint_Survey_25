@@ -108,6 +108,8 @@ data_dce_dummy_apollo <- data_dce_dummy %>%
     choice,
     mileage,
     battery_range_year0,
+    battery_range_year3,
+    battery_range_year8,
     battery_degradation,
     battery_refurbishcellreplace,
     battery_refurbishpackreplace,
@@ -121,6 +123,8 @@ data_dce_dummy_apollo <- data_dce_dummy %>%
       mileage,
       battery_range_year0,
       battery_degradation,
+      battery_range_year3,
+      battery_range_year8,
       battery_refurbishcellreplace,
       battery_refurbishpackreplace,
       price,
@@ -147,6 +151,7 @@ data_covariate_num <- data_covariate %>%
   mutate(
     across(
       any_of(c(
+        "ATT_range_anxiety",
         "ATT_EVB_environment",
         "ATT_EVB_function",
         "ATT_price_sensitive",

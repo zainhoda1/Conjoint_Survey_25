@@ -69,7 +69,7 @@ car_suv_lc_3c_apollo_inputs <- readRDS(here(
   "model_output",
   "vehicle_analysis",
   "apollo",
-  "0_car_suv_lc_3c_apollo_inputs.rds"
+  "car_suv_lc_3c_apollo_inputs.rds"
 ))
 
 car_suv_lc_3c_apollo_probabilities <- readRDS(here(
@@ -78,7 +78,7 @@ car_suv_lc_3c_apollo_probabilities <- readRDS(here(
   "model_output",
   "vehicle_analysis",
   "apollo",
-  "0_car_suv_lc_3c_apollo_probabilities.rds"
+  "car_suv_lc_3c_apollo_probabilities.rds"
 ))
 
 data_model <- read_parquet(here(
@@ -87,18 +87,24 @@ data_model <- read_parquet(here(
   "data_apollo_vehicle.parquet"
 )) %>%
   filter(
-    !is.na(hhincome_num) &
-      !is.na(FA_EV_benefit) &
+    # !is.na(hhincome_num) &
+    !is.na(FA_EV_benefit) &
       !is.na(FA_EV_anxiety) &
       !is.na(hhincome_num_10k) &
-      !is.na(EV_charger) &
+      # !is.na(EV_charger) &
       !is.na(EV_neighbor) &
       !is.na(knowledge_ev) &
-      !is.na(knowledge_subsidy) &
-      !is.na(Veh_hh_count) &
-      !is.na(Veh_hh_fuel) &
-      !is.na(Veh_primary_refuel_monthly) &
-      !is.na(Veh_primary_range)
+      # !is.na(knowledge_subsidy) &
+      # !is.na(Veh_hh_count) &
+      # !is.na(Veh_hh_fuel) &
+      # !is.na(Veh_primary_refuel_monthly) &
+      # !is.na(Veh_primary_range)
+      !is.na(ATT_risktaker) &
+      # !is.na(ATT_price_sensitive) &
+      # !is.na(ATT_climate) &
+
+      !is.na(ATT_EVB_environment) &
+      !is.na(ATT_EVB_function)
   )
 
 database <- data_model %>%
@@ -162,9 +168,9 @@ summarize_lc_model <- function(
   db_indiv <- db %>%
     left_join(conditionals, by = c("respID" = "ID")) %>%
     distinct(respID, .keep_all = TRUE) %>%
-    rename(temp_prob = prob_class2) %>%
-    rename(prob_class2 = prob_class3) %>%
-    rename(prob_class3 = temp_prob) %>%
+    # rename(temp_prob = prob_class2) %>%
+    # rename(prob_class2 = prob_class3) %>%
+    # rename(prob_class3 = temp_prob) %>%
     relocate(prob_class1, prob_class2, prob_class3, .after = last_col()) %>%
     mutate(
       prob_class_max = pmax(prob_class1, prob_class2, prob_class3),
@@ -356,7 +362,7 @@ combined_all <- car_res %>%
     by = "variable"
   ) %>%
   full_join(
-    combined_res,
+    combined_res %>% select(-label_raw),
     by = "variable"
   ) %>%
   mutate(label = coalesce(label_raw, variable)) %>%
@@ -402,12 +408,12 @@ var_meta <- tribble(
   "FA_EV_anxiety"              , "Perceived EV Anxiety (factor score)"           , "Active Indicators"                           , "number" ,
   "hhincome_num_k"             , "Household Income (1000 USD)"                   , "Active Indicators"                           , "number" ,
   "knowledge_ev"               , "EV Knowledge"                                  , "Active Indicators"                           , "pct"    ,
-  "knowledge_subsidy"          , "EV Subsidy Knowledge"                          , "Active Indicators"                           , "pct"    ,
-  "EV_charger"                 , "Home Charger Access"                           , "Active Indicators"                           , "pct"    ,
+  "knowledge_subsidy"          , "EV Subsidy Knowledge"                          , "Inactive Indicators: Socioeconomics"         , "pct"    ,
+  "EV_charger"                 , "Home Electrical Outlet Access"                 , "Inactive Indicators: Socioeconomics"         , "pct"    ,
   "EV_neighbor"                , "Neighbor Owns/Leases a BEV/PHEV"               , "Active Indicators"                           , "pct"    ,
-  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"    , "Active Indicators"                           , "number" ,
-  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"         , "Active Indicators"                           , "number" ,
-  "vehicle_typesuv"            , "SUV Segment"                                   , "Active Indicators"                           , "pct"    ,
+  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"    , "Inactive Indicators: Socioeconomics"         , "number" ,
+  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"         , "Inactive Indicators: Socioeconomics"         , "number" ,
+  # "vehicle_typesuv"            , "SUV Segment"                                   , "Active Indicators"                           , "pct"    ,
   # Inactive / Socioeconomic & other variables
   "age_num"                    , "Age"                                           , "Inactive Indicators: Socioeconomics"         , "number" ,
   "gender_cate"                , "Gender"                                        , "Inactive Indicators: Socioeconomics"         , "pct"    ,
@@ -429,13 +435,13 @@ var_meta <- tribble(
   "next_veh_fuel_used_bev"     , "Likelihood of buying used BEV (1–5)"           , "Inactive Indicators: Socioeconomics"         , "number" ,
 
   # Attitudes / psychological
-  "ATT_risktaker"              , "Risk-taking Propensity (1–5)"                  , "Inactive Indicators: Attitudes"              , "number" ,
+  "ATT_risktaker"              , "Risk-taking Propensity (1–5)"                  , "Active Indicators"                           , "number" ,
   "ATT_price_sensitive"        , "Price Sensitivity (1–5)"                       , "Inactive Indicators: Attitudes"              , "number" ,
   "ATT_climate"                , "Climate Concern (1–5)"                         , "Inactive Indicators: Attitudes"              , "number" ,
   "ATT_political"              , "Political Spectrum"                            , "Inactive Indicators: Attitudes"              , "pct"    ,
   "ATT_voting"                 , "Voting Behavior"                               , "Inactive Indicators: Attitudes"              , "pct"    ,
-  "ATT_EVB_environment"        , "EV Battery Environmental Attitude (1–5 scale)" , "Inactive Indicators: Attitudes"              , "number" ,
-  "ATT_EVB_function"           , "EV Battery Functional Attitude (1–5 scale)"    , "Inactive Indicators: Attitudes"              , "number"
+  "ATT_EVB_environment"        , "EV Battery Environmental Attitude (1–5 scale)" , "Active Indicators"                           , "number" ,
+  "ATT_EVB_function"           , "EV Battery Functional Attitude (1–5 scale)"    , "Active Indicators"                           , "number"
 )
 
 section <- c(
@@ -576,7 +582,7 @@ summarize_class_size <- function(
     ungroup() %>%
     arrange(class) %>%
     mutate(
-      class_name = c("BEV-adverse", "BEV-skeptical", "BEV-open")
+      class_name = c("BEV-adverse", "BEV-open", "BEV-skeptical")
     ) %>%
     mutate(
       class_label = paste0(
@@ -689,37 +695,3 @@ gtsave(
     "0_class_profile_summary_cars_suvs_combined_lc_3c.html"
   )
 )
-# gt_car_suv_lc_3c_latex <- gt_car_suv_lc_3c %>%
-#   tab_options(
-#     table.font.size = px(9)
-#   ) %>%
-#   cols_width(
-#     everything() ~ px(80), # uniform width
-#     label ~ px(140) # wider key column
-#   ) %>%
-#   as_latex()
-
-# writeLines(
-#   gt_car_suv_lc_3c_latex,
-#   con = here::here(
-#     "code",
-#     "output",
-#     "model_output",
-#     "vehicle_analysis",
-#     "apollo",
-#     "0_class_profile_summary_cars_suvs_lc_3c.tex"
-#   )
-# )
-
-# gtsave(
-#   gt_car_suv_lc_3c,
-#   file = file = here::here(
-#     "code",
-#     "output",
-#     "model_output",
-#     "apollo",
-#     "vehicle",
-#     "class_profile_summary_cars_suvs_lc_3c.png"
-#   ),
-#   expand = 20
-# )

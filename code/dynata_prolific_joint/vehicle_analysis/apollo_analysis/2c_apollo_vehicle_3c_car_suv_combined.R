@@ -8,18 +8,17 @@ data_model <- read_parquet(here(
   "data_apollo_vehicle.parquet"
 )) %>%
   filter(
-    !is.na(hhincome_num) &
       !is.na(FA_EV_benefit) &
       !is.na(FA_EV_anxiety) &
-      !is.na(hhincome_num_10k) &
-      !is.na(EV_charger) &
+      !is.na(next_veh_budget_10k) &
+      # !is.na(EV_charger) &
       !is.na(EV_neighbor) &
       !is.na(knowledge_ev) &
-      !is.na(knowledge_subsidy) &
-      !is.na(Veh_hh_count) &
-      !is.na(Veh_hh_fuel) &
-      !is.na(Veh_primary_refuel_monthly) &
-      !is.na(Veh_primary_range)
+      # !is.na(knowledge_subsidy) &
+      # !is.na(Veh_hh_count) &
+      # !is.na(Veh_hh_fuel) &
+      # !is.na(Veh_primary_refuel_monthly) &
+      # !is.na(Veh_primary_range)
   )
 
 prop.table(table(data_model$next_veh_fuel_used_bev))

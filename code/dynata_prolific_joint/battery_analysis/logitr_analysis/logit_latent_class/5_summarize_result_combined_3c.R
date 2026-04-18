@@ -2,7 +2,17 @@ source(here::here('code', 'setup.R'))
 
 
 # UPLOAD MODELS ----
-wtp_models_origin <- wtp_models
+
+# wtp_models <- readRDS(here(
+#   "code",
+#   "output",
+#   "model_output",
+#   "battery_analysis",
+#   "logitr",
+#   "latent_class",
+#   "ml_3c_wtp_combined.Rds"
+# ))
+
 wtp_models <- readRDS(here(
   "code",
   "output",
@@ -10,7 +20,7 @@ wtp_models <- readRDS(here(
   "battery_analysis",
   "logitr",
   "latent_class",
-  "ml_3c_wtp_combined.Rds"
+  "ml_3c_wtp_combined_reduced.Rds"
 ))
 
 # Coef models----
@@ -188,8 +198,8 @@ summarize_class_size <- ftable(
     ),
     class_name = case_when(
       class_name == "class1" ~ "Class1\nBEV-adverse",
-      class_name == "class2" ~ "Class2\nBEV-skeptical",
-      class_name == "class3" ~ "Class3\nBEV-open"
+      class_name == "class2" ~ "Class2\nBEV-open",
+      class_name == "class3" ~ "Class3\nBEV-skeptical"
     )
   ) %>%
   mutate(
@@ -242,6 +252,19 @@ gt_car_suv_ml_3c <- gt_formatted |>
 
 gt_car_suv_ml_3c
 
+# gtsave(
+#   gt_car_suv_ml_3c,
+#   file = here::here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "battery_analysis",
+#     "logitr",
+#     "latent_class",
+#     "0_model_summary_cars_suvs_ml_3c_combined.html"
+#   )
+# )
+
 gtsave(
   gt_car_suv_ml_3c,
   file = here::here(
@@ -251,6 +274,6 @@ gtsave(
     "battery_analysis",
     "logitr",
     "latent_class",
-    "0_model_summary_cars_suvs_ml_3c_combined.html"
+    "0_model_summary_cars_suvs_ml_3c_combined_reduced.html"
   )
 )
