@@ -358,3 +358,115 @@ ggsave(
   height = 6,
   dpi = 300
 )
+
+
+
+library(scales)
+
+temp4 |> 
+  mutate(segment = case_when(
+    segment == 'Low range' ~ 'Low Budget',
+    .default = 'High Budget'),
+    model_type = case_when (
+      model_type == 'car'  ~ 'CAR',
+      .default = 'SUV'
+    )
+) |> 
+  ggplot(aes(
+    x     = current_range,
+    y     = mean,
+    color = current_age,
+    fill  = current_age,
+    linetype = segment
+  )) +
+  geom_hline(yintercept = 0, color = "grey70", linewidth = 0.4) +
+  geom_ribbon(
+    aes(ymin = lower, ymax = upper),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 0.9) +
+  facet_grid(
+    current_age ~ model_type,
+    scales   = "free_y",
+    labeller = labeller(
+      current_age = c("2" = "Age 2", "5" = "Age 5", "8" = "Age 8")
+    )
+  ) +
+  scale_color_manual(
+    values = c("2" = "#C0392B", "5" = "#1A7A5E", "8" = "#2E6DA4"),
+    guide  = "none"   
+    # name   = "Current age",
+    # labels = c("2" = "2 years", "5" = "5 years", "8" = "8 years")
+  ) +
+  scale_fill_manual(
+    values = c("2" = "#C0392B", "5" = "#1A7A5E", "8" = "#2E6DA4"),
+    guide  = "none"
+  ) +
+  scale_linetype_manual(
+    values = c("High Budget" = "solid", "Low Budget" = "dashed"),
+    name   = "Market Segment"
+  ) +
+  scale_y_continuous(
+    labels = label_dollar(scale = 1e-3, suffix = "k", accuracy = 1)
+  ) +
+  scale_x_continuous(breaks = 1:4, labels= c("100", "200", "300", "400")) +
+
+  labs(
+    title    = "Estimated WTP for Vehicle Range and Age",
+    subtitle = "95% confidence intervals shown as shaded bands",
+    x        = "Vehicle range (miles)",
+    y        = "Willingness to pay (USD)"
+  ) +
+  theme_bw(base_size = 12, base_family = "sans") +
+  theme(
+    # Background
+    plot.background  = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA),
+    panel.border     = element_rect(color = "grey80", fill = NA, linewidth = 0.5),
+
+    # Grid — keep only major horizontal
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor   = element_blank(),
+    panel.grid.major.y = element_line(color = "grey92", linewidth = 0.35),
+
+    # Titles
+    plot.title    = element_text(face = "bold", size = 13, margin = margin(b = 4)),
+    plot.subtitle = element_text(size = 10, color = "grey40", margin = margin(b = 8)),
+    plot.caption  = element_text(size = 8, color = "grey50", hjust = 0),
+
+    # Axes
+    axis.title   = element_text(size = 10, face = "bold"),
+    axis.text    = element_text(size = 9, color = "grey30"),
+    axis.ticks   = element_line(color = "grey70", linewidth = 0.3),
+
+    # Facet strips
+    strip.text       = element_text(face = "bold", size = 9),
+    strip.background = element_rect(fill = "grey95", color = "grey80", linewidth = 0.5),
+
+    # Legend
+    legend.position  = "bottom",
+    legend.direction = "horizontal",
+    legend.title     = element_text(size = 9, face = "bold"),
+    legend.text      = element_text(size = 9),
+    legend.key.width = unit(1.8, "cm"),
+    legend.spacing.x = unit(0.6, "cm"),
+
+    # Margins
+    plot.margin = margin(10, 14, 8, 10)
+  )
+
+
+
+ggsave(
+  filename = here::here(
+    'code',
+    'output',
+    "images",
+    "vehicle_analysis",
+    "wtp_range_with_coef_int.png"    
+  ),
+  width = 8,
+  height = 6,
+  dpi = 300
+)

@@ -132,8 +132,8 @@ run_model_wtp <- function(data) {
 }
 
 # Estimate the model
-#model_car <- run_model(data %>% filter(vehicle_typesuv == 0))
-#model_suv <- run_model(data %>% filter(vehicle_typesuv == 1))
+model_car <- run_model(data %>% filter(vehicle_typesuv == 0))
+model_suv <- run_model(data %>% filter(vehicle_typesuv == 1))
 
 model_car_prolific_r1 <- run_model(
   data %>%
@@ -223,6 +223,16 @@ summary(wtp_model_all)
 ######################################
 
 # Save model object
+
+save(
+  model_car,
+  file = here("models", "model_car.RData")
+)
+
+save(
+  model_suv,
+  file = here("models", "model_suv.RData")
+)
 
 save(
   model_car_low,

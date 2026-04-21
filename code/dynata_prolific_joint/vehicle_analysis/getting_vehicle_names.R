@@ -88,9 +88,19 @@ cars <- listings |>
   filter (year > 2019  & year < 2024) |> 
   select(model, make, powertrain) |>
   group_by(model, make, powertrain) |> 
-  summarise() |> 
+  summarise(counts =n()) |> 
   distinct() |>
   collect()
 
 cars
+
+
+vehicle_list <- left_join(vehicle_list , cars, by = c('model', 'make', 'powertrain') )
+
+
+vehicles_data |> 
+  ggplot(aes(x = price)) +
+  geom_histogram() +
+  facet_wrap(~model)
+  facet_grid(model~powertrain)
 
