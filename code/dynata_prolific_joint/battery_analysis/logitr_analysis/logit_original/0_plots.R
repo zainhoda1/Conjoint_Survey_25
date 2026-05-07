@@ -61,6 +61,12 @@ load(here(
   "mxl_wtp_model_suv_notreat.RData"
 ))
 
+# Quantile summaries of key battery attributes ----
+probs <- c(0, 0.25, 0.33, 0.50, 0.66, 0.75, 1.00)
+
+quantile(data_model$battery_range_year3_1, probs = probs, na.rm = TRUE)
+quantile(data_model$battery_range_loss_1,  probs = probs, na.rm = TRUE)
+
 summary(wtp_model_car)
 summary(wtp_model_suv)
 
@@ -72,14 +78,14 @@ wtp_table <- data.frame(
   Parameter = c(
     "Scale parameter",
     "Mileage (unit: 10,000 miles)",
-    "Battery range (year 0, unit: 100 miles)",
-    "Battery annual degradation rate (unit: % per year)",
+    "Battery range (year 3, unit: 100 miles)",
+    "Battery range loss rate (unit: % over the next 5 years)",
     "Battery refurbishment (pack level)",
     "Battery refurbishment (cell level)",
     "No Choice",
     "sd_Mileage",
-    "sd_Battery range (year 0)",
-    "sd_Battery annual degradation rate",
+    "sd_Battery range (year 3)",
+    "sd_Battery range loss rate (% over the next 5 years)",
     "sd_Battery refurbishment (cell level)",
     "sd_Battery refurbishment (pack level)"
   ),
@@ -87,7 +93,7 @@ wtp_table <- data.frame(
     "-",
     "10,000 miles",
     "100 miles",
-    "% per year",
+    "% in the next 5 years",
     "-",
     "-",
     "-",
@@ -98,9 +104,9 @@ wtp_table <- data.frame(
     "-"
   ),
   Estimate_car = round(coef(wtp_model_car), 3),
-  StdError_car = round(se(wtp_model_car), 3),
+  StdError_car = round(sqrt(diag(vcov(wtp_model_car))), 3),
   Estimate_suv = round(coef(wtp_model_suv), 3),
-  StdError_suv = round(se(wtp_model_suv), 3)
+  StdError_suv = round(sqrt(diag(vcov(wtp_model_suv))), 3)
 )
 
 wtp_table_long <- wtp_table %>%
@@ -169,16 +175,16 @@ extract_wtp_heterogeneity <- function(model, seg_label) {
   # Random pars: mean + SD (sd params are prefixed "sd_")
   rand_pars <- c(
     "mileage",
-    "battery_range_year0",
-    "battery_degradation",
+    "battery_range_year3",
+    "battery_range_loss",
     "battery_refurbishpackreplace",
     "battery_refurbishcellreplace"
   )
 
   par_labels <- c(
     mileage = "Mileage (unit: 10,000 miles)",
-    battery_range_year0 = "Battery range (year 0, unit: 100 miles)",
-    battery_degradation = "Battery annual degradation rate (unit: % per year)",
+    battery_range_year3 = "Battery range (year 3, unit: 100 miles)",
+    battery_range_loss = "Battery range loss rate (unit: % over the next 5 years)",
     battery_refurbishpackreplace = "Battery refurbishment (pack level)",
     battery_refurbishcellreplace = "Battery refurbishment (cell level)"
   )
@@ -293,12 +299,12 @@ get_model_pars <- function(model, segment_label) {
   coefs <- coef(model)
   tibble(
     segment = segment_label,
-    mean_range = pull_coef(coefs, "battery_range_year0"),
-    mean_degrad = pull_coef(coefs, "battery_degradation"),
+    mean_range = pull_coef(coefs, "battery_range_year3"),
+    mean_degrad = pull_coef(coefs, "battery_range_loss"),
     mean_pack = pull_coef(coefs, "battery_refurbishpackreplace"),
     mean_cell = pull_coef(coefs, "battery_refurbishcellreplace"),
-    sd_range = abs(pull_coef(coefs, "sd_battery_range_year0")),
-    sd_degrad = abs(pull_coef(coefs, "sd_battery_degradation")),
+    sd_range = abs(pull_coef(coefs, "sd_battery_range_year3")),
+    sd_degrad = abs(pull_coef(coefs, "sd_battery_range_loss")),
     sd_pack = abs(pull_coef(coefs, "sd_battery_refurbishpackreplace")),
     sd_cell = abs(pull_coef(coefs, "sd_battery_refurbishcellreplace"))
   )
@@ -310,12 +316,12 @@ pars_all <- bind_rows(pars_car, pars_suv)
 
 # choose sensible ranges from your DCE data (use 1st/99th pct to avoid outliers)
 rng_degrad <- quantile(
-  data_dce$battery_degradation,
+  data_dce$battery_range_loss,
   probs = c(0, 1),
   na.rm = TRUE
 )
 rng_range <- quantile(
-  data_dce$battery_range_year0,
+  data_dce$battery_range_year3,
   probs = c(0., 1),
   na.rm = TRUE
 )
@@ -333,22 +339,22 @@ refurb_levels <- tribble(
 
 # build grid and compute combined mean WTP and population SD
 grid <- expand_grid(
-  battery_degradation = degrad_seq,
-  battery_range_year0 = range_seq
+  battery_range_loss = degrad_seq,
+  battery_range_year3 = range_seq
 )
 
 calc_df <- expand_grid(pars_all, refurb_levels) %>%
   crossing(grid) %>%
   mutate(
     mean_wtp = mean_range *
-      battery_range_year0 +
-      mean_degrad * battery_degradation +
+      battery_range_year3 +
+      mean_degrad * battery_range_loss +
       mean_pack * pack +
       mean_cell * cell,
     # assume independent random coeffs (diagonal mixing) -> var(sum) = sum((sd_i * x_i)^2)
     pop_sd_wtp = sqrt(
-      (sd_range * battery_range_year0)^2 +
-        (sd_degrad * battery_degradation)^2 +
+      (sd_range * battery_range_year3)^2 +
+        (sd_degrad * battery_range_loss)^2 +
         (sd_pack * pack)^2 +
         (sd_cell * cell)^2
     ),
@@ -377,18 +383,18 @@ calc_df |>
   summarise(
     n_total = n(),
     n_na_mean_wtp = sum(is.na(mean_wtp)),
-    n_na_x = sum(is.na(battery_degradation)),
-    n_na_y = sum(is.na(battery_range_year0)),
-    n_y_below = sum((battery_range_year0 * 100) < 0, na.rm = TRUE),
-    n_y_above = sum((battery_range_year0 * 100) > 350, na.rm = TRUE)
+    n_na_x = sum(is.na(battery_range_loss)),
+    n_na_y = sum(is.na(battery_range_year3)),
+    n_y_below = sum((battery_range_year3 * 100) < 0, na.rm = TRUE),
+    n_y_above = sum((battery_range_year3 * 100) > 350, na.rm = TRUE)
   )
 
 # plot: 3 rows (refurb) x 2 cols (segment) -> six heatmaps
 
 heatmap_plot <- calc_df %>%
   ggplot(aes(
-    x = battery_degradation,
-    y = battery_range_year0 * 100,
+    x = battery_range_loss,
+    y = battery_range_year3 * 100,
     fill = mean_wtp * 10
   )) +
   geom_raster(interpolate = TRUE) +
@@ -396,8 +402,8 @@ heatmap_plot <- calc_df %>%
   geom_contour(
     data = calc_df,
     aes(
-      x = battery_degradation,
-      y = battery_range_year0 * 100,
+      x = battery_range_loss,
+      y = battery_range_year3 * 100,
       z = mean_wtp * 10
     ),
     breaks = 0,
@@ -458,12 +464,12 @@ pars_all <- bind_rows(pars_car, pars_suv)
 
 # choose sensible ranges from your DCE data (use 1st/99th pct to avoid outliers)
 rng_degrad <- quantile(
-  data_dce$battery_degradation,
+  data_dce$battery_range_loss,
   probs = c(0, 1),
   na.rm = TRUE
 )
 rng_range <- quantile(
-  data_dce$battery_range_year0,
+  data_dce$battery_range_year3,
   probs = c(0., 1),
   na.rm = TRUE
 )
@@ -481,22 +487,22 @@ refurb_levels <- tribble(
 
 # build grid and compute combined mean WTP and population SD
 grid <- expand_grid(
-  battery_degradation = degrad_seq,
-  battery_range_year0 = range_seq
+  battery_range_loss = degrad_seq,
+  battery_range_year3 = range_seq
 )
 
 calc_df <- expand_grid(pars_all, refurb_levels) %>%
   crossing(grid) %>%
   mutate(
     mean_wtp = mean_range *
-      battery_range_year0 +
-      mean_degrad * battery_degradation +
+      battery_range_year3 +
+      mean_degrad * battery_range_loss +
       mean_pack * pack +
       mean_cell * cell,
     # assume independent random coeffs (diagonal mixing) -> var(sum) = sum((sd_i * x_i)^2)
     pop_sd_wtp = sqrt(
-      (sd_range * battery_range_year0)^2 +
-        (sd_degrad * battery_degradation)^2 +
+      (sd_range * battery_range_year3)^2 +
+        (sd_degrad * battery_range_loss)^2 +
         (sd_pack * pack)^2 +
         (sd_cell * cell)^2
     ),
@@ -525,18 +531,18 @@ calc_df |>
   summarise(
     n_total = n(),
     n_na_mean_wtp = sum(is.na(mean_wtp)),
-    n_na_x = sum(is.na(battery_degradation)),
-    n_na_y = sum(is.na(battery_range_year0)),
-    n_y_below = sum((battery_range_year0 * 100) < 0, na.rm = TRUE),
-    n_y_above = sum((battery_range_year0 * 100) > 350, na.rm = TRUE)
+    n_na_x = sum(is.na(battery_range_loss)),
+    n_na_y = sum(is.na(battery_range_year3)),
+    n_y_below = sum((battery_range_year3 * 100) < 0, na.rm = TRUE),
+    n_y_above = sum((battery_range_year3 * 100) > 350, na.rm = TRUE)
   )
 
 # plot: 3 rows (refurb) x 2 cols (segment) -> six heatmaps
 
 heatmap_plot <- calc_df %>%
   ggplot(aes(
-    x = battery_degradation,
-    y = battery_range_year0 * 100,
+    x = battery_range_loss,
+    y = battery_range_year3 * 100,
     fill = mean_wtp * 10
   )) +
   geom_raster(interpolate = TRUE) +
@@ -544,8 +550,8 @@ heatmap_plot <- calc_df %>%
   geom_contour(
     data = calc_df,
     aes(
-      x = battery_degradation,
-      y = battery_range_year0 * 100,
+      x = battery_range_loss,
+      y = battery_range_year3 * 100,
       z = mean_wtp * 10
     ),
     breaks = 0,
@@ -567,8 +573,8 @@ heatmap_plot <- calc_df %>%
   # scale_y_continuous(limits = c(0, 350), breaks = seq(0, 350, 50)) +
   labs(
     x = "Battery degradation rate (unit: percentage per year)",
-    y = "Battery range (year 0, unit: miles)",
-    title = "Combined mean WTP for battery range and degradation\nacross refurbishment levels and vehicle segments\n(subgroup: with information treatment on battery warranty)",
+    y = "Battery range (year 3, unit: miles)",
+    title = "Combined mean WTP for battery range and range loss rate\nacross refurbishment levels and vehicle segments\n(subgroup: with information treatment on battery warranty)",
     subtitle = "1. The black dashed line indicates the threshold where WTP equals zero.\n2. The red solid line represents a battery degradation rate of 3.53%.\nAt this rate, the battery's state of health (SoH) falls below 75% by Year 8, thereby qualifying for warranty replacement at no cost."
   ) +
   theme_minimal(base_size = 11) +
@@ -606,12 +612,12 @@ pars_all <- bind_rows(pars_car, pars_suv)
 
 # choose sensible ranges from your DCE data (use 1st/99th pct to avoid outliers)
 rng_degrad <- quantile(
-  data_dce$battery_degradation,
+  data_dce$battery_range_loss,
   probs = c(0, 1),
   na.rm = TRUE
 )
 rng_range <- quantile(
-  data_dce$battery_range_year0,
+  data_dce$battery_range_year3,
   probs = c(0., 1),
   na.rm = TRUE
 )
@@ -629,22 +635,22 @@ refurb_levels <- tribble(
 
 # build grid and compute combined mean WTP and population SD
 grid <- expand_grid(
-  battery_degradation = degrad_seq,
-  battery_range_year0 = range_seq
+  battery_range_loss = degrad_seq,
+  battery_range_year3 = range_seq
 )
 
 calc_df <- expand_grid(pars_all, refurb_levels) %>%
   crossing(grid) %>%
   mutate(
     mean_wtp = mean_range *
-      battery_range_year0 +
-      mean_degrad * battery_degradation +
+      battery_range_year3 +
+      mean_degrad * battery_range_loss +
       mean_pack * pack +
       mean_cell * cell,
     # assume independent random coeffs (diagonal mixing) -> var(sum) = sum((sd_i * x_i)^2)
     pop_sd_wtp = sqrt(
-      (sd_range * battery_range_year0)^2 +
-        (sd_degrad * battery_degradation)^2 +
+      (sd_range * battery_range_year3)^2 +
+        (sd_degrad * battery_range_loss)^2 +
         (sd_pack * pack)^2 +
         (sd_cell * cell)^2
     ),
@@ -673,18 +679,18 @@ calc_df |>
   summarise(
     n_total = n(),
     n_na_mean_wtp = sum(is.na(mean_wtp)),
-    n_na_x = sum(is.na(battery_degradation)),
-    n_na_y = sum(is.na(battery_range_year0)),
-    n_y_below = sum((battery_range_year0 * 100) < 0, na.rm = TRUE),
-    n_y_above = sum((battery_range_year0 * 100) > 350, na.rm = TRUE)
+    n_na_x = sum(is.na(battery_range_loss)),
+    n_na_y = sum(is.na(battery_range_year3)),
+    n_y_below = sum((battery_range_year3 * 100) < 0, na.rm = TRUE),
+    n_y_above = sum((battery_range_year3 * 100) > 350, na.rm = TRUE)
   )
 
 # plot: 3 rows (refurb) x 2 cols (segment) -> six heatmaps
 
 heatmap_plot <- calc_df %>%
   ggplot(aes(
-    x = battery_degradation,
-    y = battery_range_year0 * 100,
+    x = battery_range_loss,
+    y = battery_range_year3 * 100,
     fill = mean_wtp * 10
   )) +
   geom_raster(interpolate = TRUE) +
@@ -693,8 +699,8 @@ heatmap_plot <- calc_df %>%
   geom_contour(
     data = calc_df,
     aes(
-      x = battery_degradation,
-      y = battery_range_year0 * 100,
+      x = battery_range_loss,
+      y = battery_range_year3 * 100,
       z = mean_wtp * 10
     ),
     breaks = 0,
@@ -743,6 +749,156 @@ ggsave(
     "battery_heatmap_plot_notreat.png"
   ),
   width = 8,
+  height = 6,
+  dpi = 300
+)
+
+# Treat vs. No-treat side-by-side heatmap (no-refurbishment baseline) ----
+# Build one combined data frame from all four groups
+
+get_model_pars_treat <- function(model, segment_label, treat_label) {
+  coefs <- coef(model)
+  tibble(
+    segment = segment_label,
+    treatment = treat_label,
+    mean_range = pull_coef(coefs, "battery_range_year3"),
+    mean_degrad = pull_coef(coefs, "battery_range_loss"),
+    mean_pack = pull_coef(coefs, "battery_refurbishpackreplace"),
+    mean_cell = pull_coef(coefs, "battery_refurbishcellreplace"),
+    sd_range = abs(pull_coef(coefs, "sd_battery_range_year3")),
+    sd_degrad = abs(pull_coef(coefs, "sd_battery_range_loss")),
+    sd_pack = abs(pull_coef(coefs, "sd_battery_refurbishpackreplace")),
+    sd_cell = abs(pull_coef(coefs, "sd_battery_refurbishcellreplace"))
+  )
+}
+
+pars_combined <- bind_rows(
+  get_model_pars_treat(
+    wtp_model_car_treat,
+    "Car",
+    "With treatment"
+  ),
+  get_model_pars_treat(
+    wtp_model_suv_treat,
+    "SUV",
+    "With treatment"
+  ),
+  get_model_pars_treat(
+    wtp_model_car_notreat,
+    "Car",
+    "Without treatment"
+  ),
+  get_model_pars_treat(
+    wtp_model_suv_notreat,
+    "SUV",
+    "Without treatment"
+  )
+) %>%
+  mutate(
+    segment = factor(segment, levels = c("Car", "SUV")),
+    treatment = factor(
+      treatment,
+      levels = c("With treatment", "Without treatment")
+    )
+  )
+
+degrad_seq_4p <- seq(rng_degrad[1], rng_degrad[2], length.out = 80)
+range_seq_4p <- seq(rng_range[1], rng_range[2], length.out = 80)
+grid_4p <- expand_grid(
+  battery_range_loss = degrad_seq_4p,
+  battery_range_year3 = range_seq_4p
+)
+
+calc_df_4p <- pars_combined %>%
+  crossing(grid_4p) %>%
+  mutate(
+    mean_wtp = mean_range *
+      battery_range_year3 +
+      mean_degrad * battery_range_loss,
+    pop_sd_wtp = sqrt(
+      (sd_range * battery_range_year3)^2 +
+        (sd_degrad * battery_range_loss)^2
+    )
+  )
+
+# shared symmetric colour limits across all four panels
+wtp_abs_max <- max(abs(calc_df_4p$mean_wtp * 10), na.rm = TRUE)
+fill_limits <- c(-wtp_abs_max, wtp_abs_max)
+
+heatmap_4p <- calc_df_4p %>%
+  ggplot(aes(
+    x = battery_range_loss,
+    y = battery_range_year3 * 100,
+    fill = mean_wtp * 10
+  )) +
+  geom_raster(interpolate = TRUE) +
+  geom_contour(
+    aes(z = mean_wtp * 10),
+    breaks = 0,
+    color = "grey50",
+    linetype = "dashed",
+    linewidth = 0.6,
+    na.rm = TRUE
+  ) +
+  facet_grid(treatment ~ segment) +
+  scale_fill_gradient2(
+    name = "Mean WTP\n(unit: $1,000)",
+    low = "#0170d8ff",
+    mid = "white",
+    high = " #da5f07ff",
+    midpoint = 0,
+    limits = fill_limits,
+    na.value = "transparent"
+  ) +
+  scale_x_continuous(
+    limits = c(3.5, 37.5),
+    breaks = c(3.5, seq(10, 30, 10), 37.5)
+  ) +
+  scale_y_continuous(
+    limits = c(40, 340),
+    breaks = c(40, seq(100, 300, 100), 340)
+  ) +
+  labs(
+    x = "Battery range loss rate (unit: percentage in the next 5 years)",
+    y = "Battery range (year 3, unit: miles)",
+    title = "Mean WTP for battery range and range loss rate \nby vehicle segment and information treatment",
+    subtitle = "1. The black dashed line indicates the threshold where WTP equals zero.\n2. The axis limits reflect the observed range of battery range loss rate (3.5-37.5%)\nand battery range at year 3 (40-340 miles) in the survey data."
+  ) +
+  # theme_minimal(base_size = 11) +
+  theme_minimal_grid(font_family = "Roboto Condensed", font_size = 16) +
+  theme(
+    plot.subtitle = element_text(size = rel(0.8), margin = margin(b = 6)),
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.3),
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = NA),
+    panel.ontop = TRUE,
+    strip.background = element_rect(fill = "grey95", colour = NA)
+  )
+
+heatmap_4p
+
+# Summary table: mean WTP range across four panels ----
+calc_df_4p %>%
+  group_by(segment, treatment) %>%
+  summarise(
+    min_wtp = round(min(mean_wtp * 10, na.rm = TRUE), 2),
+    max_wtp = round(max(mean_wtp * 10, na.rm = TRUE), 2),
+    mean_wtp_avg = round(mean(mean_wtp * 10, na.rm = TRUE), 2),
+    .groups = "drop"
+  ) %>%
+  arrange(segment, treatment) %>%
+  print()
+
+ggsave(
+  plot = heatmap_4p,
+  filename = here::here(
+    "code",
+    "output",
+    "images",
+    "battery_analysis",
+    "battery_heatmap_treat_comparison.png"
+  ),
+  width = 9,
   height = 6,
   dpi = 300
 )

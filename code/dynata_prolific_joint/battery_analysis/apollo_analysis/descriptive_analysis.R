@@ -211,7 +211,11 @@ barplot_bev_attribute_rank_weighted <- battery_long_class_summary |>
   ggplot(aes(x = attribute, y = pct, fill = response)) +
   geom_col(position = "stack") +
   geom_text(
+<<<<<<< Updated upstream
     aes(label = paste0(pct_text)),
+=======
+    aes(label = ifelse(pct_text >= 5, paste0(pct_text, "%"), "")),
+>>>>>>> Stashed changes
     position = position_stack(vjust = 0.5),
     size = 3,
     color = "black",
@@ -219,7 +223,12 @@ barplot_bev_attribute_rank_weighted <- battery_long_class_summary |>
   ) +
   scale_fill_manual(
     values = c(
+<<<<<<< Updated upstream
       "Unimportant or little importance" = "#A6761D",
+=======
+      "Unimportant" = "#A6761D",
+      "Of little importance" = "#C2A56F",
+>>>>>>> Stashed changes
       "Moderately important" = "#D3D3D3",
       "Important" = "#92B6D5",
       "Very important" = "#4682B4"

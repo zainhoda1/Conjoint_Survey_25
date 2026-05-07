@@ -58,7 +58,8 @@ data_variable <- data_variable %>%
     starts_with("knowledge_"),
     starts_with("Veh_"),
     starts_with("EV_"),
-    starts_with("next_veh_fuel_")
+    starts_with("next_veh_fuel_"),
+    battery_info_treat
   ) %>%
   mutate(
     hhincome_num_10k = hhincome_num / 10000,
@@ -237,7 +238,53 @@ data_covariate_dummy <- cbc_encode(
   as.data.frame()
 
 ### Loading data from package
-database_all = data_covariate_num
+database_all <- data_covariate_num %>%
+  mutate(
+    battery_range_year3_1 = battery_range_year0_1 *
+      (1 - battery_degradation_1 / 100)^3,
+    battery_range_year3_2 = battery_range_year0_2 *
+      (1 - battery_degradation_2 / 100)^3,
+    battery_range_year3_3 = battery_range_year0_3 *
+      (1 - battery_degradation_3 / 100)^3,
+    battery_range_year8_1 = battery_range_year0_1 *
+      (1 - battery_degradation_1 / 100)^8,
+    battery_range_year8_2 = battery_range_year0_2 *
+      (1 - battery_degradation_2 / 100)^8,
+    battery_range_year8_3 = battery_range_year0_3 *
+      (1 - battery_degradation_3 / 100)^8,
+    # battery_range_loss_1 = battery_range_year0_1 - battery_range_year8_1,
+    # battery_range_loss_2 = battery_range_year0_2 - battery_range_year8_2,
+    # battery_range_loss_3 = battery_range_year0_3 - battery_range_year8_3,
+
+    battery_range_loss_1 = (battery_range_year3_1 - battery_range_year8_1) /
+      battery_range_year3_1 *
+      100,
+    battery_range_loss_2 = (battery_range_year3_2 - battery_range_year8_2) /
+      battery_range_year3_2 *
+      100,
+    battery_range_loss_3 = (battery_range_year3_3 - battery_range_year8_3) /
+      battery_range_year3_3 *
+      100,
+
+    # battery_range_loss_1 = (battery_range_year0_1 - battery_range_year8_1) /
+    #   battery_range_year0_1 *
+    #   100,
+    # battery_range_loss_2 = (battery_range_year0_2 - battery_range_year8_2) /
+    #   battery_range_year0_2 *
+    #   100,
+    # battery_range_loss_3 = (battery_range_year0_3 - battery_range_year8_3) /
+    #   battery_range_year0_3 *
+    #   100,
+    battery_range_loss_4 = 0,
+    battery_range_year0_1_quadratic = battery_range_year0_1^2,
+    battery_range_year0_2_quadratic = battery_range_year0_2^2,
+    battery_range_year0_3_quadratic = battery_range_year0_3^2,
+    battery_range_year0_4_quadratic = 0,
+    battery_range_loss_1_quadratic = battery_range_loss_1^2,
+    battery_range_loss_2_quadratic = battery_range_loss_2^2,
+    battery_range_loss_3_quadratic = battery_range_loss_3^2,
+    battery_range_loss_4_quadratic = 0
+  )
 
 write_parquet(
   database_all,

@@ -16,12 +16,29 @@ data_dce <- read_parquet(here(
     battery_range_year0 = battery_range_year0 / 100, # 1-3
     battery_range_year3 = battery_range_year3 / 100, # 1-3
     battery_range_year8 = battery_range_year8 / 100, # 0.5 - 2
-    battery_degradation = (battery_degradation * 100)
+    battery_degradation = (battery_degradation * 100),
+    battery_range_loss = (battery_range_year3 - battery_range_year8) /
+      battery_range_year3 *
+      100
   ) %>%
   mutate(
     respID_qID = paste0(respID, "_", qID),
     price = case_when(is.na(price) ~ 0, T ~ price)
   )
+
+# Respondents who opted out of all 6 choice tasks ----
+# no_choice == 1 flags the opt-out alternative (altID 4);
+# choice == 1 means it was selected. Filter to respondents
+# where the opt-out was chosen in every one of the 6 tasks.
+
+psid_alloptout <- data_dce %>%
+  filter(no_choice == 1) %>%
+  group_by(psid, respID) %>%
+  summarise(n_optout = sum(choice == 1), .groups = "drop") %>%
+  filter(n_optout == 6) %>%
+  select(psid, respID)
+
+cat("Respondents opting out of all 6 tasks:", nrow(psid_alloptout), "\n")
 
 
 # Data Processing----

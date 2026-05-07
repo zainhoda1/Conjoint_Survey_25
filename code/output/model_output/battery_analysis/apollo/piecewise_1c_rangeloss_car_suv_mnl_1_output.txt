@@ -1,0 +1,305 @@
+Model run by xnw17 using Apollo 0.3.6 on R 4.5.2 for Darwin.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : piecewise_1c_rangeloss_car_suv_mnl_1
+Model description                           : MNL model with piecewise linear range and range loss
+Model run at                                : 2026-04-28 00:48:47.73046
+Estimation method                           : bgw
+Estimation diagnosis                        : Relative function convergence (favorable)
+Optimisation diagnosis                      : Maximum found
+     hessian properties                     : Negative definite
+     maximum eigenvalue                     : -43.355754
+     reciprocal of condition number         : 0.000147424
+Number of individuals                       : 1373
+Number of rows in database                  : 8238
+Number of modelled outcomes                 : 8238
+
+Number of cores used                        :  2 
+Model without mixing
+
+LL(start)                                   : -11420.29
+LL at equal shares, LL(0)                   : -11420.29
+LL at observed shares, LL(C)                : -11409.83
+LL(final)                                   : -9877.01
+Rho-squared vs equal shares                  :  0.1351 
+Adj.Rho-squared vs equal shares              :  0.1342 
+Rho-squared vs observed shares               :  0.1343 
+Adj.Rho-squared vs observed shares           :  0.1336 
+AIC                                         :  19776.03 
+BIC                                         :  19853.21 
+
+Estimated parameters                        : 11
+Time taken (hh:mm:ss)                       :  00:00:5.61 
+     pre-estimation                         :  00:00:4.55 
+     estimation                             :  00:00:0.35 
+     post-estimation                        :  00:00:0.71 
+Iterations                                  :  8  
+
+Unconstrained optimisation.
+
+Estimates:
+                 Estimate        s.e.   t.rat.(0)  p(2-sided)    Rob.s.e. Rob.t.rat.(0)  p(2-sided)
+b_no_choice      -2.46391    0.138858     -17.744       0.000    0.191474       -12.868       0.000
+b_mileage        -0.15972    0.012553     -12.724       0.000    0.013702       -11.657       0.000
+b_range_pw1       1.00011    0.085648      11.677       0.000    0.113412         8.818       0.000
+b_range_pw2       0.49712    0.088461       5.620   1.914e-08    0.114667         4.335   1.455e-05
+b_range_pw3       0.64772    0.054932      11.791       0.000    0.073116         8.859       0.000
+b_loss_pw1       -0.08132    0.007881     -10.318       0.000    0.007884       -10.314       0.000
+b_loss_pw2       -0.06752    0.005312     -12.710       0.000    0.005518       -12.237       0.000
+b_loss_pw3       -0.04239    0.007449      -5.691   1.266e-08    0.007347        -5.769   7.958e-09
+b_packreplace    -0.26585    0.038585      -6.890   5.578e-12    0.043376        -6.129   8.844e-10
+b_cellreplace    -0.26753    0.038576      -6.935   4.057e-12    0.043094        -6.208   5.361e-10
+b_price          -0.75018    0.026212     -28.619       0.000    0.039166       -19.154       0.000
+
+
+Overview of choices for MNL model component :
+                                    alt1    alt2    alt3 no_choice
+Times available                  8238.00 8238.00 8238.00   8238.00
+Times chosen                     2006.00 2215.00 2083.00   1934.00
+Percentage chosen overall          24.35   26.89   25.29     23.48
+Percentage chosen when available   24.35   26.89   25.29     23.48
+
+
+
+Classical covariance matrix:
+                b_no_choice     b_mileage   b_range_pw1   b_range_pw2   b_range_pw3    b_loss_pw1
+b_no_choice        0.019282    6.7065e-04      0.006813     -0.001831   -1.3245e-04    5.4708e-04
+b_mileage        6.7065e-04    1.5758e-04    -2.366e-05    -4.619e-06    -1.295e-05     1.989e-06
+b_range_pw1        0.006813    -2.366e-05      0.007336     -0.002867    4.2304e-04    -6.480e-06
+b_range_pw2       -0.001831    -4.619e-06     -0.002867      0.007825     -0.002175     1.757e-05
+b_range_pw3     -1.3245e-04    -1.295e-05    4.2304e-04     -0.002175      0.003018    -5.054e-06
+b_loss_pw1       5.4708e-04     1.989e-06    -6.480e-06     1.757e-05    -5.054e-06     6.211e-05
+b_loss_pw2      -1.3923e-04     2.711e-06    -9.117e-06     9.951e-06     1.209e-05    -2.593e-05
+b_loss_pw3        9.918e-05     2.531e-07     1.894e-05     7.751e-07     1.512e-05     1.194e-05
+b_packreplace    8.6723e-04     1.670e-05    -3.238e-05    -6.801e-05    -4.318e-05     3.452e-06
+b_cellreplace    8.3323e-04     9.536e-06    -4.176e-05    -3.099e-05    -3.120e-05     3.656e-06
+b_price            0.001327     2.494e-05   -2.6430e-04   -4.4491e-04   -2.3998e-04     8.295e-06
+                 b_loss_pw2    b_loss_pw3 b_packreplace b_cellreplace       b_price
+b_no_choice     -1.3923e-04     9.918e-05    8.6723e-04    8.3323e-04      0.001327
+b_mileage         2.711e-06     2.531e-07     1.670e-05     9.536e-06     2.494e-05
+b_range_pw1      -9.117e-06     1.894e-05    -3.238e-05    -4.176e-05   -2.6430e-04
+b_range_pw2       9.951e-06     7.751e-07    -6.801e-05    -3.099e-05   -4.4491e-04
+b_range_pw3       1.209e-05     1.512e-05    -4.318e-05    -3.120e-05   -2.3998e-04
+b_loss_pw1       -2.593e-05     1.194e-05     3.452e-06     3.656e-06     8.295e-06
+b_loss_pw2        2.822e-05    -2.415e-05     2.264e-06     3.309e-06     3.152e-06
+b_loss_pw3       -2.415e-05     5.548e-05     3.565e-06     1.734e-06    -1.086e-06
+b_packreplace     2.264e-06     3.565e-06      0.001489    7.0104e-04     5.642e-05
+b_cellreplace     3.309e-06     1.734e-06    7.0104e-04      0.001488     5.027e-05
+b_price           3.152e-06    -1.086e-06     5.642e-05     5.027e-05    6.8707e-04
+
+Robust covariance matrix:
+                b_no_choice     b_mileage   b_range_pw1   b_range_pw2   b_range_pw3    b_loss_pw1
+b_no_choice        0.036662    8.3466e-04      0.012630   -1.0507e-04   -2.0509e-04    6.3974e-04
+b_mileage        8.3466e-04    1.8775e-04    -2.696e-05    -4.644e-05    -7.234e-05     3.514e-06
+b_range_pw1        0.012630    -2.696e-05      0.012862     -0.002436    1.1965e-04     1.329e-05
+b_range_pw2     -1.0507e-04    -4.644e-05     -0.002436      0.013148     -0.002891     4.799e-06
+b_range_pw3     -2.0509e-04    -7.234e-05    1.1965e-04     -0.002891      0.005346    -2.991e-06
+b_loss_pw1       6.3974e-04     3.514e-06     1.329e-05     4.799e-06    -2.991e-06     6.216e-05
+b_loss_pw2       -5.714e-05     2.478e-06    -2.998e-05     3.024e-05     1.207e-05    -2.208e-05
+b_loss_pw3       1.7831e-04     2.283e-06     5.556e-05    -4.226e-05     2.519e-05     1.102e-05
+b_packreplace    7.7796e-04     3.996e-05   -2.1449e-04   -1.5179e-04     1.497e-05     6.627e-06
+b_cellreplace    6.8810e-04     3.282e-05   -1.9574e-04   -1.3036e-04     7.326e-05    -5.132e-06
+b_price            0.003575     3.985e-05   -4.7592e-04   -5.7622e-04   -1.5562e-04     2.869e-05
+                 b_loss_pw2    b_loss_pw3 b_packreplace b_cellreplace       b_price
+b_no_choice      -5.714e-05    1.7831e-04    7.7796e-04    6.8810e-04      0.003575
+b_mileage         2.478e-06     2.283e-06     3.996e-05     3.282e-05     3.985e-05
+b_range_pw1      -2.998e-05     5.556e-05   -2.1449e-04   -1.9574e-04   -4.7592e-04
+b_range_pw2       3.024e-05    -4.226e-05   -1.5179e-04   -1.3036e-04   -5.7622e-04
+b_range_pw3       1.207e-05     2.519e-05     1.497e-05     7.326e-05   -1.5562e-04
+b_loss_pw1       -2.208e-05     1.102e-05     6.627e-06    -5.132e-06     2.869e-05
+b_loss_pw2        3.045e-05    -2.113e-05     6.457e-06     8.657e-06     1.372e-05
+b_loss_pw3       -2.113e-05     5.398e-05     5.373e-06     1.324e-05     1.454e-05
+b_packreplace     6.457e-06     5.373e-06      0.001881      0.001067    -3.120e-05
+b_cellreplace     8.657e-06     1.324e-05      0.001067      0.001857    -2.489e-05
+b_price           1.372e-05     1.454e-05    -3.120e-05    -2.489e-05      0.001534
+
+Classical correlation matrix:
+                b_no_choice     b_mileage   b_range_pw1   b_range_pw2   b_range_pw3    b_loss_pw1
+b_no_choice         1.00000      0.384754      0.572902     -0.149101      -0.01736      0.499909
+b_mileage           0.38475      1.000000     -0.022005     -0.004160      -0.01877      0.020102
+b_range_pw1         0.57290     -0.022005      1.000000     -0.378425       0.08992     -0.009599
+b_range_pw2        -0.14910     -0.004160     -0.378425      1.000000      -0.44768      0.025199
+b_range_pw3        -0.01736     -0.018774      0.089917     -0.447677       1.00000     -0.011674
+b_loss_pw1          0.49991      0.020102     -0.009599      0.025199      -0.01167      1.000000
+b_loss_pw2         -0.18874      0.040658     -0.020038      0.021175       0.04144     -0.619386
+b_loss_pw3          0.09589      0.002707      0.029687      0.001176       0.03696      0.203363
+b_packreplace       0.16186      0.034483     -0.009800     -0.019925      -0.02037      0.011352
+b_cellreplace       0.15555      0.019693     -0.012640     -0.009081      -0.01473      0.012027
+b_price             0.36463      0.075782     -0.117729     -0.191875      -0.16667      0.040156
+                 b_loss_pw2    b_loss_pw3 b_packreplace b_cellreplace       b_price
+b_no_choice        -0.18874      0.095892      0.161862      0.155551      0.364627
+b_mileage           0.04066      0.002707      0.034483      0.019693      0.075782
+b_range_pw1        -0.02004      0.029687     -0.009800     -0.012640     -0.117729
+b_range_pw2         0.02118      0.001176     -0.019925     -0.009081     -0.191875
+b_range_pw3         0.04144      0.036957     -0.020374     -0.014726     -0.166668
+b_loss_pw1         -0.61939      0.203363      0.011352      0.012027      0.040156
+b_loss_pw2          1.00000     -0.610373      0.011043      0.016146      0.022633
+b_loss_pw3         -0.61037      1.000000      0.012403      0.006033     -0.005560
+b_packreplace       0.01104      0.012403      1.000000      0.470984      0.055784
+b_cellreplace       0.01615      0.006033      0.470984      1.000000      0.049718
+b_price             0.02263     -0.005560      0.055784      0.049718      1.000000
+
+Robust correlation matrix:
+                b_no_choice     b_mileage   b_range_pw1   b_range_pw2   b_range_pw3    b_loss_pw1
+b_no_choice        1.000000       0.31814       0.58160     -0.004786     -0.014649      0.423774
+b_mileage          0.318135       1.00000      -0.01735     -0.029560     -0.072211      0.032528
+b_range_pw1        0.581595      -0.01735       1.00000     -0.187349      0.014429      0.014865
+b_range_pw2       -0.004786      -0.02956      -0.18735      1.000000     -0.344781      0.005308
+b_range_pw3       -0.014649      -0.07221       0.01443     -0.344781      1.000000     -0.005188
+b_loss_pw1         0.423774       0.03253       0.01486      0.005308     -0.005188      1.000000
+b_loss_pw2        -0.054081       0.03277      -0.04792      0.047798      0.029909     -0.507548
+b_loss_pw3         0.126753       0.02268       0.06668     -0.050160      0.046895      0.190194
+b_packreplace      0.093670       0.06724      -0.04360     -0.030518      0.004720      0.019379
+b_cellreplace      0.083392       0.05559      -0.04005     -0.026380      0.023252     -0.015105
+b_price            0.476742       0.07426      -0.10714     -0.128303     -0.054344      0.092902
+                 b_loss_pw2    b_loss_pw3 b_packreplace b_cellreplace       b_price
+b_no_choice        -0.05408       0.12675      0.093670       0.08339       0.47674
+b_mileage           0.03277       0.02268      0.067238       0.05559       0.07426
+b_range_pw1        -0.04792       0.06668     -0.043601      -0.04005      -0.10714
+b_range_pw2         0.04780      -0.05016     -0.030518      -0.02638      -0.12830
+b_range_pw3         0.02991       0.04690      0.004720       0.02325      -0.05434
+b_loss_pw1         -0.50755       0.19019      0.019379      -0.01511       0.09290
+b_loss_pw2          1.00000      -0.52119      0.026980       0.03641       0.06347
+b_loss_pw3         -0.52119       1.00000      0.016860       0.04182       0.05053
+b_packreplace       0.02698       0.01686      1.000000       0.57074      -0.01837
+b_cellreplace       0.03641       0.04182      0.570744       1.00000      -0.01475
+b_price             0.06347       0.05053     -0.018367      -0.01475       1.00000
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+   ID Avg prob per choice
+  799          0.06655093
+   36          0.06990351
+  589          0.08593954
+   18          0.09056618
+  473          0.09898389
+  360          0.10028789
+  518          0.10260625
+  660          0.10908164
+  788          0.11179941
+  412          0.11293261
+  376          0.11833735
+   88          0.11856778
+  631          0.12063658
+  394          0.12110018
+  296          0.12158750
+  922          0.12367305
+  767          0.12476516
+ 1186          0.12733348
+  764          0.12749662
+ 1144          0.12799096
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value                                                                                               
+modelName              "piecewise_1c_rangeloss_car_suv_mnl_1"                                                              
+modelDescr             "MNL model with piecewise linear range and range loss"                                              
+indivID                "respID"                                                                                            
+nCores                 "2"                                                                                                 
+panelData              "TRUE"                                                                                              
+outputDirectory        "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/code/output/model_output/battery_analysis/apollo/"
+debug                  "FALSE"                                                                                             
+workInLogs             "FALSE"                                                                                             
+seed                   "13"                                                                                                
+mixing                 "FALSE"                                                                                             
+HB                     "FALSE"                                                                                             
+noValidation           "FALSE"                                                                                             
+noDiagnostics          "FALSE"                                                                                             
+calculateLLC           "TRUE"                                                                                              
+analyticHessian        "FALSE"                                                                                             
+memorySaver            "FALSE"                                                                                             
+analyticGrad           "TRUE"                                                                                              
+analyticGrad_manualSet "FALSE"                                                                                             
+overridePanel          "FALSE"                                                                                             
+preventOverridePanel   "FALSE"                                                                                             
+noModification         "FALSE"                                                                                             
+
+Hessian routines attempted
+--------------------------
+numerical jacobian of LL analytical gradient
+
+Scaling used in computing Hessian
+---------------------------------
+                   Value
+b_no_choice   2.46390805
+b_mileage     0.15972056
+b_range_pw1   1.00010702
+b_range_pw2   0.49711918
+b_range_pw3   0.64772256
+b_loss_pw1    0.08131573
+b_loss_pw2    0.06751871
+b_loss_pw3    0.04238770
+b_packreplace 0.26585100
+b_cellreplace 0.26753349
+b_price       0.75017522
+
+
+apollo_probabilities
+----------------------
+function(
+  apollo_beta,
+  apollo_inputs,
+  functionality = "estimate"
+) {
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+
+  P = list()
+
+  mnl_settings = list(
+    alternatives = c(alt1 = 1, alt2 = 2, alt3 = 3, no_choice = 4),
+    avail = list(alt1 = 1, alt2 = 1, alt3 = 1, no_choice = 1),
+    choiceVar = choice
+  )
+
+  V = list()
+  V[["alt1"]] <-
+    b_mileage * mileage_1 +
+    b_range_pw1 * pmin(battery_range_year3_1, 1.30) +
+    b_range_pw2 * pmax(0, pmin(battery_range_year3_1, 2.00) - 1.30) +
+    b_range_pw3 * pmax(0, battery_range_year3_1 - 2.00) +
+    b_loss_pw1 * pmin(battery_range_loss_1, 12) +
+    b_loss_pw2 * pmax(0, pmin(battery_range_loss_1, 24) - 12) +
+    b_loss_pw3 * pmax(0, battery_range_loss_1 - 24) +
+    b_packreplace * battery_refurbishpackreplace_1 +
+    b_cellreplace * battery_refurbishcellreplace_1 +
+    b_price * price_1
+
+  V[["alt2"]] <-
+    b_mileage * mileage_2 +
+    b_range_pw1 * pmin(battery_range_year3_2, 1.30) +
+    b_range_pw2 * pmax(0, pmin(battery_range_year3_2, 2.00) - 1.30) +
+    b_range_pw3 * pmax(0, battery_range_year3_2 - 2.00) +
+    b_loss_pw1 * pmin(battery_range_loss_2, 12) +
+    b_loss_pw2 * pmax(0, pmin(battery_range_loss_2, 24) - 12) +
+    b_loss_pw3 * pmax(0, battery_range_loss_2 - 24) +
+    b_packreplace * battery_refurbishpackreplace_2 +
+    b_cellreplace * battery_refurbishcellreplace_2 +
+    b_price * price_2
+
+  V[["alt3"]] <-
+    b_mileage * mileage_3 +
+    b_range_pw1 * pmin(battery_range_year3_3, 1.30) +
+    b_range_pw2 * pmax(0, pmin(battery_range_year3_3, 2.00) - 1.30) +
+    b_range_pw3 * pmax(0, battery_range_year3_3 - 2.00) +
+    b_loss_pw1 * pmin(battery_range_loss_3, 12) +
+    b_loss_pw2 * pmax(0, pmin(battery_range_loss_3, 24) - 12) +
+    b_loss_pw3 * pmax(0, battery_range_loss_3 - 24) +
+    b_packreplace * battery_refurbishpackreplace_3 +
+    b_cellreplace * battery_refurbishcellreplace_3 +
+    b_price * price_3
+
+  V[["no_choice"]] <- b_no_choice
+
+  mnl_settings$utilities = V
+
+  P[["model"]] = apollo_mnl(mnl_settings, functionality)
+
+  P[["model"]] = apollo_panelProd(P[["model"]], apollo_inputs, functionality)
+
+  P = apollo_prepareProb(P, apollo_inputs, functionality)
+  return(P)
+}
