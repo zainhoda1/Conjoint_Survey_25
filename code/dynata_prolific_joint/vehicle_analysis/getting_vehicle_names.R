@@ -57,12 +57,13 @@ for (i in 1:nrow(vehicle_list))
   current_vehicle_details <- open_dataset(
   'D:/Spring 2025/ev-affordability-2025/data/listings.parquet'
 ) |> 
-  filter (year > 2019  & year < 2025) |> 
+  filter (year > 2016  & year < 2025) |> 
   filter(model == current_vehicle$model, 
     make == current_vehicle$make , 
     powertrain == current_vehicle$powertrain,
     inventory_type == 'used') |> 
   select( 
+     year,
      listing_year,
      model,
      make, 

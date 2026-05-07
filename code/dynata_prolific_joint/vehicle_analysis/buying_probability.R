@@ -14,7 +14,7 @@ library(cowplot)
 load(here("models", "model_car.RData"))
 load(here("models", "model_suv.RData"))
 
-summary(model_car_high)
+#summary(model_car_high)
 
 
 depreciation_rate = 0.05  # Annual percentage depreciation for EVs
@@ -39,7 +39,7 @@ bev_names <- predicted_car_prices  |>
   select(model, make, powertrain) |> 
   distinct()
 
-bev_names$range <- c(149, 114, 269, 170, 57, 258, 253, 33, 53, 26) # vehicle range from internet search
+bev_names$range <- c( 114, 270, 170, 30, 258, 150, 239, 53, 26) # vehicle range from internet search
 
 vehicle_pairs <- data.frame(
   vehicle_1 = c( 'leaf_nissan_bev_car',
@@ -400,81 +400,105 @@ ggsave(
 
 ##########################################
 
-# placeholder_df |>
-#   ggplot(aes(x = age_years, y = v1_choice_probability,
-#              group = vehicle1, color = vehicle1)) +
-
-#   geom_hline(yintercept = 0.50, linetype = "dashed",
-#              color = "grey65", linewidth = 0.4) +
-#   geom_line(linewidth = 1.0, alpha = 0.9) +
-#   geom_point(aes(color = vehicle1), size = 2.2, alpha = 0.85) +
-
-#   scale_color_manual(
-#     values = bev_colors,
-#     labels = setNames(
-#       placeholder_df$comparisons[match(names(bev_colors), placeholder_df$vehicle1)],
-#       names(bev_colors)
-#     )
-#   ) +
-
-#   scale_y_continuous(
-#     labels = scales::percent_format(accuracy = 1L),
-#     breaks = seq(0.10, 0.90, by = 0.10),
-#     expand = c(0.02, 0)
-#   ) +
-
-#   scale_x_continuous(
-#     breaks = seq(2, 6, by = 1),
-#     expand = expansion(mult = c(0.02, 0.05))
-#   ) +
-
-#   labs(
-#     title    = "BEV Choice Probability by Vehicle Age",
-#     subtitle = "Probability of choosing Battery-electric over Conventional or Hybrid equivalent",
-#     x        = "Vehicle age (years)",
-#     y        = "Probability of BEV choice",
-#     color    = NULL,          # no legend title
-#     caption  = "Note: Dashed line indicates 50% choice parity."
-#   ) +
-#   guides(
-#   color = guide_legend(ncol = 2)
-# ) +
-
-#   theme_minimal(base_size = 13) +
-#   theme(
-#     plot.background  = element_rect(fill = "white", color = NA),
-#     panel.background = element_rect(fill = "white", color = NA),
-#     plot.title       = element_text(face = "bold", size = 15, margin = margin(b = 4)),
-#     plot.subtitle    = element_text(size = 11, color = "grey40", margin = margin(b = 12)),
-#     plot.caption     = element_text(size = 9, color = "grey55", hjust = 0, margin = margin(t = 8)),
-#     plot.margin      = margin(12, 12, 10, 12),
-
-#     axis.title       = element_text(size = 11, color = "grey30"),
-#     axis.text        = element_text(size = 10, color = "grey40"),
-#     panel.grid.major = element_line(color = "grey92", linewidth = 0.4),
-#     panel.grid.minor = element_blank(),
-
-#     # Legend styling
-#     legend.position        = "bottom",
-#     legend.direction       = "horizontal",
-#     legend.justification   = "center",
-#     legend.text            = element_text(size = 8.5, color = "grey20"),
-#     legend.key.width       = unit(1.2, "cm"),  # wider color swatch
-#     legend.key.height      = unit(0.5, "cm"),
-#     legend.spacing.y       = unit(0.3, "cm"),  # breathing room between entries
-#     legend.margin          = margin(0, 0, 0, 10)
-#   )
 
 
-# ggsave(
-#   filename = here::here(
-#     'code',
-#     'output',
-#     "images",
-#     "vehicle_analysis",
-#     "BEV_probability_age_with_depreciation1.png"    
-#   ),
-#   width = 8,
-#   height = 6,
-#   dpi = 300
-# )
+library(tidyverse)
+library(ggrepel)
+
+# Prepare data: get min and max age for each vehicle comparison
+dumbbell_df <- placeholder_df |>
+  group_by(vehicle1) |>
+  summarise(
+    age_min = min(age_years),
+    age_max = max(age_years),
+    prob_min = v1_choice_probability[which.min(age_years)],
+    prob_max = v1_choice_probability[which.max(age_years)],
+    comparisons = first(comparisons),
+    .groups = "drop"
+  ) |>
+  # Order vehicles by the magnitude of change (or by max probability)
+  mutate(vehicle1 = fct_reorder(vehicle1, prob_max))
+
+dumbbell_df |>
+  ggplot(aes(y = vehicle1)) +
+  # Connecting segment between young and old
+  geom_segment(
+    aes(x = prob_min, xend = prob_max, yend = vehicle1, color = vehicle1),
+    linewidth = 1.5,
+    alpha = 0.6
+  ) +
+  # Point for youngest age
+  geom_point(
+    aes(x = prob_min, fill = "Youngest"),
+    shape = 21,
+    color = "white",
+    size = 4,
+    stroke = 1
+  ) +
+  # Point for oldest age
+  geom_point(
+    aes(x = prob_max, fill = "Oldest"),
+    shape = 21,
+    color = "white",
+    size = 4,
+    stroke = 1
+  ) +
+  # Label the comparison on the right
+  geom_text(
+    aes(x = pmax(prob_min, prob_max), label = comparisons, color = vehicle1),
+    hjust = -0.05,
+    size = 3.8,
+    show.legend = FALSE
+  ) +
+  # Optional: label the change magnitude
+  geom_text(
+    aes(
+      x = (prob_min + prob_max) / 2,
+      label = scales::percent(prob_max - prob_min, accuracy = 0.1)
+    ),
+    vjust = -1,
+    size = 3,
+    color = "grey30"
+  ) +
+  # Scales
+  scale_x_continuous(
+    labels = scales::percent_format(accuracy = 1L),
+    breaks = seq(0.10, 0.90, by = 0.10),
+    expand = expansion(mult = c(0.02, 0.30))
+  ) +
+  scale_fill_manual(
+    name = "Age",
+    values = c("Youngest" = "#cccccc", "Oldest" = "#2E86AB")
+  ) +
+  guides(color = "none") +
+  labs(
+    title = "BEV Choice Probability: Change with Vehicle Age",
+    subtitle = "Each bar shows probability shift from youngest to oldest vehicle in sample",
+    x = "Probability of Choice",
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.background  = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA),
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 11, color = "grey40"),
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    axis.text.y = element_blank()  # comparison labels serve as y labels
+  )
+
+
+ggsave(
+  filename = here::here(
+    'code',
+    'output',
+    "images",
+    "vehicle_analysis",
+    "dumbell_BEV_probability_age_with_depreciation.png"    
+  ),
+  width = 8,
+  height = 6,
+  dpi = 300
+)

@@ -12,7 +12,7 @@ data_raw <- read_parquet(here(
 data_approval <- read_parquet(here(
   "data",
   "prolific_testing",
-  "approve_round3.parquet"
+  "approve_round2+3.parquet"
 ))
 
 # Read in choice questions and join it to the choice_data

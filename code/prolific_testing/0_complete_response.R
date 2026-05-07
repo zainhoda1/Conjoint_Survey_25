@@ -25,6 +25,7 @@ nrow(data_raw)
 # Keep first occurrence
 data_raw <- data_raw %>% distinct(prolific_pid, .keep_all = TRUE)
 
+
 nrow(data_raw)
 
 # Check for approvals (need to fix this code)
@@ -147,19 +148,19 @@ write_parquet(
 # demos <- rbind(demos1, demos2) %>%
 #   rename(prolific_pid = participant_id)
 
-demos <- read_csv(here(
-  'fielding',
-  'prolific-april-2026',
-  'prolific-studies',
-  'prolific_demographic_export_69972f6c3f130386dee62c91.csv'
-)) %>%
-  clean_names() %>%
-  filter(status != 'SCREENED OUT') %>%
-  rename(prolific_pid = participant_id) %>%
-  mutate(source = 'round2')
+# demos <- read_csv(here(
+#   'fielding',
+#   'prolific-april-2026',
+#   'prolific-studies',
+#   'prolific_demographic_export_69972f6c3f130386dee62c91.csv'
+# )) %>%
+#   clean_names() %>%
+#   filter(status != 'SCREENED OUT') %>%
+#   rename(prolific_pid = participant_id) %>%
+#   mutate(source = 'round2')
 
 
-nrow(demos)
+#nrow(demos)
 
 data_approval %>%
   filter(status == 'good') %>%
@@ -169,12 +170,15 @@ data_approval %>%
       distinct(),
     by = 'prolific_pid'
   ) %>%
-  mutate(completion_code = as.character(completion_code)) %>%
-  select(prolific_pid, completion_code) %>%
-  left_join(
-    demos,
-    by = c('prolific_pid', 'completion_code')
+  mutate(
+    completion_code = as.character(completion_code),
+    source = 'round2'    # added this line to account for disabling prolific self check
   ) %>%
+  # select(prolific_pid, completion_code) %>%
+  # left_join(
+  #   demos,
+  #   by = c('prolific_pid', 'completion_code')
+  # ) %>%
   select(prolific_pid, source) %>%
   arrange(source) %>%
   # filter(source == 'demos2') %>%
@@ -195,3 +199,4 @@ data_approval %>%
       "reject_round2+3.parquet"
     )
   )
+
