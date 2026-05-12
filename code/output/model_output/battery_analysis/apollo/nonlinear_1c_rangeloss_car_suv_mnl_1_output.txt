@@ -1,0 +1,322 @@
+Model run by xnw17 using Apollo 0.3.6 on R 4.5.2 for Darwin.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : nonlinear_1c_rangeloss_car_suv_mnl_1
+Model description                           : MNL model with nonlinear range loss
+Model run at                                : 2026-04-21 11:55:46.489357
+Estimation method                           : bgw
+Estimation diagnosis                        : Relative function convergence (favorable)
+Optimisation diagnosis                      : Maximum found
+     hessian properties                     : Negative definite
+     maximum eigenvalue                     : -41.849202
+     reciprocal of condition number         : 1.52977e-08
+Number of individuals                       : 1373
+Number of rows in database                  : 8238
+Number of modelled outcomes                 : 8238
+
+Number of cores used                        :  2 
+Model without mixing
+
+LL(start)                                   : -11420.29
+LL at equal shares, LL(0)                   : -11420.29
+LL at observed shares, LL(C)                : -11409.83
+LL(final)                                   : -9887.1
+Rho-squared vs equal shares                  :  0.1343 
+Adj.Rho-squared vs equal shares              :  0.1335 
+Rho-squared vs observed shares               :  0.1335 
+Adj.Rho-squared vs observed shares           :  0.1329 
+AIC                                         :  19792.19 
+BIC                                         :  19855.34 
+
+Estimated parameters                        : 9
+Time taken (hh:mm:ss)                       :  00:00:5.48 
+     pre-estimation                         :  00:00:4.65 
+     estimation                             :  00:00:0.33 
+     post-estimation                        :  00:00:0.5 
+Iterations                                  :  9  
+
+Unconstrained optimisation.
+
+Estimates:
+                           Estimate        s.e.   t.rat.(0)  p(2-sided)    Rob.s.e. Rob.t.rat.(0)  p(2-sided)
+b_no_choice                -2.70069    0.138310     -19.526     0.00000    0.193166       -13.981     0.00000
+b_mileage                  -0.15919    0.012540     -12.694     0.00000    0.013684       -11.633     0.00000
+b_range_year0               0.92204    0.096487       9.556     0.00000    0.137573         6.702   2.053e-11
+b_degradation              -0.06598    0.005710     -11.554     0.00000    0.005820       -11.336     0.00000
+b_packreplace              -0.26509    0.038549      -6.877   6.124e-12    0.043333        -6.117   9.507e-10
+b_cellreplace              -0.26643    0.038552      -6.911   4.811e-12    0.043104        -6.181   6.361e-10
+b_price                    -0.75095    0.026102     -28.770     0.00000    0.038959       -19.275     0.00000
+b_range_year0_quadratic    -0.07633    0.021916      -3.483  4.9651e-04    0.030297        -2.519     0.01176
+b_degradation_quadratic  2.6810e-04  1.0473e-04       2.560     0.01047  1.0461e-04         2.563     0.01038
+
+
+Overview of choices for MNL model component :
+                                    alt1    alt2    alt3 no_choice
+Times available                  8238.00 8238.00 8238.00   8238.00
+Times chosen                     2006.00 2215.00 2083.00   1934.00
+Percentage chosen overall          24.35   26.89   25.29     23.48
+Percentage chosen when available   24.35   26.89   25.29     23.48
+
+
+
+Classical covariance matrix:
+                                    b_no_choice               b_mileage           b_range_year0
+b_no_choice                            0.019130              6.8157e-04                0.007901
+b_mileage                            6.8157e-04              1.5725e-04              -2.122e-05
+b_range_year0                          0.007901              -2.122e-05                0.009310
+b_degradation                        3.8472e-04               2.247e-06               4.867e-06
+b_packreplace                        8.4464e-04               1.664e-05              -6.087e-05
+b_cellreplace                        8.2696e-04               9.540e-06              -5.994e-05
+b_price                                0.001308               2.492e-05             -3.5288e-04
+b_range_year0_quadratic               -0.001735               2.452e-06               -0.002037
+b_degradation_quadratic              -6.253e-06              -1.442e-08              -1.595e-07
+                                  b_degradation           b_packreplace           b_cellreplace
+b_no_choice                          3.8472e-04              8.4464e-04              8.2696e-04
+b_mileage                             2.247e-06               1.664e-05               9.540e-06
+b_range_year0                         4.867e-06              -6.087e-05              -5.994e-05
+b_degradation                         3.261e-05               2.077e-06               3.076e-06
+b_packreplace                         2.077e-06                0.001486              7.0034e-04
+b_cellreplace                         3.076e-06              7.0034e-04                0.001486
+b_price                               1.007e-05               5.559e-05               4.980e-05
+b_range_year0_quadratic              -2.727e-06               4.557e-06               7.557e-06
+b_degradation_quadratic              -5.832e-07               7.513e-09              -1.197e-08
+                                        b_price b_range_year0_quadratic b_degradation_quadratic
+b_no_choice                            0.001308               -0.001735              -6.253e-06
+b_mileage                             2.492e-05               2.452e-06              -1.442e-08
+b_range_year0                       -3.5288e-04               -0.002037              -1.595e-07
+b_degradation                         1.007e-05              -2.727e-06              -5.832e-07
+b_packreplace                         5.559e-05               4.557e-06               7.513e-09
+b_cellreplace                         4.980e-05               7.557e-06              -1.197e-08
+b_price                              6.8133e-04               1.807e-05              -9.114e-08
+b_range_year0_quadratic               1.807e-05              4.8032e-04               5.461e-08
+b_degradation_quadratic              -9.114e-08               5.461e-08               1.097e-08
+
+Robust covariance matrix:
+                                    b_no_choice               b_mileage           b_range_year0
+b_no_choice                            0.037313              8.5096e-04                0.016008
+b_mileage                            8.5096e-04              1.8725e-04              -9.774e-06
+b_range_year0                          0.016008              -9.774e-06                0.018926
+b_degradation                        4.3569e-04               3.006e-06              -8.857e-06
+b_packreplace                        7.2984e-04               4.011e-05             -3.3309e-04
+b_cellreplace                        6.4084e-04               3.290e-05             -3.0759e-04
+b_price                                0.003340               3.966e-05             -8.2570e-04
+b_range_year0_quadratic               -0.003265              -9.014e-06               -0.003999
+b_degradation_quadratic              -6.326e-06              -1.030e-08              -6.238e-08
+                                  b_degradation           b_packreplace           b_cellreplace
+b_no_choice                          4.3569e-04              7.2984e-04              6.4084e-04
+b_mileage                             3.006e-06               4.011e-05               3.290e-05
+b_range_year0                        -8.857e-06             -3.3309e-04             -3.0759e-04
+b_degradation                         3.388e-05               4.881e-06              -6.330e-06
+b_packreplace                         4.881e-06                0.001878                0.001067
+b_cellreplace                        -6.330e-06                0.001067                0.001858
+b_price                               2.101e-05              -2.874e-05              -1.814e-05
+b_range_year0_quadratic              -4.191e-07               5.985e-05               6.077e-05
+b_degradation_quadratic              -5.836e-07               5.263e-09               2.124e-07
+                                        b_price b_range_year0_quadratic b_degradation_quadratic
+b_no_choice                            0.003340               -0.003265              -6.326e-06
+b_mileage                             3.966e-05              -9.014e-06              -1.030e-08
+b_range_year0                       -8.2570e-04               -0.003999              -6.238e-08
+b_degradation                         2.101e-05              -4.191e-07              -5.836e-07
+b_packreplace                        -2.874e-05               5.985e-05               5.263e-09
+b_cellreplace                        -1.814e-05               6.077e-05               2.124e-07
+b_price                                0.001518              1.2322e-04              -1.176e-07
+b_range_year0_quadratic              1.2322e-04              9.1793e-04               1.015e-08
+b_degradation_quadratic              -1.176e-07               1.015e-08               1.094e-08
+
+Classical correlation matrix:
+                                    b_no_choice               b_mileage           b_range_year0
+b_no_choice                              1.0000                0.392971                0.592031
+b_mileage                                0.3930                1.000000               -0.017536
+b_range_year0                            0.5920               -0.017536                1.000000
+b_degradation                            0.4871                0.031375                0.008834
+b_packreplace                            0.1584                0.034432               -0.016366
+b_cellreplace                            0.1551                0.019734               -0.016113
+b_price                                  0.3623                0.076134               -0.140113
+b_range_year0_quadratic                 -0.5722                0.008920               -0.963210
+b_degradation_quadratic                 -0.4317               -0.010978               -0.015783
+                                  b_degradation           b_packreplace           b_cellreplace
+b_no_choice                            0.487117                0.158418                0.155091
+b_mileage                              0.031375                0.034432                0.019734
+b_range_year0                          0.008834               -0.016366               -0.016113
+b_degradation                          1.000000                0.009437                0.013974
+b_packreplace                          0.009437                1.000000                0.471248
+b_cellreplace                          0.013974                0.471248                1.000000
+b_price                                0.067532                0.055245                0.049490
+b_range_year0_quadratic               -0.021792                0.005393                0.008944
+b_degradation_quadratic               -0.975193                0.001861               -0.002966
+                                        b_price b_range_year0_quadratic b_degradation_quadratic
+b_no_choice                             0.36230               -0.572227               -0.431695
+b_mileage                               0.07613                0.008920               -0.010978
+b_range_year0                          -0.14011               -0.963210               -0.015783
+b_degradation                           0.06753               -0.021792               -0.975193
+b_packreplace                           0.05525                0.005393                0.001861
+b_cellreplace                           0.04949                0.008944               -0.002966
+b_price                                 1.00000                0.031583               -0.033338
+b_range_year0_quadratic                 0.03158                1.000000                0.023792
+b_degradation_quadratic                -0.03334                0.023792                1.000000
+
+Robust correlation matrix:
+                                    b_no_choice               b_mileage           b_range_year0
+b_no_choice                             1.00000                0.321931                0.602375
+b_mileage                               0.32193                1.000000               -0.005192
+b_range_year0                           0.60238               -0.005192                1.000000
+b_degradation                           0.38752                0.037741               -0.011062
+b_packreplace                           0.08719                0.067643               -0.055874
+b_cellreplace                           0.07697                0.055784               -0.051871
+b_price                                 0.44377                0.074396               -0.154058
+b_range_year0_quadratic                -0.55793               -0.021742               -0.959325
+b_degradation_quadratic                -0.31307               -0.007196               -0.004335
+                                  b_degradation           b_packreplace           b_cellreplace
+b_no_choice                            0.387516                0.087192                 0.07697
+b_mileage                              0.037741                0.067643                 0.05578
+b_range_year0                         -0.011062               -0.055874                -0.05187
+b_degradation                          1.000000                0.019353                -0.02523
+b_packreplace                          0.019353                1.000000                 0.57131
+b_cellreplace                         -0.025229                0.571312                 1.00000
+b_price                                0.092663               -0.017027                -0.01080
+b_range_year0_quadratic               -0.002377                0.045583                 0.04653
+b_degradation_quadratic               -0.958416                0.001161                 0.04710
+                                        b_price b_range_year0_quadratic b_degradation_quadratic
+b_no_choice                             0.44377               -0.557926               -0.313072
+b_mileage                               0.07440               -0.021742               -0.007196
+b_range_year0                          -0.15406               -0.959325               -0.004335
+b_degradation                           0.09266               -0.002377               -0.958416
+b_packreplace                          -0.01703                0.045583                0.001161
+b_cellreplace                          -0.01080                0.046533                0.047102
+b_price                                 1.00000                0.104392               -0.028866
+b_range_year0_quadratic                 0.10439                1.000000                0.003202
+b_degradation_quadratic                -0.02887                0.003202                1.000000
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+   ID Avg prob per choice
+  799          0.06332063
+   36          0.07290899
+  589          0.08132127
+   18          0.09009104
+  360          0.09731529
+  473          0.10092586
+  518          0.10715619
+  412          0.10920643
+  660          0.11085752
+  788          0.11756731
+  922          0.11939965
+   88          0.12057983
+  296          0.12084960
+  376          0.12175574
+  767          0.12220366
+ 1144          0.12444155
+  631          0.12547869
+ 1186          0.12671863
+ 1530          0.12769552
+  764          0.12930690
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value                                                                                               
+modelName              "nonlinear_1c_rangeloss_car_suv_mnl_1"                                                              
+modelDescr             "MNL model with nonlinear range loss"                                                               
+indivID                "respID"                                                                                            
+nCores                 "2"                                                                                                 
+panelData              "TRUE"                                                                                              
+outputDirectory        "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/code/output/model_output/battery_analysis/apollo/"
+debug                  "FALSE"                                                                                             
+workInLogs             "FALSE"                                                                                             
+seed                   "13"                                                                                                
+mixing                 "FALSE"                                                                                             
+HB                     "FALSE"                                                                                             
+noValidation           "FALSE"                                                                                             
+noDiagnostics          "FALSE"                                                                                             
+calculateLLC           "TRUE"                                                                                              
+analyticHessian        "FALSE"                                                                                             
+memorySaver            "FALSE"                                                                                             
+analyticGrad           "TRUE"                                                                                              
+analyticGrad_manualSet "FALSE"                                                                                             
+overridePanel          "FALSE"                                                                                             
+preventOverridePanel   "FALSE"                                                                                             
+noModification         "FALSE"                                                                                             
+
+Hessian routines attempted
+--------------------------
+numerical jacobian of LL analytical gradient
+
+Scaling used in computing Hessian
+---------------------------------
+                               Value
+b_no_choice             2.7006897401
+b_mileage               0.1591869267
+b_range_year0           0.9220409782
+b_degradation           0.0659787677
+b_packreplace           0.2650900539
+b_cellreplace           0.2664337465
+b_price                 0.7509491967
+b_range_year0_quadratic 0.0763263288
+b_degradation_quadratic 0.0002681028
+
+
+apollo_probabilities
+----------------------
+function(
+  apollo_beta,
+  apollo_inputs,
+  functionality = "estimate"
+) {
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+
+  P = list()
+
+  mnl_settings = list(
+    alternatives = c(alt1 = 1, alt2 = 2, alt3 = 3, no_choice = 4),
+    avail = list(alt1 = 1, alt2 = 1, alt3 = 1, no_choice = 1),
+    choiceVar = choice
+  )
+
+  V = list()
+  V[["alt1"]] <-
+    b_mileage *
+    mileage_1 +
+    b_range_year0 * battery_range_year0_1 +
+    b_degradation * battery_range_loss_1 +
+    b_range_year0_quadratic * battery_range_year0_1^2 +
+    b_degradation_quadratic * battery_range_loss_1^2 +
+    b_packreplace * battery_refurbishpackreplace_1 +
+    b_cellreplace * battery_refurbishcellreplace_1 +
+    b_price * price_1
+
+  V[["alt2"]] <-
+    b_mileage *
+    mileage_2 +
+    b_range_year0 * battery_range_year0_2 +
+    b_degradation * battery_range_loss_2 +
+    b_range_year0_quadratic * battery_range_year0_2^2 +
+    b_degradation_quadratic * battery_range_loss_2^2 +
+    b_packreplace * battery_refurbishpackreplace_2 +
+    b_cellreplace * battery_refurbishcellreplace_2 +
+    b_price * price_2
+
+  V[["alt3"]] <-
+    b_mileage *
+    mileage_3 +
+    b_range_year0 * battery_range_year0_3 +
+    b_degradation * battery_range_loss_3 +
+    b_range_year0_quadratic * battery_range_year0_3^2 +
+    b_degradation_quadratic * battery_range_loss_3^2 +
+    b_packreplace * battery_refurbishpackreplace_3 +
+    b_cellreplace * battery_refurbishcellreplace_3 +
+    b_price * price_3
+
+  V[["no_choice"]] <- b_no_choice
+
+  mnl_settings$utilities = V
+
+  P[["model"]] = apollo_mnl(mnl_settings, functionality)
+
+  P[["model"]] = apollo_panelProd(P[["model"]], apollo_inputs, functionality)
+
+  P = apollo_prepareProb(P, apollo_inputs, functionality)
+  return(P)
+}

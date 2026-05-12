@@ -64,8 +64,7 @@ data_battery <- data_battery %>%
       (battery_cbc_q2_button == battery_cbc_q3_button) &
       (battery_cbc_q3_button == battery_cbc_q4_button) &
       (battery_cbc_q4_button == battery_cbc_q5_button) &
-      (battery_cbc_q5_button == battery_cbc_q6_button) &
-      (battery_cbc_q5_button != 'option_4')
+      (battery_cbc_q5_button == battery_cbc_q6_button)
   ) %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)

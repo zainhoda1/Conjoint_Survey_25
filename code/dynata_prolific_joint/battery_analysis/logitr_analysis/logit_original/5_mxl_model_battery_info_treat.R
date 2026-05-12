@@ -8,10 +8,9 @@ data_dce <- read_parquet(here(
   "data_logitr_dce_covariate_battery.parquet"
 ))
 
-table(data_dce$vehicle_typesuv) / 24
-table(data_dce$battery_info_treat) / 24
-table(data_dce$vehicle_typesuv, data_dce$battery_info_treat) / 24
-
+# table(data_dce$vehicle_typesuv) / 24
+# table(data_dce$battery_info_treat) / 24
+# table(data_dce$vehicle_typesuv, data_dce$battery_info_treat) / 24
 
 data_dce_infotreat <- data_dce %>%
   filter(battery_info_treat == 1)
@@ -23,8 +22,8 @@ data_dce_noinfotreat <- data_dce %>%
 ## Define random parameters for MXL model
 randPars <- c(
   mileage = "n",
-  battery_range_year0 = "n",
-  battery_degradation = "n",
+  battery_range_year3 = "n",
+  battery_range_loss = "n",
   battery_refurbishpackreplace = "n",
   battery_refurbishcellreplace = "n"
 )
@@ -39,8 +38,8 @@ mxl_model_pref <- function(data) {
     pars = c(
       "price",
       "mileage",
-      "battery_range_year0",
-      "battery_degradation",
+      "battery_range_year3",
+      "battery_range_loss",
       "battery_refurbishpackreplace",
       "battery_refurbishcellreplace",
       "no_choice"
@@ -64,8 +63,8 @@ mxl_model_wtp <- function(data, wtp_pref_model) {
     panelID = "respID",
     pars = c(
       "mileage",
-      "battery_range_year0",
-      "battery_degradation",
+      "battery_range_year3",
+      "battery_range_loss",
       "battery_refurbishpackreplace",
       "battery_refurbishcellreplace",
       "no_choice"
@@ -154,6 +153,54 @@ summary(wtp_model_suv_notreat)
 # eigen(model2_all$hessian)$values
 
 ## model save ----
+save(
+  pref_model_car_treat,
+  file = here(
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "logitr",
+    "mxl_pref_model_car_treat.RData"
+  )
+)
+
+save(
+  pref_model_suv_treat,
+  file = here(
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "logitr",
+    "mxl_pref_model_suv_treat.RData"
+  )
+)
+
+save(
+  pref_model_car_notreat,
+  file = here(
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "logitr",
+    "mxl_pref_model_car_notreat.RData"
+  )
+)
+
+save(
+  pref_model_suv_notreat,
+  file = here(
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "logitr",
+    "mxl_pref_model_suv_notreat.RData"
+  )
+)
+
 save(
   wtp_model_car_treat,
   file = here(
