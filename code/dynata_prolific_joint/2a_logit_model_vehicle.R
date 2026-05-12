@@ -210,6 +210,8 @@ wtp_model_all <- run_model_wtp(data)
 summary(model_all)
 # summary(model_datasource)
 
+summary(model_car)
+summary(model_suv)
 summary(wtp_model_dynata)
 summary(wtp_model_prolific)
 summary(wtp_model_car)

@@ -11,6 +11,8 @@ all_vehicles <-  read_parquet(here(
 ))
 
 
+vehicles_comparsion_list <- read_csv(here('data', 'vehicles_comparison_list.csv'))
+
 
 all_vehicles$id <- paste0(all_vehicles$model, '_' ,
  all_vehicles$make, '_', all_vehicles$powertrain, '_', all_vehicles$vehicle_type)
@@ -26,8 +28,8 @@ vehicle_ages <- all_vehicles |>
   summarise(
     earliest_year = min(year),
     latest_year = max(year),  
-    #earliest_age = min(age_years),
-    #latest_age = max(age_years),  
+    earliest_age = min(age_years),
+    latest_age = max(age_years),  
     total_cars = n(),
      .groups = "drop") 
 
@@ -39,32 +41,44 @@ vehicle_ages <- vehicle_ages |>
       str_detect(id, "_hev_") ~ "HEV",
       TRUE ~ "CV"
     ),
-    matching_id = c(1, 2, 3, 3, 2, 1, 6, 6, 4, 4, 5, 7, 7, 7, 5)
+    starting_year = earliest_year - round(earliest_age),
+    no_years = (latest_year - starting_year) 
   ) 
 
-vehicle_ages_bev <- vehicle_ages |> 
-  filter(powertrain == 'BEV')
 
-vehicle_ages_rest <- vehicle_ages |> 
-  filter(powertrain != 'BEV')
+vehicle_joint <- left_join(vehicles_comparsion_list,vehicle_ages , 
+  by = c( 'bev_vehicle'='id') ) |>  
+  select(id, bev_vehicle, other_vehicle, starting_year,
+     latest_year, no_years, bev_range, other_vehicle_range )
 
-vehicle_joint <- left_join(vehicle_ages_bev, vehicle_ages_rest, by ='matching_id' )
+vehicle_joint <- vehicle_joint |> 
+  pivot_longer(cols = c('bev_vehicle', 'other_vehicle'),
+ names_to = 'vehicle_type', values_to = 'vehicle_names')
 
-vehicle_joint <-  vehicle_joint |> 
-  mutate( use_earliest_year  = earliest_year.x,
-          use_latest_year  = latest_year.x
-  )
 
-vehicle_joint <- vehicle_joint %>%
-  select(id.x, id.y, use_earliest_year, use_latest_year) %>%
-  pivot_longer(cols = c(id.x, id.y), values_to = "id") %>%
-  distinct(id, .keep_all = TRUE)  
+# vehicle_ages_bev <- vehicle_ages |> 
+#   filter(powertrain == 'BEV')
 
-vehicle_joint$no_years <- vehicle_joint$use_latest_year - vehicle_joint$use_earliest_year
+# vehicle_ages_rest <- vehicle_ages |> 
+#   filter(powertrain != 'BEV')
 
-write_parquet( vehicle_ages,here('data', 'vehicle_ages.parquet'))
+# vehicle_joint <- left_join(vehicle_ages_bev, vehicle_ages_rest, by ='matching_id' )
 
-age_list = seq(1, 8)
+# vehicle_joint <-  vehicle_joint |> 
+#   mutate( use_earliest_year  = earliest_year.x,
+#           use_latest_year  = latest_year.x
+#   )
+
+# vehicle_joint <- vehicle_joint %>%
+#   select(id.x, id.y, use_earliest_year, use_latest_year) %>%
+#   pivot_longer(cols = c(id.x, id.y), values_to = "id") %>%
+#   distinct(id, .keep_all = TRUE)  
+
+#vehicle_joint$no_years <- vehicle_joint$use_latest_year - vehicle_joint$use_earliest_year
+
+#write_parquet( vehicle_ages,here('data', 'vehicle_ages.parquet'))
+
+age_list = seq(0, 8)
 
 df <- data.frame(
   age_years = age_list,
@@ -109,7 +123,7 @@ run_model <- function(current_id, earliest_year, latest_year,  formula) {
 
 
 
-ids <- unique(vehicle_joint$id)
+ids <- unique(vehicle_joint$vehicle_names)
 
   # data <- all_vehicles %>%
   #   filter(id == 'versa sedan_nissan_cv')
@@ -117,15 +131,15 @@ ids <- unique(vehicle_joint$id)
 for (i in ids){
 
   #i = 'versa sedan_nissan_cv'
-  no_years =  vehicle_joint$no_years[vehicle_joint$id == i]
-  earliest_year =  vehicle_joint$use_earliest_year[vehicle_joint$id == i]
-  latest_year =  vehicle_joint$use_latest_year[vehicle_joint$id == i]
-  print(paste0(i,   no_years))
+  no_years =  vehicle_joint$no_years[vehicle_joint$vehicle_names == i]
+  earliest_year =  vehicle_joint$starting_year[vehicle_joint$vehicle_names == i]
+  latest_year =  vehicle_joint$latest_year[vehicle_joint$vehicle_names == i]
+  print(paste0(i, '///',   no_years))
 
     model_used_vehicle <- run_model(
       current_id = i,
-      earliest_year =  vehicle_joint$use_earliest_year[vehicle_joint$id == i],
-      latest_year =  vehicle_joint$use_latest_year[vehicle_joint$id == i],
+      earliest_year =  earliest_year,
+      latest_year =  latest_year,
       formula = log(price) ~
         miles +
         age_years 

@@ -1,0 +1,7 @@
+﻿id,bev_vehicle,other_vehicle,bev_range,other_vehicle_range
+1,leaf_nissan_bev_car,versa sedan_nissan_cv_car,150,0
+2,hardtop 2 door_mini_bev_car,cooper_mini_cv_car,114,0
+3,i4_bmw_bev_car,4 series_bmw_cv_car,270,0
+4,ioniq_hyundai_bev_car,ioniq_hyundai_hev_car,170,30
+5,kona ev_hyundai_bev_suv,kona_hyundai_cv_suv,258,0
+6,niro_kia_bev_suv,niro_kia_hev_suv,239,26

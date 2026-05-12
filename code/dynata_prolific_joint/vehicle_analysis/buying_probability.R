@@ -13,6 +13,10 @@ library(cowplot)
 
 load(here("models", "model_car.RData"))
 load(here("models", "model_suv.RData"))
+load(here("models", "model_positive_group_car.RData"))
+load(here("models", "model_negative_group_car.RData"))
+load(here("models", "model_positive_group_suv.RData"))
+load(here("models", "model_negative_group_suv.RData"))
 
 #summary(model_car_high)
 
@@ -21,25 +25,32 @@ depreciation_rate = 0.05  # Annual percentage depreciation for EVs
  
 # Load Data :
 
+vehicles_comparsion_list <- read_csv(here('data', 'vehicles_comparison_list.csv'))  
+
+
+vehicles_comparsion_list <- vehicles_comparsion_list |> 
+  pivot_longer(
+    cols = c(bev_vehicle, other_vehicle, bev_range, other_vehicle_range),
+    names_to = c("type", ".value"),
+    names_pattern = "(bev|other)_(.*)"
+  ) |> mutate(
+    range = coalesce(range, vehicle_range)
+  ) |> select(vehicle, range)
+
 predicted_car_prices <- read_parquet(here('data', 'predicted_prices.parquet' )) |> 
-    separate(id , into = c('model', 'make', 'powertrain', 'vehicle_type'),  sep = "_", remove = FALSE) |> 
-  mutate (model_type = case_when 
-    (
-    # (predicted_price <= 25000 & vehicle_type == 'car' ) ~ 'model_car_low',
-    # (predicted_price >  25000 & vehicle_type == 'car' ) ~ 'model_car_high',
-    # (predicted_price <= 25000 & vehicle_type == 'suv' ) ~ 'model_suv_low',
-    # .default = 'model_suv_high'
-    vehicle_type == 'car' ~ 'model_car',
-    .default = 'model_suv'
-  )
-)
+    separate(id , into = c('model', 'make', 'powertrain', 'vehicle_type'), 
+   sep = "_", remove = FALSE)  |> 
+  left_join(vehicles_comparsion_list, by = c('id' = 'vehicle')) |> 
+  mutate(model_type = vehicle_type)
+
 
 bev_names <- predicted_car_prices  |> 
   filter(powertrain != 'cv') |> 
   select(model, make, powertrain) |> 
   distinct()
 
-bev_names$range <- c( 114, 270, 170, 30, 258, 150, 239, 53, 26) # vehicle range from internet search
+
+
 
 vehicle_pairs <- data.frame(
   vehicle_1 = c( 'leaf_nissan_bev_car',
@@ -55,7 +66,8 @@ vehicle_pairs <- data.frame(
   'ioniq_hyundai_hev_car',
    'kona_hyundai_cv_suv',
   'niro_kia_hev_suv'),
-  type = c('car_low', 'car_low', 'car_high', 'car_high', 'suv_low', 'suv_low'  )
+  model_type = c('car', 'car', 'car', 'car', 'suv', 'suv'  )
+  #type = c('car_low', 'car_low', 'car_high', 'car_high', 'suv_low', 'suv_low'  )
 )
 
 
@@ -111,15 +123,18 @@ predicted_car_prices <- left_join(predicted_car_prices,
 
 all_cars <- unique(predicted_car_prices$id)
 
+for (j in c('Pro-EV', 'EV-averse')){
+  print(j)
+
 
 for (i in seq(nrow(vehicle_pairs))){
   print(vehicle_pairs[i,1]) 
-  # model = case_when(
-  #   vehicle_pairs[i,3] == 'car_low'  ~ 'model_car_low',
-  #   vehicle_pairs[i,3] == 'car_high'  ~ 'model_car_high',
-  #   vehicle_pairs[i,3] == 'suv_low'  ~ 'model_suv_low',
-  #   .default = 'model_suv_low'
-  # )
+  current_model = case_when(
+    vehicle_pairs[i,3] == 'car'  & j == 'Pro-EV' ~ 'model_positive_group_car',
+    vehicle_pairs[i,3] == 'car'  & j == 'EV-averse' ~ 'model_negative_group_car',
+    vehicle_pairs[i,3] == 'suv'  & j == 'Pro-EV' ~ 'model_positive_group_suv',
+    .default = 'model_negative_group_suv'
+  )
   #i = 1
   vehicle1 <-  vehicle_pairs[i,1]   #  'fusion energi_ford_phev_car'   
   vehicle2 <-  vehicle_pairs[i,2]   # 'fusion_ford_cv_car'   
@@ -138,7 +153,7 @@ for (i in seq(nrow(vehicle_pairs))){
       v1 <- v1_data[i,]
       v2 <- v2_data[i,]
     print(v1)
-    model = v1$model_type
+    model = current_model
     
       df2 <- data.frame(
         obsID = c(1,1),
@@ -172,7 +187,8 @@ for (i in seq(nrow(vehicle_pairs))){
         vehicle2 = v2$id,
         range_v1= v1$range,
         range_v2= v2$range,
-        v1_choice_probability = probabilities[1,2]
+        v1_choice_probability = probabilities[1,2],
+        model_type = j
       )
 
       placeholder_df <- rbind(placeholder_df, row_data)
@@ -180,10 +196,11 @@ for (i in seq(nrow(vehicle_pairs))){
   }
 
 }
+}
 
 placeholder_df<- placeholder_df |> 
 mutate(
-  comparisons =  case_when(
+  Comparisons =  case_when(
   vehicle1 == 'leaf_nissan_bev_car'  ~ 'Nissan Leaf BEV //  Nissan Versa CV ',
   vehicle1 == 'hardtop 2 door_mini_bev_car'  ~ 'Mini Cooper BEV //  CV',
   vehicle1 == 'i4_bmw_bev_car'  ~ 'BMW I4 BEV // BMW 4 series CV',
@@ -199,7 +216,8 @@ mutate(
 
   
   placeholder_df |> 
-  ggplot(aes(x = age_years, y = v1_choice_probability, group = vehicle1, color = vehicle1)) +
+  ggplot(aes(x = age_years, y = v1_choice_probability, group = vehicle1, color = comparisons)) +
+  facet_wrap(~model_type)+
   # Main line with improved styling
   geom_line(
     linewidth = 1.1,
@@ -234,21 +252,21 @@ mutate(
     strip.text = element_text(face = "bold"),   # facet titles
     strip.background = element_rect(fill = "grey90", color = NA),
     
-    legend.position = "none",   # cleaner for papers  #"bottom"
+    legend.position = "bottom",   # cleaner for papers  #"bottom"
     legend.direction = "horizontal",
     
     panel.grid.minor = element_blank(),
     panel.spacing = unit(1.2, "lines")
   ) +
-    geom_text_repel(
-  data = placeholder_df |> slice_max(age_years, by = vehicle1),
-  aes(label = comparisons),
-  nudge_x      = 1,
-  direction    = "both",      # only repel vertically
-  hjust        = 0.5,
-  segment.size = 0.3,
-  size         = 4.0
-) +
+#     geom_text_repel(
+#   data = placeholder_df |> slice_max(age_years, by = vehicle1),
+#   aes(label = comparisons),
+#   nudge_x      = 1,
+#   direction    = "both",      # only repel vertically
+#   hjust        = 0.5,
+#   segment.size = 0.3,
+#   size         = 4.0
+# ) +
 scale_x_continuous(expand = expansion(mult = c(0.02, 0.20)))
 
 ggsave(
@@ -259,7 +277,7 @@ ggsave(
     "vehicle_analysis",
     "BEV_probability_age_with_depreciation_0.png"    
   ),
-  width = 8,
+  width = 11,
   height = 6,
   dpi = 300
 )
@@ -308,6 +326,7 @@ bev_colors <- setNames(prof_palette[seq_along(vehicle_levels)], vehicle_levels)
 placeholder_df |>
   ggplot(aes(x = age_years, y = v1_choice_probability,
              group = vehicle1, color = vehicle1)) +
+  facet_wrap(~model_type)+
 
   # Reference line at 50%
   geom_hline(yintercept = 0.50, linetype = "dashed",
@@ -502,3 +521,4 @@ ggsave(
   height = 6,
   dpi = 300
 )
+  
