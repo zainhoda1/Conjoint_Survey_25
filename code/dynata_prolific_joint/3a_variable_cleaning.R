@@ -220,12 +220,14 @@ data <- data %>%
 
 
 # ---- Flag issues ----
-data <- data %>%
+data1 <- data %>%
   mutate(
-    flag_attention_check = attitudes_2_a_attention_check_agree !=
-      "strongly_agree",
+    flag_attention_check = case_when(
+      attitudes_2_a_attention_check_agree != "strongly_agree" ~ 1,
+      T ~ 0
+    ),
     survey_duration = difftime(time_end, time_start, units = "sec"),
-    flag_speeding = survey_duration < 300,
+    flag_speeding = case_when(survey_duration < 300 ~ 1, T ~ 0),
     flag_veh_inconsistent = case_when(
       primary_veh_fuel == "bev" &
         !str_detect(household_veh_fuel, "bev") ~ 1,
@@ -287,11 +289,15 @@ data <- data %>%
         )
       ) ~ 1,
       T ~ 0
-    ),
+    )
+  ) %>%
+  mutate(
     flag_total = rowSums(select(., starts_with("flag_")), na.rm = TRUE)
   ) %>%
-  filter(flag_total <= 1) # remove respondents with 3 or more flags (sensitivity check: can also try 2+ flags)
+  filter(flag_total <= 2) # remove respondents with 3 or more flags (sensitivity check: can also try 2+ flags)
 
+
+# table(data1$flag_total)
 
 # b <- data %>%
 #   select(-starts_with("time_")) %>%

@@ -1,0 +1,85 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{goreDCIConsumerValuation2025}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=6c511ceeb372e6b432691b1eb8ce7030}{%
+           family={Gore},
+           familyi={G\bibinitperiod},
+           given={Christina},
+           giveni={C\bibinitperiod}}}%
+        {{hash=47b803125ceab10c191ef64d86c9342e}{%
+           family={Iogansen},
+           familyi={I\bibinitperiod},
+           given={Xiatian},
+           giveni={X\bibinitperiod}}}%
+        {{hash=a6e7f0734b8b8d85969ffe159d102267}{%
+           family={Kneifel},
+           familyi={K\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=34ccec075d79a08d006be85dc5784b87}{%
+           family={Helveston},
+           familyi={H\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Christina Gore, Xiatian Iogansen, Joshua Kneifel, John Helveston}%
+      }
+      \strng{namehash}{75424a5d1bd0904cd3456e0fd189af73}
+      \strng{fullhash}{e4f7c55875a0d5b24239087c2361131b}
+      \strng{fullhashraw}{e4f7c55875a0d5b24239087c2361131b}
+      \strng{bibnamehash}{e4f7c55875a0d5b24239087c2361131b}
+      \strng{authorbibnamehash}{e4f7c55875a0d5b24239087c2361131b}
+      \strng{authornamehash}{75424a5d1bd0904cd3456e0fd189af73}
+      \strng{authorfullhash}{e4f7c55875a0d5b24239087c2361131b}
+      \strng{authorfullhashraw}{e4f7c55875a0d5b24239087c2361131b}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{url}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{annotation}{Last Modified: 2025-11-18T18:11-05:00}
+      \field{journaltitle}{NIST}
+      \field{langid}{english}
+      \field{shorttitle}{{{DCI}}}
+      \field{title}{{{DCI}}: {{Consumer Valuation}} of {{Battery Health Information}} in {{Used Electric Vehicle Markets}}}
+      \field{urlday}{11}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/54BTGHU5/Gore et al. - 2025 - DCI Consumer Valuation of Battery Health Information in Used Electric Vehicle Markets.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nist.gov/publications/dci-consumer-valuation-battery-health-information-used-electric-vehicle-markets
+      \endverb
+      \verb{url}
+      \verb https://www.nist.gov/publications/dci-consumer-valuation-battery-health-information-used-electric-vehicle-markets
+      \endverb
+      \warn{\item article entry 'goreDCIConsumerValuation2025' (DCE_lit_review.bib): Invalid format '2025-11-18T07:00-05:00' of date field 'date' - ignoring}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -8,6 +8,7 @@ data_joint <- read_parquet(here(
   "data_joint.parquet"
 ))
 
+
 # zipcode cleaning----
 df <- data_joint %>%
   mutate(
@@ -250,6 +251,88 @@ ggsave(
   paste0(path_images, "map_combined.png"),
   plot = combined_map,
   width = 14,
+  height = 5,
+  dpi = 300
+)
+
+
+# one map regardless of data sources
+
+zip_counts_all <- df %>%
+  count(clean_zip, name = "respondent_count")
+
+geo_data_all <- zip_counts_all %>%
+  inner_join(zipcodeR::zip_code_db, by = c("clean_zip" = "zipcode"))
+
+total_zips_all <- nrow(geo_data_all)
+total_respondents_all <- sum(geo_data_all$respondent_count)
+
+map_all <- ggplot() +
+  geom_polygon(
+    data = us_states,
+    aes(x = long, y = lat, group = group),
+    fill = "#f5f5f5",
+    color = "gray80",
+    size = 0.3
+  ) +
+  geom_point(
+    data = geo_data_all,
+    aes(x = lng, y = lat, size = respondent_count, color = respondent_count),
+    alpha = 0.8
+  ) +
+  scale_color_viridis_c(
+    option = "viridis",
+    name = "Respondent Count",
+    limits = c(1, max(geo_data_all$respondent_count)),
+    breaks = integer_breaks,
+    guide = guide_colorbar(barwidth = 10, barheight = 0.5)
+  ) +
+  scale_size_continuous(
+    range = c(1, 3),
+    limits = c(1, max(geo_data_all$respondent_count)),
+    guide = "none"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 16,
+      hjust = 0.5,
+      margin = margin(b = 10)
+    ),
+    plot.subtitle = element_text(
+      size = 12,
+      hjust = 0.5,
+      color = "gray40",
+      margin = margin(b = 20)
+    ),
+    legend.position = "bottom",
+    legend.title = element_text(vjust = 1),
+    plot.background = element_rect(fill = "white", color = NA)
+  ) +
+  coord_fixed(xlim = c(-125, -66), ylim = c(24, 50), ratio = 1.3) +
+  labs(
+    title = NULL, #"Geographic Distribution of Respondents",
+    subtitle = NULL,
+    caption = str_glue(
+      "n = {2113} (across {total_zips_all} unique ZIP codes)"
+    )
+  ) +
+  theme(
+    plot.caption = element_text(
+      size = 10,
+      hjust = 0.5,
+      color = "gray40",
+      margin = margin(t = 10)
+    )
+  )
+
+map_all
+
+ggsave(
+  paste0(path_images, "map_all.png"),
+  plot = map_all,
+  width = 7,
   height = 5,
   dpi = 300
 )

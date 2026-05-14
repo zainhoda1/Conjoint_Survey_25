@@ -9,16 +9,18 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{adjustbox}
-% \usepackage[style=authoryear-icomp,
-% uniquelist=false,
-% maxnames=2,
-% minnames=1,
-% maxbibnames=99,
-%     backend=biber, giveninits=true,
-%     ibidtracker=false,
-%     uniquename=false]{biblatex}
-% \addbibresource{references.bib}
-% \addbibresource{references_shared.bib}
+\usepackage[style=authoryear-icomp,
+uniquelist=false,
+maxnames=2,
+minnames=1,
+maxbibnames=99,
+    backend=biber, giveninits=true,
+    ibidtracker=false,
+    uniquename=false,
+    natbib=true]{biblatex}
+\addbibresource{DCE_lit_review.bib}
+\addbibresource{Used EV.bib}
+\addbibresource{EV battery.bib}
 % \DeclareNameAlias{default}{family-given}
 
 \usepackage{hyperref}
@@ -73,42 +75,47 @@
 }                      
 
 
-% \author[1,2]{Xiatian {Iogansen}}
-% \fnmark[1]
-% \credit{Conceptualization, Data curation, Methodology, Software, Formal analysis, Writing - Original Draft, Writing - Review \& Editing}
+\author[1,2]{Xiatian {Iogansen}}
+\fnmark[1]
+\credit{Conceptualization, Data curation, Methodology, Software, Formal analysis, Writing - Original Draft, Writing - Review \& Editing}
 
-% \author[1]{Christina {Gore}}
-% \credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Original draft preparation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
-% \fnmark[2]
-% \cormark[1]
-% \cortext[cor1]{Corresponding author}
+\author[2]{Zain {hoda}}
+\fnmark[2]
+\credit{Conceptualization, Data curation, Methodology, Writing - Review \& Editing}
 
-% \author[1]{Joshua D. {Kneifel}}
-% \credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
-% \fnmark[3]
+\author[1]{Christina {Gore}}
+\credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Original draft preparation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
+\fnmark[3]
+\cormark[1]
+\cortext[cor1]{Corresponding author}
 
-% \author[1,2]{Sindhu {Ranganath}}
-% \credit{Data curation, Writing - Original Draft, Writing - Review \& Editing}
-% \fnmark[4]
+\author[1]{Joshua D. {Kneifel}}
+\credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
+\fnmark[4]
 
-% \author[2]{John {Helveston}}
-% \credit{Conceptualization, Methodology, Writing - Review \& Editing, Supervision}
-% \fnmark[5]
+\author[1,2]{Sindhu {Ranganath}}
+\credit{Data curation, Writing - Original Draft, Writing - Review \& Editing}
+\fnmark[5]
 
-% \affiliation[1]{organization={Applied Economics Office, Engineering Laboratory, National Institute of Standards and Technology},
-%                 country={USA}}     
+\author[2]{John {Helveston}}
+\credit{Conceptualization, Methodology, Writing - Review \& Editing, Supervision}
+\fnmark[6]
+
+\affiliation[1]{organization={Applied Economics Office, Engineering Laboratory, National Institute of Standards and Technology},
+                country={USA}}     
                 
-% \affiliation[2]{organization={Department of Engineering Management and Systems Engineering, George Washington University},
-%                 city={Washington D.C.},
-%                 country={USA}}
+\affiliation[2]{organization={Department of Engineering Management and Systems Engineering, George Washington University},
+                city={Washington D.C.},
+                country={USA}}
                 
 
 
-% \fntext[fn1]{xiatian.iogansen@gwu.edu \& xiatian.iogansen@nist.gov, https://orcid.org/0000-0002-4851-1323}
-% \fntext[fn2]{christina.gore@nist.gov, https://orcid.org/0000-0002-3586-6918}
-% \fntext[fn3]{joshua.kneifel@nist.gov}
-% \fntext[fn4]{sindhu.ranganath@nist.gov, https://orcid.org/0000-0001-5764-9773}
-% \fntext[fn5]{jph@gwu.edu, https://orcid.org/0000-0002-2657-9191}
+\fntext[fn1]{xiatian.iogansen@gwu.edu \& xiatian.iogansen@nist.gov, https://orcid.org/0000-0002-4851-1323}
+\fntext[fn2]{zain.hoda@gwu.edu}
+\fntext[fn3]{christina.gore@nist.gov, https://orcid.org/0000-0002-3586-6918}
+\fntext[fn4]{joshua.kneifel@nist.gov}
+\fntext[fn5]{sindhu.ranganath@nist.gov, https://orcid.org/0000-0001-5764-9773}
+\fntext[fn6]{jph@gwu.edu, https://orcid.org/0000-0002-2657-9191}
 
 
 \begin{abstract}
@@ -182,20 +189,20 @@ Refurbishing batteries at the cell or module level can offer cost savings and su
 One of the few relevant studies, conducted by Pedrosa and Nobre (2018) in Portugal found that all interviewees expressed positive attitudes toward refurbished EVs, particularly those fitted with replacement batteries backed by dealership warranties. Participants viewed these vehicles as more reliable, with the potential for extended driving range and greater peace of mind, and even indicated a higher WTP compared to used EVs retaining their original batteries. The main limitation of this study is that it is a qualitative interview based on a very small sample and may not be generalizable to the US market. Moreover, while the study suggests a consumer preference for BEVs with brand-new batteries than original ones, to the best of the authors' knowledge, no studies have directly examined consumer attitudes towards more nuanced refurbishment options, such as partial battery replacements where only some cells are replaced to address performance issues or extend battery life while the rest cells remain original, or full pack replacements where  the entire battery is swapped with a new pack after the original battery's performance declines below a certain threshold. Understanding consumer acceptance of these varying levels of refurbishment is essential for informing viable second-life battery strategies in the used EV market.
 
 \subsection{Willness to Pay for Battery Information}
+\par
 
-
-\section{Survey Design, Data Collection, and Descriptive Analyses}
+\section{Survey Design, Data Collection, and Sample Profile}
 
 \subsection{Used EV Survey}
+The survey was designed to understand consumer preferences and willingness to pay for vehicle attributes and battery health information in the used BEV market. The survey targets on US consumers who is 18 years old and has the intention to purchase a used car or SUV within the next two years. 
 
-The core component of the survey, where respondents are asked to consider a scenario in which they choose a used BEV from a set of options with varying attributes. Before presenting the choice tasks, we provide key background information about BEVs and their batteries to help respondents make informed decisions (see Table 2). 
-To examine the effects of goal priming—specifically, how the presentation of certain information may influence consumer preferences—participants are randomly divided into two groups. One group receives only information about vehicle driving range and battery health, while the other group is shown additional details about battery maintenance and warranty coverage. This design allows us to assess whether specific types of information impact respondents’ choices in the BEV selection tasks.
+The core component of the survey is the BEV discrete choice experiments where respondents are asked to consider a scenario in which they choose a used BEV from a set of options with varying attributes. It is designed to capture trade-offs that consumers make when evaluating used BEVs, particularly how they value battery health information relative to other vehicle attributes. Each respondent completes six repeated choice tasks. Before presenting the choice tasks, we introduce the specific attributes of the BEVs that respondents will evaluate in the upcoming choice experiments (see Table~\ref{table:dce_attributes}).  Based on prior studies, age and mileage are the main factors influencing the value of a used car (Prieto et al., 2015). For all choice questions, we ask respondents to assume the used vehicle was built in 2022 and is currently three years old. The attributes with varying values include vehicle mileage, purchase price, battery refurbishment history, electric range, and battery state of health. All attribute descriptions are provided to ensure respondents clearly understand the meaning of each before making their selections.
 
-Next, we introduce the specific attributes of the BEVs that respondents will evaluate in the upcoming choice experiments (see Table~\ref{tab:attributes}). Based on prior studies, age and mileage are the main factors influencing the value of a used car (Prieto et al., 2015). For all choice questions, we ask respondents to assume the used vehicle was built in 2022 and is currently three years old. The attributes with varying values include vehicle mileage, purchase price, battery refurbishment history, electric range, and battery state of health. All attribute descriptions are provided to ensure respondents clearly understand the meaning of each before making their selections.
+To examine the effects of information treatment, specifically, how the presentation of certain information may influence consumer preferences, participants are randomly divided into two groups. One group receives only information about vehicle driving range and battery health, while the other group is shown additional details about battery maintenance and warranty coverage. This design allows us to assess whether specific types of information impact respondents’ choices in the BEV selection tasks. Figure ~\ref{fig:battery_dce} provides an example of the choice experiment, where respondents are asked to choose between three used BEVs with varying attributes and a "None of the above" option. 
 
 \begin{table}[pos=H]
 \caption{BEV choice experiment attributes and levels.}
-\label{tab:attributes}
+\label{table:dce_attributes}
 \begin{adjustbox}{width=\textwidth, center}
 {\renewcommand{\arraystretch}{1.4}
 \begin{tabular}{p{3.2cm} p{4.8cm} p{3cm} p{3cm} p{3cm} p{3cm}}
@@ -225,40 +232,32 @@ Purchase price & The total cost of the vehicle in dollars, including down paymen
     \centering
     \includegraphics[width=0.7\textwidth]{../../code/output/images/battery_analysis/battery-1.png}
     \caption{Example of a choice experiment.}
-    \label{fig:battery_1}
+    \label{fig:battery_dce}
 \end{figure}
 
-BEV Knowledge and Attitudes
-This section of the survey assesses respondents' knowledge, attitudes, and perceptions related toEVs, battery technologies, and related topics. It begins with a series of factual questions that evaluate understanding of which vehicles can run on gasoline or be plugged in, whether respondents can name a BEV, and their knowledge of the current U.S. federal tax credit for new EV purchases. These items help establish respondents' baseline knowledge, which may influence their preferences in earlier choice tasks. The section then presents a series of attitudinal statements covering topics such as social norms, environmental beliefs, cost perceptions, battery concerns, and personality traits like risk-taking and price sensitivity. Respondents rate their agreement using a 5-point Likert scale. This section provides key context for interpreting behavioral patterns and supports more nuanced analysis of factors influencing EV adoption.
+In addition to DCEs, the survey gather information on a range of other topics. Before the DCEs, The survey collects information on household’s current vehicle fleet and detailed vehicle attributes for their primary vehicle if they report owning or leasing at least one (fuel type, fuel efficiency, range,new/used, way of obtain, purchase/lease price,monthly payment,refuel/recharge frequency), and their future vehicle purchasing plans and preferences (anticipated budget,payment method, andthe likelihood of purchasing a new or used plug-in hybrid or BEV).
+After the DCEs, the survey assesses respondents' knowledge, attitudes, and perceptions related to EVs, battery technologies, and related topics. It begins with a series of factual questions that evaluate understanding of which vehicles can run on gasoline or be plugged in, whether respondents can name a BEV, and their knowledge of the current U.S. federal tax credit for new EV purchases. Respondents then rate their agreement with a series of attitudinal statements in 5-point Likert scale covering topics such as social norms, environmental beliefs, cost perceptions, battery concerns, and personality traits like risk-taking and price sensitivity. 
+The final section of the survey collects demographic and additional attitudinal information. It includes standard demographic questions such as year of birth, gender, race/ethnicity, household size, income, education level, employment status, and housing type. These variables are crucial for understanding how socio-demographic factors influence preferences and attitudes toward EVs. Additional questions explore home ownership and average electricity bills, factors that may shape EV adoption decisions.
+
+For a comprehensive description of the survey design, see the Data Collection Instrument \citep{goreDCIConsumerValuation2025}.\footnote{The Data Collection Instrument was published prior to the start of data collection. Certain aspects of the survey design were revised following piloting. Where discrepancies exist between the instrument and the present paper, the description in this paper reflects the final implemented version.}
 
 
-The final section of the survey collects demographic and attitudinal information to support subgroup analyses and contextualize respondents' choices. It includes standard demographic questions such as year of birth, gender, race/ethnicity, household size, income, education level, employment status, and housing type. These variables are crucial for understanding how socio-demographic factors influence preferences and attitudes toward EVs. Additional questions explore home ownership and average electricity bills, factors that may shape EV adoption decisions. The survey also asks for the respondent's ZIP code to support geographic and spatial analyses. This section concludes with an open-ended question inviting them to describe, in their own words, what they believe the survey is about. These open-ended responses can help to validate the overall survey design and identify potential misinterpretations. This question can also serve to identify inattentive respondents who provide nonsensical or irrelevant answers.
+\subsection{Data Collection and Sample Profile}
+The survey was administered online through two widely-used online research platforms. The data collection took place between December 2025 and April 2026. After initial data cleaning, we ended with 2,113 participants across the US. The geographic distribution of respondents is shown in Figure~\ref{fig:map_all}. Each point represents a ZIP code, with color and size scaled to respondent count. The median survey time is around 14 minutes. The survey participants were compensated through the research platforms.
+
+\begin{figure}[pos=H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../../code/output/images/map_all.png}
+    \caption{Geographic distribution of survey respondents across the continental United States. }
+    \label{fig:map_all}
+\end{figure}
 
 
-\subsection{Descriptive Analyses}
+We further apply multiple data quality screens to identify and remove low-quality responses, including failure of an embedded attention check, inconsistency between reported information in different sections of the survey, uninformative filler text and gibberish in open-ended responses, and so forth. In the end, the final sample size for analysis is 1,500 respondents.
 
-Following the choice experiments, the survey includes a self-assessment question asking respondents to rate the importance of each attribute using a Likert scale, ranging from “Not at all important” to “Extremely important.” This question serves multiple purposes: (1) Validating choice behavior – It provides a way to cross-check whether the attributes respondents claim to value (i.e., stated importance) align with the trade-offs revealed in their actual choices (i.e., derived importance) (Chu, 2002; Huster et al., 2024). Inconsistencies may signal issues such as misunderstanding or inattention. (2) Understanding perceived salience – Because respondents may focus on different attributes during the experiment, self-reported ratings help identify which attributes were most influential in their decision-making process. (3) Segmenting respondents – These ratings can be used to group participants based on their stated priorities (e.g., price-sensitive vs. battery-conscious consumers), enabling more targeted analysis or class-specific modeling. (4) Survey diagnostics and data quality checks – Discrepancies between stated importance and revealed preferences may indicate low engagement, confusion, or misinterpretation of the attribute descriptions, helping researchers assess the overall quality of the data.
 
-% \begin{figure}[pos=H]
-% 	\centering
-% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank.png}
-%     \caption{Self-reported importance of BEV attributes}	
-%     \label{figure_bev_attribute_rank}
-% \end{figure}
 
-% \begin{figure}[pos=H]
-% 	\centering
-% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank_veh_type.png}
-%     \caption{Self-reported importance of BEV attributes by vehicle type}	
-%     \label{figure_bev_attribute_rank_veh_type}
-% \end{figure}
 
-% \begin{figure}[pos=H]
-% 	\centering
-% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank_income.png}
-%     \caption{Self-reported importance of BEV attributes by income}	
-%     \label{figure_bev_attribute_rank_income}
-% \end{figure}
 
 
 \section{Method}
@@ -354,22 +353,7 @@ A key output of the LCCM is class-specific willingness to pay (WTP) for each BEV
 
 \textbf{Model Selection}
 
-The optimal number of latent classes is determined by estimating models with two through five classes and comparing fit using multiple information criteria: the log-likelihood (LL), Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and consistent AIC (CAIC), defined respectively as:
-
-\begin{align}
-    \text{AIC}  &= -2\mathcal{L} + 2K \label{eq:aic} \\
-    \text{BIC}  &= -2\mathcal{L} + K\ln(N) \label{eq:bic} \\
-    \text{CAIC} &= -2\mathcal{L} + K\!\left(\ln(N) + 1\right) \label{eq:caic}
-\end{align}
-
-\noindent where $K$ is the number of estimated parameters and $N$ is the sample size. Lower values of AIC, BIC, and CAIC indicate better model fit penalized for complexity. In addition, the normalized entropy statistic $\bar{E}$ assesses the sharpness of class assignments:
-
-\begin{equation}
-    \bar{E} = 1 - \frac{-\displaystyle\sum_{n=1}^{N}\sum_{s=1}^{S} \hat{M}_n(s)\ln \hat{M}_n(s)}{N \ln S}
-    \label{eq:entropy}
-\end{equation}
-
-\noindent where $\hat{M}_n(s)$ is the posterior class membership probability for respondent $n$ in class $s$. The entropy statistic ranges from 0 to 1, with values closer to 1 indicating cleaner class separation (Ramaswamy et al., 1993). The preferred specification is selected based on the lowest BIC, acceptable entropy, and substantively interpretable class profiles of reasonable size.
+The optimal number of latent classes is determined by estimating models with two through five classes and comparing fit using multiple information criteria: the log-likelihood (LL), Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and class size. Lower values of AIC, BIC, and CAIC indicate better model fit penalized for complexity. The preferred specification is selected based on the lowest BIC, acceptable entropy, and substantively interpretable class profiles of reasonable size.
 
 \section{Results and Discussion}
 % \input{../../code/output/model_output/vehicle_analysis/apollo/0_class_profile_summary_cars_suvs_lc_3c.tex}
@@ -407,6 +391,29 @@ The optimal number of latent classes is determined by estimating models with two
 \textbf{Class 5: Attribute-Insensitive (17\%)}
 
 
+Following the choice experiments, the survey includes a self-assessment question asking respondents to rate the importance of each attribute using a Likert scale, ranging from “Not at all important” to “Extremely important.” This question serves multiple purposes: (1) Validating choice behavior – It provides a way to cross-check whether the attributes respondents claim to value (i.e., stated importance) align with the trade-offs revealed in their actual choices (i.e., derived importance) (Chu, 2002; Huster et al., 2024). Inconsistencies may signal issues such as misunderstanding or inattention. (2) Understanding perceived salience – Because respondents may focus on different attributes during the experiment, self-reported ratings help identify which attributes were most influential in their decision-making process. (3) Segmenting respondents – These ratings can be used to group participants based on their stated priorities (e.g., price-sensitive vs. battery-conscious consumers), enabling more targeted analysis or class-specific modeling. (4) Survey diagnostics and data quality checks – Discrepancies between stated importance and revealed preferences may indicate low engagement, confusion, or misinterpretation of the attribute descriptions, helping researchers assess the overall quality of the data.
+
+% \begin{figure}[pos=H]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank.png}
+%     \caption{Self-reported importance of BEV attributes}	
+%     \label{figure_bev_attribute_rank}
+% \end{figure}
+
+% \begin{figure}[pos=H]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank_veh_type.png}
+%     \caption{Self-reported importance of BEV attributes by vehicle type}	
+%     \label{figure_bev_attribute_rank_veh_type}
+% \end{figure}
+
+% \begin{figure}[pos=H]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank_income.png}
+%     \caption{Self-reported importance of BEV attributes by income}	
+%     \label{figure_bev_attribute_rank_income}
+% \end{figure}
+
 
 
 \section{Conclusion}
@@ -414,10 +421,13 @@ As more EVs reach the end of their first ownership cycle, understanding the dyna
 
 This survey-based study represents a novel and rigorous approach to addressing these challenges. By combining insights from prior literature with a discrete choice experiment (DCE), the survey design allows researchers to empirically estimate the value consumers place on different forms of battery information and vehicle characteristics. Looking ahead, this DCI and the results from this research project can help shape the next phase of research and innovation in the second-life EV battery space. For example, further studies could explore consumer attitudes toward more complex refurbishment scenarios, such as partial vs. full battery replacements, and investigate how different warranty structures influence willingness to pay. Additionally, integrating insights from behavioral economics and data from telematics or vehicle diagnostics could enhance our understanding of how consumers interpret and act upon battery health information.
 
+Latent class heterogeneity is driven by BEV aversion (the extent to which they reject BEVs at purchase) and disutility of battery degradation.
+Range anxiety are universal, including initial capacity and long-run loss.
+Battery cell-level and pack-level refurbishments are valued similarly despite their technical differences, implying limited consumer understanding.
 \printcredits
 
 
-% \printbibliography
+\printbibliography
 
 
 \end{document}
