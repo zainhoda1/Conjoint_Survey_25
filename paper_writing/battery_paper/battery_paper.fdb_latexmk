@@ -1,16 +1,16 @@
 # Fdb version 4
-["biber battery_paper"] 1778517125.60618 "battery_paper.bcf" "battery_paper.bbl" "battery_paper" 1778610374.04272 0
-  "DCE_lit_review.bib" 1778516588.89073 61394 52f3c3721a506045e46691450678d3ca ""
-  "battery_paper.bcf" 1778610373.95546 108883 b8eb0d42f544fa9f7777a729f0196585 "pdflatex"
+["biber battery_paper"] 1779122873.1781 "battery_paper.bcf" "battery_paper.bbl" "battery_paper" 1779128551.05556 0
+  "DCE_lit_review.bib" 1779124582.83126 66396 a216a887f1a03425f6252c88eb54cc5b ""
+  "battery_paper.bcf" 1779128550.96195 109233 e20e044735ce4e3f158dba77fce963d0 "pdflatex"
   (generated)
   "battery_paper.bbl"
   "battery_paper.blg"
   (rewritten before read)
-["pdflatex"] 1778610372.91969 "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex" "battery_paper.pdf" "battery_paper" 1778610374.04292 0
+["pdflatex"] 1779128549.82859 "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex" "battery_paper.pdf" "battery_paper" 1779128551.05584 0
   "../../code/output/images/battery_analysis/battery-1.png" 1778177635.10353 141705 0b7137d576ae98512fe8a16de266b7e2 ""
   "../../code/output/images/battery_analysis/latent_class/model_framework.pdf" 1776322111.62392 32702 75170f9e98818d935584b775c3a04f75 ""
   "../../code/output/images/map_all.png" 1778268887.30808 588182 067cc5564a4d1edcf233db76686e0793 ""
-  "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex" 1778610371.30775 46651 68622d9f8ee7429ef2738b59be8124ea ""
+  "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex" 1779128548.19503 45536 986160028295e8ece2763a4f61ca4ce6 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc" 1388795362 7013 c55cc8669071ac14036c4a0c96c16202 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -189,13 +189,13 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1771605766 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "DCE_lit_review.bib" 1778516588.89073 61394 52f3c3721a506045e46691450678d3ca ""
-  "battery_paper.abs" 1778610373.51982 768 bd5a817f6cb13a8df257c8734ea8f6ac "pdflatex"
-  "battery_paper.aux" 1778610373.95274 9830 097fb110b601d6a1038f88a5ba6aa48b "pdflatex"
-  "battery_paper.bbl" 1778517127.46867 3316 848c00df7552deeab0bb2c8a9a88bf9c "biber battery_paper"
-  "battery_paper.out" 1778610373.46043 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "battery_paper.run.xml" 1778610373.95595 2523 7c5ef21ea91284e11311e38bd715657c "pdflatex"
-  "battery_paper.tex" 1778610371.30775 46651 68622d9f8ee7429ef2738b59be8124ea ""
+  "DCE_lit_review.bib" 1779124582.83126 66396 a216a887f1a03425f6252c88eb54cc5b ""
+  "battery_paper.abs" 1779128550.47653 768 bd5a817f6cb13a8df257c8734ea8f6ac "pdflatex"
+  "battery_paper.aux" 1779128550.95896 10775 3a7c80a2a75ab202a75e2fc855a859d8 "pdflatex"
+  "battery_paper.bbl" 1779122874.16906 13316 f1cb7d18083fda6625e3093490383269 "biber battery_paper"
+  "battery_paper.out" 1779128550.4141 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "battery_paper.run.xml" 1779128550.9627 2523 7c5ef21ea91284e11311e38bd715657c "pdflatex"
+  "battery_paper.tex" 1779128548.19503 45536 986160028295e8ece2763a4f61ca4ce6 ""
   (generated)
   "battery_paper.abs"
   "battery_paper.aux"
