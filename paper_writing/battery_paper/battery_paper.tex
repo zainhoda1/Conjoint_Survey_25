@@ -18,6 +18,7 @@ maxbibnames=99,
     ibidtracker=false,
     uniquename=false,
     natbib=true]{biblatex}
+
 \addbibresource{DCE_lit_review.bib}
 \addbibresource{Used EV.bib}
 \addbibresource{EV battery.bib}
@@ -239,7 +240,7 @@ In addition to DCEs, the survey gather information on a range of other topics. B
 After the DCEs, the survey assesses respondents' knowledge, attitudes, and perceptions related to EVs, battery technologies, and related topics. It begins with a series of factual questions that evaluate understanding of which vehicles can run on gasoline or be plugged in, whether respondents can name a BEV, and their knowledge of the current U.S. federal tax credit for new EV purchases. Respondents then rate their agreement with a series of attitudinal statements in 5-point Likert scale covering topics such as social norms, environmental beliefs, cost perceptions, battery concerns, and personality traits like risk-taking and price sensitivity. 
 The final section of the survey collects demographic and additional attitudinal information. It includes standard demographic questions such as year of birth, gender, race/ethnicity, household size, income, education level, employment status, and housing type. These variables are crucial for understanding how socio-demographic factors influence preferences and attitudes toward EVs. Additional questions explore home ownership and average electricity bills, factors that may shape EV adoption decisions.
 
-For a comprehensive description of the survey design, see the Data Collection Instrument \citep{goreDCIConsumerValuation2025}.\footnote{The Data Collection Instrument was published prior to the start of data collection. Certain aspects of the survey design were revised following piloting. Where discrepancies exist between the instrument and the present paper, the description in this paper reflects the final implemented version.}
+For a comprehensive description of the survey design, see the Data Collection Instrument \parencite{goreDCIConsumerValuation2025}.\footnote{The Data Collection Instrument was published prior to the start of data collection. Certain aspects of the survey design were revised following piloting. Where discrepancies exist between the instrument and the present paper, the description in this paper reflects the final implemented version.}
 
 
 \subsection{Data Collection and Sample Profile}
@@ -260,14 +261,13 @@ We further apply multiple data quality screens to identify and remove low-qualit
 
 
 
-\section{Method}
+\section{Method:Latent Class Choice Model (LCCM)}
 
-\subsection{Latent Class Choice Model (LCCM)}
-\textbf{Model Framework}
+\noindent $\bullet$ \textbf{Model Framework} \par
 
-We employ a LCCM to analyze consumer preferences for used battery electric vehicles (BEVs). The LCCM is built on the premise that the overall market can be grouped into a finite number of latent segments, or classes, within which individuals share homogeneous preferences, but across which preferences are heterogeneous (Kamakura \& Russell, 1989; Greene \& Hensher, 2003). This approach is particularly suited to our research context, where consumer valuations of battery health information likely differ systematically across distinct segments defined by attitudes toward EVs and batteries, travel behavior, and access to charging infrastructure.
+We employ a LCCM to analyze consumer preferences and WTP for used BEVs. The LCCM is built on the premise that individuals can be grouped into a finite number of latent groups/segments/classes, within which individuals share homogeneous preferences, but across which preferences are heterogeneous \parencite{kamakuraProbabilisticChoiceModel1989, greeneLatentClassModel2003}. This approach is particularly suited to our research context, where consumer valuations of battery health information likely differ systematically across distinct segments varied by individual characteristics.
 
-As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two interrelated components. The \textit{class membership model} assigns each respondent probabilistically to a latent class based on observable individual-level covariates and the \textit{class-specific choice model} estimates the conditional probability of choosing each vehicle alternative within a given class. Additionally, a set of \textit{inactive indicators}, including attitudinal and behavioral variables observed in the survey but not directly included as estimators, are used descriptively to characterize the identified latent classes after estimation.
+As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two interrelated components which are estimated simultaneously. The \textit{class membership model} assigns each respondent probabilistically to a latent class based on observable individual-level covariates and the \textit{class-specific choice model} estimates the conditional probability of choosing each vehicle alternative within a given class. Additionally, a set of \textit{inactive indicators}, including attitudinal and behavioral variables, though not directly included as estimators (due to collinearity, insignificance, or theoretical considerations), are used to further descriptively characterize the identified latent classes after estimation. The mathematical details of the LCCM are as follows, with notations consistent with \textcite{chenExploringTouristPreference2023}.
 
 \begin{figure}[pos=H]
     \centering
@@ -276,38 +276,35 @@ As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two int
     \label{fig:model_framework}
 \end{figure}
 
-Class-Specific Choice Model
+\noindent $\bullet$ \textbf{Class-specific Choice Model}\par
 
-For respondent $n$ belonging to latent class $s$ ($s = 1, 2, \ldots, S$), the utility associated with choosing vehicle alternative $i$ in choice scenario $t$ is specified as:
+For respondent $n$ belonging to latent class $s$ ($s = 1, 2, \ldots, S$), the utility associated with choosing vehicle alternative $i$ in choice scenario $t$ ($t = 1, 2, \ldots, 6$)is specified as:
 
 \begin{equation}
     U_{nti \mid s} = \boldsymbol{\beta}_s' \mathbf{X}_{nti} + \varepsilon_{nti \mid s}
     \label{eq:utility}
 \end{equation}
 
-\noindent where $\mathbf{X}_{nti}$ is a vector of observed BEV attributes presented in scenario $t$ to respondent $n$, including battery State of Health (SOH), battery warranty coverage, vehicle price, estimated driving range, refurbishment status, and vehicle mileage; $\boldsymbol{\beta}_s$ is a vector of class-specific utility parameters capturing the marginal utility of each attribute for class $s$; and $\varepsilon_{nti \mid s}$ is a random error term assumed to be independently and identically distributed (IID) according to a Type I Extreme Value (Gumbel) distribution.
-
-Under the IID Gumbel assumption, the conditional probability that respondent $n$ in class $s$ chooses alternative $i$ in scenario $t$ follows the multinomial logit (MNL) form:
+\noindent where $\mathbf{X}_{nti}$ is a vector of observed BEV attributes presented in scenario $t$ to respondent $n$, including vehicle mileage, battery refurbishment status, estimated driving range and battery SOH currently (at years 3) and in the future (at year 8; 5 years from now), and purchase price; $\boldsymbol{\beta}_s$ is a vector of class-specific utility parameters capturing the marginal utility of each attribute for class $s$; and $\varepsilon_{nti \mid s}$ is a random error term assumed to be independently and identically distributed (IID) according to a Type I Extreme Value (Gumbel) distribution. Under this assumption, the conditional probability that respondent $n$ in class $s$ chooses alternative $i$ in scenario $t$ follows the multinomial logit (MNL) form:
 
 \begin{equation}
     P_{nt}(i \mid s) = \frac{\exp\!\left(\boldsymbol{\beta}_s' \mathbf{X}_{nti}\right)}{\displaystyle\sum_{j \in \mathcal{C}_{nt}} \exp\!\left(\boldsymbol{\beta}_s' \mathbf{X}_{ntj}\right)}
     \label{eq:conditional_choice}
 \end{equation}
 
-\noindent where $\mathcal{C}_{nt}$ denotes the choice set available to respondent $n$ at scenario $t$.
+\noindent where $\mathcal{C}_{nt}$ denotes the choice set available to respondent $n$ at scenario $t$.\par
 
-\textbf{Class Membership Model}
 
-The class membership model specifies the probability that respondent $n$ belongs to latent class $s$ as a function of observed individual-level covariates. Following the multinomial logit specification (Greene \& Hensher, 2003; Gupta \& Chintagunta, 1994), the class membership probability is:
+\noindent $\bullet$ \textbf{Class Membership Model} \par
+
+The class membership model specifies the probability that respondent $n$ belongs to latent class $s$ as a function of observed individual-level covariates. The class membership probability is:
 
 \begin{equation}
     M_n(s) = \frac{\exp\!\left(\boldsymbol{\gamma}_s' \mathbf{Z}_n\right)}{\displaystyle\sum_{s'=1}^{S} \exp\!\left(\boldsymbol{\gamma}_{s'}' \mathbf{Z}_n\right)}
     \label{eq:membership}
 \end{equation}
 
-\noindent where $\mathbf{Z}_n$ is a vector of individual-level covariates comprising four groups: (1) \textit{perceptions and attitudes toward EVs and EV batteries} (e.g., battery concern, environmental beliefs, risk tolerance, technology acceptance); (2) \textit{vehicle travel demand proxies} (e.g., annual vehicle miles traveled, commuting distance, number of vehicles owned); (3) \textit{EV infrastructure availability} (e.g., access to home charging, proximity to public charging stations); and (4) \textit{socio-demographic characteristics} (e.g., age, income, education, housing type). $\boldsymbol{\gamma}_s$ is the vector of membership function parameters for class $s$. To ensure identification, the parameters for the reference class $S$ are normalized to zero, i.e., $\boldsymbol{\gamma}_S = \mathbf{0}$.
-
-\textbf{Integrated Choice Probability and Likelihood Function}
+\noindent where $\mathbf{Z}_n$ is a vector of individual-level covariates comprising four groups: (1) \textit{perceptions and attitudes toward EVs and EV batteries} (e.g., range anxiety, environmental impact and functionality of EVB); (2) \textit{vehicle travel demand proxies} (e.g., range of individual's primary vehicle); (3) \textit{EV infrastructure availability} (e.g., access to electrical outlets); and (4) \textit{socio-demographic characteristics} (e.g., income). $\boldsymbol{\gamma}_s$ is the vector of membership function parameters for class $s$. To ensure identification, the parameters for the reference class $S$ are normalized to zero.\par
 
 The unconditional probability that respondent $n$ chooses alternative $i$ in scenario $t$, integrated over all latent classes, is:
 
@@ -334,29 +331,30 @@ The log-likelihood function across all $N$ respondents and $T$ choice scenarios 
     \label{eq:loglik}
 \end{equation}
 
-\noindent where $i_n^*$ denotes the alternative chosen by respondent $n$ in scenario $t$. The model parameters $\boldsymbol{\beta}_s$ and $\boldsymbol{\gamma}_s$ are estimated jointly via maximum likelihood estimation.
+\noindent where $i_n^*$ denotes the alternative chosen by respondent $n$ in scenario $t$. The model parameters $\boldsymbol{\beta}_s$ and $\boldsymbol{\gamma}_s$ are estimated jointly via maximum likelihood estimation.\par
 
-\textbf{Inactive Indicators}
 
-As depicted in Figure~\ref{fig:model_framework}, a set of \textit{inactive indicators} is incorporated into the LCCM framework. These are observed survey variables, such as self-reported attribute importance ratings, prior EV ownership experience, stated battery concerns, and charging behavior, that are not included as predictors in either the class membership or class-specific choice models. Instead, they serve a descriptive role: after the model is estimated, the posterior class membership probabilities $\hat{M}_n(s)$ are used to assign each respondent to their most probable class, and the inactive indicators are then examined across classes to enrich the substantive interpretation of each segment. This approach follows established LCCM practice (Greene \& Hensher, 2003; Kim \& Rasouli, 2022), enabling richer class profiling without introducing additional endogeneity or collinearity in estimation.
+\noindent $\bullet$ \textbf{Willingness to Pay} \par
 
-\textbf{Willingness to Pay}
-
-A key output of the LCCM is class-specific willingness to pay (WTP) for each BEV attribute. Under the assumption that the marginal utility of price is negative and constant across alternatives, the WTP for attribute $k$ in class $s$ is:
+A key output of the LCCM is class-specific WTP for each BEV attribute. Under the assumption that the marginal utility of price is negative and constant across alternatives, the WTP for attribute $k$ in class $s$ is:
 
 \begin{equation}
     \text{WTP}_{s,k} = -\frac{\hat{\beta}_{s,k}}{\hat{\beta}_{s,\text{price}}}
     \label{eq:wtp}
 \end{equation}
 
-\noindent This quantity represents the maximum dollar amount a representative respondent in class $s$ would be willing to pay (or accept as compensation) for a one-unit improvement in attribute $k$, holding all other attributes constant. Class-specific WTP estimates reveal the economic value consumers in each segment assign to battery health disclosures such as SOH certification, warranty coverage, and refurbishment status.
+\noindent This quantity represents the maximum dollar amount a representative respondent in class $s$ would be willing to pay (or accept as compensation) for a one-unit improvement in attribute $k$, holding all other attributes constant.
 
 \textbf{Model Selection}
 
 The optimal number of latent classes is determined by estimating models with two through five classes and comparing fit using multiple information criteria: the log-likelihood (LL), Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and class size. Lower values of AIC, BIC, and CAIC indicate better model fit penalized for complexity. The preferred specification is selected based on the lowest BIC, acceptable entropy, and substantively interpretable class profiles of reasonable size.
 
 \section{Results and Discussion}
+\subsection{Model Selection}
+
+
 % \input{../../code/output/model_output/vehicle_analysis/apollo/0_class_profile_summary_cars_suvs_lc_3c.tex}
+\subsection{}
 
 \textbf{Class 1: Hostile Reluctant (13\%)}
 
