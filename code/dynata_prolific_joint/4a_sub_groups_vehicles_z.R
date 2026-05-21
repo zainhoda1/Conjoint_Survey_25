@@ -170,6 +170,23 @@ negative_group <- data_raw_joined %>%
   ) %>%
   select(psid)
 
+charger_access_yes_group <- data_raw_joined %>%
+  filter(
+    (charger_access  == 'yes')
+  ) %>%
+  select(psid)
+
+charger_access_no_group <- data_raw_joined %>%
+  filter(
+    (!charger_access  == 'yes')
+  ) %>%
+  select(psid)
+
+neighbor_ev_yes <- data_raw_joined %>%
+  filter(
+    (!charger_access  == 'yes')
+  ) %>%
+  select(psid)
 
 positive_group_encoded <- encoding(
   inner_join(data, positive_group, by = 'psid') %>% select(-psid)
@@ -177,6 +194,18 @@ positive_group_encoded <- encoding(
 
 negative_group_encoded <- encoding(
   inner_join(data, negative_group, by = 'psid') %>% select(-psid)
+)
+
+charger_access_yes_encoded  <-  encoding(
+  inner_join(data, charger_access_yes_group, by = 'psid') %>% select(-psid)
+)
+
+charger_access_no_encoded  <-  encoding(
+  inner_join(data, charger_access_no_group, by = 'psid') %>% select(-psid)
+)
+
+neighbor_ev_yes_encodeing <- encoding(
+  inner_join(data, neighbor_ev_yes, by = 'psid') %>% select(-psid)
 )
 
 model_positive_vehicle <- run_model(positive_group_encoded)
@@ -198,6 +227,13 @@ model_positive_group_suv <- run_model(
 model_negative_group_suv <- run_model(
   negative_group_encoded %>% filter(vehicle_typesuv == 1)
 )
+
+model_charger_access_yes <- run_model(charger_access_yes_encoded)
+
+model_charger_access_no <- run_model(charger_access_no_encoded)
+
+model_neighbor_ev_yes_encodeing <- run_model(neighbor_ev_yes_encodeing)
+
 
 wtp_model_positive_group_car <- run_model_wtp(
   positive_group_encoded %>% filter(vehicle_typesuv == 0)
@@ -272,6 +308,9 @@ summary(model_positive_group_car)
 summary(model_negative_group_car)
 summary(model_positive_group_suv)
 summary(model_negative_group_suv)
+summary(model_charger_access_yes)
+summary(model_charger_access_no)
+summary(model_neighbor_ev_yes_encodeing)
 
 
 summary(wtp_model_positive_group_car)
@@ -303,6 +342,12 @@ conf_model_negative_group_car <- create_confidence_intervals(model_negative_grou
 conf_model_positive_group_suv <- create_confidence_intervals(model_positive_group_suv)
 conf_model_negative_group_suv <- create_confidence_intervals(model_negative_group_suv)
 
+conf_model_charger_access_yes <- create_confidence_intervals(model_charger_access_yes)
+conf_model_charger_access_no <- create_confidence_intervals(model_charger_access_no)
+
+conf_model_neighbor_ev_yes_encodeing <- create_confidence_intervals(model_neighbor_ev_yes_encodeing)
+
+
 
 conf_model_positive_vehicle
 
@@ -315,6 +360,10 @@ conf_model_negative_group_car
 conf_model_positive_group_suv
 
 conf_model_negative_group_suv
+
+conf_model_charger_access_yes
+
+conf_model_charger_access_no
 
 #######################
 
@@ -344,3 +393,12 @@ save(
   file = here("models", "model_negative_group_suv.RData")
 )
 
+save(
+  model_charger_access_yes,
+  file = here("models", "model_charger_access_yes.RData")
+)
+
+save(
+  model_charger_access_no,
+  file = here("models", "model_charger_access_no.RData")
+)
