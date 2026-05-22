@@ -3,7 +3,7 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 # --------------------------------------------------------------------------
 # Load the data set:
 
-data_raw <- read_csv(here('data', 'prolific_testing', 'data_round_2+3_april_26.csv'))
+data_raw <- read_csv(here('data', 'prolific_testing', 'data_round_2+3+4_may_26.csv'))
 
 
 # Testing April Data Pull 
@@ -122,7 +122,7 @@ write_parquet(
   here(
     "data",
     "prolific_testing",
-    "data_round_2+3_april26.parquet"
+    "data_round_2+3+4_may_26.parquet"
   )
 )
 
@@ -186,7 +186,7 @@ data_approval %>%
     here(
       "data",
       "prolific_testing",
-      "approve_round2+3.parquet"
+      "approve_round2+3+4.parquet"
     )
   )
 
@@ -196,7 +196,7 @@ data_approval %>%
     here(
       "data",
       "prolific_testing",
-      "reject_round2+3.parquet"
+      "reject_round2+3+4.parquet"
     )
   )
 

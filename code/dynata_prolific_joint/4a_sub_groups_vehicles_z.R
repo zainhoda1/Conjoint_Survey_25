@@ -31,7 +31,7 @@ data_raw_prolific <- read_parquet(here(
 data_raw_prolific_round2 <- read_parquet(here(
   "data",
   "prolific_testing",
-  "data_round2_feb26.parquet"
+  "data_round_2+3+4_may_26.parquet"
 )) %>%
   select(-starts_with('time'), -ends_with('button'), -respID) %>%
   mutate(psid = prolific_pid, data_source = 'prolific') %>%

@@ -41,3 +41,4 @@ powertrain_chosen <- data_dce %>%
     # powertrain=="phev"
     powertrain == "bev" & choice == 1
   )
+

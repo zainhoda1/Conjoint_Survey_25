@@ -6,13 +6,13 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 data_raw <- read_parquet(here(
   "data",
   "prolific_testing",
-  "data_round_2+3_april26.parquet"
+  "data_round_2+3+4_may_26.parquet"
 ))
 
 data_approval <- read_parquet(here(
   "data",
   "prolific_testing",
-  "approve_round2+3.parquet"
+  "approve_round2+3+4.parquet"
 ))
 
 # Read in choice questions and join it to the choice_data
@@ -169,7 +169,7 @@ write_parquet(
   here(
     "data",
     "prolific_testing",
-    "choice_data_battery_round2+3_april_26.parquet"
+    "choice_data_battery_round2+3+4_may_26.parquet"
   )
 )
 
