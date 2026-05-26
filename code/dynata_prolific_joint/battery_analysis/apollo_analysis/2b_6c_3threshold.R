@@ -253,7 +253,7 @@ apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
 apollo_beta = apollo_readBeta(
   apollo_beta,
   apollo_fixed,
-  "piecewise_rangeloss_car_suv_lc_5c_1",
+  "piecewise_rangeloss_car_suv_lc_6c_1",
   overwriteFixed = FALSE
 )
 

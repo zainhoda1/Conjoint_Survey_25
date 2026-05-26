@@ -24,6 +24,7 @@ COL_SENS <- "#1565C0" # header bg: sensitive
 attr_df <- tibble(
   attr = c(
     "optout",
+    "mileage",
     "range_pw1",
     "range_pw2",
     "range_pw3",
@@ -31,20 +32,19 @@ attr_df <- tibble(
     "loss_pw2",
     "loss_pw3",
     "pack",
-    "cell",
-    "mileage"
+    "cell"
   ),
   attr_disp = c(
     "Opt-Out",
-    "Range 40-130mi (per 100mi)",
-    "Range 130-200mi (per 100mi)",
-    "Range 200+mi (per 100mi)",
-    "Range Loss 5-12% (per %)",
-    "Range Loss 12-24% (per %)",
-    "Range Loss 24+% (per %)",
-    "Pack Replace",
-    "Cell Replace",
-    "Mileage (per 10k mi)"
+    "Mileage (per 10k mi)",
+    "Range at yr. 3: 40-130mi (per 100mi)",
+    "Range at yr. 3: 130-200mi (per 100mi)",
+    "Range at yr. 3: 200+mi (per 100mi)",
+    "Range Loss (yr.3 - yr.8): 5-12% (per %)",
+    "Range Loss (yr.3 - yr.8): 12-24% (per %)",
+    "Range Loss (yr.3 - yr.8): 24+% (per %)",
+    "Battery Refurbishment: Pack Replace",
+    "Battery Refurbishment: Cell Replace"
   )
 )
 

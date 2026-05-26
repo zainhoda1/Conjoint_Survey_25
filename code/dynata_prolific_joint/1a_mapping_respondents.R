@@ -315,7 +315,7 @@ map_all <- ggplot() +
     title = NULL, #"Geographic Distribution of Respondents",
     subtitle = NULL,
     caption = str_glue(
-      "n = {2113} (across {total_zips_all} unique ZIP codes)"
+      "n = {total_respondents_all} (across {total_zips_all} unique ZIP codes)"
     )
   ) +
   theme(
