@@ -1,6 +1,11 @@
 # After running both Dynata and Prolific
 source(here::here('code', 'setup.R'))
 
+if (!requireNamespace("usmap", quietly = TRUE)) {
+  install.packages("usmap")
+}
+library(usmap)
+
 # Load the data set----
 data_joint <- read_parquet(here(
   "data",
@@ -48,8 +53,24 @@ geo_data_prolific <- zip_counts_prolific %>%
 
 # 4. Visualization ----
 
-# Retrieve US state boundaries for map context
-us_states <- map_data("state")
+# US state boundaries in usmap projection (AK and HI repositioned as insets)
+us_states <- usmap::us_map(regions = "states")
+
+# Transform lat/lon point data to usmap projection (sf objects)
+# NA lat/lng filtered before transform to suppress geom warnings; totals computed separately
+geo_data_dynata_t <- usmap_transform(
+  geo_data_dynata %>%
+    select(lng, lat, respondent_count) %>%
+    filter(!is.na(lng), !is.na(lat)),
+  input_names = c("lng", "lat")
+)
+
+geo_data_prolific_t <- usmap_transform(
+  geo_data_prolific %>%
+    select(lng, lat, respondent_count) %>%
+    filter(!is.na(lng), !is.na(lat)),
+  input_names = c("lng", "lat")
+)
 
 # Define a function to ensure breaks are always integers
 integer_breaks <- function(x) {
@@ -63,44 +84,35 @@ max_count <- max(
 
 ## prolific ----
 
-total_zips <- nrow(geo_data_prolific) # Number of unique ZIP codes
+total_zips <- nrow(geo_data_prolific)
 total_respondents <- sum(geo_data_prolific$respondent_count)
 
 map_prolific <- ggplot() +
-  # Layer 1: Base map of US States
-  geom_polygon(
+  geom_sf(
     data = us_states,
-    aes(x = long, y = lat, group = group),
     fill = "#f5f5f5",
     color = "gray80",
-    size = 0.3
+    linewidth = 0.3
   ) +
-
-  # Layer 2: Respondent Data Points
-  # We map size and color to the count to visualize density
-  geom_point(
-    data = geo_data_prolific,
-    aes(x = lng, y = lat, size = respondent_count, color = respondent_count),
+  geom_sf(
+    data = geo_data_prolific_t,
+    aes(size = respondent_count, color = respondent_count),
     alpha = 0.8
   ) +
-
-  # Styling and Scales
   scale_color_viridis_c(
     option = "viridis",
     name = "Respondent Count",
-    # Force the scale to calculate integer-only breaks
     limits = c(1, max_count),
     breaks = integer_breaks,
     guide = guide_colorbar(barwidth = 10, barheight = 0.5)
   ) +
   scale_size_continuous(
-    range = c(1, 3),
+    range = c(0.5, 3),
     limits = c(1, max_count),
     guide = "none"
-  ) + # Hide size legend
-
-  # Map Theme adjustments
-  theme_void() + # Removes axes and standard grid
+  ) +
+  coord_sf() +
+  theme_void() +
   theme(
     plot.title = element_text(
       face = "bold",
@@ -116,60 +128,45 @@ map_prolific <- ggplot() +
     ),
     legend.position = "bottom",
     legend.title = element_text(vjust = 1),
-    plot.background = element_rect(fill = "white", color = NA) # Ensure white background for export
+    plot.background = element_rect(fill = "white", color = NA)
   ) +
-
-  # Coordinate limits (Focus on Continental US)
-  # Adjust ylim/xlim if you need Alaska/Hawaii
-  coord_fixed(xlim = c(-125, -66), ylim = c(24, 50), ratio = 1.3) +
-
-  # Labels
   labs(
     title = "Geographic Distribution of Respondents",
-    # str_glue evaluates the code inside {}
     subtitle = str_glue(
       "Prolific n = {total_respondents} (across {total_zips} unique ZIP codes)"
     )
   )
 
 ## dynata ----
-total_zips <- nrow(geo_data_dynata) # Number of unique ZIP codes
+total_zips <- nrow(geo_data_dynata)
 total_respondents <- sum(geo_data_dynata$respondent_count)
+
 map_dynata <- ggplot() +
-  # Layer 1: Base map of US States
-  geom_polygon(
+  geom_sf(
     data = us_states,
-    aes(x = long, y = lat, group = group),
     fill = "#f5f5f5",
     color = "gray80",
-    size = 0.3
+    linewidth = 0.3
   ) +
-
-  # Layer 2: Respondent Data Points
-  # We map size and color to the count to visualize density
-  geom_point(
-    data = geo_data_dynata,
-    aes(x = lng, y = lat, size = respondent_count, color = respondent_count),
+  geom_sf(
+    data = geo_data_dynata_t,
+    aes(size = respondent_count, color = respondent_count),
     alpha = 0.8
   ) +
-
-  # Styling and Scales
   scale_color_viridis_c(
     option = "viridis",
     name = "Respondent Count",
-    # Force the scale to calculate integer-only breaks
     limits = c(1, max_count),
     breaks = integer_breaks,
     guide = guide_colorbar(barwidth = 10, barheight = 0.5)
   ) +
   scale_size_continuous(
-    range = c(1, 3),
+    range = c(0.5, 3),
     limits = c(1, max_count),
     guide = "none"
-  ) + # Hide size legend
-
-  # Map Theme adjustments
-  theme_void() + # Removes axes and standard grid
+  ) +
+  coord_sf() +
+  theme_void() +
   theme(
     plot.title = element_text(
       face = "bold",
@@ -185,27 +182,18 @@ map_dynata <- ggplot() +
     ),
     legend.position = "bottom",
     legend.title = element_text(vjust = 1),
-    plot.background = element_rect(fill = "white", color = NA) # Ensure white background for export
+    plot.background = element_rect(fill = "white", color = NA)
   ) +
-
-  # Coordinate limits (Focus on Continental US)
-  # Adjust ylim/xlim if you need Alaska/Hawaii
-  coord_fixed(xlim = c(-125, -66), ylim = c(24, 50), ratio = 1.3) +
-
-  # Labels
   labs(
     title = "Geographic Distribution of Respondents",
-    # str_glue evaluates the code inside {}
     subtitle = str_glue(
       "Dynata n = {total_respondents} (across {total_zips} unique ZIP codes)"
     )
   )
 
-## combine
 ## combine ----
 library(patchwork)
 
-# Strip title from both plots, keep subtitles
 map_prolific2 <- map_prolific +
   labs(title = NULL) +
   theme(legend.position = "bottom")
@@ -214,7 +202,6 @@ map_dynata2 <- map_dynata +
   labs(title = NULL) +
   theme(legend.position = "bottom")
 
-# Combine with shared legend and overall title
 combined_map <- (map_prolific2 | map_dynata2) +
   plot_layout(guides = "collect") +
   plot_annotation(
@@ -227,10 +214,7 @@ combined_map <- (map_prolific2 | map_dynata2) +
 
 
 # 5. Output ----
-# print(map_prolific)
-# print(map_dynata)
 
-# Optional: Save to file
 path_images <- 'code/output/images/'
 ggsave(
   paste0(path_images, "map_prolific.png"),
@@ -264,20 +248,26 @@ zip_counts_all <- df %>%
 geo_data_all <- zip_counts_all %>%
   inner_join(zipcodeR::zip_code_db, by = c("clean_zip" = "zipcode"))
 
+geo_data_all_t <- usmap_transform(
+  geo_data_all %>%
+    select(lng, lat, respondent_count) %>%
+    filter(!is.na(lng), !is.na(lat)),
+  input_names = c("lng", "lat")
+)
+
 total_zips_all <- nrow(geo_data_all)
 total_respondents_all <- sum(geo_data_all$respondent_count)
 
 map_all <- ggplot() +
-  geom_polygon(
+  geom_sf(
     data = us_states,
-    aes(x = long, y = lat, group = group),
     fill = "#f5f5f5",
     color = "gray80",
-    size = 0.3
+    linewidth = 0.3
   ) +
-  geom_point(
-    data = geo_data_all,
-    aes(x = lng, y = lat, size = respondent_count, color = respondent_count),
+  geom_sf(
+    data = geo_data_all_t,
+    aes(size = respondent_count, color = respondent_count),
     alpha = 0.8
   ) +
   scale_color_viridis_c(
@@ -288,10 +278,11 @@ map_all <- ggplot() +
     guide = guide_colorbar(barwidth = 10, barheight = 0.5)
   ) +
   scale_size_continuous(
-    range = c(1, 3),
+    range = c(0.5, 3),
     limits = c(1, max(geo_data_all$respondent_count)),
     guide = "none"
   ) +
+  coord_sf() +
   theme_void() +
   theme(
     plot.title = element_text(
@@ -310,9 +301,8 @@ map_all <- ggplot() +
     legend.title = element_text(vjust = 1),
     plot.background = element_rect(fill = "white", color = NA)
   ) +
-  coord_fixed(xlim = c(-125, -66), ylim = c(24, 50), ratio = 1.3) +
   labs(
-    title = NULL, #"Geographic Distribution of Respondents",
+    title = NULL,
     subtitle = NULL,
     caption = str_glue(
       "n = {total_respondents_all} (across {total_zips_all} unique ZIP codes)"
