@@ -55,20 +55,23 @@ data_battery <- data %>%
   filter(!is.na(battery_cbc_q5_button)) %>%
   filter(!is.na(battery_cbc_q6_button))
 
+print("Drop anyone who didn't complete all choice questions")
 nrow(data_battery)
 
-# Drop anyone who answered the same question for all choice questions
+# Drop anyone who answered the same question for all choice questions except no-choice
 data_battery <- data_battery %>%
   mutate(
     cbc_all_same = (battery_cbc_q1_button == battery_cbc_q2_button) &
       (battery_cbc_q2_button == battery_cbc_q3_button) &
       (battery_cbc_q3_button == battery_cbc_q4_button) &
       (battery_cbc_q4_button == battery_cbc_q5_button) &
-      (battery_cbc_q5_button == battery_cbc_q6_button)
+      (battery_cbc_q5_button == battery_cbc_q6_button) &
+      (battery_cbc_q2_button != 'option_4')
   ) %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
 
+print("Drop anyone who answered the same question for all choice questions except no-choice")
 nrow(data_battery)
 
 # Drop respondents who went too fast
@@ -76,12 +79,13 @@ nrow(data_battery)
 summary(data_battery$time_min_total)
 summary(data_battery$time_min_battery_cbc)
 
-# Drop anyone who finished the choice question section in under 1 minute
+# Drop anyone who finished the choice question section in under 30 seconds
 data_battery <- data_battery %>%
   filter(time_min_battery_cbc >= 0.5) %>%
   # dropping non-unique respID (keeping first one)
   distinct(respID, .keep_all = TRUE)
 
+print("Drop anyone who finished the choice question section in under 30 seconds")
 nrow(data_battery)
 
 # Create battery choice data ---------
@@ -142,3 +146,4 @@ write_parquet(
     "choice_data_battery.parquet"
   )
 )
+

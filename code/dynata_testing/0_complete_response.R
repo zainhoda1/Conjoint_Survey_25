@@ -12,10 +12,21 @@ pilot_start <- ymd_hms('2025-12-17 14:27:00')   #2025-12-17 14:26:24 UTC
 
 data_raw <- read_csv(here('data', 'dynata_testing', 'data_raw.csv'))
 
+data_raw <- data_raw |> 
+    mutate(
+  survey_taken_day = ymd_hms(time_start, tz = "UTC"),
+  collection_round = 'round_1'
+    )
+
+print('Survey Responses')
+nrow(data_raw)
+
+
 # removing testing entries
 data_raw <- data_raw %>%
   filter(!is.na(psid), nchar(psid) >= 10)
 
+print('removing testing entries')
 nrow(data_raw)
 
 # Some special variables:
@@ -75,13 +86,6 @@ data <- data %>%
 
 nrow(data)
 
-# Drop those who missed attention checks
-data <- data %>%
-  # Bot
-  filter(is.na(attention_check_toyota))
-
-nrow(data)
-
 # Drop people who got screened out
 
 data <- data %>%
@@ -90,16 +94,27 @@ data <- data %>%
   # Drop those who completed before the adjustments
   filter(time_start >= pilot_start) %>% 
   #filter(time_start <= pilot_end) %>% 
-  
   select(-current_page)
 
+print('Drop people who got screened out')
 nrow(data)
+
+# Drop those who missed attention checks
+data <- data %>%
+  # Bot
+  filter(is.na(attention_check_toyota))
+
+print('Drop those who missed attention checks')
+nrow(data)
+
+
 
 # Drop people whose next vehicle is NUll
 
 data <- data %>% 
   filter(!is.na(next_veh_style ))
 
+print('Drop people whose next vehicle is NUll')
 nrow(data)
 
 # Save

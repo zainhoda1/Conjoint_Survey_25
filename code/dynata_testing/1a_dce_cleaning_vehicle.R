@@ -50,6 +50,8 @@ data_vehicle <- data %>%
   filter(!is.na(vehicle_cbc_q4_button)) %>%
   filter(!is.na(vehicle_cbc_q5_button)) %>%
   filter(!is.na(vehicle_cbc_q6_button))
+
+print("Drop anyone who didn't complete all choice questions")
 nrow(data_vehicle)
 
 # Drop anyone who got the demo question wrong:
@@ -58,6 +60,7 @@ data_vehicle <- data_vehicle %>%
   filter(vehicle_cbc_q0_button %in% c('option_1', 'option_4')) %>%
   select(-vehicle_cbc_q0_button)
 
+print("Drop anyone who got the demo question wrong")
 nrow(data_vehicle)
 
 # Drop anyone who answered the same question for all choice questions
@@ -72,6 +75,7 @@ data_vehicle <- data_vehicle %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
 
+print("Drop anyone who answered the same question for all choice questions")
 nrow(data_vehicle)
 
 # Drop respondents who went too fast
@@ -79,12 +83,13 @@ nrow(data_vehicle)
 summary(data_vehicle$time_min_total)
 summary(data_vehicle$time_min_vehicle_cbc)
 
-# Drop anyone who finished the choice question section in under 1 minute
+# Drop anyone who finished the choice question section in under 30 seconds
 data_vehicle <- data_vehicle %>%
   filter(time_min_vehicle_cbc >= 0.5) %>%
   # dropping non-unique respID (keeping first one)
   distinct(respID, .keep_all = TRUE)
 
+print("Drop anyone who finished the choice question section in under 30 seconds")
 nrow(data_vehicle)
 
 # Create vehicle choice data ---------

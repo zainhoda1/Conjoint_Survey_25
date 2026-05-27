@@ -23,13 +23,18 @@ survey_battery <- read_parquet(here(
   'design_battery.parquet'
 ))
 
-# nrow(data_raw)
+ nrow(data_raw)
 
 ## Checking input data:
 
 data_raw %>%
   group_by(next_veh_style, budget) %>%
   count()
+
+data_raw |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Select important columns
 data <- data_raw %>%
@@ -43,17 +48,37 @@ data <- data_raw %>%
     next_veh_budget,
     vehicle_type = next_veh_style,
     budget,
-    starts_with("battery_cbc_q")
+    starts_with("battery_cbc_q"),
+    collection_round
   ) %>%
   select(-next_veh_budget) %>%
   rename(respID = battery_respID)
 
 nrow(data)
 
+# Drop bad respondents
+
+
+data_battery <- data %>%
+  inner_join(
+    data_approval %>%
+      select(prolific_pid),
+    by = "prolific_pid"
+  )
+
+
+print('Drop bad respondents')
+nrow(data_battery)
+
+data_battery |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
+
 # Battery filtering ----
 
 # Drop anyone who didn't complete all choice questions
-data_battery <- data %>%
+data_battery <- data_battery %>%
   filter(!is.na(battery_cbc_q1_button)) %>%
   filter(!is.na(battery_cbc_q2_button)) %>%
   filter(!is.na(battery_cbc_q3_button)) %>%
@@ -61,9 +86,15 @@ data_battery <- data %>%
   filter(!is.na(battery_cbc_q5_button)) %>%
   filter(!is.na(battery_cbc_q6_button))
 
+print("Drop anyone who didn't complete all choice questions")
 nrow(data_battery)
 
-# Drop anyone who answered the same question for all choice questions
+data_battery |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
+
+# Drop anyone who answered the same question for all choice questions except no-choice
 data_battery <- data_battery %>%
   mutate(
     cbc_all_same = (battery_cbc_q1_button == battery_cbc_q2_button) &
@@ -76,41 +107,33 @@ data_battery <- data_battery %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
 
+print('Drop anyone who answered the same question for all choice questions except no-choice')
 nrow(data_battery)
 
-# Summary of reasons to drop respondents
+data_battery |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
-# data_approval <- check_all_approvals(data_raw)
-# data_approval %>%
-#   count(status, reason)
-
-# Drop bad respondents
-
-### Commented out for testing
-
-# data_battery <- data_battery %>%
-#   left_join(
-#     data_approval %>%
-#       select(prolific_pid),
-#     by = "prolific_pid"
-#   )
-
-### Commented out for testing
-
-nrow(data_battery)
 
 # Drop respondents who went too fast
 # Look at summary of completion times
 summary(data_battery$time_min_total)
 summary(data_battery$time_min_battery_cbc)
 
-# Drop anyone who finished the choice question section in under 1 minute
+# Drop anyone who finished the choice question section in under 30 seconds
 data_battery <- data_battery %>%
   filter(time_min_battery_cbc >= 0.5) %>%
   # dropping non-unique respID (keeping first one)
   distinct(respID,prolific_pid, .keep_all = TRUE)
 
+print('Drop respondents who went too fast < 30 sec')
 nrow(data_battery)
+
+data_battery |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Create battery choice data ---------
 

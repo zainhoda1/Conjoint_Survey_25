@@ -30,6 +30,10 @@ data_raw %>%
   group_by(next_veh_style, budget) %>%
   count()
 
+data_raw |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 
 
@@ -43,10 +47,16 @@ data <- data_raw %>%
     next_veh_budget,
     vehicle_type = next_veh_style,
     budget,
-    starts_with("vehicle_cbc_q")
+    starts_with("vehicle_cbc_q"),
+    collection_round
   )
 
 nrow(data)
+
+data |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Summary of reasons to drop respondents
 
@@ -69,8 +79,13 @@ data_vehicle <- data %>%
 
 ## Commented out for testing
 
+print('Drop bad respondents')
 nrow(data_vehicle)
 
+data_vehicle |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 
 # Vehicle filtering ----
@@ -84,7 +99,15 @@ data_vehicle <- data_vehicle %>%
   filter(!is.na(vehicle_cbc_q5_button)) %>%
   filter(!is.na(vehicle_cbc_q6_button))
 
+
+print("Drop anyone who didn't complete all choice questions")
+
 nrow(data_vehicle)
+
+data_vehicle |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Drop anyone who got the demo question wrong:
 
@@ -92,7 +115,14 @@ data_vehicle <- data_vehicle %>%
   filter(vehicle_cbc_q0_button %in% c('option_1', 'option_4')) %>%
   select(-vehicle_cbc_q0_button)
 
+print("Drop anyone who got the demo question wrong")
 nrow(data_vehicle)
+
+data_vehicle |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
+
 
 # Drop anyone who answered the same question for all choice questions
 data_vehicle <- data_vehicle %>%
@@ -106,7 +136,13 @@ data_vehicle <- data_vehicle %>%
   filter(!cbc_all_same) %>%
   select(-cbc_all_same)
 
+print("Drop anyone who answered the same question for all choice questions")
 nrow(data_vehicle)
+
+data_vehicle |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Drop respondents who went too fast
 # Look at summary of completion times
@@ -119,7 +155,14 @@ data_vehicle <- data_vehicle %>%
   # dropping non-unique respID (keeping first one)
   distinct(respID, prolific_pid, .keep_all = TRUE)
 
+
+print("Drop respondents who went too fast")
 nrow(data_vehicle)
+
+data_vehicle |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Create vehicle choice data ---------
 

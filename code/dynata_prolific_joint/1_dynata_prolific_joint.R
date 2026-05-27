@@ -8,28 +8,36 @@ data_prolific_vehicle <- read_parquet(here(
   "prolific_testing",
   "choice_data_vehicle.parquet"
 )) %>%
-  mutate(data_source = "prolific")
+  mutate(data_source = "prolific",
+    collection_round = 'round_1')
 
 data_prolific_battery <- read_parquet(here(
   "data",
   "prolific_testing",
   "choice_data_battery.parquet"
 )) %>%
-  mutate(data_source = "prolific")
+  mutate(
+    data_source = "prolific")
 
 data_dynata_vehicle <- read_parquet(here(
   "data",
   "dynata_testing",
   "choice_data_vehicle.parquet"
 )) %>%
-  mutate(data_source = "dynata")
+  mutate(
+    data_source = "dynata",
+    collection_round = 'round_1'
+  )
 
 data_dynata_battery <- read_parquet(here(
   "data",
   "dynata_testing",
   "choice_data_battery.parquet"
 )) %>%
-  mutate(data_source = "dynata")
+  mutate(
+    data_source = "dynata",
+    collection_round = 'round_1'
+)
 
 data_prolific_vehicle_round2 <- read_parquet(here(
   "data",

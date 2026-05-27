@@ -3,8 +3,26 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 # --------------------------------------------------------------------------
 # Load the data set:
 
+
 data_raw <- read_csv(here('data', 'prolific_testing', 'data_round_2+3+4_may_26.csv'))
 
+data_raw <- data_raw |> 
+    mutate(
+  survey_taken_day = ymd_hms(time_start, tz = "UTC"),
+  collection_round = case_when(
+    survey_taken_day <'2026-04-01 00:00:00' ~ 'round_2',
+    survey_taken_day >'2026-05-12 00:00:00' ~ 'round_4',
+    .default = 'round_3'
+  )
+) 
+
+print('Survey Responses')
+nrow(data_raw)
+
+data_raw |>
+  group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Testing May Data Pull 
 
@@ -20,17 +38,28 @@ data_raw <- read_csv(here('data', 'prolific_testing', 'data_round_2+3+4_may_26.c
 data_raw <- data_raw %>%
   filter(!is.na(prolific_pid), nchar(prolific_pid) >= 10)
 
+print('removing testing entries')
 nrow(data_raw)
+
+data_raw |>
+ group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Drop people who got screened out
 
 data_raw <- data_raw %>%
   filter(!is.na(current_page), current_page == "end") 
 
+print('Drop people who got screened out')
 nrow(data_raw)
 
+data_raw |>
+ group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
-# checking duplicates
+# Removing duplicate Prolific IDs
 
 #temp <-data_raw[duplicated(data_raw$prolific_pid), ]
 original_duplicate <- data_raw[duplicated(data_raw$prolific_pid) |
@@ -41,8 +70,13 @@ nrow(original_duplicate)
 # Keep first occurrence
 data_raw <- data_raw %>% distinct(prolific_pid, .keep_all = TRUE)
 
-
+print('Removing duplicate Prolific IDs')
 nrow(data_raw)
+
+data_raw |>
+ group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Check for approvals (need to fix this code)
 
@@ -105,35 +139,37 @@ data <- data %>%
     )
   )
 
-nrow(data)
+
 
 # Drop those who missed attention checks
+
 data <- data %>%
   # Bot
   filter(is.na(attention_check_toyota))
 
+print('Drop those who missed attention checks')
 nrow(data)
 
-# Drop people who got screened out
+data |>
+ group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
-data <- data %>%
-  filter(!is.na(current_page), current_page == "end") %>%
 
-  # Drop those who completed before the adjustments
-  #filter(time_start >= pilot_start) %>%
-  #filter(time_start <= pilot_end) %>%
-
-  select(-current_page)
-
-nrow(data)
 
 # Drop people whose next vehicle is NUll
 
 data <- data %>%
   filter(!is.na(next_veh_style))
 
+print('Drop people whose next vehicle is NUll')
 nrow(data)
-# Save
+
+data |>
+ group_by(collection_round) |> 
+  summarise(counts= n()) |> 
+  pivot_wider(names_from= 'collection_round', values_from = 'counts')# Save
+
 
 
 
