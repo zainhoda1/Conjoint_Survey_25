@@ -6,21 +6,37 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 data_raw <- read_csv(here('data', 'prolific_testing', 'data_round_2+3+4_may_26.csv'))
 
 
-# Testing April Data Pull 
+# Testing May Data Pull 
 
 # data_raw <- data_raw %>%
 #   mutate(
 #   survey_taken_day = ymd_hms(time_start, tz = "UTC")
 #   ) |> 
-#   filter(survey_taken_day > '2026-03-30 00:00:00')
+#   filter(survey_taken_day > '2026-05-15 00:00:00')
 
-# Testing April Data Pull 
+# Testing May Data Pull 
 
 # removing testing entries
 data_raw <- data_raw %>%
   filter(!is.na(prolific_pid), nchar(prolific_pid) >= 10)
 
 nrow(data_raw)
+
+# Drop people who got screened out
+
+data_raw <- data_raw %>%
+  filter(!is.na(current_page), current_page == "end") 
+
+nrow(data_raw)
+
+
+# checking duplicates
+
+#temp <-data_raw[duplicated(data_raw$prolific_pid), ]
+original_duplicate <- data_raw[duplicated(data_raw$prolific_pid) |
+  duplicated(data_raw$prolific_pid, fromLast = TRUE), ]
+
+nrow(original_duplicate)
 
 # Keep first occurrence
 data_raw <- data_raw %>% distinct(prolific_pid, .keep_all = TRUE)
@@ -115,7 +131,11 @@ nrow(data)
 
 data <- data %>%
   filter(!is.na(next_veh_style))
+
+nrow(data)
 # Save
+
+
 
 write_parquet(
   data,

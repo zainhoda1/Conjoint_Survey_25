@@ -1,6 +1,5 @@
 source(here::here('code', 'setup.R'))
 source(here::here('code', 'prolific_testing', 'approval_functions.R'))
-
 # Import raw data
 
 data_raw <- read_parquet(here(
@@ -109,7 +108,7 @@ summary(data_battery$time_min_battery_cbc)
 data_battery <- data_battery %>%
   filter(time_min_battery_cbc >= 0.5) %>%
   # dropping non-unique respID (keeping first one)
-  distinct(respID, .keep_all = TRUE)
+  distinct(respID,prolific_pid, .keep_all = TRUE)
 
 nrow(data_battery)
 

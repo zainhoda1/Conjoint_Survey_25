@@ -30,6 +30,9 @@ data_raw %>%
   group_by(next_veh_style, budget) %>%
   count()
 
+
+
+
 # Select important columns
 data <- data_raw %>%
   select(
@@ -55,14 +58,14 @@ nrow(data)
 
 ## Commented out for testing
 
-# data_vehicle <- data %>%
-#   inner_join(
-#     data_approval %>%
-#       select(prolific_pid),
-#     by = "prolific_pid"
-#   )
+data_vehicle <- data %>%
+  inner_join(
+    data_approval %>%
+      select(prolific_pid),
+    by = "prolific_pid"
+  )
 
-data_vehicle <- data  # Added for testing, to be removed
+#data_vehicle <- data  # Added for testing, to be removed
 
 ## Commented out for testing
 
@@ -114,7 +117,7 @@ summary(data_vehicle$time_min_vehicle_cbc)
 data_vehicle <- data_vehicle %>%
   filter(time_min_vehicle_cbc >= 0.5) %>%
   # dropping non-unique respID (keeping first one)
-  distinct(respID, .keep_all = TRUE)
+  distinct(respID, prolific_pid, .keep_all = TRUE)
 
 nrow(data_vehicle)
 

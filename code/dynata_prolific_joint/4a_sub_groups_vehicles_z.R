@@ -164,11 +164,11 @@ positive_group <- data_raw_joined %>%
 negative_group <- data_raw_joined %>%
   filter(
     (!next_veh_fuel_new_bev %in%
-      c('very_likely', 'somewhat_likely', 'neutral')) |
+      c('very_likely', 'somewhat_likely', 'neutral'))  &
       (!next_veh_fuel_used_bev %in%
         c('very_likely', 'somewhat_likely', 'neutral'))
   ) %>%
-  select(psid)
+  select(psid, next_veh_fuel_new_bev, next_veh_fuel_used_bev)
 
 charger_access_yes_group <- data_raw_joined %>%
   filter(
@@ -402,3 +402,18 @@ save(
   model_charger_access_no,
   file = here("models", "model_charger_access_no.RData")
 )
+
+
+
+############################################################
+
+
+ data_raw_joined %>%
+  filter(
+    (next_veh_fuel_new_bev %in%
+      c('very_likely', 'somewhat_likely', 'neutral')) |
+      (next_veh_fuel_used_bev %in%
+        c('very_likely', 'somewhat_likely', 'neutral'))
+  )  |> 
+   group_by(education) |> summarise(n = n())
+

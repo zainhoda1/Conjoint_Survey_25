@@ -214,7 +214,6 @@ summary(model_car)
 summary(model_suv)
 summary(wtp_model_dynata)
 summary(wtp_model_prolific)
-
 summary(wtp_model_car)
 summary(wtp_model_suv)
 summary(wtp_model_car_low)
