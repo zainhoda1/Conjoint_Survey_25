@@ -14,6 +14,17 @@ data_joint <- read_parquet(here(
 ))
 
 
+# True sample sizes before any ZIP filtering
+n_total_prolific <- data_joint %>%
+  filter(data_source %in% c("prolific", "prolific_round2")) %>%
+  nrow()
+
+n_total_dynata <- data_joint %>%
+  filter(data_source == "dynata") %>%
+  nrow()
+
+n_total_all <- nrow(data_joint)
+
 # zipcode cleaning----
 df <- data_joint %>%
   mutate(
@@ -63,14 +74,14 @@ geo_data_dynata_t <- usmap_transform(
     select(lng, lat, respondent_count) %>%
     filter(!is.na(lng), !is.na(lat)),
   input_names = c("lng", "lat")
-)
+) %>% arrange(respondent_count)
 
 geo_data_prolific_t <- usmap_transform(
   geo_data_prolific %>%
     select(lng, lat, respondent_count) %>%
     filter(!is.na(lng), !is.na(lat)),
   input_names = c("lng", "lat")
-)
+) %>% arrange(respondent_count)
 
 # Define a function to ensure breaks are always integers
 integer_breaks <- function(x) {
@@ -85,7 +96,6 @@ max_count <- max(
 ## prolific ----
 
 total_zips <- nrow(geo_data_prolific)
-total_respondents <- sum(geo_data_prolific$respondent_count)
 
 map_prolific <- ggplot() +
   geom_sf(
@@ -133,13 +143,12 @@ map_prolific <- ggplot() +
   labs(
     title = "Geographic Distribution of Respondents",
     subtitle = str_glue(
-      "Prolific n = {total_respondents} (across {total_zips} unique ZIP codes)"
+      "Prolific n = {n_total_prolific} (across {total_zips} unique ZIP codes)"
     )
   )
 
 ## dynata ----
 total_zips <- nrow(geo_data_dynata)
-total_respondents <- sum(geo_data_dynata$respondent_count)
 
 map_dynata <- ggplot() +
   geom_sf(
@@ -187,7 +196,7 @@ map_dynata <- ggplot() +
   labs(
     title = "Geographic Distribution of Respondents",
     subtitle = str_glue(
-      "Dynata n = {total_respondents} (across {total_zips} unique ZIP codes)"
+      "Dynata n = {n_total_dynata} (across {total_zips} unique ZIP codes)"
     )
   )
 
@@ -253,10 +262,9 @@ geo_data_all_t <- usmap_transform(
     select(lng, lat, respondent_count) %>%
     filter(!is.na(lng), !is.na(lat)),
   input_names = c("lng", "lat")
-)
+) %>% arrange(respondent_count)
 
 total_zips_all <- nrow(geo_data_all)
-total_respondents_all <- sum(geo_data_all$respondent_count)
 
 map_all <- ggplot() +
   geom_sf(
@@ -305,7 +313,7 @@ map_all <- ggplot() +
     title = NULL,
     subtitle = NULL,
     caption = str_glue(
-      "n = {total_respondents_all} (across {total_zips_all} unique ZIP codes)"
+      "n = {n_total_all} (across {total_zips_all} unique ZIP codes)"
     )
   ) +
   theme(
