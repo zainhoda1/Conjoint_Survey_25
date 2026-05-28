@@ -51,7 +51,7 @@ check_battery_same_answer <- function(data) {
         (battery_cbc_q3_button == battery_cbc_q4_button) &
         (battery_cbc_q4_button == battery_cbc_q5_button) &
         (battery_cbc_q5_button == battery_cbc_q6_button),
-      battery_all_option4 = battery_all_same & (battery_cbc_q1_button == "4")
+      battery_all_option4 = battery_all_same & (battery_cbc_q1_button == "option_4")
     ) %>%
     select(prolific_pid, battery_all_same, battery_all_option4)
 }

@@ -7,7 +7,8 @@ data_joint <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
   "data_joint_vehicle.parquet"
-))
+)) |> 
+  filter(collection_round != 'round_4')
 
 
 data_raw_dynata <- read_parquet(here(
@@ -15,7 +16,8 @@ data_raw_dynata <- read_parquet(here(
   "dynata_testing",
   "data.parquet"
 )) %>%
-  select(-starts_with('time'), -ends_with('button'), -respID) %>%
+  select(-starts_with('time'), -ends_with('button'),
+ -respID) %>%
   mutate(data_source = 'dynata')
 
 data_raw_prolific <- read_parquet(here(
@@ -25,7 +27,7 @@ data_raw_prolific <- read_parquet(here(
 )) %>%
   select(-starts_with('time'), -ends_with('button'), -respID) %>%
   mutate(psid = prolific_pid, data_source = 'prolific') %>%
-  select(-study_id, -prolific_session_id, -prolific_pid)
+  select(-study_id, -prolific_session_id, -prolific_pid, -current_page)
 
 
 data_raw_prolific_round2 <- read_parquet(here(
@@ -35,7 +37,8 @@ data_raw_prolific_round2 <- read_parquet(here(
 )) %>%
   select(-starts_with('time'), -ends_with('button'), -respID) %>%
   mutate(psid = prolific_pid, data_source = 'prolific') %>%
-  select(-study_id, -prolific_session_id, -prolific_pid)
+  select(-study_id, -prolific_session_id, -prolific_pid, -current_page
+  )
 
 
 data_joint %>% 
