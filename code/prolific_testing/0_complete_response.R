@@ -6,6 +6,8 @@ source(here::here('code', 'prolific_testing', 'approval_functions.R'))
 
 data_raw <- read_csv(here('data', 'prolific_testing', 'data_round_2+3+4_may_26.csv'))
 
+
+
 data_raw <- data_raw |> 
     mutate(
   survey_taken_day = ymd_hms(time_start, tz = "UTC"),
@@ -79,6 +81,7 @@ data_raw |>
   pivot_wider(names_from= 'collection_round', values_from = 'counts')
 
 # Check for approvals (need to fix this code)
+
 
 data_approval <- check_all_approvals(data_raw)
 
