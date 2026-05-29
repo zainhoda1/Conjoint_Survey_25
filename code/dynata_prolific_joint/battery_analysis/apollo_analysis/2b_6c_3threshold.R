@@ -8,6 +8,8 @@ data_model <- read_parquet(here(
   "data_apollo_battery.parquet"
 ))
 
+# n_distinct(data_dce$psid)
+
 data_model <- data_model %>%
   filter(
     # !is.na(FA_EV_benefit) &
@@ -41,7 +43,7 @@ apollo_control = list(
   modelName = paste0("piecewise_rangeloss_car_suv_lc_6c_", i),
   modelDescr = "LC model with 6 classes, piecewise linear range and range loss",
   indivID = "respID",
-  nCores = 2,
+  nCores = 6,
   panelData = TRUE,
   outputDirectory = paste0(
     here(),
@@ -227,27 +229,27 @@ apollo_beta = c(
 
 ### Class F is the reference class: fix all its allocation parameters to 0
 apollo_fixed = c(
-  "delta_f",
-  "gamma_EV_rangeanxiety_f",
-  "gamma_risktaker_f",
-  "gamma_hhincome_f",
-  "gamma_ev_charge_f",
-  # "gamma_ev_neighbor_f",
-  "gamma_knowledge_ev_f",
-  "gamma_evb_environment_agree_f",
-  "gamma_evb_function_disagree_f",
-  "gamma_hhveh_fuel_f",
-  # "gamma_veh_refuel_f",
-  "gamma_veh_range_f",
-  "gamma_suv_f"
+  "delta_a",
+  "gamma_EV_rangeanxiety_a",
+  "gamma_risktaker_a",
+  "gamma_hhincome_a",
+  "gamma_ev_charge_a",
+  # "gamma_ev_neighbor_a",
+  "gamma_knowledge_ev_a",
+  "gamma_evb_environment_agree_a",
+  "gamma_evb_function_disagree_a",
+  "gamma_hhveh_fuel_a",
+  # "gamma_veh_refuel_a",
+  "gamma_veh_range_a",
+  "gamma_suv_a"
 )
 
 # Randomise free parameters so classes start from different points.
 # LC models with identical starting values across classes produce identical
 # class probabilities and fail apollo's validation check.
-set.seed(42)
-apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
-  runif(sum(!names(apollo_beta) %in% apollo_fixed), -0.1, 0.1)
+# set.seed(42)
+# apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
+#   runif(sum(!names(apollo_beta) %in% apollo_fixed), -0.1, 0.1)
 
 # Once a first run has converged, warm-start subsequent runs from those estimates:
 apollo_beta = apollo_readBeta(

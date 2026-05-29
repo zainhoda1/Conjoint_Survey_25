@@ -189,4 +189,3 @@ write_parquet(
     "data_joint.parquet"
   )
 )
-

@@ -37,7 +37,7 @@ check_vehicle_same_answer <- function(data) {
         (vehicle_cbc_q3_button == vehicle_cbc_q4_button) &
         (vehicle_cbc_q4_button == vehicle_cbc_q5_button) &
         (vehicle_cbc_q5_button == vehicle_cbc_q6_button),
-      vehicle_all_option4 = vehicle_all_same & (vehicle_cbc_q1_button == "4")
+      vehicle_all_option4 = vehicle_all_same & (vehicle_cbc_q1_button == "option_4")
     ) %>%
     select(prolific_pid, vehicle_all_same, vehicle_all_option4)
 }

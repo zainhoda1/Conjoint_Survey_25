@@ -10,6 +10,9 @@ data_dce <- read_parquet(here(
 )) %>%
   mutate(respID_qID = paste0(respID, "_", qID))
 
+# n_distinct(data_dce$respID)
+# n_distinct(data_dce$psid)
+
 # ### subset
 # ###  BEV price >20K
 # bev_price <- data_dce %>%
@@ -39,7 +42,7 @@ data_dce <- read_parquet(here(
 #   ) %>%
 #   select(-respID_qID)
 #
-# n_distinct(data_dce$respID)
+
 
 data_variable <- read_parquet(here(
   "data",
@@ -294,3 +297,4 @@ write_parquet(
     "data_apollo_battery.parquet"
   )
 )
+

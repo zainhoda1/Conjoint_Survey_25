@@ -66,6 +66,14 @@ data_battery <- data %>%
     by = "prolific_pid"
   )
 
+# b<-data_battery |> 
+#  filter(battery_cbc_q1_button=="option_4" & 
+#   battery_cbc_q2_button=="option_4" &
+#    battery_cbc_q3_button=="option_4" & 
+#   battery_cbc_q4_button=="option_4" &
+#    battery_cbc_q5_button=="option_4" & 
+#   battery_cbc_q6_button=="option_4"
+#   )
 
 print('Drop bad respondents')
 nrow(data_battery)

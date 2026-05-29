@@ -76,7 +76,13 @@ database <- data_model %>%
     ATT_EVB_function = case_when(
       ATT_EVB_function < 3 ~ 1,
       TRUE ~ 0
-    )
+    ),
+    next_veh_fuel_used_bev=case_when(next_veh_fuel_used_bev==1 ~"strongly_disagree",
+    next_veh_fuel_used_bev==2 ~"somewhat_disagree",
+    next_veh_fuel_used_bev==3 ~"neutral",
+    next_veh_fuel_used_bev==4 ~"somewhat_agree",
+    next_veh_fuel_used_bev==5 ~"strongly_agree")
+
   )
 
 # ---- WTP significance: bounded by the less significant of (attribute, price) ----
@@ -298,21 +304,21 @@ num_vars <- c(
   "age_num",
   "hhsize_num",
   "Veh_hh_count",
-  "next_veh_budget_k",
-  "next_veh_fuel_new_phev",
-  "next_veh_fuel_used_phev",
-  "next_veh_fuel_new_bev",
-  "next_veh_fuel_used_bev"
+  "next_veh_budget_k"
+  # "next_veh_fuel_new_phev",
+  # "next_veh_fuel_used_phev",
+  # "next_veh_fuel_new_bev",
 )
 cate_vars <- c(
   "ATT_range_anxiety",
   "ATT_risktaker",
-  "ATT_price_sensitive",
+  # "ATT_price_sensitive",
   "ATT_climate",
   "ATT_EVB_environment",
   "ATT_EVB_function",
   "EV_charger",
   "EV_neighbor",
+  "next_veh_fuel_used_bev",
   "knowledge_ev",
   "knowledge_subsidy",
   "gender_cate",
@@ -407,12 +413,12 @@ var_meta <- tribble(
   "Veh_hh_count"               , "Household Vehicle Count"                           , "Inactive Indicators: Socioeconomics"        , "number" ,
   "Veh_primary_fuel"           , "Primary Vehicle Fuel Type"                         , "Inactive Indicators: Socioeconomics"        , "pct"    ,
   "next_veh_budget_k"          , "Next Vehicle Budget (1000 USD)"                    , "Inactive Indicators: Socioeconomics"        , "dollar" ,
-  "next_veh_fuel_new_phev"     , "Likelihood of buying new PHEV (1-5)"               , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "next_veh_fuel_used_phev"    , "Likelihood of buying used PHEV (1-5)"              , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "next_veh_fuel_new_bev"      , "Likelihood of buying new BEV (1-5)"                , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "next_veh_fuel_used_bev"     , "Likelihood of buying used BEV (1-5)"               , "Inactive Indicators: Socioeconomics"        , "number" ,
+  # "next_veh_fuel_new_phev"     , "Likelihood of buying new PHEV (1-5)"               , "Inactive Indicators: Socioeconomics"        , "number" ,
+  # "next_veh_fuel_used_phev"    , "Likelihood of buying used PHEV (1-5)"              , "Inactive Indicators: Socioeconomics"        , "number" ,
+  # "next_veh_fuel_new_bev"      , "Likelihood of buying new BEV (1-5)"                , "Inactive Indicators: Socioeconomics"        , "number" ,
+  "next_veh_fuel_used_bev"     , "Likelihood of buying used BEV"               , "Inactive Indicators: Socioeconomics"        , "number" ,
   # Attitudes / psychological
-  "ATT_price_sensitive"        , "Price Sensitivity"                                 , "Inactive Indicators: Attitudes"             , "pct"    ,
+  # "ATT_price_sensitive"        , "Price Sensitivity"                                 , "Inactive Indicators: Attitudes"             , "pct"    ,
   "ATT_climate"                , "Climate Concern"                                   , "Inactive Indicators: Attitudes"             , "pct"    ,
   "ATT_political"              , "Political Spectrum"                                , "Inactive Indicators: Attitudes"             , "pct"    ,
   "ATT_voting"                 , "Voting Behavior"                                   , "Inactive Indicators: Attitudes"             , "pct"    ,

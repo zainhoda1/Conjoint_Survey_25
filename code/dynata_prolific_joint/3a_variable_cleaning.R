@@ -79,13 +79,13 @@ att <- data %>%
   ) %>%
   mutate(across(
     starts_with("attitudes_"),
-    ~ recode_values(
+    ~ dplyr::recode(
       .,
-      "strongly_disagree" ~ 1L,
-      "somewhat_disagree" ~ 2L,
-      "neutral" ~ 3L,
-      "somewhat_agree" ~ 4L,
-      "strongly_agree" ~ 5L
+      "strongly_disagree" = 1L,
+      "somewhat_disagree" = 2L,
+      "neutral" = 3L,
+      "somewhat_agree" = 4L,
+      "strongly_agree" = 5L
     )
   ))
 
