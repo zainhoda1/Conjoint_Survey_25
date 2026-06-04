@@ -4,6 +4,9 @@
 
 
 %\usepackage{natbib}
+% cas-common.sty references \bibsep (a natbib length) even when natbib is not loaded.
+% Declaring it here prevents the "Undefined control sequence" error at \begin{document}.
+\newlength{\bibsep}
 \usepackage{float}
 \usepackage{array}
 \usepackage{multirow}
@@ -102,12 +105,9 @@ maxbibnames=99,
 \credit{Conceptualization, Methodology, Writing - Review \& Editing, Supervision}
 \fnmark[6]
 
-\affiliation[1]{organization={Applied Economics Office, Engineering Laboratory, National Institute of Standards and Technology},
-                country={USA}}     
-                
-\affiliation[2]{organization={Department of Engineering Management and Systems Engineering, George Washington University},
-                city={Washington D.C.},
-                country={USA}}
+\address[1]{Applied Economics Office, Engineering Laboratory, National Institute of Standards and Technology, USA}
+
+\address[2]{Department of Engineering Management and Systems Engineering, George Washington University, Washington D.C., USA}
                 
 
 
@@ -263,9 +263,12 @@ We further apply multiple data quality screens to identify and remove low-qualit
 
 
 
-\section{Method:Latent Class Choice Model (LCCM)}
+\section{Method:}
+\subsection{Mixed Logit Model (MXL)}
 
-\noindent $\bullet$ \textbf{Model Framework} \par
+\subsection{Latent Class Choice Model (LCCM)}
+
+\noindent \textbf{Model Framework} \par
 
 We employ a LCCM to analyze consumer preferences and WTP for used BEVs. The LCCM is built on the premise that individuals can be grouped into a finite number of latent groups/segments/classes, within which individuals share homogeneous preferences, but across which preferences are heterogeneous \parencite{kamakuraProbabilisticChoiceModel1989, greeneLatentClassModel2003}. This approach is particularly suited to our research context, where consumer valuations of battery health information likely differ systematically across distinct segments varied by individual characteristics.
 
@@ -278,7 +281,7 @@ As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two int
     \label{fig:model_framework}
 \end{figure}
 
-\noindent $\bullet$ \textbf{Class-specific Choice Model}\par
+\noindent \textbf{Class-specific Choice Model}\par
 
 For respondent $n$ belonging to latent class $s$ ($s = 1, 2, \ldots, S$), the utility associated with choosing vehicle alternative $i$ in choice scenario $t$ ($t = 1, 2, \ldots, 6$)is specified as:
 
@@ -297,7 +300,7 @@ For respondent $n$ belonging to latent class $s$ ($s = 1, 2, \ldots, S$), the ut
 \noindent where $\mathcal{C}_{nt}$ denotes the choice set available to respondent $n$ at scenario $t$.\par
 
 
-\noindent $\bullet$ \textbf{Class Membership Model} \par
+\noindent \textbf{Class Membership Model} \par
 
 The class membership model specifies the probability that respondent $n$ belongs to latent class $s$ as a function of observed individual-level covariates. The class membership probability is:
 
@@ -336,7 +339,7 @@ The log-likelihood function across all $N$ respondents and $T$ choice scenarios 
 \noindent where $i_n^*$ denotes the alternative chosen by respondent $n$ in scenario $t$. The model parameters $\boldsymbol{\beta}_s$ and $\boldsymbol{\gamma}_s$ are estimated jointly via maximum likelihood estimation.\par
 
 
-\noindent $\bullet$ \textbf{Willingness to Pay} \par
+\noindent \textbf{Willingness to Pay} \par
 
 A key output of the LCCM is class-specific WTP for each BEV attribute. Under the assumption that the marginal utility of price is negative and constant across alternatives, the WTP for attribute $k$ in class $s$ is:
 
@@ -353,6 +356,7 @@ The optimal number of latent classes is determined by estimating models with two
 
 \section{Results and Discussion}
 \subsection{Model Selection}
+
 
 
 % \input{../../code/output/model_output/vehicle_analysis/apollo/0_class_profile_summary_cars_suvs_lc_3c.tex}

@@ -14,22 +14,14 @@ data_model <- read_parquet(here(
 
 data_model <- data_model %>%
   filter(
-    # !is.na(FA_EV_benefit) &
-    # !is.na(FA_EV_anxiety) &
     !is.na(ATT_range_anxiety) &
       !is.na(ATT_risktaker) &
       !is.na(hhincome_num_10k) &
       !is.na(EV_charger) &
-      # !is.na(EV_neighbor) &
-      # !is.na(knowledge_ev) &
-      # !is.na(knowledge_subsidy) &
-      # !is.na(Veh_hh_count) &
       !is.na(Veh_hh_fuel) &
-      # !is.na(Veh_primary_refuel_monthly) &
       !is.na(Veh_primary_range) &
       !is.na(ATT_EVB_environment) &
-      !is.na(ATT_EVB_function) &
-      !is.na(vehicle_typesuv)
+      !is.na(ATT_EVB_function)
   )
 
 data_nobev <- data_full %>%
@@ -45,7 +37,7 @@ data_nobev <- data_full %>%
   )
 
 
-cat("N in data_nobev:", nrow(data_nobev), "\n")
+cat("N in data_nobev (model sample):", nrow(data_nobev), "\n")
 cat("Treatment distribution:\n")
 print(table(data_nobev$treatment, useNA = "always"))
 
@@ -80,6 +72,27 @@ coded <- read_parquet(here(
 )) %>%
   mutate(n_themes = rowSums(select(., all_of(themes)), na.rm = TRUE))
 cat("Loaded", nrow(coded), "coded responses.\n")
+
+# ── Check for new uncoded responses ──────────────────────────────────────────
+new_uncoded <- data_nobev %>%
+  filter(!psid %in% coded$psid)
+
+if (nrow(new_uncoded) > 0) {
+  cat("\nWARNING:", nrow(new_uncoded), "new no-BEV responses not yet LLM-coded.\n")
+  cat("Saving to: 0_nobev_themes_to_code.parquet\n")
+  write_parquet(
+    new_uncoded,
+    here("code","output","model_output","battery_analysis","apollo",
+         "0_nobev_themes_to_code.parquet")
+  )
+  cat("Re-run LLM coding on this file and append to 0_nobev_themes_coded.parquet.\n\n")
+  # Restrict analysis to already-coded responses
+  coded <- coded %>% filter(psid %in% data_nobev$psid)
+} else {
+  cat("All no-BEV responses are coded. Proceeding with full dataset.\n")
+}
+
+cat("Using", nrow(coded), "coded responses for analysis.\n")
 cat("Theme counts:\n")
 print(colSums(coded[, themes]))
 

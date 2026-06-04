@@ -446,6 +446,45 @@ combined_all <- combined_all %>%
     )
   )
 
+# ── Opt-out rate by choice task ───────────────────────────────────────────────
+{
+  n_k       <- sum(grepl("^Combined_class", names(combined_all)))
+  cp_optout <- read_parquet(here(
+    "code", "output", "model_output", "battery_analysis", "apollo",
+    paste0("0_Combined_", n_k, "c_class_probabilities.parquet")
+  )) %>% select(respID, paste0("prob_class", 1:n_k))
+
+  optout_task <- database %>%
+    select(respID, qID, choice) %>%
+    inner_join(cp_optout, by = "respID") %>%
+    mutate(optout = as.integer(choice == 4))
+
+  optout_mat <- map_dfc(1:n_k, function(k) {
+    pcol  <- paste0("prob_class", k)
+    rates <- optout_task %>%
+      group_by(qID) %>%
+      summarise(rate = weighted.mean(optout, .data[[pcol]]), .groups = "drop") %>%
+      arrange(qID)
+    tibble(!!paste0("Combined_class", k) := c(rates$rate, mean(rates$rate)))
+  })
+
+  optout_rows <- bind_cols(
+    tibble(
+      variable        = c("optout_Q1","optout_Q2","optout_Q3","optout_Q4","optout_Q5","optout_Q6","optout_mean"),
+      variable_origin = c("optout_Q1","optout_Q2","optout_Q3","optout_Q4","optout_Q5","optout_Q6","optout_mean"),
+      category        = NA_character_,
+      label           = c("Opt-out Rate: Q1","Opt-out Rate: Q2","Opt-out Rate: Q3",
+                          "Opt-out Rate: Q4","Opt-out Rate: Q5","Opt-out Rate: Q6",
+                          "Opt-out Rate: Mean (Q1-Q6)"),
+      section         = "Inactive Indicators: Opt-out by Choice Task",
+      fmt             = "pct"
+    ),
+    optout_mat
+  )
+
+  combined_all <- bind_rows(combined_all, optout_rows)
+}
+
 # --- Format numeric values per-row ---
 fmt_row <- function(x, fmt) {
   if (fmt == "dollar") {
@@ -462,7 +501,8 @@ formatted <- combined_all %>%
   mutate(
     fmt = case_when(
       variable %in% attributes_long ~ "dollar",
-      grepl("_share$", variable) ~ "pct",
+      grepl("_share$", variable)    ~ "pct",
+      grepl("^optout_", variable)   ~ "pct",
       TRUE ~ "number"
     ),
     across(

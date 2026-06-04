@@ -16,11 +16,12 @@ colnames(car_suv_lc_4c)[1] <- "variable"
 
 
 # ---- Format combined model coefficients ----
+# P.Value is retained here; dropped before pivot for the coefficient table,
+# but used separately for WTP significance computation.
 combined_all <- car_suv_lc_4c %>%
   mutate(vehicle = "Combined") %>%
   as.data.frame() %>%
   select(1:2, 6, 8, 9) %>%
-  mutate(across(where(is.numeric), round, 2)) %>%
   setNames(c("Variables", "Est.", "Std.Err.", "P.Value", "Segment")) %>%
   mutate(
     Sig. = case_when(
@@ -31,6 +32,7 @@ combined_all <- car_suv_lc_4c %>%
       T ~ " "
     )
   ) %>%
+  mutate(across(where(is.numeric), round, 2)) %>%
   filter(!is.na(Std.Err.)) %>%
   mutate(
     Variables = str_replace_all(
@@ -45,11 +47,22 @@ combined_all <- car_suv_lc_4c %>%
       pattern = "delta",
       replacement = "ASC"
     )
-  ) %>%
-  select(-P.Value)
+  )
 
 
+# Helper: parse class suffix to class label (used in both coef and WTP tables)
+parse_class <- function(x) {
+  case_when(
+    x == "a" ~ "class1",
+    x == "b" ~ "class2",
+    x == "c" ~ "class3",
+    TRUE      ~ "class4"
+  )
+}
+
+# ---- Coefficient table (no P.Value in output) ----
 formatted <- combined_all %>%
+  select(-P.Value) %>%
   separate(
     col = Variables,
     into = c("Variables", "Class"),
@@ -57,14 +70,7 @@ formatted <- combined_all %>%
     extra = "merge",
     fill = "right"
   ) %>%
-  mutate(
-    Class = case_when(
-      Class == "a" ~ "class1",
-      Class == "b" ~ "class2",
-      Class == "c" ~ "class3",
-      TRUE ~ "class4"
-    )
-  ) %>%
+  mutate(Class = parse_class(Class)) %>%
   pivot_wider(
     id_cols = c(Variables),
     names_from = c(Class, Segment),
@@ -144,77 +150,18 @@ gt_formatted <- formatted %>%
   ) %>%
   select(label, section, starts_with("Combined_class"))
 
-# gt_car_suv_lc_3c <- gt_formatted |>
-#   group_by(section) %>%
-#   gt(rowname_col = "label") |>
-#   tab_spanner(
-#     label = "Car",
-#     columns = c(Car_class1, Car_class2, Car_class3)
-#   ) |>
-#   tab_spanner(
-#     label = "SUV",
-#     columns = c(SUV_class1, SUV_class2, SUV_class3)
-#   ) |>
-#   tab_spanner(
-#     label = "Combined",
-#     columns = c(Combined_class1, Combined_class2, Combined_class3)
-#   ) |>
-#   cols_align(align = "right", columns = everything()) %>%
-#   cols_align(align = "left", columns = label) %>%
-#   cols_label(
-#     Car_class1 = "Class 1",
-#     Car_class2 = "Class 2",
-#     Car_class3 = "Class 3",
-#     SUV_class1 = "Class 1",
-#     SUV_class2 = "Class 2",
-#     SUV_class3 = "Class 3",
-#     Combined_class1 = "Class 1",
-#     Combined_class2 = "Class 2",
-#     Combined_class3 = "Class 3"
-#   ) |>
-#   tab_header(
-#     title = md(
-#       "**BEV Battery Information Valuation: Model Results (Car vs SUV)**"
-#     ),
-#     subtitle = "Est. (SE)[Sig.] for each class"
-#   ) %>%
-#   cols_align(align = "left", everything()) %>%
-#   tab_options(
-#     table.font.size = px(13),
-#     heading.align = "left",
-#     row_group.font.weight = "bold",
-#     column_labels.font.weight = "bold"
-#   ) %>%
-#   opt_stylize(style = 1, color = "blue") #
 
-# gt_car_suv_lc_3c
-
-# gtsave(
-#   gt_car_suv_lc_3c,
-#   file = here::here(
-#     "code",
-#     "output",
-#     "model_output",
-#     "battery_analysis",
-#     "apollo",
-#     "0_model_summary_cars_suvs_lc_3c.html"
-#   )
-# )
-
-gt_car_suv_lc_3c <- gt_formatted |>
+gt_car_suv_lc_4c <- gt_formatted |>
   group_by(section) %>%
   gt(rowname_col = "label") |>
-  # tab_spanner(
-  #   label = "Car",
-  #   columns = c(Car_class1, Car_class2, Car_class3)
-  # ) |>
-  # tab_spanner(
-  #   label = "SUV",
-  #   columns = c(SUV_class1, SUV_class2, SUV_class3)
-  # ) |>
   tab_spanner(
     label = "Combined",
-    columns = c(Combined_class1, Combined_class2, Combined_class3, Combined_class4)
+    columns = c(
+      Combined_class1,
+      Combined_class2,
+      Combined_class3,
+      Combined_class4
+    )
   ) |>
   cols_align(align = "right", columns = everything()) %>%
   cols_align(align = "left", columns = label) %>%
@@ -237,12 +184,12 @@ gt_car_suv_lc_3c <- gt_formatted |>
     row_group.font.weight = "bold",
     column_labels.font.weight = "bold"
   ) %>%
-  opt_stylize(style = 1, color = "blue") #
+  opt_stylize(style = 1, color = "blue")
 
-gt_car_suv_lc_3c
+gt_car_suv_lc_4c
 
 gtsave(
-  gt_car_suv_lc_3c,
+  gt_car_suv_lc_4c,
   file = here::here(
     "code",
     "output",
@@ -250,5 +197,27 @@ gtsave(
     "battery_analysis",
     "apollo",
     "0_model_summary_cars_suvs_lc_4c_piecewise_rangeloss.html"
+  )
+)
+
+gt_car_suv_lc_4c_latex <- gt_car_suv_lc_4c %>%
+  tab_options(
+    table.font.size = px(9)
+  ) %>%
+  cols_width(
+    everything() ~ px(80),
+    label ~ px(140)
+  ) %>%
+  as_latex()
+
+writeLines(
+  gt_car_suv_lc_4c_latex,
+  con = here::here(
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "apollo",
+    "0_class_profile_summary_cars_suvs_lc_4c.tex"
   )
 )

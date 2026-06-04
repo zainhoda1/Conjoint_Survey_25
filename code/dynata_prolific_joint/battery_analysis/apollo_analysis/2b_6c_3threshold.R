@@ -8,7 +8,7 @@ data_model <- read_parquet(here(
   "data_apollo_battery.parquet"
 ))
 
-# n_distinct(data_dce$psid)
+# n_distinct(data_model$psid)
 
 data_model <- data_model %>%
   filter(
@@ -255,7 +255,7 @@ apollo_fixed = c(
 apollo_beta = apollo_readBeta(
   apollo_beta,
   apollo_fixed,
-  "piecewise_rangeloss_car_suv_lc_6c_1",
+  "piecewise_rangeloss_car_suv_lc_5c_1",
   overwriteFixed = FALSE
 )
 

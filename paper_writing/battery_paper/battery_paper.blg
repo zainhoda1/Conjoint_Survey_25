@@ -1,0 +1,31 @@
+[0] Config.pm:304> INFO - This is Biber 2.14
+[0] Config.pm:307> INFO - Logfile is 'battery_paper.blg'
+[198] biber-darwin:322> INFO - === Tue Jun  2, 2026, 16:17:26
+[247] Biber.pm:415> INFO - Reading 'battery_paper.bcf'
+[424] Biber.pm:943> INFO - Found 41 citekeys in bib section 0
+[447] Biber.pm:4256> INFO - Processing section 0
+[448] Utils.pm:75> INFO - Globbing data source 'DCE_lit_review.bib'
+[449] Utils.pm:91> INFO - Globbed data source 'DCE_lit_review.bib' to DCE_lit_review.bib
+[449] Utils.pm:75> INFO - Globbing data source 'Used EV.bib'
+[450] Utils.pm:91> INFO - Globbed data source 'Used EV.bib' to Used EV.bib
+[450] Utils.pm:75> INFO - Globbing data source 'EV battery.bib'
+[450] Utils.pm:91> INFO - Globbed data source 'EV battery.bib' to EV battery.bib
+[474] Biber.pm:4455> INFO - Looking for bibtex format file 'DCE_lit_review.bib' for section 0
+[486] bibtex.pm:1653> INFO - LaTeX decoding ...
+[763] bibtex.pm:1471> INFO - Found BibTeX data source 'DCE_lit_review.bib'
+[824] Utils.pm:304> WARN - Entry 'goreDCIConsumerValuation2025' (DCE_lit_review.bib): Invalid format '2025-11-18T07:00-05:00' of date field 'date' - ignoring
+[862] Biber.pm:4455> INFO - Looking for bibtex format file 'Used EV.bib' for section 0
+[868] bibtex.pm:1653> INFO - LaTeX decoding ...
+[993] bibtex.pm:1471> INFO - Found BibTeX data source 'Used EV.bib'
+[1440] Biber.pm:4455> INFO - Looking for bibtex format file 'EV battery.bib' for section 0
+[1459] bibtex.pm:1653> INFO - LaTeX decoding ...
+[1732] bibtex.pm:1471> INFO - Found BibTeX data source 'EV battery.bib'
+[1742] Utils.pm:304> WARN - Duplicate entry key: 'englerCausalEffectReligious2019' in file 'EV battery.bib', skipping ...
+[1752] Utils.pm:304> WARN - Duplicate entry key: 'prietoUsingHedonicPrice2015' in file 'EV battery.bib', skipping ...
+[2171] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[2171] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[2171] Biber.pm:4084> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[2171] Biber.pm:4090> INFO - No sort tailoring available for locale 'en-US'
+[2304] bbl.pm:652> INFO - Writing 'battery_paper.bbl' with encoding 'UTF-8'
+[2391] bbl.pm:755> INFO - Output to battery_paper.bbl
+[2392] Biber.pm:128> INFO - WARNINGS: 3

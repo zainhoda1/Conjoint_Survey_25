@@ -43,7 +43,7 @@ mxl_model_pref <- function(data) {
     numMultiStarts = 10,
     drawType = "sobol",
     numDraws = numDraws,
-    numCores = 5,
+    numCores = 6,
     set.seed(123)
   )
   # cat('n =', length(unique(data$respID)))
@@ -69,7 +69,7 @@ mxl_model_wtp <- function(data, wtp_pref_model) {
     numMultiStarts = 10,
     drawType = "sobol",
     numDraws = numDraws,
-    numCores = 5,
+    numCores = 6,
     startVals = wtp_pref_model$Estimate,
     set.seed(6789)
   )
@@ -107,41 +107,43 @@ mxl_model_wtp <- function(data, wtp_pref_model) {
 
 ## model estimation ----
 
-# Estimate the pref model
-pref_model_car <- mxl_model_pref(
-  data_dce %>%
-    filter(vehicle_typesuv == 0) %>%
-    group_by(obsID) %>%
-    filter(n() > 1, sum(choice) == 1) %>%
-    ungroup()
-)
-pref_model_suv <- mxl_model_pref(
-  data_dce %>% filter(vehicle_typesuv == 1)
-)
-# pref_model_all <- mxl_model_pref(data_dce)
-summary(pref_model_car)
-summary(pref_model_suv)
+### Estimate the pref model
+# pref_model_car <- mxl_model_pref(
+#   data_dce %>%
+#     filter(vehicle_typesuv == 0) %>%
+#     group_by(obsID) %>%
+#     filter(n() > 1, sum(choice) == 1) %>%
+#     ungroup()
+# )
+# pref_model_suv <- mxl_model_pref(
+#   data_dce %>% filter(vehicle_typesuv == 1)
+# )
+pref_model_all <- mxl_model_pref(data_dce)
+# summary(pref_model_car)
+# summary(pref_model_suv)
 # summary(pref_model_all)
 
-wtp_pref_model_car <- wtp(pref_model_car, scalePar = "price")
-wtp_pref_model_suv <- wtp(pref_model_suv, scalePar = "price")
+# wtp_pref_model_car <- wtp(pref_model_car, scalePar = "price")
+# wtp_pref_model_suv <- wtp(pref_model_suv, scalePar = "price")
+wtp_pref_model_all <- wtp(pref_model_all, scalePar = "price")
 
-# Estimate the wtp model
-wtp_model_car <- mxl_model_wtp(
-  data_dce %>% filter(vehicle_typesuv == 0),
-  wtp_pref_model_car
-)
-wtp_model_suv <- mxl_model_wtp(
-  data_dce %>% filter(vehicle_typesuv == 1),
-  wtp_pref_model_suv
-)
-# wtp_model_all <- mxl_model_wtp(data_dce)
-summary(wtp_model_car)
-summary(wtp_model_suv)
-# summary(wtp_model_all)
+### Estimate the wtp model
+# wtp_model_car <- mxl_model_wtp(
+#   data_dce %>% filter(vehicle_typesuv == 0),
+#   wtp_pref_model_car
+# )
+# wtp_model_suv <- mxl_model_wtp(
+#   data_dce %>% filter(vehicle_typesuv == 1),
+#   wtp_pref_model_suv
+# )
+wtp_model_all <- mxl_model_wtp(data_dce)
+# summary(wtp_model_car)
+# summary(wtp_model_suv)
+summary(wtp_model_all)
 
-wtpCompare(pref_model_car, wtp_model_car, scalePar = 'price')
-wtpCompare(pref_model_suv, wtp_model_suv, scalePar = 'price')
+# wtpCompare(pref_model_car, wtp_model_car, scalePar = 'price')
+# wtpCompare(pref_model_suv, wtp_model_suv, scalePar = 'price')
+wtpCompare(pref_model_all, wtp_model_all, scalePar = 'price')
 
 ### Estimate the correkated wtp model
 # wtp_model_car_cor <- mxl_model_wtp_cor(
@@ -162,50 +164,62 @@ wtpCompare(pref_model_suv, wtp_model_suv, scalePar = 'price')
 # eigen(model2_all$hessian)$values
 
 ## model save ----
-save(
-  pref_model_car,
-  file = here(
-    "code",
-    "output",
-    "model_output",
-    "battery_analysis",
-    "logitr",
-    "mxl_pref_model_car.RData"
-  )
-)
+# save(
+#   pref_model_car,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "battery_analysis",
+#     "logitr",
+#     "mxl_pref_model_car.RData"
+#   )
+# )
+
+# save(
+#   pref_model_suv,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "battery_analysis",
+#     "logitr",
+#     "mxl_pref_model_suv.RData"
+#   )
+# )
+
+# save(
+#   wtp_model_car,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "battery_analysis",
+#     "logitr",
+#     "mxl_wtp_model_car.RData"
+#   )
+# )
+
+# save(
+#   wtp_model_suv,
+#   file = here(
+#     "code",
+#     "output",
+#     "model_output",
+#     "battery_analysis",
+#     "logitr",
+#     "mxl_wtp_model_suv.RData"
+#   )
+# )
 
 save(
-  pref_model_suv,
+  wtp_model_all,
   file = here(
     "code",
     "output",
     "model_output",
     "battery_analysis",
     "logitr",
-    "mxl_pref_model_suv.RData"
-  )
-)
-
-save(
-  wtp_model_car,
-  file = here(
-    "code",
-    "output",
-    "model_output",
-    "battery_analysis",
-    "logitr",
-    "mxl_wtp_model_car.RData"
-  )
-)
-
-save(
-  wtp_model_suv,
-  file = here(
-    "code",
-    "output",
-    "model_output",
-    "battery_analysis",
-    "logitr",
-    "mxl_wtp_model_suv.RData"
+    "mxl_wtp_model_all.RData"
   )
 )
