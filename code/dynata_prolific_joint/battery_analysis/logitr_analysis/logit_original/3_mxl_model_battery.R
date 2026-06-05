@@ -22,7 +22,7 @@ randPars <- c(
   battery_refurbishpackreplace = "n",
   battery_refurbishcellreplace = "n"
 )
-numDraws <- 300 # increase for publication
+numDraws <- 30 # increase for publication
 
 mxl_model_pref <- function(data) {
   model <- logitr(
@@ -121,7 +121,7 @@ mxl_model_wtp <- function(data, wtp_pref_model) {
 pref_model_all <- mxl_model_pref(data_dce)
 # summary(pref_model_car)
 # summary(pref_model_suv)
-# summary(pref_model_all)
+summary(pref_model_all)
 
 # wtp_pref_model_car <- wtp(pref_model_car, scalePar = "price")
 # wtp_pref_model_suv <- wtp(pref_model_suv, scalePar = "price")

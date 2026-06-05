@@ -2243,12 +2243,16 @@
     <bcf:citekey order="45">pedrosaSecondhandElectricalVehicles2018</bcf:citekey>
     <bcf:citekey order="46">prietoUsingHedonicPrice2015</bcf:citekey>
     <bcf:citekey order="47">goreDCIConsumerValuation2025</bcf:citekey>
-    <bcf:citekey order="48">kamakuraProbabilisticChoiceModel1989</bcf:citekey>
-    <bcf:citekey order="48">greeneLatentClassModel2003</bcf:citekey>
-    <bcf:citekey order="49">chenExploringTouristPreference2023</bcf:citekey>
-    <bcf:citekey order="50">chenExploringTouristPreference2023</bcf:citekey>
-    <bcf:citekey order="51">chuStatedimportanceDerivedimportanceCustomer2002</bcf:citekey>
-    <bcf:citekey order="51">husterConsumersWantReconditioned2024</bcf:citekey>
+    <bcf:citekey order="48">mcfaddenMixedMNLModels2000</bcf:citekey>
+    <bcf:citekey order="48">trainDiscreteChoiceMethods2009</bcf:citekey>
+    <bcf:citekey order="49">trainWTPSpacePreference2005</bcf:citekey>
+    <bcf:citekey order="50">trainHaltonSequencesNumerical1999</bcf:citekey>
+    <bcf:citekey order="51">kamakuraProbabilisticChoiceModel1989</bcf:citekey>
+    <bcf:citekey order="51">greeneLatentClassModel2003</bcf:citekey>
+    <bcf:citekey order="52">chenExploringTouristPreference2023</bcf:citekey>
+    <bcf:citekey order="53">chenExploringTouristPreference2023</bcf:citekey>
+    <bcf:citekey order="54">chuStatedimportanceDerivedimportanceCustomer2002</bcf:citekey>
+    <bcf:citekey order="54">husterConsumersWantReconditioned2024</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

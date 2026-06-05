@@ -263,8 +263,31 @@ We further apply multiple data quality screens to identify and remove low-qualit
 
 
 
-\section{Method:}
+\section{Method}
 \subsection{Mixed Logit Model (MXL)}
+
+The Mixed Logit (MXL) model relaxes the restrictive Independence of Irrelevant Alternatives (IIA) assumption of the standard MNL by allowing preference parameters to vary continuously across individuals \parencite{mcfaddenMixedMNLModels2000, trainDiscreteChoiceMethods2009}. We estimate the model directly in \textit{WTP space} \parencite{trainWTPSpacePreference2005}. Partitioning the attribute vector into price $p_{nti}$ and non-price attributes $\mathbf{x}_{nti}$, the WTP-space utility for respondent $n$ choosing alternative $i$ in choice scenario $t$ is:
+
+\begin{equation}
+    U_{nti} = -\alpha_n \bigl(p_{nti} - \mathbf{w}_n' \mathbf{x}_{nti}\bigr) + \varepsilon_{nti}
+    \label{eq:mxl_utility}
+\end{equation}
+
+\noindent where $\alpha_n > 0$ is the individual-specific marginal disutility of price (typically log-normally distributed to enforce the correct sign), $\mathbf{w}_n$ is the vector of individual WTP values drawn from a mixing distribution $f(\mathbf{w} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})$ with population mean $\boldsymbol{\mu}$ and covariance $\boldsymbol{\Sigma}$, and $\varepsilon_{nti}$ is an IID Type I Extreme Value error. Because $\alpha_n$ and $\mathbf{w}_n$ are unobserved, the choice probability is obtained by integrating the logit kernel over the joint mixing distribution:
+
+\begin{equation}
+    P_{nti}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \int\!\int \frac{\exp\!\left(-\alpha\bigl(p_{nti} - \mathbf{w}'\mathbf{x}_{nti}\bigr)\right)}{\displaystyle\sum_{j} \exp\!\left(-\alpha\bigl(p_{ntj} - \mathbf{w}'\mathbf{x}_{ntj}\bigr)\right)} \, f(\mathbf{w} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})\, g(\alpha) \, d\mathbf{w}\, d\alpha
+    \label{eq:mxl_prob}
+\end{equation}
+
+\noindent This integral is evaluated by simulation using Halton draws \parencite{trainHaltonSequencesNumerical1999}. Accounting for the panel structure of six repeated choice tasks per respondent, the simulated log-likelihood is:
+
+\begin{equation}
+    \mathcal{L}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^{N} \ln \left[ \frac{1}{R} \sum_{r=1}^{R} \prod_{t=1}^{6} \frac{\exp\!\left(-\alpha_r\bigl(p_{nti_{nt}^*} - \mathbf{w}_r'\mathbf{x}_{nti_{nt}^*}\bigr)\right)}{\displaystyle\sum_{j} \exp\!\left(-\alpha_r\bigl(p_{ntj} - \mathbf{w}_r'\mathbf{x}_{ntj}\bigr)\right)} \right]
+    \label{eq:mxl_ll}
+\end{equation}
+
+\noindent where $R$ is the number of Halton draws, $(\alpha_r, \mathbf{w}_r)$ is the $r$-th draw from the joint mixing distribution, and $i_{nt}^*$ is the alternative chosen by respondent $n$ in scenario $t$. Because estimation is carried out directly in WTP space, the population mean WTP for each non-price attribute $k$ is obtained directly as $\hat{\mu}_k$ from the estimated distribution of $\mathbf{w}_n$, without requiring any post-estimation ratio transformation.
 
 \subsection{Latent Class Choice Model (LCCM)}
 
