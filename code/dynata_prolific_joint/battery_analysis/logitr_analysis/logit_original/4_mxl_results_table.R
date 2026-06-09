@@ -246,6 +246,7 @@ new_lines <- c(
 tbl_str <- paste(
   c(
     "\\begin{table}[pos=H]",
+    "\\fontfamily{ptm}\\selectfont",
     "\\caption{Mixed Logit Model Estimates in WTP Space (price unit: \\$10,000).}",
     "\\label{table:mxl_results}",
     "\\begin{adjustbox}{width=\\textwidth, center}",

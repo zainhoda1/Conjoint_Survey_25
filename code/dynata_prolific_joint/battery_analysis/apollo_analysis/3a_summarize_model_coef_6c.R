@@ -239,7 +239,7 @@ gt_car_suv_lc_6c_latex <- gt_formatted |>
     column_labels.font.weight = "bold"
   ) %>%
   cols_width(
-    everything() ~ px(80)
+    everything() ~ px(70)
   ) %>%
   tab_footnote(footnote = "Est. (SE)[Sig.]") %>%
   tab_footnote(
@@ -254,6 +254,13 @@ latex_str <- as.character(gt_car_suv_lc_6c_latex)
 latex_str <- gsub(
   "(-?[0-9]+\\.[0-9]+)\n\\(",
   "\\1\\\\newline\n(",
+  latex_str
+)
+
+# Force in-place placement and inject caption.
+latex_str <- sub(
+  "\\\\begin\\{table\\}\\[t\\]",
+  "\\\\begin{table}[H]\n\\\\caption{LCCM model results}",
   latex_str
 )
 

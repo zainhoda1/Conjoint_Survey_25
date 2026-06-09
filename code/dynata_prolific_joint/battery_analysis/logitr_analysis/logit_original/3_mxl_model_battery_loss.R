@@ -12,7 +12,7 @@ data_model <- data_model %>%
   filter(
     !is.na(ATT_range_anxiety) &
       !is.na(ATT_risktaker) &
-      !is.na(next_veh_budget_k) &
+      !is.na(hhincome_num_10k) &
       !is.na(EV_charger) &
       !is.na(Veh_hh_fuel) &
       !is.na(Veh_primary_range) &

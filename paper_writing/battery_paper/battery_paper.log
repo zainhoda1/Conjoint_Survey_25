@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 JUN 2026 02:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 JUN 2026 12:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -560,15 +560,64 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box66
 \@float@everytoks=\toks34
 \@floatcapt=\box67
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
+\LTleft=\skip72
+\LTright=\skip73
+\LTpre=\skip74
+\LTpost=\skip75
+\LTchunksize=\count341
+\LTcapwidth=\dimen265
+\LT@head=\box68
+\LT@firsthead=\box69
+\LT@foot=\box70
+\LT@lastfoot=\box71
+\LT@gbox=\box72
+\LT@cols=\count342
+\LT@rows=\count343
+\c@LT@tables=\count344
+\c@LT@chunks=\count345
+\LT@p@ftn=\toks35
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen266
+\captionmargin=\dimen267
+\caption@leftmargin=\dimen268
+\caption@rightmargin=\dimen269
+\caption@width=\dimen270
+\caption@indent=\dimen271
+\caption@parindent=\dimen272
+\caption@hangindent=\dimen273
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count346
+\c@continuedfloat=\count347
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: wrapfig package is loaded.
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
  (/usr/local/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
  (/usr/local/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/local/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks35
-\XKV@tempa@toks=\toks36
+\XKV@toks=\toks36
+\XKV@tempa@toks=\toks37
 )
-\XKV@depth=\count341
+\XKV@depth=\count348
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-ends (calc, etex, pgfmath)
@@ -576,100 +625,100 @@ Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-
 Package: trimclip 2025/02/21 v1.2a Trim and clip general TeX material
  (/usr/local/texlive/2025/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
-\collectedbox=\box68
+\collectedbox=\box73
 )
-\tc@llx=\dimen265
-\tc@lly=\dimen266
-\tc@urx=\dimen267
-\tc@ury=\dimen268
+\tc@llx=\dimen274
+\tc@lly=\dimen275
+\tc@urx=\dimen276
+\tc@ury=\dimen277
 Package trimclip Info: Using driver 'tc-pdftex.def'.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
 File: tc-pdftex.def 2025/02/26 v2.3 Clipping driver for pdftex
 ))
-\adjbox@Width=\dimen269
-\adjbox@Height=\dimen270
-\adjbox@Depth=\dimen271
-\adjbox@Totalheight=\dimen272
-\adjbox@pwidth=\dimen273
-\adjbox@pheight=\dimen274
-\adjbox@pdepth=\dimen275
-\adjbox@ptotalheight=\dimen276
+\adjbox@Width=\dimen278
+\adjbox@Height=\dimen279
+\adjbox@Depth=\dimen280
+\adjbox@Totalheight=\dimen281
+\adjbox@pwidth=\dimen282
+\adjbox@pheight=\dimen283
+\adjbox@pdepth=\dimen284
+\adjbox@ptotalheight=\dimen285
  (/usr/local/texlive/2025/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count342
+\c@checkoddpage=\count349
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box69
-\sift@deathcycles=\count343
-\@vwid@loff=\dimen277
-\@vwid@roff=\dimen278
+\@vwid@box=\box74
+\sift@deathcycles=\count350
+\@vwid@loff=\dimen286
+\@vwid@roff=\dimen287
 )) (/usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2024/03/21 v3.20 programmable bibliographies (PK/MW)
  (/usr/local/texlive/2025/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count344
+\lrq@indent=\count351
  (/usr/local/texlive/2025/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 )) (/usr/local/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
-\c@tabx@nest=\count345
-\c@listtotal=\count346
-\c@listcount=\count347
-\c@liststart=\count348
-\c@liststop=\count349
-\c@citecount=\count350
-\c@citetotal=\count351
-\c@multicitecount=\count352
-\c@multicitetotal=\count353
-\c@instcount=\count354
-\c@maxnames=\count355
-\c@minnames=\count356
-\c@maxitems=\count357
-\c@minitems=\count358
-\c@citecounter=\count359
-\c@maxcitecounter=\count360
-\c@savedcitecounter=\count361
-\c@uniquelist=\count362
-\c@uniquename=\count363
-\c@refsection=\count364
-\c@refsegment=\count365
-\c@maxextratitle=\count366
-\c@maxextratitleyear=\count367
-\c@maxextraname=\count368
-\c@maxextradate=\count369
-\c@maxextraalpha=\count370
-\c@abbrvpenalty=\count371
-\c@highnamepenalty=\count372
-\c@lownamepenalty=\count373
-\c@maxparens=\count374
-\c@parenlevel=\count375
-\blx@tempcnta=\count376
-\blx@tempcntb=\count377
-\blx@tempcntc=\count378
-\c@blx@maxsection=\count379
-\blx@maxsegment@0=\count380
-\blx@notetype=\count381
-\blx@parenlevel@text=\count382
-\blx@parenlevel@foot=\count383
-\blx@sectionciteorder@0=\count384
-\blx@sectionciteorderinternal@0=\count385
-\blx@entrysetcounter=\count386
-\blx@biblioinstance=\count387
-\labelnumberwidth=\skip72
-\labelalphawidth=\skip73
-\biblabelsep=\skip74
-\bibitemsep=\skip75
-\bibnamesep=\skip76
-\bibinitsep=\skip77
-\bibparsep=\skip78
-\bibhang=\skip79
+\c@tabx@nest=\count352
+\c@listtotal=\count353
+\c@listcount=\count354
+\c@liststart=\count355
+\c@liststop=\count356
+\c@citecount=\count357
+\c@citetotal=\count358
+\c@multicitecount=\count359
+\c@multicitetotal=\count360
+\c@instcount=\count361
+\c@maxnames=\count362
+\c@minnames=\count363
+\c@maxitems=\count364
+\c@minitems=\count365
+\c@citecounter=\count366
+\c@maxcitecounter=\count367
+\c@savedcitecounter=\count368
+\c@uniquelist=\count369
+\c@uniquename=\count370
+\c@refsection=\count371
+\c@refsegment=\count372
+\c@maxextratitle=\count373
+\c@maxextratitleyear=\count374
+\c@maxextraname=\count375
+\c@maxextradate=\count376
+\c@maxextraalpha=\count377
+\c@abbrvpenalty=\count378
+\c@highnamepenalty=\count379
+\c@lownamepenalty=\count380
+\c@maxparens=\count381
+\c@parenlevel=\count382
+\blx@tempcnta=\count383
+\blx@tempcntb=\count384
+\blx@tempcntc=\count385
+\c@blx@maxsection=\count386
+\blx@maxsegment@0=\count387
+\blx@notetype=\count388
+\blx@parenlevel@text=\count389
+\blx@parenlevel@foot=\count390
+\blx@sectionciteorder@0=\count391
+\blx@sectionciteorderinternal@0=\count392
+\blx@entrysetcounter=\count393
+\blx@biblioinstance=\count394
+\labelnumberwidth=\skip76
+\labelalphawidth=\skip77
+\biblabelsep=\skip78
+\bibitemsep=\skip79
+\bibnamesep=\skip80
+\bibinitsep=\skip81
+\bibparsep=\skip82
+\bibhang=\skip83
 \blx@bcfin=\read3
 \blx@bcfout=\write3
 \blx@langwohyphens=\language90
-\c@mincomprange=\count388
-\c@maxcomprange=\count389
-\c@mincompwidth=\count390
+\c@mincomprange=\count395
+\c@maxcomprange=\count396
+\c@mincompwidth=\count397
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/blx-dm.def
@@ -679,88 +728,88 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'authoryear-icomp.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count391
-\c@savedafterword=\count392
-\c@annotator=\count393
-\c@savedannotator=\count394
-\c@author=\count395
-\c@savedauthor=\count396
-\c@bookauthor=\count397
-\c@savedbookauthor=\count398
-\c@commentator=\count399
-\c@savedcommentator=\count400
-\c@editor=\count401
-\c@savededitor=\count402
-\c@editora=\count403
-\c@savededitora=\count404
-\c@editorb=\count405
-\c@savededitorb=\count406
-\c@editorc=\count407
-\c@savededitorc=\count408
-\c@foreword=\count409
-\c@savedforeword=\count410
-\c@holder=\count411
-\c@savedholder=\count412
-\c@introduction=\count413
-\c@savedintroduction=\count414
-\c@namea=\count415
-\c@savednamea=\count416
-\c@nameb=\count417
-\c@savednameb=\count418
-\c@namec=\count419
-\c@savednamec=\count420
-\c@translator=\count421
-\c@savedtranslator=\count422
-\c@shortauthor=\count423
-\c@savedshortauthor=\count424
-\c@shorteditor=\count425
-\c@savedshorteditor=\count426
-\c@labelname=\count427
-\c@savedlabelname=\count428
-\c@institution=\count429
-\c@savedinstitution=\count430
-\c@lista=\count431
-\c@savedlista=\count432
-\c@listb=\count433
-\c@savedlistb=\count434
-\c@listc=\count435
-\c@savedlistc=\count436
-\c@listd=\count437
-\c@savedlistd=\count438
-\c@liste=\count439
-\c@savedliste=\count440
-\c@listf=\count441
-\c@savedlistf=\count442
-\c@location=\count443
-\c@savedlocation=\count444
-\c@organization=\count445
-\c@savedorganization=\count446
-\c@origlocation=\count447
-\c@savedoriglocation=\count448
-\c@origpublisher=\count449
-\c@savedorigpublisher=\count450
-\c@publisher=\count451
-\c@savedpublisher=\count452
-\c@language=\count453
-\c@savedlanguage=\count454
-\c@origlanguage=\count455
-\c@savedoriglanguage=\count456
-\c@pageref=\count457
-\c@savedpageref=\count458
-\shorthandwidth=\skip80
-\shortjournalwidth=\skip81
-\shortserieswidth=\skip82
-\shorttitlewidth=\skip83
-\shortauthorwidth=\skip84
-\shorteditorwidth=\skip85
-\locallabelnumberwidth=\skip86
-\locallabelalphawidth=\skip87
-\localshorthandwidth=\skip88
-\localshortjournalwidth=\skip89
-\localshortserieswidth=\skip90
-\localshorttitlewidth=\skip91
-\localshortauthorwidth=\skip92
-\localshorteditorwidth=\skip93
+\c@afterword=\count398
+\c@savedafterword=\count399
+\c@annotator=\count400
+\c@savedannotator=\count401
+\c@author=\count402
+\c@savedauthor=\count403
+\c@bookauthor=\count404
+\c@savedbookauthor=\count405
+\c@commentator=\count406
+\c@savedcommentator=\count407
+\c@editor=\count408
+\c@savededitor=\count409
+\c@editora=\count410
+\c@savededitora=\count411
+\c@editorb=\count412
+\c@savededitorb=\count413
+\c@editorc=\count414
+\c@savededitorc=\count415
+\c@foreword=\count416
+\c@savedforeword=\count417
+\c@holder=\count418
+\c@savedholder=\count419
+\c@introduction=\count420
+\c@savedintroduction=\count421
+\c@namea=\count422
+\c@savednamea=\count423
+\c@nameb=\count424
+\c@savednameb=\count425
+\c@namec=\count426
+\c@savednamec=\count427
+\c@translator=\count428
+\c@savedtranslator=\count429
+\c@shortauthor=\count430
+\c@savedshortauthor=\count431
+\c@shorteditor=\count432
+\c@savedshorteditor=\count433
+\c@labelname=\count434
+\c@savedlabelname=\count435
+\c@institution=\count436
+\c@savedinstitution=\count437
+\c@lista=\count438
+\c@savedlista=\count439
+\c@listb=\count440
+\c@savedlistb=\count441
+\c@listc=\count442
+\c@savedlistc=\count443
+\c@listd=\count444
+\c@savedlistd=\count445
+\c@liste=\count446
+\c@savedliste=\count447
+\c@listf=\count448
+\c@savedlistf=\count449
+\c@location=\count450
+\c@savedlocation=\count451
+\c@organization=\count452
+\c@savedorganization=\count453
+\c@origlocation=\count454
+\c@savedoriglocation=\count455
+\c@origpublisher=\count456
+\c@savedorigpublisher=\count457
+\c@publisher=\count458
+\c@savedpublisher=\count459
+\c@language=\count460
+\c@savedlanguage=\count461
+\c@origlanguage=\count462
+\c@savedoriglanguage=\count463
+\c@pageref=\count464
+\c@savedpageref=\count465
+\shorthandwidth=\skip84
+\shortjournalwidth=\skip85
+\shortserieswidth=\skip86
+\shorttitlewidth=\skip87
+\shortauthorwidth=\skip88
+\shorteditorwidth=\skip89
+\locallabelnumberwidth=\skip90
+\locallabelalphawidth=\skip91
+\localshorthandwidth=\skip92
+\localshortjournalwidth=\skip93
+\localshortserieswidth=\skip94
+\localshorttitlewidth=\skip95
+\localshortauthorwidth=\skip96
+\localshorteditorwidth=\skip97
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/blx-compat.def
@@ -770,19 +819,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
-\c@textcitecount=\count459
-\c@textcitetotal=\count460
-\c@textcitemaxnames=\count461
-\c@biburlbigbreakpenalty=\count462
-\c@biburlbreakpenalty=\count463
-\c@biburlnumpenalty=\count464
-\c@biburlucpenalty=\count465
-\c@biburllcpenalty=\count466
+\c@textcitecount=\count466
+\c@textcitetotal=\count467
+\c@textcitemaxnames=\count468
+\c@biburlbigbreakpenalty=\count469
+\c@biburlbreakpenalty=\count470
+\c@biburlnumpenalty=\count471
+\c@biburlucpenalty=\count472
+\c@biburllcpenalty=\count473
 \biburlbigskip=\muskip19
 \biburlnumskip=\muskip20
 \biburlucskip=\muskip21
 \biburllcskip=\muskip22
-\c@smartand=\count467
+\c@smartand=\count474
 )
 Package biblatex Info: Trying to load natbib compatibility...
 Package biblatex Info: ... file 'blx-natbib.def' found.
@@ -802,8 +851,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count468
-\c@bbx:relatedtotal=\count469
+\c@bbx:relatedcount=\count475
+\c@bbx:relatedtotal=\count476
 )))
 Package biblatex Info: Trying to load citation style 'authoryear-icomp'...
 Package biblatex Info: ... file 'authoryear-icomp.cbx' found.
@@ -837,83 +886,83 @@ Package biblatex Info: ... and expl3
 Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
 )) (/usr/local/texlive/2025/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2025/01/29 line numbers on paragraphs v5.4
-\linenopenalty=\count470
-\output=\toks37
-\linenoprevgraf=\count471
-\linenumbersep=\dimen279
-\linenumberwidth=\dimen280
-\c@linenumber=\count472
-\c@pagewiselinenumber=\count473
-\c@LN@truepage=\count474
-\c@internallinenumber=\count475
-\c@internallinenumbers=\count476
-\quotelinenumbersep=\dimen281
-\bframerule=\dimen282
-\bframesep=\dimen283
-\bframebox=\box70
-\@LN@amsmath@ams@eqpen=\count477
+\linenopenalty=\count477
+\output=\toks38
+\linenoprevgraf=\count478
+\linenumbersep=\dimen288
+\linenumberwidth=\dimen289
+\c@linenumber=\count479
+\c@pagewiselinenumber=\count480
+\c@LN@truepage=\count481
+\c@internallinenumber=\count482
+\c@internallinenumbers=\count483
+\quotelinenumbersep=\dimen290
+\bframerule=\dimen291
+\bframesep=\dimen292
+\bframebox=\box75
+\@LN@amsmath@ams@eqpen=\count484
 LaTeX Info: Redefining \\ on input line 3187.
 )
-\@quotelevel=\count478
-\@quotereset=\count479
-LaTeX Font Info:    Trying to load font information for T1+stix on input line 69.
+\@quotelevel=\count485
+\@quotereset=\count486
+LaTeX Font Info:    Trying to load font information for T1+stix on input line 73.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/t1stix.fd
 File: t1stix.fd 2015/04/17 v1.1.2-latex STIX T1 font definitions
 ) (./battery_paper.aux)
 \openout1 = `battery_paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 69.
-LaTeX Font Info:    Trying to load font information for LS1+stix on input line 69.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 73.
+LaTeX Font Info:    Trying to load font information for LS1+stix on input line 73.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd
 File: ls1stix.fd 2015/04/17 v1.1.2-latex STIX LS1 font definitions
 )
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for LS2/stix/m/n on input line 69.
-LaTeX Font Info:    Trying to load font information for LS2+stix on input line 69.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for LS2/stix/m/n on input line 73.
+LaTeX Font Info:    Trying to load font information for LS2+stix on input line 73.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stix.fd
 File: ls2stix.fd 2015/04/17 v1.1.2-latex STIX LS2 font definitions
 )
-LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    ... okay on input line 73.
  (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count480
-\scratchdimen=\dimen284
-\scratchbox=\box71
-\nofMPsegments=\count481
-\nofMParguments=\count482
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count483
-\MPscratchDim=\dimen285
-\MPnumerator=\count484
-\makeMPintoPDFobject=\count485
-\everyMPtoPDFconversion=\toks39
+\scratchcounter=\count487
+\scratchdimen=\dimen293
+\scratchbox=\box76
+\nofMPsegments=\count488
+\nofMParguments=\count489
+\everyMPshowfont=\toks39
+\MPscratchCnt=\count490
+\MPscratchDim=\dimen294
+\MPnumerator=\count491
+\makeMPintoPDFobject=\count492
+\everyMPtoPDFconversion=\toks40
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Info: Command `\dddot' is already robust on input line 69.
-LaTeX Info: Command `\ddddot' is already robust on input line 69.
-Package hyperref Info: Link coloring ON on input line 69.
+LaTeX Info: Command `\dddot' is already robust on input line 73.
+LaTeX Info: Command `\ddddot' is already robust on input line 73.
+Package hyperref Info: Link coloring ON on input line 73.
  (./battery_paper.out) (./battery_paper.out)
 \@outlinefile=\write4
 \openout4 = `battery_paper.out'.
@@ -953,6 +1002,8 @@ Package hyperref Info: Link coloring ON on input line 69.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
@@ -972,72 +1023,72 @@ Package biblatex Warning: Biber reported the following issues
 (biblatex)                - article entry 'goreDCIConsumerValuation2025' (DCE_lit_review.bib): Invalid format '2025-11-18T07:00-05:00' of date field 'date' - ignoring.
 
 )
-Package biblatex Info: Reference section=0 on input line 69.
-Package biblatex Info: Reference segment=0 on input line 69.
+Package biblatex Info: Reference section=0 on input line 73.
+Package biblatex Info: Reference segment=0 on input line 73.
 \verbatim@out=\write5
 \openout5 = `battery_paper.abs'.
 
-LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 140.
+LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixscr.fd
 File: ls1stixscr.fd 2015/04/17 v1.1.2-latex STIX script LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 140.
+LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixex.fd
 File: ls2stixex.fd 2015/04/17 v1.1.2-latex STIX extentions LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 140.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 140.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 140.
+LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixfrak.fd
 File: ls1stixfrak.fd 2015/04/17 v1.1.2-latex STIX fraktur LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 140.
+LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixbb.fd
 File: ls1stixbb.fd 2015/04/17 v1.1.2-latex STIX blackboard LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 140.
+LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixcal.fd
 File: ls2stixcal.fd 2015/04/17 v1.1.2-latex STIX calligraphic LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 140.
+LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixsf.fd
 File: ls1stixsf.fd 2015/04/17 v1.1.2-latex STIX sans-serif LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 140.
+LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 144.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixtt.fd
 File: ls2stixtt.fd 2015/04/17 v1.1.2-latex STIX typewriter LS2 font definitions
 )
-Overfull \hbox (117.0831pt too wide) detected at line 140
+Overfull \hbox (117.0831pt too wide) detected at line 144
 []
  []
 
 (./battery_paper.abs)
 
-Package hyperref Warning: Ignoring empty anchor on input line 140.
+Package hyperref Warning: Ignoring empty anchor on input line 144.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 140.
+Package hyperref Warning: Ignoring empty anchor on input line 144.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 140.
+Package hyperref Warning: Ignoring empty anchor on input line 144.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 140.
+Package hyperref Warning: Ignoring empty anchor on input line 144.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 140.
+Package hyperref Warning: Ignoring empty anchor on input line 144.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 140.
+Package hyperref Warning: Ignoring empty anchor on input line 144.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 140.
+Package hyperref Warning: Ignoring empty anchor on input line 144.
 
 
 
@@ -1058,7 +1109,7 @@ $[]$
  []
 
 [3]
-Underfull \hbox (badness 6592) in paragraph at lines 219--219
+Underfull \hbox (badness 6592) in paragraph at lines 223--223
 []|\T1/cmss/m/n/9 Battery re-fur-bish-ment
  []
 
@@ -1073,7 +1124,7 @@ $[]$
 <../../code/output/images/battery_analysis/battery-1.png, id=120, 741.77126pt x 705.63625pt>
 File: ../../code/output/images/battery_analysis/battery-1.png Graphic file (type png)
 <use ../../code/output/images/battery_analysis/battery-1.png>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/battery-1.png  used on input line 236.
+Package pdftex.def Info: ../../code/output/images/battery_analysis/battery-1.png  used on input line 240.
 (pdftex.def)             Requested size: 327.83124pt x 311.8591pt.
 
 
@@ -1082,21 +1133,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[5
-pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.243 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.243 
-       <../../code/output/images/battery_analysis/battery-1.png>]
+[5 <../../code/output/images/battery_analysis/battery-1.png>]
 <../../code/output/images/battery_analysis/map_all.png, id=134, 505.89pt x 361.35pt>
 File: ../../code/output/images/battery_analysis/map_all.png Graphic file (type png)
 <use ../../code/output/images/battery_analysis/map_all.png>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/map_all.png  used on input line 256.
+Package pdftex.def Info: ../../code/output/images/battery_analysis/map_all.png  used on input line 260.
 (pdftex.def)             Requested size: 398.08539pt x 284.3496pt.
 
 
@@ -1112,16 +1153,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[7
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.281 
-       <../../code/output/images/battery_analysis/map_all.png>]
+[7 <../../code/output/images/battery_analysis/map_all.png>]
 <../../code/output/images/battery_analysis/latent_class/model_framework.pdf, id=170, 364.48169pt x 199.70609pt>
 File: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf Graphic file (type pdf)
 <use ../../code/output/images/battery_analysis/latent_class/model_framework.pdf>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf  used on input line 308.
+Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf  used on input line 312.
 (pdftex.def)             Requested size: 374.66734pt x 205.29123pt.
 
 
@@ -1137,102 +1173,97 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[9
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.343 
-       <../../code/output/images/battery_analysis/latent_class/model_framework.pdf>] (./attachments/mxl_results.tex)
+[9 <../../code/output/images/battery_analysis/latent_class/model_framework.pdf>]
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[10] (./attachments/lc_fit_index_comparison.tex)
+[10] (./attachments/mxl_results.tex
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 2.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+))
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[11
-pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.404 
-      ] (./attachments/model_summary_6c.tex
-Overfull \hbox (31.86766pt too wide) in alignment at lines 3--156
-[] [] [] [] [] [] [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--161
+[11{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}] (./attachments/lc_fit_index_comparison.tex) (./attachments/model_summary_6c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 160--162
 
  []
 
-) (./attachments/model_summary_6c.tex
-Overfull \hbox (31.86766pt too wide) in alignment at lines 3--156
-[] [] [] [] [] [] [] 
+) (./attachments/table_lc6_profile_main.tex
+Overfull \hbox (76.60162pt too wide) in alignment at lines 3--8
+ [] [] [] [] [] [] [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--161
+Overfull \hbox (76.60162pt too wide) in alignment at lines 8--13
+ [] [] [] [] [] [] [] 
+ []
 
+
+Overfull \hbox (76.60162pt too wide) in alignment at lines 13--15
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (76.60162pt too wide) in alignment at lines 15--17
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (76.60162pt too wide) in alignment at lines 17--104
+ [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[12]
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[13]) (./attachments/table_lc6_metadata.tex
+Overfull \hbox (76.60162pt too wide) in alignment at lines 3--9
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (76.60162pt too wide) in alignment at lines 9--14
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (76.60162pt too wide) in alignment at lines 14--16
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (76.60162pt too wide) in alignment at lines 16--18
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (76.60162pt too wide) in alignment at lines 18--42
+ [] [] [] [] [] [] [] 
  []
 
 )
-<../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf, id=235, 1300.86pt x 1156.32pt>
-File: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf Graphic file (type pdf)
-<use ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf>
-Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf  used on input line 410.
-(pdftex.def)             Requested size: 468.3324pt x 416.29253pt.
-
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[12
-pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.414 
-      ]
-Overfull \vbox (260.1945pt too high) has occurred while \output is active []
-
-
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-$[]$
- []
-
-[13
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.414 
-       <../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf>]
-<../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg, id=253, 2710.125pt x 1505.625pt>
-File: ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg Graphic file (type jpg)
-<use ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg  used on input line 424.
-(pdftex.def)             Requested size: 468.3324pt x 260.18007pt.
-
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-$[]$
- []
-
-[14
-pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.439 \printcredits
-                    <../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg>]
+[14]
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -1247,13 +1278,67 @@ $[]$
  []
 
 [16]
+<../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf, id=266, 794.97pt x 614.295pt>
+File: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf Graphic file (type pdf)
+<use ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf>
+Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf  used on input line 441.
+(pdftex.def)             Requested size: 637.34175pt x 492.50522pt.
+
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[17] (./battery_paper.aux)
+[17
+
+]
+Overfull \vbox (49.8107pt too high) has occurred while \output is active []
+
+
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[18 <../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf>]
+<../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg, id=282, 2710.125pt x 1505.625pt>
+File: ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg Graphic file (type jpg)
+<use ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg>
+Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg  used on input line 456.
+(pdftex.def)             Requested size: 468.3324pt x 260.18007pt.
+
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[19
+
+ <../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg>]
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[20]
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[21]
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[22] (./battery_paper.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1265,18 +1350,18 @@ Package logreq Info: Writing requests to 'battery_paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25398 strings out of 473190
- 434119 string characters out of 5715801
- 1305468 words of memory out of 5000000
- 48178 multiletter control sequences out of 15000+600000
- 685199 words of font info for 207 fonts, out of 8000000 for 9000
+ 26991 strings out of 473190
+ 465312 string characters out of 5715801
+ 1404792 words of memory out of 5000000
+ 49725 multiletter control sequences out of 15000+600000
+ 702711 words of font info for 217 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,15n,93p,2286b,1928s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsi0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfso0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb>
-Output written on battery_paper.pdf (17 pages, 4509175 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsi0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on battery_paper.pdf (22 pages, 3961548 bytes).
 PDF statistics:
- 500 PDF objects out of 1000 (max. 8388607)
- 431 compressed objects within 5 object streams
- 101 named destinations out of 1000 (max. 500000)
+ 542 PDF objects out of 1000 (max. 8388607)
+ 464 compressed objects within 5 object streams
+ 109 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

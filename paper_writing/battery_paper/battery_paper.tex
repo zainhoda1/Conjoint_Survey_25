@@ -8,9 +8,13 @@
 % Declaring it here prevents the "Undefined control sequence" error at \begin{document}.
 \newlength{\bibsep}
 \usepackage{float}
+\usepackage{pdflscape}
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{caption}
+\captionsetup[longtable]{labelfont=bf,labelsep=newline,singlelinecheck=false,justification=raggedright}
 \usepackage{adjustbox}
 \usepackage[style=authoryear-icomp,
 uniquelist=false,
@@ -196,7 +200,7 @@ To be continued.
 
 \section{Survey Design, Data Collection, and Sample Profile}
 \label{section:data}
-\subsection{NationwideUsed EV Survey}
+\subsection{Nationwide Used EV Survey}
 The survey was designed to understand consumer preferences and willingness to pay for vehicle attributes and battery health information in the used BEV market. The survey targets on US consumers who is 18 years old and has the intention to purchase a used car or SUV within the next two years. 
 
 The core component of the survey is the BEV discrete choice experiments where respondents are asked to consider a scenario in which they choose a used BEV from a set of options with varying attributes. It is designed to capture trade-offs that consumers make when evaluating used BEVs, particularly how they value battery health information relative to other vehicle attributes. Each respondent completes six repeated choice tasks. Before presenting the choice tasks, we introduce the specific attributes of the BEVs that respondents will evaluate in the upcoming choice experiments (see Table~\ref{table:dce_attributes}).  Based on prior studies, age and mileage are the main factors influencing the value of a used car \parencite{prietoUsingHedonicPrice2015}. For all choice questions, we ask respondents to assume the used vehicle was built in 2022 and is currently three years old. The attributes with varying values include vehicle mileage, purchase price, battery refurbishment history, electric range, and battery SOH. Note that during the design phase of the discrete choice experiments, we used driving range at year 0 and annual degradation rate to vary the attributes, but for easier understanding for the respondents, we presented the driving range and SOH at year 3 (at the point of purchase), and at year 8 (five years after purchase) in the survey. All attribute descriptions are provided to ensure respondents clearly understand the meaning of each before making their selections.
@@ -333,7 +337,7 @@ including vehicle mileage, battery refurbishment status, estimated driving range
 
 To test the non-linear relationship between key attributes (i.e., range ) and choice probability, we consider two alternative specifications: a quadratic model and a piecewise linear model. Consumers likely have diminishing sensitivity to range at high levels and heightened sensitivity around critical thresholds (e.g., range anxiety kicks in hard below certain miles).
 
-The quadratic model allows curvature but forces a **symmetric parabolic shape** and can behave poorly at the tails. The piecewise model instead estimates a **separate slope for each segment**, allowing flexible, asymmetric nonlinearity with directly interpretable coefficients. After testing both specifications, we find that the piecewise linear model provides a better fit to the data and more meaningful insights into consumer preferences, so we adopt the piecewise specification in our final model. The piecewise linear specification are defined based on the following breakpoints based on both theoretical considerations and empirical patterns observed in the data: range at year 3 (<130 miles, 130-200 miles, >200 miles) and range loss rate (<12\%, 12\%-24\%, >25\%).
+The quadratic model allows curvature but forces a symmetric parabolic shape and can behave poorly at the tails. The piecewise model instead estimates a separate slope for each segment, allowing flexible, asymmetric nonlinearity with directly interpretable coefficients. After testing both specifications, we find that the piecewise linear model provides a better fit to the data and more meaningful insights into consumer preferences, so we adopt the piecewise specification in our final model. The piecewise linear specification are defined based on the following breakpoints based on both theoretical considerations and empirical patterns observed in the data: range at year 3 (<130 miles, 130-200 miles, >200 miles) and range loss rate (<12\%, 12\%-24\%, >25\%).
 
 
 \vspace{\baselineskip}
@@ -392,25 +396,53 @@ A key output of the LCCM is class-specific WTP for each BEV attribute. Under the
 
 \subsection{Results of Mixed Logit Model}
 
+The mixed logit model is estimated across 2,918 respondents and 17,508 choice observations, yielding a McFadden $R^2$ of 0.273 (Table~\ref{table:mxl_results}). All mean WTP parameters are significant at $p$\textless0.001. On average, respondents value additional range at \$11,160 per unit (Year~3), penalize higher mileage at \$2,810 per 10,000 miles, and discount range loss at \$1,000 per percentage point of degradation. Both refurbishment types carry mean disutility (\$4,010 for pack replacement; \$4,470 for cell replacement), and the no-choice option imposes a strong opt-out penalty of \$51,910.
+
+The standard deviation estimates reveal substantial heterogeneity in all five random parameters. Range (Year~3) exhibits the largest absolute spread (SD = 1.398***, relative to a mean of 1.116), with simulated WTP draws ranging from a first quartile of \$1,720 to a third quartile of \$20,580, indicating that a non-trivial share of respondents place little value on range while others value it very highly. Heterogeneity is also pronounced for the refurbishment attributes: the standard deviations for pack replacement (SD = 0.755***) and cell replacement (SD = 0.678***) are larger in magnitude than the respective means, with third-quartile draws turning positive (\$1,060 and \$120 respectively), suggesting that roughly one quarter of respondents view battery refurbishment neutrally or as a positive quality signal. Mileage also displays substantial dispersion (SD = 0.404***), with approximately 24\% of the simulated distribution crossing zero. Range loss, by contrast, is the most uniformly negative attribute: its standard deviation (SD = 0.079***) is smaller relative to the mean, and the draw distribution remains negative across nearly the entire sample (third quartile: \$470 disutility per percentage point). Taken together, these results confirm significant preference heterogeneity in the population and motivate the latent class analysis reported in the following section.
+
 \input{attachments/mxl_results}
 
 
 
 \subsection{Results of Latent Class Choice Model}
 
-To determine the optimal number of classes, we estimated models ranging from one to eight classes (see \ref{table:model_fit_comparison}). We eventually opted for a six-class solution based on their model fit measured by log-likelihood ($LL$), $LL^2$, Akaike Information Criterion ($AIC$), Bayesian Information Criterion ($BIC$), $\text{Adjusted}\ rho^2$, entropy, class proportion, and interpretability. Smaller values of $AIC$, $BIC$, together with larger $\text{Adjusted }\rho^2$ and $\text{Entropy}$, indicate better model fit and class separation \parencite{nylundDecidingNumberClasses2007}. Additionally, in the 7- and 8- cluster solutions, one class would contain less than 6\% of the sample, making it less robust for further analyses.
+To determine the optimal number of classes, we estimated models ranging from one to eight classes (see Table~\ref{table:model_fit_comparison}). We eventually opted for a six-class solution based on their model fit measured by log-likelihood ($LL$), $LL^2$, Akaike Information Criterion ($AIC$), Bayesian Information Criterion ($BIC$), $\text{Adjusted}\ rho^2$, entropy, class proportion, and interpretability. Smaller values of $AIC$, $BIC$, together with larger $\text{Adjusted }\rho^2$ and $\text{Entropy}$, indicate better model fit and class separation \parencite{nylundDecidingNumberClasses2007}. Additionally, in the 7- and 8- cluster solutions, one class would contain less than 6\% of the sample, making it less robust for further analyses.
 
 \input{attachments/lc_fit_index_comparison}
 
-\input{attachments/model_summary_6c.tex}
+The six-class solution identifies six interpretable consumer segments that differ substantially in their willingness to pay for vehicle range, sensitivity to battery degradation, and valuation of refurbishment history. Class membership ranges from 8.7\% (Class~1, $n$=252) to 22.7\% (Class~2, $n$=661), with all classes exceeding the 6\% threshold (Table~\ref{tab:lc6_metadata}). Estimated model coefficients are presented below; WTP estimates and respondent profiles are reported in Table~\ref{tab:lc6_profile}, and Figure~\ref{fig:lc6_class_profiles} provides a visual overview of the WTP patterns across classes.
+
 \input{attachments/model_summary_6c.tex}
 
+\input{attachments/table_lc6_profile_main.tex}
+\input{attachments/table_lc6_metadata.tex}
+
+\textbf{Class 1: Always Opt-Out (8.7\%, $n$=252).}
+Class 1 is defined primarily by systematic opt-out behavior: 75.4\% of members selected the no-choice option in all six choice tasks, and 19.4\% did so in five of six. WTP estimates for vehicle attributes are economically small and largely insignificant, with the exception of marginal disutility for the no-choice option itself (\$17.6k, $p$\textless0.1) and for battery refurbishment (\$6.4k* pack replacement, \$7.3k* cell replacement). Class~1 respondents are the oldest on average (47.1 years), report the highest rate of EV range anxiety (87.2\%), hold the weakest pro-EV attitudes (30.5\% agree that EV batteries are environmentally positive), and have the lowest electrical outlet access (32.8\%). The majority (70.4\%) strongly disagree with purchasing a used BEV. This class represents respondents who have effectively decided against a BEV purchase and are not yet viable participants in the used-BEV market.
+
+\textbf{Class 2: Range-Aware, Refurbishment-Averse (22.7\%, $n$=661).}
+Class~2 is the largest class and displays coherent, statistically significant preferences across all battery-relevant attributes. Range WTP is consistent across the three piecewise segments (\$4.6k for 40--130 miles, \$4.6k for 130--200 miles, and \$5.3k** for 200+ miles), indicating steady marginal valuation of range. Range loss aversion is strong and uniform at \$2.3k*** per percentage point across all three degradation segments. Both refurbishment types generate meaningful disutility (\$2.7k* pack, \$3.8k** cell replacement). Members of Class~2 have an average household income of \$91.3k, are relatively young (36.5 years), demonstrate high EV knowledge (76.2\%), and above-average electrical outlet access (46.0\%). Approximately 43.5\% report a neighbor who owns or leases a BEV or PHEV. This class represents well-informed consumers whose used-BEV valuations are highly responsive to battery quality signals.
+
+\textbf{Class 3: High-Value Range Enthusiasts (16.6\%, $n$=485).}
+Class~3 is distinguished by an exceptionally high WTP in the lowest range segment: \$38.7k per 100 miles for the 40--130 mile range (***), declining to \$20.8k*** (130--200 miles) and \$25.5k*** (200+ miles). This pattern suggests a disproportionate premium on crossing a minimum range viability threshold, with diminishing but still substantial marginal returns at higher range levels. Range loss aversion is moderate and significant across all segments (\$0.9k***, \$0.7k***, \$0.5k***), while refurbishment WTPs are negligible and insignificant. Class~3 has the highest average household income (\$97.1k), the highest electrical outlet access (57.5\%), and the strongest EV knowledge (81.1\%). These respondents hold the most positive EV attitudes (65.5\% agree EV batteries are environmentally positive; 35.5\% disagree they are functionally negative), are most likely to prefer a car over an SUV (57.2\%), and have the highest EV subsidy knowledge (31.9\%). Class~3 represents the most EV-ready segment in the sample.
+
+\textbf{Class 4: Price-Insensitive, Refurbishment-Averse (18.5\%, $n$=539).}
+Class~4 is characterized by the smallest price coefficient in absolute value ($-$0.144**), indicating substantially lower price sensitivity than all other classes. Despite this, Class~4 exhibits the largest disutility for battery refurbishment: \$26.6k** for pack replacement and \$32.6k** for cell replacement. The strong preference against the no-choice option (\$242.4k**) is the highest in magnitude across all classes, and the class-specific alternative-specific constant is the largest (2.641***), reflecting a strong baseline preference for any BEV over the outside option. Class~4 has the highest shares of current BEV household ownership (13.5\%), PHEV or HEV ownership (25.3\%), and neighbors who own EVs (50.9\%), alongside the lowest range anxiety (67.0\%), the highest risk-taking propensity (51.9\%), and the highest next-vehicle budget (\$29.3k). These respondents are committed EV adopters who, having already overcome price and range barriers, place an unusually high premium on a pristine battery service history.
+
+\textbf{Class 5: Range-and-Battery Sensitive (20.8\%, $n$=606).}
+Class~5 exhibits comprehensive and significant preferences across all battery-related dimensions. Range WTPs are consistent and substantial across all three segments (\$11.8k***, \$9.5k***, \$9.5k***), and range loss aversion is uniformly significant at \$0.8k*** per percentage point across all three degradation levels. Refurbishment disutility is the highest among the choice-engaging classes (\$5.8k*** pack, \$6.1k*** cell replacement). Class~5 also displays a distinctive opt-out pattern: only 5.2\% never opt out, with the plurality opting out two (29.0\%) or three (27.2\%) times out of six tasks. This distribution is consistent with selective opt-out behavior, in which respondents choose the no-choice option only when presented alternatives fall below their attribute thresholds. Class~5 members have average incomes (\$86.9k), moderate range anxiety (83.4\%), and a slight SUV preference (53.7\%). This class attends simultaneously to range maintenance, degradation trajectory, and refurbishment history when evaluating a used BEV.
+
+\textbf{Class 6: Price-Sensitive, Choice-Committed (12.8\%, $n$=373).}
+Class~6 has the largest price coefficient in absolute value ($-$4.017***), more than twice the magnitude of the next-most price-sensitive class. Despite this, 91.2\% of Class~6 members never select the no-choice option, and disutility for opting out is \$34.5k***, reflecting strong commitment to making a vehicle choice. Range WTPs are small but statistically significant at lower range segments (\$2.8k** for 40--130 miles, \$1.8k* for 130--200 miles), and range loss aversion is marginal (\$0.2k** and \$0.2k*** across the upper degradation segments). Refurbishment WTPs are negligible. Class~6 members have the lowest average household income (\$70.0k), the highest share of renters (48.8\%), the highest proportion of ICEV-only households (87.1\%), and the lowest next-vehicle budget (\$19.7k). These respondents consistently engage with the choice experiment and demonstrate a clear preference for vehicle acquisition, but their WTP profile is dominated by price rather than battery-specific attributes.
+
+\begin{landscape}
 \begin{figure}[pos=H]
     \centering
-    \includegraphics[width=\textwidth]{../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf}
-    \caption{Six-class latent class model: class profiles.}
+    \includegraphics[width=\linewidth]{../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf}
+    \caption{LCCM class profile summary.}
     \label{fig:lc6_class_profiles}
 \end{figure}
+\end{landscape}
 
 
 

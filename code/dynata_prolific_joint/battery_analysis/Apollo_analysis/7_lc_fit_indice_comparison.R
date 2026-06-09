@@ -173,6 +173,7 @@ gt_fit <- fit_table %>%
   ) %>%
   tab_options(
     table.font.size = px(13),
+    table.font.names = "Times New Roman",
     heading.align = "left",
     column_labels.font.weight = "bold",
     table.border.top.color = "#004D80",
@@ -264,6 +265,7 @@ tabular_with_footnotes <- c(
 tbl_str <- paste(
   c(
     "\\begin{table}[pos=H]",
+    "\\fontfamily{ptm}\\selectfont",
     "\\caption{Latent Class Model Fit Index Comparison.}",
     "\\label{table:model_fit_comparison}",
     "\\begin{adjustbox}{width=\\textwidth, center}",

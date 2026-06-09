@@ -374,56 +374,56 @@ combined_all <- combined_all %>%
 
 # change labels
 var_meta <- tribble(
-  ~variable                    , ~label                                              , ~section                                 , ~fmt     ,
+  ~variable                    , ~label                                          , ~section                                 , ~fmt     ,
   # WTP
-  "no_choice"                  , "No-Choice Option (opt-out)"                        , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "mileage"                    , "Mileage (10,000 miles)"                            , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "range_pw1"                  , "BEV Range WTP: 40-130 mi segment (per 100 miles)"  , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "range_pw2"                  , "BEV Range WTP: 130-200 mi segment (per 100 miles)" , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "range_pw3"                  , "BEV Range WTP: 200+ mi segment (per 100 miles)"    , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "loss_pw1"                   , "Range Loss WTP: 5-12% segment (per %)"             , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "loss_pw2"                   , "Range Loss WTP: 12-24% segment (per %)"            , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "loss_pw3"                   , "Range Loss WTP: 24%+ segment (per %)"              , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "packreplace"                , "Battery Refurbishment: Pack Replace"               , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "cellreplace"                , "Battery Refurbishment: Cell Replace"               , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "no_choice"                  , "No-Choice Option (opt-out)"                    , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "mileage"                    , "Mileage (10,000 miles)"                        , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw1"                  , "BEV Range: 40-130 mi segment (per 100 miles)"  , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw2"                  , "BEV Range: 130-200 mi segment (per 100 miles)" , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw3"                  , "BEV Range: 200+ mi segment (per 100 miles)"    , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw1"                   , "Range Loss Rate: 5-12% (per %)"                , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw2"                   , "Range Loss Rate: 12-24% (per %)"               , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw3"                   , "Range Loss Rate: 24%+ (per %)"                 , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "packreplace"                , "Battery Refurbishment: Pack Replace"           , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "cellreplace"                , "Battery Refurbishment: Cell Replace"           , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
   # Active variables
-  "ATT_risktaker"              , "Risk-taking Propensity: Agree"                     , "Inactive Indicators: Attitudes"         , "pct"    ,
-  "ATT_range_anxiety"          , "Perceived EV Range Anxiety: Agree"                 , "Active Indicators"                      , "pct"    ,
-  "ATT_EVB_environment"        , "EV Battery Environmentally Positive: Agree"        , "Active Indicators"                      , "pct"    ,
-  "ATT_EVB_function"           , "EV Battery Functionally Negative: Disagree"        , "Active Indicators"                      , "pct"    ,
-  "hhincome_num_k"             , "Household Income (1000 USD)"                       , "Active Indicators"                      , "number" ,
-  "knowledge_ev"               , "EV Knowledge"                                      , "Active Indicators"                      , "pct"    ,
-  "knowledge_subsidy"          , "EV Subsidy Knowledge"                              , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "EV_charger"                 , "Electrical Outlet Access"                          , "Active Indicators"                      , "pct"    ,
-  "EV_neighbor"                , "Neighbor Owns/Leases a BEV/PHEV"                   , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"        , "Inactive Indicators: Socioeconomics"    , "number" ,
-  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"             , "Active Indicators"                      , "number" ,
-  "Veh_hh_fuel"                , "Household Vehicle Fuel Composition"                , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "vehicle_typesuv"            , "Next Vehicle Type: SUV"                            , "Active Indicators"                      , "pct"    ,
+  "ATT_risktaker"              , "Risk-taking Propensity: Agree"                 , "Active Indicators"                      , "pct"    ,
+  "ATT_range_anxiety"          , "Perceived EV Range Anxiety: Agree"             , "Active Indicators"                      , "pct"    ,
+  "ATT_EVB_environment"        , "EV Battery Environmentally Positive: Agree"    , "Active Indicators"                      , "pct"    ,
+  "ATT_EVB_function"           , "EV Battery Functionally Negative: Disagree"    , "Active Indicators"                      , "pct"    ,
+  "hhincome_num_k"             , "Household Income (1000 USD)"                   , "Active Indicators"                      , "number" ,
+  "knowledge_ev"               , "EV Knowledge"                                  , "Active Indicators"                      , "pct"    ,
+  "knowledge_subsidy"          , "EV Subsidy Knowledge"                          , "Inactive Indicators"                    , "pct"    ,
+  "EV_charger"                 , "Electrical Outlet Access"                      , "Active Indicators"                      , "pct"    ,
+  "EV_neighbor"                , "Neighbor Owns/Leases a BEV/PHEV"               , "Inactive Indicators"                    , "pct"    ,
+  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"    , "Inactive Indicators"                    , "number" ,
+  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"         , "Active Indicators"                      , "number" ,
+  "Veh_hh_fuel"                , "Household Vehicle Fuel Composition"            , "Active Indicators"                      , "pct"    ,
+  "vehicle_typesuv"            , "Next Vehicle Type: SUV"                        , "Active Indicators"                      , "pct"    ,
   # Inactive / Socioeconomic & other variables
-  "age_num"                    , "Age"                                               , "Inactive Indicators: Socioeconomics"    , "number" ,
-  "gender_cate"                , "Gender"                                            , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "ethnicity_cate"             , "Ethnicity"                                         , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "race_cate"                  , "Race"                                              , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "education_cate"             , "Education Level"                                   , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "student_cate"               , "Student Status"                                    , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "employment_cate"            , "Employment Status"                                 , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "hhsize_num"                 , "Household Size"                                    , "Inactive Indicators: Socioeconomics"    , "number" ,
-  "hhtenure_cate"              , "Household Tenure"                                  , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "hhtype_cate"                , "Household Type"                                    , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "Veh_hh_count"               , "Household Vehicle Count"                           , "Inactive Indicators: Socioeconomics"    , "number" ,
-  "Veh_primary_fuel"           , "Primary Vehicle Fuel Type"                         , "Inactive Indicators: Socioeconomics"    , "pct"    ,
-  "next_veh_budget_k"          , "Next Vehicle Budget (1000 USD)"                    , "Inactive Indicators: Socioeconomics"    , "dollar" ,
-  # "next_veh_fuel_new_phev"     , "Likelihood of buying new PHEV (1-5)"               , "Inactive Indicators: Socioeconomics"        , "number" ,
-  # "next_veh_fuel_used_phev"    , "Likelihood of buying used PHEV (1-5)"              , "Inactive Indicators: Socioeconomics"        , "number" ,
-  # "next_veh_fuel_new_bev"      , "Likelihood of buying new BEV (1-5)"                , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "next_veh_fuel_used_bev"     , "Likelihood of buying used BEV"                     , "Inactive Indicators: Socioeconomics"    , "number" ,
+  "age_num"                    , "Age"                                           , "Inactive Indicators"                    , "number" ,
+  "gender_cate"                , "Gender"                                        , "Inactive Indicators"                    , "pct"    ,
+  "ethnicity_cate"             , "Ethnicity"                                     , "Inactive Indicators"                    , "pct"    ,
+  "race_cate"                  , "Race"                                          , "Inactive Indicators"                    , "pct"    ,
+  "education_cate"             , "Education Level"                               , "Inactive Indicators"                    , "pct"    ,
+  "student_cate"               , "Student Status"                                , "Inactive Indicators"                    , "pct"    ,
+  "employment_cate"            , "Employment Status"                             , "Inactive Indicators"                    , "pct"    ,
+  "hhsize_num"                 , "Household Size"                                , "Inactive Indicators"                    , "number" ,
+  "hhtenure_cate"              , "Household Tenure"                              , "Inactive Indicators"                    , "pct"    ,
+  "hhtype_cate"                , "Household Type"                                , "Inactive Indicators"                    , "pct"    ,
+  "Veh_hh_count"               , "Household Vehicle Count"                       , "Inactive Indicators"                    , "number" ,
+  "Veh_primary_fuel"           , "Primary Vehicle Fuel Type"                     , "Inactive Indicators"                    , "pct"    ,
+  "next_veh_budget_k"          , "Next Vehicle Budget (1000 USD)"                , "Inactive Indicators"                    , "dollar" ,
+  # "next_veh_fuel_new_phev"     , "Likelihood of buying new PHEV (1-5)"               , "Inactive Indicators"        , "number" ,
+  # "next_veh_fuel_used_phev"    , "Likelihood of buying used PHEV (1-5)"              , "Inactive Indicators"        , "number" ,
+  # "next_veh_fuel_new_bev"      , "Likelihood of buying new BEV (1-5)"                , "Inactive Indicators"        , "number" ,
+  "next_veh_fuel_used_bev"     , "Likelihood of buying used BEV"                 , "Inactive Indicators"                    , "number" ,
   # Attitudes / psychological
-  # "ATT_price_sensitive"        , "Price Sensitivity"                                 , "Inactive Indicators: Attitudes"             , "pct"    ,
-  "ATT_climate"                , "Climate Concern"                                   , "Inactive Indicators: Attitudes"         , "pct"    ,
-  # "ATT_political"              , "Political Spectrum"                                , "Inactive Indicators: Attitudes"             , "pct"    ,
-  # "ATT_voting"                 , "Voting Behavior"                                   , "Inactive Indicators: Attitudes"             , "pct"    ,
-  "battery_info_treat"         , "Received Battery Information Treatment"            , "Metadata: Information Treatment"        , "pct"
+  # "ATT_price_sensitive"        , "Price Sensitivity"                                 , "Inactive Indicators"             , "pct"    ,
+  "ATT_climate"                , "Climate Concern"                               , "Inactive Indicators"                    , "pct"    ,
+  # "ATT_political"              , "Political Spectrum"                                , "Inactive Indicators"             , "pct"    ,
+  # "ATT_voting"                 , "Voting Behavior"                                   , "Inactive Indicators"             , "pct"    ,
+  "battery_info_treat"         , "Received Battery Information Treatment"        , "Metadata: Information Treatment"        , "pct"
 )
 
 combined_all <- combined_all %>%
@@ -762,72 +762,94 @@ gtsave(
 
   # Plain-text column headers with n and share
   latex_col_hdrs <- combined_size %>%
-    transmute(hdr = paste0(
-      "Class ", class,
-      " (n=", format(class_size, big.mark = ","),
-      ", ", round(mean_probability * 100, 1), "%)"
-    )) %>%
+    transmute(
+      hdr = paste0(
+        "Class ",
+        class,
+        " (n=",
+        format(class_size, big.mark = ","),
+        ", ",
+        round(mean_probability * 100, 1),
+        "%)"
+      )
+    ) %>%
     pull(hdr)
 
-  # Section row spans — preserve data order
-  section_grps <- latex_vals %>%
-    mutate(row_id = row_number()) %>%
-    group_by(section) %>%
-    summarise(start = min(row_id), end = max(row_id), .groups = "drop") %>%
-    arrange(start)
+  # Helper: build a longtable kbl from a filtered latex_vals subset
+  make_kbl <- function(dat, caption_text, label_text) {
+    grps <- dat %>%
+      mutate(row_id = row_number()) %>%
+      group_by(section) %>%
+      summarise(start = min(row_id), end = max(row_id), .groups = "drop") %>%
+      arrange(start)
 
-  # ── Table 1: WTP + Active Indicators + Inactive Indicators ────────────────
-  kbl1 <- latex_vals %>%
-    select(label, all_of(combined_cols)) %>%
-    kbl(
-      format    = "latex",
-      booktabs  = TRUE,
-      longtable = TRUE,
-      col.names = c("", latex_col_hdrs),
-      align     = c("l", rep("r", length(combined_cols))),
-      caption   = "Latent Class Profile Summary: WTP and Indicators",
-      label     = "lc6_profile"
-    ) %>%
-    kable_styling(
-      latex_options = "repeat_header",
-      font_size     = 9,
-      full_width    = TRUE
-    ) %>%
-    column_spec(1, width = "7cm")
+    tbl <- dat %>%
+      select(label, all_of(combined_cols)) %>%
+      kbl(
+        format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        col.names = c("", latex_col_hdrs),
+        align = c("l", rep("r", length(combined_cols))),
+        caption = caption_text,
+        label = label_text
+      ) %>%
+      kable_styling(
+        latex_options = "repeat_header",
+        font_size = 8
+      ) %>%
+      column_spec(1, width = "6cm") %>%
+      column_spec(2:7, width = "1.7cm")
 
-  for (i in seq_len(nrow(section_grps))) {
-    kbl1 <- kbl1 %>%
-      pack_rows(
-        group_label     = section_grps$section[i],
-        start_row       = section_grps$start[i],
-        end_row         = section_grps$end[i],
-        bold            = TRUE,
-        latex_gap_space = "0.3em"
-      )
+    for (i in seq_len(nrow(grps))) {
+      tbl <- tbl %>%
+        pack_rows(
+          group_label = grps$section[i],
+          start_row = grps$start[i],
+          end_row = grps$end[i],
+          bold = TRUE,
+          latex_gap_space = "0.3em"
+        )
+    }
+    tbl
   }
 
-  writeLines(as.character(kbl1), file.path(latex_dir, "table_lc6_profile_main.tex"))
-
-  # ── Table 2: Class Metadata ───────────────────────────────────────────────
-  kbl2 <- combined_size %>%
-    transmute(
-      Class = paste0("Class ", class),
-      N     = format(class_size, big.mark = ","),
-      Share = paste0(round(mean_probability * 100, 1), "%")
-    ) %>%
-    kbl(
-      format   = "latex",
-      booktabs = TRUE,
-      caption  = "Latent Class Membership",
-      label    = "lc6_metadata",
-      align    = c("l", "r", "r")
-    ) %>%
-    kable_styling(
-      latex_options = "hold_position",
-      font_size     = 11
+  # kableExtra puts \label inside \caption{}; move it outside (before \\) so
+  # the caption text and label are visually separated: \caption{text}\label{...}\\
+  fix_caption_label <- function(s) {
+    gsub(
+      "\\\\caption\\{\\\\label\\{([^}]+)\\}([^}]*)\\}\\\\\\\\",
+      "\\\\caption{\\2}\\\\label{\\1}\\\\\\\\",
+      s,
+      perl = TRUE
     )
+  }
 
-  writeLines(as.character(kbl2), file.path(latex_dir, "table_lc6_metadata.tex"))
+  # ── Table 1: WTP + Active Indicators + Inactive Indicators ────────────────
+  latex_t1 <- latex_vals %>%
+    filter(!grepl("^Metadata", section))
+
+  kbl1 <- make_kbl(latex_t1, "WTP and Characteristics by Class", "lc6_profile")
+
+  writeLines(
+    fix_caption_label(as.character(kbl1)),
+    file.path(latex_dir, "table_lc6_profile_main.tex")
+  )
+
+  # ── Table 2: Metadata sections ────────────────────────────────────────────
+  latex_t2 <- latex_vals %>%
+    filter(grepl("^Metadata", section))
+
+  kbl2 <- make_kbl(
+    latex_t2,
+    "Metadata Summary by Class",
+    "lc6_metadata"
+  )
+
+  writeLines(
+    fix_caption_label(as.character(kbl2)),
+    file.path(latex_dir, "table_lc6_metadata.tex")
+  )
 
   cat("Saved:\n")
   cat(" -", file.path(latex_dir, "table_lc6_profile_main.tex"), "\n")

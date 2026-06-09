@@ -195,7 +195,7 @@ wtp_long <- wtp_raw %>%
   )
 
 # ── THEME ─────────────────────────────────────────────────────────────────────
-theme_lc <- theme_minimal(base_family = "rc", base_size = 12) %+replace%
+theme_lc <- theme_minimal(base_family = "rc", base_size = 7) %+replace%
   theme(
     panel.grid.major.y = element_blank(),
     panel.grid.major.x = element_line(color = "gray91", linewidth = 0.3),
@@ -204,7 +204,7 @@ theme_lc <- theme_minimal(base_family = "rc", base_size = 12) %+replace%
     axis.ticks = element_blank(),
     axis.text.x = element_blank(),
     plot.background = element_rect(fill = "white", color = NA),
-    plot.margin = margin(1, 4, 1, 2)
+    plot.margin = margin(0.5, 2, 0.5, 1)
   )
 
 # ── PLOT FUNCTIONS ────────────────────────────────────────────────────────────
@@ -230,7 +230,7 @@ make_header <- function(class_id) {
       label = paste0("Class ", info$num, ": ", lbl),
       family = "rc",
       fontface = "bold",
-      size = 4.6,
+      size = 2.8,
       color = "white",
       hjust = 0.5
     ) +
@@ -240,7 +240,7 @@ make_header <- function(class_id) {
       y = 0.25,
       label = paste0("n = ", info$n, "  •  ", info$share, "%"),
       family = "rc",
-      size = 4.2,
+      size = 2.5,
       color = "white",
       alpha = 0.88,
       hjust = 0.5
@@ -258,7 +258,7 @@ make_wtp <- function(class_id, show_y = TRUE) {
     geom_hline(yintercept = 0, color = "gray40", linewidth = 0.5) +
     geom_text(
       aes(y = text_pos, label = val_label, hjust = text_hjust),
-      size = 4.2,
+      size = 2.5,
       family = "rc",
       color = "#1A202C"
     ) +
@@ -268,7 +268,7 @@ make_wtp <- function(class_id, show_y = TRUE) {
     theme_lc +
     theme(
       axis.text.y = if (show_y) {
-        element_text(size = 12, hjust = 1, color = "#444444")
+        element_text(size = 7, hjust = 1, color = "#444444")
       } else {
         element_blank()
       }
@@ -296,7 +296,7 @@ make_chars <- function(class_id) {
       label = "CLASS CHARACTERISTICS",
       family = "rc",
       fontface = "bold",
-      size = 4.2,
+      size = 2.5,
       color = info$hdr_color,
       hjust = 0.5
     ) +
@@ -316,11 +316,11 @@ make_chars <- function(class_id) {
       y = 0.40,
       label = txt,
       family = "rc",
-      size = 3.6,
+      size = 2.1,
       color = "#333333",
       hjust = 0.5,
       vjust = 0.5,
-      lineheight = 1.35
+      lineheight = 1.2
     ) +
     scale_x_continuous(limits = c(0, 1)) +
     scale_y_continuous(limits = c(0, 1)) +
@@ -331,7 +331,7 @@ make_chars <- function(class_id) {
         color = info$hdr_color,
         linewidth = 0.4
       ),
-      plot.margin = margin(4, 4, 4, 4)
+      plot.margin = margin(2, 2, 2, 2)
     )
 }
 
@@ -350,24 +350,24 @@ col_c3 <- make_col("c3", show_y = FALSE)
 col_c5 <- make_col("c5", show_y = FALSE)
 
 panel_a <- (col_c2 | col_c3 | col_c5) +
-  plot_layout(widths = unit(c(10, 10, 10), "cm")) +
+  plot_layout(widths = unit(c(7.5, 7.5, 7.5), "cm")) +
   plot_annotation(
     title = "Panel A  —  Attribute-Sensitive Classes (Class 2, 3, 5  •  61% of sample)",
     theme = theme(
       plot.title = element_text(
         family = "rc",
         face = "bold",
-        size = 13,
+        size = 8,
         color = COL_SENS,
         hjust = 0,
-        margin = margin(b = 3)
+        margin = margin(b = 2)
       ),
       plot.background = element_rect(
         fill = "white",
         color = "#BBDEFB",
         linewidth = 0.7
       ),
-      plot.margin = margin(5, 5, 5, 5)
+      plot.margin = margin(3, 3, 3, 3)
     )
   )
 
@@ -377,24 +377,24 @@ col_c4 <- make_col("c4", show_y = FALSE)
 col_c6 <- make_col("c6", show_y = FALSE)
 
 panel_b <- (col_c1 | col_c4 | col_c6) +
-  plot_layout(widths = unit(c(10, 10, 10), "cm")) +
+  plot_layout(widths = unit(c(7.5, 7.5, 7.5), "cm")) +
   plot_annotation(
     title = "Panel B  —  Limited-Sensitivity Classes (Class 1, 4, 6  •  40% of sample)",
     theme = theme(
       plot.title = element_text(
         family = "rc",
         face = "bold",
-        size = 13,
+        size = 8,
         color = COL_INSENS,
         hjust = 0,
-        margin = margin(b = 3)
+        margin = margin(b = 2)
       ),
       plot.background = element_rect(
         fill = "white",
         color = "#CFD8DC",
         linewidth = 0.7
       ),
-      plot.margin = margin(5, 5, 5, 5)
+      plot.margin = margin(3, 3, 3, 3)
     )
   )
 
@@ -404,29 +404,24 @@ final_fig <- (panel_a / panel_b) +
   plot_annotation(
     title = "Six-Class Latent Class Model: Consumer Profiles for Used BEV Battery Attributes",
     caption = paste0(
-      "WTP in $1,000 USD computed as beta_attr / (−beta_price). Piecewise linear range and range loss. ",
-      "WTP significance bounded by the less significant of (attribute, price). ",
-      "Bar lengths capped at −$120k for display; ◄ indicates truncation with actual value shown. ",
-      "Class 1 has a marginally significant price coefficient; Class 4 has the smallest price coefficient in absolute value (−0.144) — WTPs for both classes are inflated and should be interpreted with caution. ",
-      "Significance: *** p<0.001, ** p<0.01, * p<0.05, . p<0.1. ",
-      "N = 2,916 respondents; 17,496 choice observations."
+      "Bar lengths capped at −$120k for display;"
     ),
     theme = theme(
       plot.title = element_text(
         family = "rc",
         face = "bold",
-        size = 18,
+        size = 11,
         hjust = 0.5,
-        margin = margin(b = 6)
+        margin = margin(b = 4)
       ),
       plot.caption = element_text(
         family = "rc",
-        size = 10,
+        size = 7,
         color = "gray50",
         hjust = 0
       ),
       plot.background = element_rect(fill = "white", color = NA),
-      plot.margin = margin(8, 8, 6, 8)
+      plot.margin = margin(4, 4, 3, 4)
     )
   )
 
@@ -443,8 +438,9 @@ output_path <- here(
 ggsave(
   output_path,
   plot = final_fig,
-  width = 18,
-  height = 16,
+  width = 11,
+  height = 8.5,
+  units = "in",
   device = "pdf"
 )
 
