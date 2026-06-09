@@ -156,7 +156,7 @@ Understanding the key determinants of used EV purchase decisions, particularly f
 The remainder of the paper is structured as follows. Section 2 provides a review of literature on household vehicle composition and usage (among BEV users), as well as factors influencing BEV adoption. Section 3 provides an overview of the survey data, and presents both descriptive statistics and comparative analyses. Section 4 outlines the statistical method employed in the analysis. Section 5 presents the key findings, discusses their implications, outlines study limitations, and suggests directions for future research. Finally, Section 6 concludes the paper.
 
 \section{Literature Review}
-
+\label{section:lit_review}
 This section reviews key literature informing survey design and analyses of this study. The first subsection examines the main drivers and barriers to the adoption of used BEVs, while the second subsection focuses on EV battery technology and how it shapes consumer perceptions and decision-making.
 
 \subsection{Used Electric Vehicle Adoption}
@@ -195,13 +195,13 @@ One of the few relevant studies, conducted by \textcite{pedrosaSecondhandElectri
 To be continued. 
 
 \section{Survey Design, Data Collection, and Sample Profile}
-
-\subsection{Used EV Survey}
+\label{section:data}
+\subsection{NationwideUsed EV Survey}
 The survey was designed to understand consumer preferences and willingness to pay for vehicle attributes and battery health information in the used BEV market. The survey targets on US consumers who is 18 years old and has the intention to purchase a used car or SUV within the next two years. 
 
-The core component of the survey is the BEV discrete choice experiments where respondents are asked to consider a scenario in which they choose a used BEV from a set of options with varying attributes. It is designed to capture trade-offs that consumers make when evaluating used BEVs, particularly how they value battery health information relative to other vehicle attributes. Each respondent completes six repeated choice tasks. Before presenting the choice tasks, we introduce the specific attributes of the BEVs that respondents will evaluate in the upcoming choice experiments (see Table~\ref{table:dce_attributes}).  Based on prior studies, age and mileage are the main factors influencing the value of a used car \parencite{prietoUsingHedonicPrice2015}. For all choice questions, we ask respondents to assume the used vehicle was built in 2022 and is currently three years old. The attributes with varying values include vehicle mileage, purchase price, battery refurbishment history, electric range, and battery state of health. All attribute descriptions are provided to ensure respondents clearly understand the meaning of each before making their selections.
+The core component of the survey is the BEV discrete choice experiments where respondents are asked to consider a scenario in which they choose a used BEV from a set of options with varying attributes. It is designed to capture trade-offs that consumers make when evaluating used BEVs, particularly how they value battery health information relative to other vehicle attributes. Each respondent completes six repeated choice tasks. Before presenting the choice tasks, we introduce the specific attributes of the BEVs that respondents will evaluate in the upcoming choice experiments (see Table~\ref{table:dce_attributes}).  Based on prior studies, age and mileage are the main factors influencing the value of a used car \parencite{prietoUsingHedonicPrice2015}. For all choice questions, we ask respondents to assume the used vehicle was built in 2022 and is currently three years old. The attributes with varying values include vehicle mileage, purchase price, battery refurbishment history, electric range, and battery SOH. Note that during the design phase of the discrete choice experiments, we used driving range at year 0 and annual degradation rate to vary the attributes, but for easier understanding for the respondents, we presented the driving range and SOH at year 3 (at the point of purchase), and at year 8 (five years after purchase) in the survey. All attribute descriptions are provided to ensure respondents clearly understand the meaning of each before making their selections.
 
-To examine the effects of information treatment, specifically, how the presentation of certain information may influence consumer preferences, participants are randomly divided into two groups. One group receives only information about vehicle driving range and battery health, while the other group is shown additional details about battery maintenance and warranty coverage. This design allows us to assess whether specific types of information impact respondents’ choices in the BEV selection tasks. Figure ~\ref{fig:battery_dce} provides an example of the choice experiment, where respondents are asked to choose between three used BEVs with varying attributes and a "None of the above" option. 
+To examine the effects of information treatment, specifically, how the presentation of certain information may influence consumer preferences, participants are randomly divided into two groups. One group receives only information about vehicle driving range and battery health, while the other group is shown additional details about battery maintenance and warranty coverage. This design allows us to assess whether specific types of information impact respondents’ choices in the BEV selection tasks. Figure~\ref{fig:battery_dce} provides an example of the choice experiment, where respondents are asked to choose between three used BEVs with varying attributes and a "None of the above" option. 
 
 \begin{table}[pos=H]
 \caption{BEV choice experiment attributes and levels.}
@@ -240,23 +240,25 @@ Purchase price & The total cost of the vehicle in dollars, including down paymen
 
 In addition to DCEs, the survey gather information on a range of other topics. Before the DCEs, The survey collects information on household’s current vehicle fleet and detailed vehicle attributes for their primary vehicle if they report owning or leasing at least one (fuel type, fuel efficiency, range,new/used, way of obtain, purchase/lease price,monthly payment,refuel/recharge frequency), and their future vehicle purchasing plans and preferences (anticipated budget,payment method, andthe likelihood of purchasing a new or used plug-in hybrid or BEV).
 After the DCEs, the survey assesses respondents' knowledge, attitudes, and perceptions related to EVs, battery technologies, and related topics. It begins with a series of factual questions that evaluate understanding of which vehicles can run on gasoline or be plugged in, whether respondents can name a BEV, and their knowledge of the current U.S. federal tax credit for new EV purchases. Respondents then rate their agreement with a series of attitudinal statements in 5-point Likert scale covering topics such as social norms, environmental beliefs, cost perceptions, battery concerns, and personality traits like risk-taking and price sensitivity. 
+
 The final section of the survey collects demographic and additional attitudinal information. It includes standard demographic questions such as year of birth, gender, race/ethnicity, household size, income, education level, employment status, and housing type. These variables are crucial for understanding how socio-demographic factors influence preferences and attitudes toward EVs. Additional questions explore home ownership and average electricity bills, factors that may shape EV adoption decisions.
 
 For a comprehensive description of the survey design, see the Data Collection Instrument \parencite{goreDCIConsumerValuation2025}.\footnote{The Data Collection Instrument was published prior to the start of data collection. Certain aspects of the survey design were revised following piloting. Where discrepancies exist between the instrument and the present paper, the description in this paper reflects the final implemented version.}
 
 
 \subsection{Data Collection and Sample Profile}
-The survey was administered online through two widely-used online research platforms. The data collection took place between December 2025 and April 2026. After initial data cleaning, we ended with 2,113 participants across the US. The geographic distribution of respondents is shown in Figure~\ref{fig:map_all}. Each point represents a ZIP code, with color and size scaled to respondent count. The median survey time is around 14 minutes. The survey participants were compensated through the research platforms.
+The survey was administered online through two widely-used online research platforms. The data collection took place between December 2025 and April 2026. The median survey time is around 14 minutes. The survey participants were compensated through the research platforms.
+
+The total respondents collected are 3,657 participants across the US. We apply multiple data quality screens to identify and remove low-quality responses, including speeders and staightliners fo the discrete choice experiments, failure of an embedded attention check, inconsistency between reported information in different sections of the survey, uninformative filler text and gibberish in open-ended responses, and so forth. In the end, the final sample size for this analysis is 2,916 respondents. The geographic distribution of respondents is shown in Figure~\ref{fig:map_all}. Each point represents a ZIP code, with color and size scaled to respondent count.
 
 \begin{figure}[pos=H]
     \centering
-    \includegraphics[width=0.85\textwidth]{../../code/output/images/map_all.png}
+    \includegraphics[width=0.85\textwidth]{../../code/output/images/battery_analysis/map_all.png}
     \caption{Geographic distribution of survey respondents across the continental United States. }
     \label{fig:map_all}
 \end{figure}
 
 
-We further apply multiple data quality screens to identify and remove low-quality responses, including failure of an embedded attention check, inconsistency between reported information in different sections of the survey, uninformative filler text and gibberish in open-ended responses, and so forth. In the end, the final sample size for analysis is 1,500 respondents.
 
 
 
@@ -264,36 +266,40 @@ We further apply multiple data quality screens to identify and remove low-qualit
 
 
 \section{Method}
-\subsection{Mixed Logit Model (MXL)}
+\label{section:method}
+\subsection{Mixed Logit Model}
 
-The Mixed Logit (MXL) model relaxes the restrictive Independence of Irrelevant Alternatives (IIA) assumption of the standard MNL by allowing preference parameters to vary continuously across individuals \parencite{mcfaddenMixedMNLModels2000, trainDiscreteChoiceMethods2009}. We estimate the model directly in \textit{WTP space} \parencite{trainWTPSpacePreference2005}. Partitioning the attribute vector into price $p_{nti}$ and non-price attributes $\mathbf{x}_{nti}$, the WTP-space utility for respondent $n$ choosing alternative $i$ in choice scenario $t$ is:
+We started by estimating WTP for changes in vehicle among the full sample to reveal whether there are preferences heterogeneous in vehicle choices in the population level and if yes, by how much. We estimate Mixed Logit (MXL)  model directly in the \textit{WTP space}. The MXL model relaxes the Independence of Irrelevant Alternatives (IIA) assumption of the standard Multinomial Logit (MNL) model by allowing preference parameters to vary continuously across individuals \parencite{mcfaddenMixedMNLModels2000, trainDiscreteChoiceMethods2009}. The WTP space model allows us to specify the WTP for all non-price attributes follows a certain distribution. In this study, we assumed the random parameters follow normal distributions, namely symmetric heterogeneity, since different individuals might attribute higher or lower importance to different vehicle attributes. Following is the utility parameterization following the same notation as in \textcite{helvestonPoolingStatedRevealed2018} and \textcite{helvestonLogitrFastEstimation2023}. 
 
+The WTP-space utility for respondent $n$ choosing alternative $i$ in choice scenario $t$ is:
 \begin{equation}
-    U_{nti} = -\alpha_n \bigl(p_{nti} - \mathbf{w}_n' \mathbf{x}_{nti}\bigr) + \varepsilon_{nti}
+    u_{nti} = \lambda_n \bigl(\boldsymbol{\omega}_n^{\top} \mathbf{x}_{nti} - p_{nti}\bigr) + \varepsilon_{nti}, \qquad \varepsilon_{nti} \sim \mathrm{Gumbel}\!\left(0,\tfrac{\pi^2}{6}\right)
     \label{eq:mxl_utility}
 \end{equation}
 
-\noindent where $\alpha_n > 0$ is the individual-specific marginal disutility of price (typically log-normally distributed to enforce the correct sign), $\mathbf{w}_n$ is the vector of individual WTP values drawn from a mixing distribution $f(\mathbf{w} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})$ with population mean $\boldsymbol{\mu}$ and covariance $\boldsymbol{\Sigma}$, and $\varepsilon_{nti}$ is an IID Type I Extreme Value error. Because $\alpha_n$ and $\mathbf{w}_n$ are unobserved, the choice probability is obtained by integrating the logit kernel over the joint mixing distribution:
+\noindent where $\mathbf{X}_{pti}$ is a vector of observed vehicle price presented in scenario $t$ to respondent $n$; $\mathbf{X}_{nti}$ is a vector of observed BEV attributes including vehicle mileage, battery refurbishment status, current driving range at the point of purchase (at year 3) and estimated range loss rate over the next 5 years (by at year 8) \footnote{Note that we tested several different model specifications regarding range and battery health: (a1) range at year 0 and annual degradation rate, (a2) range at year 3 and annual degradation rate, (b1) range at year 0 and range loss between year 0 to year 8 in absolute terms,(b2) range at year 3 and range loss between year 3 to year 8 in absolute terms, (c1) range at year 0 and range loss rate between year 0 to year 8 in percentage, (c2) range at year 3 and range loss rate between year 3 to year 8 in percentage. By comparing the model fit and interpretation, (c2) specification performed best and thus is used in our analysis. This indicates that consumers focus more on the current and the relative changes in range and battery health over time.}; $\lambda_n > 0$ is the individual-specific scale parameter, $\boldsymbol{\omega}_n$ is the vector of individual WTP values drawn from a mixing distribution $f(\boldsymbol{\omega} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})$ with population mean $\boldsymbol{\mu}$ and covariance $\boldsymbol{\Sigma}$ representing the marginal WTP for changes in each non-price attribute, $\varepsilon_{nti}$ is an IID Type I Extreme Value error, and $\lambda$ represents the scale of the deterministic portion of utility relative to the standardized scale of the random error term. Because $\lambda_n$ and $\boldsymbol{\omega}_n$ are unobserved, the choice probability is obtained by integrating the logit kernel over the joint mixing distribution:
 
 \begin{equation}
-    P_{nti}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \int\!\int \frac{\exp\!\left(-\alpha\bigl(p_{nti} - \mathbf{w}'\mathbf{x}_{nti}\bigr)\right)}{\displaystyle\sum_{j} \exp\!\left(-\alpha\bigl(p_{ntj} - \mathbf{w}'\mathbf{x}_{ntj}\bigr)\right)} \, f(\mathbf{w} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})\, g(\alpha) \, d\mathbf{w}\, d\alpha
+    P_{nti}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \int\!\int \frac{\exp\!\left(\lambda\bigl(\boldsymbol{\omega}^{\top}\mathbf{x}_{nti} - p_{nti}\bigr)\right)}{\displaystyle\sum_{j} \exp\!\left(\lambda\bigl(\boldsymbol{\omega}^{\top}\mathbf{x}_{ntj} - p_{ntj}\bigr)\right)} \, f(\boldsymbol{\omega} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})\, g(\lambda) \, d\boldsymbol{\omega}\, d\lambda
     \label{eq:mxl_prob}
 \end{equation}
 
-\noindent This integral is evaluated by simulation using Halton draws \parencite{trainHaltonSequencesNumerical1999}. Accounting for the panel structure of six repeated choice tasks per respondent, the simulated log-likelihood is:
+\noindent This integral is evaluated by simulation using Halton draws ($R$=500 in our case). Accounting for the panel structure of repeated choice tasks per respondent ($T$=6), the simulated log-likelihood is:
 
 \begin{equation}
-    \mathcal{L}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^{N} \ln \left[ \frac{1}{R} \sum_{r=1}^{R} \prod_{t=1}^{6} \frac{\exp\!\left(-\alpha_r\bigl(p_{nti_{nt}^*} - \mathbf{w}_r'\mathbf{x}_{nti_{nt}^*}\bigr)\right)}{\displaystyle\sum_{j} \exp\!\left(-\alpha_r\bigl(p_{ntj} - \mathbf{w}_r'\mathbf{x}_{ntj}\bigr)\right)} \right]
+    \mathcal{L}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^{N} \ln \left[ \frac{1}{R} \sum_{r=1}^{R} \prod_{t=1}^{T} \frac{\exp\!\left(\lambda_r\bigl(\boldsymbol{\omega}_r^{\top}\mathbf{x}_{nti_{nt}^*} - p_{nti_{nt}^*}\bigr)\right)}{\displaystyle\sum_{j} \exp\!\left(\lambda_r\bigl(\boldsymbol{\omega}_r^{\top}\mathbf{x}_{ntj} - p_{ntj}\bigr)\right)} \right]
     \label{eq:mxl_ll}
 \end{equation}
 
-\noindent where $R$ is the number of Halton draws, $(\alpha_r, \mathbf{w}_r)$ is the $r$-th draw from the joint mixing distribution, and $i_{nt}^*$ is the alternative chosen by respondent $n$ in scenario $t$. Because estimation is carried out directly in WTP space, the population mean WTP for each non-price attribute $k$ is obtained directly as $\hat{\mu}_k$ from the estimated distribution of $\mathbf{w}_n$, without requiring any post-estimation ratio transformation.
+\noindent where $(\lambda_r, \boldsymbol{\omega}_r)$ is the $r$-th draw from the joint mixing distribution, and $i_{nt}^*$ is the alternative chosen by respondent $n$ in scenario $t$. Because estimation is carried out directly in WTP space, the population mean WTP for each non-price attribute $k$ is obtained directly as $\hat{\mu}_k$ from the estimated distribution of $\boldsymbol{\omega}_n$, without requiring any post-estimation ratio transformation. We estimate the model using the \textit{logitr} R package \parencite{helvestonLogitrFastEstimation2023}. 
 
-\subsection{Latent Class Choice Model (LCCM)}
 
+
+\subsection{Latent Class Choice Model}
+\vspace{\baselineskip}
 \noindent \textbf{Model Framework} \par
 
-We employ a LCCM to analyze consumer preferences and WTP for used BEVs. The LCCM is built on the premise that individuals can be grouped into a finite number of latent groups/segments/classes, within which individuals share homogeneous preferences, but across which preferences are heterogeneous \parencite{kamakuraProbabilisticChoiceModel1989, greeneLatentClassModel2003}. This approach is particularly suited to our research context, where consumer valuations of battery health information likely differ systematically across distinct segments varied by individual characteristics.
+As we will see in the \ref{section:results} section, we observe a large degree of preference heterogeneity across respondents. Therefore, we employ a Latent Class Choice Model(LCCM) to better understand the underlying preference structure. The LCCM is built on the premise that individuals can be grouped into a finite number of latent groups/segments/classes, within which individuals share homogeneous preferences, but across which preferences are heterogeneous \parencite{kamakuraProbabilisticChoiceModel1989, greeneLatentClassModel2003}. This approach is particularly suited to our research context, where consumer valuations of battery health information likely differ systematically across distinct segments varied by individual characteristics.
 
 As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two interrelated components which are estimated simultaneously. The \textit{class membership model} assigns each respondent probabilistically to a latent class based on observable individual-level covariates and the \textit{class-specific choice model} estimates the conditional probability of choosing each vehicle alternative within a given class. Additionally, a set of \textit{inactive indicators}, including attitudinal and behavioral variables, though not directly included as estimators (due to collinearity, insignificance, or theoretical considerations), are used to further descriptively characterize the identified latent classes after estimation. The mathematical details of the LCCM are as follows, with notations consistent with \textcite{chenExploringTouristPreference2023}.
 
@@ -304,6 +310,7 @@ As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two int
     \label{fig:model_framework}
 \end{figure}
 
+\vspace{\baselineskip}
 \noindent \textbf{Class-specific Choice Model}\par
 
 For respondent $n$ belonging to latent class $s$ ($s = 1, 2, \ldots, S$), the utility associated with choosing vehicle alternative $i$ in choice scenario $t$ ($t = 1, 2, \ldots, 6$)is specified as:
@@ -313,7 +320,7 @@ For respondent $n$ belonging to latent class $s$ ($s = 1, 2, \ldots, S$), the ut
     \label{eq:utility}
 \end{equation}
 
-\noindent where $\mathbf{X}_{nti}$ is a vector of observed BEV attributes presented in scenario $t$ to respondent $n$, including vehicle mileage, battery refurbishment status, estimated driving range and battery SOH currently (at years 3) and in the future (at year 8; 5 years from now), and purchase price; $\boldsymbol{\beta}_s$ is a vector of class-specific utility parameters capturing the marginal utility of each attribute for class $s$; and $\varepsilon_{nti \mid s}$ is a random error term assumed to be independently and identically distributed (IID) according to a Type I Extreme Value (Gumbel) distribution. Under this assumption, the conditional probability that respondent $n$ in class $s$ chooses alternative $i$ in scenario $t$ follows the multinomial logit (MNL) form:
+\noindent where $\mathbf{X}_{nti}$ is a vector of observed BEV attributes presented in scenario $t$ to respondent $n$; $\boldsymbol{\beta}_s$ is a vector of class-specific utility parameters capturing the marginal utility of each attribute for class $s$; and $\varepsilon_{nti \mid s}$ is a random error term assumed to be an IID Type I Extreme Value (Gumbel) distribution. Under this assumption, the conditional probability that respondent $n$ in class $s$ chooses alternative $i$ in scenario $t$ follows the MNL form:
 
 \begin{equation}
     P_{nt}(i \mid s) = \frac{\exp\!\left(\boldsymbol{\beta}_s' \mathbf{X}_{nti}\right)}{\displaystyle\sum_{j \in \mathcal{C}_{nt}} \exp\!\left(\boldsymbol{\beta}_s' \mathbf{X}_{ntj}\right)}
@@ -322,7 +329,14 @@ For respondent $n$ belonging to latent class $s$ ($s = 1, 2, \ldots, S$), the ut
 
 \noindent where $\mathcal{C}_{nt}$ denotes the choice set available to respondent $n$ at scenario $t$.\par
 
+including vehicle mileage, battery refurbishment status, estimated driving range and battery SOH currently (at years 3) and in the future (at year 8; 5 years from now), and purchase price
 
+To test the non-linear relationship between key attributes (i.e., range ) and choice probability, we consider two alternative specifications: a quadratic model and a piecewise linear model. Consumers likely have diminishing sensitivity to range at high levels and heightened sensitivity around critical thresholds (e.g., range anxiety kicks in hard below certain miles).
+
+The quadratic model allows curvature but forces a **symmetric parabolic shape** and can behave poorly at the tails. The piecewise model instead estimates a **separate slope for each segment**, allowing flexible, asymmetric nonlinearity with directly interpretable coefficients. After testing both specifications, we find that the piecewise linear model provides a better fit to the data and more meaningful insights into consumer preferences, so we adopt the piecewise specification in our final model. The piecewise linear specification are defined based on the following breakpoints based on both theoretical considerations and empirical patterns observed in the data: range at year 3 (<130 miles, 130-200 miles, >200 miles) and range loss rate (<12\%, 12\%-24\%, >25\%).
+
+
+\vspace{\baselineskip}
 \noindent \textbf{Class Membership Model} \par
 
 The class membership model specifies the probability that respondent $n$ belongs to latent class $s$ as a function of observed individual-level covariates. The class membership probability is:
@@ -361,7 +375,7 @@ The log-likelihood function across all $N$ respondents and $T$ choice scenarios 
 
 \noindent where $i_n^*$ denotes the alternative chosen by respondent $n$ in scenario $t$. The model parameters $\boldsymbol{\beta}_s$ and $\boldsymbol{\gamma}_s$ are estimated jointly via maximum likelihood estimation.\par
 
-
+\vspace{\baselineskip}
 \noindent \textbf{Willingness to Pay} \par
 
 A key output of the LCCM is class-specific WTP for each BEV attribute. Under the assumption that the marginal utility of price is negative and constant across alternatives, the WTP for attribute $k$ in class $s$ is:
@@ -373,77 +387,48 @@ A key output of the LCCM is class-specific WTP for each BEV attribute. Under the
 
 \noindent This quantity represents the maximum dollar amount a representative respondent in class $s$ would be willing to pay (or accept as compensation) for a one-unit improvement in attribute $k$, holding all other attributes constant.
 
-\textbf{Model Selection}
-
-The optimal number of latent classes is determined by estimating models with two through five classes and comparing fit using multiple information criteria: the log-likelihood (LL), Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and class size. Lower values of AIC, BIC, and CAIC indicate better model fit penalized for complexity. The preferred specification is selected based on the lowest BIC, acceptable entropy, and substantively interpretable class profiles of reasonable size.
-
 \section{Results and Discussion}
-\subsection{Model Selection}
+\label{section:results}
+
+\subsection{Results of Mixed Logit Model}
+
+\input{attachments/mxl_results}
 
 
 
-% \input{../../code/output/model_output/vehicle_analysis/apollo/0_class_profile_summary_cars_suvs_lc_3c.tex}
-\subsection{}
+\subsection{Results of Latent Class Choice Model}
 
-\textbf{Class 1: Hostile Reluctant (13\%)}
+To determine the optimal number of classes, we estimated models ranging from one to eight classes (see \ref{table:model_fit_comparison}). We eventually opted for a six-class solution based on their model fit measured by log-likelihood ($LL$), $LL^2$, Akaike Information Criterion ($AIC$), Bayesian Information Criterion ($BIC$), $\text{Adjusted}\ rho^2$, entropy, class proportion, and interpretability. Smaller values of $AIC$, $BIC$, together with larger $\text{Adjusted }\rho^2$ and $\text{Entropy}$, indicate better model fit and class separation \parencite{nylundDecidingNumberClasses2007}. Additionally, in the 7- and 8- cluster solutions, one class would contain less than 6\% of the sample, making it less robust for further analyses.
 
-\textit{Profile:} Older, lower-income, ICEV-primary households with lower EV knowledge, short typical vehicle range, and low charging outlet access.
+\input{attachments/lc_fit_index_comparison}
 
-\textit{Mechanism of attribute insensitivity:} High variance and noisy, inconsistent engagement. $\beta_{\text{price}}$ is non-zero and significant enough to anchor WTP, but all attribute coefficients have large standard errors relative to point estimates. These respondents are not truly indifferent: they carry negative associations with BEVs (high range anxiety, low EV knowledge), but their choices are sufficiently inconsistent that the model cannot recover stable preference parameters. The near-zero opt-out WTP ($-$\$3.2k, ns) marks them as genuinely likely to walk away, unlike Class 4, who are also attribute-insensitive but strongly BEV-committed.
+\input{attachments/model_summary_6c.tex}
+\input{attachments/model_summary_6c.tex}
 
-\textbf{Class 2: Refurbishment-Averse (24\%)}
-
-\textit{Profile:} Higher income, EV-knowledgeable, environmentally positive, with charging outlet access. Fewer ICEV-primary households.
-
-\textit{Mechanism:} Genuine, strong preferences that are statistically recoverable. The defining characteristic is \textit{negative} WTP for battery refurbishment: pack replacement costs this class \$14.9k in WTP, and cell replacement \$5.3k. This is counterintuitive, as refurbishment might be expected to signal a positive intervention. This class appears to interpret refurbishment as a signal of battery failure risk or future hassle cost rather than a benefit. They value range strongly and tolerate minor degradation ($<$12\%) but are indifferent to severe degradation (24\%+), possibly because they screen out vehicles with extreme degradation before purchase.
-
-\textit{Comparison with Class 3:} Both classes value range and oppose degradation, but differ critically on three dimensions: (1) Refurbishment: Class 2 penalizes, Class 3 values (pack replacement, $+$\$10.5k). (2) Severe degradation: Class 2 is indifferent (loss pw3, ns), Class 3 penalizes strongly (loss pw3, $-$\$6.2k, $p < 0.01$). (3) Opt-out aversion: Class 2 ($-$\$43k) vs.\ Class 3 ($-$\$16.6k), indicating Class 2 is substantially more committed to completing a BEV purchase.
-
-\textit{Implication:} Class 2 represents a sophisticated, high-income segment that views refurbishment as a reliability red flag. Messaging should emphasize preventive battery design and longevity guarantees rather than repair availability.
-
-\textbf{Class 3: Range-Focused Mainstream (42\%)}
-
-\textit{Profile:} Broad mainstream segment: middle income, moderate EV knowledge, mixed-fuel households, moderate outlet access. Largest class.
-
-\textit{Mechanism:} Stable, coherent, and economically interpretable preferences across all attributes. This is the prototypical BEV buyer who responds rationally to battery information. Range exhibits diminishing marginal value (pw2 $>$ pw1 in WTP increment, but the slope flattens). Degradation carries a nonlinear penalty: mild loss is tolerated (pw1, \$12.2k), moderate loss less so (pw2, \$5.3k), and severe loss is actively penalized (pw3, $-$\$6.2k). Refurbishment is valued positively, consistent with viewing it as a consumer protection mechanism.
-
-\textit{Comparison with Class 2:} Class 3 penalizes severe degradation strongly; Class 2 does not. Class 3 values refurbishment; Class 2 penalizes it. Class 3 has lower opt-out aversion and is less wealthy and less EV-knowledgeable than Class 2.
-
-\textbf{Class 4: Budget-Constrained, Price-Sensitive}
-
-\textit{Profile:} Lower income, lower outlet access, ICEV-primary households, shorter typical vehicle range, lower EV knowledge.
-
-\textit{Mechanism, price-scaling suppression:} $\beta_{\text{price}} = -4.27$ is approximately $4\times$ larger in magnitude than Classes 2 and 3 ($\beta_{\text{price}} \approx -1.0$). Because $\text{WTP} = \beta_{\text{attr}} / (-\beta_{\text{price}})$, every attribute coefficient is divided by 4.27. A coefficient that would produce a \$10k WTP in Class 3 produces only \$2.3k here. The apparent attribute insensitivity in WTP terms is a mechanical artifact of extreme price sensitivity, not genuine indifference. The exception is loss pw3 (24\%+ degradation), which breaks through because the underlying $\beta_{\text{loss,pw3}}$ is sufficiently large relative to the scaling, yielding a statistically significant penalty even after division. These respondents are genuinely sensitive to battery degradation; they simply cannot afford to pay much for any attribute.
-
-\textbf{Class 5: Attribute-Insensitive (17\%)}
+\begin{figure}[pos=H]
+    \centering
+    \includegraphics[width=\textwidth]{../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles.pdf}
+    \caption{Six-class latent class model: class profiles.}
+    \label{fig:lc6_class_profiles}
+\end{figure}
 
 
-Following the choice experiments, the survey includes a self-assessment question asking respondents to rate the importance of each attribute using a Likert scale, ranging from “Not at all important” to “Extremely important.” This question serves multiple purposes: (1) Validating choice behavior – It provides a way to cross-check whether the attributes respondents claim to value (i.e., stated importance) align with the trade-offs revealed in their actual choices (i.e., derived importance) \parencite{chuStatedimportanceDerivedimportanceCustomer2002, husterConsumersWantReconditioned2024}. Inconsistencies may signal issues such as misunderstanding or inattention. (2) Understanding perceived salience – Because respondents may focus on different attributes during the experiment, self-reported ratings help identify which attributes were most influential in their decision-making process. (3) Segmenting respondents – These ratings can be used to group participants based on their stated priorities (e.g., price-sensitive vs. battery-conscious consumers), enabling more targeted analysis or class-specific modeling. (4) Survey diagnostics and data quality checks – Discrepancies between stated importance and revealed preferences may indicate low engagement, confusion, or misinterpretation of the attribute descriptions, helping researchers assess the overall quality of the data.
 
-% \begin{figure}[pos=H]
-% 	\centering
-% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank.png}
-%     \caption{Self-reported importance of BEV attributes}	
-%     \label{figure_bev_attribute_rank}
-% \end{figure}
 
-% \begin{figure}[pos=H]
-% 	\centering
-% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank_veh_type.png}
-%     \caption{Self-reported importance of BEV attributes by vehicle type}	
-%     \label{figure_bev_attribute_rank_veh_type}
-% \end{figure}
 
-% \begin{figure}[pos=H]
-% 	\centering
-% 	\includegraphics[width=1\textwidth]{../../code/output/images/battery_analysis/barplot_bev_attribute_rank_income.png}
-%     \caption{Self-reported importance of BEV attributes by income}	
-%     \label{figure_bev_attribute_rank_income}
-% \end{figure}
+\subsection{Results of Opt-out Analysis}
+Among those who opted out of all six choice experiments, we explicitly asked them to explain the reasons why they did not choose any of the used BEV options. Through a thematic analysis, 
 
+\begin{figure}[pos=H]
+    \centering
+    \includegraphics[width=\textwidth]{../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg}
+    \caption{Six-class latent class model: class profiles.}
+    \label{fig:opt_out_themes_by_treatment}
+\end{figure}
 
 
 \section{Conclusion}
+\label{section:conclusion}
 As more EVs reach the end of their first ownership cycle, understanding the dynamics of the used EV market, particularly the unique concerns surrounding battery condition, has become both timely and essential. Yet the lack of transparent, standardized battery health information at the point of sale continues to fuel uncertainty and undervaluation, which may impact adoption of pre-owned EVs. This DCI provides guidelines to survey design and data collection effort that could address a major gap in the literature by focusing on how consumers evaluate used battery electric vehicles (BEVs), what factors influence their willingness to adopt them, and how information asymmetries, particularly around battery health, impact market confidence and transaction outcomes.
 
 This survey-based study represents a novel and rigorous approach to addressing these challenges. By combining insights from prior literature with a discrete choice experiment (DCE), the survey design allows researchers to empirically estimate the value consumers place on different forms of battery information and vehicle characteristics. Looking ahead, this DCI and the results from this research project can help shape the next phase of research and innovation in the second-life EV battery space. For example, further studies could explore consumer attitudes toward more complex refurbishment scenarios, such as partial vs. full battery replacements, and investigate how different warranty structures influence willingness to pay. Additionally, integrating insights from behavioral economics and data from telematics or vehicle diagnostics could enhance our understanding of how consumers interpret and act upon battery health information.

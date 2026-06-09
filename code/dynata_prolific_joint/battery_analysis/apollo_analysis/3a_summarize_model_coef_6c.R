@@ -32,7 +32,7 @@ combined_all <- car_suv_lc_6c %>%
       T ~ " "
     )
   ) %>%
-  mutate(across(where(is.numeric), round, 2)) %>%
+  mutate(across(where(is.numeric), round, 3)) %>%
   filter(!is.na(Std.Err.)) %>%
   mutate(
     Variables = str_replace_all(
@@ -81,32 +81,32 @@ formatted <- combined_all %>%
   )
 
 var_meta <- tribble(
-  ~variable             , ~label                                       , ~section             , ~fmt     ,
-  "no_choice"           , "No-Choice Option (opt-out)"                 , "Vehicle Attributes" , "dollar" ,
-  "mileage"             , "Mileage (10,000 miles)"                     , "Vehicle Attributes" , "dollar" ,
+  ~variable             , ~label                                              , ~section             , ~fmt     ,
+  "no_choice"           , "No-Choice Option (opt-out)"                        , "Vehicle Attributes" , "dollar" ,
+  "mileage"             , "Mileage (10,000 miles)"                            , "Vehicle Attributes" , "dollar" ,
   # Range (year 3) piecewise segments
-  "range_pw1"           , "BEV Electric Range (Year 3): <130 miles"    , "Vehicle Attributes" , "dollar" ,
-  "range_pw2"           , "BEV Electric Range (Year 3): 130-200 miles" , "Vehicle Attributes" , "dollar" ,
-  "range_pw3"           , "BEV Electric Range (Year 3): 200+ miles"    , "Vehicle Attributes" , "dollar" ,
+  "range_pw1"           , "BEV Electric Range (Year 3): <130 miles"           , "Vehicle Attributes" , "dollar" ,
+  "range_pw2"           , "BEV Electric Range (Year 3): 130-200 miles"        , "Vehicle Attributes" , "dollar" ,
+  "range_pw3"           , "BEV Electric Range (Year 3): 200+ miles"           , "Vehicle Attributes" , "dollar" ,
   # Range loss piecewise segments
-  "loss_pw1"            , "Range Loss Rate: <12%"                      , "Vehicle Attributes" , "dollar" ,
-  "loss_pw2"            , "Range Loss Rate: 12%-24%"                   , "Vehicle Attributes" , "dollar" ,
-  "loss_pw3"            , "Range Loss Rate: 24%+"                      , "Vehicle Attributes" , "dollar" ,
-  "packreplace"         , "Battery Refurbishment: Pack Replace"        , "Vehicle Attributes" , "dollar" ,
-  "cellreplace"         , "Battery Refurbishment: Cell Replace"        , "Vehicle Attributes" , "dollar" ,
-  "price"               , "Purchase Price (10,000 USD)"                , "Vehicle Attributes" , "dollar" ,
+  "loss_pw1"            , "Range Loss Rate: <12%"                             , "Vehicle Attributes" , "dollar" ,
+  "loss_pw2"            , "Range Loss Rate: 12%-24%"                          , "Vehicle Attributes" , "dollar" ,
+  "loss_pw3"            , "Range Loss Rate: 24%+"                             , "Vehicle Attributes" , "dollar" ,
+  "packreplace"         , "Battery Refurbishment: Pack Replace"               , "Vehicle Attributes" , "dollar" ,
+  "cellreplace"         , "Battery Refurbishment: Cell Replace"               , "Vehicle Attributes" , "dollar" ,
+  "price"               , "Purchase Price (10,000 USD)"                       , "Vehicle Attributes" , "dollar" ,
   # Active variables
-  "ASC"                 , "ASC"                                        , "Active Indicators"  , "number" ,
-  "EV_rangeanxiety"     , "Perceived EV Range Anxiety: Agree"          , "Active Indicators"  , "number" ,
-  "risktaker"           , "Risk Taking Propensity: Agree"              , "Active Indicators"  , "number" ,
-  "evenvironment_agree" , "EV Battery Environmentally Positive: Agree" , "Active Indicators"  , "number" ,
-  "evfunction_disagree" , "EV Battery Functionally Negative: Disagree" , "Active Indicators"  , "number" ,
-  "hhincome"            , "Household Income (10,000 USD)"              , "Active Indicators"  , "number" ,
-  "knowledge_ev"        , "EV Battery Knowledge: Yes"                  , "Active Indicators"  , "number" ,
-  "ev_charge"           , "Electrical Outlet Access"                   , "Active Indicators"  , "pct"    ,
-  "hhveh_fuel"          , "Primary Household Vehicle Fuel Type: ICEV"  , "Active Indicators"  , "pct"    ,
-  "veh_range"           , "Primary Vehicle Typical Range (miles)"      , "Active Indicators"  , "number" ,
-  "suv"                 , "SUV Segment"                                , "Active Indicators"  , "pct"
+  "ASC"                 , "ASC"                                               , "Active Indicators"  , "number" ,
+  "EV_rangeanxiety"     , "Perceived EV Range Anxiety: Agree"                 , "Active Indicators"  , "number" ,
+  "risktaker"           , "Risk Taking Propensity: Agree"                     , "Active Indicators"  , "number" ,
+  "evenvironment_agree" , "EV Battery Environmentally Positive: Agree"        , "Active Indicators"  , "number" ,
+  "evfunction_disagree" , "EV Battery Functionally Negative: Disagree"        , "Active Indicators"  , "number" ,
+  "hhincome"            , "Household Income (10,000 USD)"                     , "Active Indicators"  , "number" ,
+  "knowledge_ev"        , "EV Battery Knowledge: Yes"                         , "Active Indicators"  , "number" ,
+  "ev_charge"           , "Electrical Outlet Access"                          , "Active Indicators"  , "pct"    ,
+  "hhveh_fuel"          , "Current Primary Household Vehicle Fuel Type: ICEV" , "Active Indicators"  , "pct"    ,
+  "veh_range"           , "Current Primary Vehicle Typical Range (miles)"     , "Active Indicators"  , "number" ,
+  "suv"                 , "SUV/Crossover as the Next Vehicle"                 , "Active Indicators"  , "pct"
 )
 
 formatted <- formatted %>%
@@ -133,9 +133,13 @@ library(glue)
 # Create display columns for each class
 gt_formatted <- formatted %>%
   mutate(
-    Combined_class1 = glue(
-      "{Est._Combined_class1}\n({Std.Err._Combined_class1}){Sig._Combined_class1}",
-      .na = NULL
+    Combined_class1 = if_else(
+      is.na(Est._Combined_class1),
+      "0",
+      as.character(glue(
+        "{Est._Combined_class1}\n({Std.Err._Combined_class1}){Sig._Combined_class1}",
+        .na = ""
+      ))
     ),
     Combined_class2 = glue(
       "{Est._Combined_class2}\n({Std.Err._Combined_class2}){Sig._Combined_class2}",
@@ -164,17 +168,6 @@ gt_formatted <- formatted %>%
 gt_car_suv_lc_6c <- gt_formatted |>
   group_by(section) %>%
   gt(rowname_col = "label") |>
-  tab_spanner(
-    label = "Combined",
-    columns = c(
-      Combined_class1,
-      Combined_class2,
-      Combined_class3,
-      Combined_class4,
-      Combined_class5,
-      Combined_class6
-    )
-  ) |>
   cols_align(align = "right", columns = everything()) %>%
   cols_align(align = "left", columns = label) %>%
   cols_label(
@@ -185,12 +178,12 @@ gt_car_suv_lc_6c <- gt_formatted |>
     Combined_class5 = "Class 5",
     Combined_class6 = "Class 6"
   ) |>
-  tab_header(
-    title = md(
-      "**BEV Battery Information Valuation: Model Results (Car vs SUV)**"
-    ),
-    subtitle = "Est. (SE)[Sig.] for each class"
-  ) %>%
+  # tab_header(
+  #   title = md(
+  #     "**BEV Battery Information Valuation: Model Results (Car vs SUV)**"
+  #   ),
+  #   subtitle = "Est. (SE)[Sig.] for each class"
+  # ) %>%
   cols_align(align = "left", everything()) %>%
   tab_options(
     table.font.size = px(13),
@@ -198,7 +191,17 @@ gt_car_suv_lc_6c <- gt_formatted |>
     row_group.font.weight = "bold",
     column_labels.font.weight = "bold"
   ) %>%
-  opt_stylize(style = 1, color = "blue")
+  opt_stylize(style = 1, color = "blue") %>%
+  text_transform(
+    locations = cells_body(columns = starts_with("Combined_class")),
+    fn = function(x) lapply(gsub("\n", "<br>", x), gt::html)
+  ) %>%
+  tab_footnote(
+    footnote = "Est. (SE)[Sig.]"
+  ) %>%
+  tab_footnote(
+    footnote = "Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1."
+  )
 
 gt_car_suv_lc_6c
 
@@ -214,24 +217,59 @@ gtsave(
   )
 )
 
-gt_car_suv_lc_6c_latex <- gt_car_suv_lc_6c %>%
+# LaTeX export: separate pipeline without text_transform so \n survives in cells,
+# then post-process to inject \newline commands before each (SE) block.
+gt_car_suv_lc_6c_latex <- gt_formatted |>
+  group_by(section) %>%
+  gt(rowname_col = "label") |>
+  cols_align(align = "right", columns = everything()) %>%
+  cols_align(align = "left", columns = label) %>%
+  cols_label(
+    Combined_class1 = "Class 1",
+    Combined_class2 = "Class 2",
+    Combined_class3 = "Class 3",
+    Combined_class4 = "Class 4",
+    Combined_class5 = "Class 5",
+    Combined_class6 = "Class 6"
+  ) |>
+  cols_align(align = "left", everything()) %>%
   tab_options(
-    table.font.size = px(9)
+    table.font.size = px(9),
+    row_group.font.weight = "bold",
+    column_labels.font.weight = "bold"
   ) %>%
   cols_width(
-    everything() ~ px(80),
-    label ~ px(140)
+    everything() ~ px(80)
+  ) %>%
+  tab_footnote(footnote = "Est. (SE)[Sig.]") %>%
+  tab_footnote(
+    footnote = "Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1."
   ) %>%
   as_latex()
 
+# \n in glue strings becomes a literal newline in the LaTeX source.
+# Replace "number<newline>(" with "number\newline(" for explicit line breaks
+# inside p{width} columns.
+latex_str <- as.character(gt_car_suv_lc_6c_latex)
+latex_str <- gsub(
+  "(-?[0-9]+\\.[0-9]+)\n\\(",
+  "\\1\\\\newline\n(",
+  latex_str
+)
+
+# Widen the first (label) column to 150pt (sub replaces first match only).
+latex_str <- sub(
+  "p\\{\\\\dimexpr [0-9.]+pt",
+  "p{\\\\dimexpr 150.00pt",
+  latex_str
+)
+
 writeLines(
-  gt_car_suv_lc_6c_latex,
+  latex_str,
   con = here::here(
-    "code",
-    "output",
-    "model_output",
-    "battery_analysis",
-    "apollo",
-    "0_class_profile_summary_cars_suvs_lc_6c.tex"
+    "paper_writing",
+    "battery_paper",
+    "attachments",
+    "model_summary_6c.tex"
   )
 )

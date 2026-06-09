@@ -17,9 +17,10 @@ data_model <- data_model %>%
     !is.na(ATT_range_anxiety) &
       !is.na(ATT_risktaker) &
       !is.na(hhincome_num_10k) &
+      # !is.na(next_veh_budget_k) &
       !is.na(EV_charger) &
       # !is.na(EV_neighbor) &
-      # !is.na(knowledge_ev) &
+      !is.na(knowledge_ev) &
       # !is.na(knowledge_subsidy) &
       # !is.na(Veh_hh_count) &
       !is.na(Veh_hh_fuel) &
@@ -29,6 +30,8 @@ data_model <- data_model %>%
       !is.na(ATT_EVB_function) &
       !is.na(vehicle_typesuv)
   )
+
+# data_model$hhincome_num_10k <- data_model$next_veh_budget_k
 
 ### ----Latent class (c=6)----
 # Create an empty list to store the results of each model run
@@ -255,7 +258,7 @@ apollo_fixed = c(
 apollo_beta = apollo_readBeta(
   apollo_beta,
   apollo_fixed,
-  "piecewise_rangeloss_car_suv_lc_5c_1",
+  "piecewise_rangeloss_car_suv_lc_6c_1",
   overwriteFixed = FALSE
 )
 

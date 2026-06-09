@@ -19,7 +19,7 @@ data_model <- data_model %>%
       !is.na(hhincome_num_10k) &
       !is.na(EV_charger) &
       # !is.na(EV_neighbor) &
-      # !is.na(knowledge_ev) &
+      !is.na(knowledge_ev) &
       # !is.na(knowledge_subsidy) &
       # !is.na(Veh_hh_count) &
       !is.na(Veh_hh_fuel) &
@@ -275,17 +275,17 @@ apollo_fixed = c(
 # Randomise free parameters so classes start from different points.
 # LC models with identical starting values across classes produce identical
 # class probabilities and fail apollo's validation check.
-# set.seed(42)
-# apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
-#   runif(sum(!names(apollo_beta) %in% apollo_fixed), -0.1, 0.1)
+set.seed(42)
+apollo_beta[!names(apollo_beta) %in% apollo_fixed] <-
+  runif(sum(!names(apollo_beta) %in% apollo_fixed), -0.1, 0.1)
 
 # Once a first run has converged, warm-start subsequent runs from those estimates:
-apollo_beta = apollo_readBeta(
-  apollo_beta,
-  apollo_fixed,
-  "piecewise_rangeloss_car_suv_lc_7c_1",
-  overwriteFixed = FALSE
-)
+# apollo_beta = apollo_readBeta(
+#   apollo_beta,
+#   apollo_fixed,
+#   "piecewise_rangeloss_car_suv_lc_7c_1",
+#   overwriteFixed = FALSE
+# )
 
 #### DEFINE LATENT CLASS COMPONENTS
 apollo_lcPars = function(apollo_beta, apollo_inputs) {

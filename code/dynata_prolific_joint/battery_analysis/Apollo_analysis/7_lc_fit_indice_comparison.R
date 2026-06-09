@@ -3,15 +3,19 @@
 source(here::here('code', 'setup.R'))
 
 output_dir <- here(
-  "code", "output", "model_output", "battery_analysis", "apollo"
+  "code",
+  "output",
+  "model_output",
+  "battery_analysis",
+  "apollo"
 )
 
 # ── Helper: compute entropy from class probability parquet ────────────────────
 compute_entropy <- function(cp, K) {
   prob_cols <- paste0("prob_class", 1:K)
-  pi_mat    <- as.matrix(cp[, prob_cols])
-  H     <- -sum(pi_mat * log(pmax(pi_mat, 1e-300)), na.rm = TRUE)
-  N     <- nrow(cp)
+  pi_mat <- as.matrix(cp[, prob_cols])
+  H <- -sum(pi_mat * log(pmax(pi_mat, 1e-300)), na.rm = TRUE)
+  N <- nrow(cp)
   H_max <- N * log(K)
   round(1 - H / H_max, 3)
 }
@@ -19,18 +23,21 @@ compute_entropy <- function(cp, K) {
 # ── Helper: extract fit indices from Apollo model object ─────────────────────
 extract_indices <- function(k, model_tag) {
   model_file <- file.path(output_dir, paste0(model_tag, "_model.rds"))
-  cp_file    <- file.path(output_dir, paste0("0_Combined_", k, "c_class_probabilities.parquet"))
+  cp_file <- file.path(
+    output_dir,
+    paste0("0_Combined_", k, "c_class_probabilities.parquet")
+  )
 
   if (!file.exists(model_file)) {
     message("Model not found: ", model_file)
     return(NULL)
   }
 
-  m    <- readRDS(model_file)
-  LL   <- m$finalLL
+  m <- readRDS(model_file)
+  LL <- m$finalLL
   Npar <- m$numParams
-  AIC  <- m$AIC
-  BIC  <- m$BIC
+  AIC <- m$AIC
+  BIC <- m$BIC
 
   # Adjusted Rho-squared vs observed shares (constants model): from Apollo output
   adj_rho2 <- round(m$adjRho2_C, 3)
@@ -49,28 +56,33 @@ extract_indices <- function(k, model_tag) {
   class_props <- if (k == 1) {
     "100.0%"
   } else if (file.exists(cp_file)) {
-    cp    <- read_parquet(cp_file)
-    props <- sapply(1:k, function(j) round(mean(cp[[paste0("prob_class", j)]], na.rm = TRUE), 3))
+    cp <- read_parquet(cp_file)
+    props <- sapply(1:k, function(j) {
+      round(mean(cp[[paste0("prob_class", j)]], na.rm = TRUE), 3)
+    })
     paste0(sprintf("%.1f%%", props * 100), collapse = " / ")
   } else {
     NA_character_
   }
 
   tibble(
-    `No. of Classes`  = k,
-    Npar              = as.integer(round(Npar)),
-    LL                = as.integer(round(LL)),
-    `L²`              = NA_integer_,   # filled after all rows built
-    AIC               = as.integer(round(AIC)),
-    BIC               = as.integer(round(BIC)),
-    `Adj.Rho²`        = adj_rho2,
-    Entropy           = entropy,
+    `No. of Classes` = k,
+    Npar = as.integer(round(Npar)),
+    LL = as.integer(round(LL)),
+    `L²` = NA_integer_, # filled after all rows built
+    AIC = as.integer(round(AIC)),
+    BIC = as.integer(round(BIC)),
+    `Adj.Rho²` = adj_rho2,
+    Entropy = entropy,
     `Class proportions` = class_props
   )
 }
 
 # ── Null LL: read from the 1c model in the same series (consistent dataset) ───
-null_model_file <- file.path(output_dir, "piecewise_rangeloss_car_suv_lc_1c_1_model.rds")
+null_model_file <- file.path(
+  output_dir,
+  "piecewise_rangeloss_car_suv_lc_1c_1_model.rds"
+)
 LL_null <- if (file.exists(null_model_file)) {
   readRDS(null_model_file)$finalLL
 } else {
@@ -100,10 +112,21 @@ fit_table <- map_dfr(model_configs, function(cfg) {
   extract_indices(cfg$k, cfg$tag)
 }) %>%
   mutate(
-    `L²` = if (!is.na(LL_null)) as.integer(round(-2 * (LL_null - LL))) else NA_integer_
+    `L²` = if (!is.na(LL_null)) {
+      as.integer(round(-2 * (LL_null - LL)))
+    } else {
+      NA_integer_
+    }
   ) %>%
   select(
-    `No. of Classes`, Npar, LL, `L²`, AIC, BIC, `Adj.Rho²`, Entropy,
+    `No. of Classes`,
+    Npar,
+    LL,
+    `L²`,
+    AIC,
+    BIC,
+    `Adj.Rho²`,
+    Entropy,
     `Class proportions`
   )
 
@@ -112,43 +135,47 @@ fit_table
 # ── GT table ─────────────────────────────────────────────────────────────────
 gt_fit <- fit_table %>%
   gt() %>%
-  tab_header(
-    title    = md("**Latent Class Model Fit Index Comparison**"),
-    subtitle = md(paste0(
-      "Piecewise linear range and range loss model · N = ",
-      n_distinct_respondents, " respondents"
-    ))
-  ) %>%
-  tab_spanner(
-    label   = md("**Information Criteria**"),
-    columns = c(AIC, BIC, `Adj.Rho²`)
-  ) %>%
+  # tab_header(
+  #   title    = md("**Latent Class Model Fit Index Comparison**"),
+  #   subtitle = md(paste0(
+  #     "Piecewise linear range and range loss model · N = ",
+  #     n_distinct_respondents, " respondents"
+  #   ))
+  # ) %>%
+  # tab_spanner(
+  #   label   = md("**Information Criteria**"),
+  #   columns = c(AIC, BIC, `Adj.Rho²`)
+  # ) %>%
   tab_style(
-    style     = cell_text(weight = "bold"),
+    style = cell_text(weight = "bold"),
     locations = cells_column_labels(everything())
   ) %>%
   cols_align(align = "center", columns = everything()) %>%
-  cols_align(align = "left",   columns = `Class proportions`) %>%
+  cols_align(align = "left", columns = `Class proportions`) %>%
   fmt_integer(columns = c(Npar, LL, `L²`, AIC, BIC)) %>%
   fmt_number(columns = `Adj.Rho²`, decimals = 3) %>%
-  fmt_number(columns = Entropy,    decimals = 3) %>%
+  fmt_number(columns = Entropy, decimals = 3) %>%
   tab_footnote(
-    footnote  = md("Entropy = 1 − H/H_max, where H = −Σ π_ik log(π_ik). Values closer to 1 indicate cleaner class separation."),
+    footnote = md(
+      "Entropy = 1 − H/H_max, where H = −Σ π_ik log(π_ik). Values closer to 1 indicate cleaner class separation."
+    ),
     locations = cells_column_labels(Entropy)
   ) %>%
   tab_footnote(
-    footnote  = paste0("L² = −2(LL_1c − LL_model). Null = 1-class MNL on the same dataset (LL = ", as.integer(round(LL_null)), ")."),
+    footnote = "L² = −2(LL_1c − LL_model).",
     locations = cells_column_labels(`L²`)
   ) %>%
   tab_footnote(
-    footnote  = md("Adj.Rho² = adjusted rho-squared vs observed shares (constants model)."),
+    footnote = md(
+      "Adj.Rho² = adjusted rho-squared vs observed shares (constants model)."
+    ),
     locations = cells_column_labels(`Adj.Rho²`)
   ) %>%
   tab_options(
-    table.font.size           = px(13),
-    heading.align             = "left",
+    table.font.size = px(13),
+    heading.align = "left",
     column_labels.font.weight = "bold",
-    table.border.top.color    = "#004D80",
+    table.border.top.color = "#004D80",
     table.border.bottom.color = "#004D80"
   ) %>%
   opt_stylize(style = 1, color = "blue")
@@ -158,7 +185,101 @@ gt_fit
 gtsave(
   gt_fit,
   file = here::here(
-    "code", "output", "model_output", "battery_analysis", "apollo",
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "apollo",
     "0_lc_fit_index_comparison.html"
+  )
+)
+
+# ── LaTeX table ───────────────────────────────────────────────────────────────
+library(knitr)
+library(kableExtra)
+
+fit_latex <- fit_table %>%
+  mutate(
+    LL = formatC(LL, format = "d", big.mark = ","),
+    `L²` = formatC(`L²`, format = "d", big.mark = ","),
+    AIC = formatC(AIC, format = "d", big.mark = ","),
+    BIC = formatC(BIC, format = "d", big.mark = ","),
+    `Adj.Rho²` = sprintf("%.3f", `Adj.Rho²`),
+    Entropy = ifelse(is.na(Entropy), "---", sprintf("%.3f", Entropy)),
+    `Class proportions` = gsub("%", "\\\\%", `Class proportions`)
+  )
+
+col_names_latex <- c(
+  "No. of Classes",
+  "Npar",
+  "LL",
+  "$L^2$",
+  "AIC",
+  "BIC",
+  "$\\text{Adj.}\\rho^2$",
+  "Entropy",
+  "Class proportions"
+)
+
+# kable() without kable_styling() produces only the \begin{tabular}...\end{tabular}
+# block; we wrap it ourselves to control caption, label, and adjustbox.
+tabular_raw <- kable(
+  fit_latex,
+  format = "latex",
+  booktabs = TRUE,
+  escape = FALSE,
+  col.names = col_names_latex,
+  align = c("c", "c", "r", "r", "r", "r", "c", "c", "l"),
+  linesep = ""
+)
+
+# kableExtra::footnote() strips backslashes from math; inject footnote rows
+# directly before \bottomrule to preserve LaTeX commands.
+ncol <- 9
+fn_ll_null <- formatC(as.integer(round(LL_null)), format = "d", big.mark = ",")
+footnote_rows <- paste0(
+  "\\multicolumn{",
+  ncol,
+  "}{l}{\\rule{0pt}{1em}\\textsuperscript{",
+  1:3,
+  "} ",
+  c(
+    paste0(
+      "$L^2 = -2(\\text{LL}_{1c} - \\text{LL}_{\\text{model}})$."
+    ),
+    "$\\text{Adj.}\\rho^2$ = adjusted rho-squared vs.\\ observed shares (constants model).",
+    "Entropy $= 1 - H/H_{\\max}$, where $H = -\\sum \\pi_{ik}\\log(\\pi_{ik})$. Values closer to 1 indicate cleaner class separation."
+  ),
+  "}\\\\"
+)
+
+tbl_lines <- strsplit(as.character(tabular_raw), "\n")[[1]]
+br_idx <- which(tbl_lines == "\\bottomrule")
+tabular_with_footnotes <- c(
+  tbl_lines[seq_len(br_idx)],
+  footnote_rows,
+  tbl_lines[(br_idx + 1):length(tbl_lines)]
+)
+
+tbl_str <- paste(
+  c(
+    "\\begin{table}[pos=H]",
+    "\\caption{Latent Class Model Fit Index Comparison.}",
+    "\\label{table:model_fit_comparison}",
+    "\\begin{adjustbox}{width=\\textwidth, center}",
+    tabular_with_footnotes,
+    "\\end{adjustbox}",
+    "\\end{table}"
+  ),
+  collapse = "\n"
+)
+
+writeLines(
+  tbl_str,
+  here::here(
+    "paper_writing",
+    "battery_paper",
+    "attachments",
+    "lc_fit_index_comparison.tex"
   )
 )

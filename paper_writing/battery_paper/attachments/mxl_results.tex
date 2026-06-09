@@ -1,0 +1,41 @@
+\begin{table}[pos=H]
+\caption{Mixed Logit Model Estimates in WTP Space (price unit: \$10,000).}
+\label{table:mxl_results}
+\begin{adjustbox}{width=\textwidth, center}
+
+\begin{tabular}{lrrrlrrr}
+\toprule
+Parameter & Estimate & Std. Error & $p$-value &  &  &  & \\
+\midrule
+\multicolumn{5}{l}{\textbf{\textit{Mean parameters}}} & \multicolumn{3}{c}{\textit{Summary of 10k Draws}}\\
+\cmidrule(l){6-8}
+ & & & & & 1st Qu. & Median & 3rd Qu.\\[1.5ex]
+$\lambda$ (scale) & 0.984 & 0.025 & $<$0.001 & *** &  &  & \\
+Mileage & -0.277 & 0.015 & $<$0.001 & *** & -0.549 & -0.277 & -0.005\\
+Range (Year 0) & 0.930 & 0.041 & $<$0.001 & *** & 0.106 & 0.930 & 1.754\\
+Battery Degradation Rate & -0.528 & 0.016 & $<$0.001 & *** & -0.778 & -0.528 & -0.278\\
+Battery Refurbishment: Pack Replace & -0.404 & 0.038 & $<$0.001 & *** & -0.908 & -0.405 & 0.098\\
+Battery Refurbishment: Cell Replace & -0.442 & 0.038 & $<$0.001 & *** & -0.889 & -0.441 & 0.008\\
+No choice (opt-out) & -5.515 & 0.116 & $<$0.001 & *** &  &  & \\
+\addlinespace[1.5ex]\multicolumn{8}{l}{\textbf{\textit{Standard deviation}}}\\[1.5ex]
+SD: Mileage & -0.404 & 0.017 & $<$0.001 & *** &  &  & \\
+SD: Range (Year 0) & 1.222 & 0.048 & $<$0.001 & *** &  &  & \\
+SD: Battery degradation rate & -0.371 & 0.014 & $<$0.001 & *** &  &  & \\
+SD: Battery Refurbishment: Pack Replace & 0.746 & 0.062 & $<$0.001 & *** &  &  & \\
+SD: Battery Refurbishment: Cell Replace & -0.665 & 0.064 & $<$0.001 & *** &  &  & \\
+\midrule
+\multicolumn{4}{l}{Observations} & \multicolumn{4}{r}{2,916 $\times$ 6 $=$ 17,496}\\
+\multicolumn{4}{l}{Parameters} & \multicolumn{4}{r}{12}\\
+\multicolumn{4}{l}{Log-Likelihood} & \multicolumn{4}{r}{-17,618.23}\\
+\multicolumn{4}{l}{Null Log-Likelihood} & \multicolumn{4}{r}{-24,254.61}\\
+\multicolumn{4}{l}{AIC} & \multicolumn{4}{r}{35,260.45}\\
+\multicolumn{4}{l}{BIC} & \multicolumn{4}{r}{35,353.69}\\
+\multicolumn{4}{l}{McFadden $R^2$} & \multicolumn{4}{r}{0.2736}\\
+\multicolumn{4}{l}{Adj.\ McFadden $R^2$} & \multicolumn{4}{r}{0.2731}\\ 
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{minipage}{\textwidth}\footnotesize
+Signif. codes: 0 `***' 0.001 `**' 0.01 `*' 0.05 `.' 0.1.
+\end{minipage}
+\end{table}

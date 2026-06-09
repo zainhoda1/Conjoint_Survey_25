@@ -7,12 +7,32 @@ if (!requireNamespace("usmap", quietly = TRUE)) {
 library(usmap)
 
 # Load the data set----
+data_model <- read_parquet(here(
+  "data",
+  "dynata_prolific_joint",
+  "data_apollo_battery.parquet"
+))
+
+data_model <- data_model %>%
+  filter(
+    !is.na(ATT_range_anxiety) &
+      !is.na(ATT_risktaker) &
+      !is.na(hhincome_num_10k) &
+      !is.na(EV_charger) &
+      !is.na(Veh_hh_fuel) &
+      !is.na(Veh_primary_range) &
+      !is.na(ATT_EVB_environment) &
+      !is.na(ATT_EVB_function) &
+      !is.na(vehicle_typesuv)
+  )
+
 data_joint <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
   "data_joint.parquet"
 ))
 
+data_joint
 
 # True sample sizes before any ZIP filtering
 n_total_prolific <- data_joint %>%
@@ -74,14 +94,16 @@ geo_data_dynata_t <- usmap_transform(
     select(lng, lat, respondent_count) %>%
     filter(!is.na(lng), !is.na(lat)),
   input_names = c("lng", "lat")
-) %>% arrange(respondent_count)
+) %>%
+  arrange(respondent_count)
 
 geo_data_prolific_t <- usmap_transform(
   geo_data_prolific %>%
     select(lng, lat, respondent_count) %>%
     filter(!is.na(lng), !is.na(lat)),
   input_names = c("lng", "lat")
-) %>% arrange(respondent_count)
+) %>%
+  arrange(respondent_count)
 
 # Define a function to ensure breaks are always integers
 integer_breaks <- function(x) {
@@ -262,7 +284,8 @@ geo_data_all_t <- usmap_transform(
     select(lng, lat, respondent_count) %>%
     filter(!is.na(lng), !is.na(lat)),
   input_names = c("lng", "lat")
-) %>% arrange(respondent_count)
+) %>%
+  arrange(respondent_count)
 
 total_zips_all <- nrow(geo_data_all)
 

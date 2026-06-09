@@ -30,8 +30,9 @@ data_nobev <- data_full %>%
   select(psid, prime_group_label, no_bev_selected0) %>%
   mutate(
     treatment = case_when(
-      prime_group_label == "prime_long" ~ "Extended Info",
-      prime_group_label == "prime_short" ~ "Basic Info",
+      prime_group_label == "prime_long" ~ "With Battery Information Treatment",
+      prime_group_label ==
+        "prime_short" ~ "WithoutBattery Information Treatment",
       TRUE ~ NA_character_
     )
   )
@@ -78,14 +79,26 @@ new_uncoded <- data_nobev %>%
   filter(!psid %in% coded$psid)
 
 if (nrow(new_uncoded) > 0) {
-  cat("\nWARNING:", nrow(new_uncoded), "new no-BEV responses not yet LLM-coded.\n")
+  cat(
+    "\nWARNING:",
+    nrow(new_uncoded),
+    "new no-BEV responses not yet LLM-coded.\n"
+  )
   cat("Saving to: 0_nobev_themes_to_code.parquet\n")
   write_parquet(
     new_uncoded,
-    here("code","output","model_output","battery_analysis","apollo",
-         "0_nobev_themes_to_code.parquet")
+    here(
+      "code",
+      "output",
+      "model_output",
+      "battery_analysis",
+      "apollo",
+      "0_nobev_themes_to_code.parquet"
+    )
   )
-  cat("Re-run LLM coding on this file and append to 0_nobev_themes_coded.parquet.\n\n")
+  cat(
+    "Re-run LLM coding on this file and append to 0_nobev_themes_coded.parquet.\n\n"
+  )
   # Restrict analysis to already-coded responses
   coded <- coded %>% filter(psid %in% data_nobev$psid)
 } else {

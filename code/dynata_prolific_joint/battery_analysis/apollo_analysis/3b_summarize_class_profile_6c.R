@@ -77,12 +77,13 @@ database <- data_model %>%
       ATT_EVB_function < 3 ~ 1,
       TRUE ~ 0
     ),
-    next_veh_fuel_used_bev=case_when(next_veh_fuel_used_bev==1 ~"strongly_disagree",
-    next_veh_fuel_used_bev==2 ~"somewhat_disagree",
-    next_veh_fuel_used_bev==3 ~"neutral",
-    next_veh_fuel_used_bev==4 ~"somewhat_agree",
-    next_veh_fuel_used_bev==5 ~"strongly_agree")
-
+    next_veh_fuel_used_bev = case_when(
+      next_veh_fuel_used_bev == 1 ~ "strongly_disagree",
+      next_veh_fuel_used_bev == 2 ~ "somewhat_disagree",
+      next_veh_fuel_used_bev == 3 ~ "neutral",
+      next_veh_fuel_used_bev == 4 ~ "somewhat_agree",
+      next_veh_fuel_used_bev == 5 ~ "strongly_agree"
+    )
   )
 
 # ---- WTP significance: bounded by the less significant of (attribute, price) ----
@@ -331,8 +332,8 @@ cate_vars <- c(
   "hhtype_cate",
   "Veh_hh_fuel",
   "Veh_primary_fuel",
-  "ATT_political",
-  "ATT_voting",
+  # "ATT_political",
+  # "ATT_voting",
   "vehicle_typesuv",
   "battery_info_treat"
 )
@@ -373,56 +374,56 @@ combined_all <- combined_all %>%
 
 # change labels
 var_meta <- tribble(
-  ~variable                    , ~label                                              , ~section                                     , ~fmt     ,
+  ~variable                    , ~label                                              , ~section                                 , ~fmt     ,
   # WTP
-  "no_choice"                  , "No-Choice Option (opt-out)"                        , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "mileage"                    , "Mileage (10,000 miles)"                            , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "range_pw1"                  , "BEV Range WTP: 40-130 mi segment (per 100 miles)"  , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "range_pw2"                  , "BEV Range WTP: 130-200 mi segment (per 100 miles)" , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "range_pw3"                  , "BEV Range WTP: 200+ mi segment (per 100 miles)"    , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "loss_pw1"                   , "Range Loss WTP: 5-12% segment (per %)"             , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "loss_pw2"                   , "Range Loss WTP: 12-24% segment (per %)"            , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "loss_pw3"                   , "Range Loss WTP: 24%+ segment (per %)"              , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "packreplace"                , "Battery Refurbishment: Pack Replace"               , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
-  "cellreplace"                , "Battery Refurbishment: Cell Replace"               , "WTP (*1000 USD) for Vehicle Attributes"     , "dollar" ,
+  "no_choice"                  , "No-Choice Option (opt-out)"                        , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "mileage"                    , "Mileage (10,000 miles)"                            , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw1"                  , "BEV Range WTP: 40-130 mi segment (per 100 miles)"  , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw2"                  , "BEV Range WTP: 130-200 mi segment (per 100 miles)" , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw3"                  , "BEV Range WTP: 200+ mi segment (per 100 miles)"    , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw1"                   , "Range Loss WTP: 5-12% segment (per %)"             , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw2"                   , "Range Loss WTP: 12-24% segment (per %)"            , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw3"                   , "Range Loss WTP: 24%+ segment (per %)"              , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "packreplace"                , "Battery Refurbishment: Pack Replace"               , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "cellreplace"                , "Battery Refurbishment: Cell Replace"               , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
   # Active variables
-  "ATT_risktaker"              , "Risk-taking Propensity: Agree"                     , "Inactive Indicators: Attitudes"             , "pct"    ,
-  "ATT_range_anxiety"          , "Perceived EV Range Anxiety: Agree"                 , "Active Indicators"                          , "pct"    ,
-  "ATT_EVB_environment"        , "EV Battery Environmentally Positive: Agree"        , "Active Indicators"                          , "pct"    ,
-  "ATT_EVB_function"           , "EV Battery Functionally Negative: Disagree"        , "Active Indicators"                          , "pct"    ,
-  "hhincome_num_k"             , "Household Income (1000 USD)"                       , "Active Indicators"                          , "number" ,
-  "knowledge_ev"               , "EV Knowledge"                                      , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "knowledge_subsidy"          , "EV Subsidy Knowledge"                              , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "EV_charger"                 , "Electrical Outlet Access"                          , "Active Indicators"                          , "pct"    ,
-  "EV_neighbor"                , "Neighbor Owns/Leases a BEV/PHEV"                   , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"        , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"             , "Active Indicators"                          , "number" ,
-  "Veh_hh_fuel"                , "Household Vehicle Fuel Composition"                , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "vehicle_typesuv"            , "Next Vehicle Type: SUV"                            , "Active Indicators"                          , "pct"    ,
+  "ATT_risktaker"              , "Risk-taking Propensity: Agree"                     , "Inactive Indicators: Attitudes"         , "pct"    ,
+  "ATT_range_anxiety"          , "Perceived EV Range Anxiety: Agree"                 , "Active Indicators"                      , "pct"    ,
+  "ATT_EVB_environment"        , "EV Battery Environmentally Positive: Agree"        , "Active Indicators"                      , "pct"    ,
+  "ATT_EVB_function"           , "EV Battery Functionally Negative: Disagree"        , "Active Indicators"                      , "pct"    ,
+  "hhincome_num_k"             , "Household Income (1000 USD)"                       , "Active Indicators"                      , "number" ,
+  "knowledge_ev"               , "EV Knowledge"                                      , "Active Indicators"                      , "pct"    ,
+  "knowledge_subsidy"          , "EV Subsidy Knowledge"                              , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "EV_charger"                 , "Electrical Outlet Access"                          , "Active Indicators"                      , "pct"    ,
+  "EV_neighbor"                , "Neighbor Owns/Leases a BEV/PHEV"                   , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"        , "Inactive Indicators: Socioeconomics"    , "number" ,
+  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"             , "Active Indicators"                      , "number" ,
+  "Veh_hh_fuel"                , "Household Vehicle Fuel Composition"                , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "vehicle_typesuv"            , "Next Vehicle Type: SUV"                            , "Active Indicators"                      , "pct"    ,
   # Inactive / Socioeconomic & other variables
-  "age_num"                    , "Age"                                               , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "gender_cate"                , "Gender"                                            , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "ethnicity_cate"             , "Ethnicity"                                         , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "race_cate"                  , "Race"                                              , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "education_cate"             , "Education Level"                                   , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "student_cate"               , "Student Status"                                    , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "employment_cate"            , "Employment Status"                                 , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "hhsize_num"                 , "Household Size"                                    , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "hhtenure_cate"              , "Household Tenure"                                  , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "hhtype_cate"                , "Household Type"                                    , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "Veh_hh_count"               , "Household Vehicle Count"                           , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "Veh_primary_fuel"           , "Primary Vehicle Fuel Type"                         , "Inactive Indicators: Socioeconomics"        , "pct"    ,
-  "next_veh_budget_k"          , "Next Vehicle Budget (1000 USD)"                    , "Inactive Indicators: Socioeconomics"        , "dollar" ,
+  "age_num"                    , "Age"                                               , "Inactive Indicators: Socioeconomics"    , "number" ,
+  "gender_cate"                , "Gender"                                            , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "ethnicity_cate"             , "Ethnicity"                                         , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "race_cate"                  , "Race"                                              , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "education_cate"             , "Education Level"                                   , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "student_cate"               , "Student Status"                                    , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "employment_cate"            , "Employment Status"                                 , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "hhsize_num"                 , "Household Size"                                    , "Inactive Indicators: Socioeconomics"    , "number" ,
+  "hhtenure_cate"              , "Household Tenure"                                  , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "hhtype_cate"                , "Household Type"                                    , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "Veh_hh_count"               , "Household Vehicle Count"                           , "Inactive Indicators: Socioeconomics"    , "number" ,
+  "Veh_primary_fuel"           , "Primary Vehicle Fuel Type"                         , "Inactive Indicators: Socioeconomics"    , "pct"    ,
+  "next_veh_budget_k"          , "Next Vehicle Budget (1000 USD)"                    , "Inactive Indicators: Socioeconomics"    , "dollar" ,
   # "next_veh_fuel_new_phev"     , "Likelihood of buying new PHEV (1-5)"               , "Inactive Indicators: Socioeconomics"        , "number" ,
   # "next_veh_fuel_used_phev"    , "Likelihood of buying used PHEV (1-5)"              , "Inactive Indicators: Socioeconomics"        , "number" ,
   # "next_veh_fuel_new_bev"      , "Likelihood of buying new BEV (1-5)"                , "Inactive Indicators: Socioeconomics"        , "number" ,
-  "next_veh_fuel_used_bev"     , "Likelihood of buying used BEV"               , "Inactive Indicators: Socioeconomics"        , "number" ,
+  "next_veh_fuel_used_bev"     , "Likelihood of buying used BEV"                     , "Inactive Indicators: Socioeconomics"    , "number" ,
   # Attitudes / psychological
   # "ATT_price_sensitive"        , "Price Sensitivity"                                 , "Inactive Indicators: Attitudes"             , "pct"    ,
-  "ATT_climate"                , "Climate Concern"                                   , "Inactive Indicators: Attitudes"             , "pct"    ,
-  "ATT_political"              , "Political Spectrum"                                , "Inactive Indicators: Attitudes"             , "pct"    ,
-  "ATT_voting"                 , "Voting Behavior"                                   , "Inactive Indicators: Attitudes"             , "pct"    ,
-  "battery_info_treat"         , "Received Battery Information Treatment"            , "Inactive Indicators: Information Treatment" , "pct"
+  "ATT_climate"                , "Climate Concern"                                   , "Inactive Indicators: Attitudes"         , "pct"    ,
+  # "ATT_political"              , "Political Spectrum"                                , "Inactive Indicators: Attitudes"             , "pct"    ,
+  # "ATT_voting"                 , "Voting Behavior"                                   , "Inactive Indicators: Attitudes"             , "pct"    ,
+  "battery_info_treat"         , "Received Battery Information Treatment"            , "Metadata: Information Treatment"        , "pct"
 )
 
 combined_all <- combined_all %>%
@@ -446,43 +447,86 @@ combined_all <- combined_all %>%
     )
   )
 
-# ── Opt-out rate by choice task ───────────────────────────────────────────────
+# ── Share of respondents by number of opt-outs (0–6) ─────────────────────────
 {
-  n_k       <- sum(grepl("^Combined_class", names(combined_all)))
+  n_k <- sum(grepl("^Combined_class", names(combined_all)))
   cp_optout <- read_parquet(here(
-    "code", "output", "model_output", "battery_analysis", "apollo",
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "apollo",
     paste0("0_Combined_", n_k, "c_class_probabilities.parquet")
-  )) %>% select(respID, paste0("prob_class", 1:n_k))
+  )) %>%
+    select(respID, paste0("prob_class", 1:n_k))
 
-  optout_task <- database %>%
+  # Total opt-outs per respondent across all 6 tasks
+  resp_optouts <- database %>%
     select(respID, qID, choice) %>%
-    inner_join(cp_optout, by = "respID") %>%
-    mutate(optout = as.integer(choice == 4))
+    mutate(optout = as.integer(choice == 4)) %>%
+    group_by(respID) %>%
+    summarise(n_optout = sum(optout), .groups = "drop") %>%
+    inner_join(cp_optout, by = "respID")
 
+  # Weighted share of respondents with exactly n opt-outs, per class
   optout_mat <- map_dfc(1:n_k, function(k) {
-    pcol  <- paste0("prob_class", k)
-    rates <- optout_task %>%
-      group_by(qID) %>%
-      summarise(rate = weighted.mean(optout, .data[[pcol]]), .groups = "drop") %>%
-      arrange(qID)
-    tibble(!!paste0("Combined_class", k) := c(rates$rate, mean(rates$rate)))
+    pcol <- paste0("prob_class", k)
+    shares <- map_dbl(0:6, function(n) {
+      weighted.mean(resp_optouts$n_optout == n, resp_optouts[[pcol]])
+    })
+    tibble(!!paste0("Combined_class", k) := shares)
   })
 
   optout_rows <- bind_cols(
     tibble(
-      variable        = c("optout_Q1","optout_Q2","optout_Q3","optout_Q4","optout_Q5","optout_Q6","optout_mean"),
-      variable_origin = c("optout_Q1","optout_Q2","optout_Q3","optout_Q4","optout_Q5","optout_Q6","optout_mean"),
-      category        = NA_character_,
-      label           = c("Opt-out Rate: Q1","Opt-out Rate: Q2","Opt-out Rate: Q3",
-                          "Opt-out Rate: Q4","Opt-out Rate: Q5","Opt-out Rate: Q6",
-                          "Opt-out Rate: Mean (Q1-Q6)"),
-      section         = "Inactive Indicators: Opt-out by Choice Task",
-      fmt             = "pct"
+      variable = paste0("optout_n", 0:6),
+      variable_origin = paste0("optout_n", 0:6),
+      category = NA_character_,
+      label = paste0("Opt-out: ", 0:6, " time", ifelse(0:6 == 1, "", "s")),
+      section = "Metadata: Opt-out Count",
+      fmt = "pct"
     ),
     optout_mat
   )
 
   combined_all <- bind_rows(combined_all, optout_rows)
+}
+
+# ── Survey duration by class (median seconds) ──────────────────────────────────
+# Source: 0_survey_duration_by_class_6c.parquet (generated by 3b_survey_duration_6c.R)
+# Re-run 3b_survey_duration_6c.R first whenever duration results are updated.
+{
+  duration_raw <- read_parquet(here(
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "apollo",
+    "0_survey_duration_by_class_6c.parquet"
+  ))
+
+  duration_rows <- duration_raw %>%
+    pivot_longer(-class, names_to = "variable", values_to = "value") %>%
+    pivot_wider(names_from = class, values_from = value) %>%
+    rename_with(~ paste0("Combined_", .), starts_with("class")) %>%
+    mutate(
+      variable_origin = variable,
+      category = NA_character_,
+      label = case_when(
+        variable == "duration_q1" ~ "Battery DCE Section: Q1",
+        variable == "duration_q2" ~ "Battery DCE Section: Q2",
+        variable == "duration_q3" ~ "Battery DCE Section: Q3",
+        variable == "duration_q4" ~ "Battery DCE Section: Q4",
+        variable == "duration_q5" ~ "Battery DCE Section: Q5",
+        variable == "duration_q6" ~ "Battery DCE Section: Q6",
+        variable == "duration_battery_dce" ~ "Battery DCE Section: Total",
+        variable == "duration_full_survey" ~ "Full Survey"
+      ),
+      section = "Metadata: Survey Duration",
+      fmt = "number"
+    )
+
+  combined_all <- bind_rows(combined_all, duration_rows)
 }
 
 # --- Format numeric values per-row ---
@@ -501,8 +545,8 @@ formatted <- combined_all %>%
   mutate(
     fmt = case_when(
       variable %in% attributes_long ~ "dollar",
-      grepl("_share$", variable)    ~ "pct",
-      grepl("^optout_", variable)   ~ "pct",
+      grepl("_share$", variable) ~ "pct",
+      grepl("^optout_", variable) ~ "pct",
       TRUE ~ "number"
     ),
     across(
@@ -588,7 +632,7 @@ summarize_class_size <- function(
     rowwise() %>%
     mutate(
       class_size = round(class_size * mean_probability, 0),
-      mean_probability = round(mean_probability, 2)
+      mean_probability = round(mean_probability, 3)
     ) %>%
     ungroup() %>%
     arrange(class) %>%
@@ -662,6 +706,32 @@ gt_car_suv_lc_6c <- gt_formatted %>%
   ) %>%
   opt_stylize(style = 1, color = "blue")
 
+# ── Bold the maximum value in each row ────────────────────────────────────────
+{
+  numeric_cols <- gsub("^fmt_", "", combined_cols) # Combined_class1..6
+
+  max_col_idx <- gt_formatted %>%
+    select(all_of(numeric_cols)) %>%
+    apply(1, function(x) {
+      idx <- which.max(x)
+      if (length(idx) == 0L) NA_integer_ else as.integer(idx)
+    })
+
+  for (k in seq_along(combined_cols)) {
+    bold_rows <- which(max_col_idx == k)
+    if (length(bold_rows) > 0) {
+      gt_car_suv_lc_6c <- gt_car_suv_lc_6c %>%
+        tab_style(
+          style = cell_text(weight = "bold"),
+          locations = cells_body(
+            columns = all_of(combined_cols[k]),
+            rows = bold_rows
+          )
+        )
+    }
+  }
+}
+
 gt_car_suv_lc_6c
 
 gtsave(
@@ -676,356 +746,90 @@ gtsave(
   )
 )
 
-# ============================================================
-# CLASS 6 SUBGROUP ANALYSIS
-# Hypothesis: C6 contains two distinct groups:
-#   (a) genuine pre-committed adopters (slow, occasionally opt out)
-#   (b) satisficers avoiding opt-out from survey fear (fast, never opt out)
-# Strategy: median split on mean task duration; compare all characteristics
-# ============================================================
+# ── LaTeX Export ──────────────────────────────────────────────────────────────
+{
+  library(kableExtra)
+  latex_dir <- here("paper_writing", "battery_paper", "attachments")
 
-library(glue)
-library(lubridate)
+  # Strip newlines separating value from significance stars;
+  # kbl(escape = TRUE, the default) handles $ and % automatically
+  latex_clean <- function(x) trimws(gsub("\n", "", x, fixed = TRUE))
 
-# --- 1. Class probabilities ---
-class_probs_6c <- read_parquet(here(
-  "code",
-  "output",
-  "model_output",
-  "battery_analysis",
-  "apollo",
-  "0_Combined_6c_class_probabilities.parquet"
-)) %>%
-  left_join(
-    database %>% distinct(respID, psid),
-    by = "respID"
-  )
+  latex_vals <- gt_formatted %>%
+    select(section, label, all_of(combined_cols)) %>%
+    mutate(across(all_of(combined_cols), latex_clean)) %>%
+    filter(!is.na(section))
 
-# --- 2. Per-task decision time ---
-data_full_raw <- read_parquet(here(
-  "data",
-  "dynata_prolific_joint",
-  "data_joint.parquet"
-))
+  # Plain-text column headers with n and share
+  latex_col_hdrs <- combined_size %>%
+    transmute(hdr = paste0(
+      "Class ", class,
+      " (n=", format(class_size, big.mark = ","),
+      ", ", round(mean_probability * 100, 1), "%)"
+    )) %>%
+    pull(hdr)
 
-timing_c6 <- data_full_raw %>%
-  mutate(
-    across(
-      c(
-        time_p_battery_pageQ1_button,
-        time_p_battery_pageQ2_button,
-        time_p_battery_pageQ3_button,
-        time_p_battery_pageQ4_button,
-        time_p_battery_pageQ5_button,
-        time_p_battery_pageQ6_button,
-        time_q_battery_cbc_q1_button,
-        time_q_battery_cbc_q2_button,
-        time_q_battery_cbc_q3_button,
-        time_q_battery_cbc_q4_button,
-        time_q_battery_cbc_q5_button,
-        time_q_battery_cbc_q6_button
-      ),
-      ~ ymd_hms(.x, tz = "UTC")
-    ),
-    cbc_q1_sec = -as.numeric(
-      time_p_battery_pageQ1_button - time_q_battery_cbc_q1_button,
-      units = "secs"
-    ),
-    cbc_q2_sec = -as.numeric(
-      time_p_battery_pageQ2_button - time_q_battery_cbc_q2_button,
-      units = "secs"
-    ),
-    cbc_q3_sec = -as.numeric(
-      time_p_battery_pageQ3_button - time_q_battery_cbc_q3_button,
-      units = "secs"
-    ),
-    cbc_q4_sec = -as.numeric(
-      time_p_battery_pageQ4_button - time_q_battery_cbc_q4_button,
-      units = "secs"
-    ),
-    cbc_q5_sec = -as.numeric(
-      time_p_battery_pageQ5_button - time_q_battery_cbc_q5_button,
-      units = "secs"
-    ),
-    cbc_q6_sec = -as.numeric(
-      time_p_battery_pageQ6_button - time_q_battery_cbc_q6_button,
-      units = "secs"
-    )
-  ) %>%
-  select(psid, starts_with("cbc_q")) %>%
-  mutate(
-    mean_cbc_sec = rowMeans(across(starts_with("cbc_q")), na.rm = TRUE),
-    valid_timing = if_all(starts_with("cbc_q"), ~ is.na(.x) | .x >= 0)
-  ) %>%
-  filter(valid_timing) %>%
-  select(-valid_timing)
+  # Section row spans — preserve data order
+  section_grps <- latex_vals %>%
+    mutate(row_id = row_number()) %>%
+    group_by(section) %>%
+    summarise(start = min(row_id), end = max(row_id), .groups = "drop") %>%
+    arrange(start)
 
-# --- 3. Opt-out behavior per respondent ---
-optout_per_resp <- database %>%
-  select(psid, qID, choice) %>%
-  distinct() %>%
-  group_by(psid) %>%
-  summarise(
-    optout_rate_resp = mean(choice == 4, na.rm = TRUE),
-    optout_never = as.integer(sum(choice == 4, na.rm = TRUE) == 0),
-    .groups = "drop"
-  )
+  # ── Table 1: WTP + Active Indicators + Inactive Indicators ────────────────
+  kbl1 <- latex_vals %>%
+    select(label, all_of(combined_cols)) %>%
+    kbl(
+      format    = "latex",
+      booktabs  = TRUE,
+      longtable = TRUE,
+      col.names = c("", latex_col_hdrs),
+      align     = c("l", rep("r", length(combined_cols))),
+      caption   = "Latent Class Profile Summary: WTP and Indicators",
+      label     = "lc6_profile"
+    ) %>%
+    kable_styling(
+      latex_options = "repeat_header",
+      font_size     = 9,
+      full_width    = TRUE
+    ) %>%
+    column_spec(1, width = "7cm")
 
-# --- 4. Respondent-level covariates ---
-resp_covariates <- database %>%
-  distinct(respID, .keep_all = TRUE) %>%
-  select(psid, respID, all_of(num_vars), all_of(cate_vars))
-
-# --- 5. Class 6 respondent-level dataset ---
-c6_resp <- class_probs_6c %>%
-  filter(prob_class_assign == "class6") %>%
-  left_join(timing_c6, by = "psid") %>%
-  left_join(optout_per_resp, by = "psid") %>%
-  left_join(resp_covariates, by = "psid") %>%
-  filter(!is.na(mean_cbc_sec))
-
-# --- 6. Median split on mean task duration ---
-median_sec <- median(c6_resp$mean_cbc_sec, na.rm = TRUE)
-
-c6_resp <- c6_resp %>%
-  mutate(
-    speed_group = factor(
-      if_else(mean_cbc_sec <= median_sec, "Fast", "Slow"),
-      levels = c("Fast", "Slow")
-    )
-  )
-
-# --- 7. Compute group summaries ---
-
-# Behavioral diagnostics
-diag_summary <- c6_resp %>%
-  group_by(speed_group) %>%
-  summarise(
-    n = n(),
-    mean_duration_sec = weighted.mean(mean_cbc_sec, prob_class6, na.rm = TRUE),
-    optout_rate = weighted.mean(optout_rate_resp, prob_class6, na.rm = TRUE),
-    optout_never_pct = weighted.mean(optout_never, prob_class6, na.rm = TRUE),
-    .groups = "drop"
-  )
-
-# Numeric variable comparison
-compare_num <- map_dfr(num_vars, function(v) {
-  map_dfr(c("Fast", "Slow"), function(grp) {
-    sub <- c6_resp %>% filter(speed_group == grp)
-    tibble(
-      variable = v,
-      speed_group = grp,
-      value = weighted.mean(sub[[v]], sub$prob_class6, na.rm = TRUE)
-    )
-  })
-}) %>%
-  pivot_wider(names_from = speed_group, values_from = value)
-
-# Binary categorical variable comparison
-binary_cate_vars <- c(
-  "ATT_range_anxiety",
-  "ATT_risktaker",
-  "ATT_EVB_environment",
-  "ATT_EVB_function",
-  "EV_charger",
-  "EV_neighbor",
-  "knowledge_ev",
-  "knowledge_subsidy"
-)
-
-compare_cate <- map_dfr(binary_cate_vars, function(v) {
-  map_dfr(c("Fast", "Slow"), function(grp) {
-    sub <- c6_resp %>% filter(speed_group == grp)
-    tibble(
-      variable = v,
-      speed_group = grp,
-      value = weighted.mean(
-        as.numeric(sub[[v]] == 1),
-        sub$prob_class6,
-        na.rm = TRUE
+  for (i in seq_len(nrow(section_grps))) {
+    kbl1 <- kbl1 %>%
+      pack_rows(
+        group_label     = section_grps$section[i],
+        start_row       = section_grps$start[i],
+        end_row         = section_grps$end[i],
+        bold            = TRUE,
+        latex_gap_space = "0.3em"
       )
+  }
+
+  writeLines(as.character(kbl1), file.path(latex_dir, "table_lc6_profile_main.tex"))
+
+  # ── Table 2: Class Metadata ───────────────────────────────────────────────
+  kbl2 <- combined_size %>%
+    transmute(
+      Class = paste0("Class ", class),
+      N     = format(class_size, big.mark = ","),
+      Share = paste0(round(mean_probability * 100, 1), "%")
+    ) %>%
+    kbl(
+      format   = "latex",
+      booktabs = TRUE,
+      caption  = "Latent Class Membership",
+      label    = "lc6_metadata",
+      align    = c("l", "r", "r")
+    ) %>%
+    kable_styling(
+      latex_options = "hold_position",
+      font_size     = 11
     )
-  })
-}) %>%
-  pivot_wider(names_from = speed_group, values_from = value)
 
-# Combine and format
-compare_all <- bind_rows(compare_num, compare_cate) %>%
-  left_join(
-    var_meta %>% select(variable, label, section, fmt),
-    by = "variable"
-  ) %>%
-  mutate(
-    label = coalesce(label, variable),
-    fmt = coalesce(fmt, "number"),
-    Diff = Slow - Fast,
-    across(
-      c(Fast, Slow, Diff),
-      list(
-        fmt = ~ case_when(
-          fmt == "dollar" ~ dollar(.x, accuracy = 0.1),
-          fmt == "pct" ~ percent(.x, accuracy = 0.1),
-          TRUE ~ number(.x, accuracy = 0.1)
-        )
-      ),
-      .names = "{col}_fmt"
-    )
-  ) %>%
-  filter(!is.na(section))
+  writeLines(as.character(kbl2), file.path(latex_dir, "table_lc6_metadata.tex"))
 
-# --- 8. Behavioral header rows ---
-n_fast <- diag_summary$n[diag_summary$speed_group == "Fast"]
-n_slow <- diag_summary$n[diag_summary$speed_group == "Slow"]
-dur_fast <- diag_summary$mean_duration_sec[diag_summary$speed_group == "Fast"]
-dur_slow <- diag_summary$mean_duration_sec[diag_summary$speed_group == "Slow"]
-oo_fast <- diag_summary$optout_rate[diag_summary$speed_group == "Fast"]
-oo_slow <- diag_summary$optout_rate[diag_summary$speed_group == "Slow"]
-oo_never_fast <- diag_summary$optout_never_pct[
-  diag_summary$speed_group == "Fast"
-]
-oo_never_slow <- diag_summary$optout_never_pct[
-  diag_summary$speed_group == "Slow"
-]
-
-diag_rows <- tribble(
-  ~label                     , ~section            , ~Fast_fmt                              , ~Slow_fmt                              , ~Diff_fmt                                              ,
-  "Mean task duration (sec)" , "Behavioral Checks" , number(dur_fast, accuracy = 0.1)       , number(dur_slow, accuracy = 0.1)       , number(dur_slow - dur_fast, accuracy = 0.1)            ,
-  "Opt-out rate"             , "Behavioral Checks" , percent(oo_fast, accuracy = 0.1)       , percent(oo_slow, accuracy = 0.1)       , percent(oo_slow - oo_fast, accuracy = 0.1)             ,
-  "Never opted out (%)"      , "Behavioral Checks" , percent(oo_never_fast, accuracy = 0.1) , percent(oo_never_slow, accuracy = 0.1) , percent(oo_never_slow - oo_never_fast, accuracy = 0.1)
-)
-
-display_tbl <- bind_rows(
-  diag_rows,
-  compare_all %>% select(label, section, Fast_fmt, Slow_fmt, Diff_fmt)
-) %>%
-  mutate(
-    section = factor(
-      section,
-      levels = c(
-        "Behavioral Checks",
-        "WTP (*1000 USD) for Vehicle Attributes",
-        "Active Indicators",
-        "Inactive Indicators: Socioeconomics",
-        "Inactive Indicators: Attitudes"
-      )
-    )
-  )
-
-# --- 9. GT table ---
-gt_c6_subgroup <- display_tbl %>%
-  group_by(section) %>%
-  gt(rowname_col = "label") %>%
-  tab_header(
-    title = md(
-      "**Class 6 Internal Subgroup Comparison: Fast vs. Slow Responders**"
-    ),
-    subtitle = md(glue(
-      "Median split on mean task duration ({round(median_sec, 1)} sec). ",
-      "Fast: N={n_fast}, avg {round(dur_fast, 1)}s. ",
-      "Slow: N={n_slow}, avg {round(dur_slow, 1)}s."
-    ))
-  ) %>%
-  tab_spanner(
-    label = "Speed Group (median split on task duration)",
-    columns = c(Fast_fmt, Slow_fmt, Diff_fmt)
-  ) %>%
-  cols_label(
-    Fast_fmt = md(glue("**Fast** (<=>{round(median_sec,1)}s)  \nN={n_fast}")),
-    Slow_fmt = md(glue("**Slow** (>{round(median_sec,1)}s)  \nN={n_slow}")),
-    Diff_fmt = "Slow - Fast"
-  ) %>%
-  tab_footnote(
-    footnote = "All means probability-weighted by each respondent's posterior P(class 6). Behavioral rows use raw means.",
-    locations = cells_title("subtitle")
-  ) %>%
-  tab_style(
-    style = cell_fill(color = "#FFF9C4"),
-    locations = cells_row_groups(groups = "Behavioral Checks")
-  ) %>%
-  cols_align(align = "center", columns = c(Fast_fmt, Slow_fmt, Diff_fmt)) %>%
-  cols_align(align = "left", columns = label) %>%
-  tab_options(
-    table.font.size = px(13),
-    table.font.names = "Roboto Condensed",
-    heading.align = "left",
-    row_group.font.weight = "bold",
-    column_labels.font.weight = "bold"
-  ) %>%
-  opt_stylize(style = 1, color = "blue")
-
-gt_c6_subgroup
-
-gtsave(
-  gt_c6_subgroup,
-  file = here::here(
-    "code",
-    "output",
-    "model_output",
-    "battery_analysis",
-    "apollo",
-    "0_c6_subgroup_fast_vs_slow.html"
-  )
-)
-
-# --- 10. Scatter: duration vs opt-out rate per C6 respondent ---
-p_c6_scatter <- c6_resp %>%
-  mutate(
-    mean_cbc_cap = pmin(
-      mean_cbc_sec,
-      quantile(mean_cbc_sec, 0.97, na.rm = TRUE)
-    )
-  ) %>%
-  ggplot(aes(
-    x = mean_cbc_cap,
-    y = optout_rate_resp,
-    color = prob_class6,
-    size = prob_class6
-  )) +
-  geom_point(alpha = 0.7) +
-  geom_vline(
-    xintercept = median_sec,
-    linetype = "dashed",
-    color = "firebrick",
-    linewidth = 0.7
-  ) +
-  annotate(
-    "text",
-    x = median_sec + 1,
-    y = 0.95,
-    label = glue("median = {round(median_sec, 1)}s"),
-    hjust = 0,
-    color = "firebrick",
-    size = 3.2,
-    family = "Roboto Condensed"
-  ) +
-  scale_color_gradient(low = "#FFCDD2", high = "#B71C1C", name = "P(class 6)") +
-  scale_size_continuous(range = c(1, 4), guide = "none") +
-  scale_y_continuous(labels = scales::percent, breaks = seq(0, 1, 0.2)) +
-  labs(
-    title = "C6 Respondents: Task Duration vs. Opt-Out Rate",
-    subtitle = "Each point = one respondent. If two groups exist, expect a cluster bottom-left (fast, never opt-out).",
-    x = "Mean seconds per task (capped at 97th pct)",
-    y = "Opt-out rate across 6 tasks"
-  ) +
-  theme_minimal(base_family = "Roboto Condensed") +
-  theme(
-    plot.title = element_text(face = "bold", size = 13),
-    panel.grid.minor = element_blank(),
-    legend.position = "right"
-  )
-
-p_c6_scatter
-
-ggsave(
-  here(
-    "code",
-    "output",
-    "images",
-    "battery_analysis",
-    "c6_duration_vs_optout_scatter.png"
-  ),
-  p_c6_scatter,
-  width = 9,
-  height = 5.5,
-  dpi = 300
-)
+  cat("Saved:\n")
+  cat(" -", file.path(latex_dir, "table_lc6_profile_main.tex"), "\n")
+  cat(" -", file.path(latex_dir, "table_lc6_metadata.tex"), "\n")
+}

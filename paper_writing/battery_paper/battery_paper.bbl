@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.1 $
+% $ biblatex bbl format version 3.3 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,8 +18,8 @@
 
 
 \refsection{0}
-  \datalist[entry]{nyt/global//global/global}
-    \entry{attiaReviewKneesLithiumIonBattery2022}{article}{}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{attiaReviewKneesLithiumIonBattery2022}{article}{}{}
       \name{author}{17}{}{%
         {{hash=249d6ac28574ee1219b06f162dac35b9}{%
            family={Attia},
@@ -114,13 +114,15 @@
       }
       \strng{namehash}{0c077e9b62d514eb55f846267f9b5d9f}
       \strng{fullhash}{1b4e7b96d4d7f77ee036aa89d51fb42a}
+      \strng{fullhashraw}{1b4e7b96d4d7f77ee036aa89d51fb42a}
       \strng{bibnamehash}{1b4e7b96d4d7f77ee036aa89d51fb42a}
       \strng{authorbibnamehash}{1b4e7b96d4d7f77ee036aa89d51fb42a}
       \strng{authornamehash}{0c077e9b62d514eb55f846267f9b5d9f}
       \strng{authorfullhash}{1b4e7b96d4d7f77ee036aa89d51fb42a}
+      \strng{authorfullhashraw}{1b4e7b96d4d7f77ee036aa89d51fb42a}
       \field{extraname}{1}
       \field{sortinit}{A}
-      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -155,7 +157,7 @@
       \verb https://dx.doi.org/10.1149/1945-7111/ac6d13
       \endverb
     \endentry
-    \entry{attiaRevisitingT05Dependence2020}{article}{}
+    \entry{attiaRevisitingT05Dependence2020}{article}{}{}
       \name{author}{3}{}{%
         {{hash=249d6ac28574ee1219b06f162dac35b9}{%
            family={Attia},
@@ -178,13 +180,15 @@
       }
       \strng{namehash}{0c077e9b62d514eb55f846267f9b5d9f}
       \strng{fullhash}{3040a5165d28f0171f7b8bae0baa90e3}
+      \strng{fullhashraw}{3040a5165d28f0171f7b8bae0baa90e3}
       \strng{bibnamehash}{3040a5165d28f0171f7b8bae0baa90e3}
       \strng{authorbibnamehash}{3040a5165d28f0171f7b8bae0baa90e3}
       \strng{authornamehash}{0c077e9b62d514eb55f846267f9b5d9f}
       \strng{authorfullhash}{3040a5165d28f0171f7b8bae0baa90e3}
+      \strng{authorfullhashraw}{3040a5165d28f0171f7b8bae0baa90e3}
       \field{extraname}{2}
       \field{sortinit}{A}
-      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -219,7 +223,7 @@
       \verb https://dx.doi.org/10.1149/1945-7111/ab8ce4
       \endverb
     \endentry
-    \entry{bashashPluginHybridElectric2011}{article}{}
+    \entry{bashashPluginHybridElectric2011}{article}{}{}
       \name{author}{4}{}{%
         {{hash=d1b50ab61b0fa9b5b428fd8fa91761bd}{%
            family={Bashash},
@@ -244,12 +248,14 @@
       }
       \strng{namehash}{0413ab3d64609a8cc5b1a2f0dae885a6}
       \strng{fullhash}{9a87bf4704cd7cfc3e16ad1542e188cd}
+      \strng{fullhashraw}{9a87bf4704cd7cfc3e16ad1542e188cd}
       \strng{bibnamehash}{9a87bf4704cd7cfc3e16ad1542e188cd}
       \strng{authorbibnamehash}{9a87bf4704cd7cfc3e16ad1542e188cd}
       \strng{authornamehash}{0413ab3d64609a8cc5b1a2f0dae885a6}
       \strng{authorfullhash}{9a87bf4704cd7cfc3e16ad1542e188cd}
+      \strng{authorfullhashraw}{9a87bf4704cd7cfc3e16ad1542e188cd}
       \field{sortinit}{B}
-      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -285,7 +291,7 @@
       \endverb
       \keyw{Charge pattern optimization,Lithium-ion battery degradation,Plug-in hybrid electric vehicles}
     \endentry
-    \entry{boudwayBatteriesElectricCars2020}{article}{}
+    \entry{boudwayBatteriesElectricCars2020}{article}{}{}
       \name{author}{1}{}{%
         {{hash=91e234e6d7399b43097861edb043fd7c}{%
            family={Boudway},
@@ -295,12 +301,14 @@
       }
       \strng{namehash}{91e234e6d7399b43097861edb043fd7c}
       \strng{fullhash}{91e234e6d7399b43097861edb043fd7c}
+      \strng{fullhashraw}{91e234e6d7399b43097861edb043fd7c}
       \strng{bibnamehash}{91e234e6d7399b43097861edb043fd7c}
       \strng{authorbibnamehash}{91e234e6d7399b43097861edb043fd7c}
       \strng{authornamehash}{91e234e6d7399b43097861edb043fd7c}
       \strng{authorfullhash}{91e234e6d7399b43097861edb043fd7c}
+      \strng{authorfullhashraw}{91e234e6d7399b43097861edb043fd7c}
       \field{sortinit}{B}
-      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -329,7 +337,7 @@
       \endverb
       \keyw{BLOOMBERGNEF,business,China,Electric Vehicles,Energy,Generic 1st 'XB' Future,Great Britain,hyperdrive,Markets,Raw Materials,SPEED,TESLA INC}
     \endentry
-    \entry{bruckmannResaleAnxietyObstacle2021}{article}{}
+    \entry{bruckmannResaleAnxietyObstacle2021}{article}{}{}
       \name{author}{3}{}{%
         {{hash=d13e603b07a4ec47c6bde112c8e29751}{%
            family={Brückmann},
@@ -352,12 +360,14 @@
       }
       \strng{namehash}{2b17d8075b9d36e2cd54120a4dd6c080}
       \strng{fullhash}{c7ea9b700f45bc06aca001a6ba7a7093}
+      \strng{fullhashraw}{c7ea9b700f45bc06aca001a6ba7a7093}
       \strng{bibnamehash}{c7ea9b700f45bc06aca001a6ba7a7093}
       \strng{authorbibnamehash}{c7ea9b700f45bc06aca001a6ba7a7093}
       \strng{authornamehash}{2b17d8075b9d36e2cd54120a4dd6c080}
       \strng{authorfullhash}{c7ea9b700f45bc06aca001a6ba7a7093}
+      \strng{authorfullhashraw}{c7ea9b700f45bc06aca001a6ba7a7093}
       \field{sortinit}{B}
-      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -393,7 +403,7 @@
       \verb https://dx.doi.org/10.1088/1748-9326/ac3531
       \endverb
     \endentry
-    \entry{canalscasalsElectricVehicleBattery2022}{article}{}
+    \entry{canalscasalsElectricVehicleBattery2022}{article}{}{}
       \name{author}{5}{}{%
         {{hash=11206ca3df0c91367857c22e3d2780c2}{%
            family={Canals\bibnamedelima Casals},
@@ -426,13 +436,15 @@
       }
       \strng{namehash}{fddd4789edad8c2c0d74c26b1cf006ee}
       \strng{fullhash}{00c59e9846e277f2228a77a92195da44}
+      \strng{fullhashraw}{00c59e9846e277f2228a77a92195da44}
       \strng{bibnamehash}{00c59e9846e277f2228a77a92195da44}
       \strng{authorbibnamehash}{00c59e9846e277f2228a77a92195da44}
       \strng{authornamehash}{fddd4789edad8c2c0d74c26b1cf006ee}
       \strng{authorfullhash}{00c59e9846e277f2228a77a92195da44}
+      \strng{authorfullhashraw}{00c59e9846e277f2228a77a92195da44}
       \field{extraname}{1}
       \field{sortinit}{C}
-      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -468,7 +480,7 @@
       \endverb
       \keyw{electric vehicle,end of life,second life,state of health}
     \endentry
-    \entry{canalscasalsEvaluationEndofLifeElectric2019}{article}{}
+    \entry{canalscasalsEvaluationEndofLifeElectric2019}{article}{}{}
       \name{author}{4}{}{%
         {{hash=11206ca3df0c91367857c22e3d2780c2}{%
            family={Canals\bibnamedelima Casals},
@@ -496,13 +508,15 @@
       }
       \strng{namehash}{fddd4789edad8c2c0d74c26b1cf006ee}
       \strng{fullhash}{117be8f11df2b97f4467d39d0a4324a9}
+      \strng{fullhashraw}{117be8f11df2b97f4467d39d0a4324a9}
       \strng{bibnamehash}{117be8f11df2b97f4467d39d0a4324a9}
       \strng{authorbibnamehash}{117be8f11df2b97f4467d39d0a4324a9}
       \strng{authornamehash}{fddd4789edad8c2c0d74c26b1cf006ee}
       \strng{authorfullhash}{117be8f11df2b97f4467d39d0a4324a9}
+      \strng{authorfullhashraw}{117be8f11df2b97f4467d39d0a4324a9}
       \field{extraname}{2}
       \field{sortinit}{C}
-      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -538,7 +552,7 @@
       \endverb
       \keyw{battery aging,electric vehicle,End-of-Life,state of health,sustainability}
     \endentry
-    \entry{canepaEarlyLookPlugin2019}{article}{}
+    \entry{canepaEarlyLookPlugin2019}{article}{}{}
       \name{author}{3}{}{%
         {{hash=6f8003df67d9c47b8d3219d984e89fbe}{%
            family={Canepa},
@@ -558,12 +572,14 @@
       }
       \strng{namehash}{b2b2ca24633de99a2c159c5dbdbeb19c}
       \strng{fullhash}{c70601a17c2965f3ec2e1e481cdf6f6d}
+      \strng{fullhashraw}{c70601a17c2965f3ec2e1e481cdf6f6d}
       \strng{bibnamehash}{c70601a17c2965f3ec2e1e481cdf6f6d}
       \strng{authorbibnamehash}{c70601a17c2965f3ec2e1e481cdf6f6d}
       \strng{authornamehash}{b2b2ca24633de99a2c159c5dbdbeb19c}
       \strng{authorfullhash}{c70601a17c2965f3ec2e1e481cdf6f6d}
+      \strng{authorfullhashraw}{c70601a17c2965f3ec2e1e481cdf6f6d}
       \field{sortinit}{C}
-      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -598,7 +614,7 @@
       \endverb
       \keyw{Disadvantaged communities,Electric vehicles,Environmental justice,Used vehicles}
     \endentry
-    \entry{chenExploringTouristPreference2023}{article}{}
+    \entry{chenExploringTouristPreference2023}{article}{}{}
       \name{author}{3}{}{%
         {{hash=9e01fabf91b07fd48dc17bd222ffbb8e}{%
            family={Chen},
@@ -618,12 +634,14 @@
       }
       \strng{namehash}{8d774849afa5ce64040fc0cc70ba5da9}
       \strng{fullhash}{f50bbe442fb16b12ad34d146097e23be}
+      \strng{fullhashraw}{f50bbe442fb16b12ad34d146097e23be}
       \strng{bibnamehash}{f50bbe442fb16b12ad34d146097e23be}
       \strng{authorbibnamehash}{f50bbe442fb16b12ad34d146097e23be}
       \strng{authornamehash}{8d774849afa5ce64040fc0cc70ba5da9}
       \strng{authorfullhash}{f50bbe442fb16b12ad34d146097e23be}
+      \strng{authorfullhashraw}{f50bbe442fb16b12ad34d146097e23be}
       \field{sortinit}{C}
-      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -657,59 +675,7 @@
       \verb https://linkinghub.elsevier.com/retrieve/pii/S0965856423001702
       \endverb
     \endentry
-    \entry{chuStatedimportanceDerivedimportanceCustomer2002}{article}{}
-      \name{author}{1}{}{%
-        {{hash=68524fe5be8436e8625ac1b51eca6166}{%
-           family={Chu},
-           familyi={C\bibinitperiod},
-           given={Ray},
-           giveni={R\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {MCB UP Ltd}%
-      }
-      \strng{namehash}{68524fe5be8436e8625ac1b51eca6166}
-      \strng{fullhash}{68524fe5be8436e8625ac1b51eca6166}
-      \strng{bibnamehash}{68524fe5be8436e8625ac1b51eca6166}
-      \strng{authorbibnamehash}{68524fe5be8436e8625ac1b51eca6166}
-      \strng{authornamehash}{68524fe5be8436e8625ac1b51eca6166}
-      \strng{authorfullhash}{68524fe5be8436e8625ac1b51eca6166}
-      \field{sortinit}{C}
-      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{This study aims to compare the customer satisfaction index (CSI) based on two approaches: stated‐importance and derived‐importance approaches. The stated‐importance approach uses both importance and performance scores in constructing the CSI, while the derived‐importance approach uses regression analysis to derive the betas for calculating CSI. The results show that the stated‐importance approach has achieved a higher CSI (79.1 percent) than that of the derived‐importance approach (57.4 percent). Both approaches find that the aspects of rooms and employees are the most important factors in driving customer satisfaction. Strengths and weaknesses of the two approaches are discussed.}
-      \field{day}{1}
-      \field{issn}{0887-6045}
-      \field{journaltitle}{Journal of Services Marketing}
-      \field{month}{1}
-      \field{number}{4}
-      \field{title}{Stated‐importance versus Derived‐importance Customer Satisfaction Measurement}
-      \field{urlday}{30}
-      \field{urlmonth}{6}
-      \field{urlyear}{2025}
-      \field{volume}{16}
-      \field{year}{2002}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \field{pages}{285\bibrangedash 301}
-      \range{pages}{17}
-      \verb{doi}
-      \verb 10.1108/08876040210433202
-      \endverb
-      \verb{file}
-      \verb /Users/xnw17/Zotero/storage/UIELRM7P/Chu - 2002 - Stated‐importance versus derived‐importance customer satisfaction measurement.pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1108/08876040210433202
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1108/08876040210433202
-      \endverb
-    \endentry
-    \entry{clarkeCarWarrantyCoverage2024}{online}{}
+    \entry{clarkeCarWarrantyCoverage2024}{online}{}{}
       \name{author}{1}{}{%
         {{hash=ac60210f6f074f0e3853972c83273905}{%
            family={Clarke},
@@ -722,12 +688,14 @@
       }
       \strng{namehash}{ac60210f6f074f0e3853972c83273905}
       \strng{fullhash}{ac60210f6f074f0e3853972c83273905}
+      \strng{fullhashraw}{ac60210f6f074f0e3853972c83273905}
       \strng{bibnamehash}{ac60210f6f074f0e3853972c83273905}
       \strng{authorbibnamehash}{ac60210f6f074f0e3853972c83273905}
       \strng{authornamehash}{ac60210f6f074f0e3853972c83273905}
       \strng{authorfullhash}{ac60210f6f074f0e3853972c83273905}
+      \strng{authorfullhashraw}{ac60210f6f074f0e3853972c83273905}
       \field{sortinit}{C}
-      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -751,7 +719,7 @@
       \verb https://cars.usnews.com/cars-trucks/advice/ev-battery-warranty
       \endverb
     \endentry
-    \entry{coxautomotiveinc.EVMarketMonitor2025}{online}{}
+    \entry{coxautomotiveinc.EVMarketMonitor2025}{online}{}{}
       \name{author}{1}{}{%
         {{hash=a8b3d6c340557e9d73efc799f6538a0b}{%
            family={{Cox Automotive Inc.}},
@@ -759,12 +727,14 @@
       }
       \strng{namehash}{a8b3d6c340557e9d73efc799f6538a0b}
       \strng{fullhash}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{fullhashraw}{a8b3d6c340557e9d73efc799f6538a0b}
       \strng{bibnamehash}{a8b3d6c340557e9d73efc799f6538a0b}
       \strng{authorbibnamehash}{a8b3d6c340557e9d73efc799f6538a0b}
       \strng{authornamehash}{a8b3d6c340557e9d73efc799f6538a0b}
       \strng{authorfullhash}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{authorfullhashraw}{a8b3d6c340557e9d73efc799f6538a0b}
       \field{sortinit}{C}
-      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -788,7 +758,7 @@
       \verb https://www.coxautoinc.com/market-insights/ev-market-monitor-february-2025/
       \endverb
     \endentry
-    \entry{dnistranEVBatteriesCan2024}{online}{}
+    \entry{dnistranEVBatteriesCan2024}{online}{}{}
       \name{author}{1}{}{%
         {{hash=d1d4f8099f4a2d4087f3be9665b94e01}{%
            family={Dnistran},
@@ -801,12 +771,14 @@
       }
       \strng{namehash}{d1d4f8099f4a2d4087f3be9665b94e01}
       \strng{fullhash}{d1d4f8099f4a2d4087f3be9665b94e01}
+      \strng{fullhashraw}{d1d4f8099f4a2d4087f3be9665b94e01}
       \strng{bibnamehash}{d1d4f8099f4a2d4087f3be9665b94e01}
       \strng{authorbibnamehash}{d1d4f8099f4a2d4087f3be9665b94e01}
       \strng{authornamehash}{d1d4f8099f4a2d4087f3be9665b94e01}
       \strng{authorfullhash}{d1d4f8099f4a2d4087f3be9665b94e01}
+      \strng{authorfullhashraw}{d1d4f8099f4a2d4087f3be9665b94e01}
       \field{sortinit}{D}
-      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -830,7 +802,7 @@
       \verb https://insideevs.com/news/733987/ev-batteries-outlast-vehicle-degradation-study/
       \endverb
     \endentry
-    \entry{fernandesUSUnderstandingConsumer2023}{online}{}
+    \entry{fernandesUSUnderstandingConsumer2023}{online}{}{}
       \name{author}{1}{}{%
         {{hash=9d2a2f9bab7b81861bb318a781085d08}{%
            family={Fernandes},
@@ -840,12 +812,14 @@
       }
       \strng{namehash}{9d2a2f9bab7b81861bb318a781085d08}
       \strng{fullhash}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{fullhashraw}{9d2a2f9bab7b81861bb318a781085d08}
       \strng{bibnamehash}{9d2a2f9bab7b81861bb318a781085d08}
       \strng{authorbibnamehash}{9d2a2f9bab7b81861bb318a781085d08}
       \strng{authornamehash}{9d2a2f9bab7b81861bb318a781085d08}
       \strng{authorfullhash}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{authorfullhashraw}{9d2a2f9bab7b81861bb318a781085d08}
       \field{sortinit}{F}
-      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -870,7 +844,7 @@
       \verb https://business.yougov.com/content/47834-us-understanding-consumer-opinion-about-used-electric-cars
       \endverb
     \endentry
-    \entry{goreDCIConsumerValuation2025}{article}{}
+    \entry{goreDCIConsumerValuation2025}{article}{}{}
       \name{author}{4}{}{%
         {{hash=6c511ceeb372e6b432691b1eb8ce7030}{%
            family={Gore},
@@ -898,12 +872,14 @@
       }
       \strng{namehash}{75424a5d1bd0904cd3456e0fd189af73}
       \strng{fullhash}{e4f7c55875a0d5b24239087c2361131b}
+      \strng{fullhashraw}{e4f7c55875a0d5b24239087c2361131b}
       \strng{bibnamehash}{e4f7c55875a0d5b24239087c2361131b}
       \strng{authorbibnamehash}{e4f7c55875a0d5b24239087c2361131b}
       \strng{authornamehash}{75424a5d1bd0904cd3456e0fd189af73}
       \strng{authorfullhash}{e4f7c55875a0d5b24239087c2361131b}
+      \strng{authorfullhashraw}{e4f7c55875a0d5b24239087c2361131b}
       \field{sortinit}{G}
-      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{url}
       \field{labelnamesource}{author}
@@ -926,9 +902,9 @@
       \verb{url}
       \verb https://www.nist.gov/publications/dci-consumer-valuation-battery-health-information-used-electric-vehicle-markets
       \endverb
-      \warn{\item Entry 'goreDCIConsumerValuation2025' (DCE_lit_review.bib): Invalid format '2025-11-18T07:00-05:00' of date field 'date' - ignoring}
+      \warn{\item article entry 'goreDCIConsumerValuation2025' (DCE_lit_review.bib): Invalid format '2025-11-18T07:00-05:00' of date field 'date' - ignoring}
     \endentry
-    \entry{greeneLatentClassModel2003}{article}{}
+    \entry{greeneLatentClassModel2003}{article}{}{}
       \name{author}{2}{}{%
         {{hash=6aeaa164d917d0657b4f141378594e78}{%
            family={Greene},
@@ -946,12 +922,14 @@
       }
       \strng{namehash}{e31156ffe245c54d216d965efbeeffe6}
       \strng{fullhash}{e31156ffe245c54d216d965efbeeffe6}
+      \strng{fullhashraw}{e31156ffe245c54d216d965efbeeffe6}
       \strng{bibnamehash}{e31156ffe245c54d216d965efbeeffe6}
       \strng{authorbibnamehash}{e31156ffe245c54d216d965efbeeffe6}
       \strng{authornamehash}{e31156ffe245c54d216d965efbeeffe6}
       \strng{authorfullhash}{e31156ffe245c54d216d965efbeeffe6}
+      \strng{authorfullhashraw}{e31156ffe245c54d216d965efbeeffe6}
       \field{sortinit}{G}
-      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -981,7 +959,7 @@
       \verb https://ideas.repec.org//a/eee/transb/v37y2003i8p681-698.html
       \endverb
     \endentry
-    \entry{guzekElectricVehiclesOverview2024}{article}{}
+    \entry{guzekElectricVehiclesOverview2024}{article}{}{}
       \name{author}{6}{}{%
         {{hash=76cfa593f06c402276f76bbaf9b48464}{%
            family={Guzek},
@@ -1019,12 +997,14 @@
       }
       \strng{namehash}{b11bbf2b1ccfb8636cfa5b35379a0f3f}
       \strng{fullhash}{344060af3961af0c35c3e2160507f501}
+      \strng{fullhashraw}{344060af3961af0c35c3e2160507f501}
       \strng{bibnamehash}{344060af3961af0c35c3e2160507f501}
       \strng{authorbibnamehash}{344060af3961af0c35c3e2160507f501}
       \strng{authornamehash}{b11bbf2b1ccfb8636cfa5b35379a0f3f}
       \strng{authorfullhash}{344060af3961af0c35c3e2160507f501}
+      \strng{authorfullhashraw}{344060af3961af0c35c3e2160507f501}
       \field{sortinit}{G}
-      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1060,7 +1040,7 @@
       \endverb
       \keyw{electric drive,electric vehicle,environment protection,EV safety,LCA,recycling,second life of batteries,source of energy}
     \endentry
-    \entry{hagmanTotalCostOwnership2016}{article}{}
+    \entry{hagmanTotalCostOwnership2016}{article}{}{}
       \name{author}{4}{}{%
         {{hash=c7b2ad41f7c713a64d875d69bf2ecfd7}{%
            family={Hagman},
@@ -1085,12 +1065,14 @@
       }
       \strng{namehash}{60fdd5e03056738e39d22d43ee7e89dc}
       \strng{fullhash}{fbeafd8f36895f28616dc8807e1d0dab}
+      \strng{fullhashraw}{fbeafd8f36895f28616dc8807e1d0dab}
       \strng{bibnamehash}{fbeafd8f36895f28616dc8807e1d0dab}
       \strng{authorbibnamehash}{fbeafd8f36895f28616dc8807e1d0dab}
       \strng{authornamehash}{60fdd5e03056738e39d22d43ee7e89dc}
       \strng{authorfullhash}{fbeafd8f36895f28616dc8807e1d0dab}
+      \strng{authorfullhashraw}{fbeafd8f36895f28616dc8807e1d0dab}
       \field{sortinit}{H}
-      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1126,78 +1108,116 @@
       \endverb
       \keyw{Battery electric vehicles,Diffusion of innovation,Sustainability,TCO,Total cost of ownership}
     \endentry
-    \entry{husterConsumersWantReconditioned2024}{article}{}
-      \name{author}{5}{}{%
-        {{hash=7d7ba7d66cc463c338918f76014bbd68}{%
-           family={Huster},
+    \entry{helvestonLogitrFastEstimation2023}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=9817d5f69c3b5815283345d5deaf3adb}{%
+           family={Helveston},
            familyi={H\bibinitperiod},
-           given={Sandra},
-           giveni={S\bibinitperiod}}}%
-        {{hash=3c302c935e7dc0e3b40e551b1fc0b71b}{%
-           family={Rosenberg},
-           familyi={R\bibinitperiod},
-           given={Sonja},
-           giveni={S\bibinitperiod}}}%
-        {{hash=ebe7f73ee9b7a0aa9ae654bc0e1210fe}{%
-           family={Hufnagel},
-           familyi={H\bibinitperiod},
-           given={Simon},
-           giveni={S\bibinitperiod}}}%
-        {{hash=3bf998b9dde2f64cd2895f0a262608e0}{%
-           family={Rudi},
-           familyi={R\bibinitperiod},
-           given={Andreas},
-           giveni={A\bibinitperiod}}}%
-        {{hash=4a782fb21521690315c73c83c54dd768}{%
-           family={Schultmann},
-           familyi={S\bibinitperiod},
-           given={Frank},
-           giveni={F\bibinitperiod}}}%
+           given={John\bibnamedelima Paul},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
       }
-      \strng{namehash}{022d5acfee3c962083b96946a5f0296f}
-      \strng{fullhash}{87ced556b1a949ccdafc44d4ca87f8ba}
-      \strng{bibnamehash}{87ced556b1a949ccdafc44d4ca87f8ba}
-      \strng{authorbibnamehash}{87ced556b1a949ccdafc44d4ca87f8ba}
-      \strng{authornamehash}{022d5acfee3c962083b96946a5f0296f}
-      \strng{authorfullhash}{87ced556b1a949ccdafc44d4ca87f8ba}
+      \strng{namehash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{fullhash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{fullhashraw}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{bibnamehash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{authorbibnamehash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{authornamehash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{authorfullhash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{authorfullhashraw}{9817d5f69c3b5815283345d5deaf3adb}
       \field{sortinit}{H}
-      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
-      \field{abstract}{Reconditioning electric vehicle (EV) batteries for reuse as spare parts could extend the lifespan of EVs and reduce the environmental impact of battery production. However, this circular option's viability depends on consumer acceptance of reconditioned batteries. This study presents a discrete choice experiment among German residents to address this issue. A mixed logit behavioral model and Hierarchical Bayes estimation are used to evaluate the choice experiment. The experiment was conducted online and surveyed 1152 participants, with 837 providing sufficient data for analysis. The results indicate that there might be acceptance of reconditioned EV batteries as spare parts. A considerable number of respondents opted for this option when presented with the hypothetical choice of replacing a defective battery in their EV with a new or reconditioned spare battery, or scrapping the EV and purchasing a working vehicle. The study finds that the choice is primarily influenced by the expected battery lifetime and the associated costs. Ecological factors play a minimal role and are more of a bonus. The study also reveals that younger respondents and non-EV owners exhibit greater concern regarding the lifetime losses of reconditioned batteries compared to older respondents and EV owners. A self-assessment of the respondents concerning the most and least decisive battery characteristics shows a connection between stated importance of the attributes and the actual choice, but the connection is relatively weak. The results lead to the conclusion that industry and academic institutes should see EV battery reconditioning as an emerging research field that requests solutions for prolonging reconditioned batteries' lifetime while ensuring economical pricing to satisfy the demands of the consumers.}
-      \field{day}{1}
-      \field{issn}{2352-5509}
-      \field{journaltitle}{Sustainable Production and Consumption}
-      \field{month}{7}
-      \field{shortjournal}{Sustainable Production and Consumption}
-      \field{shorttitle}{Do Consumers Want Reconditioned Electric Vehicle Batteries?}
-      \field{title}{Do Consumers Want Reconditioned Electric Vehicle Batteries? – {{A}} Discrete Choice Experiment}
-      \field{urlday}{20}
-      \field{urlmonth}{11}
+      \field{abstract}{This paper introduces the logitr R package for fast maximum likelihood estimation of multinomial logit and mixed logit models with unobserved heterogeneity across individuals, which is modeled by allowing parameters to vary randomly over individuals according to a chosen distribution. The package is faster than other similar packages such as mlogit, gmnl, mixl, and apollo, and it supports utility models specified with \&ldquo;preference space\&rdquo; or \&ldquo;willingness-to-pay (WTP) space\&rdquo; parameterizations, allowing for the direct estimation of marginal WTP. The typical procedure of computing WTP post-estimation using a preference space model can lead to unreasonable distributions of WTP across the population in mixed logit models. The paper provides a discussion of some of the implications of each utility parameterization for WTP estimates. It also highlights some of the design features that enable logitr's performant estimation speed and includes a benchmarking exercise with similar packages. Finally, the paper highlights additional features that are designed specifically for WTP space models, including a consistent user interface for specifying models in either space and a parallelized multi-start optimization loop, which is particularly useful for searching the solution space for different local minima when estimating models with non-convex log-likelihood functions.}
+      \field{day}{7}
+      \field{issn}{1548-7660}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{langid}{english}
+      \field{month}{2}
+      \field{shorttitle}{Logitr}
+      \field{title}{Logitr: {{Fast Estimation}} of {{Multinomial}} and {{Mixed Logit Models}} with {{Preference Space}} and {{Willingness-to-Pay Space Utility Parameterizations}}}
+      \field{urlday}{24}
+      \field{urlmonth}{6}
       \field{urlyear}{2025}
-      \field{volume}{48}
-      \field{year}{2024}
+      \field{volume}{105}
+      \field{year}{2023}
       \field{dateera}{ce}
       \field{urldateera}{ce}
-      \field{pages}{446\bibrangedash 459}
-      \range{pages}{14}
+      \field{pages}{1\bibrangedash 37}
+      \range{pages}{37}
       \verb{doi}
-      \verb 10.1016/j.spc.2024.05.027
+      \verb 10.18637/jss.v105.i10
       \endverb
       \verb{file}
-      \verb /Users/xnw17/Zotero/storage/EI2TH9S9/Huster et al. - 2024 - Do consumers want reconditioned electric vehicle batteries – A discrete choice experiment.pdf;/Users/xnw17/Zotero/storage/UQLQSSB3/S2352550924001568.html
+      \verb /Users/xnw17/Zotero/storage/PIZXEP78/Helveston - 2023 - logitr Fast Estimation of Multinomial and Mixed Logit Models with Preference Space and Willingness-.pdf
       \endverb
       \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S2352550924001568
+      \verb https://doi.org/10.18637/jss.v105.i10
       \endverb
       \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S2352550924001568
+      \verb https://doi.org/10.18637/jss.v105.i10
       \endverb
-      \keyw{Circular economy,Consumer preferences,Customer acceptance,Discrete choice,Remanufacturing}
+      \keyw{discrete choice models,logit,maximum likelihood estimation,preference,R,utility,willingness to pay}
     \endentry
-    \entry{iogansenDecipheringFactorsAssociated2023}{article}{}
+    \entry{helvestonPoolingStatedRevealed2018}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=9817d5f69c3b5815283345d5deaf3adb}{%
+           family={Helveston},
+           familyi={H\bibinitperiod},
+           given={John\bibnamedelima Paul},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=4cae08a39b8ce7007a41ac42a1de8313}{%
+           family={Feit},
+           familyi={F\bibinitperiod},
+           given={Elea\bibnamedelima McDonnell},
+           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=1c91c53cf018a0de7005fba50fc085ef}{%
+           family={Michalek},
+           familyi={M\bibinitperiod},
+           given={Jeremy\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{f10dd9f61247b2732d38a26901ed39f0}
+      \strng{fullhash}{3df647363cc14383a5e90a5d042e52e8}
+      \strng{fullhashraw}{3df647363cc14383a5e90a5d042e52e8}
+      \strng{bibnamehash}{3df647363cc14383a5e90a5d042e52e8}
+      \strng{authorbibnamehash}{3df647363cc14383a5e90a5d042e52e8}
+      \strng{authornamehash}{f10dd9f61247b2732d38a26901ed39f0}
+      \strng{authorfullhash}{3df647363cc14383a5e90a5d042e52e8}
+      \strng{authorfullhashraw}{3df647363cc14383a5e90a5d042e52e8}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Research Part B: Methodological}
+      \field{title}{Pooling Stated and Revealed Preference Data in the Presence of {{RP}} Endogeneity}
+      \field{urlday}{5}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{109}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{70\bibrangedash 89}
+      \range{pages}{20}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/4A4RXH6X/Helveston et al. - 2018 - Pooling stated and revealed preference data in the presence of RP endogeneity.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0191261516304647
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0191261516304647
+      \endverb
+    \endentry
+    \entry{iogansenDecipheringFactorsAssociated2023}{article}{}{}
       \name{author}{5}{}{%
         {{hash=47b803125ceab10c191ef64d86c9342e}{%
            family={Iogansen},
@@ -1227,12 +1247,14 @@
       }
       \strng{namehash}{89619f5304ba9c6c1c59489364f9bbc5}
       \strng{fullhash}{71a70524aa93abbec08db0d0cdd25725}
+      \strng{fullhashraw}{71a70524aa93abbec08db0d0cdd25725}
       \strng{bibnamehash}{71a70524aa93abbec08db0d0cdd25725}
       \strng{authorbibnamehash}{71a70524aa93abbec08db0d0cdd25725}
       \strng{authornamehash}{89619f5304ba9c6c1c59489364f9bbc5}
       \strng{authorfullhash}{71a70524aa93abbec08db0d0cdd25725}
+      \strng{authorfullhashraw}{71a70524aa93abbec08db0d0cdd25725}
       \field{sortinit}{I}
-      \field{sortinithash}{9417e9a1288a9371e2691d999083ed39}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1268,7 +1290,7 @@
       \endverb
       \keyw{Adoption behavior modeling,Alternative fuel vehicle (AFV),California,Integrated choice and latent variable (ICLV) model,Vehicle fuel type choice}
     \endentry
-    \entry{jiaoBusinessModelsSustainability2016}{article}{}
+    \entry{jiaoBusinessModelsSustainability2016}{article}{}{}
       \name{author}{2}{}{%
         {{hash=d4cfb1c213ac5e09c5b97cd8d71b551a}{%
            family={Jiao},
@@ -1283,12 +1305,14 @@
       }
       \strng{namehash}{74bf7814f185c861577df04e87c3c184}
       \strng{fullhash}{74bf7814f185c861577df04e87c3c184}
+      \strng{fullhashraw}{74bf7814f185c861577df04e87c3c184}
       \strng{bibnamehash}{74bf7814f185c861577df04e87c3c184}
       \strng{authorbibnamehash}{74bf7814f185c861577df04e87c3c184}
       \strng{authornamehash}{74bf7814f185c861577df04e87c3c184}
       \strng{authorfullhash}{74bf7814f185c861577df04e87c3c184}
+      \strng{authorfullhashraw}{74bf7814f185c861577df04e87c3c184}
       \field{sortinit}{J}
-      \field{sortinithash}{c45040a764d616897e7f5b30174d7b92}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1325,7 +1349,7 @@
       \endverb
       \keyw{battery secondary use,Business models,electric vehicles,energy storage,innovation,renewables,sustainability}
     \endentry
-    \entry{kamakuraProbabilisticChoiceModel1989}{article}{}
+    \entry{kamakuraProbabilisticChoiceModel1989}{article}{}{}
       \name{author}{2}{}{%
         {{hash=a5e932f7d1560ba17b511bcbc7b1b7bf}{%
            family={Kamakura},
@@ -1343,12 +1367,14 @@
       }
       \strng{namehash}{7489858284d55cb09f84e11bef771d7d}
       \strng{fullhash}{7489858284d55cb09f84e11bef771d7d}
+      \strng{fullhashraw}{7489858284d55cb09f84e11bef771d7d}
       \strng{bibnamehash}{7489858284d55cb09f84e11bef771d7d}
       \strng{authorbibnamehash}{7489858284d55cb09f84e11bef771d7d}
       \strng{authornamehash}{7489858284d55cb09f84e11bef771d7d}
       \strng{authorfullhash}{7489858284d55cb09f84e11bef771d7d}
+      \strng{authorfullhashraw}{7489858284d55cb09f84e11bef771d7d}
       \field{sortinit}{K}
-      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1380,7 +1406,7 @@
       \verb https://doi.org/10.1177/002224378902600401
       \endverb
     \endentry
-    \entry{khaloeiHowDoesCharging2020}{report}{}
+    \entry{khaloeiHowDoesCharging2020}{report}{}{}
       \name{author}{3}{}{%
         {{hash=dbc59af1710560cc5a498615a072f234}{%
            family={Khaloei},
@@ -1400,12 +1426,14 @@
       }
       \strng{namehash}{c494cdcf971621a192f89fba22434421}
       \strng{fullhash}{ae9f5094d634eebff36e27ab5ff10db2}
+      \strng{fullhashraw}{ae9f5094d634eebff36e27ab5ff10db2}
       \strng{bibnamehash}{ae9f5094d634eebff36e27ab5ff10db2}
       \strng{authorbibnamehash}{ae9f5094d634eebff36e27ab5ff10db2}
       \strng{authornamehash}{c494cdcf971621a192f89fba22434421}
       \strng{authorfullhash}{ae9f5094d634eebff36e27ab5ff10db2}
+      \strng{authorfullhashraw}{ae9f5094d634eebff36e27ab5ff10db2}
       \field{sortinit}{K}
-      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1425,7 +1453,7 @@
       \verb https://cpb-us-e1.wpmucdn.com/sites.uw.edu/dist/d/4543/files/2020/07/EV-infrastructure-and-vehicle-choice-final-report.pdf
       \endverb
     \endentry
-    \entry{kothariBatteryReplacementCosts2024}{online}{}
+    \entry{kothariBatteryReplacementCosts2024}{online}{}{}
       \name{author}{1}{}{%
         {{hash=99368aedc6761ea6eda6ad2533a927fa}{%
            family={Kothari},
@@ -1438,12 +1466,14 @@
       }
       \strng{namehash}{99368aedc6761ea6eda6ad2533a927fa}
       \strng{fullhash}{99368aedc6761ea6eda6ad2533a927fa}
+      \strng{fullhashraw}{99368aedc6761ea6eda6ad2533a927fa}
       \strng{bibnamehash}{99368aedc6761ea6eda6ad2533a927fa}
       \strng{authorbibnamehash}{99368aedc6761ea6eda6ad2533a927fa}
       \strng{authornamehash}{99368aedc6761ea6eda6ad2533a927fa}
       \strng{authorfullhash}{99368aedc6761ea6eda6ad2533a927fa}
+      \strng{authorfullhashraw}{99368aedc6761ea6eda6ad2533a927fa}
       \field{sortinit}{K}
-      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1468,7 +1498,7 @@
       \verb https://insideevs.com/news/742022/battery-replacement-costs-fall-cheaper-than-fixing-engine/
       \endverb
     \endentry
-    \entry{krishnaUnderstandingIdentifyingBarriers2021}{article}{}
+    \entry{krishnaUnderstandingIdentifyingBarriers2021}{article}{}{}
       \name{author}{1}{}{%
         {{hash=b3241714edeea6c65d88c22236cb889c}{%
            family={Krishna},
@@ -1478,12 +1508,14 @@
       }
       \strng{namehash}{b3241714edeea6c65d88c22236cb889c}
       \strng{fullhash}{b3241714edeea6c65d88c22236cb889c}
+      \strng{fullhashraw}{b3241714edeea6c65d88c22236cb889c}
       \strng{bibnamehash}{b3241714edeea6c65d88c22236cb889c}
       \strng{authorbibnamehash}{b3241714edeea6c65d88c22236cb889c}
       \strng{authornamehash}{b3241714edeea6c65d88c22236cb889c}
       \strng{authorfullhash}{b3241714edeea6c65d88c22236cb889c}
+      \strng{authorfullhashraw}{b3241714edeea6c65d88c22236cb889c}
       \field{sortinit}{K}
-      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1518,7 +1550,7 @@
       \endverb
       \keyw{Barriers,Consumer perception,Electric vehicles,eWOM}
     \endentry
-    \entry{letmatheConsumerorientedTotalCost2017}{article}{}
+    \entry{letmatheConsumerorientedTotalCost2017}{article}{}{}
       \name{author}{2}{}{%
         {{hash=eecd54c2662efb90ff5ad1ed620aa06c}{%
            family={Letmathe},
@@ -1533,12 +1565,14 @@
       }
       \strng{namehash}{c2f7d81e3d3f475aee4f32657b5183b4}
       \strng{fullhash}{c2f7d81e3d3f475aee4f32657b5183b4}
+      \strng{fullhashraw}{c2f7d81e3d3f475aee4f32657b5183b4}
       \strng{bibnamehash}{c2f7d81e3d3f475aee4f32657b5183b4}
       \strng{authorbibnamehash}{c2f7d81e3d3f475aee4f32657b5183b4}
       \strng{authornamehash}{c2f7d81e3d3f475aee4f32657b5183b4}
       \strng{authorfullhash}{c2f7d81e3d3f475aee4f32657b5183b4}
+      \strng{authorfullhashraw}{c2f7d81e3d3f475aee4f32657b5183b4}
       \field{sortinit}{L}
-      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1573,7 +1607,7 @@
       \endverb
       \keyw{Battery second life,Battery second use,Consumer-oriented total cost of ownership,Cost drivers,Electric vehicles}
     \endentry
-    \entry{limMassAdoptionElectric2015}{article}{}
+    \entry{limMassAdoptionElectric2015}{article}{}{}
       \name{author}{3}{}{%
         {{hash=08ce9d2a2ef60fb1407207f23b2d1183}{%
            family={Lim},
@@ -1596,12 +1630,14 @@
       }
       \strng{namehash}{85edd62ef552b0349a0fbc22b9ab7722}
       \strng{fullhash}{c88eba0271becfadf2510177f4dbc63a}
+      \strng{fullhashraw}{c88eba0271becfadf2510177f4dbc63a}
       \strng{bibnamehash}{c88eba0271becfadf2510177f4dbc63a}
       \strng{authorbibnamehash}{c88eba0271becfadf2510177f4dbc63a}
       \strng{authornamehash}{85edd62ef552b0349a0fbc22b9ab7722}
       \strng{authorfullhash}{c88eba0271becfadf2510177f4dbc63a}
+      \strng{authorfullhashraw}{c88eba0271becfadf2510177f4dbc63a}
       \field{sortinit}{L}
-      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1634,7 +1670,7 @@
       \endverb
       \keyw{consumer anxieties,durable goods,electric vehicles,emission savings,secondary market}
     \endentry
-    \entry{marketresearchfutureUnitedStatesUsed2025}{online}{}
+    \entry{marketresearchfutureUnitedStatesUsed2025}{online}{}{}
       \name{author}{1}{}{%
         {{hash=0585f4ab93b0b5191d72ce69f0a4d7bc}{%
            family={{Market Research Future}},
@@ -1642,12 +1678,14 @@
       }
       \strng{namehash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
       \strng{fullhash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{fullhashraw}{0585f4ab93b0b5191d72ce69f0a4d7bc}
       \strng{bibnamehash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
       \strng{authorbibnamehash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
       \strng{authornamehash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
       \strng{authorfullhash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{authorfullhashraw}{0585f4ab93b0b5191d72ce69f0a4d7bc}
       \field{sortinit}{M}
-      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1671,7 +1709,64 @@
       \verb https://www.marketresearchfuture.com/reports/us-used-car-market-21771
       \endverb
     \endentry
-    \entry{naseriWhoMoreLikely2024}{article}{}
+    \entry{mcfaddenMixedMNLModels2000}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=1327829299e572b76be93fafcdca8d7b}{%
+           family={McFadden},
+           familyi={M\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=5b2e1829286c42e06ea22ce95f7792c5}{%
+           family={Train},
+           familyi={T\bibinitperiod},
+           given={Kenneth},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{e7f474932572a9e931816304701d3cde}
+      \strng{fullhash}{e7f474932572a9e931816304701d3cde}
+      \strng{fullhashraw}{e7f474932572a9e931816304701d3cde}
+      \strng{bibnamehash}{e7f474932572a9e931816304701d3cde}
+      \strng{authorbibnamehash}{e7f474932572a9e931816304701d3cde}
+      \strng{authornamehash}{e7f474932572a9e931816304701d3cde}
+      \strng{authorfullhash}{e7f474932572a9e931816304701d3cde}
+      \strng{authorfullhashraw}{e7f474932572a9e931816304701d3cde}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper considers mixed, or random coeÅcients, multinomial logit (MMNL) models for discrete response, and establishes the following results. Under mild regularity conditions, any discrete choice model derived from random utility maximization has choice probabilities that can be approximated as closely as one pleases by a MMNL model. Practical estimation of a parametric mixing family can be carried out by Maximum Simulated Likelihood Estimation or Method of Simulated Moments, and easily computed instruments are provided that make the latter procedure fairly eÅcient. The adequacy of a mixing speciÆcation can be tested simply as an omitted variable test with appropriately deÆned artiÆcial variables. An application to a problem of demand for alternative vehicles shows that MMNL provides a Øexible and computationally practical approach to discrete response analysis. Copyright \# 2000 John Wiley \& Sons, Ltd.}
+      \field{issn}{0883-7252, 1099-1255}
+      \field{journaltitle}{Journal of Applied Econometrics}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{5}
+      \field{shortjournal}{J. Appl. Econ.}
+      \field{title}{Mixed {{MNL}} Models for Discrete Response}
+      \field{urlday}{5}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{15}
+      \field{year}{2000}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{447\bibrangedash 470}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1002/1099-1255(200009/10)15:5<447::AID-JAE570>3.0.CO;2-1
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/QRGDDGPK/McFadden and Train - 2000 - Mixed MNL models for discrete response.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/10.1002/1099-1255(200009/10)15:5<447::AID-JAE570>3.0.CO;2-1
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/10.1002/1099-1255(200009/10)15:5%3C447::AID-JAE570%3E3.0.CO;2-1
+      \endverb
+    \endentry
+    \entry{naseriWhoMoreLikely2024}{article}{}{}
       \name{author}{4}{}{%
         {{hash=f210f70f96555c70459de36fb08dc101}{%
            family={Naseri},
@@ -1696,12 +1791,14 @@
       }
       \strng{namehash}{356de45e8891d29c3bc44095b1ae334a}
       \strng{fullhash}{1868350c2a4c98e0802a33ce8cbde5f1}
+      \strng{fullhashraw}{1868350c2a4c98e0802a33ce8cbde5f1}
       \strng{bibnamehash}{1868350c2a4c98e0802a33ce8cbde5f1}
       \strng{authorbibnamehash}{1868350c2a4c98e0802a33ce8cbde5f1}
       \strng{authornamehash}{356de45e8891d29c3bc44095b1ae334a}
       \strng{authorfullhash}{1868350c2a4c98e0802a33ce8cbde5f1}
+      \strng{authorfullhashraw}{1868350c2a4c98e0802a33ce8cbde5f1}
       \field{sortinit}{N}
-      \field{sortinithash}{98cf339a479c0454fe09153a08675a15}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1736,7 +1833,7 @@
       \endverb
       \keyw{Accumulated local effects,Electric vehicle,Ensemble learning,Variables analysis}
     \endentry
-    \entry{neubauerSensitivityBatteryElectric2012}{article}{}
+    \entry{neubauerSensitivityBatteryElectric2012}{article}{}{}
       \name{author}{3}{}{%
         {{hash=ab5d38f4dd16b78b59ddbca64976dd3f}{%
            family={Neubauer},
@@ -1756,12 +1853,14 @@
       }
       \strng{namehash}{a76ad5b7fad3faf488a1712f38fee968}
       \strng{fullhash}{c3455612cede5c010ab23745a7046839}
+      \strng{fullhashraw}{c3455612cede5c010ab23745a7046839}
       \strng{bibnamehash}{c3455612cede5c010ab23745a7046839}
       \strng{authorbibnamehash}{c3455612cede5c010ab23745a7046839}
       \strng{authornamehash}{a76ad5b7fad3faf488a1712f38fee968}
       \strng{authorfullhash}{c3455612cede5c010ab23745a7046839}
+      \strng{authorfullhashraw}{c3455612cede5c010ab23745a7046839}
       \field{sortinit}{N}
-      \field{sortinithash}{98cf339a479c0454fe09153a08675a15}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1796,7 +1895,69 @@
       \endverb
       \keyw{Battery Ownership Model,Charge strategies,Drive pattern,Electric vehicles,Range,Total cost of ownership}
     \endentry
-    \entry{pedrosaSecondhandElectricalVehicles2018}{article}{}
+    \entry{nylundDecidingNumberClasses2007}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=df5542674a1b790e05a00e7b86eaebdf}{%
+           family={Nylund},
+           familyi={N\bibinitperiod},
+           given={Karen\bibnamedelima L.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=ad1e5668a6a4f83a6133c359f579c441}{%
+           family={Asparouhov},
+           familyi={A\bibinitperiod},
+           given={Tihomir},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f8aaa302d9930dbecaf323e154a4a943}{%
+           family={Muthén},
+           familyi={M\bibinitperiod},
+           given={Bengt\bibnamedelima O.},
+           giveni={B\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Routledge}%
+      }
+      \strng{namehash}{e8a6ce5979fe49141203ed3fd95bab1c}
+      \strng{fullhash}{0cbdf42e068cecb5548b05c581ded57b}
+      \strng{fullhashraw}{0cbdf42e068cecb5548b05c581ded57b}
+      \strng{bibnamehash}{0cbdf42e068cecb5548b05c581ded57b}
+      \strng{authorbibnamehash}{0cbdf42e068cecb5548b05c581ded57b}
+      \strng{authornamehash}{e8a6ce5979fe49141203ed3fd95bab1c}
+      \strng{authorfullhash}{0cbdf42e068cecb5548b05c581ded57b}
+      \strng{authorfullhashraw}{0cbdf42e068cecb5548b05c581ded57b}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Mixture modeling is a widely applied data analysis technique used to identify unobserved heterogeneity in a population. Despite mixture models' usefulness in practice, one unresolved issue in the application of mixture models is that there is not one commonly accepted statistical indicator for deciding on the number of classes in a study population. This article presents the results of a simulation study that examines the performance of likelihood-based tests and the traditionally used Information Criterion (ICs) used for determining the number of classes in mixture modeling. We look at the performance of these tests and indexes for 3 types of mixture models: latent class analysis (LCA), a factor mixture model (FMA), and a growth mixture models (GMM). We evaluate the ability of the tests and indexes to correctly identify the number of classes at three different sample sizes (n = 200, 500, 1,000). Whereas the Bayesian Information Criterion performed the best of the ICs, the bootstrap likelihood ratio test proved to be a very consistent indicator of classes across all of the models considered.}
+      \field{day}{23}
+      \field{issn}{1070-5511}
+      \field{journaltitle}{Structural Equation Modeling: A Multidisciplinary Journal}
+      \field{month}{10}
+      \field{number}{4}
+      \field{shorttitle}{Deciding on the {{Number}} of {{Classes}} in {{Latent Class Analysis}} and {{Growth Mixture Modeling}}}
+      \field{title}{Deciding on the {{Number}} of {{Classes}} in {{Latent Class Analysis}} and {{Growth Mixture Modeling}}: {{A Monte Carlo Simulation Study}}}
+      \field{urlday}{5}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{14}
+      \field{year}{2007}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{535\bibrangedash 569}
+      \range{pages}{35}
+      \verb{doi}
+      \verb 10.1080/10705510701575396
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1080/10705510701575396
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1080/10705510701575396
+      \endverb
+    \endentry
+    \entry{pedrosaSecondhandElectricalVehicles2018}{article}{}{}
       \name{author}{2}{}{%
         {{hash=969d1278838d47f5b353b5754038f62d}{%
            family={Pedrosa},
@@ -1814,12 +1975,14 @@
       }
       \strng{namehash}{354f4e0a92d09af06fb52c0dd4d34452}
       \strng{fullhash}{354f4e0a92d09af06fb52c0dd4d34452}
+      \strng{fullhashraw}{354f4e0a92d09af06fb52c0dd4d34452}
       \strng{bibnamehash}{354f4e0a92d09af06fb52c0dd4d34452}
       \strng{authorbibnamehash}{354f4e0a92d09af06fb52c0dd4d34452}
       \strng{authornamehash}{354f4e0a92d09af06fb52c0dd4d34452}
       \strng{authorfullhash}{354f4e0a92d09af06fb52c0dd4d34452}
+      \strng{authorfullhashraw}{354f4e0a92d09af06fb52c0dd4d34452}
       \field{sortinit}{P}
-      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1851,7 +2014,7 @@
       \endverb
       \keyw{battery,electric vehicle,EV,second-hand EV,secondary market,warranty}
     \endentry
-    \entry{prietoUsingHedonicPrice2015}{article}{}
+    \entry{prietoUsingHedonicPrice2015}{article}{}{}
       \name{author}{3}{}{%
         {{hash=b45a8e7593a5b6f2ec8972bfa4ca0098}{%
            family={Prieto},
@@ -1871,12 +2034,14 @@
       }
       \strng{namehash}{e926abb4b95be35932d12d7439fec57c}
       \strng{fullhash}{909668b665b2c6eb6e051abf8ebb7569}
+      \strng{fullhashraw}{909668b665b2c6eb6e051abf8ebb7569}
       \strng{bibnamehash}{909668b665b2c6eb6e051abf8ebb7569}
       \strng{authorbibnamehash}{909668b665b2c6eb6e051abf8ebb7569}
       \strng{authornamehash}{e926abb4b95be35932d12d7439fec57c}
       \strng{authorfullhash}{909668b665b2c6eb6e051abf8ebb7569}
+      \strng{authorfullhashraw}{909668b665b2c6eb6e051abf8ebb7569}
       \field{sortinit}{P}
-      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1912,7 +2077,7 @@
       \endverb
       \keyw{Prospect theory,Reliability,Residual prices,Used car market}
     \endentry
-    \entry{shaikhSystemDynamicsCosting2023}{article}{}
+    \entry{shaikhSystemDynamicsCosting2023}{article}{}{}
       \name{author}{6}{}{%
         {{hash=afef1bcb06532e291dc7e4efa4afdff2}{%
            family={Shaikh},
@@ -1947,12 +2112,14 @@
       }
       \strng{namehash}{437df0095b9121e49d6ca4ff479fdd8c}
       \strng{fullhash}{ecc91a6ca1e1a7c8fa2cd925814643ea}
+      \strng{fullhashraw}{ecc91a6ca1e1a7c8fa2cd925814643ea}
       \strng{bibnamehash}{ecc91a6ca1e1a7c8fa2cd925814643ea}
       \strng{authorbibnamehash}{ecc91a6ca1e1a7c8fa2cd925814643ea}
       \strng{authornamehash}{437df0095b9121e49d6ca4ff479fdd8c}
       \strng{authorfullhash}{ecc91a6ca1e1a7c8fa2cd925814643ea}
+      \strng{authorfullhashraw}{ecc91a6ca1e1a7c8fa2cd925814643ea}
       \field{sortinit}{S}
-      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -1986,7 +2153,7 @@
       \verb http://jjmie.hu.edu.jo/vol17/vol17-1/02.htm
       \endverb
     \endentry
-    \entry{sheykhfardAnalyzingPurchaseIntentions2025}{article}{}
+    \entry{sheykhfardAnalyzingPurchaseIntentions2025}{article}{}{}
       \name{author}{4}{}{%
         {{hash=73e2f72d09d3499d8eaa84b5891d03cc}{%
            family={Sheykhfard},
@@ -2011,12 +2178,14 @@
       }
       \strng{namehash}{66e7a7548a4be4dd580a2f2f1084cf48}
       \strng{fullhash}{3eb624030f9bf215aef3e55a806f90d5}
+      \strng{fullhashraw}{3eb624030f9bf215aef3e55a806f90d5}
       \strng{bibnamehash}{3eb624030f9bf215aef3e55a806f90d5}
       \strng{authorbibnamehash}{3eb624030f9bf215aef3e55a806f90d5}
       \strng{authornamehash}{66e7a7548a4be4dd580a2f2f1084cf48}
       \strng{authorfullhash}{3eb624030f9bf215aef3e55a806f90d5}
+      \strng{authorfullhashraw}{3eb624030f9bf215aef3e55a806f90d5}
       \field{sortinit}{S}
-      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -2052,7 +2221,7 @@
       \endverb
       \keyw{Consumer behavior,Electric vehicles,EV experience,Structural equation modeling,Sustainable transportation}
     \endentry
-    \entry{skeeteEVentHorizonBattery2020}{article}{}
+    \entry{skeeteEVentHorizonBattery2020}{article}{}{}
       \name{author}{5}{}{%
         {{hash=0c8bea664cb1973d984c87b0259e3bed}{%
            family={Skeete},
@@ -2082,12 +2251,14 @@
       }
       \strng{namehash}{6907db1260c6933cbe29f786e6766235}
       \strng{fullhash}{7e9522597ba4eefa1f467161602572c7}
+      \strng{fullhashraw}{7e9522597ba4eefa1f467161602572c7}
       \strng{bibnamehash}{7e9522597ba4eefa1f467161602572c7}
       \strng{authorbibnamehash}{7e9522597ba4eefa1f467161602572c7}
       \strng{authornamehash}{6907db1260c6933cbe29f786e6766235}
       \strng{authorfullhash}{7e9522597ba4eefa1f467161602572c7}
+      \strng{authorfullhashraw}{7e9522597ba4eefa1f467161602572c7}
       \field{sortinit}{S}
-      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -2123,7 +2294,7 @@
       \endverb
       \keyw{Electric vehicles,End-of-life,Lithium-ion batteries,Recycling,Second life,Technological obsolescence}
     \endentry
-    \entry{sonarExaminingCausalFactors2023}{article}{}
+    \entry{sonarExaminingCausalFactors2023}{article}{}{}
       \name{author}{5}{}{%
         {{hash=aa545c76846c2d915267222a00c47059}{%
            family={Sonar},
@@ -2153,12 +2324,14 @@
       }
       \strng{namehash}{3a8a09c704d21d4fcf84466423789f7d}
       \strng{fullhash}{a060775ad048eb4240c8162efcf880dd}
+      \strng{fullhashraw}{a060775ad048eb4240c8162efcf880dd}
       \strng{bibnamehash}{a060775ad048eb4240c8162efcf880dd}
       \strng{authorbibnamehash}{a060775ad048eb4240c8162efcf880dd}
       \strng{authornamehash}{3a8a09c704d21d4fcf84466423789f7d}
       \strng{authorfullhash}{a060775ad048eb4240c8162efcf880dd}
+      \strng{authorfullhashraw}{a060775ad048eb4240c8162efcf880dd}
       \field{sortinit}{S}
-      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -2192,7 +2365,7 @@
       \endverb
       \keyw{Climate change,Conceptual Analysis,Critical Thinking,Delphi,DEMATEL,Electric vehicles,Empiricism,Formal Reasoning,MCDM,Mixed Methods,Reasoning}
     \endentry
-    \entry{tankouScalingReuseRecycling2023}{report}{}
+    \entry{tankouScalingReuseRecycling2023}{report}{}{}
       \name{author}{3}{}{%
         {{hash=d4d1ab3f98502c22c3fd8be0492d4208}{%
            family={Tankou},
@@ -2212,12 +2385,14 @@
       }
       \strng{namehash}{3e0b6d82d8954ebe57aaca4bbfe541fb}
       \strng{fullhash}{241c1ad794a22566e2679acb63a3d822}
+      \strng{fullhashraw}{241c1ad794a22566e2679acb63a3d822}
       \strng{bibnamehash}{241c1ad794a22566e2679acb63a3d822}
       \strng{authorbibnamehash}{241c1ad794a22566e2679acb63a3d822}
       \strng{authornamehash}{3e0b6d82d8954ebe57aaca4bbfe541fb}
       \strng{authorfullhash}{241c1ad794a22566e2679acb63a3d822}
+      \strng{authorfullhashraw}{241c1ad794a22566e2679acb63a3d822}
       \field{sortinit}{T}
-      \field{sortinithash}{51f9faf24c60c62ca764a77f78cf5666}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -2230,7 +2405,58 @@
       \verb /Users/xnw17/Zotero/storage/PDZRRYK4/Tankou et al. - Scaling up reuse and recycling of electric vehicle batteries Assessing challenges and policy approa.pdf
       \endverb
     \endentry
-    \entry{wittElectricCarBattery2024}{online}{}
+    \entry{trainDiscreteChoiceMethods2009}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=bb49649475647614b53241e5cdccd584}{%
+           family={Train},
+           familyi={T\bibinitperiod},
+           given={Kenneth\bibnamedelima E.},
+           giveni={K\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{bb49649475647614b53241e5cdccd584}
+      \strng{fullhash}{bb49649475647614b53241e5cdccd584}
+      \strng{fullhashraw}{bb49649475647614b53241e5cdccd584}
+      \strng{bibnamehash}{bb49649475647614b53241e5cdccd584}
+      \strng{authorbibnamehash}{bb49649475647614b53241e5cdccd584}
+      \strng{authornamehash}{bb49649475647614b53241e5cdccd584}
+      \strng{authorfullhash}{bb49649475647614b53241e5cdccd584}
+      \strng{authorfullhashraw}{bb49649475647614b53241e5cdccd584}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This book describes the new generation of discrete choice methods, focusing on the many advances that are made possible by simulation. Researchers use these statistical methods to examine the choices that consumers, households, firms, and other agents make. Each of the major models is covered: logit, generalized extreme value, or GEV (including nested and cross-nested logits), probit, and mixed logit, plus a variety of specifications that build on these basics. Recent advances in Bayesian procedures are explored, including the use of the Metropolis-Hastings algorithm and its variant Gibbs sampling. This second edition adds chapters on endogeneity and expectation-maximization (EM) algorithms. No other book incorporates all these fields, which have arisen in the past 25 years. The procedures are applicable in many fields, including energy, transportation, environmental studies, health, labor, and marketing.}
+      \field{edition}{2}
+      \field{isbn}{978-0-521-76655-5}
+      \field{title}{Discrete {{Choice Methods}} with {{Simulation}}}
+      \field{urlday}{5}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1017/CBO9780511805271
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/7L7CXEZI/49CABD00F3DDDA088A8FBFAAAD7E9546.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cambridge.org/core/books/discrete-choice-methods-with-simulation/49CABD00F3DDDA088A8FBFAAAD7E9546
+      \endverb
+      \verb{url}
+      \verb https://www.cambridge.org/core/books/discrete-choice-methods-with-simulation/49CABD00F3DDDA088A8FBFAAAD7E9546
+      \endverb
+    \endentry
+    \entry{wittElectricCarBattery2024}{online}{}{}
       \name{author}{1}{}{%
         {{hash=6fe745409ef7fbb8b15f1e238fb9aa83}{%
            family={Witt},
@@ -2240,12 +2466,14 @@
       }
       \strng{namehash}{6fe745409ef7fbb8b15f1e238fb9aa83}
       \strng{fullhash}{6fe745409ef7fbb8b15f1e238fb9aa83}
+      \strng{fullhashraw}{6fe745409ef7fbb8b15f1e238fb9aa83}
       \strng{bibnamehash}{6fe745409ef7fbb8b15f1e238fb9aa83}
       \strng{authorbibnamehash}{6fe745409ef7fbb8b15f1e238fb9aa83}
       \strng{authornamehash}{6fe745409ef7fbb8b15f1e238fb9aa83}
       \strng{authorfullhash}{6fe745409ef7fbb8b15f1e238fb9aa83}
+      \strng{authorfullhashraw}{6fe745409ef7fbb8b15f1e238fb9aa83}
       \field{sortinit}{W}
-      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -2268,7 +2496,7 @@
       \verb https://www.recurrentauto.com/research/costs-ev-battery-replacement?utm_source=chatgpt.com
       \endverb
     \endentry
-    \entry{yangPredictiveModelingBattery2018}{article}{}
+    \entry{yangPredictiveModelingBattery2018}{article}{}{}
       \name{author}{4}{}{%
         {{hash=bac6a7a5d8c835c2ebe5288a6fe722b4}{%
            family={Yang},
@@ -2296,12 +2524,14 @@
       }
       \strng{namehash}{2abb2f5ef86f1a54fc0ee4dc1e1b45f2}
       \strng{fullhash}{8366f1d1f5e4eed5e0af3b69c89517a1}
+      \strng{fullhashraw}{8366f1d1f5e4eed5e0af3b69c89517a1}
       \strng{bibnamehash}{8366f1d1f5e4eed5e0af3b69c89517a1}
       \strng{authorbibnamehash}{8366f1d1f5e4eed5e0af3b69c89517a1}
       \strng{authornamehash}{2abb2f5ef86f1a54fc0ee4dc1e1b45f2}
       \strng{authorfullhash}{8366f1d1f5e4eed5e0af3b69c89517a1}
+      \strng{authorfullhashraw}{8366f1d1f5e4eed5e0af3b69c89517a1}
       \field{sortinit}{Y}
-      \field{sortinithash}{6ae2ff5458ff901249c2745238c951b7}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -2338,7 +2568,7 @@
       \endverb
       \keyw{Energy and behaviour,Projection and prediction}
     \endentry
-    \entry{yuanInvestigationRangeAnxiety2018}{article}{}
+    \entry{yuanInvestigationRangeAnxiety2018}{article}{}{}
       \name{author}{6}{}{%
         {{hash=54cf1a2509659f1451d09bdfaee4fdd6}{%
            family={Yuan},
@@ -2373,12 +2603,14 @@
       }
       \strng{namehash}{d078f9b897f7582fdd43e0dcaefb0ea0}
       \strng{fullhash}{9286df6750ff3bafbd974170f15a2dbb}
+      \strng{fullhashraw}{9286df6750ff3bafbd974170f15a2dbb}
       \strng{bibnamehash}{9286df6750ff3bafbd974170f15a2dbb}
       \strng{authorbibnamehash}{9286df6750ff3bafbd974170f15a2dbb}
       \strng{authornamehash}{d078f9b897f7582fdd43e0dcaefb0ea0}
       \strng{authorfullhash}{9286df6750ff3bafbd974170f15a2dbb}
+      \strng{authorfullhashraw}{9286df6750ff3bafbd974170f15a2dbb}
       \field{sortinit}{Y}
-      \field{sortinithash}{6ae2ff5458ff901249c2745238c951b7}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -2411,7 +2643,7 @@
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1155/2018/8301209
       \endverb
     \endentry
-    \entry{zouEffectsChargingInfrastructure2020}{article}{}
+    \entry{zouEffectsChargingInfrastructure2020}{article}{}{}
       \name{author}{3}{}{%
         {{hash=08bdacc32bec1d425a0e2155be46fccc}{%
            family={Zou},
@@ -2434,12 +2666,14 @@
       }
       \strng{namehash}{0961f854c867d66df48c9f815120ddc2}
       \strng{fullhash}{a514e9ec372f7a04778ad74c61fb2415}
+      \strng{fullhashraw}{a514e9ec372f7a04778ad74c61fb2415}
       \strng{bibnamehash}{a514e9ec372f7a04778ad74c61fb2415}
       \strng{authorbibnamehash}{a514e9ec372f7a04778ad74c61fb2415}
       \strng{authornamehash}{0961f854c867d66df48c9f815120ddc2}
       \strng{authorfullhash}{a514e9ec372f7a04778ad74c61fb2415}
+      \strng{authorfullhashraw}{a514e9ec372f7a04778ad74c61fb2415}
       \field{sortinit}{Z}
-      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
@@ -2475,10 +2709,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{mcfaddenMixedMNLModels2000}
-  \missing{trainDiscreteChoiceMethods2009}
-  \missing{trainHaltonSequencesNumerical1999}
-  \missing{trainWTPSpacePreference2005}
 \endrefsection
 \endinput
 

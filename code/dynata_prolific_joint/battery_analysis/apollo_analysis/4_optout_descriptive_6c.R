@@ -183,20 +183,30 @@ class_prop <- class_prop %>%
 # ---- Class labels ----
 
 class_labels <- c(
-  class1 = "C1: Disengaged / Range Anxious",
-  class2 = "C2: Range-Aware / Refurbishment-Averse",
-  class3 = "C3: High-Value Range Enthusiasts",
-  class4 = "C4: Budget-Constrained",
-  class5 = "C5: Loss-Averse / Battery-Sensitive",
-  class6 = "C6: Opt-Out Resistant"
+  # class1 = "C1: Disengaged / Range Anxious",
+  # class2 = "C2: Range-Aware / Refurbishment-Averse",
+  # class3 = "C3: High-Value Range Enthusiasts",
+  # class4 = "C4: Budget-Constrained",
+  # class5 = "C5: Loss-Averse / Battery-Sensitive",
+  # class6 = "C6: Opt-Out Resistant"
+  class1 = "Class 1",
+  class2 = "Class 2",
+  class3 = "Class 3",
+  class4 = "Class 4",
+  class5 = "Class 5",
+  class6 = "Class 6"
 )
 
 # Posterior class probabilities per respondent (model sample only)
 class_probs <- class_prop %>%
   select(
     psid,
-    prob_class1, prob_class2, prob_class3,
-    prob_class4, prob_class5, prob_class6
+    prob_class1,
+    prob_class2,
+    prob_class3,
+    prob_class4,
+    prob_class5,
+    prob_class6
   )
 
 # ---- Probability-weighted opt-out rates ----
@@ -292,6 +302,28 @@ time_overall <- time_data %>%
 time_table <- bind_rows(time_by_class, time_overall) %>%
   mutate(across(where(is.numeric), ~ round(., 1)))
 
+# Save class-level durations for use in 3b_summarize_class_profile_6c.R
+write_parquet(
+  time_table %>%
+    filter(class_label != "Overall") %>%
+    mutate(class = paste0("class", str_extract(class_label, "\\d+"))) %>%
+    select(
+      class,
+      duration_q1          = Q1,
+      duration_q2          = Q2,
+      duration_q3          = Q3,
+      duration_q4          = Q4,
+      duration_q5          = Q5,
+      duration_q6          = Q6,
+      duration_battery_dce = CBC_Total,
+      duration_full_survey = Survey_Total
+    ),
+  here(
+    "code", "output", "model_output", "battery_analysis", "apollo",
+    "0_survey_duration_by_class_6c.parquet"
+  )
+)
+
 # ---- GT: Opt-out rate table ----
 
 gt_optout <- optout_table %>%
@@ -345,6 +377,10 @@ gtsave(
 
 gt_time <- time_table %>%
   gt(rowname_col = "class_label") %>%
+  fmt_number(
+    columns = c(Q1, Q2, Q3, Q4, Q5, Q6, CBC_Total, Survey_Total),
+    decimals = 1
+  ) %>%
   tab_spanner(
     label = "Median of Duration\n(Seconds per Choice Task)",
     columns = c(Q1, Q2, Q3, Q4, Q5, Q6)
@@ -500,14 +536,18 @@ p_c3_c6 <- bind_rows(c3_long, c6_long) %>%
   geom_density(alpha = 0.35, linewidth = 0.8) +
   facet_wrap(~Question, ncol = 3) +
   scale_x_continuous(breaks = seq(0, 120, 20)) +
-  scale_fill_manual(values = c(
-    "C3: High-Value Range Enthusiasts" = "#1565C0",
-    "C6: Opt-Out Resistant"           = "#E53935"
-  )) +
-  scale_color_manual(values = c(
-    "C3: High-Value Range Enthusiasts" = "#1565C0",
-    "C6: Opt-Out Resistant"           = "#E53935"
-  )) +
+  scale_fill_manual(
+    values = c(
+      "C3: High-Value Range Enthusiasts" = "#1565C0",
+      "C6: Opt-Out Resistant" = "#E53935"
+    )
+  ) +
+  scale_color_manual(
+    values = c(
+      "C3: High-Value Range Enthusiasts" = "#1565C0",
+      "C6: Opt-Out Resistant" = "#E53935"
+    )
+  ) +
   labs(
     title = "Decision Time Distribution: C3 vs C6 by Choice Task",
     subtitle = "Hard-assigned respondents. X capped at 90th pct. Faster C6 peak would indicate satisficing.",
