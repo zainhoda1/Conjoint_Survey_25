@@ -2389,7 +2389,7 @@
     <bcf:citekey order="10" intorder="1">sheykhfardAnalyzingPurchaseIntentions2025</bcf:citekey>
     <bcf:citekey order="11" intorder="1">sheykhfardAnalyzingPurchaseIntentions2025</bcf:citekey>
     <bcf:citekey order="12" intorder="1">prietoUsingHedonicPrice2015</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">iogansenDecipheringFactorsAssociated2023</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">iogansenDecipheringFactorsAssociated2023a</bcf:citekey>
     <bcf:citekey order="13" intorder="2">naseriWhoMoreLikely2024</bcf:citekey>
     <bcf:citekey order="13" intorder="3">sonarExaminingCausalFactors2023</bcf:citekey>
     <bcf:citekey order="14" intorder="1">zouEffectsChargingInfrastructure2020</bcf:citekey>
@@ -2445,6 +2445,7 @@
     <bcf:citekey order="55" intorder="1">chenExploringTouristPreference2023</bcf:citekey>
     <bcf:citekey order="56" intorder="1">chenExploringTouristPreference2023</bcf:citekey>
     <bcf:citekey order="57" intorder="1">nylundDecidingNumberClasses2007</bcf:citekey>
+    <bcf:citekey order="58" intorder="1">iogansenDecipheringFactorsAssociated2023a</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

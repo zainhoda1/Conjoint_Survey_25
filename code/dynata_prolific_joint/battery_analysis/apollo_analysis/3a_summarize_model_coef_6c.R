@@ -260,7 +260,7 @@ latex_str <- gsub(
 # Force in-place placement and inject caption.
 latex_str <- sub(
   "\\\\begin\\{table\\}\\[t\\]",
-  "\\\\begin{table}[H]\n\\\\caption{LCCM model results}",
+  "\\\\begin{table}[H]\n\\\\fontfamily{ptm}\\\\selectfont\n\\\\caption{LCCM model results}\\\\label{tab:lc6_model_summary}",
   latex_str
 )
 

@@ -34,13 +34,13 @@ param_labels <- c(
   scalePar = "$\\lambda$ (scale)",
   mileage = "Mileage",
   battery_range_year3 = "Range (Year 3)",
-  battery_range_loss = "Range loss (Year 3 to Year 8)",
+  battery_range_loss = "Range loss Rate (Year 3 to Year 8, in percentage)",
   battery_refurbishpackreplace = "Battery Refurbishment: Pack Replace",
   battery_refurbishcellreplace = "Battery Refurbishment: Cell Replace",
   no_choice = "No choice (opt-out)",
   sd_mileage = "SD: Mileage",
   sd_battery_range_year3 = "SD: Range (Year 3)",
-  sd_battery_range_loss = "SD: Range loss (Year 3 to Year 8)",
+  sd_battery_range_loss = "SD: Range loss Rate (Year 3 to Year 8, in percentage)",
   sd_battery_refurbishpackreplace = "SD: Battery Refurbishment: Pack Replace",
   sd_battery_refurbishcellreplace = "SD: Battery Refurbishment: Cell Replace"
 )

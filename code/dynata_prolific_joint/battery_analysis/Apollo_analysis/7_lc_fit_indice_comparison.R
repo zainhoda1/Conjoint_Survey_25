@@ -60,6 +60,7 @@ extract_indices <- function(k, model_tag) {
     props <- sapply(1:k, function(j) {
       round(mean(cp[[paste0("prob_class", j)]], na.rm = TRUE), 3)
     })
+    props <- sort(props, decreasing = TRUE)
     paste0(sprintf("%.1f%%", props * 100), collapse = " / ")
   } else {
     NA_character_

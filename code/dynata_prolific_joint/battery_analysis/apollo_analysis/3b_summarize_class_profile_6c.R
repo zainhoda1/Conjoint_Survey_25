@@ -300,7 +300,7 @@ attributes_long <- attributes
 
 num_vars <- c(
   "hhincome_num_k",
-  "Veh_primary_refuel_monthly",
+  # "Veh_primary_refuel_monthly",
   "Veh_primary_range",
   "age_num",
   "hhsize_num",
@@ -374,56 +374,56 @@ combined_all <- combined_all %>%
 
 # change labels
 var_meta <- tribble(
-  ~variable                    , ~label                                          , ~section                                 , ~fmt     ,
+  ~variable                , ~label                                          , ~section                                 , ~fmt     ,
   # WTP
-  "no_choice"                  , "No-Choice Option (opt-out)"                    , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "mileage"                    , "Mileage (10,000 miles)"                        , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "range_pw1"                  , "BEV Range: 40-130 mi segment (per 100 miles)"  , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "range_pw2"                  , "BEV Range: 130-200 mi segment (per 100 miles)" , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "range_pw3"                  , "BEV Range: 200+ mi segment (per 100 miles)"    , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "loss_pw1"                   , "Range Loss Rate: 5-12% (per %)"                , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "loss_pw2"                   , "Range Loss Rate: 12-24% (per %)"               , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "loss_pw3"                   , "Range Loss Rate: 24%+ (per %)"                 , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "packreplace"                , "Battery Refurbishment: Pack Replace"           , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
-  "cellreplace"                , "Battery Refurbishment: Cell Replace"           , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "no_choice"              , "No-Choice Option (opt-out)"                    , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "mileage"                , "Mileage (10,000 miles)"                        , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw1"              , "BEV Range: 40-130 mi segment (per 100 miles)"  , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw2"              , "BEV Range: 130-200 mi segment (per 100 miles)" , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "range_pw3"              , "BEV Range: 200+ mi segment (per 100 miles)"    , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw1"               , "Range Loss Rate: 5-12% (per %)"                , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw2"               , "Range Loss Rate: 12-24% (per %)"               , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "loss_pw3"               , "Range Loss Rate: 24%+ (per %)"                 , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "packreplace"            , "Battery Refurbishment: Pack Replace"           , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
+  "cellreplace"            , "Battery Refurbishment: Cell Replace"           , "WTP (*1000 USD) for Vehicle Attributes" , "dollar" ,
   # Active variables
-  "ATT_risktaker"              , "Risk-taking Propensity: Agree"                 , "Active Indicators"                      , "pct"    ,
-  "ATT_range_anxiety"          , "Perceived EV Range Anxiety: Agree"             , "Active Indicators"                      , "pct"    ,
-  "ATT_EVB_environment"        , "EV Battery Environmentally Positive: Agree"    , "Active Indicators"                      , "pct"    ,
-  "ATT_EVB_function"           , "EV Battery Functionally Negative: Disagree"    , "Active Indicators"                      , "pct"    ,
-  "hhincome_num_k"             , "Household Income (1000 USD)"                   , "Active Indicators"                      , "number" ,
-  "knowledge_ev"               , "EV Knowledge"                                  , "Active Indicators"                      , "pct"    ,
-  "knowledge_subsidy"          , "EV Subsidy Knowledge"                          , "Inactive Indicators"                    , "pct"    ,
-  "EV_charger"                 , "Electrical Outlet Access"                      , "Active Indicators"                      , "pct"    ,
-  "EV_neighbor"                , "Neighbor Owns/Leases a BEV/PHEV"               , "Inactive Indicators"                    , "pct"    ,
-  "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"    , "Inactive Indicators"                    , "number" ,
-  "Veh_primary_range"          , "Primary Vehicle Typical Range (miles)"         , "Active Indicators"                      , "number" ,
-  "Veh_hh_fuel"                , "Household Vehicle Fuel Composition"            , "Active Indicators"                      , "pct"    ,
-  "vehicle_typesuv"            , "Next Vehicle Type: SUV"                        , "Active Indicators"                      , "pct"    ,
+  "ATT_risktaker"          , "Risk-taking Propensity: Agree"                 , "Active Indicators"                      , "pct"    ,
+  "ATT_range_anxiety"      , "Perceived EV Range Anxiety: Agree"             , "Active Indicators"                      , "pct"    ,
+  "ATT_EVB_environment"    , "EV Battery Environmentally Positive: Agree"    , "Active Indicators"                      , "pct"    ,
+  "ATT_EVB_function"       , "EV Battery Functionally Negative: Disagree"    , "Active Indicators"                      , "pct"    ,
+  "hhincome_num_k"         , "Household Income (1000 USD)"                   , "Active Indicators"                      , "number" ,
+  "knowledge_ev"           , "EV Knowledge"                                  , "Active Indicators"                      , "pct"    ,
+  "knowledge_subsidy"      , "EV Subsidy Knowledge"                          , "Inactive Indicators"                    , "pct"    ,
+  "EV_charger"             , "Electrical Outlet Access"                      , "Active Indicators"                      , "pct"    ,
+  "EV_neighbor"            , "Neighbor Owns/Leases a BEV/PHEV"               , "Inactive Indicators"                    , "pct"    ,
+  # "Veh_primary_refuel_monthly" , "Primary Vehicle Refuel Frequency (monthly)"    , "Inactive Indicators"                    , "number" ,
+  "Veh_primary_range"      , "Primary Vehicle Typical Range (miles)"         , "Active Indicators"                      , "number" ,
+  "Veh_hh_fuel"            , "Household Vehicle Fuel Composition"            , "Active Indicators"                      , "pct"    ,
+  "vehicle_typesuv"        , "Next Vehicle Type: SUV"                        , "Active Indicators"                      , "pct"    ,
   # Inactive / Socioeconomic & other variables
-  "age_num"                    , "Age"                                           , "Inactive Indicators"                    , "number" ,
-  "gender_cate"                , "Gender"                                        , "Inactive Indicators"                    , "pct"    ,
-  "ethnicity_cate"             , "Ethnicity"                                     , "Inactive Indicators"                    , "pct"    ,
-  "race_cate"                  , "Race"                                          , "Inactive Indicators"                    , "pct"    ,
-  "education_cate"             , "Education Level"                               , "Inactive Indicators"                    , "pct"    ,
-  "student_cate"               , "Student Status"                                , "Inactive Indicators"                    , "pct"    ,
-  "employment_cate"            , "Employment Status"                             , "Inactive Indicators"                    , "pct"    ,
-  "hhsize_num"                 , "Household Size"                                , "Inactive Indicators"                    , "number" ,
-  "hhtenure_cate"              , "Household Tenure"                              , "Inactive Indicators"                    , "pct"    ,
-  "hhtype_cate"                , "Household Type"                                , "Inactive Indicators"                    , "pct"    ,
-  "Veh_hh_count"               , "Household Vehicle Count"                       , "Inactive Indicators"                    , "number" ,
-  "Veh_primary_fuel"           , "Primary Vehicle Fuel Type"                     , "Inactive Indicators"                    , "pct"    ,
-  "next_veh_budget_k"          , "Next Vehicle Budget (1000 USD)"                , "Inactive Indicators"                    , "dollar" ,
+  "age_num"                , "Age"                                           , "Inactive Indicators"                    , "number" ,
+  "gender_cate"            , "Gender"                                        , "Inactive Indicators"                    , "pct"    ,
+  "ethnicity_cate"         , "Ethnicity"                                     , "Inactive Indicators"                    , "pct"    ,
+  "race_cate"              , "Race"                                          , "Inactive Indicators"                    , "pct"    ,
+  "education_cate"         , "Education Level"                               , "Inactive Indicators"                    , "pct"    ,
+  "student_cate"           , "Student Status"                                , "Inactive Indicators"                    , "pct"    ,
+  "employment_cate"        , "Employment Status"                             , "Inactive Indicators"                    , "pct"    ,
+  "hhsize_num"             , "Household Size"                                , "Inactive Indicators"                    , "number" ,
+  "hhtenure_cate"          , "Household Tenure"                              , "Inactive Indicators"                    , "pct"    ,
+  "hhtype_cate"            , "Household Type"                                , "Inactive Indicators"                    , "pct"    ,
+  "Veh_hh_count"           , "Household Vehicle Count"                       , "Inactive Indicators"                    , "number" ,
+  "Veh_primary_fuel"       , "Primary Vehicle Fuel Type"                     , "Inactive Indicators"                    , "pct"    ,
+  "next_veh_budget_k"      , "Next Vehicle Budget (1000 USD)"                , "Inactive Indicators"                    , "dollar" ,
   # "next_veh_fuel_new_phev"     , "Likelihood of buying new PHEV (1-5)"               , "Inactive Indicators"        , "number" ,
   # "next_veh_fuel_used_phev"    , "Likelihood of buying used PHEV (1-5)"              , "Inactive Indicators"        , "number" ,
   # "next_veh_fuel_new_bev"      , "Likelihood of buying new BEV (1-5)"                , "Inactive Indicators"        , "number" ,
-  "next_veh_fuel_used_bev"     , "Likelihood of buying used BEV"                 , "Inactive Indicators"                    , "number" ,
+  "next_veh_fuel_used_bev" , "Likelihood of buying used BEV"                 , "Inactive Indicators"                    , "number" ,
   # Attitudes / psychological
   # "ATT_price_sensitive"        , "Price Sensitivity"                                 , "Inactive Indicators"             , "pct"    ,
-  "ATT_climate"                , "Climate Concern"                               , "Inactive Indicators"                    , "pct"    ,
+  "ATT_climate"            , "Climate Concern"                               , "Inactive Indicators"                    , "pct"    ,
   # "ATT_political"              , "Political Spectrum"                                , "Inactive Indicators"             , "pct"    ,
   # "ATT_voting"                 , "Voting Behavior"                                   , "Inactive Indicators"             , "pct"    ,
-  "battery_info_treat"         , "Received Battery Information Treatment"        , "Metadata: Information Treatment"        , "pct"
+  "battery_info_treat"     , "Battery Information Treatment"                 , "Metadata: Information Treatment"        , "pct"
 )
 
 combined_all <- combined_all %>%
@@ -756,7 +756,7 @@ gtsave(
   latex_clean <- function(x) trimws(gsub("\n", "", x, fixed = TRUE))
 
   latex_vals <- gt_formatted %>%
-    select(section, label, all_of(combined_cols)) %>%
+    select(section, label, variable_origin, all_of(combined_cols)) %>%
     mutate(across(all_of(combined_cols), latex_clean)) %>%
     filter(!is.na(section))
 
@@ -798,8 +798,8 @@ gtsave(
         latex_options = "repeat_header",
         font_size = 8
       ) %>%
-      column_spec(1, width = "6cm") %>%
-      column_spec(2:7, width = "1.7cm")
+      column_spec(1, width = "6.3cm") %>%
+      column_spec(2:7, width = "1.2cm")
 
     for (i in seq_len(nrow(grps))) {
       tbl <- tbl %>%
@@ -825,9 +825,25 @@ gtsave(
     )
   }
 
+  # Lookup: row index in var_meta drives within-section ordering
+  var_meta_idx <- var_meta %>%
+    mutate(var_meta_idx = row_number()) %>%
+    select(variable, var_meta_idx)
+
   # ── Table 1: WTP + Active Indicators + Inactive Indicators ────────────────
+  section_levels_t1 <- c(
+    "WTP (*1000 USD) for Vehicle Attributes",
+    "Active Indicators",
+    "Inactive Indicators"
+  )
+
   latex_t1 <- latex_vals %>%
-    filter(!grepl("^Metadata", section))
+    filter(!grepl("^Metadata", section)) %>%
+    left_join(var_meta_idx, by = c("variable_origin" = "variable")) %>%
+    mutate(section = factor(section, levels = section_levels_t1)) %>%
+    arrange(section, var_meta_idx) %>%
+    mutate(section = as.character(section)) %>%
+    select(-variable_origin, -var_meta_idx)
 
   kbl1 <- make_kbl(latex_t1, "WTP and Characteristics by Class", "lc6_profile")
 
@@ -837,8 +853,18 @@ gtsave(
   )
 
   # ── Table 2: Metadata sections ────────────────────────────────────────────
+  section_levels_t2 <- c(
+    "Metadata: Information Treatment",
+    "Metadata: Opt-out Count",
+    "Metadata: Survey Duration"
+  )
+
   latex_t2 <- latex_vals %>%
-    filter(grepl("^Metadata", section))
+    filter(grepl("^Metadata", section)) %>%
+    mutate(section = factor(section, levels = section_levels_t2)) %>%
+    arrange(section) %>%
+    mutate(section = as.character(section)) %>%
+    select(-variable_origin)
 
   kbl2 <- make_kbl(
     latex_t2,

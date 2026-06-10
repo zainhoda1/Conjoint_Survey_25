@@ -1,5 +1,6 @@
-# 5_visualize_lc6_profiles.R
-# Six-class LC model: two-panel profile figure
+# 5b_visualize_lc6_profiles_no_optout.R
+# Six-class LC model: two-panel profile figure — opt-out bars excluded,
+# axis rescaled to the remaining attribute range.
 # Panel A: Attribute-Sensitive   (Class 2, 3, 5)
 # Panel B: Limited-Sensitivity   (Class 1, 4, 6)
 
@@ -162,12 +163,17 @@ class_chars <- list(
   )
 )
 
-# ── SHARED AXIS LIMITS (same scale across all classes) ────────────────────────
-BAR_CAP <- -120 # bar display cap (negative side)
-y_lo <- BAR_CAP * 1.22
-y_hi <- max(unlist(wtp_raw[-1])) * 1.25
+# ── SHARED AXIS LIMITS — rescaled to non-optout attribute range ───────────────
+wtp_vals_no_optout <- unlist(
+  wtp_raw %>% filter(attr != "optout") %>% select(-attr)
+)
+BAR_CAP <- floor(min(wtp_vals_no_optout) * 1.15)
+y_lo    <- BAR_CAP * 1.22
+y_hi    <- max(wtp_vals_no_optout) * 1.55
 
 # ── LONG DATA ─────────────────────────────────────────────────────────────────
+attr_df_no_optout <- attr_df %>% filter(attr != "optout")
+
 wtp_long <- wtp_raw %>%
   pivot_longer(-attr, names_to = "id", values_to = "wtp") %>%
   left_join(
@@ -176,8 +182,9 @@ wtp_long <- wtp_raw %>%
   ) %>%
   left_join(attr_df, by = "attr") %>%
   left_join(class_meta, by = "id") %>%
+  filter(attr != "optout") %>%
   mutate(
-    attr_disp = factor(attr_disp, levels = rev(attr_df$attr_disp)),
+    attr_disp = factor(attr_disp, levels = rev(attr_df_no_optout$attr_disp)),
     wtp_bar = pmax(wtp, BAR_CAP),
     truncated = wtp < BAR_CAP,
     val_label = ifelse(
@@ -209,7 +216,7 @@ theme_lc <- theme_minimal(base_family = "rc", base_size = 7) %+replace%
 
 # ── PLOT FUNCTIONS ────────────────────────────────────────────────────────────
 
-make_header <- function(class_id) {
+make_header <- function(class_id, show_y = TRUE) {
   info <- class_meta %>% filter(id == class_id)
   lbl <- gsub("\n", ", ", info$label)
 
@@ -247,7 +254,8 @@ make_header <- function(class_id) {
     ) +
     scale_x_continuous(limits = c(0, 1)) +
     scale_y_continuous(limits = c(0, 1)) +
-    theme_void()
+    theme_void() +
+    theme(plot.margin = margin(0, 0, 0, 0))
 }
 
 make_wtp <- function(class_id, show_y = TRUE) {
@@ -275,19 +283,15 @@ make_wtp <- function(class_id, show_y = TRUE) {
     )
 }
 
-make_chars <- function(class_id) {
+make_chars <- function(class_id, show_y = TRUE) {
   info <- class_meta %>% filter(id == class_id)
   txt <- class_chars[[class_id]]
 
   ggplot() +
     annotate(
       "rect",
-      xmin = -Inf,
-      xmax = Inf,
-      ymin = -Inf,
-      ymax = Inf,
-      fill = "#F5F7FA",
-      color = NA
+      xmin = 0, xmax = 1, ymin = 0, ymax = 1,
+      fill = "#F5F7FA", color = info$hdr_color, linewidth = 0.4
     ) +
     annotate(
       "text",
@@ -322,23 +326,16 @@ make_chars <- function(class_id) {
       vjust = 0.5,
       lineheight = 1.2
     ) +
-    scale_x_continuous(limits = c(0, 1)) +
-    scale_y_continuous(limits = c(0, 1)) +
+    scale_x_continuous(limits = c(0, 1), expand = expansion(add = 0)) +
+    scale_y_continuous(limits = c(0, 1), expand = expansion(add = 0)) +
     theme_void() +
-    theme(
-      plot.background = element_rect(
-        fill = "#F5F7FA",
-        color = info$hdr_color,
-        linewidth = 0.4
-      ),
-      plot.margin = margin(2, 2, 2, 2)
-    )
+    theme(plot.margin = margin(2, 2, 2, 2))
 }
 
 make_col <- function(class_id, show_y = TRUE) {
-  hdr <- make_header(class_id)
+  hdr <- make_header(class_id, show_y = show_y)
   wtp <- make_wtp(class_id, show_y = show_y)
-  chars <- make_chars(class_id)
+  chars <- make_chars(class_id, show_y = show_y)
   (hdr / wtp / chars) + plot_layout(heights = c(0.5, 3.0, 2.0))
 }
 
@@ -398,26 +395,11 @@ panel_b <- (col_c1 | col_c4 | col_c6) +
     )
   )
 
-# Final figure
+# Final figure — no overall title
 final_fig <- (panel_a / panel_b) +
   plot_layout(heights = c(1, 1)) +
   plot_annotation(
-    title = "Six-Class Latent Class Model: Consumer Profiles for Used BEV Battery Attributes",
-    caption = "Bar lengths capped at −$120k for display;",
     theme = theme(
-      plot.title = element_text(
-        family = "rc",
-        face = "bold",
-        size = 11,
-        hjust = 0.5,
-        margin = margin(b = 4)
-      ),
-      plot.caption = element_text(
-        family = "rc",
-        size = 7,
-        color = "gray50",
-        hjust = 0
-      ),
       plot.background = element_rect(fill = "white", color = NA),
       plot.margin = margin(4, 4, 3, 4)
     )
@@ -430,7 +412,7 @@ output_path <- here(
   "model_output",
   "battery_analysis",
   "apollo",
-  "0_lc6_class_profiles.pdf"
+  "0_lc6_class_profiles_no_optout.png"
 )
 
 ggsave(
@@ -439,7 +421,8 @@ ggsave(
   width = 11,
   height = 8.5,
   units = "in",
-  device = "pdf"
+  dpi = 300,
+  device = "png"
 )
 
 cat("Saved:", output_path, "\n")
