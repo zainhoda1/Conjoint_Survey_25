@@ -7,11 +7,6 @@ load(here("models", "model_suv_low.RData"))
 load(here("models", "model_suv_high.RData"))
 
 
-model_car_low
-
-model <- model_car_low
-
-
 get_wtp_draws <- function(model) {
   coefs <- coef(model)
   # Get the model coefficients and covariance matrix
@@ -61,6 +56,9 @@ predict(model_car_low)
 
 
 all_models <- c("conf_model_car_low", "conf_model_car_high", "conf_model_suv_low", "conf_model_suv_high")
+
+# all_models <- c("conf_model_likely_bev_adopter_car", "conf_model_unlikely_bev_adopter_car",
+#  "conf_model_unlikely_bev_adopter_suv", "conf_model_unlikely_bev_adopter_suv")
 
 age_list <- seq(2,8)
 mileage_list <- seq (1, 8, 0.5)
@@ -123,28 +121,30 @@ temp <- temp %>%
 
 #Final wtp:
 #############
-temp %>%  
+temp <- temp %>%  
   mutate(
     model_type = case_when(
       model_name %in% c('conf_model_car_low', 'conf_model_car_high') ~ 'car',
       .default = 'suv'
     ),
     segment = case_when(
-      model_name %in% c('conf_model_car_low', 'conf_model_suv_low') ~ 'Low range',
-      TRUE ~ 'High range'
+      model_name %in% c('conf_model_car_low', 'conf_model_suv_low') ~ 'Low Budget',
+      TRUE ~ 'High Budget'
     )
   ) %>% 
   filter(
     vehicle_type == "BEV",
     current_age %in% c(2, 5, 8),
     (
-      (segment == 'Low range' & current_range < 2.5) |
-        (segment == 'High range' & current_range > 1.5)
+      (segment == 'Low Budget' & current_range < 2.5) |
+        (segment == 'High Budget' & current_range > 1.5)
     )
   ) %>% 
   mutate(
     current_age = factor(current_age, levels = c(2, 5, 8))
-  ) %>% 
+  )
+
+temp %>% 
   ggplot(aes(
     x = current_range,
     y = wtp_total,
@@ -164,7 +164,7 @@ temp %>%
     name = "Vehicle age\n(years)"
   )+
   scale_linetype_manual(
-    values = c("Low range" = "dashed", "High range" = "solid"),
+    values = c("Low Budget" = "dashed", "High Budget" = "solid"),
     name = "Model segment"
   ) +
   scale_y_continuous(labels = label_dollar()) +
@@ -199,6 +199,7 @@ ggsave(
     'code',
     'output',
     "images",
+    "vehicle_analysis",
     "vehicle_wtp_range.png"    
   ),
   width = 8,
@@ -208,6 +209,13 @@ ggsave(
 
 
 #######
+
+
+###############################
+
+
+
+###################
 
 
 plot_data2 <- data.frame(
@@ -258,16 +266,16 @@ temp3 <-  temp2 |>
       .default = 'suv'
     ),
     segment = case_when(
-      model_name %in% c('conf_model_car_low', 'conf_model_suv_low') ~ 'Low range',
-      TRUE ~ 'High range'
+      model_name %in% c('conf_model_car_low', 'conf_model_suv_low') ~ 'Low Budget',
+      TRUE ~ 'High Budget'
     )
   ) %>% 
   filter(
     vehicle_type == "BEV",
     current_age %in% c(2, 5, 8),
     (
-      (segment == 'Low range' & current_range < 2.5) |
-        (segment == 'High range' & current_range > 1.5)
+      (segment == 'Low Budget' & current_range < 2.5) |
+        (segment == 'High Budget' & current_range > 1.5)
     )
   ) %>% 
   mutate(
@@ -360,12 +368,180 @@ ggsave(
 )
 
 
+####################
+# dumb-bell plot for snapshot of range (100, 200, 300) for age (2)
+
+dumbbell_plot_data <- temp4 |> 
+  filter(current_age == '2',
+current_range %in% c('1', '2', '3') 
+)
+
+# Create y-axis label combining type + segment
+dumbbell_plot_data <- dumbbell_plot_data |>
+  mutate(
+    label = paste0(toupper(model_type), " – ", segment," - " ,current_range*100 , " miles"),
+    label = factor(label, levels = rev(unique(label)))
+  )
+
+dumbbell_plot_data <- dumbbell_plot_data |>
+  mutate(
+    model_type = factor(model_type, levels = c("CAR", "SUV")),
+    segment    = factor(segment, levels = c("Low Budget", "High Budget")),
+    current_range = factor(current_range, levels = c(1, 2, 3))
+  ) |>
+  arrange(current_range, model_type, segment) |>
+  mutate(label = fct_rev(fct_inorder(label)))
+
+
+
+################
+# 
+ggplot(dumbbell_plot_data, aes(y = label)) +
+
+  geom_segment(
+    aes(x = lower, xend = upper, yend = label, colour = factor(current_range)),
+    linewidth = 1.5
+  ) +
+
+  geom_point(
+    aes(x = mean, colour = factor(current_range)),
+    shape = 18, size = 5
+  ) +
+
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey40") +
+
+  scale_colour_manual(
+    values = c(
+      "1" = "#E69F00",  # 100 miles (assuming stored as 1)
+      "2" = "#56B4E9",  # 200 miles (assuming stored as 2)
+      "3" = "#009E73"   # 300 miles (assuming stored as 3)
+    ),
+    labels = c("1" = "100 mile range", "2" = "200 mile range", "3" = "300 mile range"),
+    name = "Range"
+  ) +
+
+scale_x_continuous(labels = scales::label_dollar(scale = 1/1000, suffix = "K")) + 
+  labs(
+    title    = "Modelled WTP for EVs by Budget Preference, Vehicle Type, and Range",
+    subtitle = paste0("(Vehicle Age is ", dumbbell_plot_data$current_age, " years)"),
+    x        = "Willingness to Pay (WTP)",
+    y        = NULL
+  ) +
+
+  theme_minimal(base_size = 13) +
+  theme(
+    strip.text       = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    plot.title       = element_text(size = 14, margin = margin(b = 5)),
+    plot.title.position   = "plot",
+    legend.position  = "bottom"
+  )
+
+
+# file_location= paste0('dumbbell_wtp_age_',
+#  dumbbell_plot_data$current_age[1],'_range_',
+#   dumbbell_plot_data$current_range[1],'.png' ) 
+
+file_location ='dumbbell_wtp_age_fixed_age_2_budgets.png'
+
+ggsave(
+  filename = here::here(
+    'code',
+    'output',
+    "images",
+    "vehicle_analysis",
+    file_location  
+  ),
+  width = 8,
+  height = 6,
+  dpi = 300
+)
+
+
+
+dumbbell_plot_data <- temp4 |> 
+  filter(current_range == '2')
+
+dumbbell_plot_data <- dumbbell_plot_data |>
+  mutate(
+    label = paste0(toupper(model_type), " – ", segment, " - ", current_age, " years"),
+    label = factor(label, levels = rev(unique(label)))
+  )
+
+dumbbell_plot_data <- dumbbell_plot_data |>
+  mutate(
+    model_type = factor(model_type, levels = c("CAR", "SUV")),
+    segment    = factor(segment, levels = c("Low Budget", "High Budget")),
+    current_age = factor(current_age, levels = c(2, 5, 8))
+  ) |>
+  arrange(current_age, model_type, segment) |>
+  mutate(label = fct_rev(fct_inorder(label)))
+
+ggplot(dumbbell_plot_data, aes(y = label)) +
+
+  geom_segment(
+    aes(x = lower, xend = upper, yend = label, colour = factor(current_age)),
+    linewidth = 1.5
+  ) +
+
+  geom_point(
+    aes(x = mean, colour = factor(current_age)),
+    shape = 18, size = 5
+  ) +
+
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "red") +
+
+  scale_colour_manual(
+    values = c(
+      "2" = "#E69F00",  # amber
+      "3" = "#56B4E9",  # sky blue
+      "5" = "#009E73",  # teal
+      "8" = "#CC79A7"   # pink
+    ),
+    name = "Vehicle Age"
+  ) +
+
+scale_x_continuous(labels = scales::label_dollar(scale = 1/1000, suffix = "K")) + 
+  labs(
+    title    = "Modelled WTP for EVs by Budget Preference, Vehicle Type, and Age",
+    subtitle = "(Vehicle Range is 200 miles)",
+    x        = "Willingness to Pay(WTP)",
+    y        = NULL
+  ) +
+
+  theme_minimal(base_size = 13) +
+  theme(
+    strip.text       = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    plot.title       = element_text(size = 14, margin = margin(b = 5)),
+    plot.title.position   = "plot",
+    legend.position  = "bottom"
+  )
+
+file_location ='dumbbell_wtp_age_fixed_range_200_budgets.png'
+
+ggsave(
+  filename = here::here(
+    'code',
+    'output',
+    "images",
+    "vehicle_analysis",
+    file_location  
+  ),
+  width = 8,
+  height = 6,
+  dpi = 300
+)
+
+
+######################
+
 
 library(scales)
 
 temp4 |> 
   mutate(segment = case_when(
-    segment == 'Low range' ~ 'Low Budget',
+    segment == 'Low Budget' ~ 'Low Budget',
     .default = 'High Budget'),
     model_type = case_when (
       model_type == 'car'  ~ 'CAR',
@@ -464,9 +640,11 @@ ggsave(
     'output',
     "images",
     "vehicle_analysis",
-    "wtp_range_with_coef_int.png"    
+    "wtp_range_with_coef_int1.png"    
   ),
   width = 8,
   height = 6,
   dpi = 300
 )
+
+

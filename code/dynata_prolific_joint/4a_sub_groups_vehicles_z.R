@@ -7,8 +7,9 @@ data_joint <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
   "data_joint_vehicle.parquet"
-)) |> 
-  filter(collection_round != 'round_4')
+ )) 
+# |> 
+#   filter(collection_round != 'round_4')
 
 
 data_raw_dynata <- read_parquet(here(
@@ -155,23 +156,29 @@ data_raw_joined %>%
   count()
 
 
-positive_group <- data_raw_joined %>%
+likely_bev_adopter <- data_raw_joined %>%
   filter(
     (next_veh_fuel_new_bev %in%
-      c('very_likely', 'somewhat_likely', 'neutral')) |
+      c('very_likely', 'somewhat_likely')) |   #, 'neutral'
       (next_veh_fuel_used_bev %in%
-        c('very_likely', 'somewhat_likely', 'neutral'))
+        c('very_likely', 'somewhat_likely'))  #, 'neutral'
   ) %>%
   select(psid)
 
-negative_group <- data_raw_joined %>%
+nrow(likely_bev_adopter)
+
+unlikely_bev_adopter <- data_raw_joined %>%
   filter(
-    (!next_veh_fuel_new_bev %in%
-      c('very_likely', 'somewhat_likely', 'neutral'))  &
-      (!next_veh_fuel_used_bev %in%
-        c('very_likely', 'somewhat_likely', 'neutral'))
+    (next_veh_fuel_new_bev %in%
+      c('very_unlikely', 'somewhat_unlikely'))  &
+      (next_veh_fuel_used_bev %in%
+        c('very_unlikely', 'somewhat_unlikely'))
   ) %>%
   select(psid, next_veh_fuel_new_bev, next_veh_fuel_used_bev)
+
+nrow(unlikely_bev_adopter)
+
+
 
 charger_access_yes_group <- data_raw_joined %>%
   filter(
@@ -191,12 +198,12 @@ neighbor_ev_yes <- data_raw_joined %>%
   ) %>%
   select(psid)
 
-positive_group_encoded <- encoding(
-  inner_join(data, positive_group, by = 'psid') %>% select(-psid)
+likely_bev_adopter_encoded <- encoding(
+  inner_join(data, likely_bev_adopter, by = 'psid') %>% select(-psid)
 )
 
-negative_group_encoded <- encoding(
-  inner_join(data, negative_group, by = 'psid') %>% select(-psid)
+unlikely_bev_adopter_encoded <- encoding(
+  inner_join(data, unlikely_bev_adopter, by = 'psid') %>% select(-psid)
 )
 
 charger_access_yes_encoded  <-  encoding(
@@ -211,24 +218,24 @@ neighbor_ev_yes_encodeing <- encoding(
   inner_join(data, neighbor_ev_yes, by = 'psid') %>% select(-psid)
 )
 
-model_positive_vehicle <- run_model(positive_group_encoded)
+model_positive_vehicle <- run_model(likely_bev_adopter_encoded)
 
-model_negative_vehicle <- run_model(negative_group_encoded )
+model_negative_vehicle <- run_model(unlikely_bev_adopter_encoded )
 
-model_positive_group_car <- run_model(
-  positive_group_encoded %>% filter(vehicle_typesuv == 0)
+model_likely_bev_adopter_car <- run_model(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
 )
 
-model_negative_group_car <- run_model(
-  negative_group_encoded %>% filter(vehicle_typesuv == 0)
+model_unlikely_bev_adopter_car <- run_model(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
 )
 
-model_positive_group_suv <- run_model(
-  positive_group_encoded %>% filter(vehicle_typesuv == 1)
+model_likely_bev_adopter_suv <- run_model(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
 )
 
-model_negative_group_suv <- run_model(
-  negative_group_encoded %>% filter(vehicle_typesuv == 1)
+model_unlikely_bev_adopter_suv <- run_model(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
 )
 
 model_charger_access_yes <- run_model(charger_access_yes_encoded)
@@ -238,98 +245,98 @@ model_charger_access_no <- run_model(charger_access_no_encoded)
 model_neighbor_ev_yes_encodeing <- run_model(neighbor_ev_yes_encodeing)
 
 
-wtp_model_positive_group_car <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 0)
+wtp_model_likely_bev_adopter_car <- run_model_wtp(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
 )
 
-wtp_model_negative_group_car <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 0)
+wtp_model_unlikely_bev_adopter_car <- run_model_wtp(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
 )
 
-wtp_model_positive_group_suv <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 1)
+wtp_model_likely_bev_adopter_suv <- run_model_wtp(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
 )
 
-wtp_model_negative_group_suv <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 1)
+wtp_model_unlikely_bev_adopter_suv <- run_model_wtp(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
 )
 
 #####################################################################
 
-wtp_model_positive_group_vehicle_low <- run_model_wtp(
-  positive_group_encoded %>% filter(budgethigh == 0 )
+wtp_model_likely_bev_adopter_vehicle_low <- run_model_wtp(
+  likely_bev_adopter_encoded %>% filter(budgethigh == 0 )
 )
 
-wtp_model_negative_group_vehicle_low <- run_model_wtp(
-  negative_group_encoded %>% filter( budgethigh == 0 )
+wtp_model_unlikely_bev_adopter_vehicle_low <- run_model_wtp(
+  unlikely_bev_adopter_encoded %>% filter( budgethigh == 0 )
 )
 
-wtp_model_positive_group_vehicle_high <- run_model_wtp(
-  positive_group_encoded %>% filter(budgethigh == 1 )
+wtp_model_likely_bev_adopter_vehicle_high <- run_model_wtp(
+  likely_bev_adopter_encoded %>% filter(budgethigh == 1 )
 )
 
-wtp_model_negative_group_vehicle_high <- run_model_wtp(
-  negative_group_encoded %>% filter( budgethigh == 1 )
+wtp_model_unlikely_bev_adopter_vehicle_high <- run_model_wtp(
+  unlikely_bev_adopter_encoded %>% filter( budgethigh == 1 )
 )
 
 
-wtp_model_positive_group_car_low <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
+wtp_model_likely_bev_adopter_car_low <- run_model_wtp(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
 )
 
-wtp_model_negative_group_car_low <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
+wtp_model_unlikely_bev_adopter_car_low <- run_model_wtp(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
 )
 
-wtp_model_positive_group_car_high <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 1 )
+wtp_model_likely_bev_adopter_car_high <- run_model_wtp(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 1 )
 )
 
-wtp_model_negative_group_car_high <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 0,  budgethigh == 1 )
+wtp_model_unlikely_bev_adopter_car_high <- run_model_wtp(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0,  budgethigh == 1 )
 )
 
-wtp_model_positive_group_suv_low <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
+wtp_model_likely_bev_adopter_suv_low <- run_model_wtp(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
 )
 
-wtp_model_negative_group_suv_low <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
+wtp_model_unlikely_bev_adopter_suv_low <- run_model_wtp(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
 )
 
-wtp_model_positive_group_suv_high <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
+wtp_model_likely_bev_adopter_suv_high <- run_model_wtp(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
 )
 
-wtp_model_negative_group_suv_high <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
+wtp_model_unlikely_bev_adopter_suv_high <- run_model_wtp(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
 )
 
 #####################
 
-summary(model_positive_group_car)
-summary(model_negative_group_car)
-summary(model_positive_group_suv)
-summary(model_negative_group_suv)
+summary(model_likely_bev_adopter_car)
+summary(model_unlikely_bev_adopter_car)
+summary(model_likely_bev_adopter_suv)
+summary(model_unlikely_bev_adopter_suv)
 summary(model_charger_access_yes)
 summary(model_charger_access_no)
 summary(model_neighbor_ev_yes_encodeing)
 
 
-summary(wtp_model_positive_group_car)
-summary(wtp_model_negative_group_car)
-summary(wtp_model_positive_group_suv)
-summary(wtp_model_negative_group_suv)
+summary(wtp_model_likely_bev_adopter_car)
+summary(wtp_model_unlikely_bev_adopter_car)
+summary(wtp_model_likely_bev_adopter_suv)
+summary(wtp_model_unlikely_bev_adopter_suv)
 
-# summary(wtp_model_positive_group_car_low)
-# summary(wtp_model_negative_group_car_low)
-# summary(wtp_model_positive_group_car_high)
-# summary(wtp_model_negative_group_car_high)
+# summary(wtp_model_likely_bev_adopter_car_low)
+# summary(wtp_model_unlikely_bev_adopter_car_low)
+# summary(wtp_model_likely_bev_adopter_car_high)
+# summary(wtp_model_unlikely_bev_adopter_car_high)
 
-# summary(wtp_model_positive_group_suv_low)
-# summary(wtp_model_negative_group_suv_low)
-# summary(wtp_model_positive_group_suv_high)
-# summary(wtp_model_negative_group_suv_high)
+# summary(wtp_model_likely_bev_adopter_suv_low)
+# summary(wtp_model_unlikely_bev_adopter_suv_low)
+# summary(wtp_model_likely_bev_adopter_suv_high)
+# summary(wtp_model_unlikely_bev_adopter_suv_high)
 
 #####################
 
@@ -340,10 +347,10 @@ summary(wtp_model_negative_group_suv)
 conf_model_positive_vehicle <- create_confidence_intervals(model_positive_vehicle)
 conf_model_negative_vehicle <- create_confidence_intervals(model_negative_vehicle)
 
-conf_model_positive_group_car <- create_confidence_intervals(model_positive_group_car)
-conf_model_negative_group_car <- create_confidence_intervals(model_negative_group_car)
-conf_model_positive_group_suv <- create_confidence_intervals(model_positive_group_suv)
-conf_model_negative_group_suv <- create_confidence_intervals(model_negative_group_suv)
+conf_model_likely_bev_adopter_car <- create_confidence_intervals(model_likely_bev_adopter_car)
+conf_model_unlikely_bev_adopter_car <- create_confidence_intervals(model_unlikely_bev_adopter_car)
+conf_model_likely_bev_adopter_suv <- create_confidence_intervals(model_likely_bev_adopter_suv)
+conf_model_unlikely_bev_adopter_suv <- create_confidence_intervals(model_unlikely_bev_adopter_suv)
 
 conf_model_charger_access_yes <- create_confidence_intervals(model_charger_access_yes)
 conf_model_charger_access_no <- create_confidence_intervals(model_charger_access_no)
@@ -356,17 +363,19 @@ conf_model_positive_vehicle
 
 conf_model_negative_vehicle
 
-conf_model_positive_group_car
+conf_model_likely_bev_adopter_car
 
-conf_model_negative_group_car
+conf_model_unlikely_bev_adopter_car
 
-conf_model_positive_group_suv
+conf_model_likely_bev_adopter_suv
 
-conf_model_negative_group_suv
+conf_model_unlikely_bev_adopter_suv
 
 conf_model_charger_access_yes
 
 conf_model_charger_access_no
+
+conf_model_neighbor_ev_yes_encodeing
 
 #######################
 
@@ -377,23 +386,23 @@ conf_model_charger_access_no
 # Save model object
 
 save(
-  model_positive_group_car,
-  file = here("models", "model_positive_group_car.RData")
+  model_likely_bev_adopter_car,
+  file = here("models", "model_likely_bev_adopter_car.RData")
 )
 
 save(
-  model_negative_group_car,
-  file = here("models", "model_negative_group_car.RData")
+  model_unlikely_bev_adopter_car,
+  file = here("models", "model_unlikely_bev_adopter_car.RData")
 )
 
 save(
-  model_positive_group_suv,
-  file = here("models", "model_positive_group_suv.RData")
+  model_likely_bev_adopter_suv,
+  file = here("models", "model_likely_bev_adopter_suv.RData")
 )
 
 save(
-  model_negative_group_suv,
-  file = here("models", "model_negative_group_suv.RData")
+  model_unlikely_bev_adopter_suv,
+  file = here("models", "model_unlikely_bev_adopter_suv.RData")
 )
 
 save(
