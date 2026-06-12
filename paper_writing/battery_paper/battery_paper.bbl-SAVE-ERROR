@@ -1217,7 +1217,7 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0191261516304647
       \endverb
     \endentry
-    \entry{iogansenDecipheringFactorsAssociated2023}{article}{}{}
+    \entry{iogansenDecipheringFactorsAssociated2023a}{article}{}{}
       \name{author}{5}{}{%
         {{hash=47b803125ceab10c191ef64d86c9342e}{%
            family={Iogansen},
@@ -1267,9 +1267,9 @@
       \field{shortjournal}{Transportation Research Part A: Policy and Practice}
       \field{shorttitle}{Deciphering the Factors Associated with Adoption of Alternative Fuel Vehicles in {{California}}}
       \field{title}{Deciphering the Factors Associated with Adoption of Alternative Fuel Vehicles in {{California}}: {{An}} Investigation of Latent Attitudes, Socio-Demographics, and Neighborhood Effects}
-      \field{urlday}{1}
-      \field{urlmonth}{7}
-      \field{urlyear}{2025}
+      \field{urlday}{10}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
       \field{volume}{168}
       \field{year}{2023}
       \field{dateera}{ce}
@@ -1280,7 +1280,7 @@
       \verb 10.1016/j.tra.2022.10.012
       \endverb
       \verb{file}
-      \verb /Users/xnw17/Zotero/storage/QUKM3HBE/Iogansen et al. - 2023 - Deciphering the factors associated with adoption of alternative fuel vehicles in California An inve.pdf;/Users/xnw17/Zotero/storage/HBQIBE3I/S0965856422002701.html
+      \verb /Users/xnw17/Zotero/storage/GI64FUZS/Iogansen et al. - 2023 - Deciphering the factors associated with adoption of alternative fuel vehicles in California An inve.pdf;/Users/xnw17/Zotero/storage/CR5PPFBQ/S0965856422002701.html
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0965856422002701
@@ -1497,58 +1497,6 @@
       \verb{url}
       \verb https://insideevs.com/news/742022/battery-replacement-costs-fall-cheaper-than-fixing-engine/
       \endverb
-    \endentry
-    \entry{krishnaUnderstandingIdentifyingBarriers2021}{article}{}{}
-      \name{author}{1}{}{%
-        {{hash=b3241714edeea6c65d88c22236cb889c}{%
-           family={Krishna},
-           familyi={K\bibinitperiod},
-           given={G.},
-           giveni={G\bibinitperiod}}}%
-      }
-      \strng{namehash}{b3241714edeea6c65d88c22236cb889c}
-      \strng{fullhash}{b3241714edeea6c65d88c22236cb889c}
-      \strng{fullhashraw}{b3241714edeea6c65d88c22236cb889c}
-      \strng{bibnamehash}{b3241714edeea6c65d88c22236cb889c}
-      \strng{authorbibnamehash}{b3241714edeea6c65d88c22236cb889c}
-      \strng{authornamehash}{b3241714edeea6c65d88c22236cb889c}
-      \strng{authorfullhash}{b3241714edeea6c65d88c22236cb889c}
-      \strng{authorfullhashraw}{b3241714edeea6c65d88c22236cb889c}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{The study aims to understand the general perception of electric vehicles among consumers and the barriers to their widespread adoption. The study focuses on identifying and understanding the factors involved in their purchase with a wider range of expression using thematic analysis unlike traditional survey techniques. Further, the role of emotions is also considered in the study which is normally overlooked. eWOM is used as data for the study as it is relevant for electric vehicles as people majorly use internet mediums to freely share their thoughts. This method helps in finding all gaps (tangible and intangible) present in the offering (EVs) and expectations of a consumer. This study also provides us with information on relationships amongst these barriers which has a negative cascading effect on overall adoption.}
-      \field{day}{1}
-      \field{issn}{2590-1982}
-      \field{journaltitle}{Transportation Research Interdisciplinary Perspectives}
-      \field{month}{6}
-      \field{shortjournal}{Transportation Research Interdisciplinary Perspectives}
-      \field{title}{Understanding and Identifying Barriers to Electric Vehicle Adoption through Thematic Analysis}
-      \field{urlday}{1}
-      \field{urlmonth}{7}
-      \field{urlyear}{2025}
-      \field{volume}{10}
-      \field{year}{2021}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \field{pages}{100364}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1016/j.trip.2021.100364
-      \endverb
-      \verb{file}
-      \verb /Users/xnw17/Zotero/storage/LDMB5UXL/Krishna - 2021 - Understanding and identifying barriers to electric vehicle adoption through thematic analysis.pdf;/Users/xnw17/Zotero/storage/LRF7EDLZ/S2590198221000713.html
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S2590198221000713
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S2590198221000713
-      \endverb
-      \keyw{Barriers,Consumer perception,Electric vehicles,eWOM}
     \endentry
     \entry{letmatheConsumerorientedTotalCost2017}{article}{}{}
       \name{author}{2}{}{%

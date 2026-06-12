@@ -83,6 +83,13 @@ database <- data_model %>%
       next_veh_fuel_used_bev == 3 ~ "neutral",
       next_veh_fuel_used_bev == 4 ~ "somewhat_agree",
       next_veh_fuel_used_bev == 5 ~ "strongly_agree"
+    ),
+    next_veh_fuel_new_bev = case_when(
+      next_veh_fuel_new_bev == 1 ~ "strongly_disagree",
+      next_veh_fuel_new_bev == 2 ~ "somewhat_disagree",
+      next_veh_fuel_new_bev == 3 ~ "neutral",
+      next_veh_fuel_new_bev == 4 ~ "somewhat_agree",
+      next_veh_fuel_new_bev == 5 ~ "strongly_agree"
     )
   )
 
@@ -308,7 +315,6 @@ num_vars <- c(
   "next_veh_budget_k"
   # "next_veh_fuel_new_phev",
   # "next_veh_fuel_used_phev",
-  # "next_veh_fuel_new_bev",
 )
 cate_vars <- c(
   "ATT_range_anxiety",
@@ -320,6 +326,7 @@ cate_vars <- c(
   "EV_charger",
   "EV_neighbor",
   "next_veh_fuel_used_bev",
+  "next_veh_fuel_new_bev",
   "knowledge_ev",
   "knowledge_subsidy",
   "gender_cate",
@@ -416,7 +423,7 @@ var_meta <- tribble(
   "next_veh_budget_k"      , "Next Vehicle Budget (1000 USD)"                , "Inactive Indicators"                    , "dollar" ,
   # "next_veh_fuel_new_phev"     , "Likelihood of buying new PHEV (1-5)"               , "Inactive Indicators"        , "number" ,
   # "next_veh_fuel_used_phev"    , "Likelihood of buying used PHEV (1-5)"              , "Inactive Indicators"        , "number" ,
-  # "next_veh_fuel_new_bev"      , "Likelihood of buying new BEV (1-5)"                , "Inactive Indicators"        , "number" ,
+  "next_veh_fuel_new_bev"  , "Likelihood of buying new BEV"                  , "Inactive Indicators"                    , "number" ,
   "next_veh_fuel_used_bev" , "Likelihood of buying used BEV"                 , "Inactive Indicators"                    , "number" ,
   # Attitudes / psychological
   # "ATT_price_sensitive"        , "Price Sensitivity"                                 , "Inactive Indicators"             , "pct"    ,

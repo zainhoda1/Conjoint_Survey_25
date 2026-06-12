@@ -2,8 +2,8 @@ PWD /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper.tex
-OUTPUT battery_paper.log
+INPUT /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper copy.tex
+OUTPUT battery_paper copy.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-sc.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-sc.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -245,10 +245,10 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/t1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/t1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/t1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT ./battery_paper.aux
-INPUT ./battery_paper.aux
-INPUT battery_paper.aux
-OUTPUT battery_paper.aux
+INPUT ./battery_paper copy.aux
+INPUT ./battery_paper copy.aux
+INPUT battery_paper copy.aux
+OUTPUT battery_paper copy.aux
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd
@@ -263,24 +263,24 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.st
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT ./battery_paper.out
-INPUT ./battery_paper.out
-INPUT battery_paper.out
-INPUT battery_paper.out
-INPUT ./battery_paper.out
-INPUT ./battery_paper.out
-OUTPUT battery_paper.out
-OUTPUT battery_paper.pdf
+INPUT ./battery_paper copy.out
+INPUT ./battery_paper copy.out
+INPUT battery_paper copy.out
+INPUT battery_paper copy.out
+INPUT ./battery_paper copy.out
+INPUT ./battery_paper copy.out
+OUTPUT battery_paper copy.out
+OUTPUT battery_paper copy.pdf
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
-OUTPUT battery_paper.bcf
-INPUT battery_paper.bbl
-INPUT ./battery_paper.bbl
-INPUT ./battery_paper.bbl
-INPUT ./battery_paper.bbl
-INPUT battery_paper.bbl
-OUTPUT battery_paper.abs
+OUTPUT battery_paper copy.bcf
+INPUT battery_paper copy.bbl
+INPUT ./battery_paper copy.bbl
+INPUT ./battery_paper copy.bbl
+INPUT ./battery_paper copy.bbl
+INPUT battery_paper copy.bbl
+OUTPUT battery_paper copy.abs
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-italic.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
@@ -372,8 +372,8 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-italic.tfm
-INPUT ./battery_paper.abs
-INPUT battery_paper.abs
+INPUT ./battery_paper copy.abs
+INPUT battery_paper copy.abs
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-bold.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
@@ -550,11 +550,11 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneralsc.
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/stix/t1-stixgeneralsc.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT battery_paper.aux
-INPUT ./battery_paper.out
-INPUT ./battery_paper.out
-INPUT battery_paper.run.xml
-OUTPUT battery_paper.run.xml
+INPUT battery_paper copy.aux
+INPUT ./battery_paper copy.out
+INPUT ./battery_paper copy.out
+INPUT battery_paper copy.run.xml
+OUTPUT battery_paper copy.run.xml
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-BoldItalic.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb

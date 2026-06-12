@@ -107,7 +107,7 @@ class_meta <- tibble(
 
 class_chars <- list(
   c1 = paste0(
-    "3/4 opts out in all 6 DCEs\n",
+    "3/4 opts out all 6 DCEs\n",
     "Oldest avg. age · Least risk-taking\n",
     "Highest range anxiety\n",
     "Most negative attitude toward EV batteries\n",
@@ -118,19 +118,19 @@ class_chars <- list(
   ),
   c2 = paste0(
     "Largest class\n",
-    "Constant, or slightly increasing marginal returns to range.\n",
+    "High and almost consistent loss aversion\n",
     "High concern about EV battery functionality\n",
-    "High and almost consistent loss aversion, regardless of the rates\n",
+    "Constant, or slightly increasing marginal returns to range.\n",
     "High SUV preference\n"
   ),
   c3 = paste0(
-    "Highest household income\n",
     "Highest primary vehicle range\n",
     "High share of current BEV owners\n",
     "Most positive towards EV batteries\n",
     "Highest electrical outlet access\n",
     "High EV exposure · Most EV knowledge\n",
     "High used BEV purchase intention\n",
+    "Highest household income\n",
     "Lowest SUV preference"
   ),
   c4 = paste0(
@@ -140,22 +140,21 @@ class_chars <- list(
     "High concern about functionality of EV batteries\n",
     "Lowest ICEV-only · Highest BEV households\n",
     "Highest vehicle budget · Most risk-taking\n",
-    "Potentially inattentive respondents\n",
-    "High tendency to agree with statements regardless of content"
+    "Potentially inattentive, attribute-disengaged respondents\n"
   ),
   c5 = paste0(
     "Only 5.2% never opt out\n",
     "High concern about EV battery functionality\n",
-    "Diminishing marginal returns to range, and then constant\n",
-    "Median-level of household income and vehicle buget\n",
-    "High concern about functionality of EV batteries\n",
     "High Range anxiety\n",
-    "High Refurbishment-averse"
+    "High Refurbishment-averse",
+    "Diminishing marginal returns to range, and then constant\n",
+    "comprehensive evaluations across all vehicle attributes\n",
+    "Median-level of household income and vehicle buget\n"
   ),
   c6 = paste0(
     "Most price-sensitive, small WTPs\n",
     "Lowest household income\n",
-    "Accept low-range BEVs\n",
+    "Accepting low-range BEVs\n",
     "Range loss-averse\n",
     "Lowest vehicle ownership (predominately ICEVs)\n",
     "Lowest share of housing owners\n",
@@ -168,8 +167,8 @@ wtp_vals_no_optout <- unlist(
   wtp_raw %>% filter(attr != "optout") %>% select(-attr)
 )
 BAR_CAP <- floor(min(wtp_vals_no_optout) * 1.15)
-y_lo    <- BAR_CAP * 1.22
-y_hi    <- max(wtp_vals_no_optout) * 1.55
+y_lo <- BAR_CAP * 1.22
+y_hi <- max(wtp_vals_no_optout) * 1.55
 
 # ── LONG DATA ─────────────────────────────────────────────────────────────────
 attr_df_no_optout <- attr_df %>% filter(attr != "optout")
@@ -290,8 +289,13 @@ make_chars <- function(class_id, show_y = TRUE) {
   ggplot() +
     annotate(
       "rect",
-      xmin = 0, xmax = 1, ymin = 0, ymax = 1,
-      fill = "#F5F7FA", color = info$hdr_color, linewidth = 0.4
+      xmin = 0,
+      xmax = 1,
+      ymin = 0,
+      ymax = 1,
+      fill = "#F5F7FA",
+      color = info$hdr_color,
+      linewidth = 0.4
     ) +
     annotate(
       "text",

@@ -21,7 +21,8 @@ data_model <- data_model %>%
       !is.na(Veh_hh_fuel) &
       !is.na(Veh_primary_range) &
       !is.na(ATT_EVB_environment) &
-      !is.na(ATT_EVB_function)
+      !is.na(ATT_EVB_function) &
+      !is.na(vehicle_typesuv)
   )
 
 data_nobev <- data_full %>%
@@ -30,9 +31,8 @@ data_nobev <- data_full %>%
   select(psid, prime_group_label, no_bev_selected0) %>%
   mutate(
     treatment = case_when(
-      prime_group_label == "prime_long" ~ "With Battery Information Treatment",
-      prime_group_label ==
-        "prime_short" ~ "WithoutBattery Information Treatment",
+      prime_group_label == "prime_long" ~ "Extended Info",
+      prime_group_label == "prime_short" ~ "Basic Info",
       TRUE ~ NA_character_
     )
   )
@@ -127,6 +127,10 @@ theme_labels <- c(
 )
 
 # Prevalence by treatment with chi-square p-value
+
+coded <- coded %>%
+  filter(psid %in% data_nobev$psid)
+
 crosstab <- purrr::map_dfr(themes, function(th) {
   tab <- coded %>%
     filter(!is.na(.data[[th]])) %>%
@@ -221,9 +225,25 @@ gtsave(
 
 # ── Bar chart: theme prevalence by treatment ───────────────────────────────────
 
+# Register Roboto Condensed via showtext (not installed as a system font)
+if (!requireNamespace("showtext", quietly = TRUE)) {
+  install.packages("showtext")
+}
+library(showtext)
+font_add_google("Roboto Condensed", "Roboto Condensed")
+showtext_auto()
+showtext_opts(dpi = 300)
+
+# Order themes by total frequency across both treatment groups (highest at top)
+theme_order <- crosstab %>%
+  group_by(theme_label) %>%
+  summarise(total_n = sum(n_theme), .groups = "drop") %>%
+  arrange(total_n) %>%
+  pull(theme_label)
+
 plot_data <- crosstab %>%
   mutate(
-    theme_label = factor(theme_label, levels = rev(theme_labels)),
+    theme_label = factor(theme_label, levels = theme_order),
     treatment = factor(treatment, levels = c("Basic Info", "Extended Info"))
   )
 
@@ -239,14 +259,18 @@ bar_optout_themes <- plot_data %>%
   ) +
   scale_y_continuous(
     labels = label_percent(),
-    expand = expansion(mult = c(0, 0.15))
+    expand = expansion(mult = c(0, 0.18))
   ) +
   scale_fill_manual(
-    values = c("Basic Info" = "#92B6D5", "Extended Info" = "#4682B4")
+    values = c("Basic Info" = "#92B6D5", "Extended Info" = "#4682B4"),
+    labels = c(
+      "Basic Info" = paste0("Basic Info (n=", n_basic, ")"),
+      "Extended Info" = paste0("Extended Info (n=", n_extended, ")")
+    )
   ) +
   coord_flip() +
   labs(
-    title = "Self-Reported Opt-Out Reasons by Information Treatment",
+    title = NULL,
     x = NULL,
     y = "% of Respondents",
     fill = "Treatment"
@@ -254,11 +278,11 @@ bar_optout_themes <- plot_data %>%
   theme_minimal_grid(font_family = "Roboto Condensed") +
   theme(
     panel.border = element_rect(colour = "black", fill = NA, size = .5),
-    axis.text = element_text(colour = "black", size = 10),
-    axis.title = element_text(colour = "black", size = 11),
+    axis.text = element_text(colour = "black", size = 12),
+    axis.title = element_text(colour = "black", size = 12),
     legend.position = "bottom",
-    legend.title = element_text(size = 11),
-    legend.text = element_text(size = 10),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 12),
     panel.background = element_blank(),
     plot.title = element_text(size = 12, face = "bold")
   )
@@ -275,7 +299,7 @@ ggsave(
     "latent_class",
     "barplot_optout_themes_by_treatment.jpg"
   ),
-  width = 9,
-  height = 5,
+  width = 7,
+  height = 4,
   dpi = 300
 )

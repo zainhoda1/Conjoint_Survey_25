@@ -26,9 +26,9 @@ maxbibnames=99,
     uniquename=false,
     natbib=true]{biblatex}
 
-\addbibresource{DCE_lit_review.bib}
-\addbibresource{Used EV.bib}
-\addbibresource{EV battery.bib}
+\addbibresource{../battery_paper/DCE_lit_review.bib}
+\addbibresource{../battery_paper/Used EV.bib}
+\addbibresource{../battery_paper/EV battery.bib}
 % \DeclareNameAlias{default}{family-given}
 
 \usepackage{hyperref}
@@ -48,11 +48,6 @@ maxbibnames=99,
 % add line number
 \usepackage{lineno}
 \pagewiselinenumbers
-
-%\usepackage{titlesec}
-%\titlespacing*{\section}{0pt}{6pt}{3pt}
-%\titlespacing*{\subsection}{0pt}{6pt}{3pt}
-%\titlespacing*{\subsubsection}{0pt}{6pt}{3pt}
 
 % remove the "preprint"
 \ExplSyntaxOn \cs_gset:Npn \__first_footerline: { \group_begin: \small \sffamily \__short_authors: \group_end: } \ExplSyntaxOff
@@ -75,9 +70,6 @@ maxbibnames=99,
 \def\floatpagepagefraction{1}
 \def\textpagefraction{.001}
 \shorttitle{}
-%\shortauthors{X. Iogansen et~al.}
-
-%\begin{frontmatter}
 
 \title [mode = title]{Consumer Valuation of Battery Health Information in Used Electric Vehicle Markets: A Discrete Choice Experiment
 }
@@ -124,16 +116,8 @@ maxbibnames=99,
 
 
 \begin{abstract}
-The used battery electric vehicle (BEV) market is growing rapidly, yet consumers face substantial uncertainty about battery condition at the point of sale. This paper estimates consumer preferences and willingness to pay (WTP) for battery health information in the used BEV market using a discrete choice experiment (DCE) administered to a national sample of 2,916 U.S. adults. The DCE jointly varies conventional vehicle attributes (price, mileage) and battery-specific attributes (electric range, degradation rate, refurbishment history) across six repeated choice tasks. We estimate a mixed logit model (MXL) and a six-class latent class choice model (LCCM) to capture both aggregate preferences and preference heterogeneity. At the population level, consumers value vehicles with lower mileage and additional range, while penalizing range degradation and battery refurbishment. The LCCM reveals six distinct consumer segments that differ markedly in their sensitivity to battery quality signals, price, and the no-choice option. Vehicles with documented performance indicators and battery health information represent a material pricing premium opportunity with the majority of the market. An information treatment analysis further shows that providing detailed battery and warranty information reshapes the type of concern driving opt-out behavior, but does not reduce overall market disengagement. These findings carry direct implications for used vehicle dealers, OEMs, and certification service providers seeking to develop market infrastructure for used BEVs.
+The used battery electric vehicle (BEV) market is growing rapidly, yet consumers face substantial uncertainty about battery condition at the point of sale. This paper estimates consumer preferences and willingness to pay (WTP) for battery health information in the used BEV market using a discrete choice experiment (DCE) administered to a national sample of 2,916 U.S. adults. The DCE jointly varies conventional vehicle attributes (price, mileage) and battery-specific attributes (electric range, degradation rate, refurbishment history) across six repeated choice tasks. We estimate a six-class latent class choice model (LCCM) to identify discrete consumer segments differing in their battery quality sensitivity, price responsiveness, and propensity to opt out of the market. The LCCM reveals six distinct consumer segments that differ markedly in their sensitivity to battery quality signals, price, and the no-choice option. Vehicles with documented performance indicators and battery health information represent a material pricing premium opportunity with the majority of the market. An information treatment analysis further shows that providing detailed battery and warranty information reshapes the type of concern driving opt-out behavior, but does not reduce overall market disengagement. These findings carry direct implications for used vehicle dealers, OEMs, and certification service providers seeking to develop market infrastructure for used BEVs.
 \end{abstract}
-
-%\begin{highlights}
-%\item Research highlights item 1
-%\item Research highlights item 2
-%\item Research highlights item 3
-%\item Research highlights item 4
-%\item Research highlights item 5
-%\end{highlights}
 
 \begin{keywords}
 
@@ -147,53 +131,21 @@ Battery electric vehicle; Used vehicle market; Discrete choice experiment; Willi
 
 The used vehicle market plays a central role in U.S. automobile ownership: used vehicle transactions now account for roughly 70\% of all passenger vehicle purchases and are projected to grow steadily through the coming decade \parencite{marketresearchfutureUnitedStatesUsed2025}. As electric vehicles (EVs) continue to penetrate the new car market, an increasing number of BEVs are entering the secondary market. Used EV sales rose 34.2\% year-over-year through early 2025, while average days of supply fell by 21.5\%, signaling rapid and accelerating demand \parencite{coxautomotiveinc.EVMarketMonitor2025}. The growth of the used BEV market extends EV access to middle- and lower-income households \parencite{hagmanTotalCostOwnership2016}, supports a circular economy by extending vehicle and battery lifetimes \parencite{guzekElectricVehiclesOverview2024}, and underpins the residual values that make new EV leases financially viable \parencite{bruckmannResaleAnxietyObstacle2021, limMassAdoptionElectric2015}.
 
-Despite this momentum, consumer hesitation toward used BEVs remains pronounced. \textcite{fernandesUSUnderstandingConsumer2023} indicates that 52\% of U.S. adults are unlikely to consider purchasing a used EV, compared to only 28\% who express openness to the idea. Consumers frequently cite uncertainty about vehicle and battery condition (41\%) and concerns about reliability relative to new EVs (23\%) as primary barriers. Among those who have already purchased a used EV, over half reported pre-purchase concerns about battery longevity, yeteven though only 5.1\% experienced substantial performance loss in practice \parencite{sheykhfardAnalyzingPurchaseIntentions2025}. This gap between perceived and actual risk points to a fundamental information asymmetry: buyers lack information and knowledge about the battery at the point of sale, which represents up to 30\% of a used BEV's value \parencite{boudwayBatteriesElectricCars2020}.
+Despite this momentum, consumer hesitation toward used BEVs remains pronounced. \textcite{fernandesUSUnderstandingConsumer2023} indicates that 52\% of U.S. adults are unlikely to consider purchasing a used EV, compared to only 28\% who express openness to the idea. Consumers frequently cite uncertainty about vehicle and battery condition (41\%) and concerns about reliability relative to new EVs (23\%) as primary barriers. Among those who have already purchased a used EV, over half reported pre-purchase concerns about battery longevity, yet only 5.1\% experienced substantial performance loss in practice \parencite{sheykhfardAnalyzingPurchaseIntentions2025}. This gap between perceived and actual risk points to a fundamental information asymmetry: buyers lack information and knowledge about the battery at the point of sale, which represents up to 30\% of a used BEV's value \parencite{boudwayBatteriesElectricCars2020}.
 
-Unlike conventional vehicles, where odometer reading and vehicle age serve as reasonable proxies for overall wear, battery degradation in BEVs depends on factors that are invisible to buyers: charging history, depth of discharge cycles, thermal exposure, and driving patterns \parencite{bashashPluginHybridElectric2011, neubauerSensitivityBatteryElectric2012}. Two BEVs of identical age and mileage can differ substantially in their remaining battery capacity and projected useful life. This creates a classic lemons problem in which sellers of well-maintained vehicles cannot credibly signal battery quality, depressing prices across the board and discouraging investment in battery upkeep. The consequences extend beyond individual transactions: persistent market uncertainty may suppress new EV adoption by generating "resale anxiety" among prospective buyers who question whether their new vehicle will hold its value \parencite{bruckmannResaleAnxietyObstacle2021}.
+Unlike conventional vehicles, where odometer reading and vehicle age serve as reasonable proxies for overall wear, battery degradation in BEVs depends on factors that are invisible to buyers: charging history, depth of discharge cycles, thermal exposure, and driving patterns \parencite{bashashPluginHybridElectric2011, neubauerSensitivityBatteryElectric2012}. Two BEVs of identical age and mileage can differ substantially in their remaining battery capacity and projected useful life. This creates a classic lemons problem in which sellers of well-maintained vehicles cannot credibly signal battery quality, depressing prices across the board and discouraging investment in battery upkeep. The consequences extend beyond individual transactions: persistent market uncertainty may suppress new EV adoption by generating ``resale anxiety'' among prospective buyers who question whether their new vehicle will hold its value \parencite{bruckmannResaleAnxietyObstacle2021}.
+
+Several characteristics of the used BEV market further compound this uncertainty. Battery replacement, when required, can cost between \$5,000 and \$20,000 depending on the vehicle model \parencite{kothariBatteryReplacementCosts2024, wittElectricCarBattery2024}, and a battery is generally considered at end-of-life for vehicle use when its state of health (SOH) falls to approximately 70--80\% of original capacity \parencite{canalscasalsEvaluationEndofLifeElectric2019}. Most manufacturers cover batteries for 8 years or 100,000 miles, meaning remaining warranty coverage at the point of resale independently contributes to vehicle value \parencite{clarkeCarWarrantyCoverage2024, letmatheConsumerorientedTotalCost2017}. To date, only one consumer study has directly examined WTP for battery condition in used EVs---conducted in Portugal, it found positive WTP for vehicles fitted with replacement batteries when backed by dealership warranties \parencite{pedrosaSecondhandElectricalVehicles2018}. No comparable evidence exists for the U.S. market, where the scale and composition of the used BEV buyer pool differ substantially.
 
 This paper asks how consumers value battery health information in the used BEV market and how preferences vary across consumer segments. We address these questions using a discrete choice experiment (DCE) administered to a national U.S. sample of 2,916 adults who reported an intention to purchase a used car or SUV within the next two years. The DCE presents respondents with repeated choices among hypothetical used BEVs that vary in mileage, purchase price, electric range, battery degradation rate, and battery refurbishment history. Respondents are also randomly assigned to receive either basic range-and-health information or extended information that additionally describes battery maintenance costs and warranty coverage, allowing us to assess whether information treatment shapes preferences and opt-out behavior.
 
-We estimate two complementary models. A mixed logit (MXL) model in WTP space characterizes aggregate preferences and the degree of preference heterogeneity across the full sample. A six-class latent class choice model (LCCM) then identifies discrete consumer segments that differ in their sensitivity to price, battery quality signals, and the outside option. To our knowledge, this study provides the first WTP estimates for battery health information in the U.S. used BEV market.
+We estimate a six-class latent class choice model (LCCM) that identifies discrete consumer segments differing in their sensitivity to price, battery quality signals, and the outside option. To our knowledge, this study provides the first WTP estimates for battery health information in the U.S. used BEV market.
 
-The MXL results confirm that the population, on average, values additional electric range (\$11,160 per 100 miles at Year~3), penalizes higher mileage (\$2,810 per 10,000 miles), and discounts battery degradation rate (\$1,000 per percentage point of annual range loss). Both refurbishment types carry significant disutility, though large standard deviation estimates indicate substantial variation across individuals. The LCCM reveals that this heterogeneity is structurally organized: approximately 62\% of respondents belong to three classes that strongly penalize any refurbishment history. A further 17\% are either price-constrained buyers largely indifferent to battery quality signals or deeply skeptical non-adopters unlikely to enter the used BEV market in the near term. The remaining class consists of highly committed, price-insensitive buyers who place an exceptionally high premium on a pristine battery service history. The information treatment analysis reveals that extended battery information raises the salience of battery-specific concerns among opt-outs but does not reduce the overall rate of market disengagement.
+The LCCM reveals that preference heterogeneity is structurally organized: approximately 62\% of respondents belong to three classes that strongly penalize any refurbishment history. A further 17\% are either price-constrained buyers largely indifferent to battery quality signals or deeply skeptical non-adopters unlikely to enter the used BEV market in the near term. The remaining class consists of highly committed, price-insensitive buyers who place an exceptionally high premium on a pristine battery service history. The information treatment analysis reveals that extended battery information raises the salience of battery-specific concerns among opt-outs but does not reduce the overall rate of market disengagement.
 
-These findings are relevant to dealers, OEMs, battery service providers, and financing institutions that are developing commercial infrastructure for used BEVs. The existence of large, identifiable segments with strong preferences for battery quality documentation supports the viability of premium pricing for certified battery health, while the presence of a price-sensitive but engaged segment points to the importance of affordable product offerings. We discuss the business and market implications of these findings in detail in Section~\ref{section:discussion}.
+These findings are relevant to dealers, OEMs, battery service providers, and financing institutions that are developing commercial infrastructure for used BEVs. The existence of large, identifiable segments with strong preferences for battery quality documentation supports the viability of premium pricing for certified battery health, while the presence of a price-sensitive but engaged segment points to the importance of affordable product offerings.
 
-The remainder of the paper is organized as follows. Section~\ref{section:lit_review} reviews the relevant literature. Section~\ref{section:data} describes the survey design and sample. Section~\ref{section:method} presents the econometric framework. Section~\ref{section:results} reports results. Section~\ref{section:discussion} discusses market and business implications. Section~\ref{section:conclusion} concludes.
-
-\section{Literature Review}
-\label{section:lit_review}
-This section reviews key literature informing survey design and analyses of this study. The first subsection examines the main drivers and barriers to the adoption of used BEVs, while the second subsection focuses on EV battery technology and how it shapes consumer perceptions and decision-making.
-
-\subsection{Used Electric Vehicle Adoption}
-
-Gore et al. (2024) provided a comprehensive review on consumer perspectives on EVs and the factors influencing EV adoption, identifying a broad range of determinants including attitudinal, demographic, societal, environmental, technological, and economic variables \parencite{iogansenDecipheringFactorsAssociated2023a, naseriWhoMoreLikely2024, sonarExaminingCausalFactors2023}. However, most existing studies focused on new EV markets, with comparatively limited attention given to the used EV markets, which is rapidly expanding and playing an increasingly important role in the broader diffusion of electric mobility.
-
-Though some preferences may carry over between new and used vehicle buyers---for instance, longer driving range consistently correlates with stronger EV preference---emerging evidence suggests that these two consumer groups differ in meaningful ways. For instance, used EV buyers are more sensitive to the availability of public charging infrastructure than new EV buyers, likely due to lower rates of home charging access \parencite{zouEffectsChargingInfrastructure2020}. Moreover, purchasing behavior for used vehicles is often more risk-averse and budget-conscious, reflecting different decision-making processes than those found in the new car market. This indicates that used EV adoption is not simply a scaled-down version of new EV adoption and warrants independent investigation.
-
-Several studies have begun to profile the typical used EV buyer. \textcite{canepaEarlyLookPlugin2019} found that used car buyers are commonly cost-conscious. Compared to the general population, used EV buyers are more likely to be younger, male, White, and better educated. However, compared to new-EV buyers, used EV buyers tend to have lower household incomes and be renters, with lower access to private garages with EV chargers \parencite{khaloeiHowDoesCharging2020, sheykhfardAnalyzingPurchaseIntentions2025}. These characteristics differ from the traditional early adopter profile seen in the new EV market (typically wealthier homeowners with garages), suggesting that used EVs may serve as a more accessible entry point into EV ownership for broader population segments.
-
-Although range is a common concern for EV users, \textcite{sheykhfardAnalyzingPurchaseIntentions2025} found that the majority of used EV owners drive well within the range capabilities of most existing EV models: 59.4\% reported driving fewer than 100 miles per day and 29.4\% drove less than 50 miles per day. This implies that range anxiety may be less of a practical barrier for used EV buyers, who tend to have shorter commutes or use their vehicles in more limited contexts. Range may therefore be a less decisive factor in used EV adoption compared to other attributes such as battery condition, charging accessibility, and price.
-
-Electric vehicle batteries (EVBs) present new risks and opportunities for both consumers and the automotive industry. Despite progress in battery technology, consumer concerns about battery health, replacement cost, and resale value persist, particularly in the used EV market. Battery costs can represent up to 30\% of a vehicle's total price \parencite{boudwayBatteriesElectricCars2020}, making battery longevity and reliability central to the economic attractiveness of used EV ownership.
-
-\subsection{Battery Degradation and State-of-Health}
-
-In the EV adoption literature, battery-related considerations have largely been operationalized through driving range \parencite{yuanInvestigationRangeAnxiety2018}. Prospective used EV buyers commonly express concerns about battery degradation, SOH uncertainty, and the perceived unreliability of older battery technology \parencite{pedrosaSecondhandElectricalVehicles2018}. Battery degradation manifests as a reduction in energy capacity, driving range, and charging efficiency over time \parencite{attiaReviewKneesLithiumIonBattery2022}. The rate of degradation depends on charging patterns, driving behavior, depth of discharge, and operating conditions such as temperature exposure \parencite{bashashPluginHybridElectric2011, neubauerSensitivityBatteryElectric2012}. \textcite{yangPredictiveModelingBattery2018} estimates that BEV batteries can last between five and thirteen years depending on climate conditions. Battery aging trajectories tend to be linear or sublinear, as degradation rates often stabilize after initial use due to the settling of battery chemistry \parencite{attiaRevisitingT05Dependence2020, attiaReviewKneesLithiumIonBattery2022}. A battery is generally considered to have reached its End-of-Life (EoL) for vehicle use when its SOH drops to approximately 70--80\% of original capacity \parencite{canalscasalsEvaluationEndofLifeElectric2019, canalscasalsElectricVehicleBattery2022}. Battery degradation reduces the perceived future value of a used BEV and heightens resale anxiety among prospective buyers.
-
-\subsection{Battery Replacement, Cost, and Warranty Considerations}
-
-While the literature has examined battery longevity in the context of total cost of EV ownership \parencite{hagmanTotalCostOwnership2016, letmatheConsumerorientedTotalCost2017}, direct evidence on the cost of battery replacement in used BEVs remains limited. Most modern EVBs are designed to outlast the vehicle's useful life under normal use. \textcite{dnistranEVBatteriesCan2024}, in a study of nearly 5,000 EVs, estimated an average annual degradation rate of just 1.8\%. Nevertheless, when replacement is required, costs can range from \$5,000 to \$20,000 or more depending on vehicle model and labor \parencite{kothariBatteryReplacementCosts2024, wittElectricCarBattery2024}. To support consumer confidence, most EV manufacturers provide warranties covering 8 years or 100,000 miles, whichever comes first \parencite{clarkeCarWarrantyCoverage2024}. For used vehicle buyers evaluating whether a battery's SOH will remain above the 70--75\% warranty threshold within their ownership window, the presence of remaining warranty coverage represents meaningful additional value. \textcite{letmatheConsumerorientedTotalCost2017} further account for battery residual value as a separate component of total cost of ownership, underscoring the economic significance of battery condition at resale.
-
-Second-Life and Refurbished Batteries
-As the number of retired EVBs increases, second-life applications and refurbishment are gaining commercial attention \parencite{skeeteEVentHorizonBattery2020, tankouScalingReuseRecycling2023}. The two dominant second-life pathways are repurposing degraded batteries for stationary energy storage and refurbishing them for continued use in EVs. This paper focuses on the latter. Refurbishing batteries at the cell or module level can lower vehicle costs and support the commercial viability of BEVs: \textcite{jiaoBusinessModelsSustainability2016} show that repurposing EoL EVBs could reduce the cost gap between BEVs and conventional vehicles, while \textcite{shaikhSystemDynamicsCosting2023} demonstrate through simulation that refurbished EVBs are less expensive than new ones, with cost advantages that are greatest in local markets. However, existing research on second-life EVBs has focused primarily on technical and economic feasibility, with comparatively little attention to consumer demand for refurbished options in the U.S. context.
-
-One of the few consumer-facing studies, conducted in Portugal, found that respondents expressed positive attitudes toward used EVs fitted with replacement batteries backed by dealership warranties, and indicated higher WTP relative to vehicles with original batteries \parencite{pedrosaSecondhandElectricalVehicles2018}. This qualitative study was small in scope and may not generalize to the U.S. market. More importantly, no study to date has examined consumer valuations of partial versus full battery replacement, or estimated WTP for battery health disclosure as distinct from the battery condition itself. These gaps motivate the present study.
-
-\subsection{Willingness to Pay for Battery Information}
-\par
-
-To be continued.
+The remainder of the paper is organized as follows. Section~\ref{section:data} describes the survey design and sample. Section~\ref{section:method} presents the econometric framework. Section~\ref{section:results} reports results and market implications. Section~\ref{section:conclusion} concludes.
 
 \section{Survey Design, Data Collection, and Sample Profile}
 \label{section:data}
@@ -263,41 +215,13 @@ The initial sample comprised 3,657 respondents from across the United States. We
 
 \section{Method}
 \label{section:method}
-\subsection{Mixed Logit Model}
-
-We begin by estimating WTP for changes in vehicle attributes across the full sample, treating the population as a single group. This provides an aggregate baseline and reveals the extent of preference heterogeneity. We estimate a Mixed Logit (MXL) model directly in \textit{WTP space}. The MXL model relaxes the Independence of Irrelevant Alternatives (IIA) assumption of the standard Multinomial Logit (MNL) model by allowing preference parameters to vary continuously across individuals \parencite{mcfaddenMixedMNLModels2000, trainDiscreteChoiceMethods2009}. Estimating in WTP space allows us to directly specify the distribution of WTP for each non-price attribute, rather than recovering it post hoc from the ratio of attribute to price coefficients. We assume that individual WTP values follow normal distributions, capturing symmetric heterogeneity around population means. The utility parameterization follows the notation in \textcite{helvestonPoolingStatedRevealed2018} and \textcite{helvestonLogitrFastEstimation2023}.
-
-The WTP-space utility for respondent $n$ choosing alternative $i$ in choice scenario $t$ is:
-\begin{equation}
-    u_{nti} = \lambda_n \bigl(\boldsymbol{\omega}_n^{\top} \mathbf{x}_{nti} - p_{nti}\bigr) + \varepsilon_{nti}, \qquad \varepsilon_{nti} \sim \mathrm{Gumbel}\!\left(0,\tfrac{\pi^2}{6}\right)
-    \label{eq:mxl_utility}
-\end{equation}
-
-\noindent where $p_{nti}$ is the purchase price presented in scenario $t$ to respondent $n$; $\mathbf{x}_{nti}$ is a vector of non-price BEV attributes including vehicle mileage, battery refurbishment status, current electric range at the point of purchase (Year~3), and the proportional rate of range loss over the subsequent five years (to Year~8);\footnote{We compared six attribute specifications that varied whether range was expressed at Year~0 or Year~3, and whether battery health change was expressed as absolute range loss or as a percentage degradation rate. The specification combining range at Year~3 with percentage loss rate from Year~3 to Year~8 yielded the best model fit and the most economically interpretable coefficients, suggesting consumers evaluate used BEVs primarily in terms of current performance and relative future deterioration.} $\lambda_n > 0$ is the individual-specific scale parameter; $\boldsymbol{\omega}_n$ is a vector of individual WTP values drawn from a mixing distribution $f(\boldsymbol{\omega} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})$ with population mean $\boldsymbol{\mu}$ and covariance $\boldsymbol{\Sigma}$; and $\varepsilon_{nti}$ is an IID Type I Extreme Value error. Because $\lambda_n$ and $\boldsymbol{\omega}_n$ are both unobserved, the choice probability requires integrating the logit kernel over their joint mixing distribution:
-
-\begin{equation}
-    P_{nti}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \int\!\int \frac{\exp\!\left(\lambda\bigl(\boldsymbol{\omega}^{\top}\mathbf{x}_{nti} - p_{nti}\bigr)\right)}{\displaystyle\sum_{j} \exp\!\left(\lambda\bigl(\boldsymbol{\omega}^{\top}\mathbf{x}_{ntj} - p_{ntj}\bigr)\right)} \, f(\boldsymbol{\omega} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})\, g(\lambda) \, d\boldsymbol{\omega}\, d\lambda
-    \label{eq:mxl_prob}
-\end{equation}
-
-\noindent This integral is evaluated by simulation using Halton draws ($R = 500$). Accounting for the panel structure of six repeated choice tasks per respondent, the simulated log-likelihood is:
-
-\begin{equation}
-    \mathcal{L}(\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^{N} \ln \left[ \frac{1}{R} \sum_{r=1}^{R} \prod_{t=1}^{T} \frac{\exp\!\left(\lambda_r\bigl(\boldsymbol{\omega}_r^{\top}\mathbf{x}_{nti_{nt}^*} - p_{nti_{nt}^*}\bigr)\right)}{\displaystyle\sum_{j} \exp\!\left(\lambda_r\bigl(\boldsymbol{\omega}_r^{\top}\mathbf{x}_{ntj} - p_{ntj}\bigr)\right)} \right]
-    \label{eq:mxl_ll}
-\end{equation}
-
-\noindent where $(\lambda_r, \boldsymbol{\omega}_r)$ is the $r$-th draw from the joint mixing distribution and $i_{nt}^*$ is the alternative chosen by respondent $n$ in scenario $t$. Because estimation is carried out directly in WTP space, the population mean WTP for each non-price attribute $k$ is obtained directly as $\hat{\mu}_k$, without requiring a post-estimation ratio transformation. We estimate the model using the \textit{logitr} R package \parencite{helvestonLogitrFastEstimation2023}.
-
-
-
 \subsection{Latent Class Choice Model}
 \vspace{\baselineskip}
 \noindent \textbf{Model Framework} \par
 
-The MXL results reveal substantial preference heterogeneity across respondents. To explore whether this heterogeneity reflects discrete consumer segments with systematically different preferences, we estimate a Latent Class Choice Model (LCCM). The LCCM assumes that individuals can be assigned to a finite number of unobserved groups (classes) within which preferences are homogeneous, but across which they differ \parencite{kamakuraProbabilisticChoiceModel1989, greeneLatentClassModel2003}. This structure is well suited to our research context, where consumers may differ fundamentally in their attitudes toward battery health risk, their familiarity with EV technology, and their price sensitivity.
+To identify discrete consumer segments that differ systematically in their battery quality sensitivity and price responsiveness, we estimate a Latent Class Choice Model (LCCM). The LCCM assumes that individuals can be assigned to a finite number of unobserved groups (classes) within which preferences are homogeneous, but across which they differ \parencite{kamakuraProbabilisticChoiceModel1989, greeneLatentClassModel2003}. This structure is well suited to our research context, where consumers may differ fundamentally in their attitudes toward battery health risk, their familiarity with EV technology, and their price sensitivity.
 
-As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two simultaneously estimated components. The \textit{class membership model} assigns each respondent probabilistically to a latent class as a function of observable individual characteristics. The \textit{class-specific choice model} then estimates the conditional probability of each vehicle choice within each class. In addition, a set of \textit{inactive indicators} --- attitudinal and behavioral variables excluded from estimation due to potential collinearity or theoretical considerations --- are used to further characterize the classes descriptively after estimation. The formal model structure follows the notation of \textcite{chenExploringTouristPreference2023}.
+As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two simultaneously estimated components. The \textit{class membership model} assigns each respondent probabilistically to a latent class as a function of observable individual characteristics. The \textit{class-specific choice model} then estimates the conditional probability of each vehicle choice within each class. In addition, a set of \textit{inactive indicators}---attitudinal and behavioral variables excluded from estimation due to potential collinearity or theoretical considerations---are used to further characterize the classes descriptively after estimation. The formal model structure follows the notation of \textcite{chenExploringTouristPreference2023}.
 
 \begin{figure}[pos=H]
     \centering
@@ -309,96 +233,30 @@ As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two sim
 \vspace{\baselineskip}
 \noindent \textbf{Class-specific Choice Model}\par
 
-For respondent $n$ belonging to latent class $s$ ($s = 1, 2, \ldots, S$), the utility of choosing vehicle alternative $i$ in choice scenario $t$ ($t = 1, \ldots, 6$) is:
-
-\begin{equation}
-    U_{nti \mid s} = \boldsymbol{\beta}_s' \mathbf{X}_{nti} + \varepsilon_{nti \mid s}
-    \label{eq:utility}
-\end{equation}
-
-\noindent where $\mathbf{X}_{nti}$ is a vector of observed BEV attributes (vehicle mileage, battery refurbishment status, electric range at Year~3, proportional range loss to Year~8, and purchase price); $\boldsymbol{\beta}_s$ is a vector of class-specific utility parameters; and $\varepsilon_{nti \mid s}$ is an IID Type I Extreme Value error. Under this assumption, the conditional probability that respondent $n$ in class $s$ chooses alternative $i$ in scenario $t$ follows the MNL form:
-
-\begin{equation}
-    P_{nt}(i \mid s) = \frac{\exp\!\left(\boldsymbol{\beta}_s' \mathbf{X}_{nti}\right)}{\displaystyle\sum_{j \in \mathcal{C}_{nt}} \exp\!\left(\boldsymbol{\beta}_s' \mathbf{X}_{ntj}\right)}
-    \label{eq:conditional_choice}
-\end{equation}
-
-\noindent where $\mathcal{C}_{nt}$ denotes the choice set available to respondent $n$ at scenario $t$.
+For each respondent in a latent class, the conditional choice probability follows a Multinomial Logit form governed by class-specific utility parameters interacting with observed vehicle attributes (mileage, battery refurbishment status, electric range at Year~3, proportional range loss to Year~8, and purchase price).
 
 To capture the non-linear relationship between range and choice probability, we adopt a piecewise linear specification for the range and degradation rate attributes. Consumers likely have diminishing sensitivity to range at higher levels and heightened sensitivity around critical viability thresholds. We compared a quadratic specification, which imposes a symmetric parabolic shape and performs poorly at the tails, with a piecewise linear specification that estimates separate slopes for distinct segments. The piecewise specification provides superior model fit and more interpretable coefficients. The breakpoints are defined as follows: electric range at Year~3 is segmented into 40--130 miles, 130--200 miles, and above 200 miles; the range loss rate is segmented into below 12\%, 12--24\%, and above 24\%. These thresholds reflect both theoretical considerations about minimum driving viability and empirical patterns in the data.
 
 \vspace{\baselineskip}
 \noindent \textbf{Class Membership Model} \par
 
-The class membership model specifies the probability that respondent $n$ belongs to latent class $s$ as a function of observed individual characteristics:
-
-\begin{equation}
-    M_n(s) = \frac{\exp\!\left(\boldsymbol{\gamma}_s' \mathbf{Z}_n\right)}{\displaystyle\sum_{s'=1}^{S} \exp\!\left(\boldsymbol{\gamma}_{s'}' \mathbf{Z}_n\right)}
-    \label{eq:membership}
-\end{equation}
-
-\noindent where $\mathbf{Z}_n$ is a vector of individual-level covariates organized into four groups: (1) \textit{perceptions and attitudes toward EVs and EV batteries} (e.g., range anxiety, environmental and functional assessments of refurbished batteries); (2) \textit{vehicle travel demand proxies} (e.g., range of the respondent's primary vehicle); (3) \textit{EV infrastructure availability} (e.g., access to electrical outlets for charging); and (4) \textit{socio-demographic characteristics} (e.g., household income, vehicle type preference). The parameters for the reference class $S$ are normalized to zero for identification.
-
-The unconditional probability that respondent $n$ chooses alternative $i$ in scenario $t$, integrating over all latent classes, is:
-
-\begin{equation}
-    P_{nt}(y_n = i) = \sum_{s=1}^{S} P_{nt}(i \mid s) \cdot M_n(s)
-    \label{eq:unconditional}
-\end{equation}
-
-Substituting Equations~\eqref{eq:conditional_choice} and \eqref{eq:membership} into Equation~\eqref{eq:unconditional} gives the full integrated choice probability:
-
-\begin{equation}
-    P_{nt}(y_n = i) = \sum_{s=1}^{S} \left[
-        \frac{\exp\!\left(\boldsymbol{\beta}_s' \mathbf{X}_{nti}\right)}{\displaystyle\sum_{j \in \mathcal{C}_{nt}} \exp\!\left(\boldsymbol{\beta}_s' \mathbf{X}_{ntj}\right)}
-        \cdot
-        \frac{\exp\!\left(\boldsymbol{\gamma}_s' \mathbf{Z}_n\right)}{\displaystyle\sum_{s'=1}^{S} \exp\!\left(\boldsymbol{\gamma}_{s'}' \mathbf{Z}_n\right)}
-    \right]
-    \label{eq:full_prob}
-\end{equation}
-
-The log-likelihood across all $N$ respondents and $T$ choice scenarios is:
-
-\begin{equation}
-    \mathcal{L}(\boldsymbol{\beta}, \boldsymbol{\gamma}) = \sum_{n=1}^{N} \sum_{t=1}^{T} \ln P_{nt}(y_n = i_n^*)
-    \label{eq:loglik}
-\end{equation}
-
-\noindent where $i_n^*$ denotes the alternative chosen by respondent $n$ in scenario $t$. The model parameters $\boldsymbol{\beta}_s$ and $\boldsymbol{\gamma}_s$ are estimated jointly via maximum likelihood.
+The class membership model specifies the probability that each respondent belongs to a given latent class as a function of observed individual characteristics, organized into four groups: (1) \textit{perceptions and attitudes toward EVs and EV batteries} (e.g., range anxiety, environmental and functional assessments of refurbished batteries); (2) \textit{vehicle travel demand proxies} (e.g., range of the respondent's primary vehicle); (3) \textit{EV infrastructure availability} (e.g., access to electrical outlets for charging); and (4) \textit{socio-demographic characteristics} (e.g., household income, vehicle type preference). The parameters for the reference class are normalized to zero for identification. The unconditional choice probability integrates over all latent classes, and model parameters are estimated jointly via maximum likelihood.
 
 \vspace{\baselineskip}
 \noindent \textbf{Willingness to Pay} \par
 
-A key output of the LCCM is class-specific WTP for each BEV attribute. Under the assumption that the marginal utility of price is negative and constant across alternatives, the WTP for attribute $k$ in class $s$ is:
-
-\begin{equation}
-    \text{WTP}_{s,k} = -\frac{\hat{\beta}_{s,k}}{\hat{\beta}_{s,\text{price}}}
-    \label{eq:wtp}
-\end{equation}
-
-\noindent This represents the maximum dollar amount a representative respondent in class $s$ would pay, or accept as compensation, for a one-unit change in attribute $k$, holding all other attributes constant.
+A key output of the LCCM is class-specific WTP for each BEV attribute. Under the assumption that the marginal utility of price is negative and constant across alternatives, WTP for a given attribute in a given class is computed as the negative ratio of the attribute coefficient to the price coefficient. This represents the maximum dollar amount a representative respondent in that class would pay, or accept as compensation, for a one-unit change in the attribute, holding all other attributes constant.
 
 \section{Results and Discussion}
 \label{section:results}
 
-\subsection{Results of Mixed Logit Model}
+\subsection{Model Selection}
 
-Table~\ref{table:mxl_results} presents the MXL estimates. All mean WTP parameters are significant at the 0.1\% level (***). On average, respondents value an additional 100 miles of electric range at Year~3 by \$11.2k, penalize every 10,000 miles of odometer reading by \$2.8k, and discount each additional percentage point of range loss rate by \$1.0k. Both refurbishment types generate meaningful disutility: pack replacement reduces WTP by \$4.0k and cell replacement by \$4.5k. The no-choice opt-out option carries a large negative coefficient (\$51.9k), reflecting a strong baseline preference to purchase a vehicle rather than opt out.
+We estimated models with one through eight classes and selected a six-class solution based on AIC, BIC, adjusted $\rho^2$, entropy, and class interpretability \parencite{nylundDecidingNumberClasses2007}. In solutions with more than six classes, at least one class consistently fell below 6\% of the sample, reducing segment-level robustness.
 
-The standard deviation estimates confirm substantial preference heterogeneity across respondents. Range at Year~3 exhibits the widest dispersion in absolute terms (SD = \$14.0k relative to a mean of \$11.1k), with the distribution of simulated WTP draws spanning from \$1.7k at the first quartile to \$20.5k at the third quartile. This indicates that while most respondents positively value range, a non-trivial share places little weight on it. Heterogeneity in the refurbishment parameters is also pronounced: the standard deviations for pack replacement and cell replacement are both larger in magnitude than their respective means, and the upper quartiles of the simulated distributions are positive (\$1.1k and \$0.1k, respectively). This implies that roughly one quarter of consumers view battery refurbishment neutrally or even as a positive quality signal, potentially because a replaced battery is perceived as newer than the original. Mileage dispersion is also substantial, with approximately one quarter of the simulated distribution crossing zero. In contrast, range loss rate is the most uniformly penalized attribute: its standard deviation is small relative to the mean, and the distribution remains negative throughout nearly the entire sample. Together, these results confirm that consumer valuations of battery-related attributes are heterogeneous in both sign and magnitude, motivating the segment-level analysis that follows.
+\subsection{WTP and Class Profiles}
 
-\input{attachments/mxl_results}
-
-\subsection{Results of Latent Class Choice Model}
-\subsubsection{Model Selection}
-
-To determine the optimal number of latent classes, we estimated models with one through eight classes (Table~\ref{table:model_fit_comparison}). Model fit was evaluated using log-likelihood ($LL$), the $\rho^2$ measure relative to the null model, Akaike Information Criterion ($AIC$), Bayesian Information Criterion ($BIC$), adjusted $\rho^2$, and entropy, where smaller $AIC$ and $BIC$ values and larger adjusted $\rho^2$ and entropy indicate better fit and class separation \parencite{nylundDecidingNumberClasses2007}. We selected a six-class solution on the basis of fit statistics and interpretability. In the seven- and eight-class solutions, one class consistently accounted for fewer than 6\% of the sample, reducing robustness for segment-level analysis.
-
-\input{attachments/lc_fit_index_comparison}
-
-\subsubsection{WTP and Class Profiles}
-
-Estimated model coefficients are presented in Table~\ref{tab:lc6_model_summary}, with \textbf{Class 1} serving as the reference class. WTP estimates and class profile characteristics are reported in Table~\ref{tab:lc6_profile}, with additional metadata on opt-out behavior and survey engagement in Table~\ref{tab:lc6_metadata}. Figure~\ref{fig:lc6_class_profiles} provides a visual summary of WTP patterns and segment profiles across classes. Class membership ranges from 8.7\% to 22.7\% of the sample. We describe each class below, organized to highlight contrasts in battery quality sensitivity, price responsiveness,market readiness, and segment-specific market strategies.
+Estimated model coefficients are presented in Table~\ref{tab:lc6_model_summary}, with \textbf{Class 1} serving as the reference class. Figure~\ref{fig:lc6_class_profiles} provides a visual summary of WTP patterns and segment profiles across classes. Class membership ranges from 8.7\% to 22.7\% of the sample. We describe each class below, organized to highlight contrasts in battery quality sensitivity, price responsiveness, market readiness, and segment-specific market strategies.
 
 \medskip
 
@@ -421,7 +279,7 @@ For this segment, auto dealers can filter low-range inventory aggressively or pr
 \noindent\textbf{Class 2: Battery Health Attentives ($n$=661, 22.7\%).}\\
 Class~2 is the largest class, which is uniquely defined by their battery health sensitivity.  Range loss aversion is the highest across classes and uniform at approximately \$2.3k*** per percentage point across all three degradation segments. Both refurbishment types also generate meaningful disutility (\$2.7k* for pack replacement; \$3.8k** for cell replacement). Their range WTP is consistent across the three piecewise segments (\$4.6k, \$4.6k, and \$5.3k**), indicating a steady marginal valuation of additional range without a strong threshold effect though only the highest tier reaches statistical significance.
 
-Members of Class~2 have an average household income of \$91.3k and are relatively young (36.5 years). They demonstrate above-average EV knowledge (76.2\%), moderate electrical outlet access (46.0\%), and a high rate of EV-owning neighbors (43.5\%). This class represents well-informed consumers are not necessarily purchasing range; rather, they are purchasing battery reliability at point of sale and protection against future performance loss. 
+Members of Class~2 have an average household income of \$91.3k and are relatively young (36.5 years). They demonstrate above-average EV knowledge (76.2\%), moderate electrical outlet access (46.0\%), and a high rate of EV-owning neighbors (43.5\%). This class represents well-informed consumers are not necessarily purchasing range; rather, they are purchasing battery reliability at point of sale and protection against future performance loss.
 
 Their valuation structure is well suited to transparent, attribute-based pricing. Financing products that tie interest rates or warranty terms to battery SOH readings, or that offer extended coverage contingent on passing a minimum degradation threshold, could be particularly attractive to this segment. Their strong aversion to range loss (\$2.3k per percentage point across all degradation levels) also suggests that short-term ownership scenarios with rapid degradation are significantly discounted, pointing to the value of long-term degradation forecasts in the listing description.
 
@@ -448,7 +306,7 @@ For this class, affordable pricing strategies and accessible financing, includin
 \noindent\textbf{Class 4: Price-Insensitive, Mixed-Motivation Evaluators ($n$=539, 18.5\%).}\\
 The most prominent feature of this class is its exceptionally low price coefficient in absolute value ($-0.144$**), indicating substantially lower price sensitivity than all other classes; as a result, all calutated WTP values are ratio-inflated. We suspect this class emcompasses several several subsets of respondents with different motivations who nonetheless produce similar WTP patterns.
 
-Class~4 exhibits the largest disutility for battery refurbishment of any class: \$26.6k** for pack replacement and \$32.6k** for cell replacement. One contributing factor may be that  that Class~4 has the highest share of respondents who received the extended information treatment (52.7\%), which included more details about battery maintenance costs and warranty coverage. This information may have heightened respondents' attention to the refurbishment attribute and amplified their concern about non-original battery conditions. 
+Class~4 exhibits the largest disutility for battery refurbishment of any class: \$26.6k** for pack replacement and \$32.6k** for cell replacement. One contributing factor may be that  that Class~4 has the highest share of respondents who received the extended information treatment (52.7\%), which included more details about battery maintenance costs and warranty coverage. This information may have heightened respondents' attention to the refurbishment attribute and amplified their concern about non-original battery conditions.
 
 At the same time, Class~4 exhibits characteristics commonly associated with experienced EV consumers. Class~4 has the highest rates of current BEV ownership in theirhousehold (13.5\%), PHEV or HEV ownership (25.3\%), and EV-owning neighbors (50.9\%). They report the lowest range anxiety (67.0\%) and the highest risk-taking propensity (51.9\%), and they have set the highest budget for their next vehicle (\$29.3k). These patterns suggest that at least some respondents in this class are highly committed to EV technology and may view many of the battery-health attributes included in the experiment as less relevant to their purchase decisions.
 
@@ -467,12 +325,6 @@ Taken together, Class~4 may represent a mixture of refurbishment-averse consumer
 \end{landscape}
 
 \input{attachments/model_summary_6c.tex}
-
-\input{attachments/table_lc6_profile_main.tex}
-\input{attachments/table_lc6_metadata.tex}
-
-
-
 
 
 \subsection{Results of Opt-Out Analysis}
@@ -498,9 +350,9 @@ This finding cautions against a strategy of disclosure-as-sufficient. For market
 \section{Conclusion}
 \label{section:conclusion}
 
-The used BEV market is expanding rapidly, yet persistent information asymmetry around battery health condition continues to suppress consumer confidence and limit market efficiency. This paper provides the first WTP estimates for battery health information in the U.S. used BEV market, based on a national DCE with 2,916 respondents and a jointly estimated MXL and six-class LCCM.
+The used BEV market is expanding rapidly, yet persistent information asymmetry around battery health condition continues to suppress consumer confidence and limit market efficiency. This paper provides the first WTP estimates for battery health information in the U.S. used BEV market, based on a national DCE with 2,916 respondents and a six-class LCCM.
 
-At the aggregate level, consumers value electric range, penalize mileage and battery degradation, and discount refurbishment history. The MXL estimates confirm that preference heterogeneity is substantial. The LCCM reveals that consumers be organized into six segments that differ markedly in their sensitivity to battery quality signals, their price responsiveness, and their market engagement. \textbf{Class~1} (8.7\%) is defined by systematic opt-out behavior and represents consumers who are largely outside the addressable used BEV market, with low EV knowledge, high range anxiety, and predominantly ICEV households. \textbf{Class~2} (22.7\%), the largest class, is characterized by the strongest and most uniform range loss aversion and meaningful disutility for both refurbishment types; these well-informed consumers are effectively purchasing battery reliability rather than range per se. \textbf{Class~3} (16.6\%) is most EV-engaged and places an exceptionally high premium on crossing a minimum viable range threshold and is the most EV-engaged segment. \textbf{Class~5} (20.8\%) attends simultaneously to range adequacy, degradation trajectory, and refurbishment condition, and opts out selectively when no presented vehicle meets its standards across all dimensions at once. \textbf{Class~6} (12.8\%) is the most price-sensitive class and is composed of budget-constrained buyers who are strongly committed to making a vehicle choice but largely indifferent to battery quality signals. \textbf{Class~4} (18.5\%) is best interpreted cautiously: its near-zero price sensitivity inflates calculated WTP values, and the class likely encompasses a mix of information-treatment-affected respondents, experienced EV adopters, and attribute-disengaged respondents who share a common pattern of large refurbishment disutility alongside imprecise estimates for most other attributes.
+The LCCM reveals that consumers can be organized into six segments that differ markedly in their sensitivity to battery quality signals, their price responsiveness, and their market engagement. Six classes emerge, each with a distinct combination of battery sensitivity, price responsiveness, and market engagement. \textbf{Class~1} (8.7\%) is defined by systematic opt-out behavior and represents consumers who are largely outside the addressable used BEV market, with low EV knowledge, high range anxiety, and predominantly ICEV households. \textbf{Class~2} (22.7\%), the largest class, is characterized by the strongest and most uniform range loss aversion (\$2.3k*** per percentage point across all degradation segments) and meaningful disutility for both refurbishment types; these well-informed consumers are effectively purchasing battery reliability rather than range per se. \textbf{Class~3} (16.6\%) places an exceptionally high premium on crossing a minimum viable range threshold and is the most EV-engaged segment, but assigns negligible disutility to refurbishment history. \textbf{Class~5} (20.8\%) attends simultaneously to range adequacy, degradation trajectory, and refurbishment condition, and opts out selectively when no presented vehicle meets its standards across all dimensions at once. \textbf{Class~6} (12.8\%) is the most price-sensitive class and is composed of budget-constrained buyers who are strongly committed to making a vehicle choice but largely indifferent to battery quality signals. \textbf{Class~4} (18.5\%) is best interpreted cautiously: its near-zero price sensitivity inflates calculated WTP values, and the class likely encompasses a mix of information-treatment-affected respondents, experienced EV adopters, and attribute-disengaged respondents who share a common pattern of large refurbishment disutility alongside imprecise estimates for most other attributes.
 
 These findings carry a direct message for dealers and OEMs. Vehicles with documented performance indicators (mileage, range) and battery health information (degradation rate and refurbished history)represent a material pricing premium opportunity with the majority of the market. It is important to consider the development of standardized battery health certification, analogous in structure and function to vehicle history reports. A certification program that provides independently verified SOH readings, degradation history, and remaining warranty coverage could allow dealers to differentiate inventory and command measurable price premiums from the battery-quality-sensitive majority. Critically, cell and pack replacement are penalized at similar magnitudes despite their technical differences, which indicates that consumers do not currently distinguish between high-quality refurbishment and simple repair. This represents a market opportunity for third-party certification services that validate refurbishment quality and communicate it in terms consumers understand.
 
