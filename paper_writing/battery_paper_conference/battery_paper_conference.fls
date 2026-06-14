@@ -1,9 +1,9 @@
-PWD /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper
+PWD /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper_conference
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/battery_paper copy.tex
-OUTPUT battery_paper copy.log
+INPUT /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper_conference/battery_paper_conference.tex
+OUTPUT battery_paper_conference.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-sc.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-sc.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -245,10 +245,10 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/t1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/t1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/t1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT ./battery_paper copy.aux
-INPUT ./battery_paper copy.aux
-INPUT battery_paper copy.aux
-OUTPUT battery_paper copy.aux
+INPUT ./battery_paper_conference.aux
+INPUT ./battery_paper_conference.aux
+INPUT battery_paper_conference.aux
+OUTPUT battery_paper_conference.aux
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd
@@ -263,26 +263,23 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.st
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT ./battery_paper copy.out
-INPUT ./battery_paper copy.out
-INPUT battery_paper copy.out
-INPUT battery_paper copy.out
-INPUT ./battery_paper copy.out
-INPUT ./battery_paper copy.out
-OUTPUT battery_paper copy.out
-OUTPUT battery_paper copy.pdf
+INPUT ./battery_paper_conference.out
+INPUT ./battery_paper_conference.out
+INPUT battery_paper_conference.out
+INPUT battery_paper_conference.out
+INPUT ./battery_paper_conference.out
+INPUT ./battery_paper_conference.out
+OUTPUT battery_paper_conference.out
+OUTPUT battery_paper_conference.pdf
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
-OUTPUT battery_paper copy.bcf
-INPUT battery_paper copy.bbl
-INPUT ./battery_paper copy.bbl
-INPUT ./battery_paper copy.bbl
-INPUT ./battery_paper copy.bbl
-INPUT battery_paper copy.bbl
-OUTPUT battery_paper copy.abs
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-italic.tfm
+OUTPUT battery_paper_conference.bcf
+INPUT battery_paper_conference.bbl
+INPUT ./battery_paper_conference.bbl
+INPUT ./battery_paper_conference.bbl
+INPUT ./battery_paper_conference.bbl
+INPUT battery_paper_conference.bbl
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecss0800.tfm
@@ -356,6 +353,9 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixtt.fd
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-italic.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathrm.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathit.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathscr.tfm
@@ -370,21 +370,13 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathcal.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsf.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-italic.tfm
-INPUT ./battery_paper copy.abs
-INPUT battery_paper copy.abs
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecss0900.tfm
-INPUT /usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecss1000.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecss0900.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecsx0900.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathrm.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathrm.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathit.tfm
@@ -413,8 +405,6 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-italic.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecsx0900.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathrm.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathit.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathscr.tfm
@@ -430,133 +420,36 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsf.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecsi0900.tfm
+INPUT /usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc
 INPUT ../../code/output/images/battery_analysis/battery-1.png
 INPUT ../../code/output/images/battery_analysis/battery-1.png
 INPUT ../../code/output/images/battery_analysis/battery-1.png
 INPUT ../../code/output/images/battery_analysis/battery-1.png
 INPUT ../../code/output/images/battery_analysis/battery-1.png
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT ../../code/output/images/battery_analysis/map_all.png
-INPUT ../../code/output/images/battery_analysis/map_all.png
-INPUT ../../code/output/images/battery_analysis/map_all.png
-INPUT ../../code/output/images/battery_analysis/map_all.png
-INPUT ../../code/output/images/battery_analysis/map_all.png
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathscr-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathscr-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathscr-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathex-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathex-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathex-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathfrak-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathfrak-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathfrak-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathbb-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathbb-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathbb-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathbbit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathbbit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathbbit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathcal-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathcal-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathcal-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsf-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsf-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsf-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt-bold.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-italic.tfm
 INPUT ../../code/output/images/battery_analysis/latent_class/model_framework.pdf
 INPUT ../../code/output/images/battery_analysis/latent_class/model_framework.pdf
 INPUT ../../code/output/images/battery_analysis/latent_class/model_framework.pdf
 INPUT ../../code/output/images/battery_analysis/latent_class/model_framework.pdf
 INPUT ../../code/output/images/battery_analysis/latent_class/model_framework.pdf
-INPUT ./attachments/mxl_results.tex
-INPUT ./attachments/mxl_results.tex
-INPUT ./attachments/mxl_results.tex
-INPUT ./attachments/mxl_results.tex
-INPUT attachments/mxl_results.tex
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1ptm.fd
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1ptm.fd
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1ptm.fd
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmbi8t.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-bolditalic.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmbi8t.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmbi8r.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT ./attachments/lc_fit_index_comparison.tex
-INPUT ./attachments/lc_fit_index_comparison.tex
-INPUT ./attachments/lc_fit_index_comparison.tex
-INPUT ./attachments/lc_fit_index_comparison.tex
-INPUT attachments/lc_fit_index_comparison.tex
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
-INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
-INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
-INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
-INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
-INPUT ./attachments/model_summary_6c.tex
-INPUT ./attachments/model_summary_6c.tex
-INPUT attachments/model_summary_6c.tex
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathrm.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathit.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathscr.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathex.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathrm-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathfrak.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathbb.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathbbit.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathcal.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsf.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathsfit.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/stix-mathtt.tfm
-INPUT ./attachments/table_lc6_profile_main.tex
-INPUT ./attachments/table_lc6_profile_main.tex
-INPUT attachments/table_lc6_profile_main.tex
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-bold.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT ./attachments/table_lc6_metadata.tex
-INPUT ./attachments/table_lc6_metadata.tex
-INPUT attachments/table_lc6_metadata.tex
-INPUT ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg
-INPUT ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg
-INPUT ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg
-INPUT ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg
-INPUT ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneralsc.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/stix/t1-stixgeneralsc.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT battery_paper copy.aux
-INPUT ./battery_paper copy.out
-INPUT ./battery_paper copy.out
-INPUT battery_paper copy.run.xml
-OUTPUT battery_paper copy.run.xml
+INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
+INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
+INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
+INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
+INPUT ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png
+INPUT battery_paper_conference.aux
+INPUT ./battery_paper_conference.out
+INPUT ./battery_paper_conference.out
+INPUT battery_paper_conference.run.xml
+OUTPUT battery_paper_conference.run.xml
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-BoldItalic.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsi0900.pfb
@@ -565,12 +458,5 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0900.pf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit-bold.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm-bold.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb

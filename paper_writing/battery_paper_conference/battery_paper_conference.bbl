@@ -1,0 +1,213 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{boudwayBatteriesElectricCars2020}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=91e234e6d7399b43097861edb043fd7c}{%
+           family={Boudway},
+           familyi={B\bibinitperiod},
+           given={Ira},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{91e234e6d7399b43097861edb043fd7c}
+      \strng{fullhash}{91e234e6d7399b43097861edb043fd7c}
+      \strng{fullhashraw}{91e234e6d7399b43097861edb043fd7c}
+      \strng{bibnamehash}{91e234e6d7399b43097861edb043fd7c}
+      \strng{authorbibnamehash}{91e234e6d7399b43097861edb043fd7c}
+      \strng{authornamehash}{91e234e6d7399b43097861edb043fd7c}
+      \strng{authorfullhash}{91e234e6d7399b43097861edb043fd7c}
+      \strng{authorfullhashraw}{91e234e6d7399b43097861edb043fd7c}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A new survey shows battery prices fast approaching cost competitiveness}
+      \field{day}{16}
+      \field{entrysubtype}{newspaper}
+      \field{journaltitle}{Bloomberg.com}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{title}{Batteries {{For Electric Cars Speed Toward}} a {{Tipping Point}}}
+      \field{urlday}{3}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/SBYLYURB/electric-cars-are-about-to-be-as-cheap-as-gas-powered-models.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.bloomberg.com/news/articles/2020-12-16/electric-cars-are-about-to-be-as-cheap-as-gas-powered-models
+      \endverb
+      \verb{url}
+      \verb https://www.bloomberg.com/news/articles/2020-12-16/electric-cars-are-about-to-be-as-cheap-as-gas-powered-models
+      \endverb
+      \keyw{BLOOMBERGNEF,business,China,Electric Vehicles,Energy,Generic 1st 'XB' Future,Great Britain,hyperdrive,Markets,Raw Materials,SPEED,TESLA INC}
+    \endentry
+    \entry{chenExploringTouristPreference2023}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=9e01fabf91b07fd48dc17bd222ffbb8e}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Ching-Fu},
+           giveni={C\bibinithyphendelim F\bibinitperiod}}}%
+        {{hash=8b5a9fa4485e7d5ffbd8df3c3512a0a9}{%
+           family={Fu},
+           familyi={F\bibinitperiod},
+           given={Chiang},
+           giveni={C\bibinitperiod}}}%
+        {{hash=85e766d2e5466f2847980a7a8487fe2f}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yu-Chun},
+           giveni={Y\bibinithyphendelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{8d774849afa5ce64040fc0cc70ba5da9}
+      \strng{fullhash}{f50bbe442fb16b12ad34d146097e23be}
+      \strng{fullhashraw}{f50bbe442fb16b12ad34d146097e23be}
+      \strng{bibnamehash}{f50bbe442fb16b12ad34d146097e23be}
+      \strng{authorbibnamehash}{f50bbe442fb16b12ad34d146097e23be}
+      \strng{authornamehash}{8d774849afa5ce64040fc0cc70ba5da9}
+      \strng{authorfullhash}{f50bbe442fb16b12ad34d146097e23be}
+      \strng{authorfullhashraw}{f50bbe442fb16b12ad34d146097e23be}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Mobility-as-a-Service (MaaS) provides travelers with a single digital travel platform that integrates information, booking, and payment with considerable discounts. Existing MaaS studies mainly focus on commuters’ daily mobility instead of tourists’ mobility during their stay at destinations. However, the tourist market is a potential but neglected MaaS market. To explore tourist preference for MaaS bundled services, this research examines the preference heterogeneity of tourist-specific MaaS bundles among 491 Taiwanese tourists by using the latent class choice model. The choice experiments are designed by seven MaaS bundle attributes, including public transport, shared bike, shared e-moped, shared car, shopping discount, attraction ticket discount and price. Three tourist classes, namely, MaaS Skeptics, MaaS Supporters, and MaaS Enthusiasts, are identified based upon three attitudinal latent variables (hedonic motivation, Attitude toward MaaS and mobile application factor) as well as socioeconomic characteristics. The results provided evidence of a tourist-specific MaaS market and preference heterogeneity among various tourist classes in Taiwan. Class profiles and scenario analyses of pro-MaaS propensity for three classes were conducted to provide deeper insights into preference variations. Implications and recommendations for developing more customized MaaS bundles for tourists are provided herein.}
+      \field{issn}{09658564}
+      \field{journaltitle}{Transportation Research Part A: Policy and Practice}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{title}{Exploring Tourist Preference for {{Mobility-as-a-Service}} ({{MaaS}}) – {{A}} Latent Class Choice Approach}
+      \field{urlday}{18}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{volume}{174}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{103750}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.tra.2023.103750
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/K89389L7/Chen et al. - 2023 - Exploring tourist preference for Mobility-as-a-Service (MaaS) – A latent class choice approach.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0965856423001702
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0965856423001702
+      \endverb
+    \endentry
+    \entry{fernandesUSUnderstandingConsumer2023}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=9d2a2f9bab7b81861bb318a781085d08}{%
+           family={Fernandes},
+           familyi={F\bibinitperiod},
+           given={Janice},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{fullhash}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{fullhashraw}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{bibnamehash}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{authorbibnamehash}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{authornamehash}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{authorfullhash}{9d2a2f9bab7b81861bb318a781085d08}
+      \strng{authorfullhashraw}{9d2a2f9bab7b81861bb318a781085d08}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{How likely or unlikely as consumers to consider purchasing a used electric car? And what motivates or deters them from doing so?}
+      \field{langid}{english}
+      \field{shorttitle}{{{US}}}
+      \field{title}{{{US}}: {{Understanding}} Consumer Opinion about Used Electric Cars}
+      \field{urlday}{30}
+      \field{urlmonth}{6}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/SNM329H4/47834-us-understanding-consumer-opinion-about-used-electric-cars.html
+      \endverb
+      \verb{urlraw}
+      \verb https://business.yougov.com/content/47834-us-understanding-consumer-opinion-about-used-electric-cars
+      \endverb
+      \verb{url}
+      \verb https://business.yougov.com/content/47834-us-understanding-consumer-opinion-about-used-electric-cars
+      \endverb
+    \endentry
+    \entry{marketresearchfutureUnitedStatesUsed2025}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=0585f4ab93b0b5191d72ce69f0a4d7bc}{%
+           family={{Market Research Future}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{fullhash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{fullhashraw}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{bibnamehash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{authorbibnamehash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{authornamehash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{authorfullhash}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \strng{authorfullhashraw}{0585f4ab93b0b5191d72ce69f0a4d7bc}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{United States Used Car Market is projected to register a CAGR of 8.20\% to reach USD 547.32 Billion by the end of 2034, United States Used Car Market Type, Propulsion, Engine Capacity, Sales Channel | United States Used Car Industry Overview.}
+      \field{langid}{english}
+      \field{title}{United {{States Used Car Market Trends}} \& {{Growth By}} 2034}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/BM2I6RVW/us-used-car-market-21771.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.marketresearchfuture.com/reports/us-used-car-market-21771
+      \endverb
+      \verb{url}
+      \verb https://www.marketresearchfuture.com/reports/us-used-car-market-21771
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

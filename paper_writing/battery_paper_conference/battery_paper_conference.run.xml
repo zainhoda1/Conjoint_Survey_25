@@ -44,10 +44,10 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>"battery_paper copy".bcf</file>
+      <file>battery_paper_conference.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>"battery_paper copy".bbl</file>
+      <file>battery_paper_conference.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -66,24 +66,24 @@
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>"battery_paper copy"</infile>
+      <infile>battery_paper_conference</infile>
     </cmdline>
     <input>
-      <file>"battery_paper copy".bcf</file>
+      <file>battery_paper_conference.bcf</file>
     </input>
     <output>
-      <file>"battery_paper copy".bbl</file>
+      <file>battery_paper_conference.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>"battery_paper copy".bbl</file>
+      <file>battery_paper_conference.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>"battery_paper copy".bcf</file>
+      <file>battery_paper_conference.bcf</file>
     </requires>
     <requires type="editable">
-      <file>DCE_lit_review.bib</file>
-      <file>Used EV.bib</file>
-      <file>EV battery.bib</file>
+      <file>../battery_paper/DCE_lit_review.bib</file>
+      <file>../battery_paper/Used EV.bib</file>
+      <file>../battery_paper/EV battery.bib</file>
     </requires>
   </external>
 </requests>

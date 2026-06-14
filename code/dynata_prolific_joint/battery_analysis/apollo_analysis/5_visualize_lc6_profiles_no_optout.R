@@ -89,10 +89,10 @@ class_meta <- tibble(
   ),
   label = c(
     "Opt-Out Dominant, BEV-Skeptical",
-    "High-range Enthusiast, Loss-Averse",
-    "Range-Focused, EV-ready",
-    "Price-Insensitive, Refurbishment-Averse",
-    "Opt-Out Prone, Range & Loss Aware",
+    "Battery Health Attentives",
+    "Range-Focused, EV-Engaged",
+    "Price-Insensitive, Mixed-Motivational",
+    "Multi-Attribute Maximizers",
     "Budget-Constrained, Low WTP"
   ),
   hdr_color = c(
