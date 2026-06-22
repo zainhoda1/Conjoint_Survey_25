@@ -1,25 +1,25 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'battery_paper.blg'
-[23] biber-darwin:340> INFO - === Fri Jun 12, 2026, 10:26:12
-[28] Biber.pm:420> INFO - Reading 'battery_paper.bcf'
-[57] Biber.pm:994> INFO - Found 43 citekeys in bib section 0
-[62] Biber.pm:4463> INFO - Processing section 0
-[66] Biber.pm:4654> INFO - Looking for bibtex file 'DCE_lit_review.bib' for section 0
-[69] bibtex.pm:1713> INFO - LaTeX decoding ...
-[98] bibtex.pm:1519> INFO - Found BibTeX data source 'DCE_lit_review.bib'
-[137] Biber.pm:4654> INFO - Looking for bibtex file 'Used EV.bib' for section 0
-[139] bibtex.pm:1713> INFO - LaTeX decoding ...
-[151] bibtex.pm:1519> INFO - Found BibTeX data source 'Used EV.bib'
-[194] Biber.pm:4654> INFO - Looking for bibtex file 'EV battery.bib' for section 0
-[197] bibtex.pm:1713> INFO - LaTeX decoding ...
-[217] bibtex.pm:1519> INFO - Found BibTeX data source 'EV battery.bib'
-[280] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[280] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[280] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
-[280] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
-[302] bbl.pm:676> INFO - Writing 'battery_paper.bbl' with encoding 'UTF-8'
+[25] biber-darwin:340> INFO - === Thu Jun 18, 2026, 18:01:14
+[31] Biber.pm:420> INFO - Reading 'battery_paper.bcf'
+[61] Biber.pm:994> INFO - Found 44 citekeys in bib section 0
+[66] Biber.pm:4463> INFO - Processing section 0
+[70] Biber.pm:4654> INFO - Looking for bibtex file 'DCE_lit_review.bib' for section 0
+[74] bibtex.pm:1713> INFO - LaTeX decoding ...
+[102] bibtex.pm:1519> INFO - Found BibTeX data source 'DCE_lit_review.bib'
+[139] Biber.pm:4654> INFO - Looking for bibtex file 'Used EV.bib' for section 0
+[141] bibtex.pm:1713> INFO - LaTeX decoding ...
+[154] bibtex.pm:1519> INFO - Found BibTeX data source 'Used EV.bib'
+[193] Biber.pm:4654> INFO - Looking for bibtex file 'EV battery.bib' for section 0
+[196] bibtex.pm:1713> INFO - LaTeX decoding ...
+[216] bibtex.pm:1519> INFO - Found BibTeX data source 'EV battery.bib'
+[279] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[279] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[279] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[279] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[301] bbl.pm:676> INFO - Writing 'battery_paper.bbl' with encoding 'UTF-8'
 [311] bbl.pm:779> INFO - Output to battery_paper.bbl
-[312] Biber.pm:131> WARN - article entry 'goreDCIConsumerValuation2025' (DCE_lit_review.bib): Invalid format '2025-11-18T07:00-05:00' of date field 'date' - ignoring
-[312] Biber.pm:131> WARN - Duplicate entry key: 'englerCausalEffectReligious2019' in file 'EV battery.bib', skipping ...
-[312] Biber.pm:131> WARN - Duplicate entry key: 'prietoUsingHedonicPrice2015' in file 'EV battery.bib', skipping ...
-[312] Biber.pm:133> INFO - WARNINGS: 3
+[311] Biber.pm:131> WARN - article entry 'goreDCIConsumerValuation2025' (DCE_lit_review.bib): Invalid format '2025-11-18T07:00-05:00' of date field 'date' - ignoring
+[311] Biber.pm:131> WARN - Duplicate entry key: 'englerCausalEffectReligious2019' in file 'EV battery.bib', skipping ...
+[311] Biber.pm:131> WARN - Duplicate entry key: 'prietoUsingHedonicPrice2015' in file 'EV battery.bib', skipping ...
+[311] Biber.pm:133> INFO - WARNINGS: 3

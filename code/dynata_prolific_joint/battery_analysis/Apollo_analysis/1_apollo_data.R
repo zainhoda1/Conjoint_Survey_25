@@ -43,7 +43,6 @@ data_dce <- read_parquet(here(
 #   select(-respID_qID)
 #
 
-
 data_variable <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
@@ -240,6 +239,78 @@ data_covariate_dummy <- cbc_encode(
 ) %>%
   as.data.frame()
 
+# ----Survey timing variables (per respondent)----
+
+data_time <- read_parquet(here(
+  "data",
+  "dynata_prolific_joint",
+  "data_joint.parquet"
+)) %>%
+  mutate(
+    across(
+      c(
+        time_start,
+        time_end,
+        time_p_battery_pageQ1_button,
+        time_p_battery_pageQ2_button,
+        time_p_battery_pageQ3_button,
+        time_p_battery_pageQ4_button,
+        time_p_battery_pageQ5_button,
+        time_p_battery_pageQ6_button,
+        time_q_battery_cbc_q1_button,
+        time_q_battery_cbc_q2_button,
+        time_q_battery_cbc_q3_button,
+        time_q_battery_cbc_q4_button,
+        time_q_battery_cbc_q5_button,
+        time_q_battery_cbc_q6_button
+      ),
+      ~ ymd_hms(., tz = "UTC")
+    ),
+    duration_q1 = as.numeric(
+      time_q_battery_cbc_q1_button - time_p_battery_pageQ1_button,
+      units = "secs"
+    ),
+    duration_q2 = as.numeric(
+      time_q_battery_cbc_q2_button - time_p_battery_pageQ2_button,
+      units = "secs"
+    ),
+    duration_q3 = as.numeric(
+      time_q_battery_cbc_q3_button - time_p_battery_pageQ3_button,
+      units = "secs"
+    ),
+    duration_q4 = as.numeric(
+      time_q_battery_cbc_q4_button - time_p_battery_pageQ4_button,
+      units = "secs"
+    ),
+    duration_q5 = as.numeric(
+      time_q_battery_cbc_q5_button - time_p_battery_pageQ5_button,
+      units = "secs"
+    ),
+    duration_q6 = as.numeric(
+      time_q_battery_cbc_q6_button - time_p_battery_pageQ6_button,
+      units = "secs"
+    ),
+    duration_battery_dce = as.numeric(
+      time_p_battery_pageQ6_button - time_p_battery_pageQ1_button,
+      units = "secs"
+    ),
+    duration_full_survey = as.numeric(
+      time_end - time_start,
+      units = "secs"
+    )
+  ) %>%
+  select(
+    psid,
+    duration_q1,
+    duration_q2,
+    duration_q3,
+    duration_q4,
+    duration_q5,
+    duration_q6,
+    duration_battery_dce,
+    duration_full_survey
+  )
+
 ### Loading data from package
 database_all <- data_covariate_num %>%
   mutate(
@@ -287,7 +358,8 @@ database_all <- data_covariate_num %>%
     battery_range_loss_2_quadratic = battery_range_loss_2^2,
     battery_range_loss_3_quadratic = battery_range_loss_3^2,
     battery_range_loss_4_quadratic = 0
-  )
+  ) %>%
+  left_join(data_time, by = "psid")
 
 write_parquet(
   database_all,
@@ -297,4 +369,3 @@ write_parquet(
     "data_apollo_battery.parquet"
   )
 )
-

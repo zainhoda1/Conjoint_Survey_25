@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  12 JUN 2026 17:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  18 JUN 2026 18:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1141,10 +1141,10 @@ $[]$
  []
 
 [5 <../../code/output/images/battery_analysis/battery-1.png>]
-<../../code/output/images/battery_analysis/map_all.png, id=139, 505.89pt x 361.35pt>
+<../../code/output/images/battery_analysis/map_all.png, id=140, 505.89pt x 361.35pt>
 File: ../../code/output/images/battery_analysis/map_all.png Graphic file (type png)
 <use ../../code/output/images/battery_analysis/map_all.png>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/map_all.png  used on input line 258.
+Package pdftex.def Info: ../../code/output/images/battery_analysis/map_all.png  used on input line 262.
 (pdftex.def)             Requested size: 398.08539pt x 284.3496pt.
 
 
@@ -1161,10 +1161,10 @@ $[]$
  []
 
 [7 <../../code/output/images/battery_analysis/map_all.png>]
-<../../code/output/images/battery_analysis/latent_class/model_framework.pdf, id=175, 364.48169pt x 199.70609pt>
+<../../code/output/images/battery_analysis/latent_class/model_framework.pdf, id=177, 364.48169pt x 199.70609pt>
 File: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf Graphic file (type pdf)
 <use ../../code/output/images/battery_analysis/latent_class/model_framework.pdf>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf  used on input line 304.
+Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf  used on input line 308.
 (pdftex.def)             Requested size: 374.66734pt x 205.29123pt.
 
 
@@ -1220,10 +1220,10 @@ $[]$
  []
 
 [14]
-<../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png, id=264, 794.97pt x 614.295pt>
+<../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png, id=266, 794.97pt x 614.295pt>
 File: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png Graphic file (type png)
 <use ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png>
-Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png  used on input line 463.
+Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png  used on input line 467.
 (pdftex.def)             Requested size: 560.86385pt x 433.4061pt.
 
 
@@ -1260,10 +1260,10 @@ $[]$
  []
 
 [18]
-<../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg, id=282, 2107.875pt x 1204.5pt>
+<../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg, id=284, 2107.875pt x 1204.5pt>
 File: ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg Graphic file (type jpg)
 <use ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg  used on input line 492.
+Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/barplot_optout_themes_by_treatment.jpg  used on input line 496.
 (pdftex.def)             Requested size: 468.3324pt x 267.61903pt.
 
 
@@ -1316,18 +1316,18 @@ Package logreq Info: Writing requests to 'battery_paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26990 strings out of 473190
- 465130 string characters out of 5715801
- 1401728 words of memory out of 5000000
- 49720 multiletter control sequences out of 15000+600000
+ 26996 strings out of 473190
+ 465382 string characters out of 5715801
+ 1401817 words of memory out of 5000000
+ 49725 multiletter control sequences out of 15000+600000
  710205 words of font info for 220 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,15n,93p,2286b,1928s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-BoldItalic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsi0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on battery_paper.pdf (23 pages, 2053446 bytes).
+Output written on battery_paper.pdf (23 pages, 2054800 bytes).
 PDF statistics:
- 545 PDF objects out of 1000 (max. 8388607)
- 465 compressed objects within 5 object streams
- 111 named destinations out of 1000 (max. 500000)
+ 548 PDF objects out of 1000 (max. 8388607)
+ 468 compressed objects within 5 object streams
+ 112 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

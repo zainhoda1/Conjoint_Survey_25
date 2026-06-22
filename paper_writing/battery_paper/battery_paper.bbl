@@ -959,6 +959,54 @@
       \verb https://ideas.repec.org//a/eee/transb/v37y2003i8p681-698.html
       \endverb
     \endentry
+    \entry{greszkiImpactSpeedingData2015}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=6f4f2b9444b280785639ef9a46d084c9}{%
+           family={Greszki},
+           familyi={G\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=fe2705156111e768e036aeb203c29e11}{%
+           family={Meyer},
+           familyi={M\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=45821fd0cc96b2c55d455c9486f6b613}{%
+           family={Schoen},
+           familyi={S\bibinitperiod},
+           given={Harald},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{1d237b1672a8267e63dd4c77c5cd0ddf}
+      \strng{fullhash}{440db07250e6328342a8a13e6e877741}
+      \strng{fullhashraw}{440db07250e6328342a8a13e6e877741}
+      \strng{bibnamehash}{440db07250e6328342a8a13e6e877741}
+      \strng{authorbibnamehash}{440db07250e6328342a8a13e6e877741}
+      \strng{authornamehash}{1d237b1672a8267e63dd4c77c5cd0ddf}
+      \strng{authorfullhash}{440db07250e6328342a8a13e6e877741}
+      \strng{authorfullhashraw}{440db07250e6328342a8a13e6e877741}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{1}
+      \field{issn}{0033-362X}
+      \field{journaltitle}{Public Opinion Quarterly}
+      \field{month}{6}
+      \field{number}{2}
+      \field{shortjournal}{Public Opinion Quarterly}
+      \field{title}{The {{Impact}} of {{Speeding}} on {{Data Quality}} in {{Nonprobability}} and {{Freshly Recruited Probability-Based Online Panels}}}
+      \field{volume}{79}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \field{pages}{471\bibrangedash 503}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.1093/poq/nfu058
+      \endverb
+    \endentry
     \entry{guzekElectricVehiclesOverview2024}{article}{}{}
       \name{author}{6}{}{%
         {{hash=76cfa593f06c402276f76bbaf9b48464}{%
