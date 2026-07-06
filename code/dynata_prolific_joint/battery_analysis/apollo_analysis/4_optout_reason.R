@@ -74,6 +74,20 @@ coded <- read_parquet(here(
   mutate(n_themes = rowSums(select(., all_of(themes)), na.rm = TRUE))
 cat("Loaded", nrow(coded), "coded responses.\n")
 
+
+# write coded to as a exc for manual review if needed
+write_csv(
+  coded,
+  here(
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "apollo",
+    "0_nobev_themes_coded.csv"
+  )
+)
+
 # ── Check for new uncoded responses ──────────────────────────────────────────
 new_uncoded <- data_nobev %>%
   filter(!psid %in% coded$psid)
@@ -85,6 +99,7 @@ if (nrow(new_uncoded) > 0) {
     "new no-BEV responses not yet LLM-coded.\n"
   )
   cat("Saving to: 0_nobev_themes_to_code.parquet\n")
+
   write_parquet(
     new_uncoded,
     here(
@@ -251,15 +266,23 @@ bar_optout_themes <- plot_data %>%
   ggplot(aes(x = theme_label, y = pct, fill = treatment)) +
   geom_col(position = position_dodge(width = 0.7), width = 0.6) +
   geom_text(
-    aes(label = scales::percent(pct, accuracy = 1)),
+    aes(
+      label = paste0(
+        "(n=",
+        n_theme,
+        " | ",
+        scales::percent(pct, accuracy = 0.1),
+        ")"
+      )
+    ),
     position = position_dodge(width = 0.7),
-    hjust = -0.15,
-    size = 3,
+    hjust = -0.05,
+    size = 2.5,
     color = "black"
   ) +
   scale_y_continuous(
     labels = label_percent(),
-    expand = expansion(mult = c(0, 0.18))
+    expand = expansion(mult = c(0, 0.28))
   ) +
   scale_fill_manual(
     values = c("Basic Info" = "#92B6D5", "Extended Info" = "#4682B4"),
@@ -301,5 +324,255 @@ ggsave(
   ),
   width = 7,
   height = 4,
+  dpi = 300
+)
+
+
+# ── Word cloud of battery-related concerns ────────────────────────────────────
+if (!requireNamespace("tidytext", quietly = TRUE)) {
+  install.packages("tidytext", repos = "https://cloud.r-project.org")
+}
+if (!requireNamespace("ggwordcloud", quietly = TRUE)) {
+  install.packages("ggwordcloud", repos = "https://cloud.r-project.org")
+}
+if (!requireNamespace("textstem", quietly = TRUE)) {
+  install.packages("textstem", repos = "https://cloud.r-project.org")
+}
+library(tidytext)
+library(ggwordcloud)
+library(textstem)
+
+# Battery-related = any theme flag for battery/range/charging OR keyword hit in raw text
+battery_kw <- "\\b(batter(y|ies)|charg|kwh|range|degrad|replace|lifespan|fire)"
+battery_responses <- coded %>%
+  mutate(
+    kw_hit = grepl(battery_kw, no_bev_selected0, ignore.case = TRUE),
+    battery_related = battery_concern == 1 |
+      range_anxiety == 1 |
+      charging_infrastructure == 1 |
+      kw_hit
+  ) %>%
+  filter(battery_related)
+
+cat("\n── Battery-related responses ──\n")
+cat(
+  "N =",
+  nrow(battery_responses),
+  "of",
+  nrow(coded),
+  "(",
+  scales::percent(nrow(battery_responses) / nrow(coded), accuracy = 0.1),
+  ")\n"
+)
+
+# Drop generic EV/vehicle vocabulary so the cloud surfaces *concerns*, not the topic
+custom_stop <- tibble(
+  word = c(
+    "ev",
+    "evs",
+    "electric",
+    "vehicle",
+    "vehicles",
+    "car",
+    "cars",
+    "bev",
+    "bevs",
+    "buy",
+    "get",
+    "would",
+    "much",
+    "really",
+    "ive",
+    "im",
+    "dont",
+    "doesnt",
+    "isnt",
+    "just",
+    "thing",
+    "things",
+    "lot",
+    "people",
+    "want",
+    "like"
+  )
+)
+
+word_counts <- battery_responses %>%
+  select(psid, no_bev_selected0) %>%
+  unnest_tokens(word, no_bev_selected0) %>%
+  anti_join(stop_words, by = "word") %>%
+  anti_join(custom_stop, by = "word") %>%
+  filter(!grepl("^[0-9]+$", word), nchar(word) > 2) %>%
+  mutate(word = lemmatize_words(word)) %>%
+  anti_join(stop_words, by = "word") %>%
+  anti_join(custom_stop, by = "word") %>%
+  count(word, sort = TRUE)
+
+cat("Top 20 words:\n")
+print(head(word_counts, 20))
+
+theme_map <- tribble(
+  ~word            , ~theme            ,
+  "battery"        , "Battery"         , "cell"         , "Battery"         ,
+  "lithium"        , "Battery"         , "capacity"     , "Battery"         ,
+  "batt"           , "Battery"         , "tesla"        , "Battery"         ,
+  # Charging
+  "charge"         , "Charging"        , "charger"      , "Charging"        ,
+  "recharge"       , "Charging"        , "station"      , "Charging"        ,
+  "outlet"         , "Charging"        , "plug"         , "Charging"        ,
+  "infrastructure" , "Charging"        , "wall"         , "Charging"        ,
+  "access"         , "Charging"        , "rural"        , "Charging"        ,
+  "home"           , "Charging"        , "electrical"   , "Charging"        ,
+  "location"       , "Charging"        , "availability" , "Charging"        ,
+  "accessibility"  , "Charging"        , "ample"        , "Charging"        ,
+  # Range / distance
+  "range"          , "Range"           , "distance"     , "Range"           ,
+  "mile"           , "Range"           , "mileage"      , "Range"           ,
+  "travel"         , "Range"           , "drive"        , "Range"           ,
+  "trip"           , "Range"           , "far"          , "Range"           ,
+  "highway"        , "Range"           , "road"         , "Range"           ,
+  "limit"          , "Range"           , "low"          , "Range"           ,
+  "run"            , "Range"           , "stop"         , "Range"           ,
+  "strand"         , "Range"           , "short"        , "Range"           ,
+  "destination"    , "Range"           , "route"        , "Range"           ,
+  "terrain"        , "Range"           ,
+  # Cost
+  "expensive"      , "Cost"            , "price"        , "Cost"            ,
+  "cost"           , "Cost"            , "purchase"     , "Cost"            ,
+  "money"          , "Cost"            , "afford"       , "Cost"            ,
+  "pay"            , "Cost"            , "cheap"        , "Cost"            ,
+  "spend"          , "Cost"            ,
+  # Lifespan / reliability / safety
+  "life"           , "Lifespan/Safety" , "lifespan"     , "Lifespan/Safety" ,
+  "degradation"    , "Lifespan/Safety" , "replace"      , "Lifespan/Safety" ,
+  "replacement"    , "Lifespan/Safety" , "wear"         , "Lifespan/Safety" ,
+  "last"           , "Lifespan/Safety" , "reliable"     , "Lifespan/Safety" ,
+  "reliability"    , "Lifespan/Safety" , "fire"         , "Lifespan/Safety" ,
+  "safety"         , "Lifespan/Safety" , "safe"         , "Lifespan/Safety" ,
+  "issue"          , "Lifespan/Safety" , "degrade"      , "Lifespan/Safety" ,
+  "degradation"    , "Lifespan/Safety" , "refurbish"    , "Lifespan/Safety" ,
+  "risk"           , "Lifespan/Safety" , "concern"      , "Lifespan/Safety" ,
+  "worry"          , "Lifespan/Safety" , "trust"        , "Lifespan/Safety" ,
+  "distrust"       , "Lifespan/Safety" , "health"       , "Lifespan/Safety" ,
+  "maintain"       , "Lifespan/Safety" , "dispose"      , "Lifespan/Safety" ,
+  "waste"          , "Lifespan/Safety" , "dangerous"    , "Lifespan/Safety" ,
+  "poor"           , "Lifespan/Safety" , "uncertainty"  , "Lifespan/Safety" ,
+  "coverage"       , "Lifespan/Safety" , "negative"     , "Lifespan/Safety" ,
+  "rely"           , "Lifespan/Safety" , "afraid"       , "Lifespan/Safety" ,
+  "warranty"       , "Lifespan/Safety" , "cold"         , "Lifespan/Safety" ,
+  "weather"        , "Lifespan/Safety" , "winter"       , "Lifespan/Safety" ,
+  "temperature"    , "Lifespan/Safety" ,
+  # Alt fuels
+  "gas"            , "Alt Fuels"       , "gasoline"     , "Alt Fuels"       ,
+  "hybrid"         , "Alt Fuels"       , "fuel"         , "Alt Fuels"       ,
+  "diesel"         , "Alt Fuels"       , "engine"       , "Alt Fuels"       ,
+  "tank"           , "Alt Fuels"       , "gallon"       , "Alt Fuels"       ,
+  "conventional"   , "Alt Fuels"       ,
+  # Time / inconvenience
+  "time"           , "Time"            , "slow"         , "Time"            ,
+  "wait"           , "Time"            , "hour"         , "Time"            ,
+  "fast"           , "Time"            , "quick"        , "Time"            ,
+  "inconvenient"   , "Time"            , "minute"       , "Time"            ,
+  "month"          , "Time"            ,
+  # Power / performance
+  "power"          , "Power"           , "performance"  , "Power"           ,
+  "electricity"    , "Power"           , "energy"       , "Power"
+)
+
+theme_palette <- c(
+  "Battery" = "#1F3D5C",
+  "Charging" = "#4682B4",
+  "Range" = "#2E8B57",
+  "Cost" = "#B22222",
+  "Lifespan/Safety" = "#8B008B",
+  "Alt Fuels" = "#8B4513",
+  "Time" = "#DAA520",
+  "Power" = "#008080",
+  "Other" = "#808080"
+)
+
+wc_data <- word_counts %>%
+  inner_join(theme_map, by = "word") %>%
+  slice_max(n, n = 80)
+
+set.seed(42)
+wc_battery <- wc_data %>%
+  ggplot(aes(label = word, size = n, color = theme)) +
+  geom_text_wordcloud_area(
+    family = "Roboto Condensed",
+    shape = "circle",
+    rm_outside = TRUE
+  ) +
+  scale_size_area(max_size = 22) +
+  scale_color_manual(values = theme_palette) +
+  theme_minimal(base_family = "Roboto Condensed") +
+  theme(
+    plot.background = element_rect(fill = "white", color = NA),
+    legend.position = "none"
+  )
+
+# Theme → color reference (printed since no in-plot legend)
+cat("\n── Theme color code ──\n")
+purrr::iwalk(theme_palette, ~ cat(sprintf("  %-18s %s\n", .y, .x)))
+
+wc_battery
+
+ggsave(
+  plot = wc_battery,
+  filename = here(
+    "code",
+    "output",
+    "images",
+    "battery_analysis",
+    "latent_class",
+    "wordcloud_battery_concerns.jpg"
+  ),
+  width = 3,
+  height = 2,
+  dpi = 350
+)
+
+
+# ── Standalone theme color legend ─────────────────────────────────────────────
+themes_used <- names(theme_palette)[names(theme_palette) != "Other"]
+legend_data <- tibble(
+  theme = factor(themes_used, levels = themes_used),
+  idx = seq_along(themes_used)
+)
+
+legend_fig <- legend_data %>%
+  ggplot(aes(x = idx, y = 1)) +
+  geom_point(aes(color = theme), size = 10, shape = 15) +
+  geom_text(
+    aes(label = theme),
+    y = 0.55,
+    vjust = 1,
+    family = "Roboto Condensed",
+    fontface = "bold",
+    size = 4
+  ) +
+  scale_color_manual(values = theme_palette) +
+  scale_x_continuous(expand = expansion(add = 0.5)) +
+  scale_y_continuous(limits = c(0.2, 1.3)) +
+  theme_void(base_family = "Roboto Condensed") +
+  theme(
+    legend.position = "none",
+    plot.background = element_rect(fill = "white", color = NA)
+  )
+
+legend_fig
+
+ggsave(
+  plot = legend_fig,
+  filename = here(
+    "code",
+    "output",
+    "images",
+    "battery_analysis",
+    "thematic_analysis",
+    "wordcloud_battery_concerns_legend.jpg"
+  ),
+  width = 12,
+  height = 1.4,
   dpi = 300
 )

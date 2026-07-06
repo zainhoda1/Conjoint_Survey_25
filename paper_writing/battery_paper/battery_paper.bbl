@@ -120,7 +120,6 @@
       \strng{authornamehash}{0c077e9b62d514eb55f846267f9b5d9f}
       \strng{authorfullhash}{1b4e7b96d4d7f77ee036aa89d51fb42a}
       \strng{authorfullhashraw}{1b4e7b96d4d7f77ee036aa89d51fb42a}
-      \field{extraname}{1}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{extradatescope}{labelyear}
@@ -157,71 +156,117 @@
       \verb https://dx.doi.org/10.1149/1945-7111/ac6d13
       \endverb
     \endentry
-    \entry{attiaRevisitingT05Dependence2020}{article}{}{}
-      \name{author}{3}{}{%
-        {{hash=249d6ac28574ee1219b06f162dac35b9}{%
-           family={Attia},
-           familyi={A\bibinitperiod},
-           given={Peter\bibnamedelima M.},
-           giveni={P\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
-        {{hash=0bbc102f7a4213af303a3b98830f4e6b}{%
-           family={Chueh},
-           familyi={C\bibinitperiod},
-           given={William\bibnamedelima C.},
-           giveni={W\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
-        {{hash=68082a7646ac373e5ef37dbe9e29ca62}{%
-           family={Harris},
-           familyi={H\bibinitperiod},
-           given={Stephen\bibnamedelima J.},
-           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+    \entry{HomeAVILOO2026}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=5cc03348507c4300d3cf8b1cfc12b9aa}{%
+           family={{Aviloo}},
+           familyi={A\bibinitperiod}}}%
       }
-      \list{publisher}{1}{%
-        {IOP Publishing}%
-      }
-      \strng{namehash}{0c077e9b62d514eb55f846267f9b5d9f}
-      \strng{fullhash}{3040a5165d28f0171f7b8bae0baa90e3}
-      \strng{fullhashraw}{3040a5165d28f0171f7b8bae0baa90e3}
-      \strng{bibnamehash}{3040a5165d28f0171f7b8bae0baa90e3}
-      \strng{authorbibnamehash}{3040a5165d28f0171f7b8bae0baa90e3}
-      \strng{authornamehash}{0c077e9b62d514eb55f846267f9b5d9f}
-      \strng{authorfullhash}{3040a5165d28f0171f7b8bae0baa90e3}
-      \strng{authorfullhashraw}{3040a5165d28f0171f7b8bae0baa90e3}
-      \field{extraname}{2}
+      \strng{namehash}{5cc03348507c4300d3cf8b1cfc12b9aa}
+      \strng{fullhash}{5cc03348507c4300d3cf8b1cfc12b9aa}
+      \strng{fullhashraw}{5cc03348507c4300d3cf8b1cfc12b9aa}
+      \strng{bibnamehash}{5cc03348507c4300d3cf8b1cfc12b9aa}
+      \strng{authorbibnamehash}{5cc03348507c4300d3cf8b1cfc12b9aa}
+      \strng{authornamehash}{5cc03348507c4300d3cf8b1cfc12b9aa}
+      \strng{authorfullhash}{5cc03348507c4300d3cf8b1cfc12b9aa}
+      \strng{authorfullhashraw}{5cc03348507c4300d3cf8b1cfc12b9aa}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{SEI growth in lithium-ion batteries is commonly assumed to scale with t0.5, in line with simple models of diffusion-limited surface layer growth. As a result, this model is widely used for empirical predictions of capacity fade in lithium-ion batteries. However, the t0.5 model is generally not theoretically sufficient to describe all of the various SEI growth modes. Furthermore, previous literature has not convincingly demonstrated that this model provides the best fit to measurements of SEI growth. In this work, we discuss the theoretical assumptions of the t0.5 model, evaluate claims of t0.5 dependence in six previously published datasets and one new dataset, and compare the performance of this model to that of other models. We find that few of the purported t0.5 fits in literature are statistically justified, although t0.5 generally describes SEI growth during storage better than SEI growth during cycling. Finally, we evaluate how the fitted exponents in the power-law models vary as a function of time, and we illustrate the limitations of using t0.5 for prediction without validating its applicability to a particular dataset. This work illustrates the theoretical and empirical limitations of the t0.5 model and highlights alternatives for more accurate estimates and predictions of SEI growth.}
-      \field{issn}{1945-7111}
-      \field{journaltitle}{Journal of The Electrochemical Society}
-      \field{langid}{english}
-      \field{month}{5}
-      \field{number}{9}
-      \field{shortjournal}{J. Electrochem. Soc.}
-      \field{title}{Revisiting the T0.5 {{Dependence}} of {{SEI Growth}}}
-      \field{urlday}{3}
-      \field{urlmonth}{7}
-      \field{urlyear}{2025}
-      \field{volume}{167}
-      \field{year}{2020}
+      \field{day}{22}
+      \field{langid}{american}
+      \field{month}{9}
+      \field{title}{Aviloo}
+      \field{urlday}{30}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2026}
       \field{dateera}{ce}
       \field{urldateera}{ce}
-      \field{pages}{090535}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1149/1945-7111/ab8ce4
-      \endverb
       \verb{file}
-      \verb /Users/xnw17/Zotero/storage/4UENHSVK/Attia et al. - 2020 - Revisiting the t0.5 Dependence of SEI Growth.pdf
+      \verb /Users/xnw17/Zotero/storage/SQPYRHFR/en-us.html
       \endverb
       \verb{urlraw}
-      \verb https://dx.doi.org/10.1149/1945-7111/ab8ce4
+      \verb https://aviloo.com/en-us/
       \endverb
       \verb{url}
-      \verb https://dx.doi.org/10.1149/1945-7111/ab8ce4
+      \verb https://aviloo.com/en-us/
       \endverb
+    \endentry
+    \entry{bansalWillingnessPayAttitudinal2021}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=edf70fc438046012605b0711144130d3}{%
+           family={Bansal},
+           familyi={B\bibinitperiod},
+           given={Prateek},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ea3ca52a007623f51529219165ec2aad}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Rajeev\bibnamedelima Ranjan},
+           giveni={R\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=ec5ca1ddf4545b043d9736698c558802}{%
+           family={Raj},
+           familyi={R\bibinitperiod},
+           given={Alok},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7d5ae1ae89983f9f3e9fef0165da3533}{%
+           family={Dubey},
+           familyi={D\bibinitperiod},
+           given={Subodh},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3ee45449d153e9dd97b7ca69c1725af4}{%
+           family={Graham},
+           familyi={G\bibinitperiod},
+           given={Daniel\bibnamedelima J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{8869eb224ff66f39087c8bae06179b94}
+      \strng{fullhash}{8bf89c54d26b7d74e1eae66906baf1a5}
+      \strng{fullhashraw}{8bf89c54d26b7d74e1eae66906baf1a5}
+      \strng{bibnamehash}{8bf89c54d26b7d74e1eae66906baf1a5}
+      \strng{authorbibnamehash}{8bf89c54d26b7d74e1eae66906baf1a5}
+      \strng{authornamehash}{8869eb224ff66f39087c8bae06179b94}
+      \strng{authorfullhash}{8bf89c54d26b7d74e1eae66906baf1a5}
+      \strng{authorfullhashraw}{8bf89c54d26b7d74e1eae66906baf1a5}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Consumer preference elicitation is critical to devise effective policies for the diffusion of electric vehicles (EVs) in India. This study contributes to the EV demand literature in the Indian context by (a) analysing the EV attributes and attitudinal factors of Indian car buyers that determine consumers' preferences for EVs, (b) estimating Indian consumers' willingness to pay (WTP) to buy EVs with improved attributes, and c) quantifying how the reference dependence affects the WTP estimates. We adopt a hybrid choice modelling approach for this study. The results indicate that accounting for reference dependence provides more realistic WTP estimates than the standard utility estimation approach. Our results suggest that Indian consumers are willing to pay an additional US\$10–34 in the purchase price to reduce the fast charging time by 1~min, US\$7–40 to add a kilometre to the driving range of EVs at 200~km, and US\$104–692 to save US\$1 per 100~km in operating cost. These estimates and the effect of attitudes on the likelihood to adopt EVs provide insights about EV design, marketing strategies, and pro-EV policies (e.g., specialised lanes and reserved parking for EVs) to expedite the adoption of EVs in India.}
+      \field{day}{1}
+      \field{issn}{0140-9883}
+      \field{journaltitle}{Energy Economics}
+      \field{month}{8}
+      \field{shortjournal}{Energy Economics}
+      \field{title}{Willingness to Pay and Attitudinal Preferences of {{Indian}} Consumers for Electric Vehicles}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{100}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{105340}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.eneco.2021.105340
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/HSGTXXVU/Bansal et al. - 2021 - Willingness to pay and attitudinal preferences of Indian consumers for electric vehicles.pdf;/Users/xnw17/Zotero/storage/38TZMYKP/S0140988321002462.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0140988321002462
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0140988321002462
+      \endverb
+      \keyw{Electric vehicle Willingness to pay,Hybrid choice model,Indian consumers,Reference dependence}
     \endentry
     \entry{bashashPluginHybridElectric2011}{article}{}{}
       \name{author}{4}{}{%
@@ -291,6 +336,133 @@
       \endverb
       \keyw{Charge pattern optimization,Lithium-ion battery degradation,Plug-in hybrid electric vehicles}
     \endentry
+    \entry{BatteryTestingAnalytics2025}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=64ed67d9cd3ad15c06e9bdbe9782e202}{%
+           family={{Battery-Tech Network}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{64ed67d9cd3ad15c06e9bdbe9782e202}
+      \strng{fullhash}{64ed67d9cd3ad15c06e9bdbe9782e202}
+      \strng{fullhashraw}{64ed67d9cd3ad15c06e9bdbe9782e202}
+      \strng{bibnamehash}{64ed67d9cd3ad15c06e9bdbe9782e202}
+      \strng{authorbibnamehash}{64ed67d9cd3ad15c06e9bdbe9782e202}
+      \strng{authornamehash}{64ed67d9cd3ad15c06e9bdbe9782e202}
+      \strng{authorfullhash}{64ed67d9cd3ad15c06e9bdbe9782e202}
+      \strng{authorfullhashraw}{64ed67d9cd3ad15c06e9bdbe9782e202}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This overview introduces the leading startups and established firms in battery testing, detailing their core technologies and key capabilities.}
+      \field{day}{10}
+      \field{hour}{15}
+      \field{langid}{american}
+      \field{minute}{18}
+      \field{month}{7}
+      \field{second}{27}
+      \field{timezone}{+02\bibtzminsep 00}
+      \field{title}{Battery {{Testing}} \& {{Analytics Companies}} -}
+      \field{urlday}{30}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/ND2343GA/battery-testing-analytics-companies.html
+      \endverb
+      \verb{urlraw}
+      \verb https://battery-tech.net/battery-testing-analytics-companies/
+      \endverb
+      \verb{url}
+      \verb https://battery-tech.net/battery-testing-analytics-companies/
+      \endverb
+    \endentry
+    \entry{bilfingerWhyWeNeed2025}{online}{}{}
+      \name{author}{7}{}{%
+        {{hash=578e7cfbc6810e697a19dace41929738}{%
+           family={Bilfinger},
+           familyi={B\bibinitperiod},
+           given={Philip},
+           giveni={P\bibinitperiod}}}%
+        {{hash=2df21fdcd2dc42ded965408fac86b2d2}{%
+           family={Schreiber},
+           familyi={S\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3d4244d8d146c262f268272f17c6d1c3}{%
+           family={Rosner},
+           familyi={R\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9c57217c531dd333048c6da4d1325a84}{%
+           family={Gamra},
+           familyi={G\bibinitperiod},
+           given={Kareem\bibnamedelima Abo},
+           giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=0ce2efa2d0761cb80fb88f57e6da5e29}{%
+           family={Schöberl},
+           familyi={S\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e7edbae5f84b8f43deedb35db5633ff1}{%
+           family={Grosu},
+           familyi={G\bibinitperiod},
+           given={Cristina},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b6eaf9c0cbe6c46f009c422f4db31a23}{%
+           family={Lienkamp},
+           familyi={L\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{da75c09a27c99fab0d9710fc8515e6a3}
+      \strng{fullhash}{0c6d8591bd6a41a17a4d5e9bffda85a1}
+      \strng{fullhashraw}{0c6d8591bd6a41a17a4d5e9bffda85a1}
+      \strng{bibnamehash}{0c6d8591bd6a41a17a4d5e9bffda85a1}
+      \strng{authorbibnamehash}{0c6d8591bd6a41a17a4d5e9bffda85a1}
+      \strng{authornamehash}{da75c09a27c99fab0d9710fc8515e6a3}
+      \strng{authorfullhash}{0c6d8591bd6a41a17a4d5e9bffda85a1}
+      \strng{authorfullhashraw}{0c6d8591bd6a41a17a4d5e9bffda85a1}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Range and performance are key customer-relevant properties of electric vehicles. Both degrade over time due to battery aging, thus impacting business decisions throughout a vehicle's lifecycle, such as efficient utilization and asset valuation. For practical assessment, aging is often simplified into a single figure of merit - the state of health - typically defined by the battery pack's remaining capacity or energy. However, no standardized method for measuring the state of health at the vehicle level has been established, leaving both academia and industry without a clear consensus. Ultimately, standardization is crucial to increase transparency and build confidence in the long-term reliability of electric vehicles' battery packs. In this article, we propose a standard measurement procedure for assessing the capacity- and energy-based state of health, leveraging onboard charging to enable reproducibility and scalability. Additionally, we demonstrate how differential voltage analysis can provide deeper insights into battery aging at the vehicle level.}
+      \field{day}{21}
+      \field{eprintclass}{eess.SY}
+      \field{eprinttype}{arXiv}
+      \field{month}{8}
+      \field{pubstate}{prepublished}
+      \field{title}{Why We Need a Standardized State of Health Definition for Electric Vehicle Battery Packs -- a Proposal for Energy- and Capacity-Based Metrics}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2508.15517
+      \endverb
+      \verb{eprint}
+      \verb 2508.15517
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/25N2MHRR/Bilfinger et al. - 2025 - Why we need a standardized state of health definition for electric vehicle battery packs -- a propos.pdf;/Users/xnw17/Zotero/storage/5HY7EK4N/2508.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2508.15517
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2508.15517
+      \endverb
+      \keyw{Electrical Engineering and Systems Science - Systems and Control}
+    \endentry
     \entry{boudwayBatteriesElectricCars2020}{article}{}{}
       \name{author}{1}{}{%
         {{hash=91e234e6d7399b43097861edb043fd7c}{%
@@ -336,6 +508,63 @@
       \verb https://www.bloomberg.com/news/articles/2020-12-16/electric-cars-are-about-to-be-as-cheap-as-gas-powered-models
       \endverb
       \keyw{BLOOMBERGNEF,business,China,Electric Vehicles,Energy,Generic 1st 'XB' Future,Great Britain,hyperdrive,Markets,Raw Materials,SPEED,TESLA INC}
+    \endentry
+    \entry{braunUsingThematicAnalysis2006}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=ea90dfebef3293c5af2151719ce2385e}{%
+           family={Braun},
+           familyi={B\bibinitperiod},
+           given={Virginia},
+           giveni={V\bibinitperiod}}}%
+        {{hash=f0513d29a647c5f1beea56b0aed1bd40}{%
+           family={Clarke},
+           familyi={C\bibinitperiod},
+           given={Victoria},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Routledge}%
+      }
+      \strng{namehash}{5d3eb06fe3d6dd55dd140dc783327eb9}
+      \strng{fullhash}{5d3eb06fe3d6dd55dd140dc783327eb9}
+      \strng{fullhashraw}{5d3eb06fe3d6dd55dd140dc783327eb9}
+      \strng{bibnamehash}{5d3eb06fe3d6dd55dd140dc783327eb9}
+      \strng{authorbibnamehash}{5d3eb06fe3d6dd55dd140dc783327eb9}
+      \strng{authornamehash}{5d3eb06fe3d6dd55dd140dc783327eb9}
+      \strng{authorfullhash}{5d3eb06fe3d6dd55dd140dc783327eb9}
+      \strng{authorfullhashraw}{5d3eb06fe3d6dd55dd140dc783327eb9}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Thematic analysis is a poorly demarcated, rarely acknowledged, yet widely used qualitative analytic method within psychology. In this paper, we argue that it offers an accessible and theoretically flexible approach to analysing qualitative data. We outline what thematic analysis is, locating it in relation to other qualitative analytic methods that search for themes or patterns, and in relation to different epistemological and ontological positions. We then provide clear guidelines to those wanting to start thematic analysis, or conduct it in a more deliberate and rigorous way, and consider potential pitfalls in conducting thematic analysis. Finally, we outline the disadvantages and advantages of thematic analysis. We conclude by advocating thematic analysis as a useful and flexible method for qualitative research in and beyond psychology.}
+      \field{day}{1}
+      \field{issn}{1478-0887}
+      \field{journaltitle}{Qualitative Research in Psychology}
+      \field{month}{1}
+      \field{number}{2}
+      \field{title}{Using Thematic Analysis in Psychology}
+      \field{urlday}{28}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{3}
+      \field{year}{2006}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{77\bibrangedash 101}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.1191/1478088706qp063oa
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1191/1478088706qp063oa
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1191/1478088706qp063oa
+      \endverb
+      \keyw{epistemology,flexibility,patterns,qualitative psychology,thematic analysis}
     \endentry
     \entry{bruckmannResaleAnxietyObstacle2021}{article}{}{}
       \name{author}{3}{}{%
@@ -403,83 +632,6 @@
       \verb https://dx.doi.org/10.1088/1748-9326/ac3531
       \endverb
     \endentry
-    \entry{canalscasalsElectricVehicleBattery2022}{article}{}{}
-      \name{author}{5}{}{%
-        {{hash=11206ca3df0c91367857c22e3d2780c2}{%
-           family={Canals\bibnamedelima Casals},
-           familyi={C\bibinitperiod\bibinitdelim C\bibinitperiod},
-           given={Lluc},
-           giveni={L\bibinitperiod}}}%
-        {{hash=b3539a7b18f700e40bde1ff41925ac8e}{%
-           family={Etxandi-Santolaya},
-           familyi={E\bibinithyphendelim S\bibinitperiod},
-           given={Maite},
-           giveni={M\bibinitperiod}}}%
-        {{hash=cd14b62f0f0800c28e1d84eb9b918ab3}{%
-           family={Bibiloni-Mulet},
-           familyi={B\bibinithyphendelim M\bibinitperiod},
-           given={Pere\bibnamedelima Antoni},
-           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-        {{hash=df362ff2f0c4d55feb2b544e17304ea3}{%
-           family={Corchero},
-           familyi={C\bibinitperiod},
-           given={Cristina},
-           giveni={C\bibinitperiod}}}%
-        {{hash=fe82aff9ad6d5472c87e2b26e81c0132}{%
-           family={Trilla},
-           familyi={T\bibinitperiod},
-           given={Lluis},
-           giveni={L\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Multidisciplinary Digital Publishing Institute}%
-      }
-      \strng{namehash}{fddd4789edad8c2c0d74c26b1cf006ee}
-      \strng{fullhash}{00c59e9846e277f2228a77a92195da44}
-      \strng{fullhashraw}{00c59e9846e277f2228a77a92195da44}
-      \strng{bibnamehash}{00c59e9846e277f2228a77a92195da44}
-      \strng{authorbibnamehash}{00c59e9846e277f2228a77a92195da44}
-      \strng{authornamehash}{fddd4789edad8c2c0d74c26b1cf006ee}
-      \strng{authorfullhash}{00c59e9846e277f2228a77a92195da44}
-      \strng{authorfullhashraw}{00c59e9846e277f2228a77a92195da44}
-      \field{extraname}{1}
-      \field{sortinit}{C}
-      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Second-life businesses from Electric Vehicle (EV) batteries are gaining attention considering that these batteries are deemed as inappropriate for transport purposes once they reach 80 or 70\% of State of Health (SoH). However, the limited number of retired batteries and the trend in battery capacity increase hinder a realistic evaluation of second-life applications. To analyze battery reuse, a closer look at the End of Life (EoL) conditions of these batteries must be taken. This study presents a battery ageing model to estimate the SoH of EV batteries according to their age and mileage. The model is applied to the current retirement characteristics of combustion vehicles to statistically determine the expected SoH at the vehicle EoL. Results indicate that most EVs will reach EoL for reasons other than under-performance. Once retired, most EV batteries will have a SoH higher than 75\% within the next 20 years, opening an interesting market for second-life businesses. However, battery reuse is an option that, considering the growing EV market, will rapidly saturate the stationary energy storage demand. Before 2040, most EV batteries will follow streams towards the circular economy, although at some point, they will have to be sent directly to recycling after the vehicular use.}
-      \field{issn}{2313-0105}
-      \field{issue}{10}
-      \field{journaltitle}{Batteries}
-      \field{langid}{english}
-      \field{month}{10}
-      \field{number}{10}
-      \field{title}{Electric {{Vehicle Battery Health Expected}} at {{End}} of {{Life}} in the {{Upcoming Years Based}} on {{UK Data}}}
-      \field{urlday}{2}
-      \field{urlmonth}{7}
-      \field{urlyear}{2025}
-      \field{volume}{8}
-      \field{year}{2022}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \field{pages}{164}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.3390/batteries8100164
-      \endverb
-      \verb{file}
-      \verb /Users/xnw17/Zotero/storage/KHXEPJJZ/Canals Casals et al. - 2022 - Electric Vehicle Battery Health Expected at End of Life in the Upcoming Years Based on UK Data.pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://www.mdpi.com/2313-0105/8/10/164
-      \endverb
-      \verb{url}
-      \verb https://www.mdpi.com/2313-0105/8/10/164
-      \endverb
-      \keyw{electric vehicle,end of life,second life,state of health}
-    \endentry
     \entry{canalscasalsEvaluationEndofLifeElectric2019}{article}{}{}
       \name{author}{4}{}{%
         {{hash=11206ca3df0c91367857c22e3d2780c2}{%
@@ -514,7 +666,6 @@
       \strng{authornamehash}{fddd4789edad8c2c0d74c26b1cf006ee}
       \strng{authorfullhash}{117be8f11df2b97f4467d39d0a4324a9}
       \strng{authorfullhashraw}{117be8f11df2b97f4467d39d0a4324a9}
-      \field{extraname}{2}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
@@ -959,54 +1110,6 @@
       \verb https://ideas.repec.org//a/eee/transb/v37y2003i8p681-698.html
       \endverb
     \endentry
-    \entry{greszkiImpactSpeedingData2015}{article}{}{}
-      \name{author}{3}{}{%
-        {{hash=6f4f2b9444b280785639ef9a46d084c9}{%
-           family={Greszki},
-           familyi={G\bibinitperiod},
-           given={Robert},
-           giveni={R\bibinitperiod}}}%
-        {{hash=fe2705156111e768e036aeb203c29e11}{%
-           family={Meyer},
-           familyi={M\bibinitperiod},
-           given={Marco},
-           giveni={M\bibinitperiod}}}%
-        {{hash=45821fd0cc96b2c55d455c9486f6b613}{%
-           family={Schoen},
-           familyi={S\bibinitperiod},
-           given={Harald},
-           giveni={H\bibinitperiod}}}%
-      }
-      \strng{namehash}{1d237b1672a8267e63dd4c77c5cd0ddf}
-      \strng{fullhash}{440db07250e6328342a8a13e6e877741}
-      \strng{fullhashraw}{440db07250e6328342a8a13e6e877741}
-      \strng{bibnamehash}{440db07250e6328342a8a13e6e877741}
-      \strng{authorbibnamehash}{440db07250e6328342a8a13e6e877741}
-      \strng{authornamehash}{1d237b1672a8267e63dd4c77c5cd0ddf}
-      \strng{authorfullhash}{440db07250e6328342a8a13e6e877741}
-      \strng{authorfullhashraw}{440db07250e6328342a8a13e6e877741}
-      \field{sortinit}{G}
-      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{day}{1}
-      \field{issn}{0033-362X}
-      \field{journaltitle}{Public Opinion Quarterly}
-      \field{month}{6}
-      \field{number}{2}
-      \field{shortjournal}{Public Opinion Quarterly}
-      \field{title}{The {{Impact}} of {{Speeding}} on {{Data Quality}} in {{Nonprobability}} and {{Freshly Recruited Probability-Based Online Panels}}}
-      \field{volume}{79}
-      \field{year}{2015}
-      \field{dateera}{ce}
-      \field{pages}{471\bibrangedash 503}
-      \range{pages}{33}
-      \verb{doi}
-      \verb 10.1093/poq/nfu058
-      \endverb
-    \endentry
     \entry{guzekElectricVehiclesOverview2024}{article}{}{}
       \name{author}{6}{}{%
         {{hash=76cfa593f06c402276f76bbaf9b48464}{%
@@ -1087,6 +1190,79 @@
       \verb https://www.mdpi.com/1996-1073/17/1/249
       \endverb
       \keyw{electric drive,electric vehicle,environment protection,EV safety,LCA,recycling,second life of batteries,source of energy}
+    \endentry
+    \entry{haghaniHypotheticalBiasStated2021}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=65fca42c2f903e8a997cab4a129b2aba}{%
+           family={Haghani},
+           familyi={H\bibinitperiod},
+           given={Milad},
+           giveni={M\bibinitperiod}}}%
+        {{hash=411092064a59c542ebc6590d0f617a88}{%
+           family={Bliemer},
+           familyi={B\bibinitperiod},
+           given={Michiel\bibnamedelimb C.\bibnamedelimi J.},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=7d3f8ec62f8e8407d49659c2091ca57f}{%
+           family={Rose},
+           familyi={R\bibinitperiod},
+           given={John\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=a0bf1e308e924f0e5396611bad9e748e}{%
+           family={Oppewal},
+           familyi={O\bibinitperiod},
+           given={Harmen},
+           giveni={H\bibinitperiod}}}%
+        {{hash=2dbdf417aef87a25d327f8b0cbdb7d4b}{%
+           family={Lancsar},
+           familyi={L\bibinitperiod},
+           given={Emily},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{1361a7da07180b22c2e0b00f498e9f48}
+      \strng{fullhash}{ecc6c18dd35dea02e0bd2b7cbf5901d5}
+      \strng{fullhashraw}{ecc6c18dd35dea02e0bd2b7cbf5901d5}
+      \strng{bibnamehash}{ecc6c18dd35dea02e0bd2b7cbf5901d5}
+      \strng{authorbibnamehash}{ecc6c18dd35dea02e0bd2b7cbf5901d5}
+      \strng{authornamehash}{1361a7da07180b22c2e0b00f498e9f48}
+      \strng{authorfullhash}{ecc6c18dd35dea02e0bd2b7cbf5901d5}
+      \strng{authorfullhashraw}{ecc6c18dd35dea02e0bd2b7cbf5901d5}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This paper follows the review of empirical evidence on the existence of hypothetical bias (HB) in choice experiments (CEs) presented in Part I of this study. It observes how the variation in operational definitions of HB has prohibited consistent measurement of HB in CE. It offers a unifying definition of HB and presents an integrative framework of how HB relates to but is also distinct from external validity (EV), with HB representing one component of the wider concept of EV. The paper further identifies major sources of HB and discusses explanations as well as possible moderating factors of HB. The paper reviews methods of HB mitigation identified in the literature and the empirical evidence of their effectiveness. The review includes both ex-ante and ex-post bias mitigation methods. Ex-ante bias mitigation methods include cheap talk, real talk, consequentiality scripts, solemn oath scripts, opt-out reminders, budget reminders, honesty priming, induced truth telling, indirect questioning, time to think and pivot designs. Ex-post methods include follow-up certainty calibration scales, respondent perceived consequentiality scales, and revealed-preference-assisted estimation. It is observed that the mitigation methods and their preferred use vary markedly across different sectors of applied economics. The existing empirical evidence points to the overall effectiveness of mitigation strategies in reducing HB, although there is some variation. The paper further discusses how each mitigation method can counter a certain subset of HB sources. Considering the prevalence of HB in CEs and the effectiveness of bias mitigation methods, it is recommended that implementation of at least one bias mitigation method (or a suitable combination where possible) becomes standard practice in conducting CEs to ensure that inferences and subsequent policy decisions are as much as possible free of HB.}
+      \field{day}{1}
+      \field{issn}{1755-5345}
+      \field{journaltitle}{Journal of Choice Modelling}
+      \field{month}{12}
+      \field{shortjournal}{Journal of Choice Modelling}
+      \field{shorttitle}{Hypothetical Bias in Stated Choice Experiments}
+      \field{title}{Hypothetical Bias in Stated Choice Experiments: {{Part II}}. {{Conceptualisation}} of External Validity, Sources and Explanations of Bias and Effectiveness of Mitigation Methods}
+      \field{urlday}{2}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{41}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{100322}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.jocm.2021.100322
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/TZGAMH9F/Haghani et al. - 2021 - Hypothetical bias in stated choice experiments Part II. Conceptualisation of external validity, sou.pdf;/Users/xnw17/Zotero/storage/XTT87EF5/S1755534521000555.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1755534521000555
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1755534521000555
+      \endverb
+      \keyw{Ex-ante methods,Ex-post methods,External validity,Hypothetical bias,Mitigation methods}
     \endentry
     \entry{hagmanTotalCostOwnership2016}{article}{}{}
       \name{author}{4}{}{%
@@ -1238,6 +1414,7 @@
       \strng{authornamehash}{f10dd9f61247b2732d38a26901ed39f0}
       \strng{authorfullhash}{3df647363cc14383a5e90a5d042e52e8}
       \strng{authorfullhashraw}{3df647363cc14383a5e90a5d042e52e8}
+      \field{extraname}{1}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{extradatescope}{labelyear}
@@ -1264,6 +1441,226 @@
       \verb{url}
       \verb https://www.sciencedirect.com/science/article/pii/S0191261516304647
       \endverb
+    \endentry
+    \entry{helvestonWillSubsidiesDrive2015}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=9817d5f69c3b5815283345d5deaf3adb}{%
+           family={Helveston},
+           familyi={H\bibinitperiod},
+           given={John\bibnamedelima Paul},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=6c04edb0c8a3867dae5a38f549b25f54}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yimin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=4cae08a39b8ce7007a41ac42a1de8313}{%
+           family={Feit},
+           familyi={F\bibinitperiod},
+           given={Elea\bibnamedelima McDonnell},
+           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=1843a2051aabfc0f02e830ffddb1a46e}{%
+           family={Fuchs},
+           familyi={F\bibinitperiod},
+           given={Erica},
+           giveni={E\bibinitperiod}}}%
+        {{hash=3cc98dfc6823bc4c49ed6977172dc48f}{%
+           family={Klampfl},
+           familyi={K\bibinitperiod},
+           given={Erica},
+           giveni={E\bibinitperiod}}}%
+        {{hash=1c91c53cf018a0de7005fba50fc085ef}{%
+           family={Michalek},
+           familyi={M\bibinitperiod},
+           given={Jeremy\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{f10dd9f61247b2732d38a26901ed39f0}
+      \strng{fullhash}{d158137c550dba86445758c943ef4b0a}
+      \strng{fullhashraw}{d158137c550dba86445758c943ef4b0a}
+      \strng{bibnamehash}{d158137c550dba86445758c943ef4b0a}
+      \strng{authorbibnamehash}{d158137c550dba86445758c943ef4b0a}
+      \strng{authornamehash}{f10dd9f61247b2732d38a26901ed39f0}
+      \strng{authorfullhash}{d158137c550dba86445758c943ef4b0a}
+      \strng{authorfullhashraw}{d158137c550dba86445758c943ef4b0a}
+      \field{extraname}{2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{We model consumer preferences for conventional, hybrid electric, plug-in hybrid electric (PHEV), and battery electric (BEV) vehicle technologies in China and the U.S. using data from choice-based conjoint surveys fielded in 2012–2013 in both countries. We find that with the combined bundle of attributes offered by vehicles available today, gasoline vehicles continue in both countries to be most attractive to consumers, and American respondents have significantly lower relative willingness-to-pay for BEV technology than Chinese respondents. While U.S. and Chinese subsidies are similar, favoring vehicles with larger battery packs, differences in consumer preferences lead to different outcomes. Our results suggest that with or without each country’s 2012–2013 subsidies, Chinese consumers are willing to adopt today’s BEVs and mid-range PHEVs at similar rates relative to their respective gasoline counterparts, whereas American consumers prefer low-range PHEVs despite subsidies. This implies potential for earlier BEV adoption in China, given adequate supply. While there are clear national security benefits for adoption of BEVs in China, the local and global social impact is unclear: With higher electricity generation emissions in China, a transition to BEVs may reduce oil consumption at the expense of increased air pollution and/or greenhouse gas emissions. On the other hand, demand from China could increase global incentives for electric vehicle technology development with the potential to reduce emissions in countries where electricity generation is associated with lower emissions.}
+      \field{day}{1}
+      \field{issn}{0965-8564}
+      \field{journaltitle}{Transportation Research Part A: Policy and Practice}
+      \field{month}{3}
+      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shorttitle}{Will Subsidies Drive Electric Vehicle Adoption?}
+      \field{title}{Will Subsidies Drive Electric Vehicle Adoption? {{Measuring}} Consumer Preferences in the {{U}}.{{S}}. and {{China}}}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{73}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{96\bibrangedash 112}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1016/j.tra.2015.01.002
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/4SPIFEXL/Helveston et al. - 2015 - Will subsidies drive electric vehicle adoption Measuring consumer preferences in the U.S. and China.pdf;/Users/xnw17/Zotero/storage/Y76D6FI5/S0965856415000038.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0965856415000038
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0965856415000038
+      \endverb
+      \keyw{China,Conjoint analysis,Discrete choice modeling,Federal subsidy policy,Vehicle electrification,Willingness-to-pay}
+    \endentry
+    \entry{hidrueWillingnessPayElectric2011}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=ce8e33337f29d72b54c8debfcf215a0f}{%
+           family={Hidrue},
+           familyi={H\bibinitperiod},
+           given={Michael\bibnamedelima K.},
+           giveni={M\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=20930f1bc4a97f37a3c5853b1190ca7f}{%
+           family={Parsons},
+           familyi={P\bibinitperiod},
+           given={George\bibnamedelima R.},
+           giveni={G\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=0df92822ae3433c57fac167eee1a0014}{%
+           family={Kempton},
+           familyi={K\bibinitperiod},
+           given={Willett},
+           giveni={W\bibinitperiod}}}%
+        {{hash=8fec151008c8dd2783faa77e79a1b89e}{%
+           family={Gardner},
+           familyi={G\bibinitperiod},
+           given={Meryl\bibnamedelima P.},
+           giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{6c10d4ed1551aceefc5e7e969df270d9}
+      \strng{fullhash}{6bc104e329d9a34ed3f0cd16286b524f}
+      \strng{fullhashraw}{6bc104e329d9a34ed3f0cd16286b524f}
+      \strng{bibnamehash}{6bc104e329d9a34ed3f0cd16286b524f}
+      \strng{authorbibnamehash}{6bc104e329d9a34ed3f0cd16286b524f}
+      \strng{authornamehash}{6c10d4ed1551aceefc5e7e969df270d9}
+      \strng{authorfullhash}{6bc104e329d9a34ed3f0cd16286b524f}
+      \strng{authorfullhashraw}{6bc104e329d9a34ed3f0cd16286b524f}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This article presents a stated preference study of electric vehicle choice using data from a national survey. We used a choice experiment wherein 3029 respondents were asked to choose between their preferred gasoline vehicle and two electric versions of that preferred vehicle. We estimated a latent class random utility model and used the results to estimate the willingness to pay for five electric vehicle attributes: driving range, charging time, fuel cost saving, pollution reduction, and performance. Driving range, fuel cost savings, and charging time led in importance to respondents. Individuals were willing to pay (wtp) from \$35 to \$75 for a mile of added driving range, with incremental wtp per mile decreasing at higher distances. They were willing to pay from \$425 to \$3250 per hour reduction in charging time (for a 50mile charge). Respondents capitalized about 5 years of fuel saving into the purchase price of an electric vehicle. We simulated our model over a range of electric vehicle configurations and found that people with the highest values for electric vehicles were willing to pay a premium above their wtp for a gasoline vehicle that ranged from \$6000 to \$16,000 for electric vehicles with the most desirable attributes. At the same time, our results suggest that battery cost must drop significantly before electric vehicles will find a mass market without subsidy.}
+      \field{day}{1}
+      \field{issn}{0928-7655}
+      \field{journaltitle}{Resource and Energy Economics}
+      \field{month}{9}
+      \field{number}{3}
+      \field{shortjournal}{Resource and Energy Economics}
+      \field{title}{Willingness to Pay for Electric Vehicles and Their Attributes}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{33}
+      \field{year}{2011}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{686\bibrangedash 705}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1016/j.reseneeco.2011.02.002
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/XEA9K647/Hidrue et al. - 2011 - Willingness to pay for electric vehicles and their attributes.pdf;/Users/xnw17/Zotero/storage/S78GFQQN/S0928765511000200.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0928765511000200
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0928765511000200
+      \endverb
+      \keyw{Discrete choice,Electric vehicles,Stated preference}
+    \endentry
+    \entry{iogansenConsumersPerceptionsKnowledge2026}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=47b803125ceab10c191ef64d86c9342e}{%
+           family={Iogansen},
+           familyi={I\bibinitperiod},
+           given={Xiatian},
+           giveni={X\bibinitperiod}}}%
+        {{hash=6c511ceeb372e6b432691b1eb8ce7030}{%
+           family={Gore},
+           familyi={G\bibinitperiod},
+           given={Christina},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a6e7f0734b8b8d85969ffe159d102267}{%
+           family={Kneifel},
+           familyi={K\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=40b6da0992ae1fe5963695b468ceec02}{%
+           family={Ranganath},
+           familyi={R\bibinitperiod},
+           given={Sindhu},
+           giveni={S\bibinitperiod}}}%
+        {{hash=9817d5f69c3b5815283345d5deaf3adb}{%
+           family={Helveston},
+           familyi={H\bibinitperiod},
+           given={John\bibnamedelima Paul},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{89619f5304ba9c6c1c59489364f9bbc5}
+      \strng{fullhash}{7ece278fc36eafcdf0b5751bebf27cae}
+      \strng{fullhashraw}{7ece278fc36eafcdf0b5751bebf27cae}
+      \strng{bibnamehash}{7ece278fc36eafcdf0b5751bebf27cae}
+      \strng{authorbibnamehash}{7ece278fc36eafcdf0b5751bebf27cae}
+      \strng{authornamehash}{89619f5304ba9c6c1c59489364f9bbc5}
+      \strng{authorfullhash}{7ece278fc36eafcdf0b5751bebf27cae}
+      \strng{authorfullhashraw}{7ece278fc36eafcdf0b5751bebf27cae}
+      \field{extraname}{1}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This study examines consumer perceptions, knowledge, and adoption patterns of battery electric vehicles (BEVs), using survey data from 1,443\,U.S. residents. Findings reveal persistent informational and psychological barriers that hinder adoption among current non-adopters and challenge sustained use among current adopters. A binary logit model distinguishes BEV-only users and BEV-mixed-fuel users, uncovering distinct socio-demographic profiles, motivations, vehicle usage, and charging behaviors often obscured in aggregate analyses. BEV-only users are typically younger, urban, and price-sensitive, often lacking dedicated charging access, whereas mixed-fuel users place greater value on BEVs’ symbolic appeal and mitigate range concerns through access to conventional vehicles. A multinomial logit model of non-adopters shows that BEV-related perceptions, knowledge, incentives, infrastructure access, and personal traits affect adoption intentions in asymmetric ways. These findings highlight the need for flexible modeling and measurement of adoption to capture the complex and varied drivers of BEV resistance and uptake across different consumer groups.}
+      \field{day}{1}
+      \field{issn}{1361-9209}
+      \field{journaltitle}{Transportation Research Part D: Transport and Environment}
+      \field{month}{4}
+      \field{shortjournal}{Transportation Research Part D: Transport and Environment}
+      \field{title}{Consumers ’ Perceptions, Knowledge, and Adoption Patterns of Battery Electric Vehicles}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{153}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{105194}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.trd.2025.105194
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/RQ9M6S5Q/Iogansen et al. - 2026 - Consumers ’ perceptions, knowledge, and adoption patterns of battery electric vehicles.pdf;/Users/xnw17/Zotero/storage/9XG3NABT/S1361920925006042.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920925006042
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920925006042
+      \endverb
+      \keyw{Adoption intention,Electric vehicle,Fuel type choice,Knowledge,Perception,Vehicle fleet composition}
     \endentry
     \entry{iogansenDecipheringFactorsAssociated2023a}{article}{}{}
       \name{author}{5}{}{%
@@ -1301,6 +1698,7 @@
       \strng{authornamehash}{89619f5304ba9c6c1c59489364f9bbc5}
       \strng{authorfullhash}{71a70524aa93abbec08db0d0cdd25725}
       \strng{authorfullhashraw}{71a70524aa93abbec08db0d0cdd25725}
+      \field{extraname}{2}
       \field{sortinit}{I}
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
       \field{extradatescope}{labelyear}
@@ -1454,53 +1852,6 @@
       \verb https://doi.org/10.1177/002224378902600401
       \endverb
     \endentry
-    \entry{khaloeiHowDoesCharging2020}{report}{}{}
-      \name{author}{3}{}{%
-        {{hash=dbc59af1710560cc5a498615a072f234}{%
-           family={Khaloei},
-           familyi={K\bibinitperiod},
-           given={Moein},
-           giveni={M\bibinitperiod}}}%
-        {{hash=08bdacc32bec1d425a0e2155be46fccc}{%
-           family={Zou},
-           familyi={Z\bibinitperiod},
-           given={Tianqi},
-           giveni={T\bibinitperiod}}}%
-        {{hash=22dfa391be5f6503032e1c97a0e2d0cd}{%
-           family={MacKenzie},
-           familyi={M\bibinitperiod},
-           given={Don},
-           giveni={D\bibinitperiod}}}%
-      }
-      \strng{namehash}{c494cdcf971621a192f89fba22434421}
-      \strng{fullhash}{ae9f5094d634eebff36e27ab5ff10db2}
-      \strng{fullhashraw}{ae9f5094d634eebff36e27ab5ff10db2}
-      \strng{bibnamehash}{ae9f5094d634eebff36e27ab5ff10db2}
-      \strng{authorbibnamehash}{ae9f5094d634eebff36e27ab5ff10db2}
-      \strng{authornamehash}{c494cdcf971621a192f89fba22434421}
-      \strng{authorfullhash}{ae9f5094d634eebff36e27ab5ff10db2}
-      \strng{authorfullhashraw}{ae9f5094d634eebff36e27ab5ff10db2}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{langid}{english}
-      \field{title}{How {{Does Charging Network Design Affect Electric Vehicle Adoption}}?}
-      \field{urlday}{1}
-      \field{urlmonth}{7}
-      \field{urlyear}{2025}
-      \field{year}{2020}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://cpb-us-e1.wpmucdn.com/sites.uw.edu/dist/d/4543/files/2020/07/EV-infrastructure-and-vehicle-choice-final-report.pdf
-      \endverb
-      \verb{url}
-      \verb https://cpb-us-e1.wpmucdn.com/sites.uw.edu/dist/d/4543/files/2020/07/EV-infrastructure-and-vehicle-choice-final-report.pdf
-      \endverb
-    \endentry
     \entry{kothariBatteryReplacementCosts2024}{online}{}{}
       \name{author}{1}{}{%
         {{hash=99368aedc6761ea6eda6ad2533a927fa}{%
@@ -1545,6 +1896,58 @@
       \verb{url}
       \verb https://insideevs.com/news/742022/battery-replacement-costs-fall-cheaper-than-fixing-engine/
       \endverb
+    \endentry
+    \entry{krishnaUnderstandingIdentifyingBarriers2021}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=b3241714edeea6c65d88c22236cb889c}{%
+           family={Krishna},
+           familyi={K\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{b3241714edeea6c65d88c22236cb889c}
+      \strng{fullhash}{b3241714edeea6c65d88c22236cb889c}
+      \strng{fullhashraw}{b3241714edeea6c65d88c22236cb889c}
+      \strng{bibnamehash}{b3241714edeea6c65d88c22236cb889c}
+      \strng{authorbibnamehash}{b3241714edeea6c65d88c22236cb889c}
+      \strng{authornamehash}{b3241714edeea6c65d88c22236cb889c}
+      \strng{authorfullhash}{b3241714edeea6c65d88c22236cb889c}
+      \strng{authorfullhashraw}{b3241714edeea6c65d88c22236cb889c}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The study aims to understand the general perception of electric vehicles among consumers and the barriers to their widespread adoption. The study focuses on identifying and understanding the factors involved in their purchase with a wider range of expression using thematic analysis unlike traditional survey techniques. Further, the role of emotions is also considered in the study which is normally overlooked. eWOM is used as data for the study as it is relevant for electric vehicles as people majorly use internet mediums to freely share their thoughts. This method helps in finding all gaps (tangible and intangible) present in the offering (EVs) and expectations of a consumer. This study also provides us with information on relationships amongst these barriers which has a negative cascading effect on overall adoption.}
+      \field{day}{1}
+      \field{issn}{2590-1982}
+      \field{journaltitle}{Transportation Research Interdisciplinary Perspectives}
+      \field{month}{6}
+      \field{shortjournal}{Transportation Research Interdisciplinary Perspectives}
+      \field{title}{Understanding and Identifying Barriers to Electric Vehicle Adoption through Thematic Analysis}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{volume}{10}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{100364}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.trip.2021.100364
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/LDMB5UXL/Krishna - 2021 - Understanding and identifying barriers to electric vehicle adoption through thematic analysis.pdf;/Users/xnw17/Zotero/storage/LRF7EDLZ/S2590198221000713.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2590198221000713
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2590198221000713
+      \endverb
+      \keyw{Barriers,Consumer perception,Electric vehicles,eWOM}
     \endentry
     \entry{letmatheConsumerorientedTotalCost2017}{article}{}{}
       \name{author}{2}{}{%
@@ -1666,6 +2069,121 @@
       \endverb
       \keyw{consumer anxieties,durable goods,electric vehicles,emission savings,secondary market}
     \endentry
+    \entry{lohConcernsExpressedUsed2024}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=b22d0abf1645a1f0602ff5594e329707}{%
+           family={Loh},
+           familyi={L\bibinitperiod},
+           given={Wei\bibnamedelima San},
+           giveni={W\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=e643c3d3c8970d6df0d5d1324b964e71}{%
+           family={Noland},
+           familyi={N\bibinitperiod},
+           given={Robert\bibnamedelima B.},
+           giveni={R\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{32d006950de4d1b1b0c011cfe0a0fe8b}
+      \strng{fullhash}{32d006950de4d1b1b0c011cfe0a0fe8b}
+      \strng{fullhashraw}{32d006950de4d1b1b0c011cfe0a0fe8b}
+      \strng{bibnamehash}{32d006950de4d1b1b0c011cfe0a0fe8b}
+      \strng{authorbibnamehash}{32d006950de4d1b1b0c011cfe0a0fe8b}
+      \strng{authornamehash}{32d006950de4d1b1b0c011cfe0a0fe8b}
+      \strng{authorfullhash}{32d006950de4d1b1b0c011cfe0a0fe8b}
+      \strng{authorfullhashraw}{32d006950de4d1b1b0c011cfe0a0fe8b}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The used EV market is growing as more EVs penetrate the market. To examine who is purchasing used EVs and what concerns they may have, we deployed a survey focused on owners of used EVs. Data was collected online via posting the survey to used-EV-related Facebook and Reddit communities. The survey was deployed from September to October 2022, and a total of 1,669 participants responded, of which 1,167 were usable responses. Most respondents are male, middle-aged, white, well-educated, and with higher incomes. Prior to buying a used EV, respondents were most concerned about pricing, battery performance, and the availability of public charging stations. We estimate logistic regression models and find that those with lower incomes were more concerned about the prices and the availability of public charging stations.}
+      \field{day}{1}
+      \field{issn}{1361-9209}
+      \field{journaltitle}{Transportation Research Part D: Transport and Environment}
+      \field{month}{3}
+      \field{shortjournal}{Transportation Research Part D: Transport and Environment}
+      \field{title}{Concerns Expressed by Used Electric Vehicle Owners Based on Surveying Social Media}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{128}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{104086}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.trd.2024.104086
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/PEDTGVA8/Loh and Noland - 2024 - Concerns expressed by used electric vehicle owners based on surveying social media.pdf;/Users/xnw17/Zotero/storage/M85E5S8Q/S1361920924000439.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920924000439
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920924000439
+      \endverb
+      \keyw{Charging infrastructure,Electric vehicles,Survey research,Transportation equity}
+    \endentry
+    \entry{lohawalaDeterminantsEVPurchase2026}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=d6428f26d0cfef605d8b20dd7a98a053}{%
+           family={Lohawala},
+           familyi={L\bibinitperiod},
+           given={Nafisa},
+           giveni={N\bibinitperiod}}}%
+        {{hash=d3f6f68ff3c916510798cedbb79afadd}{%
+           family={Rahman},
+           familyi={R\bibinitperiod},
+           given={Mohammad\bibnamedelima Arshad},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{698b7dcf032f5f52a6b226d513d450de}
+      \strng{fullhash}{698b7dcf032f5f52a6b226d513d450de}
+      \strng{fullhashraw}{698b7dcf032f5f52a6b226d513d450de}
+      \strng{bibnamehash}{698b7dcf032f5f52a6b226d513d450de}
+      \strng{authorbibnamehash}{698b7dcf032f5f52a6b226d513d450de}
+      \strng{authornamehash}{698b7dcf032f5f52a6b226d513d450de}
+      \strng{authorfullhash}{698b7dcf032f5f52a6b226d513d450de}
+      \strng{authorfullhashraw}{698b7dcf032f5f52a6b226d513d450de}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{While electric vehicle (EV) adoption has been widely studied, most research focuses on the average effects of predictors on purchase intent, overlooking variation across the distribution of EV purchase intent. This paper makes a threefold contribution by analyzing four unique explanatory variables, leveraging large-scale US survey data from 2021 to 2023, and employing Bayesian ordinal probit and Bayesian ordinal quantile modeling to evaluate the effects of these variables—while controlling for other commonly used covariates—on EV purchase intent, both on average and across its full distribution. By modeling purchase intent as an ordered outcome—from “not at all likely” to “very likely”—we reveal how covariate effects differ across levels of interest. This is the first application of ordinal quantile modeling in the EV adoption literature, uncovering heterogeneity in how potential buyers respond to key factors. For instance, confidence in development of charging infrastructure and belief in environmental benefits are linked not only to higher interest among respondents likely to adopt EVs, but also to reduced resistance among more skeptical respondents. Notably, we identify a gap between the prevalence and influence of key predictors: although few respondents report strong infrastructure confidence or frequent EV information exposure, both factors are strongly associated with increased intent across the spectrum. These findings suggest clear opportunities for targeted communication and outreach, alongside infrastructure investment, to support widespread EV adoption.}
+      \field{day}{1}
+      \field{issn}{0965-8564}
+      \field{journaltitle}{Transportation Research Part A: Policy and Practice}
+      \field{month}{5}
+      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shorttitle}{Do Determinants of {{EV}} Purchase Intent Vary across the Spectrum?}
+      \field{title}{Do Determinants of {{EV}} Purchase Intent Vary across the Spectrum? {{Evidence}} from {{Bayesian}} Analysis of {{US}} Survey Data}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{207}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{104961}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.tra.2026.104961
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/ARKGHJ7V/Lohawala and Rahman - 2026 - Do determinants of EV purchase intent vary across the spectrum Evidence from Bayesian analysis of U.pdf;/Users/xnw17/Zotero/storage/7SJ9D22H/S0965856426001023.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0965856426001023
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0965856426001023
+      \endverb
+      \keyw{Decarbonization,Electric vehicle,Ordinal probit,Pew research center,Quantile regression,Technology adoption}
+    \endentry
     \entry{marketresearchfutureUnitedStatesUsed2025}{online}{}{}
       \name{author}{1}{}{%
         {{hash=0585f4ab93b0b5191d72ce69f0a4d7bc}{%
@@ -1704,6 +2222,63 @@
       \verb{url}
       \verb https://www.marketresearchfuture.com/reports/us-used-car-market-21771
       \endverb
+    \endentry
+    \entry{mashrurUncoveringFactorsAffecting2025}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=219cab2f0d021a08693d39527873a0b4}{%
+           family={Mashrur},
+           familyi={M\bibinitperiod},
+           given={Sk.\bibnamedelimi Md.},
+           giveni={Sk\bibinitperiod\bibinitdelim \bibinitperiod\bibinitdelim Md\bibinitperiod\bibinitdelim \bibinitperiod}}}%
+        {{hash=46bcfbc7abdda23ab102eae3d3c44860}{%
+           family={Mohamed},
+           familyi={M\bibinitperiod},
+           given={Moataz},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{d9e152f7178db3ae6114ba65620b9810}
+      \strng{fullhash}{d9e152f7178db3ae6114ba65620b9810}
+      \strng{fullhashraw}{d9e152f7178db3ae6114ba65620b9810}
+      \strng{bibnamehash}{d9e152f7178db3ae6114ba65620b9810}
+      \strng{authorbibnamehash}{d9e152f7178db3ae6114ba65620b9810}
+      \strng{authornamehash}{d9e152f7178db3ae6114ba65620b9810}
+      \strng{authorfullhash}{d9e152f7178db3ae6114ba65620b9810}
+      \strng{authorfullhashraw}{d9e152f7178db3ae6114ba65620b9810}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{As the electric vehicle (EV) market rises, the relevance of the used EV market becomes more significant in the context of environmental sustainability and green transportation. Hence, the study conducts data-driven investigations to comprehensively understand users’ preferences for pre-owned EVs. Full-time employed, highly educated, higher-income individuals living in detached homes or townhouses and owning personal parking amenities are more likely to purchase pre-owned EVs. The study used a latent class choice model to analyse the impact of hidden psychological factors and vehicle characteristics on “Experienced EV Drivers” and “New EV Drivers”. The latter class prefers sedans and home charging facilities while opting for pre-owned EVs. However, those concerned about EV charging infrastructure and price and those having a positive attitude toward automated vehicles were reluctant to purchase a pre-owned EV. Overall, the study provides target population-specific actionable policy insights aiming to promote the adoption and sustainable usage of EVs.}
+      \field{day}{1}
+      \field{issn}{1361-9209}
+      \field{journaltitle}{Transportation Research Part D: Transport and Environment}
+      \field{month}{2}
+      \field{shortjournal}{Transportation Research Part D: Transport and Environment}
+      \field{title}{Uncovering Factors Affecting Consumers’ Decisions for Pre-Owned Electric Vehicles}
+      \field{urlday}{18}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{139}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{104555}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.trd.2024.104555
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/BCW68HB9/Mashrur and Mohamed - 2025 - Uncovering factors affecting consumers’ decisions for pre-owned electric vehicles.pdf;/Users/xnw17/Zotero/storage/WSWX6GCZ/S1361920924005121.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920924005121
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920924005121
+      \endverb
+      \keyw{Choice modelling,Consumer preference,Environment Sustainability,Green Transportation,Pre-owned Electric Vehicles}
     \endentry
     \entry{mcfaddenMixedMNLModels2000}{article}{}{}
       \name{author}{2}{}{%
@@ -1953,6 +2528,83 @@
       \verb https://doi.org/10.1080/10705510701575396
       \endverb
     \endentry
+    \entry{parkBatteryHealthReporting2026}{online}{}{}
+      \name{author}{6}{}{%
+        {{hash=4cec33b48f96900f20594acb9a65b9f0}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Jeongju},
+           giveni={J\bibinitperiod}}}%
+        {{hash=2ab21fb97c4b79b343c162ff26abe91d}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Kyungkak},
+           giveni={K\bibinitperiod}}}%
+        {{hash=911b08b73ddd6b62bac42cfabe4cc0cf}{%
+           family={Geum},
+           familyi={G\bibinitperiod},
+           given={Seungho},
+           giveni={S\bibinitperiod}}}%
+        {{hash=9ce93b9d13e1d7b52ed88127a090556f}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Junhyung},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b3c4d6a880df5f45b2dd1eb6558ea3b9}{%
+           family={Son},
+           familyi={S\bibinitperiod},
+           given={Hyeongyu},
+           giveni={H\bibinitperiod}}}%
+        {{hash=69bb896ef08008f10d3a30a14a21a9b6}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Sekyung},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{640d4cf9bbeacabfbc8ab660a3e56ccc}
+      \strng{fullhash}{d4d771b445451afecf25947c3eda5f39}
+      \strng{fullhashraw}{d4d771b445451afecf25947c3eda5f39}
+      \strng{bibnamehash}{d4d771b445451afecf25947c3eda5f39}
+      \strng{authorbibnamehash}{d4d771b445451afecf25947c3eda5f39}
+      \strng{authornamehash}{640d4cf9bbeacabfbc8ab660a3e56ccc}
+      \strng{authorfullhash}{d4d771b445451afecf25947c3eda5f39}
+      \strng{authorfullhashraw}{d4d771b445451afecf25947c3eda5f39}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Battery state-of-health (SOH) reported by on-board battery management systems (BMS) is the primary metric available to electric vehicle (EV) owners and regulators, yet no study has validated its reliability across manufacturers against independent measurements. Here we show, through an epidemiological study of 1,114 EVs spanning five manufacturers and 375 days, that battery health reporting is fundamentally unreliable: real capacity differences of 12-25\% exist within every model, but BMS SOH fails to track them, with correlations ranging from \textbackslash r\{ho\} = 0.10 (non-significant) to \textbackslash r\{ho\} = 0.62 only under restrictive filtering, while 384 vehicles do not expose SOH at all. A manufacturer-independent electrochemical marker achieves 74-89\% degradation classification accuracy across all platforms without requiring BMS data, and a controlled laboratory validation on cells identical to those in the fleet confirms that partial-voltage-window charge measurements track reference capacity with \textbackslash r\{ho\} {$>$} 0.80 across all 60 voltage windows (p {$<$} 0.001). These findings reveal a structural information asymmetry with direct implications for the EU Battery Regulation's 2027 SOH transparency mandate, California's Advanced Clean Cars (ACC) II durability requirements, warranty enforcement, used-vehicle valuation, right-to-repair legislation, and second-life battery markets.}
+      \field{day}{23}
+      \field{eprintclass}{eess.SP}
+      \field{eprinttype}{arXiv}
+      \field{month}{3}
+      \field{pubstate}{prepublished}
+      \field{title}{Battery Health Reporting Fails Independent Validation across Manufacturers}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2603.21592
+      \endverb
+      \verb{eprint}
+      \verb 2603.21592
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/QQLK2K8V/Park et al. - 2026 - Battery health reporting fails independent validation across manufacturers.pdf;/Users/xnw17/Zotero/storage/ITCXYRXQ/2603.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2603.21592
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2603.21592
+      \endverb
+      \keyw{Electrical Engineering and Systems Science - Signal Processing}
+    \endentry
     \entry{pedrosaSecondhandElectricalVehicles2018}{article}{}{}
       \name{author}{2}{}{%
         {{hash=969d1278838d47f5b353b5754038f62d}{%
@@ -2010,68 +2662,84 @@
       \endverb
       \keyw{battery,electric vehicle,EV,second-hand EV,secondary market,warranty}
     \endentry
-    \entry{prietoUsingHedonicPrice2015}{article}{}{}
-      \name{author}{3}{}{%
-        {{hash=b45a8e7593a5b6f2ec8972bfa4ca0098}{%
-           family={Prieto},
-           familyi={P\bibinitperiod},
-           given={Marc},
-           giveni={M\bibinitperiod}}}%
-        {{hash=fcfcc1673c49a5bf8057d2f39070c7f6}{%
-           family={Caemmerer},
-           familyi={C\bibinitperiod},
-           given={Barbara},
-           giveni={B\bibinitperiod}}}%
-        {{hash=b5e2df74c0843a1cba2f53b7b9c23edc}{%
-           family={Baltas},
-           familyi={B\bibinitperiod},
-           given={George},
-           giveni={G\bibinitperiod}}}%
+    \entry{DriveElectricConfidence}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=5144dcff496e760c7282e817a1bec112}{%
+           family={{Recharged}},
+           familyi={R\bibinitperiod}}}%
       }
-      \strng{namehash}{e926abb4b95be35932d12d7439fec57c}
-      \strng{fullhash}{909668b665b2c6eb6e051abf8ebb7569}
-      \strng{fullhashraw}{909668b665b2c6eb6e051abf8ebb7569}
-      \strng{bibnamehash}{909668b665b2c6eb6e051abf8ebb7569}
-      \strng{authorbibnamehash}{909668b665b2c6eb6e051abf8ebb7569}
-      \strng{authornamehash}{e926abb4b95be35932d12d7439fec57c}
-      \strng{authorfullhash}{909668b665b2c6eb6e051abf8ebb7569}
-      \strng{authorfullhashraw}{909668b665b2c6eb6e051abf8ebb7569}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \list{organization}{1}{%
+        {Recharged}%
+      }
+      \strng{namehash}{5144dcff496e760c7282e817a1bec112}
+      \strng{fullhash}{5144dcff496e760c7282e817a1bec112}
+      \strng{fullhashraw}{5144dcff496e760c7282e817a1bec112}
+      \strng{bibnamehash}{5144dcff496e760c7282e817a1bec112}
+      \strng{authorbibnamehash}{5144dcff496e760c7282e817a1bec112}
+      \strng{authornamehash}{5144dcff496e760c7282e817a1bec112}
+      \strng{authorfullhash}{5144dcff496e760c7282e817a1bec112}
+      \strng{authorfullhashraw}{5144dcff496e760c7282e817a1bec112}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{abstract}{This paper investigates prospect theory implications in used goods markets. In particular, it develops a hedonic price model that addresses the price structure of the used car market in the light of prospect theory. The proposed hedonic price model provides empirical evidence in support of prospect theory predictions for explaining used car prices after controlling for observed product differentiation. It is demonstrated that consumers are risk seeking when used car reliability is below the expected reference value and risk averse when used car reliability is above the expected reference value. The model also illustrates how car quality affects residual values and how buyers evaluate used cars.}
-      \field{day}{1}
-      \field{issn}{0969-6989}
-      \field{journaltitle}{Journal of Retailing and Consumer Services}
-      \field{month}{1}
-      \field{shortjournal}{Journal of Retailing and Consumer Services}
-      \field{shorttitle}{Using a Hedonic Price Model to Test Prospect Theory Assertions}
-      \field{title}{Using a Hedonic Price Model to Test Prospect Theory Assertions: {{The}} Asymmetrical and Nonlinear Effect of Reliability on Used Car Prices}
-      \field{urlday}{3}
-      \field{urlmonth}{7}
-      \field{urlyear}{2025}
-      \field{volume}{22}
-      \field{year}{2015}
+      \field{labeltitlesource}{title}
+      \field{abstract}{From battery health to nationwide delivery, we've got you covered. Shop the widest selection of certified EVs at one upfront price, all backed by the Recharged Guarantee.}
+      \field{langid}{english}
+      \field{title}{Drive {{Electric}} with {{Confidence}}}
+      \field{urlday}{30}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{year}{2026}
       \field{dateera}{ce}
       \field{urldateera}{ce}
-      \field{pages}{206\bibrangedash 212}
-      \range{pages}{7}
-      \verb{doi}
-      \verb 10.1016/j.jretconser.2014.08.013
-      \endverb
       \verb{file}
-      \verb /Users/xnw17/Zotero/storage/XL8HVGKY/Prieto et al. - 2015 - Using a hedonic price model to test prospect theory assertions The asymmetrical and nonlinear effec.pdf;/Users/xnw17/Zotero/storage/HFNC87LW/S0969698914001210.html
+      \verb /Users/xnw17/Zotero/storage/27VUKZBI/recharged.com.html
       \endverb
       \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0969698914001210
+      \verb https://recharged.com/
       \endverb
       \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0969698914001210
+      \verb https://recharged.com/
       \endverb
-      \keyw{Prospect theory,Reliability,Residual prices,Used car market}
+    \endentry
+    \entry{CheckingTeslaBattery}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=bca5de82a6e5d37a1885b55bcb39b87b}{%
+           family={{Recurrent Auto}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{bca5de82a6e5d37a1885b55bcb39b87b}
+      \strng{fullhash}{bca5de82a6e5d37a1885b55bcb39b87b}
+      \strng{fullhashraw}{bca5de82a6e5d37a1885b55bcb39b87b}
+      \strng{bibnamehash}{bca5de82a6e5d37a1885b55bcb39b87b}
+      \strng{authorbibnamehash}{bca5de82a6e5d37a1885b55bcb39b87b}
+      \strng{authornamehash}{bca5de82a6e5d37a1885b55bcb39b87b}
+      \strng{authorfullhash}{bca5de82a6e5d37a1885b55bcb39b87b}
+      \strng{authorfullhashraw}{bca5de82a6e5d37a1885b55bcb39b87b}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{url}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Want to Check Your Tesla Battery Health?}
+      \field{shorttitle}{Checking {{Tesla Battery Health}}}
+      \field{title}{Checking {{Tesla Battery Health}}: {{Measure}}, {{Monitor}}, and {{Protect}}}
+      \field{urlday}{30}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/YB7M636K/check-tesla-battery-health-for-free.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.recurrentauto.com/research/check-tesla-battery-health-for-free
+      \endverb
+      \verb{url}
+      \verb https://www.recurrentauto.com/research/check-tesla-battery-health-for-free
+      \endverb
     \endentry
     \entry{shaikhSystemDynamicsCosting2023}{article}{}{}
       \name{author}{6}{}{%
@@ -2360,6 +3028,57 @@
       \verb https://doi.org/10.1007/s10479-023-05519-8
       \endverb
       \keyw{Climate change,Conceptual Analysis,Critical Thinking,Delphi,DEMATEL,Electric vehicles,Empiricism,Formal Reasoning,MCDM,Mixed Methods,Reasoning}
+    \endentry
+    \entry{talFirstLookPlugin2017}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=2b5b3396bb2958902705304056a61182}{%
+           family={Tal},
+           familyi={T\bibinitperiod},
+           given={Gil},
+           giveni={G\bibinitperiod}}}%
+        {{hash=bc5fcf08965c8a1297c427086805c382}{%
+           family={Nicholas},
+           familyi={N\bibinitperiod},
+           given={Michael\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=92c74d5ffeab295b62500129250ee9f0}{%
+           family={Turrentine},
+           familyi={T\bibinitperiod},
+           given={Thomas\bibnamedelima S.},
+           giveni={T\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{2a7b3415b4a8830d84d0139c5596544d}
+      \strng{fullhash}{067dd010ded0887e765f20a0ad975941}
+      \strng{fullhashraw}{067dd010ded0887e765f20a0ad975941}
+      \strng{bibnamehash}{067dd010ded0887e765f20a0ad975941}
+      \strng{authorbibnamehash}{067dd010ded0887e765f20a0ad975941}
+      \strng{authornamehash}{2a7b3415b4a8830d84d0139c5596544d}
+      \strng{authorfullhash}{067dd010ded0887e765f20a0ad975941}
+      \strng{authorfullhashraw}{067dd010ded0887e765f20a0ad975941}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In most markets in the world there are very few used PEVs. California is one of the first markets to have a significant secondary market - about 5-8\% of the almost 200,000 PEVs in California are being used by a second owner. Looking at the market for conventional vehicles, used vehicle sales comprise the clear majority of all transactions while the new vehicle buyers are a small share of the households, making used PEV sales potentially very significant on the market as a whole. As the number of used PEVs grows, the secondary market for PEVs will have an increasing effect as used PEV buyers join new buyers in adopting a new technology. Can these used vehicles provide environmentally friendly choices to those who do not buy new vehicles? Is range degradation an important factor in the use and purchase of the vehicles? Do the subsidies provided by State, Federal and local authorities pass to the second owner and by how much? This report explores the used PEVs in the market and the motivations behind their purchase and use.}
+      \field{langid}{english}
+      \field{title}{First {{Look}} at the {{Plug-in Vehicle Secondary Market}}}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/ER7B54G7/Tal et al. - 2017 - First Look at the Plug-in Vehicle Secondary Market.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://escholarship.org/uc/item/22p191zs
+      \endverb
+      \verb{url}
+      \verb https://escholarship.org/uc/item/22p191zs
+      \endverb
     \endentry
     \entry{tankouScalingReuseRecycling2023}{report}{}{}
       \name{author}{3}{}{%

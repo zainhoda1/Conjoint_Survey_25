@@ -309,17 +309,21 @@ write_parquet(
     mutate(class = paste0("class", str_extract(class_label, "\\d+"))) %>%
     select(
       class,
-      duration_q1          = Q1,
-      duration_q2          = Q2,
-      duration_q3          = Q3,
-      duration_q4          = Q4,
-      duration_q5          = Q5,
-      duration_q6          = Q6,
+      duration_q1 = Q1,
+      duration_q2 = Q2,
+      duration_q3 = Q3,
+      duration_q4 = Q4,
+      duration_q5 = Q5,
+      duration_q6 = Q6,
       duration_battery_dce = CBC_Total,
       duration_full_survey = Survey_Total
     ),
   here(
-    "code", "output", "model_output", "battery_analysis", "apollo",
+    "code",
+    "output",
+    "model_output",
+    "battery_analysis",
+    "apollo",
     "0_survey_duration_by_class_6c.parquet"
   )
 )
@@ -550,7 +554,7 @@ p_c3_c6 <- bind_rows(c3_long, c6_long) %>%
   ) +
   labs(
     title = "Decision Time Distribution: C3 vs C6 by Choice Task",
-    subtitle = "Hard-assigned respondents. X capped at 90th pct. Faster C6 peak would indicate satisficing.",
+    subtitle = "X capped at 90th pct.",
     x = "Seconds on choice task",
     y = "Density",
     fill = NULL,

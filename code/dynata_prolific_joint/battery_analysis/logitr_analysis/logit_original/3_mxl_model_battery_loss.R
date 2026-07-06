@@ -8,19 +8,18 @@ data_model <- read_parquet(here(
   "data_apollo_battery.parquet"
 ))
 
-data_model <- data_model %>%
-  filter(
-    !is.na(ATT_range_anxiety) &
-      !is.na(ATT_risktaker) &
-      !is.na(hhincome_num_10k) &
-      !is.na(EV_charger) &
-      !is.na(Veh_hh_fuel) &
-      !is.na(Veh_primary_range) &
-      !is.na(ATT_EVB_environment) &
-      !is.na(ATT_EVB_function) &
-      !is.na(vehicle_typesuv)
-  )
-
+# data_model <- data_model %>%
+#   filter(
+#     !is.na(ATT_range_anxiety) &
+#       !is.na(ATT_risktaker) &
+#       !is.na(hhincome_num_10k) &
+#       !is.na(EV_charger) &
+#       !is.na(Veh_hh_fuel) &
+#       !is.na(Veh_primary_range) &
+#       !is.na(ATT_EVB_environment) &
+#       !is.na(ATT_EVB_function) &
+#       !is.na(vehicle_typesuv)
+#   )
 
 data_dce <- read_parquet(here(
   "data",

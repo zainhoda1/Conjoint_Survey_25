@@ -13,18 +13,18 @@ data_model <- read_parquet(here(
   "data_apollo_battery.parquet"
 ))
 
-data_model <- data_model %>%
-  filter(
-    !is.na(ATT_range_anxiety) &
-      !is.na(ATT_risktaker) &
-      # !is.na(next_veh_budget_k) &
-      !is.na(EV_charger) &
-      !is.na(Veh_hh_fuel) &
-      !is.na(Veh_primary_range) &
-      !is.na(ATT_EVB_environment) &
-      !is.na(ATT_EVB_function) &
-      !is.na(vehicle_typesuv)
-  )
+# data_model <- data_model %>%
+#   filter(
+#     !is.na(ATT_range_anxiety) &
+#       !is.na(ATT_risktaker) &
+#       # !is.na(next_veh_budget_k) &
+#       !is.na(EV_charger) &
+#       !is.na(Veh_hh_fuel) &
+#       !is.na(Veh_primary_range) &
+#       !is.na(ATT_EVB_environment) &
+#       !is.na(ATT_EVB_function) &
+#       !is.na(vehicle_typesuv)
+#   )
 
 # table(data_model$data_source)
 length(unique(data_model$psid))
@@ -356,7 +356,7 @@ map_all
 ggsave(
   paste0(path_images, "map_all.png"),
   plot = map_all,
-  width = 7,
-  height = 5,
+  width = 6,
+  height = 4,
   dpi = 300
 )
