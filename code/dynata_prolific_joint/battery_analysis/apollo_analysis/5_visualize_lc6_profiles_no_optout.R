@@ -91,7 +91,7 @@ class_meta <- tibble(
     "Opt-Out Dominant, BEV-Skeptical",
     "Battery Health Attentives",
     "Range-Focused, EV-Engaged",
-    "Price-Insensitive, Mixed-Motivational",
+    "Low-Engagement, Attribute Non-Attendance",
     "Multi-Attribute Maximizers",
     "Budget-Constrained, Low WTP"
   ),
@@ -134,13 +134,12 @@ class_chars <- list(
     "Lowest SUV preference"
   ),
   c4 = paste0(
-    "Strong opt-out aversion\n",
+    "Strong opt-out aversion, yet attribute-disengaged\n",
     "Smallest price coefficient, WTPs are ratio-inflated\n",
     "Highest share of information treatment · Refurbishment-averse\n",
     "High concern about functionality of EV batteries\n",
     "Lowest ICEV-only · Highest BEV households\n",
-    "Highest vehicle budget · Most risk-taking\n",
-    "Potentially inattentive, attribute-disengaged respondents\n"
+    "Highest vehicle budget · Most risk-taking\n"
   ),
   c5 = paste0(
     "Only 5.2% never opt out\n",
@@ -421,6 +420,16 @@ output_path <- here(
 
 ggsave(
   output_path,
+  plot = final_fig,
+  width = 11,
+  height = 8.5,
+  units = "in",
+  dpi = 300,
+  device = "png"
+)
+
+ggsave(
+  "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/images/0_lc6_class_profiles_no_optout.png",
   plot = final_fig,
   width = 11,
   height = 8.5,

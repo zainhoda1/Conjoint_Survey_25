@@ -44,7 +44,7 @@ randPars <- c(
   battery_refurbishpackreplace = "n",
   battery_refurbishcellreplace = "n"
 )
-numDraws <- 500 # increase for publication
+numDraws <- 1000 # increase for publication
 # mclapply uses fork()-based parallelism, which is incompatible with RStudio on
 # macOS: forked workers inherit RStudio's GUI state and crash immediately,
 # returning NULLs that break logitr's internal multistart summary.
