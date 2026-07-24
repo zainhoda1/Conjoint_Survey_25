@@ -502,8 +502,6 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmbi8t.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral-bolditalic.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/stix/t1-stixgeneral.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmbi8t.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmbi8r.tfm
 INPUT ./attachments/lc_fit_index_comparison.tex
 INPUT ./attachments/lc_fit_index_comparison.tex
 INPUT ./attachments/lc_fit_index_comparison.tex
@@ -511,6 +509,8 @@ INPUT ./attachments/lc_fit_index_comparison.tex
 INPUT attachments/lc_fit_index_comparison.tex
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmbi8t.vf
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmbi8r.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT ./images/0_lc6_class_profiles_no_optout.png
@@ -553,6 +553,9 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT ./attachments/table_lc6_metadata.tex
 INPUT ./attachments/table_lc6_metadata.tex
 INPUT attachments/table_lc6_metadata.tex
+INPUT ./attachments/wtp_pairwise_tests.tex
+INPUT ./attachments/wtp_pairwise_tests.tex
+INPUT attachments/wtp_pairwise_tests.tex
 INPUT ./attachments/wtp_lit_summary.tex
 INPUT ./attachments/wtp_lit_summary.tex
 INPUT attachments/wtp_lit_summary.tex

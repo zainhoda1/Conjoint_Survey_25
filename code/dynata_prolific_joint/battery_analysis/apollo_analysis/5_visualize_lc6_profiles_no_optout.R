@@ -55,12 +55,23 @@ attr_df <- tibble(
 #        loss_pw1, loss_pw2, loss_pw3, pack, cell
 wtp_raw <- tibble(
   attr = attr_df$attr,
-  c1 = c(-17.6, -3.2, 0.8, 12.8, 9.2, -1.6, -0.3, 0.2, -6.4, -7.3),
-  c2 = c(-95.8, -2.9, 4.6, 4.6, 5.3, -2.3, -2.3, -2.1, -2.7, -3.8),
-  c3 = c(-13.3, -2.1, 38.7, 20.8, 25.5, -0.9, -0.7, -0.5, -0.5, -0.7),
-  c4 = c(-242.4, -10.0, 12.3, -10.1, 13.8, 0.3, -1.3, -1.4, -26.6, -32.6),
-  c5 = c(-20.8, -1.8, 11.8, 9.5, 9.5, -0.8, -0.8, -0.4, -5.8, -6.1),
-  c6 = c(-34.5, -0.6, 2.8, 1.8, 2.0, -0.2, -0.2, -0.2, 0.1, 0.3)
+  c1 = c(-17.56, -3.22, 0.78, 12.84, 9.18, -1.62, -0.30, 0.24, -6.35, -7.32),
+  c2 = c(-95.82, -2.93, 4.57, 4.61, 5.31, -2.31, -2.33, -2.14, -2.74, -3.76),
+  c3 = c(-13.26, -2.09, 38.70, 20.82, 25.47, -0.87, -0.69, -0.47, -0.54, -0.67),
+  c4 = c(
+    -242.41,
+    -9.95,
+    12.31,
+    -10.06,
+    13.76,
+    0.26,
+    -1.26,
+    -1.38,
+    -26.64,
+    -32.62
+  ),
+  c5 = c(-20.85, -1.82, 11.83, 9.45, 9.50, -0.78, -0.76, -0.39, -5.76, -6.07),
+  c6 = c(-34.47, -0.57, 2.81, 1.76, 1.98, -0.21, -0.17, -0.17, 0.10, 0.27)
 )
 
 sig_raw <- tibble(
@@ -90,7 +101,7 @@ class_meta <- tibble(
   label = c(
     "Opt-Out Dominant, BEV-Skeptical",
     "Battery Health Attentives",
-    "Range-Focused, EV-Engaged",
+    "Range-Focused, EV-Knowledgeable",
     "Low-Engagement, Attribute Non-Attendance",
     "Multi-Attribute Maximizers",
     "Budget-Constrained, Low WTP"
@@ -187,14 +198,14 @@ wtp_long <- wtp_raw %>%
     truncated = wtp < BAR_CAP,
     val_label = ifelse(
       truncated,
-      paste0(sprintf("%.1f", wtp), sig, " ◄"),
-      paste0(sprintf("%.1f", wtp), sig)
+      paste0(ifelse(wtp >= 0, "$", "-$"), format(round(abs(wtp) * 1000), big.mark = ",", trim = TRUE), sig, " ◄"),
+      paste0(ifelse(wtp >= 0, "$", "-$"), format(round(abs(wtp) * 1000), big.mark = ",", trim = TRUE), sig)
     ),
     fill_col = ifelse(wtp >= 0, COL_POS, COL_NEG),
     text_pos = ifelse(
       wtp >= 0,
-      wtp_bar + abs(wtp_bar) * 0.04,
-      wtp_bar - abs(wtp_bar) * 0.04
+      wtp_bar + pmax(abs(wtp_bar) * 0.08, 1.5),
+      wtp_bar - pmax(abs(wtp_bar) * 0.08, 1.5)
     ),
     text_hjust = ifelse(wtp >= 0, 0, 1)
   )

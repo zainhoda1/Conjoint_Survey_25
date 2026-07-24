@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 JUL 2026 06:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  23 JUL 2026 12:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1213,10 +1213,17 @@ $[]$
  []
 
 [15]
-<images/0_lc6_class_profiles_no_optout.png, id=315, 794.97pt x 614.295pt>
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[16]
+<images/0_lc6_class_profiles_no_optout.png, id=325, 794.97pt x 614.295pt>
 File: images/0_lc6_class_profiles_no_optout.png Graphic file (type png)
 <use images/0_lc6_class_profiles_no_optout.png>
-Package pdftex.def Info: images/0_lc6_class_profiles_no_optout.png  used on input line 463.
+Package pdftex.def Info: images/0_lc6_class_profiles_no_optout.png  used on input line 461.
 (pdftex.def)             Requested size: 560.86385pt x 433.4061pt.
 
 
@@ -1225,7 +1232,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[16
+[17
 
 
  <./images/0_lc6_class_profiles_no_optout.png>] (./attachments/model_summary_6c.tex
@@ -1240,7 +1247,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[17
+[18
 
 ]
 
@@ -1249,11 +1256,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[18]
-<images/thematic_hierarchical_nobev_all_blocks.png, id=335, 1156.32pt x 893.4981pt>
+[19]
+<images/thematic_hierarchical_nobev_all_blocks.png, id=345, 1156.32pt x 893.4981pt>
 File: images/thematic_hierarchical_nobev_all_blocks.png Graphic file (type png)
 <use images/thematic_hierarchical_nobev_all_blocks.png>
-Package pdftex.def Info: images/thematic_hierarchical_nobev_all_blocks.png  used on input line 495.
+Package pdftex.def Info: images/thematic_hierarchical_nobev_all_blocks.png  used on input line 493.
 (pdftex.def)             Requested size: 515.16849pt x 398.07576pt.
 
 
@@ -1262,7 +1269,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[19
+[20
 
 
  <./images/thematic_hierarchical_nobev_all_blocks.png>]
@@ -1272,42 +1279,38 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[20
+[21
 
 ] (./attachments/table_lc6_profile_main.tex
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[21]) (./attachments/table_lc6_metadata.tex
+[22]) (./attachments/table_lc6_metadata.tex
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[22]) (./attachments/wtp_lit_summary.tex
+[23]) (./attachments/wtp_pairwise_tests.tex)
+Overfull \hbox (15.0pt too wide) in paragraph at lines 32--532
+[]$[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--532
+
+ []
+
+(./attachments/wtp_lit_summary.tex
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[23]
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-$[]$
- []
-
-[24
-
-])
-
-Package biblatex Warning: No driver for 'legislation'.
-(biblatex)                Using fallback driver on input line 538.
-
-
+[24]
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -1316,14 +1319,21 @@ $[]$
 
 [25
 
-]
+])
+
+Package biblatex Warning: No driver for 'legislation'.
+(biblatex)                Using fallback driver on input line 540.
+
+
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[26]
+[26
+
+]
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -1337,7 +1347,14 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[28] (./battery_paper.aux)
+[28]
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[29] (./battery_paper.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1349,18 +1366,18 @@ Package logreq Info: Writing requests to 'battery_paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27227 strings out of 473190
- 472152 string characters out of 5715801
- 1383004 words of memory out of 5000000
- 49918 multiletter control sequences out of 15000+600000
+ 27241 strings out of 473190
+ 472441 string characters out of 5715801
+ 1383259 words of memory out of 5000000
+ 49927 multiletter control sequences out of 15000+600000
  711351 words of font info for 223 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,15n,93p,5709b,2362s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-BoldItalic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsi0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on battery_paper.pdf (28 pages, 2003377 bytes).
+Output written on battery_paper.pdf (29 pages, 2030355 bytes).
 PDF statistics:
- 712 PDF objects out of 1000 (max. 8388607)
- 621 compressed objects within 7 object streams
- 142 named destinations out of 1000 (max. 500000)
+ 721 PDF objects out of 1000 (max. 8388607)
+ 629 compressed objects within 7 object streams
+ 144 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
