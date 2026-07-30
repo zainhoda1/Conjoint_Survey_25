@@ -7,6 +7,13 @@ load(here("models", "model_suv_low.RData"))
 load(here("models", "model_suv_high.RData"))
 
 
+# Load the estimated model
+load(here("models", "mixed_model_1_car_low_panel.RData"))
+load(here("models", "mixed_model_1_car_high_panel.RData"))
+load(here("models", "mixed_model_1_suv_low_panel.RData"))
+load(here("models", "mixed_model_1_suv_high_panel.RData"))
+
+
 get_wtp_draws <- function(model) {
   coefs <- coef(model)
   # Get the model coefficients and covariance matrix
@@ -16,9 +23,9 @@ get_wtp_draws <- function(model) {
   coef_draws <- as.data.frame(MASS::mvrnorm(10^4, coefs, covariance))
   
   # Compute WTP for each coefficient draw
-  wtp_draws = -1 * (coef_draws[,] / coef_draws[, 'price'])
+ # wtp_draws = -1 * (coef_draws[,] / coef_draws[, 'price'])
   
-  return(wtp_draws) 
+  return(coef_draws) 
   
 }
 
@@ -44,18 +51,17 @@ get_cis <- function(df) {
 }
 
 
-conf_model_car_low <- get_cis(get_wtp_draws(model_car_low))
-conf_model_car_high <- get_cis(get_wtp_draws(model_car_high))
-conf_model_suv_low <- get_cis(get_wtp_draws(model_suv_low))
-conf_model_suv_high <- get_cis(get_wtp_draws(model_suv_high))
-
-
-predict(model_car_low)
+conf_mixed_model_1_car_low <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
+conf_mixed_model_1_car_high <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
+conf_mixed_model_1_suv_low <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
+conf_mixed_model_1_suv_high <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
 
 
 
 
-all_models <- c("conf_model_car_low", "conf_model_car_high", "conf_model_suv_low", "conf_model_suv_high")
+
+all_models <- c("conf_mixed_model_1_car_low", "conf_mixed_model_1_car_high",
+                "conf_mixed_model_1_suv_low", "conf_mixed_model_1_suv_high")
 
 # all_models <- c("conf_model_likely_bev_adopter_car", "conf_model_unlikely_bev_adopter_car",
 #  "conf_model_unlikely_bev_adopter_suv", "conf_model_unlikely_bev_adopter_suv")
@@ -124,11 +130,11 @@ temp <- temp %>%
 temp <- temp %>%  
   mutate(
     model_type = case_when(
-      model_name %in% c('conf_model_car_low', 'conf_model_car_high') ~ 'car',
+      model_name %in% c('conf_mixed_model_1_car_low', 'conf_mixed_model_1_car_high') ~ 'car',
       .default = 'suv'
     ),
     segment = case_when(
-      model_name %in% c('conf_model_car_low', 'conf_model_suv_low') ~ 'Low Budget',
+      model_name %in% c('conf_mixed_model_1_car_low', 'conf_mixed_model_1_suv_low') ~ 'Low Budget',
       TRUE ~ 'High Budget'
     )
   ) %>% 
@@ -262,11 +268,11 @@ temp2 <- temp2 %>%
 temp3 <-  temp2 |> 
   mutate(
     model_type = case_when(
-      model_name %in% c('conf_model_car_low', 'conf_model_car_high') ~ 'car',
+      model_name %in% c('conf_mixed_model_1_car_low', 'conf_mixed_model_1_car_high') ~ 'car',
       .default = 'suv'
     ),
     segment = case_when(
-      model_name %in% c('conf_model_car_low', 'conf_model_suv_low') ~ 'Low Budget',
+      model_name %in% c('conf_mixed_model_1_car_low', 'conf_mixed_model_1_suv_low') ~ 'Low Budget',
       TRUE ~ 'High Budget'
     )
   ) %>% 
