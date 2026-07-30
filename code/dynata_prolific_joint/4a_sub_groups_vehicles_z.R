@@ -90,24 +90,34 @@ run_model <- function(data) {
   return(model)
 }
 
-#WTP Model:
-
-run_model_wtp <- function(data) {
+run_mixed_model_1 <- function(data) {
+  
   model <- logitr(
     data = data,
     outcome = "choice",
     obsID = "obsID",
+    panelID = "respID",
     pars = c(
-      "no_choice",
       "powertrainbev",
       "powertrainhev",
       "range_bev",
       "mileage",
       "age",
-      "operating_cost"
+      "operating_cost",
+      "no_choice"
+    ),
+    randPars = c(powertrainbev = 'n',
+                 powertrainhev = 'n',
+                 range_bev = 'n',
+                 mileage = 'n',
+                 age = 'n',
+                 operating_cost = 'n',
+                 no_choice = 'n'
     ),
     scalePar = 'price',
-    numMultiStarts = 10 # Use a multi-start since log-likelihood is nonconvex
+    drawType = 'sobol',
+    numDraws = 5000,
+    numMultiStarts = 10
   )
   cat('n =', length(unique(data$respID)))
   return(model)
@@ -218,167 +228,31 @@ neighbor_ev_yes_encodeing <- encoding(
   inner_join(data, neighbor_ev_yes, by = 'psid') %>% select(-psid)
 )
 
-model_positive_vehicle <- run_model(likely_bev_adopter_encoded)
+mixed_model_1_positive_vehicle <- run_mixed_model_1(likely_bev_adopter_encoded)
 
-model_negative_vehicle <- run_model(unlikely_bev_adopter_encoded )
+mixed_model_1_negative_vehicle <- run_mixed_model_1(unlikely_bev_adopter_encoded )
 
-model_likely_bev_adopter_car <- run_model(
+mixed_model_1_likely_bev_adopter_car <- run_mixed_model_1(
   likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
 )
 
-model_unlikely_bev_adopter_car <- run_model(
+mixed_model_1_unlikely_bev_adopter_car <- run_mixed_model_1(
   unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
 )
 
-model_likely_bev_adopter_suv <- run_model(
+mixed_model_1_likely_bev_adopter_suv <- run_mixed_model_1(
   likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
 )
 
-model_unlikely_bev_adopter_suv <- run_model(
+mixed_model_1_unlikely_bev_adopter_suv <- run_mixed_model_1(
   unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
 )
 
-model_charger_access_yes <- run_model(charger_access_yes_encoded)
+mixed_model_1_charger_access_yes <- run_mixed_model_1(charger_access_yes_encoded)
 
-model_charger_access_no <- run_model(charger_access_no_encoded)
+mixed_model_1_charger_access_no <- run_mixed_model_1(charger_access_no_encoded)
 
-model_neighbor_ev_yes_encodeing <- run_model(neighbor_ev_yes_encodeing)
-
-
-wtp_model_likely_bev_adopter_car <- run_model_wtp(
-  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
-)
-
-wtp_model_unlikely_bev_adopter_car <- run_model_wtp(
-  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
-)
-
-wtp_model_likely_bev_adopter_suv <- run_model_wtp(
-  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
-)
-
-wtp_model_unlikely_bev_adopter_suv <- run_model_wtp(
-  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
-)
-
-#####################################################################
-
-wtp_model_likely_bev_adopter_vehicle_low <- run_model_wtp(
-  likely_bev_adopter_encoded %>% filter(budgethigh == 0 )
-)
-
-wtp_model_unlikely_bev_adopter_vehicle_low <- run_model_wtp(
-  unlikely_bev_adopter_encoded %>% filter( budgethigh == 0 )
-)
-
-wtp_model_likely_bev_adopter_vehicle_high <- run_model_wtp(
-  likely_bev_adopter_encoded %>% filter(budgethigh == 1 )
-)
-
-wtp_model_unlikely_bev_adopter_vehicle_high <- run_model_wtp(
-  unlikely_bev_adopter_encoded %>% filter( budgethigh == 1 )
-)
-
-
-wtp_model_likely_bev_adopter_car_low <- run_model_wtp(
-  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
-)
-
-wtp_model_unlikely_bev_adopter_car_low <- run_model_wtp(
-  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
-)
-
-wtp_model_likely_bev_adopter_car_high <- run_model_wtp(
-  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 1 )
-)
-
-wtp_model_unlikely_bev_adopter_car_high <- run_model_wtp(
-  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0,  budgethigh == 1 )
-)
-
-wtp_model_likely_bev_adopter_suv_low <- run_model_wtp(
-  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
-)
-
-wtp_model_unlikely_bev_adopter_suv_low <- run_model_wtp(
-  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
-)
-
-wtp_model_likely_bev_adopter_suv_high <- run_model_wtp(
-  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
-)
-
-wtp_model_unlikely_bev_adopter_suv_high <- run_model_wtp(
-  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
-)
-
-#####################
-
-summary(model_likely_bev_adopter_car)
-summary(model_unlikely_bev_adopter_car)
-summary(model_likely_bev_adopter_suv)
-summary(model_unlikely_bev_adopter_suv)
-summary(model_charger_access_yes)
-summary(model_charger_access_no)
-summary(model_neighbor_ev_yes_encodeing)
-
-
-summary(wtp_model_likely_bev_adopter_car)
-summary(wtp_model_unlikely_bev_adopter_car)
-summary(wtp_model_likely_bev_adopter_suv)
-summary(wtp_model_unlikely_bev_adopter_suv)
-
-# summary(wtp_model_likely_bev_adopter_car_low)
-# summary(wtp_model_unlikely_bev_adopter_car_low)
-# summary(wtp_model_likely_bev_adopter_car_high)
-# summary(wtp_model_unlikely_bev_adopter_car_high)
-
-# summary(wtp_model_likely_bev_adopter_suv_low)
-# summary(wtp_model_unlikely_bev_adopter_suv_low)
-# summary(wtp_model_likely_bev_adopter_suv_high)
-# summary(wtp_model_unlikely_bev_adopter_suv_high)
-
-#####################
-
-
-
-#Generate confidence intervals:
-
-conf_model_positive_vehicle <- create_confidence_intervals(model_positive_vehicle)
-conf_model_negative_vehicle <- create_confidence_intervals(model_negative_vehicle)
-
-conf_model_likely_bev_adopter_car <- create_confidence_intervals(model_likely_bev_adopter_car)
-conf_model_unlikely_bev_adopter_car <- create_confidence_intervals(model_unlikely_bev_adopter_car)
-conf_model_likely_bev_adopter_suv <- create_confidence_intervals(model_likely_bev_adopter_suv)
-conf_model_unlikely_bev_adopter_suv <- create_confidence_intervals(model_unlikely_bev_adopter_suv)
-
-conf_model_charger_access_yes <- create_confidence_intervals(model_charger_access_yes)
-conf_model_charger_access_no <- create_confidence_intervals(model_charger_access_no)
-
-conf_model_neighbor_ev_yes_encodeing <- create_confidence_intervals(model_neighbor_ev_yes_encodeing)
-
-
-
-conf_model_positive_vehicle
-
-conf_model_negative_vehicle
-
-conf_model_likely_bev_adopter_car
-
-conf_model_unlikely_bev_adopter_car
-
-conf_model_likely_bev_adopter_suv
-
-conf_model_unlikely_bev_adopter_suv
-
-conf_model_charger_access_yes
-
-conf_model_charger_access_no
-
-conf_model_neighbor_ev_yes_encodeing
-
-#######################
-
+mixed_model_1_neighbor_ev_yes_encodeing <- run_mixed_model_1(neighbor_ev_yes_encodeing)
 
 
 ######################################
@@ -386,33 +260,34 @@ conf_model_neighbor_ev_yes_encodeing
 # Save model object
 
 save(
-  model_likely_bev_adopter_car,
-  file = here("models", "model_likely_bev_adopter_car.RData")
+  mixed_model_1_likely_bev_adopter_car,
+  file = here("models", "mixed_model_1_likely_bev_adopter_car.RData")
 )
 
 save(
-  model_unlikely_bev_adopter_car,
-  file = here("models", "model_unlikely_bev_adopter_car.RData")
+  mixed_model_1_unlikely_bev_adopter_car,
+  file = here("models", "mixed_model_1_unlikely_bev_adopter_car.RData")
 )
 
 save(
-  model_likely_bev_adopter_suv,
-  file = here("models", "model_likely_bev_adopter_suv.RData")
+  mixed_model_1_likely_bev_adopter_suv,
+  file = here("models", "mixed_model_1_likely_bev_adopter_suv.RData")
 )
 
 save(
-  model_unlikely_bev_adopter_suv,
-  file = here("models", "model_unlikely_bev_adopter_suv.RData")
+  mixed_model_1_unlikely_bev_adopter_suv,
+  file = here("models", "mixed_model_1_unlikely_bev_adopter_suv.RData")
+)
+
+
+save(
+  mixed_model_1_charger_access_yes,
+  file = here("models", "mixed_model_1_charger_access_yes.RData")
 )
 
 save(
-  model_charger_access_yes,
-  file = here("models", "model_charger_access_yes.RData")
-)
-
-save(
-  model_charger_access_no,
-  file = here("models", "model_charger_access_no.RData")
+  mixed_model_1_charger_access_no,
+  file = here("models", "mixed_model_1_charger_access_no.RData")
 )
 
 
