@@ -1,0 +1,115 @@
+DUMBBELL PLOTS: MODELLED WTP FOR USED EVs
+=========================================
+
+OVERVIEW
+--------
+All five plots display modelled Willingness to Pay (WTP) for used electric vehicles (EVs),
+estimated from a discrete choice model. The x-axis shows WTP in dollars, with a red dashed
+line at $0 as the reference point (the price equivalent of a conventional vehicle).
+
+  - Values to the RIGHT of $0: buyers are willing to pay a premium for the EV.
+  - Values to the LEFT of $0: buyers expect a discount relative to a conventional vehicle.
+
+Horizontal lines represent 95% confidence intervals around each WTP estimate.
+Each row corresponds to a combination of vehicle type (CAR vs SUV), a segmentation variable,
+and a fixed attribute. Colors encode the third dimension (range or age).
+
+
+INDIVIDUAL PLOT DESCRIPTIONS
+-----------------------------
+
+1. dumbbell_wtp_age_fixed_age_2_adopters.png
+   Title: Modelled WTP for EVs by Adoption Preference, Vehicle Type, and Range (Vehicle Age = 2 years)
+   Fixed: Vehicle Age = 2 years
+   Varies: Adoption preference (Likely/Unlikely) x Vehicle type (CAR/SUV) x Range (100/200/300 miles)
+   Color: Range (orange = 100 miles, blue = 200 miles, teal = 300 miles)
+
+   Key findings:
+   - Likely adopters have substantially higher WTP than Unlikely adopters across all combinations.
+   - 100-mile range (orange) has the most negative WTP -- buyers require large discounts.
+   - 300-mile range (teal) has the highest WTP -- Likely CAR adopters at 300 miles are the only
+     group with positive WTP (~+$10,000 to +$15,000), crossing the $0 reference line.
+   - SUVs consistently show lower WTP than equivalent CARs within each segment.
+   - Unlikely SUV adopters at 100-mile range have the most negative WTP (~-$35,000 to -$40,000).
+
+
+2. dumbbell_wtp_age_fixed_age_2_budgets.png
+   Title: Modelled WTP for EVs by Budget Preference, Vehicle Type, and Range (Vehicle Age = 2 years)
+   Fixed: Vehicle Age = 2 years
+   Varies: Budget (Low/High) x Vehicle type (CAR/SUV) x Range (100/200/300 miles)
+   Color: Range (orange = 100 miles, blue = 200 miles, teal = 300 miles)
+
+   Key findings:
+   - Only select combinations are shown (100 miles low-budget, 200 miles both budgets,
+     300 miles high-budget only).
+   - High Budget consumers show higher WTP than Low Budget across all vehicle types.
+   - High Budget CAR at 300 miles comes closest to or slightly crosses the $0 reference line.
+   - Most groups cluster between -$5,000 and -$20,000, indicating buyers still expect discounts
+     even for newer EVs.
+   - Low Budget SUV at 100 miles has the most negative WTP (~-$20,000).
+
+
+3. dumbbell_wtp_age_fixed_range_200_budgets.png
+   Title: Modelled WTP for EVs by Budget Preference, Vehicle Type, and Age (Vehicle Range = 200 miles)
+   Fixed: Vehicle Range = 200 miles
+   Varies: Budget (Low/High) x Vehicle type (CAR/SUV) x Age (2/5/8 years)
+   Color: Vehicle Age (orange = 2 years, green = 5 years, pink = 8 years)
+
+   Key findings:
+   - A clear age gradient is visible: 2-year-old vehicles (orange) have the highest WTP,
+     declining through 5-year (green) and 8-year (pink) vehicles.
+   - High Budget consumers generally show higher WTP than Low Budget, though the effect is
+     smaller than the age effect.
+   - Even the most favorable segment (CAR - High Budget - 2 years) barely approaches $0.
+   - 8-year SUV at Low Budget has the most negative WTP (~-$35,000 to -$40,000).
+   - The age penalty is particularly severe for SUVs compared to CARs.
+
+
+4. dumbbell_wtp_age_fixed_range_300_adopters.png
+   Title: Modelled WTP for EVs by Adoption Preference, Vehicle Type, and Age (Vehicle Range = 300 miles)
+   Fixed: Vehicle Range = 300 miles
+   Varies: Adoption preference (Likely/Unlikely) x Vehicle type (CAR/SUV) x Age (2/5/8 years)
+   Color: Vehicle Age (orange = 2 years, green = 5 years, pink = 8 years)
+
+   Key findings:
+   - This plot shows the widest spread of any in the set.
+   - Likely CAR adopters with 2-year-old vehicles have strongly positive WTP (~+$10,000 to +$20,000).
+   - Unlikely SUV adopters with 8-year-old vehicles sit at approximately -$40,000.
+   - The age effect is especially pronounced for Unlikely adopters, whose WTP drops sharply
+     from 2 to 5 to 8 years.
+   - Likely adopters are more resilient to vehicle age -- their WTP stays near or above $0
+     even at 5 years old.
+   - SUVs consistently have lower WTP than CARs within each segment.
+
+
+5. dumbbell_wtp_age_fixed_range_300_budgets.png
+   Title: Modelled WTP for EVs by Budget Preference, Vehicle Type, and Age (Vehicle Range = 300 miles)
+   Fixed: Vehicle Range = 300 miles, High Budget consumers only
+   Varies: Vehicle type (CAR/SUV) x Age (2/5/8 years)
+   Color: Vehicle Age (orange = 2 years, green = 5 years, pink = 8 years)
+
+   Key findings:
+   - This plot focuses exclusively on the High Budget segment at 300-mile range.
+   - 2-year CAR (High Budget) has WTP very close to $0, with a wide confidence interval that
+     crosses into positive territory.
+   - 8-year SUV (High Budget) has WTP around -$20,000 to -$25,000 -- substantially more negative.
+   - Confidence intervals are notably wide throughout, indicating high uncertainty in WTP
+     estimates for this segment.
+   - The age penalty is clear: each step from 2 to 5 to 8 years moves WTP further negative.
+   - CARs have higher WTP than SUVs at every age level.
+
+
+CROSS-CUTTING SUMMARY
+----------------------
+Factor                  Direction of Effect on WTP
+------                  --------------------------
+Range (100 -> 300 mi)   Increases substantially (longer range = higher WTP)
+Age (2 -> 8 years)      Decreases substantially (older vehicle = more negative WTP)
+Adoption preference     Likely adopters >> Unlikely adopters
+Budget                  High budget -> higher WTP
+Vehicle type            CARs > SUVs in WTP
+
+The most buyer-favorable scenario for a used EV is a 2-year-old, 300-mile-range CAR
+for a likely adopter or high-budget buyer -- the only conditions under which WTP is
+positive (buyers willing to pay a premium). In most other segments, buyers require
+a price discount relative to a comparable conventional vehicle.

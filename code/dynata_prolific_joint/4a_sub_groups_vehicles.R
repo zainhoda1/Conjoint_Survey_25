@@ -7,7 +7,9 @@ data_joint <- read_parquet(here(
   "data",
   "dynata_prolific_joint",
   "data_joint_vehicle.parquet"
-))
+ )) 
+# |> 
+#   filter(collection_round != 'round_4')
 
 
 data_raw_dynata <- read_parquet(here(
@@ -15,7 +17,8 @@ data_raw_dynata <- read_parquet(here(
   "dynata_testing",
   "data.parquet"
 )) %>%
-  select(-starts_with('time'), -ends_with('button'), -respID) %>%
+  select(-starts_with('time'), -ends_with('button'),
+ -respID) %>%
   mutate(data_source = 'dynata')
 
 data_raw_prolific <- read_parquet(here(
@@ -25,17 +28,18 @@ data_raw_prolific <- read_parquet(here(
 )) %>%
   select(-starts_with('time'), -ends_with('button'), -respID) %>%
   mutate(psid = prolific_pid, data_source = 'prolific') %>%
-  select(-study_id, -prolific_session_id, -prolific_pid)
+  select(-study_id, -prolific_session_id, -prolific_pid, -current_page)
 
 
 data_raw_prolific_round2 <- read_parquet(here(
   "data",
   "prolific_testing",
-  "data_round2_feb26.parquet"
+  "data_round_2+3+4_may_26.parquet"
 )) %>%
   select(-starts_with('time'), -ends_with('button'), -respID) %>%
   mutate(psid = prolific_pid, data_source = 'prolific') %>%
-  select(-study_id, -prolific_session_id, -prolific_pid)
+  select(-study_id, -prolific_session_id, -prolific_pid, -current_page
+  )
 
 
 data_joint %>% 
@@ -44,11 +48,6 @@ data_joint %>%
 
 #########
 
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 data <- data_joint %>%
   mutate(
     price = price / 10000, # 0.5-6
@@ -63,25 +62,62 @@ data_raw_joined <- rbind(
   data_raw_prolific_round2
 )
 
-#########
-#WTP Model:
 
-run_model_wtp <- function(data) {
+data_raw_joined <- data_raw_joined |> 
+  filter(psid %in% unique(data_joint$psid) )
+
+
+
+#########
+
+run_model <- function(data) {
   model <- logitr(
     data = data,
     outcome = "choice",
     obsID = "obsID",
     pars = c(
-      "no_choice",
       "powertrainbev",
       "powertrainhev",
       "range_bev",
       "mileage",
       "age",
-      "operating_cost"
+      "operating_cost",
+      "price",
+      "no_choice"
+    )
+  )
+  cat('n =', length(unique(data$respID)))
+  return(model)
+}
+
+run_mixed_model_1 <- function(data) {
+  
+  model <- logitr(
+    data = data,
+    outcome = "choice",
+    obsID = "obsID",
+    panelID = "respID",
+    pars = c(
+      "powertrainbev",
+      "powertrainhev",
+      "range_bev",
+      "mileage",
+      "age",
+      "operating_cost",
+      "no_choice"
+    ),
+    randPars = c(powertrainbev = 'n',
+                 powertrainhev = 'n',
+                 range_bev = 'n',
+                 mileage = 'n',
+                 age = 'n',
+                 operating_cost = 'n',
+                 no_choice = 'n'
     ),
     scalePar = 'price',
-    numMultiStarts = 10 # Use a multi-start since log-likelihood is nonconvex
+    drawType = 'sobol',
+    numDraws = 5000,
+    numMultiStarts = 10
   )
   cat('n =', length(unique(data$respID)))
   return(model)
@@ -130,102 +166,141 @@ data_raw_joined %>%
   count()
 
 
-positive_group <- data_raw_joined %>%
+likely_bev_adopter <- data_raw_joined %>%
+  filter(
+    (next_veh_fuel_new_bev %in%
+      c('very_likely', 'somewhat_likely')) |   #, 'neutral'
+      (next_veh_fuel_used_bev %in%
+        c('very_likely', 'somewhat_likely'))  #, 'neutral'
+  ) %>%
+  select(psid)
+
+nrow(likely_bev_adopter)
+
+unlikely_bev_adopter <- data_raw_joined %>%
+  filter(
+    (next_veh_fuel_new_bev %in%
+      c('very_unlikely', 'somewhat_unlikely'))  &
+      (next_veh_fuel_used_bev %in%
+        c('very_unlikely', 'somewhat_unlikely'))
+  ) %>%
+  select(psid, next_veh_fuel_new_bev, next_veh_fuel_used_bev)
+
+nrow(unlikely_bev_adopter)
+
+
+
+charger_access_yes_group <- data_raw_joined %>%
+  filter(
+    (charger_access  == 'yes')
+  ) %>%
+  select(psid)
+
+charger_access_no_group <- data_raw_joined %>%
+  filter(
+    (!charger_access  == 'yes')
+  ) %>%
+  select(psid)
+
+neighbor_ev_yes <- data_raw_joined %>%
+  filter(
+    (!charger_access  == 'yes')
+  ) %>%
+  select(psid)
+
+likely_bev_adopter_encoded <- encoding(
+  inner_join(data, likely_bev_adopter, by = 'psid') %>% select(-psid)
+)
+
+unlikely_bev_adopter_encoded <- encoding(
+  inner_join(data, unlikely_bev_adopter, by = 'psid') %>% select(-psid)
+)
+
+charger_access_yes_encoded  <-  encoding(
+  inner_join(data, charger_access_yes_group, by = 'psid') %>% select(-psid)
+)
+
+charger_access_no_encoded  <-  encoding(
+  inner_join(data, charger_access_no_group, by = 'psid') %>% select(-psid)
+)
+
+neighbor_ev_yes_encodeing <- encoding(
+  inner_join(data, neighbor_ev_yes, by = 'psid') %>% select(-psid)
+)
+
+mixed_model_1_positive_vehicle <- run_mixed_model_1(likely_bev_adopter_encoded)
+
+mixed_model_1_negative_vehicle <- run_mixed_model_1(unlikely_bev_adopter_encoded )
+
+mixed_model_1_likely_bev_adopter_car <- run_mixed_model_1(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
+)
+
+mixed_model_1_unlikely_bev_adopter_car <- run_mixed_model_1(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
+)
+
+mixed_model_1_likely_bev_adopter_suv <- run_mixed_model_1(
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
+)
+
+mixed_model_1_unlikely_bev_adopter_suv <- run_mixed_model_1(
+  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
+)
+
+mixed_model_1_charger_access_yes <- run_mixed_model_1(charger_access_yes_encoded)
+
+mixed_model_1_charger_access_no <- run_mixed_model_1(charger_access_no_encoded)
+
+mixed_model_1_neighbor_ev_yes_encodeing <- run_mixed_model_1(neighbor_ev_yes_encodeing)
+
+
+######################################
+
+# Save model object
+
+save(
+  mixed_model_1_likely_bev_adopter_car,
+  file = here("models", "mixed_model_1_likely_bev_adopter_car.RData")
+)
+
+save(
+  mixed_model_1_unlikely_bev_adopter_car,
+  file = here("models", "mixed_model_1_unlikely_bev_adopter_car.RData")
+)
+
+save(
+  mixed_model_1_likely_bev_adopter_suv,
+  file = here("models", "mixed_model_1_likely_bev_adopter_suv.RData")
+)
+
+save(
+  mixed_model_1_unlikely_bev_adopter_suv,
+  file = here("models", "mixed_model_1_unlikely_bev_adopter_suv.RData")
+)
+
+
+save(
+  mixed_model_1_charger_access_yes,
+  file = here("models", "mixed_model_1_charger_access_yes.RData")
+)
+
+save(
+  mixed_model_1_charger_access_no,
+  file = here("models", "mixed_model_1_charger_access_no.RData")
+)
+
+
+
+############################################################
+
+
+ data_raw_joined %>%
   filter(
     (next_veh_fuel_new_bev %in%
       c('very_likely', 'somewhat_likely', 'neutral')) |
-      (next_veh_fuel_new_bev %in%
+      (next_veh_fuel_used_bev %in%
         c('very_likely', 'somewhat_likely', 'neutral'))
-  ) %>%
-  select(psid)
-
-negative_group <- data_raw_joined %>%
-  filter(
-    (!next_veh_fuel_new_bev %in%
-      c('very_likely', 'somewhat_likely', 'neutral')) |
-      (!next_veh_fuel_new_bev %in%
-        c('very_likely', 'somewhat_likely', 'neutral'))
-  ) %>%
-  select(psid)
-
-
-positive_group_encoded <- encoding(
-  inner_join(data, positive_group, by = 'psid') %>% select(-psid)
-)
-
-negative_group_encoded <- encoding(
-  inner_join(data, negative_group, by = 'psid') %>% select(-psid)
-)
-
-
-wtp_model_positive_group_car <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 0)
-)
-
-wtp_model_negative_group_car <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 0)
-)
-
-wtp_model_positive_group_suv <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 1)
-)
-
-wtp_model_negative_group_suv <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 1)
-)
-
-
-summary(wtp_model_positive_group_car)
-summary(wtp_model_negative_group_car)
-summary(wtp_model_positive_group_suv)
-summary(wtp_model_negative_group_suv)
-
-
-wtp_model_positive_group_car_low <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
-)
-
-wtp_model_negative_group_car_low <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 0 )
-)
-
-wtp_model_positive_group_car_high <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 0, budgethigh == 1 )
-)
-
-wtp_model_negative_group_car_high <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 0,  budgethigh == 1 )
-)
-
-wtp_model_positive_group_suv_low <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
-)
-
-wtp_model_negative_group_suv_low <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 0 )
-)
-
-wtp_model_positive_group_suv_high <- run_model_wtp(
-  positive_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
-)
-
-wtp_model_negative_group_suv_high <- run_model_wtp(
-  negative_group_encoded %>% filter(vehicle_typesuv == 1, budgethigh == 1 )
-)
-
-
-
-
-summary(wtp_model_positive_group_car_low)
-summary(wtp_model_negative_group_car_low)
-summary(wtp_model_positive_group_car_high)
-summary(wtp_model_negative_group_car_high)
-
-summary(wtp_model_positive_group_suv_low)
-summary(wtp_model_negative_group_suv_low)
-summary(wtp_model_positive_group_suv_high)
-summary(wtp_model_negative_group_suv_high)
-
-
-
+  )  |> 
+   group_by(education) |> summarise(n = n())
 

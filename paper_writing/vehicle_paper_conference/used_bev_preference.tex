@@ -1,0 +1,736 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\author{}
+\date{}
+
+\begin{document}
+
+
+\section{Measuring Consumer Preferences for Used Battery Electric
+Vehicles}\label{measuring-consumer-preferences-for-used-battery-electric-vehicles}
+
+\textbf{Zain Hoda}\textsuperscript{1}, \textbf{Xiatian
+Iogansen}\textsuperscript{1}, \textbf{John Helveston}\textsuperscript{1}
+
+\textsuperscript{1}Department of Engineering Management and Systems
+Engineering, George Washington University, Washington, D.C., USA
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1 Motivation and Research
+Questions}\label{motivation-and-research-questions}
+
+Used vehicles account for approximately 70\% of all vehicle transactions
+in the United States {[}1{]}, yet the used battery electric vehicle
+(BEV) segment has received comparatively little systematic inquiry from
+researchers or policymakers. This inattention is increasingly difficult
+to justify: used EV sales rose 34.2\% year-over-year as of February
+2025, while average days' supply declined 21.5\% over the same period
+{[}2{]}, signaling demand growth that is outpacing inventory. The used
+BEV market also carries significance beyond its transaction volume. It
+extends the productive life of vehicles and battery packs, supports
+circular economy objectives {[}3{]}, and reduces the effective entry
+price for lower- and middle-income households seeking the operating cost
+advantages of electric propulsion without the capital outlay of a new
+vehicle purchase.
+
+Consumer demand for used BEVs remains constrained, however, by barriers
+that do not apply equally to conventional used vehicles. Survey evidence
+indicates that 52\% of U.S. adults are unlikely to consider a used EV
+purchase, compared with 28\% who express openness to doing so {[}4{]}.
+Used BEVs share certain adoption barriers with new EVs --- range
+anxiety, charging infrastructure availability --- but carry additional
+purchase risks specific to the secondary market. Among these, battery
+condition is the most consequential: it is the primary determinant of a
+used BEV's residual range, longevity, and resale value, yet it is
+largely unobservable to prospective buyers at the point of sale. Unlike
+mileage or model year, which serve as widely accepted proxies for
+mechanical wear in conventional vehicles, battery degradation
+trajectories vary substantially among BEVs of identical vintage and
+odometer reading as a function of prior charging behavior, thermal
+exposure, and duty cycle {[}5{]}. This structural information asymmetry
+creates conditions under which buyers systematically discount older BEVs
+as a hedge against unobserved deterioration, potentially suppressing
+market prices below the true value of well-maintained vehicles and
+dampening demand across the segment.
+
+This study addresses three interrelated research questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is consumers' willingness to pay (WTP) for a used BEV powertrain
+  relative to a comparable internal combustion engine (ICE) vehicle, and
+  how does this WTP vary across price budget tiers?
+\item
+  How do the principal vehicle attributes --- driving range, vehicle
+  age, and powertrain type --- jointly determine WTP for used BEVs?
+\item
+  To what extent do preference structures and WTP magnitudes differ
+  between consumers who self-identify as likely versus unlikely future
+  BEV adopters?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2 Background and
+Contribution}\label{background-and-contribution}
+
+The EV adoption literature is dominated by studies of new vehicle
+buyers, in which purchase price, operating costs, driving range,
+recharging time, and charging infrastructure availability are
+consistently identified as the primary determinants of choice {[}6{]}.
+Relatively little of this work extends to the used-vehicle segment,
+which serves a distinct population with different cost constraints,
+vehicle quality expectations, and information environments.
+Affordability, vehicle condition, and reliability are the dominant
+evaluation criteria for used-vehicle buyers {[}6{]}; total cost of
+ownership and fuel costs are also salient, particularly among
+cost-constrained households. Average used-vehicle transaction prices
+have remained elevated since the post-pandemic period, reaching \$25,547
+in April 2025 {[}7{]}, compressing the potential cost advantage of used
+BEVs for budget-sensitive buyers.
+
+Among the limited studies that do examine the used EV market
+specifically, qualitative and descriptive analyses predominate.
+Segmentation work identifies three broadly distinct prospective buyer
+types: those for whom purchase cost constitutes a binding constraint,
+those resistant to the behavioral and technological adjustments
+associated with electric propulsion, and those motivated by a favorable
+cost-to-benefit ratio relative to accelerated new EV depreciation
+{[}8{]}. The demographic profile of observed used EV owners ---
+disproportionately male, middle-aged, higher-income, and highly educated
+--- closely mirrors that of new EV owners {[}9{]}, indicating that the
+secondary market has not yet substantially extended access to
+lower-income households. Pre-purchase concerns center on battery
+condition, charging access, and vehicle price; lower-income prospective
+buyers weight both price and charging availability more heavily than
+higher-income counterparts {[}10{]}.
+
+This literature, while informative about the qualitative structure of
+buyer heterogeneity, has not produced disaggregated quantitative
+estimates of WTP for powertrain type in the used BEV market. The present
+study addresses that gap through a discrete choice experiment (DCE)
+administered to a nationally distributed sample of prospective
+used-vehicle buyers in the United States. The DCE design recovers
+implicit monetary valuations for vehicle attributes directly from
+observed choices between competing alternatives, enabling WTP estimation
+disaggregated by price budget tier, adoption propensity, vehicle type
+(car vs.~SUV), driving range, and vehicle age. To the authors'
+knowledge, this constitutes the first systematic quantification of used
+BEV willingness to pay at this level of segmentation in a U.S. context.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3 Data and Methods}\label{data-and-methods}
+
+\subsubsection{3.1 Survey Design}\label{survey-design}
+
+The survey targets U.S. residents aged 18 years or older who report an
+intention to purchase a used car or SUV within the following two years.
+The core instrument is a DCE in which respondents complete six repeated
+choice tasks. Each task presents three used vehicle alternatives ---
+differentiated on observed attributes --- alongside a ``none of the
+above'' opt-out option. Respondents select their preferred alternative
+in each task. This repeated-measures design exploits within-respondent
+variation across attribute combinations to estimate preference
+parameters more precisely than a single-task design would permit.
+
+Vehicle attributes included in the DCE are mileage, powertrain type,
+operating cost, model year, and purchase price. Powertrain is defined at
+three levels: conventional internal combustion engine vehicle (ICEV),
+gas hybrid electric vehicle (HEV), and battery electric vehicle (BEV),
+with the ICEV serving as the reference category throughout. Operating
+cost is expressed in cents per mile driven. Purchase price levels are
+segmented by vehicle type and consumer budget tier to maintain
+contextual plausibility of the attribute ranges: low-budget cars
+(\$10,000--\$20,000), high-budget cars (\$20,000--\$40,000), low-budget
+SUVs (\$15,000--\$25,000), and high-budget SUVs (\$25,000--\$45,000).
+All attribute definitions are presented to respondents before the choice
+tasks begin to ensure consistent interpretation across the sample.
+
+In addition to the DCE, the survey collects information on respondents'
+current vehicle ownership and primary vehicle characteristics, future
+purchase intentions and anticipated budget, EV-specific knowledge and
+attitudes (assessed through 5-point Likert scales covering range
+anxiety, charging infrastructure concerns, environmental beliefs, cost
+perceptions, and battery-related concerns), and standard
+sociodemographic characteristics including household income, housing
+type, education level, and employment status.
+
+\subsubsection{3.2 Data Collection and
+Sample}\label{data-collection-and-sample}
+
+The survey was administered online between December 2025 and April 2026
+across two established research platforms. Respondents who failed
+embedded attention checks, exhibited within-survey response
+inconsistencies, or provided uninformative filler text in open-ended
+fields were removed from analysis. The final analytic sample comprises
+\textbf{2,916 respondents} distributed across the continental United
+States. Median survey completion time was approximately 14 minutes.
+
+\subsubsection{3.3 Estimation}\label{estimation}
+
+Consumer choice is modeled within the random utility framework. Each
+respondent \(i\) is assumed to select the alternative \(j\) that
+maximizes their latent utility \(U_{ij}\) in each choice task, where
+utility is a function of observed vehicle attributes and an unobserved
+idiosyncratic error term assumed to follow an independent Gumbel
+distribution.
+
+A multinomial logit (MNL) model, estimated via maximum likelihood,
+provides the baseline specification under the assumption of preference
+homogeneity across respondents. To relax this restriction --- which is
+inconsistent with the substantial heterogeneity in EV attitudes
+documented in the literature --- the primary analysis employs a mixed
+logit (MXL) model. In the MXL specification, each of the eight
+preference parameters is treated as a draw from an independent normal
+mixing distribution:
+
+\[\beta_{ik} \sim \mathcal{N}(\mu_k,\, \sigma_k^2)\]
+
+where \(\mu_k\) is the population mean valuation for attribute \(k\) and
+\(\sigma_k\) captures the dispersion of that valuation across
+respondents. A statistically significant estimate of \(\sigma_k\)
+constitutes evidence that preferences for attribute \(k\) are genuinely
+heterogeneous in the population, rather than uniform. The eight
+parameters specified as randomly distributed are the BEV powertrain
+indicator, HEV powertrain indicator, BEV driving range, vehicle mileage,
+vehicle age, operating cost, purchase price, and the
+alternative-specific constant for the no-choice option.
+
+Six MXL models are estimated, stratified by self-reported adoption
+propensity (likely vs.~unlikely BEV adopter) and vehicle segment (full
+sample, car segment, SUV segment), yielding models for all combinations
+of these two dimensions. All models are estimated in R using the
+\texttt{logitr} package (v1.1.2) under a preference-space specification.
+The mixing integral is approximated using 100 Sobol quasi-random draws
+per respondent. To reduce sensitivity to starting values and mitigate
+convergence to local optima, each model is initialized from 20
+independent random starting points; the run achieving the globally
+lowest log-likelihood is retained. Convergence is verified via the
+relative and absolute function tolerance criterion (Exit Status 3) in
+all six models.
+
+Willingness to pay for attribute \(k\) is derived as the negative ratio
+of the mean attribute coefficient to the mean price coefficient:
+
+\[\widehat{\text{WTP}}_k = -\frac{\hat{\mu}_k}{\hat{\mu}_{\text{price}}}\]
+
+This quantity represents the dollar amount the average respondent would
+pay --- or require as a compensating discount --- for a one-unit change
+in attribute \(k\), holding utility constant. Uncertainty bounds on WTP
+are computed by drawing 10,000 samples from the estimated joint
+distribution of \((\hat{\mu}_k,\, \hat{\mu}_{\text{price}})\) and
+reporting the resulting 95\% simulation interval.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4 Results}\label{results}
+
+\subsubsection{4.1 WTP for used BEVs by adoption preference, vehicle
+type, and driving
+range}\label{wtp-for-used-bevs-by-adoption-preference-vehicle-type-and-driving-range}
+
+Figure 1 presents WTP estimates at a fixed vehicle age of two years,
+disaggregated by adoption preference (likely vs.~unlikely BEV adopter),
+vehicle type (car vs.~SUV), and driving range (100, 200, and 300 miles).
+The reference value of \$0 marks the ICE-parity threshold: WTP above
+this line indicates a consumer-perceived premium for the used BEV
+relative to an equivalent ICE vehicle; WTP below it indicates the
+magnitude of discount required to reach purchase indifference.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{vehicle_paper_2/images/dumbbell_plots/dumbbell_wtp_age_fixed_age_2_adopters.png}
+
+}
+
+\caption{Modelled WTP for used BEVs by adoption preference, vehicle
+type, and range (vehicle age = 2 years). Points show point estimates;
+horizontal lines show 95\% confidence intervals.}
+
+\end{figure}%
+
+Likely adopters consistently exhibit higher WTP than unlikely adopters
+across all attribute combinations, and the gap is large. Among likely
+car adopters at 300-mile range, WTP is the only estimate that crosses
+into positive territory --- approximately +\$10,000 to +\$15,000 ---
+indicating a willingness to pay a premium for a used BEV over an
+equivalent ICE vehicle at this combination of attributes. All other
+segments require some discount to induce purchase, with the required
+discount increasing sharply as range declines and adoption propensity
+decreases. Unlikely adopters at 100-mile range require discounts in the
+range of \$35,000 to \$40,000 relative to an ICE alternative. Within
+each adoption group, SUVs carry consistently lower WTP than cars at
+equivalent range levels, a vehicle-type penalty that is stable across
+the full range of estimates shown.
+
+\subsubsection{4.2 WTP by adoption preference, vehicle type, and vehicle
+age}\label{wtp-by-adoption-preference-vehicle-type-and-vehicle-age}
+
+Figure 2 holds driving range constant at 300 miles and examines how WTP
+varies across vehicle age cohorts (2, 5, and 8 years), disaggregated by
+adoption preference and vehicle type.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{vehicle_paper_2/images/dumbbell_plots/dumbbell_wtp_age_fixed_range_300_adopters.png}
+
+}
+
+\caption{Modelled WTP for used BEVs by adoption preference, vehicle
+type, and vehicle age (range = 300 miles).}
+
+\end{figure}%
+
+Vehicle age exerts a large, negative, and monotonic effect on WTP. Each
+successive age cohort shifts estimated WTP further below the parity
+threshold, and the gradient is steeper than standard ICE depreciation
+schedules would predict for the same age interval --- an excess discount
+that most plausibly reflects consumer uncertainty about battery
+state-of-health in older vehicles rather than mechanical wear per se.
+The age penalty is most severe among unlikely adopters: 8-year-old SUVs
+in this group require discounts approaching \$40,000. Likely adopters
+are more resilient to vehicle aging --- their WTP for cars remains at or
+near \$0 at five years of age --- but shifts meaningfully downward by
+eight years. The joint variation in adoption preference and vehicle age
+produces the widest spread of WTP estimates across the full set of model
+outputs, establishing these two dimensions as the primary
+value-determining axes in the used BEV market.
+
+\subsubsection{4.3 WTP by budget tier, vehicle type, and vehicle
+age}\label{wtp-by-budget-tier-vehicle-type-and-vehicle-age}
+
+Figure 3 focuses on the high-budget consumer segment at 300-mile range
+and presents WTP estimates across vehicle types and age cohorts.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{vehicle_paper_2/images/dumbbell_plots/dumbbell_wtp_age_fixed_range_300_budgets.png}
+
+}
+
+\caption{Modelled WTP for used BEVs by vehicle type and age ---
+high-budget consumers, range fixed at 300 miles.}
+
+\end{figure}%
+
+High-budget car buyers at two years of age represent the consumer
+segment most proximate to price parity: the point estimate approaches
+\$0 with a confidence interval that extends into positive territory,
+indicating that near-parity pricing for used BEVs is a feasible market
+outcome for this specific attribute combination. The age penalty
+operates with similar force in this segment: the WTP differential
+between 2- and 8-year-old vehicles is approximately \$15,000 to
+\$20,000. Within the high-budget group, SUVs lag behind cars at every
+age level, and confidence intervals are notably wider throughout this
+segment relative to others, reflecting the greater estimated preference
+heterogeneity among SUV buyers.
+
+\subsubsection{4.4 Summary of attribute effects on
+WTP}\label{summary-of-attribute-effects-on-wtp}
+
+Table 1 summarizes the direction and relative magnitude of each
+attribute's effect on WTP, which is consistent in sign across all model
+specifications.
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Attribute & Direction of effect on WTP & Relative magnitude \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Driving range (100 → 300 miles) & Positive & Large \\
+Vehicle age (2 → 8 years) & Negative & Large \\
+Adoption preference (unlikely → likely) & Positive & Large \\
+Budget tier (low → high) & Positive & Moderate \\
+Vehicle type (SUV vs.~car) & Negative for SUV & Moderate \\
+\end{longtable}
+
+\textbf{Table 1.} Direction and relative magnitude of attribute effects
+on WTP for used BEVs across all model specifications.
+
+Driving range, vehicle age, and adoption preference are the dominant
+value determinants, each producing effects that substantially exceed
+those of budget tier and vehicle type. The only segment for which WTP
+reaches or exceeds the ICE-parity threshold is likely BEV adopters
+selecting 300-mile-range cars at two years of age. For all other
+combinations, used BEVs must be offered at a discount relative to
+equivalent ICE vehicles to attract buyers, with the required discount
+scaling predictably with increasing vehicle age, declining range, and
+greater adoption reluctance.
+
+\subsubsection{4.5 Mixed Logit Estimates: Preference Heterogeneity by
+Adoption
+Group}\label{mixed-logit-estimates-preference-heterogeneity-by-adoption-group}
+
+The six MXL models establish that the aggregate WTP patterns in Figures
+1--3 reflect qualitatively distinct preference structures across
+adoption groups, and that substantial within-group heterogeneity
+characterizes both segments. Among likely BEV adopters, mean BEV
+powertrain coefficients are negative across all three vehicle-segment
+specifications (full sample: β = −0.49; car: β = −1.01; SUV: β = −1.88),
+yet are in each case accompanied by large and statistically significant
+standard deviations (\textbar σ\textbar{} = 2.2--3.2, p \textless{}
+0.001 throughout). The apparent contradiction between negative mean BEV
+utility and self-reported adoption likelihood is resolved by the mixing
+distribution: simulation-based draws from the estimated parameter
+distributions confirm that the interquartile range for BEV utility
+straddles zero within each subgroup, indicating genuine within-group
+polarization in BEV attitudes rather than a uniformly receptive
+population. HEV powertrains are, by contrast, unambiguously and
+consistently preferred over the ICE baseline among likely adopters (β =
+0.89--0.95, p \textless{} 0.001), suggesting that hybrid electrification
+represents the more broadly accepted form of powertrain transition
+within this group. Driving range is the dominant positive attribute
+among likely car adopters specifically (β = 1.061, p \textless{} 0.001)
+--- approximately 2.5 times its magnitude in the full likely-adopter
+sample --- identifying range as the primary attribute lever for this
+subgroup. McFadden R² values across the three likely-adopter models
+range from 0.164 to 0.214, consistent with good fit for discrete choice
+models; the SUV segment yields the lowest fit (R² = 0.164), reflecting
+greater idiosyncratic preference variation among SUV buyers who are
+otherwise positively oriented toward BEVs.
+
+Among unlikely BEV adopters, the preference structure is categorically
+different in both direction and magnitude. Mean BEV utility coefficients
+are large and negative across all three models (full sample: β = −7.78;
+car: β = −9.27; SUV: β = −8.35; all p \textless{} 0.001), with
+simulation-based draws confirming near-universal BEV aversion in the car
+segment: at least 75\% of the simulated population holds strongly
+negative BEV utility, with effectively no probability mass above zero.
+HEV powertrains are also negatively valued in this group (β = −0.62 to
+−0.76, p \textless{} 0.001), establishing that the resistance is to
+electrification broadly rather than to BEVs specifically. Price
+sensitivity among unlikely adopters substantially exceeds that of likely
+adopters: the price coefficient for car-segment unlikely adopters (β =
+−2.912) is 63\% larger in magnitude than for the corresponding
+likely-adopter group (β = −1.792), and the full-sample differential is
+approximately 29\%. Driving range is a statistically significant
+predictor of vehicle choice in five of the six models; the single
+exception is the car-segment unlikely-adopter model (β = 0.420, p =
+0.272), which is the only model in which range fails to reach
+significance and indicates that range improvements alone would not
+induce BEV consideration among this segment's car buyers. Despite the
+pervasive aversion, large standard deviations on both BEV and HEV
+coefficients (\textbar σ\_BEV\textbar{} = 5.2--6.5;
+\textbar σ\_HEV\textbar{} = 2.7--3.4, p \textless{} 0.01 in all cases)
+confirm within-group heterogeneity sufficient to indicate that a
+non-trivial minority of unlikely adopters may be reachable through
+targeted interventions --- particularly in the SUV segment, where mean
+HEV aversion is weakest (β = −0.617).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{5 Discussion and Policy
+Implications}\label{discussion-and-policy-implications}
+
+\subsubsection{5.1 Pricing and market
+structure}\label{pricing-and-market-structure}
+
+The results collectively establish that the used BEV market has not
+reached price parity with conventional vehicles for the majority of
+prospective buyers. Only the intersection of likely adoption propensity,
+300-mile driving range, car vehicle type, and low vehicle age produces
+WTP estimates at or near the ICE-equivalent price; every other segment
+combination requires a discount of varying magnitude. This finding has
+direct implications for dealer pricing and remarketing strategy: used
+BEVs aged beyond approximately five years, or those with rated ranges
+below 200 miles, face a valuation gap that cannot be closed by marginal
+price concessions alone.
+
+The age effect on WTP warrants particular attention. The estimated WTP
+differential between 2-year-old and 8-year-old vehicles --- on the order
+of \$15,000 to \$20,000 within a given segment --- considerably exceeds
+what standard ICE depreciation schedules predict for the same age
+interval, and most plausibly reflects consumer uncertainty about battery
+state-of-health rather than mechanical depreciation per se.
+Interventions that credibly reduce SOH uncertainty --- standardized
+battery health disclosure requirements, third-party certification
+programs, or manufacturer-extended battery warranties in the secondary
+market --- could recover a portion of this excess age discount without
+requiring changes in the underlying vehicle. In the absence of such
+mechanisms, downward pressure on used BEV residual values will intensify
+as early-adopter vehicles age into the 5--8 year range in coming years.
+
+\subsubsection{5.2 Segment-differentiated intervention
+strategies}\label{segment-differentiated-intervention-strategies}
+
+The breadth of the WTP distribution across adoption groups indicates
+that no single policy or market instrument is uniformly effective. Among
+likely BEV adopters --- the population already proximate to the purchase
+threshold --- the binding constraints are driving range and total cost
+of ownership rather than powertrain aversion. The MXL results identify
+range as the largest positive attribute in the car-segment model and
+operating cost as the dominant financial disutility factor in that
+group, with the operating cost coefficient exceeding the price
+coefficient. These estimates point to consumer communication strategies
+emphasizing per-mile cost advantages and range sufficiency for typical
+daily use as the most cost-efficient mechanism for converting this
+population. The strong opt-out aversion observed among likely adopters
+further confirms high baseline purchase engagement, reducing the
+intervention threshold for this segment.
+
+Among unlikely BEV adopters, the constraints are more fundamental. BEV
+aversion in this population is not contingent on range adequacy --- the
+non-significant range coefficient in the car-segment model directly
+excludes range as a primary driver --- and price sensitivity is 29--63\%
+higher than among likely adopters, implying that financial incentives
+would need to be substantially larger than current programs provide to
+shift revealed preferences at scale. The most tractable near-term lever
+identified by the data is the significant within-group heterogeneity on
+HEV coefficients: the large standard deviations and the relatively mild
+mean HEV aversion among SUV-segment unlikely adopters (β = −0.617)
+identify hybrid SUVs as a more accessible intermediate adoption pathway
+than direct BEV promotion for this population.
+
+\subsubsection{5.3 Implications for incentive
+design}\label{implications-for-incentive-design}
+
+The federal used EV tax credit, currently capped at \$4,000 for
+qualifying used vehicle transactions, is substantially smaller than the
+price concessions required to bring most unlikely-adopter segments to
+purchase indifference. Required discounts for unlikely adopters at
+realistic age and range combinations range from approximately \$15,000
+to over \$35,000, indicating that the current federal instrument is
+insufficient to materially expand used BEV uptake beyond buyers who
+would likely have purchased regardless. Achieving broader market
+penetration would require either substantially larger per-vehicle
+transfers or complementary non-price interventions --- charging
+infrastructure deployment, battery health certification, consumer
+education --- that reduce the risk premium currently embedded in used
+BEV valuations for the majority of prospective buyers.
+
+State-level programs designed with segment awareness may achieve better
+marginal returns by concentrating resources on consumers closest to the
+purchase threshold. Targeting high-budget car buyers at low vehicle age
+and long range --- where WTP already approaches parity --- minimizes the
+transfer required per incremental transaction. Uniform subsidies applied
+without regard to vehicle age, range, or buyer propensity risk
+distributing a substantial share of resources to inframarginal
+transactions and generating limited additionality.
+
+\subsubsection{5.4 Limitations and future
+directions}\label{limitations-and-future-directions}
+
+Several limitations bound the scope and external validity of these
+findings. First, the analysis rests on stated preferences, which may
+diverge from revealed purchase behavior; hypothetical bias is a
+well-documented concern in DCE research, particularly for product
+categories with which respondents lack direct experience, and the
+magnitude and direction of this bias in the used BEV context is
+uncertain. Second, the analytic sample was recruited through online
+research panels, which may overrepresent digitally engaged and
+information-seeking consumers relative to the broader used-vehicle
+buying population. Third, the MXL specification models preference
+heterogeneity as continuous normal distributions; this may inadequately
+represent the possibility of discrete, internally coherent preference
+clusters within adoption groups, and a latent class analysis would test
+that possibility directly. Fourth, battery state-of-health --- arguably
+the most consequential unobserved attribute in the used BEV transaction
+--- was not varied in the vehicle powertrain DCE analyzed here; its
+effect on WTP is addressed in a companion battery DCE component of the
+broader study. Integrating findings from both DCE components and
+cross-validating WTP estimates against revealed transaction prices from
+dealer records would substantially strengthen the empirical basis for
+the inferences drawn above.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{References}\label{references}
+
+{[}1{]} Bureau of Transportation Statistics (2023). \emph{New and Used
+Passenger Car and Light Truck Sales and Leases}. www.bts.gov.
+
+{[}2{]} Cox Automotive Inc.~(2025). \emph{February 2025 Used EV Sales
+Data}.
+
+{[}3{]} Hagman, J., Ritzén, S., Stier, J. J., \& Susilo, Y. (2016).
+Total cost of ownership and its potential implications for battery
+electric vehicle diffusion. \emph{Research in Transportation Business \&
+Management}, 18, 11--17.
+
+{[}4{]} Fernandes, M. (2023). \emph{Consumer survey on used EV
+consideration}.
+
+{[}5{]} Prieto, M., Caemmerer, B., \& Baltas, G. (2015). Fuel type
+choice in the used car market. \emph{Transportation Research Part A},
+80, 1--15.
+
+{[}6{]} Consumer Reports; U.S. EPA (various years). \emph{Used Car
+Buying Guides}.
+
+{[}7{]} Kelley Blue Book (2025, April). \emph{Used Car Market Report}.
+
+{[}8{]} Tandf (2025). \emph{Consumer segments in the used EV market}.
+
+{[}9{]} Sd (2024). \emph{Demographics of used EV owners}. Studies 1 \&
+2.
+
+{[}10{]} Trd (2024). \emph{Pre-purchase concerns and income sensitivity
+in used EV adoption}.
+
+{[}11{]} Dnistran (2024). \emph{Battery degradation analysis across
+\textasciitilde5,000 EVs}.
+
+{[}12{]} Sheykhfard, A. et al.~(2025). \emph{Used EV ownership
+experience and battery concerns}.
+
+
+
+
+\end{document}
