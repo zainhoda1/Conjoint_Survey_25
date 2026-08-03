@@ -1,0 +1,40 @@
+\begin{table}[pos=H]
+\caption{Mixed logit parameter estimates: Unlikely BEV adopters. $\hat{\mu}$: population mean coefficient. $|\hat{\sigma}|$: absolute value of the estimated standard deviation of the mixing distribution; significance indicates genuine preference heterogeneity. ICEV is the reference powertrain category. Estimation: \texttt{logitr} v1.1.2 (R), 100 Sobol draws, 20 multistart runs.}
+\label{table:mxl_unlikely}
+\begin{adjustbox}{width=\textwidth, center}
+{\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Parameter} & \textbf{Full sample (M2)} & \textbf{Car (M4)} & \textbf{SUV (M6)} \\
+\midrule
+\multicolumn{4}{l}{\textit{Powertrain (ref.: ICEV)}} \\[2pt]
+\quad BEV, $\hat{\mu}$               & $-7.776^{***}$  & $-9.273^{***}$  & $-8.347^{***}$ \\
+\quad\quad $|\hat{\sigma}|$          & $5.207^{***}$   & $6.510^{***}$   & $5.161^{***}$  \\[3pt]
+\quad HEV, $\hat{\mu}$               & $-0.734^{***}$  & $-0.758^{***}$  & $-0.617^{***}$ \\
+\quad\quad $|\hat{\sigma}|$          & $3.072^{***}$   & $3.432^{***}$   & $2.671^{***}$  \\[3pt]
+\multicolumn{4}{l}{\textit{BEV-specific attribute}} \\[2pt]
+\quad BEV driving range, $\hat{\mu}$ & $\phantom{-}0.488^{*}$   & $\phantom{-}0.420$        & $\phantom{-}0.790^{***}$ \\
+\quad\quad $|\hat{\sigma}|$          & $0.843^{**}$    & $2.194^{***}$   & $0.722^{*}$    \\[3pt]
+\multicolumn{4}{l}{\textit{Vehicle attributes}} \\[2pt]
+\quad Mileage, $\hat{\mu}$           & $-0.523^{***}$  & $-0.559^{***}$  & $-0.508^{***}$ \\
+\quad\quad $|\hat{\sigma}|$          & $0.455^{***}$   & $0.772^{***}$   & $0.103$        \\[3pt]
+\quad Vehicle age, $\hat{\mu}$       & $-0.200^{***}$  & $-0.185^{***}$  & $-0.218^{***}$ \\
+\quad\quad $|\hat{\sigma}|$          & $0.165^{**}$    & $0.083$         & $0.105$        \\[3pt]
+\multicolumn{4}{l}{\textit{Cost attributes}} \\[2pt]
+\quad Operating cost, $\hat{\mu}$    & $-1.788^{***}$  & $-2.026^{***}$  & $-1.718^{***}$ \\
+\quad\quad $|\hat{\sigma}|$          & $1.711^{***}$   & $1.953^{***}$   & $1.868^{***}$  \\[3pt]
+\quad Purchase price, $\hat{\mu}$    & $-2.145^{***}$  & $-2.912^{***}$  & $-1.743^{***}$ \\[3pt]
+\multicolumn{4}{l}{\textit{No-choice (opt-out) constant}} \\[2pt]
+\quad $\hat{\mu}$                    & $-16.470^{***}$ & $-18.493^{***}$ & $-14.204^{***}$\\
+\quad\quad $|\hat{\sigma}|$          & $6.046^{***}$   & $6.198^{***}$   & $4.180^{***}$  \\
+\midrule
+\multicolumn{4}{l}{\textit{Model fit}} \\[2pt]
+\quad Observations                   & 6,714           & 3,222           & 3,492          \\
+\quad Log-likelihood                 & $-7{,}345.44$   & $-3{,}442.62$   & $-3{,}866.73$  \\
+\quad McFadden $R^{2}$               & 0.211           & 0.229           & 0.201          \\
+\bottomrule
+\multicolumn{4}{p{\dimexpr\linewidth-2\tabcolsep\relax}}{\footnotesize
+  Significance: $^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$; $^{.}p<0.10$; blank = not significant. BEV driving range (M4): $\hat{\mu} = 0.420$, $p = 0.272$ (not significant).} \\
+\end{tabular}}
+\end{adjustbox}
+\end{table}

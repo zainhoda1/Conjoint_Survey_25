@@ -1,0 +1,48 @@
+\begin{landscape}
+\begin{table}[pos=H]
+\footnotesize
+\caption{Mixed logit model estimates in WTP space: budget subgroups and BEV adoption propensity subgroups (price unit: \$10,000).}
+\label{table:mxl_results_vehicle}
+\begin{adjustbox}{width=\linewidth, center}
+\begin{tabular}{l *{8}{>{\centering\arraybackslash}p{2.4cm}}}
+\toprule
+ & \multicolumn{4}{c}{\textbf{By Budget}} & \multicolumn{4}{c}{\textbf{By BEV Adoption Propensity}} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+ & Car (Low) & Car (High) & SUV (Low) & SUV (High) & Car (Likely) & Car (Unlikely) & SUV (Likely) & SUV (Unlikely) \\
+\midrule
+\multicolumn{9}{l}{\textbf{\textit{Mean parameters}}} \\[1ex]
+\quad $\lambda$ (scale) & \shortstack[r]{3.660\\(0.137)***} & \shortstack[r]{1.223\\(0.063)***} & \shortstack[r]{2.445\\(0.117)***} & \shortstack[r]{1.209\\(0.050)***} & \shortstack[r]{1.499\\(0.081)***} & \shortstack[r]{1.930\\(0.093)***} & \shortstack[r]{1.164\\(0.067)***} & \shortstack[r]{1.511\\(0.071)***} \\
+\quad BEV powertrain & \shortstack[r]{-1.019\\(0.082)***} & \shortstack[r]{-1.807\\(0.269)***} & \shortstack[r]{-2.046\\(0.198)***} & \shortstack[r]{-2.180\\(0.300)***} & \shortstack[r]{-0.470\\(0.151)**} & \shortstack[r]{-2.466\\(0.207)***} & \shortstack[r]{-1.038\\(0.291)***} & \shortstack[r]{-3.756\\(0.409)***} \\
+\quad HEV powertrain & \shortstack[r]{-0.060\\(0.032).} & \shortstack[r]{0.416\\(0.101)***} & \shortstack[r]{-0.073\\(0.050)} & \shortstack[r]{0.228\\(0.081)**} & \shortstack[r]{0.558\\(0.077)***} & \shortstack[r]{-0.242\\(0.066)***} & \shortstack[r]{0.588\\(0.095)***} & \shortstack[r]{-0.325\\(0.081)***} \\
+\quad Electric range & \shortstack[r]{0.196\\(0.059)***} & \shortstack[r]{0.516\\(0.121)***} & \shortstack[r]{0.411\\(0.078)***} & \shortstack[r]{0.344\\(0.096)***} & \shortstack[r]{0.546\\(0.083)***} & \shortstack[r]{0.205\\(0.119).} & \shortstack[r]{0.467\\(0.098)***} & \shortstack[r]{0.411\\(0.149)**} \\
+\quad Mileage & \shortstack[r]{-0.100\\(0.008)***} & \shortstack[r]{-0.315\\(0.027)***} & \shortstack[r]{-0.148\\(0.014)***} & \shortstack[r]{-0.384\\(0.025)***} & \shortstack[r]{-0.240\\(0.023)***} & \shortstack[r]{-0.169\\(0.015)***} & \shortstack[r]{-0.352\\(0.032)***} & \shortstack[r]{-0.288\\(0.022)***} \\
+\quad Vehicle age & \shortstack[r]{-0.028\\(0.004)***} & \shortstack[r]{-0.191\\(0.018)***} & \shortstack[r]{-0.043\\(0.007)***} & \shortstack[r]{-0.216\\(0.015)***} & \shortstack[r]{-0.090\\(0.013)***} & \shortstack[r]{-0.068\\(0.009)***} & \shortstack[r]{-0.196\\(0.019)***} & \shortstack[r]{-0.130\\(0.012)***} \\
+\quad Operating cost & \shortstack[r]{-0.413\\(0.033)***} & \shortstack[r]{-1.047\\(0.114)***} & \shortstack[r]{-0.583\\(0.053)***} & \shortstack[r]{-0.903\\(0.085)***} & \shortstack[r]{-0.988\\(0.098)***} & \shortstack[r]{-0.616\\(0.065)***} & \shortstack[r]{-1.033\\(0.119)***} & \shortstack[r]{-0.810\\(0.078)***} \\
+\quad No choice & \shortstack[r]{-3.327\\(0.086)***} & \shortstack[r]{-7.761\\(0.312)***} & \shortstack[r]{-4.691\\(0.156)***} & \shortstack[r]{-8.449\\(0.245)***} & \shortstack[r]{-6.586\\(0.310)***} & \shortstack[r]{-5.137\\(0.170)***} & \shortstack[r]{-8.521\\(0.386)***} & \shortstack[r]{-7.208\\(0.220)***} \\
+\addlinespace[1.5ex]
+\multicolumn{9}{l}{\textbf{\textit{Standard deviation}}} \\[1ex]
+\quad $|\hat{\sigma}|$: BEV powertrain & \shortstack[r]{0.925\\(0.065)***} & \shortstack[r]{2.159\\(0.214)***} & \shortstack[r]{1.458\\(0.114)***} & \shortstack[r]{2.178\\(0.232)***} & \shortstack[r]{1.146\\(0.131)***} & \shortstack[r]{1.437\\(0.141)***} & \shortstack[r]{1.903\\(0.208)***} & \shortstack[r]{1.859\\(0.285)***} \\
+\quad $|\hat{\sigma}|$: HEV powertrain & \shortstack[r]{0.545\\(0.034)***} & \shortstack[r]{1.157\\(0.119)***} & \shortstack[r]{0.723\\(0.059)***} & \shortstack[r]{1.397\\(0.100)***} & \shortstack[r]{0.677\\(0.099)***} & \shortstack[r]{1.036\\(0.075)***} & \shortstack[r]{0.888\\(0.131)***} & \shortstack[r]{1.436\\(0.097)***} \\
+\quad $|\hat{\sigma}|$: Electric range & \shortstack[r]{0.282\\(0.102)**} & \shortstack[r]{0.692\\(0.138)***} & \shortstack[r]{0.009\\(0.136)} & \shortstack[r]{0.412\\(0.127)**} & \shortstack[r]{0.275\\(0.162).} & \shortstack[r]{0.426\\(0.162)**} & \shortstack[r]{0.194\\(0.203)} & \shortstack[r]{0.371\\(0.179)*} \\
+\quad $|\hat{\sigma}|$: Mileage & \shortstack[r]{0.077\\(0.010)***} & \shortstack[r]{0.175\\(0.041)***} & \shortstack[r]{0.115\\(0.018)***} & \shortstack[r]{0.234\\(0.030)***} & \shortstack[r]{0.193\\(0.032)***} & \shortstack[r]{0.114\\(0.022)***} & \shortstack[r]{0.243\\(0.040)***} & \shortstack[r]{0.179\\(0.027)***} \\
+\quad $|\hat{\sigma}|$: Vehicle age & \shortstack[r]{0.043\\(0.007)***} & \shortstack[r]{0.171\\(0.021)***} & \shortstack[r]{0.043\\(0.016)**} & \shortstack[r]{0.174\\(0.018)***} & \shortstack[r]{0.116\\(0.019)***} & \shortstack[r]{0.084\\(0.013)***} & \shortstack[r]{0.171\\(0.024)***} & \shortstack[r]{0.122\\(0.017)***} \\
+\quad $|\hat{\sigma}|$: Operating cost & \shortstack[r]{0.307\\(0.037)***} & \shortstack[r]{0.665\\(0.147)***} & \shortstack[r]{0.420\\(0.062)***} & \shortstack[r]{0.861\\(0.093)***} & \shortstack[r]{0.770\\(0.118)***} & \shortstack[r]{0.408\\(0.083)***} & \shortstack[r]{1.097\\(0.132)***} & \shortstack[r]{0.647\\(0.086)***} \\
+\quad $|\hat{\sigma}|$: No choice & \shortstack[r]{0.534\\(0.065)***} & \shortstack[r]{1.669\\(0.220)***} & \shortstack[r]{0.925\\(0.116)***} & \shortstack[r]{1.530\\(0.167)***} & \shortstack[r]{1.948\\(0.219)***} & \shortstack[r]{1.090\\(0.101)***} & \shortstack[r]{2.153\\(0.295)***} & \shortstack[r]{1.384\\(0.142)***} \\
+\midrule
+Respondents & 657 & 442 & 441 & 714 & 423 & 537 & 415 & 582 \\
+Choice observations & 3,942 & 2,652 & 2,646 & 4,284 & 2,538 & 3,222 & 2,490 & 3,492 \\
+Log-Likelihood & -3,757.46 & -2,726.08 & -2,621.00 & -4,447.85 & -2,537.60 & -3,156.78 & -2,587.40 & -3,408.86 \\
+Null Log-Likelihood & -5,464.77 & -3,676.45 & -3,668.13 & -5,938.89 & -3,518.42 & -4,466.64 & -3,451.87 & -4,840.94 \\
+AIC & 7,544.93 & 5,482.15 & 5,272.00 & 8,925.69 & 5,105.21 & 6,343.56 & 5,204.81 & 6,847.71 \\
+BIC & 7,639.12 & 5,570.40 & 5,360.21 & 9,021.13 & 5,192.79 & 6,434.73 & 5,292.11 & 6,940.09 \\
+McFadden $R^2$ & 0.3124 & 0.2585 & 0.2855 & 0.2511 & 0.2788 & 0.2933 & 0.2504 & 0.2958 \\
+Adj.\ McFadden $R^2$ & 0.3097 & 0.2544 & 0.2814 & 0.2485 & 0.2745 & 0.2899 & 0.2461 & 0.2927 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{minipage}{\linewidth}\vspace{4pt}\footnotesize
+Notes: WTP estimates in \$10,000 units. Significance codes: $p<0.001$ `***', $p<0.01$ `**', $p<0.05$ `*', $p<0.1$ `.'.
+Standard errors in parentheses.
+\end{minipage}
+\end{table}
+\end{landscape}

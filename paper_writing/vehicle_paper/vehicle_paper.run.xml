@@ -41,13 +41,13 @@
   >
 ]>
 <requests version="1.0">
-  <internal package="biblatex" priority="9" active="1">
+  <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>vehicle_paper_edited.bcf</file>
+      <file>vehicle_paper.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>vehicle_paper_edited.bbl</file>
+      <file>vehicle_paper.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -62,29 +62,28 @@
       <file>english.lbx</file>
     </requires>
   </internal>
-  <external package="biblatex" priority="5" active="1">
+  <external package="biblatex" priority="5" active="0">
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>vehicle_paper_edited</infile>
+      <infile>vehicle_paper</infile>
     </cmdline>
     <input>
-      <file>vehicle_paper_edited.bcf</file>
+      <file>vehicle_paper.bcf</file>
     </input>
     <output>
-      <file>vehicle_paper_edited.bbl</file>
+      <file>vehicle_paper.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>vehicle_paper_edited.bbl</file>
+      <file>vehicle_paper.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>vehicle_paper_edited.bcf</file>
+      <file>vehicle_paper.bcf</file>
     </requires>
     <requires type="editable">
       <file>DCE_lit_review.bib</file>
       <file>Used EV.bib</file>
-      <file>EV battery.bib</file>
-      <file>used_EV_lit_review</file>
+      <file>used_EV_lit_review.bib</file>
     </requires>
   </external>
 </requests>
