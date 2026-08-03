@@ -1,15 +1,15 @@
 # Fdb version 4
-["biber vehicle_paper"] 1785526152.99383 "vehicle_paper.bcf" "vehicle_paper.bbl" "vehicle_paper" 1785766574.58214 0
+["biber vehicle_paper"] 1785526152.99383 "vehicle_paper.bcf" "vehicle_paper.bbl" "vehicle_paper" 1785779744.10781 0
   "DCE_lit_review.bib" 1785441583.78986 66396 a216a887f1a03425f6252c88eb54cc5b ""
   "Used EV.bib" 1785441583.79018 38357 5ed5a61c99f115b5c0893068fededfbb ""
   "used_EV_lit_review.bib" 1785446588.2556 7634 9881fa423c48e95e038dfac92fa1baff ""
-  "vehicle_paper.bcf" 1785766574.47726 111915 73f20546b771b5093105046219074548 "pdflatex"
+  "vehicle_paper.bcf" 1785779744.00593 111915 73f20546b771b5093105046219074548 "pdflatex"
   (generated)
   "vehicle_paper.bbl"
   "vehicle_paper.blg"
   (rewritten before read)
-["pdflatex"] 1785766572.49827 "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" "vehicle_paper.pdf" "vehicle_paper" 1785766574.58242 0
-  "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" 1785766570.10772 41720 4da017c0b1570155e3b82cb16b631a65 ""
+["pdflatex"] 1785779742.05294 "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" "vehicle_paper.pdf" "vehicle_paper" 1785779744.10805 0
+  "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" 1785779739.52038 43929 ec5ad95077e9e76cd814aef03f0b3909 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc" 1388795362 7013 c55cc8669071ac14036c4a0c96c16202 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -61,6 +61,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb" 1388795362 26156 d6751631159a7cd0a5d264b2d10a82fe ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb" 1388795362 41474 772656494141d29334d3e80c9a859c10 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb" 1388795362 40662 35fc2ef7e5426524c472184c87cb4d57 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb" 1388795362 49105 9eedb6cab5411e388fea9002bbf95a72 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathsf.pfb" 1388795362 41655 e7591451a427b4270d35622721b08f6a ""
   "/usr/local/texlive/2025/texmf-dist/fonts/vf/public/stix/t1-stixgeneralsc.vf" 1388795362 1924 0897a65b0de596367f65e150a518f29a ""
   "/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -198,12 +199,12 @@
   "images/dumbbell_plots/dumbbell_wtp_age_fixed_range_300_adopters.png" 1785441583.84755 205390 52cad769c8e9610904d4726851580c6c ""
   "images/dumbbell_plots/dumbbell_wtp_age_fixed_range_300_budgets.png" 1785441583.84817 140604 2b49af41be957cfdd8d75552db2c18ed ""
   "images/vehicle_analysis/vehicle_choice_image.png" 1785456829.39564 111513 b71faaa75e5c524049072ac41a673cfa ""
-  "vehicle_paper.abs" 1785766573.15017 1876 922f27e6ba571ca9a295f0d6a437d065 "pdflatex"
-  "vehicle_paper.aux" 1785766574.47266 21472 45c033ee8f9ae42336eea385f1f240f2 "pdflatex"
+  "vehicle_paper.abs" 1785779742.72513 1876 922f27e6ba571ca9a295f0d6a437d065 "pdflatex"
+  "vehicle_paper.aux" 1785779744.00162 21650 a57dd393093fc6749bfd07495e3b9ca7 "pdflatex"
   "vehicle_paper.bbl" 1785526154.95429 54688 0fdf2181a48644ba710a81c156407313 "biber vehicle_paper"
-  "vehicle_paper.out" 1785766573.08477 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "vehicle_paper.run.xml" 1785766574.47796 2531 e968a0989c885b2b1262b7e0b03a7680 "pdflatex"
-  "vehicle_paper.tex" 1785766570.10772 41720 4da017c0b1570155e3b82cb16b631a65 ""
+  "vehicle_paper.out" 1785779742.65736 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "vehicle_paper.run.xml" 1785779744.00649 2531 e968a0989c885b2b1262b7e0b03a7680 "pdflatex"
+  "vehicle_paper.tex" 1785779739.52038 43929 ec5ad95077e9e76cd814aef03f0b3909 ""
   (generated)
   "vehicle_paper.abs"
   "vehicle_paper.aux"

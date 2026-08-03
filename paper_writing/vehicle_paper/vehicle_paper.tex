@@ -249,31 +249,37 @@ Table~\ref{table:sample_profile_vehicle} compares the analytic sample against U.
 
 Consumer choice is modeled within the random utility framework. Each respondent $i$ is assumed to select the alternative $j$ that maximizes their latent utility $U_{ij}$ in each choice task, where utility is a linear function of observed vehicle attributes augmented by an unobserved idiosyncratic error term assumed to follow an independent Gumbel distribution.
 
-A multinomial logit (MNL) model estimated via maximum likelihood provides the baseline specification under the assumption of preference homogeneity across respondents. To relax this restriction (inconsistent with the substantial heterogeneity in EV attitudes documented in the literature), the primary analysis employs a mixed logit (MXL) model. In the MXL specification, each of the eight preference parameters is modeled as an independent draw from a normal mixing distribution:
+A multinomial logit (MNL) model provides the baseline specification, but two features of the choice setting favor the mixed logit (MXL) extension. First, the MNL imposes the Independence of Irrelevant Alternatives (IIA) property, which requires consumers to redistribute among remaining options in fixed proportion to current shares whenever one alternative is removed. With qualitatively distinct powertrains, this is implausible: a consumer who prefers a conventional ICEV would, if that option were unavailable, substitute far more toward an HEV than a BEV, because the two share a combustion engine and a familiar fueling experience. Second, the MNL assumes preference homogeneity across respondents — a restriction inconsistent with the substantial heterogeneity in EV attitudes documented in the literature, and rejected empirically by statistically significant standard deviation parameters $\hat{\sigma}_k$ across virtually all attributes in all models. The MXL addresses both problems by modeling each preference parameter as an independent draw from a normal mixing distribution:
 
 \begin{equation}
 \beta_{ik} \sim \mathcal{N}(\mu_k,\, \sigma_k^2)
 \label{eq:mixing}
 \end{equation}
 
-\noindent where $\mu_k$ is the population mean valuation for attribute $k$ and $\sigma_k$ captures the dispersion of that valuation across respondents. A statistically significant $\hat{\sigma}_k$ constitutes evidence that preferences for attribute $k$ are genuinely heterogeneous in the population rather than uniform. The eight parameters specified as randomly distributed are the BEV powertrain indicator, HEV powertrain indicator, BEV driving range, vehicle mileage, vehicle age, operating cost, purchase price, and the alternative-specific constant for the no-choice (opt-out) option. The internal combustion engine vehicle (ICEV) serves as the reference powertrain category throughout.
+\noindent where $\mu_k$ is the population mean valuation for attribute $k$ and $\sigma_k$ captures the dispersion of that valuation across respondents. A statistically significant $\hat{\sigma}_k$ constitutes evidence that preferences for attribute $k$ are genuinely heterogeneous in the population rather than uniform. The seven parameters specified as randomly distributed are the BEV powertrain indicator, HEV powertrain indicator, BEV driving range, vehicle mileage, vehicle age, operating cost, and the alternative-specific constant for the no-choice (opt-out) option. Purchase price enters as the scale parameter $\lambda_i$ in the WTP-space reparameterization rather than as a randomly distributed preference weight. The internal combustion engine vehicle (ICEV) serves as the reference powertrain category throughout.
 
-The MXL specification is preferred over the MNL for two related reasons. First, the estimated standard deviation parameters $\hat{\sigma}_k$ are statistically significant for virtually all attributes across all six models, confirming genuine preference heterogeneity and the violation of the MNL's representative-consumer assumption. Second, the MXL accommodates flexible substitution patterns across the qualitatively distinct powertrain alternatives. 
-
-Six MXL models are estimated, stratified by self-reported adoption propensity (likely vs.\ unlikely BEV adopter) and vehicle segment (full sample, car, SUV), yielding models for all six combinations of these two dimensions. All models are estimated in R using the \texttt{logitr} package (v1.1.2) under a preference-space specification. The mixing integral is approximated using 100 Sobol quasi-random draws per respondent. To reduce sensitivity to starting values and mitigate convergence to local optima, each model is initialized from 20 independent random starting points; the run achieving the globally lowest log-likelihood is retained. Convergence is verified via the relative and absolute function tolerance criterion (Exit Status 3) in all six models.
-
-Willingness to pay for attribute $k$ is derived as the negative ratio of the mean attribute coefficient to the mean price coefficient:
+Rather than deriving WTP post-estimation as a ratio of coefficients, the models are specified directly in WTP space by reparameterizing the utility function as:
 
 \begin{equation}
-\widehat{\text{WTP}}_k = -\frac{\hat{\mu}_k}{\hat{\mu}_{\text{price}}}
+U_{ij} = \lambda_i \Bigl(\sum_{k} \omega_{ik}\, x_{ijk} - p_{ij}\Bigr) + \varepsilon_{ij}
 \label{eq:wtp}
 \end{equation}
 
-\noindent This quantity represents the dollar amount the average respondent would pay, or require as a compensating discount, for a one-unit change in attribute $k$, holding utility constant. Uncertainty bounds on WTP estimates are computed by drawing 10,000 samples from the estimated joint distribution of $(\hat{\mu}_k,\, \hat{\mu}_{\text{price}})$ and reporting the resulting 95\% simulation interval.
+ 
+Ten MXL models are estimated across two stratification dimensions: two primary vehicle-segment models (car and SUV), four budget-tier subgroup models (car and SUV each crossed with \textit{low} and \textit{high} budget), and four BEV adoption-propensity subgroup models (car and SUV each crossed with \textit{likely} and \textit{unlikely} BEV adopters). All models are estimated in R using the \texttt{logitr} package in willingness-to-pay space, with a panel correction applied via respondent identifiers to account for the correlation of the six repeated choice observations per respondent. The mixing integral is approximated using 5,000 Sobol quasi-random draws per respondent. To reduce sensitivity to starting values and mitigate convergence to local optima, each model is initialized from 10 independent random starting points; the run achieving the globally lowest log-likelihood is retained. Convergence is verified via the relative and absolute function tolerance criterion (Exit Status 3) in all models.
 
-\subsection{Mixed Logit Models}
+\noindent where $\lambda_i > 0$ is a respondent-specific price sensitivity (scale) parameter and $\omega_{ik}$ is respondent $i$'s marginal WTP for attribute $k$, expressed directly in dollar units. Each $\omega_{ik}$ is drawn from a normal mixing distribution $\mathcal{N}(\mu_{\omega_k},\, \sigma_{\omega_k}^2)$, so the population mean WTP for attribute $k$ is recovered directly from $\hat{\mu}_{\omega_k}$ without ratio computation. Uncertainty bounds are obtained by drawing 10,000 samples from the estimated joint parameter distribution and reporting the 95\% simulation interval.
 
-\subsection{Mixed Logit Models}
+\subsection{WTP for Defined Vehicle Profiles}
+
+While WTP-space estimation yields interpretable marginal valuations for each attribute, reporting coefficients in isolation is abstract for powertrain-type comparisons. A consumer choosing between a used BEV and an equivalent ICEV does not weigh powertrain type and driving range as separate attributes: range is a property of the BEV that does not apply to the ICEV baseline. Reporting the BEV powertrain coefficient alone corresponds to WTP for a BEV with zero driving range, which is economically meaningless. To produce interpretable figures, BEV WTP is therefore computed for specific vehicle configurations by combining the powertrain, range, and age parameters:
+
+\begin{equation}
+\text{WTP}_{\text{BEV}}(r,\, a) = \hat{\mu}_{\omega_{\text{BEV}}} + \hat{\mu}_{\omega_{\text{range}}} \cdot r + \hat{\mu}_{\omega_{\text{age}}} \cdot a
+\label{eq:wtp_bev}
+\end{equation}
+
+\noindent where $r$ is driving range in hundreds of miles and $a$ is vehicle age in years. This quantity represents the dollar premium (positive) or required discount (negative) for a consumer to be indifferent between a BEV with range $r$ and age $a$ and an otherwise identical ICEV. Results sections 5.2 through 5.4 present this combined WTP at fixed combinations of range (100, 200, and 300 miles) and vehicle age (2, 5, and 8 years). Uncertainty is propagated by drawing 10,000 samples from the estimated joint parameter distribution and reporting 95\% simulation intervals.
 
 \section{Results and Discussion}
 
@@ -287,6 +293,20 @@ Table~\ref{table:mxl_results_vehicle} reports the full MXL parameter estimates f
 As shown in Table~\ref{table:mxl_results_vehicle}, the six MXL models establish that the aggregate WTP patterns in Figures~\ref{fig:wtp_adopter_age2}--\ref{fig:wtp_budget_range300} reflect qualitatively distinct preference structures across adoption groups, with substantial within-group heterogeneity characterizing both segments. Among likely BEV adopters, mean BEV powertrain coefficients are negative across all three vehicle-segment specifications (full sample: $\hat{\mu} = -0.49$; car: $\hat{\mu} = -1.01$; SUV: $\hat{\mu} = -1.88$), yet are accompanied in each case by large and statistically significant standard deviations ($|\hat{\sigma}| = 2.2$--$3.2$, $p < 0.001$ throughout). The apparent contradiction between negative mean BEV utility and self-reported adoption likelihood is resolved by the mixing distribution: simulation-based draws confirm that the interquartile range for BEV utility straddles zero within each subgroup, indicating genuine within-group polarization. HEV powertrains are, by contrast, unambiguously preferred over the ICEV baseline among likely adopters ($\hat{\mu} = 0.89$--$0.95$, $p < 0.001$), suggesting that hybrid electrification represents the more broadly accepted form of powertrain transition within this group. Driving range is the dominant positive attribute among likely car adopters ($\hat{\mu} = 1.061$, $p < 0.001$), approximately 2.5 times its magnitude in the full likely-adopter sample, identifying range as the primary attribute lever for this subgroup.
 
 Among unlikely BEV adopters (Table~\ref{table:mxl_results_vehicle}), the preference structure is categorically different. Mean BEV utility coefficients are large and negative across all three models (full sample: $\hat{\mu} = -7.78$; car: $\hat{\mu} = -9.27$; SUV: $\hat{\mu} = -8.35$; all $p < 0.001$), with simulation-based draws confirming near-universal aversion in the car segment: at least 75\% of the simulated population holds strongly negative BEV utility, with effectively no probability mass above zero. HEV powertrains are also negatively valued ($\hat{\mu} = -0.62$ to $-0.76$, $p < 0.001$), establishing that the resistance extends to electrification broadly rather than to BEVs specifically. Price sensitivity among unlikely adopters substantially exceeds that of likely adopters: the price coefficient for car-segment unlikely adopters ($\hat{\mu} = -2.912$) is 63\% larger in magnitude than for the corresponding likely-adopter group ($\hat{\mu} = -1.792$), and the full-sample differential is approximately 29\%. Driving range is a statistically significant predictor of vehicle choice in five of the six models; the single exception is the car-segment unlikely-adopter model ($\hat{\mu} = 0.420$, $p = 0.272$), indicating that range improvements alone would not induce BEV consideration among this segment's car buyers. Despite the pervasive aversion, large standard deviations on both BEV and HEV coefficients ($|\hat{\sigma}_{\text{BEV}}| = 5.2$--$6.5$; $|\hat{\sigma}_{\text{HEV}}| = 2.7$--$3.4$, all $p < 0.01$) confirm that a non-trivial minority within the unlikely-adopter population holds more favorable powertrain views, particularly in the SUV segment, where mean HEV aversion is weakest ($\hat{\mu} = -0.617$) and where hybrid vehicles may represent a more tractable intermediate adoption pathway.
+
+\subsection{WTP by Budget Tier, Vehicle Type, and Vehicle Age}
+\label{subsec:wtp_budget}
+
+Figure~\ref{fig:wtp_budget_range300} focuses on high-budget consumers at 300-mile range and presents WTP estimates across vehicle types and age cohorts.
+
+\begin{figure}[pos=H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{images/dumbbell_plots/dumbbell_wtp_age_fixed_range_300_budgets.png}
+    \caption{Modelled WTP for used BEVs by vehicle type and vehicle age, high-budget consumers, driving range fixed at 300 miles. Points show point estimates; horizontal bars show 95\% simulation confidence intervals.}
+    \label{fig:wtp_budget_range300}
+\end{figure}
+
+High-budget car buyers at two years of age represent the segment most proximate to price parity: the point estimate approaches \$0 with a confidence interval that extends into positive territory, indicating that near-parity pricing is a feasible market outcome for this specific attribute combination. The age penalty operates with similar force in this segment, with a WTP differential of approximately \$15,000 to \$20,000 between 2- and 8-year-old vehicles. SUVs lag behind cars at every age level within the high-budget group, and confidence intervals are notably wider throughout this segment, reflecting the greater estimated preference heterogeneity among SUV buyers.
 
 \subsection{WTP for Used BEVs by Adoption Preference, Vehicle Type, and Driving Range}
 \label{subsec:wtp_range}
@@ -316,47 +336,12 @@ Figure~\ref{fig:wtp_adopter_range300} holds driving range constant at 300 miles 
 
 Vehicle age exerts a large, negative, and monotonic effect on WTP. Each successive age cohort shifts estimated WTP further below the parity threshold, and the gradient exceeds what standard ICE depreciation schedules would predict for the same age interval, an excess discount most plausibly reflecting consumer uncertainty about battery state-of-health in older vehicles rather than mechanical wear per se. The age penalty is most severe among unlikely adopters: 8-year-old SUVs in this group require discounts approaching \$40,000. Likely adopters are more resilient to vehicle aging (their WTP for cars remains at or near \$0 at five years) but shifts meaningfully downward by eight years. The joint variation in adoption preference and vehicle age produces the widest spread of WTP estimates across all model outputs, establishing these two dimensions as the primary value-determining axes in the used BEV market.
 
-\subsection{WTP by Budget Tier, Vehicle Type, and Vehicle Age}
-\label{subsec:wtp_budget}
 
-Figure~\ref{fig:wtp_budget_range300} focuses on high-budget consumers at 300-mile range and presents WTP estimates across vehicle types and age cohorts.
-
-\begin{figure}[pos=H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{images/dumbbell_plots/dumbbell_wtp_age_fixed_range_300_budgets.png}
-    \caption{Modelled WTP for used BEVs by vehicle type and vehicle age, high-budget consumers, driving range fixed at 300 miles. Points show point estimates; horizontal bars show 95\% simulation confidence intervals.}
-    \label{fig:wtp_budget_range300}
-\end{figure}
-
-High-budget car buyers at two years of age represent the segment most proximate to price parity: the point estimate approaches \$0 with a confidence interval that extends into positive territory, indicating that near-parity pricing is a feasible market outcome for this specific attribute combination. The age penalty operates with similar force in this segment, with a WTP differential of approximately \$15,000 to \$20,000 between 2- and 8-year-old vehicles. SUVs lag behind cars at every age level within the high-budget group, and confidence intervals are notably wider throughout this segment, reflecting the greater estimated preference heterogeneity among SUV buyers.
-
-\subsection{Summary of Attribute Effects on WTP}
-\label{subsec:summary}
-
-Table~\ref{table:wtp_summary} summarizes the direction and relative magnitude of each attribute's effect on WTP for used BEVs, which is consistent in sign across all model specifications.
-
-\begin{table}[pos=H]
-\caption{Direction and relative magnitude of attribute effects on WTP for used BEVs, consistent across all model specifications.}
-\label{table:wtp_summary}
-\centering
-{\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{lll}
-\toprule
-\textbf{Attribute} & \textbf{Direction of effect on WTP} & \textbf{Relative magnitude} \\
-\midrule
-Driving range (100 $\to$ 300 miles)          & Positive         & Large    \\
-Vehicle age (2 $\to$ 8 years)                & Negative         & Large    \\
-Adoption preference (unlikely $\to$ likely)  & Positive         & Large    \\
-Budget tier (low $\to$ high)                 & Positive         & Moderate \\
-Vehicle type (SUV vs.\ car)                  & Negative for SUV & Moderate \\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-Driving range, vehicle age, and adoption preference are the dominant value determinants, each producing WTP effects that substantially exceed those of budget tier and vehicle type. The only segment for which WTP reaches or exceeds the ICE-parity threshold is likely BEV adopters selecting 300-mile-range cars at two years of age. For all other attribute combinations, used BEVs must be offered at a discount, with the required discount scaling predictably with increasing vehicle age, declining range, and greater adoption reluctance.
 
 \section{Conclusion}
 \label{section:conclusion}
+
+Driving range, vehicle age, and adoption preference are the dominant value determinants, each producing WTP effects that substantially exceed those of budget tier and vehicle type. The only segment for which WTP reaches or exceeds the ICE-parity threshold is likely BEV adopters selecting 300-mile-range cars at two years of age. For all other attribute combinations, used BEVs must be offered at a discount, with the required discount scaling predictably with increasing vehicle age, declining range, and greater adoption reluctance.
 
 This study provides quantitative estimates of consumer willingness to pay for used battery electric vehicles in the United States, disaggregated by adoption propensity, vehicle type, driving range, vehicle age, and budget tier. A discrete choice experiment administered to 1,500 prospective used-vehicle buyers yielded six mixed logit models that recover preference parameters and characterize heterogeneity across adoption and vehicle segments.
 
