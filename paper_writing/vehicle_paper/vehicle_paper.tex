@@ -143,7 +143,7 @@ This study employs a discrete choice experiment (DCE) to measure consumer willin
 %\end{highlights}
 
 \begin{keywords}
-Battery electric vehicle \sep Used vehicle market \sep Discrete choice experiment \sep Willingness to pay \sep Mixed logit \sep Consumer preferences \sep Adoption heterogeneity \sep Driving range
+Battery electric vehicle \sep Used vehicle market \sep Discrete choice experiment \sep Willingness to pay \sep Mixed logit \sep Consumer preferences
 \end{keywords}
 
 \maketitle
@@ -211,53 +211,14 @@ Eligible respondents of this study were U.S. adults who are interested in buying
 
 Before the DCE, the survey asked respondents to report their budget for the vehicle. In addition, respondents were asked to select one vehicle image (out of nine images) (conditional on the body type, car or SUV, that they selected) with a style that is most closely aligned with the next vehicle they are considering purchasing. The selected vehicle image was displayed throughout all choice tasks, holding body-style appearance constant across alternatives.
 
-Four separate DCE designs were constructed, one per combination of body type (car, SUV) and budget tier (low: $\leq$\$20,000, high: $>$\$20,000), so that the price and vehicle attributes presented to each respondent corresponded to a plausible purchase context. 
-
-The DCE attributes are mileage, powertrain type (and electric driving range), operating cost, model year, and purchase price. The DCE included three powertrain types: conventional ICEV, gas hybrid electric vehicle (HEV), and BEV. Electric driving range is additionally varied for BEV alternatives. Prior evidence identifies age and mileage as the primary determinants of used vehicle value \parencite{prieto2015}, so both are included in the design, with model year serving as the observable proxy for vehicle age.
+Four separate DCE designs were constructed, one per combination of body type (car, SUV) and budget tier (low: $\leq$\$20,000, high: $>$\$20,000), so that the price and vehicle attributes presented to each respondent corresponded to a plausible purchase context. The DCE attributes are mileage, powertrain type (and electric driving range), operating cost, model year, and purchase price. The DCE included three powertrain types: conventional ICEV, gas hybrid electric vehicle (HEV), and BEV. Electric driving range is additionally varied for BEV alternatives. Prior evidence identifies age and mileage as the primary determinants of used vehicle value \parencite{prieto2015}, so both are included in the design, with model year serving as the observable proxy for vehicle age.
 
 Operating cost levels were derived from observed fuel economy data. Vehicle energy consumption (in kWh per mile for BEVs and miles per gallon for ICEVs and HEVs) was sourced from EPA ratings for 2024 model-year vehicles, stratified by powertrain and body type. These figures were combined with the 10th--90th percentile range of state-level electricity rates (\$0.11--\$0.33 per kWh) and retail gasoline prices (\$2.66--\$4.77 per gallon) prevailing in early 2025 to produce 20 equally-spaced operating cost values per powertrain--body-type combination. Costs were displayed to respondents in cents per mile alongside the miles-per-gallon equivalent of a conventional gasoline vehicle at the same cost, allowing direct comparison across powertrain types. Operating cost was bounded by powertrain type: ICEV profiles were limited to 9--18 cents per mile, BEV profiles to 3--12 cents per mile, and HEV profiles to 6--12 cents per mile for car alternatives and 9--18 cents per mile for SUV alternatives, reflecting plausible fuel cost ranges for each powertrain. Choice sets were drawn at random from the restricted profile space, with alternatives balanced across powertrain types and dominated profiles excluded.
 
 Choice profiles were generated using the \texttt{cbcTools} R package \parencite{helvestonCbcToolsDesignAnalyze2025}. Respondents view the definitions of all attribute before DCE tasks(see Table~\ref{table:dce_attributes}). The table also includes detailed attribute levels. Figure~\ref{fig:vehicle_dce} provides an example of the choice task format. 
 
 
-\begin{table}[pos=H]
-\caption{BEV choice experiment attributes and levels.}
-\label{table:dce_attributes}
-\begin{adjustbox}{width=\textwidth, center}
-{\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{p{3.2cm} p{4.8cm} p{3cm} p{3cm} p{3cm} p{3cm}}
-\toprule
-\multirow{2}{*}{\textbf{Attribute}} & \multirow{2}{*}{\textbf{Definition}} & \multicolumn{4}{c}{\textbf{Levels}} \\
-\cmidrule(lr){3-6}
- & & \textbf{Low-budget Car} \newline ($\leq$\$20,000) & \textbf{High-budget Car} \newline ($>$\$20,000) & \textbf{Low-budget SUV} \newline ($\leq$\$20,000) & \textbf{High-budget SUV} \newline ($>$\$20,000) \\
-\midrule
-Mileage & The total number of miles a vehicle has traveled since manufacture. & \multicolumn{4}{p{12.5cm}}{\textbf{All levels:} \newline15,000--60,000 miles (500-mile increments).} \\
-\addlinespace[4pt]
-Powertrain & The type of powertrain the vehicle runs on. & \multicolumn{4}{p{12.5cm}}{%
-  \textbf{All levels:} \newline
-  \textit{(1) Conventional:} Gasoline or other liquid-fuel engine, such as diesel or flex-fuel.\newline
-  \textit{(2) Gas hybrid electric vehicle (HEV):} Smaller gasoline engine + electric motor + small battery. The gasoline engine recharges the battery to improve fuel efficiency.\newline
-  \textit{(3) Battery electric vehicle (BEV):} Electric motor only. Must be plugged into an electrical outlet to be refueled.} \\
-\addlinespace[4pt]
-Electric Range & Maximum distance the BEVs can travel on a full charge. Applies to BEVs only. & 50--150 miles \newline (50-mile increments) & 100--250 miles \newline (50-mile increments) & 150--250 miles \newline (50-mile increments) & 200--350 miles \newline (50-mile increments) \\
-\addlinespace[4pt]
-Operating Cost & Cost in cents per mile driven of fueling the vehicle. The equivalent fuel efficiency in miles per gallon (MPG) of a conventional gasoline vehicle is displayed in parenthesis. & \multicolumn{2}{p{6cm}}{%
-  \textbf{Car:} \newline
-  ICEV: 9--18 cents/mile\newline
-  HEV: 6--12 cents/mile\newline
-  BEV: 3--12 cents/mile} & \multicolumn{2}{p{6cm}}{%
-  \textbf{SUV:} \newline
-  ICEV: 9--18 cents/mile\newline
-  HEV: 9--18 cents/mile\newline
-  BEV: 3--12 cents/mile} \\
-\addlinespace[4pt]
-Model Year & The actual year the vehicle was made. & \multicolumn{4}{p{12.5cm}}{\textbf{All levels:} \newline 2015--2023 (2-year increments).} \\
-\addlinespace[4pt]
-Purchase price & The total cost of the vehicle in dollars, including down payment, monthly payments, taxes, and fees. & \$10,000--\$20,000 \newline (\$2,000 increments) & \$20,000--\$40,000 \newline (\$5,000 increments) & \$15,000--\$25,000 \newline (\$2,000 increments) & \$25,000--\$45,000 \newline (\$5,000 increments) \\
-\bottomrule
-\end{tabular}}
-\end{adjustbox}
-\end{table}
+\input{attachments/dce_attributes.tex}
 
 \begin{figure}[pos=H]
     \centering
@@ -266,7 +227,7 @@ Purchase price & The total cost of the vehicle in dollars, including down paymen
     \label{fig:vehicle_dce}
 \end{figure}
 
-In the survey respondents also report their stated likelihood of purchasing new and used PHEVs and BEVs on a 5-point scale (very unlikely to very likely), from which likely and unlikely BEV adopter subgroups are constructed for the estimation phase. Respondents who rated either new or used BEVs as somewhat or very likely to purchase are classified as likely BEV adopters. Those who rated both new and used BEVs as somewhat or very unlikely are classified as unlikely BEV adopters. Respondents with neutral or mixed ratings are excluded from the adoption-propensity subgroup models but retained in the full-sample and vehicle-type segment models.
+In the survey, respondents also report their stated likelihood of purchasing new and used PHEVs and BEVs on a 5-point scale (very unlikely to very likely), from which likely and unlikely BEV adopter subgroups are constructed for the estimation phase. Respondents who rated either new or used BEVs as somewhat or very likely to purchase are classified as likely BEV adopters. Those who rated both new and used BEVs as somewhat or very unlikely are classified as unlikely BEV adopters. Respondents with neutral or mixed ratings are excluded from the adoption-propensity subgroup models but retained in the full-sample and vehicle-type segment models.
 
 
 \subsection{Data Collection and Sample Profile}
@@ -284,11 +245,9 @@ Table~\ref{table:sample_profile_vehicle} compares the analytic sample against U.
 \section{Method}
 \label{section:method}
 
-\subsection{Random Utility Framework}
+\subsection{Mixed Logit Models}
 
 Consumer choice is modeled within the random utility framework. Each respondent $i$ is assumed to select the alternative $j$ that maximizes their latent utility $U_{ij}$ in each choice task, where utility is a linear function of observed vehicle attributes augmented by an unobserved idiosyncratic error term assumed to follow an independent Gumbel distribution.
-
-\subsection{Model Specification}
 
 A multinomial logit (MNL) model estimated via maximum likelihood provides the baseline specification under the assumption of preference homogeneity across respondents. To relax this restriction (inconsistent with the substantial heterogeneity in EV attitudes documented in the literature), the primary analysis employs a mixed logit (MXL) model. In the MXL specification, each of the eight preference parameters is modeled as an independent draw from a normal mixing distribution:
 
@@ -299,11 +258,9 @@ A multinomial logit (MNL) model estimated via maximum likelihood provides the ba
 
 \noindent where $\mu_k$ is the population mean valuation for attribute $k$ and $\sigma_k$ captures the dispersion of that valuation across respondents. A statistically significant $\hat{\sigma}_k$ constitutes evidence that preferences for attribute $k$ are genuinely heterogeneous in the population rather than uniform. The eight parameters specified as randomly distributed are the BEV powertrain indicator, HEV powertrain indicator, BEV driving range, vehicle mileage, vehicle age, operating cost, purchase price, and the alternative-specific constant for the no-choice (opt-out) option. The internal combustion engine vehicle (ICEV) serves as the reference powertrain category throughout.
 
-\subsection{Model Estimation}
+The MXL specification is preferred over the MNL for two related reasons. First, the estimated standard deviation parameters $\hat{\sigma}_k$ are statistically significant for virtually all attributes across all six models, confirming genuine preference heterogeneity and the violation of the MNL's representative-consumer assumption. Second, the MXL accommodates flexible substitution patterns across the qualitatively distinct powertrain alternatives. 
 
 Six MXL models are estimated, stratified by self-reported adoption propensity (likely vs.\ unlikely BEV adopter) and vehicle segment (full sample, car, SUV), yielding models for all six combinations of these two dimensions. All models are estimated in R using the \texttt{logitr} package (v1.1.2) under a preference-space specification. The mixing integral is approximated using 100 Sobol quasi-random draws per respondent. To reduce sensitivity to starting values and mitigate convergence to local optima, each model is initialized from 20 independent random starting points; the run achieving the globally lowest log-likelihood is retained. Convergence is verified via the relative and absolute function tolerance criterion (Exit Status 3) in all six models.
-
-\subsection{Willingness-to-Pay Estimation}
 
 Willingness to pay for attribute $k$ is derived as the negative ratio of the mean attribute coefficient to the mean price coefficient:
 
@@ -314,12 +271,22 @@ Willingness to pay for attribute $k$ is derived as the negative ratio of the mea
 
 \noindent This quantity represents the dollar amount the average respondent would pay, or require as a compensating discount, for a one-unit change in attribute $k$, holding utility constant. Uncertainty bounds on WTP estimates are computed by drawing 10,000 samples from the estimated joint distribution of $(\hat{\mu}_k,\, \hat{\mu}_{\text{price}})$ and reporting the resulting 95\% simulation interval.
 
+\subsection{Mixed Logit Models}
+
+\subsection{Mixed Logit Models}
+
 \section{Results and Discussion}
 
-\subsection{Model Selection}
-\label{subsec:model_selection}
+\subsection{Mixed Logit Estimates: Preference Heterogeneity by subgroups}
+\label{subsec:mxl_results}
 
-The MXL specification is preferred over the MNL for two related reasons. First, the estimated standard deviation parameters $\hat{\sigma}_k$ are statistically significant for virtually all attributes across all six models, confirming genuine preference heterogeneity and the violation of the MNL's representative-consumer assumption. Second, the MXL accommodates flexible substitution patterns across the qualitatively distinct powertrain alternatives. McFadden $R^2$ values range from 0.164 to 0.229 across the six specifications, within the range conventionally interpreted as indicative of good model fit for discrete choice models. The model for car-segment unlikely adopters achieves the highest fit (0.229), while the SUV-segment likely-adopter model yields the lowest (0.164), reflecting greater idiosyncratic preference variation among SUV buyers who are otherwise positively oriented toward BEVs.
+Table~\ref{table:mxl_results_vehicle} reports the full MXL parameter estimates for all eight subgroup models, grouped by budget tier and adoption propensity. For each attribute, the population mean coefficient ($\hat{\mu}$) and the estimated standard deviation of the mixing distribution ($|\hat{\sigma}|$) are presented. A statistically significant $|\hat{\sigma}|$ indicates genuine preference heterogeneity for that attribute within the subgroup. Model fit statistics are reported at the base of the table.
+
+\input{attachments/mxl_results_vehicle.tex}
+
+As shown in Table~\ref{table:mxl_results_vehicle}, the six MXL models establish that the aggregate WTP patterns in Figures~\ref{fig:wtp_adopter_age2}--\ref{fig:wtp_budget_range300} reflect qualitatively distinct preference structures across adoption groups, with substantial within-group heterogeneity characterizing both segments. Among likely BEV adopters, mean BEV powertrain coefficients are negative across all three vehicle-segment specifications (full sample: $\hat{\mu} = -0.49$; car: $\hat{\mu} = -1.01$; SUV: $\hat{\mu} = -1.88$), yet are accompanied in each case by large and statistically significant standard deviations ($|\hat{\sigma}| = 2.2$--$3.2$, $p < 0.001$ throughout). The apparent contradiction between negative mean BEV utility and self-reported adoption likelihood is resolved by the mixing distribution: simulation-based draws confirm that the interquartile range for BEV utility straddles zero within each subgroup, indicating genuine within-group polarization. HEV powertrains are, by contrast, unambiguously preferred over the ICEV baseline among likely adopters ($\hat{\mu} = 0.89$--$0.95$, $p < 0.001$), suggesting that hybrid electrification represents the more broadly accepted form of powertrain transition within this group. Driving range is the dominant positive attribute among likely car adopters ($\hat{\mu} = 1.061$, $p < 0.001$), approximately 2.5 times its magnitude in the full likely-adopter sample, identifying range as the primary attribute lever for this subgroup.
+
+Among unlikely BEV adopters (Table~\ref{table:mxl_results_vehicle}), the preference structure is categorically different. Mean BEV utility coefficients are large and negative across all three models (full sample: $\hat{\mu} = -7.78$; car: $\hat{\mu} = -9.27$; SUV: $\hat{\mu} = -8.35$; all $p < 0.001$), with simulation-based draws confirming near-universal aversion in the car segment: at least 75\% of the simulated population holds strongly negative BEV utility, with effectively no probability mass above zero. HEV powertrains are also negatively valued ($\hat{\mu} = -0.62$ to $-0.76$, $p < 0.001$), establishing that the resistance extends to electrification broadly rather than to BEVs specifically. Price sensitivity among unlikely adopters substantially exceeds that of likely adopters: the price coefficient for car-segment unlikely adopters ($\hat{\mu} = -2.912$) is 63\% larger in magnitude than for the corresponding likely-adopter group ($\hat{\mu} = -1.792$), and the full-sample differential is approximately 29\%. Driving range is a statistically significant predictor of vehicle choice in five of the six models; the single exception is the car-segment unlikely-adopter model ($\hat{\mu} = 0.420$, $p = 0.272$), indicating that range improvements alone would not induce BEV consideration among this segment's car buyers. Despite the pervasive aversion, large standard deviations on both BEV and HEV coefficients ($|\hat{\sigma}_{\text{BEV}}| = 5.2$--$6.5$; $|\hat{\sigma}_{\text{HEV}}| = 2.7$--$3.4$, all $p < 0.01$) confirm that a non-trivial minority within the unlikely-adopter population holds more favorable powertrain views, particularly in the SUV segment, where mean HEV aversion is weakest ($\hat{\mu} = -0.617$) and where hybrid vehicles may represent a more tractable intermediate adoption pathway.
 
 \subsection{WTP for Used BEVs by Adoption Preference, Vehicle Type, and Driving Range}
 \label{subsec:wtp_range}
@@ -387,17 +354,6 @@ Vehicle type (SUV vs.\ car)                  & Negative for SUV & Moderate \\
 \end{table}
 
 Driving range, vehicle age, and adoption preference are the dominant value determinants, each producing WTP effects that substantially exceed those of budget tier and vehicle type. The only segment for which WTP reaches or exceeds the ICE-parity threshold is likely BEV adopters selecting 300-mile-range cars at two years of age. For all other attribute combinations, used BEVs must be offered at a discount, with the required discount scaling predictably with increasing vehicle age, declining range, and greater adoption reluctance.
-
-\subsection{Mixed Logit Estimates: Preference Heterogeneity by Adoption Group}
-\label{subsec:mxl_results}
-
-Table~\ref{table:mxl_results_vehicle} reports the full MXL parameter estimates for all eight subgroup models, grouped by budget tier and adoption propensity. For each attribute, the population mean coefficient ($\hat{\mu}$) and the absolute value of the estimated standard deviation of the mixing distribution ($|\hat{\sigma}|$) are presented in paired rows. A statistically significant $|\hat{\sigma}|$ indicates genuine preference heterogeneity for that attribute within the subgroup. Model fit statistics are reported at the base of the table.
-
-\input{attachments/mxl_results_vehicle.tex}
-
-As shown in Table~\ref{table:mxl_results_vehicle}, the six MXL models establish that the aggregate WTP patterns in Figures~\ref{fig:wtp_adopter_age2}--\ref{fig:wtp_budget_range300} reflect qualitatively distinct preference structures across adoption groups, with substantial within-group heterogeneity characterizing both segments. Among likely BEV adopters, mean BEV powertrain coefficients are negative across all three vehicle-segment specifications (full sample: $\hat{\mu} = -0.49$; car: $\hat{\mu} = -1.01$; SUV: $\hat{\mu} = -1.88$), yet are accompanied in each case by large and statistically significant standard deviations ($|\hat{\sigma}| = 2.2$--$3.2$, $p < 0.001$ throughout). The apparent contradiction between negative mean BEV utility and self-reported adoption likelihood is resolved by the mixing distribution: simulation-based draws confirm that the interquartile range for BEV utility straddles zero within each subgroup, indicating genuine within-group polarization. HEV powertrains are, by contrast, unambiguously preferred over the ICEV baseline among likely adopters ($\hat{\mu} = 0.89$--$0.95$, $p < 0.001$), suggesting that hybrid electrification represents the more broadly accepted form of powertrain transition within this group. Driving range is the dominant positive attribute among likely car adopters ($\hat{\mu} = 1.061$, $p < 0.001$), approximately 2.5 times its magnitude in the full likely-adopter sample, identifying range as the primary attribute lever for this subgroup.
-
-Among unlikely BEV adopters (Table~\ref{table:mxl_results_vehicle}), the preference structure is categorically different. Mean BEV utility coefficients are large and negative across all three models (full sample: $\hat{\mu} = -7.78$; car: $\hat{\mu} = -9.27$; SUV: $\hat{\mu} = -8.35$; all $p < 0.001$), with simulation-based draws confirming near-universal aversion in the car segment: at least 75\% of the simulated population holds strongly negative BEV utility, with effectively no probability mass above zero. HEV powertrains are also negatively valued ($\hat{\mu} = -0.62$ to $-0.76$, $p < 0.001$), establishing that the resistance extends to electrification broadly rather than to BEVs specifically. Price sensitivity among unlikely adopters substantially exceeds that of likely adopters: the price coefficient for car-segment unlikely adopters ($\hat{\mu} = -2.912$) is 63\% larger in magnitude than for the corresponding likely-adopter group ($\hat{\mu} = -1.792$), and the full-sample differential is approximately 29\%. Driving range is a statistically significant predictor of vehicle choice in five of the six models; the single exception is the car-segment unlikely-adopter model ($\hat{\mu} = 0.420$, $p = 0.272$), indicating that range improvements alone would not induce BEV consideration among this segment's car buyers. Despite the pervasive aversion, large standard deviations on both BEV and HEV coefficients ($|\hat{\sigma}_{\text{BEV}}| = 5.2$--$6.5$; $|\hat{\sigma}_{\text{HEV}}| = 2.7$--$3.4$, all $p < 0.01$) confirm that a non-trivial minority within the unlikely-adopter population holds more favorable powertrain views, particularly in the SUV segment, where mean HEV aversion is weakest ($\hat{\mu} = -0.617$) and where hybrid vehicles may represent a more tractable intermediate adoption pathway.
 
 \section{Conclusion}
 \label{section:conclusion}
