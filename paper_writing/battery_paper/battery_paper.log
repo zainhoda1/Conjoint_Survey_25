@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  23 JUL 2026 12:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  6 AUG 2026 13:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1016,7 +1016,22 @@ Package biblatex Info: Automatic encoding selection.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'battery_paper.bbl' found.
- (./battery_paper.bbl)
+ (./battery_paper.bbl
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                hess2019apollo
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                walker2018d
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+)
 Package biblatex Info: Reference section=0 on input line 74.
 Package biblatex Info: Reference segment=0 on input line 74.
 \verbatim@out=\write5
@@ -1110,11 +1125,15 @@ $[]$
  []
 
 [4]
+
+LaTeX Warning: Citation 'walker2018d' on page 5 undefined on input line 214.
+
+
 Underfull \hbox (badness 6592) in paragraph at lines 231--231
 []|\T1/cmss/m/n/9 Battery re-fur-bish-ment
  []
 
-<images/battery-1.png, id=157, 741.77126pt x 705.63625pt>
+<images/battery-1.png, id=158, 741.77126pt x 705.63625pt>
 File: images/battery-1.png Graphic file (type png)
 <use images/battery-1.png>
 Package pdftex.def Info: images/battery-1.png  used on input line 248.
@@ -1127,10 +1146,10 @@ $[]$
  []
 
 [5]
-<images/map_all.png, id=173, 433.62pt x 289.08pt>
+<images/map_all.png, id=174, 433.62pt x 289.08pt>
 File: images/map_all.png Graphic file (type png)
 <use images/map_all.png>
-Package pdftex.def Info: images/map_all.png  used on input line 267.
+Package pdftex.def Info: images/map_all.png  used on input line 265.
 (pdftex.def)             Requested size: 398.08539pt x 265.40544pt.
 
 
@@ -1158,10 +1177,13 @@ $[]$
  []
 
 [8{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-<images/model_framework.pdf, id=210, 364.48169pt x 199.70609pt>
+
+LaTeX Warning: Citation 'hess2019apollo' on page 9 undefined on input line 308.
+
+<images/model_framework.pdf, id=211, 364.48169pt x 199.70609pt>
 File: images/model_framework.pdf Graphic file (type pdf)
 <use images/model_framework.pdf>
-Package pdftex.def Info: images/model_framework.pdf  used on input line 316.
+Package pdftex.def Info: images/model_framework.pdf  used on input line 314.
 (pdftex.def)             Requested size: 374.66734pt x 205.29123pt.
 
 
@@ -1220,11 +1242,11 @@ $[]$
  []
 
 [16]
-<images/0_lc6_class_profiles_no_optout.png, id=325, 794.97pt x 614.295pt>
+<images/0_lc6_class_profiles_no_optout.png, id=324, 1011.78pt x 614.295pt>
 File: images/0_lc6_class_profiles_no_optout.png Graphic file (type png)
 <use images/0_lc6_class_profiles_no_optout.png>
-Package pdftex.def Info: images/0_lc6_class_profiles_no_optout.png  used on input line 461.
-(pdftex.def)             Requested size: 560.86385pt x 433.4061pt.
+Package pdftex.def Info: images/0_lc6_class_profiles_no_optout.png  used on input line 459.
+(pdftex.def)             Requested size: 637.34175pt x 386.96103pt.
 
 
 
@@ -1257,11 +1279,11 @@ $[]$
  []
 
 [19]
-<images/thematic_hierarchical_nobev_all_blocks.png, id=345, 1156.32pt x 893.4981pt>
+<images/thematic_hierarchical_nobev_all_blocks.png, id=344, 1517.67pt x 903.375pt>
 File: images/thematic_hierarchical_nobev_all_blocks.png Graphic file (type png)
 <use images/thematic_hierarchical_nobev_all_blocks.png>
-Package pdftex.def Info: images/thematic_hierarchical_nobev_all_blocks.png  used on input line 493.
-(pdftex.def)             Requested size: 515.16849pt x 398.07576pt.
+Package pdftex.def Info: images/thematic_hierarchical_nobev_all_blocks.png  used on input line 491.
+(pdftex.def)             Requested size: 608.83354pt x 362.405pt.
 
 
 
@@ -1294,12 +1316,12 @@ $[]$
  []
 
 [23]) (./attachments/wtp_pairwise_tests.tex)
-Overfull \hbox (15.0pt too wide) in paragraph at lines 32--532
+Overfull \hbox (15.0pt too wide) in paragraph at lines 32--530
 []$[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--532
+Underfull \hbox (badness 10000) in paragraph at lines 32--530
 
  []
 
@@ -1320,11 +1342,6 @@ $[]$
 [25
 
 ])
-
-Package biblatex Warning: No driver for 'legislation'.
-(biblatex)                Using fallback driver on input line 540.
-
-
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -1366,18 +1383,18 @@ Package logreq Info: Writing requests to 'battery_paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27241 strings out of 473190
- 472441 string characters out of 5715801
- 1383259 words of memory out of 5000000
- 49927 multiletter control sequences out of 15000+600000
- 711351 words of font info for 223 fonts, out of 8000000 for 9000
+ 27237 strings out of 473190
+ 472223 string characters out of 5715801
+ 1385345 words of memory out of 5000000
+ 49924 multiletter control sequences out of 15000+600000
+ 714080 words of font info for 224 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,15n,93p,5709b,2362s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-BoldItalic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsi0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm-bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on battery_paper.pdf (29 pages, 2030355 bytes).
+Output written on battery_paper.pdf (29 pages, 2235528 bytes).
 PDF statistics:
- 721 PDF objects out of 1000 (max. 8388607)
- 629 compressed objects within 7 object streams
- 144 named destinations out of 1000 (max. 500000)
+ 718 PDF objects out of 1000 (max. 8388607)
+ 626 compressed objects within 7 object streams
+ 143 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -10,9 +10,11 @@ model <- readRDS(here(
   "piecewise_rangeloss_car_suv_lc_6c_1_model.rds"
 ))
 
-# Apollo assigns classes letters a–f; these map to paper classes 1–6
+# Apollo assigns classes letters a–f; mapped to new paper class order:
+# a=old1(BEV-Skeptical)→new5, b=old2(BatHealth)→new1, c=old3(RangeFocus)→new3,
+# d=old4(NonAttend)→new6, e=old5(MultiAttr)→new2, f=old6(BudgetConstr)→new4
 class_letters <- c("a", "b", "c", "d", "e", "f")
-class_labels <- paste0("Class ", 1:6)
+class_labels <- c("Class 5", "Class 1", "Class 3", "Class 6", "Class 2", "Class 4")
 
 # ---- Build delta-method expressions for one class ----
 # WTP = b_attr / (-b_price) * 10000 (price is in $10k units)
@@ -265,12 +267,12 @@ col_spec <- paste0(
 )
 
 cls_headers <- c(
-  "Class 1 (n=252, 8.7\\%)",
-  "Class 2 (n=661, 22.7\\%)",
+  "Class 1 (n=661, 22.7\\%)",
+  "Class 2 (n=606, 20.8\\%)",
   "Class 3 (n=485, 16.6\\%)",
-  "Class 4 (n=539, 18.5\\%)",
-  "Class 5 (n=606, 20.8\\%)",
-  "Class 6 (n=373, 12.8\\%)"
+  "Class 4 (n=373, 12.8\\%)",
+  "Class 5 (n=252, 8.7\\%)",
+  "Class 6 (n=539, 18.5\\%)"
 )
 col_header <- paste0(" & ", paste(cls_headers, collapse = " & "), "\\\\")
 

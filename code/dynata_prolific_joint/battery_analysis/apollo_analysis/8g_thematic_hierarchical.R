@@ -200,8 +200,8 @@ sub_layout_multi <- sub_layout_multi %>%
   ungroup()
 
 # ── X coordinates (wider themes and sub-themes so labels fit) ────────────────
-W_THEME <- 68
-W_SUB <- 52 # trimmed to be just wide enough for the longest sub-theme label
+W_THEME <- 85
+W_SUB <- 80
 GAP <- 5
 INTER_GAP <- 40 # space between the two sub-theme blocks — arc territory
 
@@ -449,8 +449,8 @@ if (nrow(arc_data) > 0) {
 }
 
 # ── Labels ────────────────────────────────────────────────────────────────────
-SIZE_PARENT <- 5.6
-SIZE_SUB <- 3.8
+SIZE_PARENT <- 7.0
+SIZE_SUB <- 4.8
 
 parent_layout <- parent_layout %>%
   mutate(
@@ -548,7 +548,7 @@ p <- ggplot() +
         aes(x = apex_x, y = apex_y, label = badge),
         family = "Roboto Condensed",
         fontface = "bold",
-        size = 2.9,
+        size = 3.7,
         color = BADGE_COLOR,
         fill = "white",
         label.padding = unit(0.14, "lines"),
@@ -596,8 +596,8 @@ p <- ggplot() +
 # point-sized fonts keep the same proportion to the layout as the earlier
 # renders; LaTeX scales the file to the page exactly because the aspect
 # ratio already matches a full landscape page.
-save_w <- 16
-save_h <- save_w * 8.5 / 11
+save_w <- 21
+save_h <- 12.5
 cat(sprintf(
   "Save size: %.1f x %.2f in (11:8.5 landscape aspect)\n",
   save_w,

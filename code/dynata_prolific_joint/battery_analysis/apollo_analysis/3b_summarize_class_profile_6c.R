@@ -99,13 +99,33 @@ database <- data_model %>%
 
 parse_class_suffix <- function(x) {
   case_when(
-    x == "a" ~ "class1",
-    x == "b" ~ "class2",
+    x == "a" ~ "class5",
+    x == "b" ~ "class1",
     x == "c" ~ "class3",
-    x == "d" ~ "class4",
-    x == "e" ~ "class5",
-    TRUE ~ "class6"
+    x == "d" ~ "class6",
+    x == "e" ~ "class2",
+    TRUE ~ "class4"
   )
+}
+
+# Remap Combined_class1-6 from Apollo model order to paper presentation order:
+# old1(BEV-Skeptical)→new5, old2(BatHealth)→new1, old3(RangeFocus)→new3,
+# old4(NonAttend)→new6, old5(MultiAttr)→new2, old6(BudgetConstr)→new4
+remap_class_cols <- function(df) {
+  df %>%
+    rename(
+      tmp1 = Combined_class1, tmp2 = Combined_class2,
+      tmp3 = Combined_class3, tmp4 = Combined_class4,
+      tmp5 = Combined_class5, tmp6 = Combined_class6
+    ) %>%
+    rename(
+      Combined_class1 = tmp2,
+      Combined_class2 = tmp5,
+      Combined_class3 = tmp3,
+      Combined_class4 = tmp6,
+      Combined_class5 = tmp1,
+      Combined_class6 = tmp4
+    )
 }
 
 estimates_6c <- read_csv(here(
@@ -379,6 +399,9 @@ combined_all <- combined_all %>%
     )
   )
 
+# Remap class columns to paper presentation order
+combined_all <- remap_class_cols(combined_all)
+
 # change labels
 var_meta <- tribble(
   ~variable                , ~label                                          , ~section                                 , ~fmt     ,
@@ -493,7 +516,7 @@ combined_all <- combined_all %>%
       section = "Metadata: Opt-out Count",
       fmt = "pct"
     ),
-    optout_mat
+    remap_class_cols(optout_mat)
   )
 
   combined_all <- bind_rows(combined_all, optout_rows)
@@ -516,6 +539,7 @@ combined_all <- combined_all %>%
     pivot_longer(-class, names_to = "variable", values_to = "value") %>%
     pivot_wider(names_from = class, values_from = value) %>%
     rename_with(~ paste0("Combined_", .), starts_with("class")) %>%
+    remap_class_cols() %>%
     mutate(
       variable_origin = variable,
       category = NA_character_,
@@ -671,6 +695,27 @@ combined_size <- summarize_class_size(
   car_suv_lc_6c_apollo_probabilities,
   car_suv_lc_6c_apollo_inputs
 )
+
+# Remap combined_size rows to paper presentation order and renumber class labels
+# New order: old2(BatHealth), old5(MultiAttr), old3(RangeFocus), old6(BudgetConstr),
+#            old1(BEVSkep), old4(NonAttend)
+combined_size <- combined_size %>%
+  arrange(as.integer(class)) %>%
+  slice(c(2L, 5L, 3L, 6L, 1L, 4L)) %>%
+  mutate(
+    class = as.character(row_number()),
+    class_label = paste0(
+      "**Class ", class, "**  \n",
+      "\n",
+      class_name,
+      "\n(",
+      format(class_size, big.mark = ","),
+      "|",
+      mean_probability * 100,
+      "%)",
+      "\n"
+    )
+  )
 
 # --- Build gt table ---
 gt_car_suv_lc_6c <- gt_formatted %>%

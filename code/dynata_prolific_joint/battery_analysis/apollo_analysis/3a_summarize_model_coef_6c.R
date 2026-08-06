@@ -51,14 +51,16 @@ combined_all <- car_suv_lc_6c %>%
 
 
 # Helper: parse class suffix to class label (used in both coef and WTP tables)
+# Remap: a=old1(BEV-Skeptical)→new5, b=old2(BatHealth)→new1, c=old3(RangeFocus)→new3,
+#         d=old4(NonAttend)→new6, e=old5(MultiAttr)→new2, f=old6(BudgetConstr)→new4
 parse_class <- function(x) {
   case_when(
-    x == "a" ~ "class1",
-    x == "b" ~ "class2",
+    x == "a" ~ "class5",
+    x == "b" ~ "class1",
     x == "c" ~ "class3",
-    x == "d" ~ "class4",
-    x == "e" ~ "class5",
-    TRUE ~ "class6"
+    x == "d" ~ "class6",
+    x == "e" ~ "class2",
+    TRUE ~ "class4"
   )
 }
 
@@ -133,13 +135,9 @@ library(glue)
 # Create display columns for each class
 gt_formatted <- formatted %>%
   mutate(
-    Combined_class1 = if_else(
-      is.na(Est._Combined_class1),
-      "0",
-      as.character(glue(
-        "{Est._Combined_class1}\n({Std.Err._Combined_class1}){Sig._Combined_class1}",
-        .na = ""
-      ))
+    Combined_class1 = glue(
+      "{Est._Combined_class1}\n({Std.Err._Combined_class1}){Sig._Combined_class1}",
+      .na = NULL
     ),
     Combined_class2 = glue(
       "{Est._Combined_class2}\n({Std.Err._Combined_class2}){Sig._Combined_class2}",
@@ -153,9 +151,13 @@ gt_formatted <- formatted %>%
       "{Est._Combined_class4}\n({Std.Err._Combined_class4}){Sig._Combined_class4}",
       .na = NULL
     ),
-    Combined_class5 = glue(
-      "{Est._Combined_class5}\n({Std.Err._Combined_class5}){Sig._Combined_class5}",
-      .na = NULL
+    Combined_class5 = if_else(
+      is.na(Est._Combined_class5),
+      "0",
+      as.character(glue(
+        "{Est._Combined_class5}\n({Std.Err._Combined_class5}){Sig._Combined_class5}",
+        .na = ""
+      ))
     ),
     Combined_class6 = glue(
       "{Est._Combined_class6}\n({Std.Err._Combined_class6}){Sig._Combined_class6}",

@@ -1,8 +1,8 @@
 # 5b_visualize_lc6_profiles_no_optout.R
 # Six-class LC model: two-panel profile figure — opt-out bars excluded,
 # axis rescaled to the remaining attribute range.
-# Panel A: Attribute-Sensitive   (Class 2, 3, 5)
-# Panel B: Limited-Sensitivity   (Class 1, 4, 6)
+# Panel A: Attribute-Sensitive   (Class 1, 2, 3 — new numbering: BatHealth, MultiAttr, RangeFocus)
+# Panel B: Limited-Sensitivity   (Class 4, 5, 6 — new numbering: BudgetConstr, BEVSkep, NonAttend)
 
 source(here::here('code', 'setup.R'))
 library(ggplot2)
@@ -85,33 +85,34 @@ sig_raw <- tibble(
 )
 
 # ── CLASS METADATA ────────────────────────────────────────────────────────────
+# Ordered by paper presentation: new1=c2, new2=c5, new3=c3, new4=c6, new5=c1, new6=c4
 class_meta <- tibble(
-  id = c("c1", "c2", "c3", "c4", "c5", "c6"),
+  id = c("c2", "c5", "c3", "c6", "c1", "c4"),
   num = 1:6,
-  n = c(252, 661, 485, 539, 606, 373),
-  share = c(9, 23, 17, 18, 21, 13),
+  n = c(661, 606, 485, 373, 252, 539),
+  share = c(23, 21, 17, 13, 9, 18),
   group = c(
+    "sensitive",
+    "sensitive",
+    "sensitive",
     "insensitive",
-    "sensitive",
-    "sensitive",
     "insensitive",
-    "sensitive",
     "insensitive"
   ),
   label = c(
-    "Opt-Out Dominant, BEV-Skeptical",
     "Battery Health Attentives",
-    "Range-Focused, EV-Knowledgeable",
-    "Low-Engagement, Attribute Non-Attendance",
     "Multi-Attribute Maximizers",
-    "Budget-Constrained, Low WTP"
+    "Range-Focused, EV-Knowledgeable",
+    "Budget-Constrained, Low WTP",
+    "Opt-Out Dominant, BEV-Skeptical",
+    "Low-Engagement,\nAttribute Non-Attendance"
   ),
   hdr_color = c(
+    COL_SENS,
+    COL_SENS,
+    COL_SENS,
     COL_INSENS,
-    COL_SENS,
-    COL_SENS,
     COL_INSENS,
-    COL_SENS,
     COL_INSENS
   )
 )
@@ -120,9 +121,8 @@ class_chars <- list(
   c1 = paste0(
     "3/4 opts out all 6 DCEs\n",
     "Oldest avg. age · Least risk-taking\n",
-    "Highest range anxiety\n",
+    "Highest range anxiety · Lowest climate concern\n",
     "Most negative attitude toward EV batteries\n",
-    "Lowest climate concern\n",
     "Dominately ICEV-only · Lowest BEV ownership\n",
     "Lowest electric outlet access\n",
     "Highest SUV preference"
@@ -131,8 +131,8 @@ class_chars <- list(
     "Largest class\n",
     "High and almost consistent loss aversion\n",
     "High concern about EV battery functionality\n",
-    "Constant, or slightly increasing marginal returns to range.\n",
-    "High SUV preference\n"
+    "Steady marginal returns to additional range.\n",
+    "High SUV preference"
   ),
   c3 = paste0(
     "Highest primary vehicle range\n",
@@ -141,25 +141,25 @@ class_chars <- list(
     "Highest electrical outlet access\n",
     "High EV exposure · Most EV knowledge\n",
     "High used BEV purchase intention\n",
-    "Highest household income\n",
-    "Lowest SUV preference"
+    "Highest income · Lowest SUV preference"
   ),
   c4 = paste0(
     "Strong opt-out aversion, yet attribute-disengaged\n",
     "Smallest price coefficient, WTPs are ratio-inflated\n",
-    "Highest share of information treatment · Refurbishment-averse\n",
+    "Highest share of information treatment\n",
+    "Refurbishment-averse\n",
     "High concern about functionality of EV batteries\n",
     "Lowest ICEV-only · Highest BEV households\n",
-    "Highest vehicle budget · Most risk-taking\n"
+    "Highest vehicle budget · Most risk-taking"
   ),
   c5 = paste0(
     "Only 5.2% never opt out\n",
     "High concern about EV battery functionality\n",
     "High Range anxiety\n",
-    "High Refurbishment-averse",
-    "Diminishing marginal returns to range, and then constant\n",
-    "comprehensive evaluations across all vehicle attributes\n",
-    "Median-level of household income and vehicle buget\n"
+    "High Refurbishment-averse\n",
+    "higher premium on minimum viable range\n",
+    "Comprehensive evaluations across all vehicle attributes\n",
+    "Median-level of household income and vehicle buget"
   ),
   c6 = paste0(
     "Most price-sensitive, small WTPs\n",
@@ -198,8 +198,17 @@ wtp_long <- wtp_raw %>%
     truncated = wtp < BAR_CAP,
     val_label = ifelse(
       truncated,
-      paste0(ifelse(wtp >= 0, "$", "-$"), format(round(abs(wtp) * 1000), big.mark = ",", trim = TRUE), sig, " ◄"),
-      paste0(ifelse(wtp >= 0, "$", "-$"), format(round(abs(wtp) * 1000), big.mark = ",", trim = TRUE), sig)
+      paste0(
+        ifelse(wtp >= 0, "$", "-$"),
+        format(round(abs(wtp) * 1000), big.mark = ",", trim = TRUE),
+        sig,
+        " ◄"
+      ),
+      paste0(
+        ifelse(wtp >= 0, "$", "-$"),
+        format(round(abs(wtp) * 1000), big.mark = ",", trim = TRUE),
+        sig
+      )
     ),
     fill_col = ifelse(wtp >= 0, COL_POS, COL_NEG),
     text_pos = ifelse(
@@ -211,7 +220,7 @@ wtp_long <- wtp_raw %>%
   )
 
 # ── THEME ─────────────────────────────────────────────────────────────────────
-theme_lc <- theme_minimal(base_family = "rc", base_size = 7) %+replace%
+theme_lc <- theme_minimal(base_family = "rc", base_size = 9) %+replace%
   theme(
     panel.grid.major.y = element_blank(),
     panel.grid.major.x = element_line(color = "gray91", linewidth = 0.3),
@@ -246,7 +255,7 @@ make_header <- function(class_id, show_y = TRUE) {
       label = paste0("Class ", info$num, ": ", lbl),
       family = "rc",
       fontface = "bold",
-      size = 2.8,
+      size = 3.5,
       color = "white",
       hjust = 0.5
     ) +
@@ -256,7 +265,7 @@ make_header <- function(class_id, show_y = TRUE) {
       y = 0.25,
       label = paste0("n = ", info$n, "  •  ", info$share, "%"),
       family = "rc",
-      size = 2.5,
+      size = 3.2,
       color = "white",
       alpha = 0.88,
       hjust = 0.5
@@ -275,7 +284,7 @@ make_wtp <- function(class_id, show_y = TRUE) {
     geom_hline(yintercept = 0, color = "gray40", linewidth = 0.5) +
     geom_text(
       aes(y = text_pos, label = val_label, hjust = text_hjust),
-      size = 2.5,
+      size = 3.2,
       family = "rc",
       color = "#1A202C"
     ) +
@@ -285,7 +294,7 @@ make_wtp <- function(class_id, show_y = TRUE) {
     theme_lc +
     theme(
       axis.text.y = if (show_y) {
-        element_text(size = 7, hjust = 1, color = "#444444")
+        element_text(size = 9, hjust = 1, color = "#444444")
       } else {
         element_blank()
       }
@@ -314,7 +323,7 @@ make_chars <- function(class_id, show_y = TRUE) {
       label = "CLASS CHARACTERISTICS",
       family = "rc",
       fontface = "bold",
-      size = 2.5,
+      size = 3.2,
       color = info$hdr_color,
       hjust = 0.5
     ) +
@@ -334,7 +343,7 @@ make_chars <- function(class_id, show_y = TRUE) {
       y = 0.40,
       label = txt,
       family = "rc",
-      size = 2.1,
+      size = 2.8,
       color = "#333333",
       hjust = 0.5,
       vjust = 0.5,
@@ -355,20 +364,20 @@ make_col <- function(class_id, show_y = TRUE) {
 
 # ── ASSEMBLE ──────────────────────────────────────────────────────────────────
 
-# Panel A: Sensitive (C2, C3, C5) — TOP
+# Panel A: Sensitive (new Class 1, 2, 3 = c2, c5, c3) — TOP
 col_c2 <- make_col("c2", show_y = TRUE)
-col_c3 <- make_col("c3", show_y = FALSE)
 col_c5 <- make_col("c5", show_y = FALSE)
+col_c3 <- make_col("c3", show_y = FALSE)
 
-panel_a <- (col_c2 | col_c3 | col_c5) +
-  plot_layout(widths = unit(c(7.5, 7.5, 7.5), "cm")) +
+panel_a <- (col_c2 | col_c5 | col_c3) +
+  plot_layout(widths = unit(c(9.5, 9.5, 9.5), "cm")) +
   plot_annotation(
-    title = "Panel A  —  Attribute-Sensitive Classes (Class 2, 3, 5  •  61% of sample)",
+    title = "Panel A  —  Attribute-Sensitive Classes (Class 1, 2, 3  •  60% of sample)",
     theme = theme(
       plot.title = element_text(
         family = "rc",
         face = "bold",
-        size = 8,
+        size = 10,
         color = COL_SENS,
         hjust = 0,
         margin = margin(b = 2)
@@ -382,20 +391,20 @@ panel_a <- (col_c2 | col_c3 | col_c5) +
     )
   )
 
-# Panel B: Limited-Sensitivity (C1, C4, C6) — BOTTOM
-col_c1 <- make_col("c1", show_y = TRUE)
+# Panel B: Limited-Sensitivity (new Class 4, 5, 6 = c6, c1, c4) — BOTTOM
+col_c6 <- make_col("c6", show_y = TRUE)
+col_c1 <- make_col("c1", show_y = FALSE)
 col_c4 <- make_col("c4", show_y = FALSE)
-col_c6 <- make_col("c6", show_y = FALSE)
 
-panel_b <- (col_c1 | col_c4 | col_c6) +
-  plot_layout(widths = unit(c(7.5, 7.5, 7.5), "cm")) +
+panel_b <- (col_c6 | col_c1 | col_c4) +
+  plot_layout(widths = unit(c(9.5, 9.5, 9.5), "cm")) +
   plot_annotation(
-    title = "Panel B  —  Limited-Sensitivity Classes (Class 1, 4, 6  •  40% of sample)",
+    title = "Panel B  —  Limited-Sensitivity Classes (Class 4, 5, 6  •  40% of sample)",
     theme = theme(
       plot.title = element_text(
         family = "rc",
         face = "bold",
-        size = 8,
+        size = 10,
         color = COL_INSENS,
         hjust = 0,
         margin = margin(b = 2)
@@ -432,7 +441,7 @@ output_path <- here(
 ggsave(
   output_path,
   plot = final_fig,
-  width = 11,
+  width = 14,
   height = 8.5,
   units = "in",
   dpi = 300,
@@ -442,7 +451,7 @@ ggsave(
 ggsave(
   "/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper/images/0_lc6_class_profiles_no_optout.png",
   plot = final_fig,
-  width = 11,
+  width = 14,
   height = 8.5,
   units = "in",
   dpi = 300,

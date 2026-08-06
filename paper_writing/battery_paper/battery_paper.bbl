@@ -454,6 +454,7 @@
       \field{journaltitle}{Qualitative Research in Psychology}
       \field{month}{1}
       \field{number}{2}
+      \field{shortjournal}{Qual. Res. Psychol.}
       \field{title}{Using Thematic Analysis in Psychology}
       \field{urlday}{28}
       \field{urlmonth}{6}
@@ -711,7 +712,7 @@
       \field{journaltitle}{Transportation Research Part A: Policy and Practice}
       \field{langid}{english}
       \field{month}{8}
-      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shortjournal}{Transp. Res. Part Policy Pract.}
       \field{title}{Exploring Tourist Preference for {{Mobility-as-a-Service}} ({{MaaS}}) – {{A}} Latent Class Choice Approach}
       \field{urlday}{18}
       \field{urlmonth}{5}
@@ -857,7 +858,7 @@
       \field{issn}{0965-8564}
       \field{journaltitle}{Transportation Research Part A: Policy and Practice}
       \field{month}{9}
-      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shortjournal}{Transp. Res. Part Policy Pract.}
       \field{shorttitle}{Consumer Valuation of Changes in Driving Range}
       \field{title}{Consumer Valuation of Changes in Driving Range: {{A}} Meta-Analysis}
       \field{urlday}{7}
@@ -927,42 +928,6 @@
       \verb https://insideevs.com/news/733987/ev-batteries-outlast-vehicle-degradation-study/
       \endverb
     \endentry
-    \entry{EUBatteryRegulation2023}{legislation}{}{}
-      \name{author}{1}{}{%
-        {{hash=d0baa957acb6522d22e3251a428fe067}{%
-           family={{European Parliament and Council of the European Union}},
-           familyi={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{d0baa957acb6522d22e3251a428fe067}
-      \strng{fullhash}{d0baa957acb6522d22e3251a428fe067}
-      \strng{fullhashraw}{d0baa957acb6522d22e3251a428fe067}
-      \strng{bibnamehash}{d0baa957acb6522d22e3251a428fe067}
-      \strng{authorbibnamehash}{d0baa957acb6522d22e3251a428fe067}
-      \strng{authornamehash}{d0baa957acb6522d22e3251a428fe067}
-      \strng{authorfullhash}{d0baa957acb6522d22e3251a428fe067}
-      \strng{authorfullhashraw}{d0baa957acb6522d22e3251a428fe067}
-      \field{sortinit}{E}
-      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{day}{28}
-      \field{journaltitle}{Official Journal of the European Union}
-      \field{month}{7}
-      \field{title}{Regulation ({{EU}}) 2023/1542 of the {{European Parliament}} and of the {{Council}} of 12 {{July}} 2023 Concerning Batteries and Waste Batteries}
-      \field{volume}{L 191}
-      \field{year}{2023}
-      \field{dateera}{ce}
-      \field{pages}{1\bibrangedash 117}
-      \range{pages}{117}
-      \verb{urlraw}
-      \verb https://eur-lex.europa.eu/eli/reg/2023/1542/oj/eng
-      \endverb
-      \verb{url}
-      \verb https://eur-lex.europa.eu/eli/reg/2023/1542/oj/eng
-      \endverb
-    \endentry
     \entry{fergusonHowOpenAre2018}{article}{}{}
       \name{author}{5}{}{%
         {{hash=dccb9c9dc3108ce65ef8cec9d4cdce68}{%
@@ -1010,7 +975,7 @@
       \field{journaltitle}{Transportation Research Part D: Transport and Environment}
       \field{langid}{english}
       \field{month}{1}
-      \field{shortjournal}{Transportation Research Part D: Transport and Environment}
+      \field{shortjournal}{Transp. Res. Part Transp. Environ.}
       \field{shorttitle}{How Open Are {{Canadian}} Households to Electric Vehicles?}
       \field{title}{How Open Are {{Canadian}} Households to Electric Vehicles? {{A}} National Latent Class Choice Analysis with Willingness-to-Pay and Metropolitan Characterization}
       \field{urlday}{6}
@@ -1122,6 +1087,7 @@
       \field{journaltitle}{Proceedings of the National Academy of Sciences}
       \field{month}{6}
       \field{number}{23}
+      \field{shortjournal}{Proc. Natl. Acad. Sci.}
       \field{title}{Technology Advancement Is Driving Electric Vehicle Adoption}
       \field{urlday}{8}
       \field{urlmonth}{7}
@@ -1349,6 +1315,7 @@
       \field{journaltitle}{Transportation Research Part B: Methodological}
       \field{langid}{english}
       \field{number}{8}
+      \field{shortjournal}{Transp. Res. Part B Methodol.}
       \field{shorttitle}{A Latent Class Model for Discrete Choice Analysis}
       \field{title}{A Latent Class Model for Discrete Choice Analysis: Contrasts with Mixed Logit}
       \field{urlday}{18}
@@ -1483,7 +1450,7 @@
       \field{issn}{0965-8564}
       \field{journaltitle}{Transportation Research Part A: Policy and Practice}
       \field{month}{3}
-      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shortjournal}{Transp. Res. Part Policy Pract.}
       \field{shorttitle}{Willingness-to-Pay for Alternative Fuel Vehicle Characteristics}
       \field{title}{Willingness-to-Pay for Alternative Fuel Vehicle Characteristics: {{A}} Stated Choice Study for {{Germany}}}
       \field{urlday}{7}
@@ -1556,7 +1523,7 @@
       \field{issn}{1755-5345}
       \field{journaltitle}{Journal of Choice Modelling}
       \field{month}{12}
-      \field{shortjournal}{Journal of Choice Modelling}
+      \field{shortjournal}{J. Choice Model.}
       \field{shorttitle}{Hypothetical Bias in Stated Choice Experiments}
       \field{title}{Hypothetical Bias in Stated Choice Experiments: {{Part II}}. {{Conceptualisation}} of External Validity, Sources and Explanations of Bias and Effectiveness of Mitigation Methods}
       \field{urlday}{2}
@@ -1721,6 +1688,7 @@
       \field{journaltitle}{Journal of Statistical Software}
       \field{langid}{english}
       \field{month}{2}
+      \field{shortjournal}{J. Stat. Softw.}
       \field{shorttitle}{Logitr}
       \field{title}{Logitr: {{Fast Estimation}} of {{Multinomial}} and {{Mixed Logit Models}} with {{Preference Space}} and {{Willingness-to-Pay Space Utility Parameterizations}}}
       \field{urlday}{24}
@@ -1783,6 +1751,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Transportation Research Part B: Methodological}
+      \field{shortjournal}{Transp. Res. Part B Methodol.}
       \field{title}{Pooling Stated and Revealed Preference Data in the Presence of {{RP}} Endogeneity}
       \field{urlday}{5}
       \field{urlmonth}{6}
@@ -1856,7 +1825,7 @@
       \field{issn}{0965-8564}
       \field{journaltitle}{Transportation Research Part A: Policy and Practice}
       \field{month}{3}
-      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shortjournal}{Transp. Res. Part Policy Pract.}
       \field{shorttitle}{Will Subsidies Drive Electric Vehicle Adoption?}
       \field{title}{Will Subsidies Drive Electric Vehicle Adoption? {{Measuring}} Consumer Preferences in the {{U}}.{{S}}. and {{China}}}
       \field{urlday}{1}
@@ -1921,7 +1890,6 @@
       \field{langid}{english}
       \field{month}{5}
       \field{number}{3}
-      \field{shortjournal}{Transportation}
       \field{title}{The Implications on Willingness to Pay of Respondents Ignoring Specific Attributes}
       \field{urlday}{9}
       \field{urlmonth}{7}
@@ -1989,7 +1957,7 @@
       \field{journaltitle}{Resource and Energy Economics}
       \field{month}{9}
       \field{number}{3}
-      \field{shortjournal}{Resource and Energy Economics}
+      \field{shortjournal}{Resour. Energy Econ.}
       \field{title}{Willingness to Pay for Electric Vehicles and Their Attributes}
       \field{urlday}{1}
       \field{urlmonth}{7}
@@ -2062,7 +2030,7 @@
       \field{issn}{1361-9209}
       \field{journaltitle}{Transportation Research Part D: Transport and Environment}
       \field{month}{4}
-      \field{shortjournal}{Transportation Research Part D: Transport and Environment}
+      \field{shortjournal}{Transp. Res. Part Transp. Environ.}
       \field{title}{Consumers ’ Perceptions, Knowledge, and Adoption Patterns of Battery Electric Vehicles}
       \field{urlday}{1}
       \field{urlmonth}{7}
@@ -2135,7 +2103,7 @@
       \field{issn}{0965-8564}
       \field{journaltitle}{Transportation Research Part A: Policy and Practice}
       \field{month}{2}
-      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shortjournal}{Transp. Res. Part Policy Pract.}
       \field{shorttitle}{Deciphering the Factors Associated with Adoption of Alternative Fuel Vehicles in {{California}}}
       \field{title}{Deciphering the Factors Associated with Adoption of Alternative Fuel Vehicles in {{California}}: {{An}} Investigation of Latent Attitudes, Socio-Demographics, and Neighborhood Effects}
       \field{urlday}{10}
@@ -2257,6 +2225,7 @@
       \field{langid}{english}
       \field{month}{11}
       \field{number}{4}
+      \field{shortjournal}{J. Mark. Res.}
       \field{title}{A {{Probabilistic Choice Model}} for {{Market Segmentation}} and {{Elasticity Structure}}}
       \field{urlday}{18}
       \field{urlmonth}{5}
@@ -2526,7 +2495,7 @@
       \field{issn}{1361-9209}
       \field{journaltitle}{Transportation Research Part D: Transport and Environment}
       \field{month}{3}
-      \field{shortjournal}{Transportation Research Part D: Transport and Environment}
+      \field{shortjournal}{Transp. Res. Part Transp. Environ.}
       \field{title}{Concerns Expressed by Used Electric Vehicle Owners Based on Surveying Social Media}
       \field{urlday}{1}
       \field{urlmonth}{7}
@@ -2583,7 +2552,7 @@
       \field{issn}{0965-8564}
       \field{journaltitle}{Transportation Research Part A: Policy and Practice}
       \field{month}{5}
-      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shortjournal}{Transp. Res. Part Policy Pract.}
       \field{shorttitle}{Do Determinants of {{EV}} Purchase Intent Vary across the Spectrum?}
       \field{title}{Do Determinants of {{EV}} Purchase Intent Vary across the Spectrum? {{Evidence}} from {{Bayesian}} Analysis of {{US}} Survey Data}
       \field{urlday}{1}
@@ -2680,7 +2649,7 @@
       \field{issn}{1361-9209}
       \field{journaltitle}{Transportation Research Part D: Transport and Environment}
       \field{month}{2}
-      \field{shortjournal}{Transportation Research Part D: Transport and Environment}
+      \field{shortjournal}{Transp. Res. Part Transp. Environ.}
       \field{title}{Uncovering Factors Affecting Consumers’ Decisions for Pre-Owned Electric Vehicles}
       \field{urlday}{18}
       \field{urlmonth}{11}
@@ -2738,7 +2707,7 @@
       \field{langid}{english}
       \field{month}{9}
       \field{number}{5}
-      \field{shortjournal}{J. Appl. Econ.}
+      \field{shortjournal}{J. Appl. Econom.}
       \field{title}{Mixed {{MNL}} Models for Discrete Response}
       \field{urlday}{5}
       \field{urlmonth}{6}
@@ -2932,6 +2901,7 @@
       \field{journaltitle}{Structural Equation Modeling: A Multidisciplinary Journal}
       \field{month}{10}
       \field{number}{4}
+      \field{shortjournal}{Struct. Equ. Model. Multidiscip. J.}
       \field{shorttitle}{Deciding on the {{Number}} of {{Classes}} in {{Latent Class Analysis}} and {{Growth Mixture Modeling}}}
       \field{title}{Deciding on the {{Number}} of {{Classes}} in {{Latent Class Analysis}} and {{Growth Mixture Modeling}}: {{A Monte Carlo Simulation Study}}}
       \field{urlday}{5}
@@ -3130,7 +3100,7 @@
       \field{journaltitle}{European Review of Agricultural Economics}
       \field{month}{6}
       \field{number}{2}
-      \field{shortjournal}{Eur Rev Agric Econ}
+      \field{shortjournal}{Eur. Rev. Agric. Econ.}
       \field{title}{Modelling Attribute Non-Attendance in Choice Experiments for Rural Landscape Valuation}
       \field{urlday}{9}
       \field{urlmonth}{7}
@@ -3535,7 +3505,7 @@
       \field{issn}{0965-8564}
       \field{journaltitle}{Transportation Research Part A: Policy and Practice}
       \field{month}{12}
-      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shortjournal}{Transp. Res. Part Policy Pract.}
       \field{shorttitle}{Consumers’ Willingness to Pay for Alternative Fuel Vehicles}
       \field{title}{Consumers’ Willingness to Pay for Alternative Fuel Vehicles: {{A}} Comparative Discrete Choice Analysis between the {{US}} and {{Japan}}}
       \field{urlday}{7}
@@ -4019,6 +3989,8 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{hess2019apollo}
+  \missing{walker2018d}
 \endrefsection
 \endinput
 
