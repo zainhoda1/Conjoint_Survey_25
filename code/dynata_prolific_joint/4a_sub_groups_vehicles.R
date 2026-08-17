@@ -152,6 +152,7 @@ data_raw_joined %>%
   group_by(max_subsidy) %>%
   count()
 
+
 data_raw_joined %>%
   group_by(next_veh_fuel_new_bev) %>%
   count()
@@ -168,8 +169,6 @@ data_raw_joined %>%
 
 likely_bev_adopter <- data_raw_joined %>%
   filter(
-    (next_veh_fuel_new_bev %in%
-      c('very_likely', 'somewhat_likely')) |   #, 'neutral'
       (next_veh_fuel_used_bev %in%
         c('very_likely', 'somewhat_likely'))  #, 'neutral'
   ) %>%
@@ -177,82 +176,47 @@ likely_bev_adopter <- data_raw_joined %>%
 
 nrow(likely_bev_adopter)
 
-unlikely_bev_adopter <- data_raw_joined %>%
-  filter(
-    (next_veh_fuel_new_bev %in%
-      c('very_unlikely', 'somewhat_unlikely'))  &
-      (next_veh_fuel_used_bev %in%
-        c('very_unlikely', 'somewhat_unlikely'))
-  ) %>%
-  select(psid, next_veh_fuel_new_bev, next_veh_fuel_used_bev)
-
-nrow(unlikely_bev_adopter)
-
-
-
-charger_access_yes_group <- data_raw_joined %>%
-  filter(
-    (charger_access  == 'yes')
-  ) %>%
-  select(psid)
-
-charger_access_no_group <- data_raw_joined %>%
-  filter(
-    (!charger_access  == 'yes')
-  ) %>%
-  select(psid)
-
-neighbor_ev_yes <- data_raw_joined %>%
-  filter(
-    (!charger_access  == 'yes')
-  ) %>%
-  select(psid)
 
 likely_bev_adopter_encoded <- encoding(
-  inner_join(data, likely_bev_adopter, by = 'psid') %>% select(-psid)
-)
+  inner_join(data, likely_bev_adopter, by = 'psid') |>
+    select(-psid, -collection_round, -data_source))
+  
+data_car <- encoding (data |> 
+  select (-psid, -collection_round, -data_source) ) |> 
+  filter(vehicle_typesuv == 0)
 
-unlikely_bev_adopter_encoded <- encoding(
-  inner_join(data, unlikely_bev_adopter, by = 'psid') %>% select(-psid)
-)
+data_suv <- encoding (data |> 
+  select (-psid, -collection_round, -data_source) ) |> 
+  filter(vehicle_typesuv == 1)
 
-charger_access_yes_encoded  <-  encoding(
-  inner_join(data, charger_access_yes_group, by = 'psid') %>% select(-psid)
-)
+data_car_low <- data_car |> 
+  filter(budgethigh == 0)
 
-charger_access_no_encoded  <-  encoding(
-  inner_join(data, charger_access_no_group, by = 'psid') %>% select(-psid)
-)
+data_car_high <- data_car |> 
+  filter(budgethigh == 1)
 
-neighbor_ev_yes_encodeing <- encoding(
-  inner_join(data, neighbor_ev_yes, by = 'psid') %>% select(-psid)
-)
+data_suv_low <- data_suv |> 
+  filter(budgethigh == 0)
 
-mixed_model_1_positive_vehicle <- run_mixed_model_1(likely_bev_adopter_encoded)
+data_suv_high <- data_suv |> 
+  filter(budgethigh == 1)
 
-mixed_model_1_negative_vehicle <- run_mixed_model_1(unlikely_bev_adopter_encoded )
+
+
+mixed_model_1_car <- run_mixed_model_1(data_car)
+mixed_model_1_suv <- run_mixed_model_1(data_suv)
+mixed_model_1_car_low <- run_mixed_model_1(data_car_low)
+mixed_model_1_car_high <- run_mixed_model_1(data_car_high)
+mixed_model_1_suv_low <- run_mixed_model_1(data_suv_low)
+mixed_model_1_suv_high <- run_mixed_model_1(data_suv_high)
+
+mixed_model_1_likely_bev_adopter <- run_mixed_model_1(likely_bev_adopter_encoded)
 
 mixed_model_1_likely_bev_adopter_car <- run_mixed_model_1(
-  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
-)
-
-mixed_model_1_unlikely_bev_adopter_car <- run_mixed_model_1(
-  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0)
-)
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 0))
 
 mixed_model_1_likely_bev_adopter_suv <- run_mixed_model_1(
-  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
-)
-
-mixed_model_1_unlikely_bev_adopter_suv <- run_mixed_model_1(
-  unlikely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1)
-)
-
-mixed_model_1_charger_access_yes <- run_mixed_model_1(charger_access_yes_encoded)
-
-mixed_model_1_charger_access_no <- run_mixed_model_1(charger_access_no_encoded)
-
-mixed_model_1_neighbor_ev_yes_encodeing <- run_mixed_model_1(neighbor_ev_yes_encodeing)
+  likely_bev_adopter_encoded %>% filter(vehicle_typesuv == 1))
 
 
 ######################################
@@ -260,47 +224,42 @@ mixed_model_1_neighbor_ev_yes_encodeing <- run_mixed_model_1(neighbor_ev_yes_enc
 # Save model object
 
 save(
-  mixed_model_1_likely_bev_adopter_car,
-  file = here("models", "mixed_model_1_likely_bev_adopter_car.RData")
-)
+  mixed_model_1_car,
+  file = here("models", "mixed_model_1_car.RData"))
 
 save(
-  mixed_model_1_unlikely_bev_adopter_car,
-  file = here("models", "mixed_model_1_unlikely_bev_adopter_car.RData")
-)
+  mixed_model_1_suv,
+  file = here("models", "mixed_model_1_suv.RData"))
+
+save(
+  mixed_model_1_car_low,
+  file = here("models", "mixed_model_1_car_low.RData"))
+
+save(
+  mixed_model_1_car_high,
+  file = here("models", "mixed_model_1_car_high.RData"))
+
+save(
+  mixed_model_1_suv_low,
+  file = here("models", "mixed_model_1_suv_low.RData"))
+
+save(
+  mixed_model_1_suv_high,
+  file = here("models", "mixed_model_1_suv_high.RData"))
+
+save(
+  mixed_model_1_likely_bev_adopter,
+  file = here("models", "mixed_model_1_likely_bev_adopter.RData"))
+
+save(
+  mixed_model_1_likely_bev_adopter_car,
+  file = here("models", "mixed_model_1_likely_bev_adopter_car.RData"))
 
 save(
   mixed_model_1_likely_bev_adopter_suv,
-  file = here("models", "mixed_model_1_likely_bev_adopter_suv.RData")
-)
-
-save(
-  mixed_model_1_unlikely_bev_adopter_suv,
-  file = here("models", "mixed_model_1_unlikely_bev_adopter_suv.RData")
-)
-
-
-save(
-  mixed_model_1_charger_access_yes,
-  file = here("models", "mixed_model_1_charger_access_yes.RData")
-)
-
-save(
-  mixed_model_1_charger_access_no,
-  file = here("models", "mixed_model_1_charger_access_no.RData")
-)
+  file = here("models", "mixed_model_1_likely_bev_adopter_suv.RData"))
 
 
 
 ############################################################
-
-
- data_raw_joined %>%
-  filter(
-    (next_veh_fuel_new_bev %in%
-      c('very_likely', 'somewhat_likely', 'neutral')) |
-      (next_veh_fuel_used_bev %in%
-        c('very_likely', 'somewhat_likely', 'neutral'))
-  )  |> 
-   group_by(education) |> summarise(n = n())
 
