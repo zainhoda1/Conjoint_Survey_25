@@ -1,0 +1,131 @@
+Pair ID,Vehicle,Powertrain Type,Model Years (US),Paired With,Pair Category
+1,Ford Focus,cv,through 2018,Focus Electric,cv + bev
+1,Focus Electric,bev,2016-2018,Ford Focus,cv + bev
+2,Fiat 500,cv,through 2019,500e,cv + bev
+2,500e,bev,"2016-2019, relaunched 2024",Fiat 500,cv + bev
+3,Kia Soul,cv,2016-2024,Soul EV,cv + bev
+3,Soul EV,bev,2016-2020 (limited states),Kia Soul,cv + bev
+4,Volkswagen Golf,cv,through 2019,e-Golf,cv + bev
+4,e-Golf,bev,2016-2019,Volkswagen Golf,cv + bev
+5,Chevrolet Spark,cv,through 2016,Spark EV,cv + bev
+5,Spark EV,bev,2016 (final year),Chevrolet Spark,cv + bev
+6,Hyundai Kona,cv,2018-2024,Kona Electric,cv + bev
+6,Kona Electric,bev,2019-2024,Hyundai Kona,cv + bev
+7,Mini Cooper,cv,2016-2024,Cooper SE,cv + bev
+7,Cooper SE,bev,2020-2024,Mini Cooper,cv + bev
+8,Ford F-150,cv,2016-2024,F-150 Lightning,cv + bev
+8,F-150 Lightning,bev,2022-2024,Ford F-150,cv + bev
+9,Ford Transit,cv,2016-2024,E-Transit,cv + bev
+9,E-Transit,bev,2022-2024,Ford Transit,cv + bev
+10,Volvo XC40,cv,2019-2024,XC40 Recharge,cv + bev
+10,XC40 Recharge,bev,2021-2024,Volvo XC40,cv + bev
+11,Mercedes B-Class,cv,through 2017,B-Class Electric Drive,cv + bev
+11,B-Class Electric Drive,bev,through 2017,Mercedes B-Class,cv + bev
+12,Toyota Camry,cv,2016-2024,Camry Hybrid,cv + Hybrid
+12,Camry Hybrid,Hybrid,2016-2024,Toyota Camry,cv + Hybrid
+13,Toyota Corolla,cv,2016-2024,Corolla Hybrid,cv + Hybrid
+13,Corolla Hybrid,Hybrid,2020-2024,Toyota Corolla,cv + Hybrid
+14,Toyota RAV4,cv,2016-2024,RAV4 Hybrid,cv + Hybrid
+14,RAV4 Hybrid,Hybrid,2016-2024,Toyota RAV4,cv + Hybrid
+15,Toyota Highlander,cv,2016-2024,Highlander Hybrid,cv + Hybrid
+15,Highlander Hybrid,Hybrid,2016-2024,Toyota Highlander,cv + Hybrid
+16,Toyota Avalon,cv,2016-2022,Avalon Hybrid,cv + Hybrid
+16,Avalon Hybrid,Hybrid,2016-2022,Toyota Avalon,cv + Hybrid
+17,Toyota Sienna,cv,2016-2020,Sienna Hybrid,cv + Hybrid
+17,Sienna Hybrid,Hybrid,before going hybrid-only in 2021,Toyota Sienna,cv + Hybrid
+18,Honda Accord,cv,2016-2024,Accord Hybrid,cv + Hybrid
+18,Accord Hybrid,Hybrid,2016-2024,Honda Accord,cv + Hybrid
+19,Honda CR-V,cv,2016-2024,CR-V Hybrid,cv + Hybrid
+19,CR-V Hybrid,Hybrid,2016-2024,Honda CR-V,cv + Hybrid
+20,Ford Fusion,cv,2016-2020,Fusion Hybrid,cv + Hybrid
+20,Fusion Hybrid,Hybrid,2016-2020,Ford Fusion,cv + Hybrid
+21,Ford Escape,cv,2016-2024,Escape Hybrid,cv + Hybrid
+21,Escape Hybrid,Hybrid,2016-2024,Ford Escape,cv + Hybrid
+22,Ford Explorer,cv,2016-2024,Explorer Hybrid,cv + Hybrid
+22,Explorer Hybrid,Hybrid,2020-2024,Ford Explorer,cv + Hybrid
+23,Ford Maverick,cv,2022-2024,Maverick Hybrid,cv + Hybrid
+23,Maverick Hybrid,Hybrid,2022-2024,Ford Maverick,cv + Hybrid
+24,Ford F-150,cv,2016-2024,F-150 Hybrid (PowerBoost),cv + Hybrid
+24,F-150 Hybrid (PowerBoost),Hybrid,2021-2024,Ford F-150,cv + Hybrid
+25,Chevrolet Malibu,cv,2016-2024,Malibu Hybrid,cv + Hybrid
+25,Malibu Hybrid,Hybrid,2016-2019,Chevrolet Malibu,cv + Hybrid
+26,Hyundai Sonata,cv,2016-2024,Sonata Hybrid,cv + Hybrid
+26,Sonata Hybrid,Hybrid,2016-2024,Hyundai Sonata,cv + Hybrid
+27,Hyundai Elantra,cv,2016-2024,Elantra Hybrid,cv + Hybrid
+27,Elantra Hybrid,Hybrid,2021-2024,Hyundai Elantra,cv + Hybrid
+28,Hyundai Tucson,cv,2016-2024,Tucson Hybrid,cv + Hybrid
+28,Tucson Hybrid,Hybrid,2022-2024,Hyundai Tucson,cv + Hybrid
+29,Hyundai Santa Fe,cv,2016-2024,Santa Fe Hybrid,cv + Hybrid
+29,Santa Fe Hybrid,Hybrid,2021-2024,Hyundai Santa Fe,cv + Hybrid
+30,Kia Optima / K5,cv,2016-2024,Optima Hybrid,cv + Hybrid
+30,Optima Hybrid,Hybrid,2017-2020,Kia Optima / K5,cv + Hybrid
+31,Kia Sorento,cv,2016-2024,Sorento Hybrid,cv + Hybrid
+31,Sorento Hybrid,Hybrid,2021-2024,Kia Sorento,cv + Hybrid
+32,Kia Sportage,cv,2016-2024,Sportage Hybrid,cv + Hybrid
+32,Sportage Hybrid,Hybrid,2023-2024,Kia Sportage,cv + Hybrid
+33,Nissan Rogue,cv,2016-2024,Rogue Hybrid,cv + Hybrid
+33,Rogue Hybrid,Hybrid,2017-2019,Nissan Rogue,cv + Hybrid
+34,Nissan Pathfinder,cv,2016-2024,Pathfinder Hybrid,cv + Hybrid
+34,Pathfinder Hybrid,Hybrid,2017,Nissan Pathfinder,cv + Hybrid
+35,Lexus ES,cv,2016-2024,ES Hybrid,cv + Hybrid
+35,ES Hybrid,Hybrid,2016-2024,Lexus ES,cv + Hybrid
+36,Lexus RX,cv,2016-2024,RX Hybrid,cv + Hybrid
+36,RX Hybrid,Hybrid,2016-2024,Lexus RX,cv + Hybrid
+37,Lexus NX,cv,2016-2024,NX Hybrid,cv + Hybrid
+37,NX Hybrid,Hybrid,2016-2024,Lexus NX,cv + Hybrid
+38,Chrysler Pacifica,cv,2017-2024,Pacifica Hybrid,cv + PHEV
+38,Pacifica Hybrid,PHEV,2017-2024,Chrysler Pacifica,cv + PHEV
+39,Ford Fusion,cv,2016-2020,Fusion Energi,cv + PHEV
+39,Fusion Energi,PHEV,2016-2020,Ford Fusion,cv + PHEV
+40,Ford C-Max,cv,through 2018,C-Max Energi,cv + PHEV
+40,C-Max Energi,PHEV,through 2018,Ford C-Max,cv + PHEV
+41,Ford Escape,cv,2016-2024,Escape PHEV,cv + PHEV
+41,Escape PHEV,PHEV,2020-2024,Ford Escape,cv + PHEV
+42,Ford Explorer,cv,2016-2024,Explorer PHEV,cv + PHEV
+42,Explorer PHEV,PHEV,2020-2023,Ford Explorer,cv + PHEV
+43,Toyota RAV4,cv,2016-2024,RAV4 Prime,cv + PHEV
+43,RAV4 Prime,PHEV,2021-2024,Toyota RAV4,cv + PHEV
+44,Hyundai Sonata,cv,2016-2024,Sonata PHEV,cv + PHEV
+44,Sonata PHEV,PHEV,2016-2019,Hyundai Sonata,cv + PHEV
+45,Hyundai Tucson,cv,2016-2024,Tucson PHEV,cv + PHEV
+45,Tucson PHEV,PHEV,2022-2024,Hyundai Tucson,cv + PHEV
+46,Hyundai Santa Fe,cv,2016-2024,Santa Fe PHEV,cv + PHEV
+46,Santa Fe PHEV,PHEV,2022-2024,Hyundai Santa Fe,cv + PHEV
+47,Kia Optima / K5,cv,2016-2024,Optima PHEV,cv + PHEV
+47,Optima PHEV,PHEV,2017-2020,Kia Optima / K5,cv + PHEV
+48,Kia Sorento,cv,2016-2024,Sorento PHEV,cv + PHEV
+48,Sorento PHEV,PHEV,2022-2024,Kia Sorento,cv + PHEV
+49,Kia Sportage,cv,2016-2024,Sportage PHEV,cv + PHEV
+49,Sportage PHEV,PHEV,2023-2024,Kia Sportage,cv + PHEV
+50,Subaru Crosstrek,cv,2016-2024,Crosstrek Hybrid (PHEV),cv + PHEV
+50,Crosstrek Hybrid (PHEV),PHEV,2019-2023,Subaru Crosstrek,cv + PHEV
+51,Jeep Wrangler,cv,2016-2024,Wrangler 4xe,cv + PHEV
+51,Wrangler 4xe,PHEV,2021-2024,Jeep Wrangler,cv + PHEV
+52,Jeep Grand Cherokee,cv,2016-2024,Grand Cherokee 4xe,cv + PHEV
+52,Grand Cherokee 4xe,PHEV,2022-2024,Jeep Grand Cherokee,cv + PHEV
+53,Lincoln Corsair,cv,2020-2024,Corsair Grand Touring,cv + PHEV
+53,Corsair Grand Touring,PHEV,2020-2024,Lincoln Corsair,cv + PHEV
+54,Lincoln Aviator,cv,2020-2024,Aviator Grand Touring,cv + PHEV
+54,Aviator Grand Touring,PHEV,2020-2024,Lincoln Aviator,cv + PHEV
+55,Volvo XC60,cv,2016-2024,XC60 Recharge,cv + PHEV
+55,XC60 Recharge,PHEV,2018-2024,Volvo XC60,cv + PHEV
+56,Volvo XC90,cv,2016-2024,XC90 Recharge,cv + PHEV
+56,XC90 Recharge,PHEV,2016-2024,Volvo XC90,cv + PHEV
+57,Volvo S60,cv,2019-2024,S60 Recharge,cv + PHEV
+57,S60 Recharge,PHEV,2019-2024,Volvo S60,cv + PHEV
+58,Mini Countryman,cv,2016-2024,Countryman SE PHEV,cv + PHEV
+58,Countryman SE PHEV,PHEV,2018-2024,Mini Countryman,cv + PHEV
+59,BMW 3 Series,cv,2016-2024,330e,cv + PHEV
+59,330e,PHEV,2016-2024,BMW 3 Series,cv + PHEV
+60,BMW 5 Series,cv,2016-2024,530e,cv + PHEV
+60,530e,PHEV,2018-2024,BMW 5 Series,cv + PHEV
+61,BMW X5,cv,2016-2024,X5 xDrive45e,cv + PHEV
+61,X5 xDrive45e,PHEV,2019-2024,BMW X5,cv + PHEV
+62,Audi Q5,cv,2016-2024,Q5 TFSI e,cv + PHEV
+62,Q5 TFSI e,PHEV,2020-2022,Audi Q5,cv + PHEV
+63,Mercedes GLE,cv,2016-2024,GLE 550e / 350de,cv + PHEV
+63,GLE 550e / 350de,PHEV,2016-2024 (intermittent),Mercedes GLE,cv + PHEV
+64,Nissan Versa Note,cv,2006-2025,Nissan Leaf,cv + bev
+64,Nissan Leaf,bev,2010-2024,Nissan Versa Note,cv + bev
+65,BMW 4 SERIES,cv,2014 -2025,BMW I4,cv + bev
+65,BMW I4,bev,2022 -2026,BMW 4 SERIES,cv + bev

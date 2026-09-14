@@ -58,28 +58,6 @@ vehicle_joint <- vehicle_joint |>
  names_to = 'vehicle_type', values_to = 'vehicle_names')
 
 
-# vehicle_ages_bev <- vehicle_ages |> 
-#   filter(powertrain == 'BEV')
-
-# vehicle_ages_rest <- vehicle_ages |> 
-#   filter(powertrain != 'BEV')
-
-# vehicle_joint <- left_join(vehicle_ages_bev, vehicle_ages_rest, by ='matching_id' )
-
-# vehicle_joint <-  vehicle_joint |> 
-#   mutate( use_earliest_year  = earliest_year.x,
-#           use_latest_year  = latest_year.x
-#   )
-
-# vehicle_joint <- vehicle_joint %>%
-#   select(id.x, id.y, use_earliest_year, use_latest_year) %>%
-#   pivot_longer(cols = c(id.x, id.y), values_to = "id") %>%
-#   distinct(id, .keep_all = TRUE)  
-
-#vehicle_joint$no_years <- vehicle_joint$use_latest_year - vehicle_joint$use_earliest_year
-
-#write_parquet( vehicle_ages,here('data', 'vehicle_ages.parquet'))
-
 age_list = seq(0, 8)
 
 df <- data.frame(
@@ -106,21 +84,6 @@ run_model <- function(current_id, earliest_year, latest_year,  formula) {
   }
   return(NULL)
 }
-
-# make_predictions <- function(model, pred_data) {
-#   pred_vars <- names(pred_data)
-#   if (is.null(model)) {
-#     result <- data.frame(
-#       estimate = rep(NA, nrow(pred_data))
-#     )
-#   } else {
-#     result <- data.frame(
-#       estimate = exp(predict(model, newdata = pred_data))
-#     )
-#   }
-#   result[pred_vars] <- pred_data
-#   return(result)
-# }
 
 
 
@@ -161,3 +124,4 @@ for (i in ids){
 }
 
   write_parquet( predictions,here('data', 'predicted_prices.parquet'))
+

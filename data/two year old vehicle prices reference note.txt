@@ -1,0 +1,16 @@
+2 year old prices:
+versa cv car  -  1.64  - low budget -- bev/cv
+cooper mini cv car- 3.09 high budget -- bev/cv
+4 series bmw cv car - 4.55 - high budget -- bev/cv 
+kona hyundai cv suv - 2.35 low budget -- bev/cv
+rav4 cv suv - 3.12 high budget  -- hev/cv
+camri cv car - 2.70  - high budget -- hev /cv
+
+DOE Design:
+Car low --> 10k to 20k,  range  50 to 150
+Car High --> 20k to 40k , range 100 to 250
+SUV low --> 15k to 25k, range 150 to 250
+SUV high --> 25k to 45k, range 200 to 350
+
+
+

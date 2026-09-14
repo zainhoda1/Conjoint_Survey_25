@@ -10,13 +10,20 @@ data_joint <- read_parquet(here(
 
 
 
+# data <- data_joint %>%
+#   mutate(
+#     price = price / 10000, # 0.5-6
+#     range_bev = range_bev / 100, # 0.5 - 2.5
+#     mileage = mileage / 10000, # 2 - 6
+#     age = age, # 2 - 8
+#     operating_cost = operating_cost / 10 # 0.3 - 2.5,
+#   ) %>%
+#   select(-psid)
+
+
 data <- data_joint %>%
   mutate(
-    price = price / 10000, # 0.5-6
-    range_bev = range_bev / 100, # 0.5 - 2.5
-    mileage = mileage / 10000, # 2 - 6
-    age = age, # 2 - 8
-    operating_cost = operating_cost / 10 # 0.3 - 2.5,
+    price = price / 1000, # 5-60
   ) %>%
   select(-psid)
 

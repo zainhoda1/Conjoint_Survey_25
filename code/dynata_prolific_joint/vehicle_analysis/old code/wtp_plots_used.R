@@ -1,17 +1,17 @@
 source(here::here('code', 'setup.R'))
 
 # Load the estimated model
-load(here("models", "model_car_low.RData"))
-load(here("models", "model_car_high.RData"))
-load(here("models", "model_suv_low.RData"))
-load(here("models", "model_suv_high.RData"))
+# load(here("models", "model_car_low.RData"))
+# load(here("models", "model_car_high.RData"))
+# load(here("models", "model_suv_low.RData"))
+# load(here("models", "model_suv_high.RData"))
 
 
 # Load the estimated model
-load(here("models", "mixed_model_1_car_low_panel.RData"))
-load(here("models", "mixed_model_1_car_high_panel.RData"))
-load(here("models", "mixed_model_1_suv_low_panel.RData"))
-load(here("models", "mixed_model_1_suv_high_panel.RData"))
+load(here("models", "mixed_model_1_car_low.RData"))
+load(here("models", "mixed_model_1_car_high.RData"))
+load(here("models", "mixed_model_1_suv_low.RData"))
+load(here("models", "mixed_model_1_suv_high.RData"))
 
 
 get_wtp_draws <- function(model) {
@@ -21,9 +21,6 @@ get_wtp_draws <- function(model) {
   
   # Take 10,000 draws of the coefficients
   coef_draws <- as.data.frame(MASS::mvrnorm(10^4, coefs, covariance))
-  
-  # Compute WTP for each coefficient draw
- # wtp_draws = -1 * (coef_draws[,] / coef_draws[, 'price'])
   
   return(coef_draws) 
   
@@ -39,8 +36,12 @@ get_cis <- function(df) {
       CV = 0,
       age_year = age * 10^4,
       mileage_10k = mileage * 10^4,
-      range_bev = range_bev * 10^4
-    )
+      range_bev = range_bev * 10^4,
+      BEV_100 = BEV + range_bev*1 ,
+      BEV_200 = BEV + range_bev*2 ,
+      BEV_300 = BEV + range_bev*3 
+    ) %>% 
+    select (HEV, BEV_100, BEV_200, BEV_300)
   
   
   # For each coefficient, get the mean and 95% confidence interval of WTP
@@ -51,10 +52,10 @@ get_cis <- function(df) {
 }
 
 
-conf_mixed_model_1_car_low <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
-conf_mixed_model_1_car_high <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
-conf_mixed_model_1_suv_low <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
-conf_mixed_model_1_suv_high <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
+conf_mixed_model_1_car_low <- get_cis(get_wtp_draws(mixed_model_1_car_low))
+conf_mixed_model_1_car_high <- get_cis(get_wtp_draws(mixed_model_1_car_high))
+conf_mixed_model_1_suv_low <- get_cis(get_wtp_draws(mixed_model_1_suv_low))
+conf_mixed_model_1_suv_high <- get_cis(get_wtp_draws(mixed_model_1_suv_high))
 
 
 

@@ -6,34 +6,63 @@ listings <- open_dataset(
   'D:/Time Periods/Spring 2025/ev-affordability-2025/data/listings.parquet'
 )
 
+########### Insert new code here to look for vehicles
+
+toyota_listings <- listings |>
+  filter(make == 'toyota') |>
+  select(model, make, powertrain) |>
+  collect()
+
+# RAV4 and Camry, matched loosely on model spelling (e.g. "rav4" vs "rav 4")
+toyota_rav_camry <- toyota_listings |>
+  filter(str_detect(model, regex('rav|camry', ignore_case = TRUE)))
+
+# Distinct model strings actually present, to confirm how each is spelled
+toyota_rav_camry |>
+  distinct(model) |>
+  as.data.frame() |>
+  print()
+
+# Counts by model, make, and powertrain (CV / Hybrid / BEV / PHEV variants)
+toyota_rav_camry_counts <- toyota_rav_camry |>
+  group_by(model, make, powertrain) |>
+  summarise(counts = n(), .groups = 'drop') |>
+  arrange(model, powertrain) |>
+  as.data.frame()
+
+print(toyota_rav_camry_counts)
+
+
+#############
+
 
 vehicle_list <- data.frame(
   model = c(
     "versa sedan", "leaf",
     "cooper", "hardtop 2 door",
-    "4 series", "i4",
-    "ioniq", "ioniq",
     "kona", "kona ev",
     "niro", "niro", "niro",
-    "fusion", "fusion energi"
+    "fusion", "fusion energi",
+    "camry", "camry",
+    "rav4", "rav4", "rav4"
   ),
   make = c(
     "nissan", "nissan",
     "mini", "mini",
-    "bmw", "bmw",
-    "hyundai", "hyundai",
     "hyundai", "hyundai",
     "kia", "kia", "kia",
-    "ford", "ford"
+    "ford", "ford",
+    "toyota", "toyota",
+    "toyota", "toyota", "toyota"
   ),
   powertrain = c(
     "cv", "bev",
     "cv", "bev",
     "cv", "bev",
-    "bev", "hev",
-    "cv", "bev",
     "bev", "phev", "hev",
-    "cv", "phev"
+    "cv", "phev",
+    "cv", "hev",
+    "cv", "hev", "bev"
   ),
   stringsAsFactors = FALSE
 )
@@ -105,5 +134,5 @@ vehicles_data |>
   ggplot(aes(x = price)) +
   geom_histogram() +
   facet_wrap(~model)
-  facet_grid(model~powertrain)
+  #facet_grid(model~powertrain)
 

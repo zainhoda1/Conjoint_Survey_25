@@ -10,9 +10,7 @@ load(here("models", "mixed_model_1_car_high.RData"))
 load(here("models", "mixed_model_1_suv_low.RData"))
 load(here("models", "mixed_model_1_suv_high.RData"))
 
-load(here("models", "mixed_model_1_likely_bev_adopter.RData"))
-load(here("models", "mixed_model_1_likely_bev_adopter_car.RData"))
-load(here("models", "mixed_model_1_likely_bev_adopter_suv.RData"))
+
 
 
 ####################
