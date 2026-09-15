@@ -12,6 +12,10 @@ all_vehicles <-  read_parquet(here(
   "vehicle_listing_prices.parquet"
 ))
 
+all_vehicles_2 <- all_vehicles |> 
+  filter(age_years >=2.5 & age_years <3.5) |> 
+  collect()
+
 
 
 vehicles_comparsion_list <- read_csv(here('data', 'vehicle_pairs_2016_2024.csv')) |> 

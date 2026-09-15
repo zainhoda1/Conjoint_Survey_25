@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber vehicle_paper"] 1789438853.87589 "vehicle_paper.bcf" "vehicle_paper.bbl" "vehicle_paper" 1789440904.57068 0
+["biber vehicle_paper"] 1789438853.87589 "vehicle_paper.bcf" "vehicle_paper.bbl" "vehicle_paper" 1789489938.66348 0
   "DCE_lit_review.bib" 1779348841 66967 a216a887f1a03425f6252c88eb54cc5b ""
   "Used EV.bib" 1778790434 38706 5ed5a61c99f115b5c0893068fededfbb ""
   "used_EV_lit_review.bib" 1787614318 8275 440a747f69c9c92542cc939191c10b41 ""
-  "vehicle_paper.bcf" 1789440903 112493 7feed474f53360fc1d4753e0a9c52b2c "pdflatex"
+  "vehicle_paper.bcf" 1789489938 112493 7feed474f53360fc1d4753e0a9c52b2c "pdflatex"
   (generated)
   "vehicle_paper.bbl"
   "vehicle_paper.blg"
   (rewritten before read)
-["pdflatex"] 1789440898.93674 "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" "vehicle_paper.pdf" "vehicle_paper" 1789440904.57199 0
+["pdflatex"] 1789489933.51774 "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" "vehicle_paper.pdf" "vehicle_paper" 1789489938.66469 0
   "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1789061857 84470 1b03f303430b1250744b51ca4bdbdd0b ""
   "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi375/ecss0800.pk" 1778175205 10028 1840d44416893ea035cefda749e4476b ""
   "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecsi0900.pk" 1778790639 22084 6a533c2400043c85dfe3c3d90ddf0e7c ""
@@ -188,17 +188,17 @@
   "attachments/household_context_vehicle.tex" 1789019988 1639 bc4faf6c9c8436affe1708b93a7b1521 ""
   "attachments/mxl_results_vehicle.tex" 1789437125 5653 244c5bdc18ed3af74ad3400cadeec208 ""
   "attachments/sample_vs_acs_vehicle.tex" 1786458265 2511 bd555f8325ca2bb5161182eb07d5d259 ""
-  "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" 1789439967 53656 f724dfb72819cf85902bf70cd0538064 ""
+  "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" 1789473712 56114 b1a6d55d9c1af7067af6069bd5d31587 ""
   "images/vehicle_analysis/BEV_probability_age_with_depreciation.png" 1789420428 196295 4ed0da1168a7a8a83f8bb6cce63a0d1e ""
   "images/vehicle_analysis/depreciation_curves_plot.png" 1789420415 283706 a87461a45d0cc4b8401db788e511425c ""
   "images/vehicle_analysis/vehicle_choice_image.png" 1786458265 111513 34bf4340cb300126df47440889f356c3 ""
   "images/vehicle_analysis/wtp_plot_vehicle_attributes.png" 1789412685 179323 cb212f1d3a0afc18079cb016620386b0 ""
-  "vehicle_paper.abs" 1789440901 1994 4dd4735f59017717f8daa560e563ebda "pdflatex"
-  "vehicle_paper.aux" 1789440903 24814 edbb80141acf1503503159e227ec48e9 "pdflatex"
+  "vehicle_paper.abs" 1789489935 1994 4dd4735f59017717f8daa560e563ebda "pdflatex"
+  "vehicle_paper.aux" 1789489938 25094 471d58f71a5dafb476d463e1dba2941d "pdflatex"
   "vehicle_paper.bbl" 1789438857 61804 5dbc73c383fe0dfefc2a0473c18e16ef "biber vehicle_paper"
-  "vehicle_paper.out" 1789440900 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "vehicle_paper.run.xml" 1789440903 2531 e968a0989c885b2b1262b7e0b03a7680 "pdflatex"
-  "vehicle_paper.tex" 1789439967 53656 f724dfb72819cf85902bf70cd0538064 ""
+  "vehicle_paper.out" 1789489935 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "vehicle_paper.run.xml" 1789489938 2531 e968a0989c885b2b1262b7e0b03a7680 "pdflatex"
+  "vehicle_paper.tex" 1789473712 56114 b1a6d55d9c1af7067af6069bd5d31587 ""
   (generated)
   "vehicle_paper.abs"
   "vehicle_paper.aux"
