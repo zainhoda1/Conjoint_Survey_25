@@ -8,10 +8,11 @@ library(cowplot)
 
 
 # Load the estimated model
-load(here("models", "mixed_model_1_car_low.RData"))
-load(here("models", "mixed_model_1_car_high.RData"))
-load(here("models", "mixed_model_1_suv_low.RData"))
-load(here("models", "mixed_model_1_suv_high.RData"))
+
+load(here("models", "mixed_model_1_car_low_panel.RData"))
+load(here("models", "mixed_model_1_car_high_panel.RData"))
+load(here("models", "mixed_model_1_suv_low_panel.RData"))
+load(here("models", "mixed_model_1_suv_high_panel.RData"))
 
 
 
@@ -116,10 +117,10 @@ bev_probability_inputs <- predicted_car_prices_pairs |>
   mutate(
     obsID = row_number(),
     model_name = case_when(
-      vehicle_type == "car" & budget == "low"  ~ "mixed_model_1_car_low",
-      vehicle_type == "car" & budget == "high" ~ "mixed_model_1_car_high",
-      vehicle_type == "suv" & budget == "low"  ~ "mixed_model_1_suv_low",
-      vehicle_type == "suv" & budget == "high" ~ "mixed_model_1_suv_high"
+      vehicle_type == "car" & budget == "low"  ~ "mixed_model_1_car_low_panel",
+      vehicle_type == "car" & budget == "high" ~ "mixed_model_1_car_high_panel",
+      vehicle_type == "suv" & budget == "low"  ~ "mixed_model_1_suv_low_panel",
+      vehicle_type == "suv" & budget == "high" ~ "mixed_model_1_suv_high_panel"
     )
   ) |>
   filter(!is.na(model_name)) |>

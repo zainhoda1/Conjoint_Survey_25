@@ -2,10 +2,10 @@ source(here::here('code', 'setup.R'))
 
 
 # Load the estimated model
-load(here("models", "mixed_model_1_car_low.RData"))
-load(here("models", "mixed_model_1_car_high.RData"))
-load(here("models", "mixed_model_1_suv_low.RData"))
-load(here("models", "mixed_model_1_suv_high.RData"))
+load(here("models", "mixed_model_1_car_low_panel.RData"))
+load(here("models", "mixed_model_1_car_high_panel.RData"))
+load(here("models", "mixed_model_1_suv_low_panel.RData"))
+load(here("models", "mixed_model_1_suv_high_panel.RData"))
 
 
 get_wtp_draws <- function(model) {
@@ -25,16 +25,16 @@ get_cis <- function(df, current_age=2) {
   # Adding dollar values
   wtp_draws <- df %>%
     mutate(
-      BEV = powertrainbev * 10^4,
-      HEV = powertrainhev * 10^4,
+      BEV = powertrainbev * 10^3,
+      HEV = powertrainhev * 10^3,
       CV = 0,
-      age_year = age * 10^4 * -1,
-      mileage_10k = mileage * 10^4 * -1,
-      range_bev = range_bev * 10^4,
-      operating_cost_mile = operating_cost * 10^4 * -1,
-      BEV_100 = BEV + range_bev*1 ,
-      BEV_200 = BEV + range_bev*2 ,
-      BEV_300 = BEV + range_bev*3,
+      age_year = age * 10^3 * -1,
+      mileage_10k = mileage * 10^3 * -1 * 10^4,
+      range_bev = range_bev * 10^3,
+      operating_cost_mile = operating_cost * 10^3 * -1,
+      BEV_100 = BEV + range_bev*100 ,
+      BEV_200 = BEV + range_bev*200 ,
+      BEV_300 = BEV + range_bev*300,
       range_bev = range_bev * -1
     )%>% 
     select (starts_with('HEV'), starts_with('BEV_'), 
@@ -49,10 +49,10 @@ get_cis <- function(df, current_age=2) {
 }
 
 
-conf_mixed_model_1_car_low <- get_cis(get_wtp_draws(mixed_model_1_car_low))
-conf_mixed_model_1_car_high <- get_cis(get_wtp_draws(mixed_model_1_car_high))
-conf_mixed_model_1_suv_low <- get_cis(get_wtp_draws(mixed_model_1_suv_low))
-conf_mixed_model_1_suv_high <- get_cis(get_wtp_draws(mixed_model_1_suv_high))
+conf_mixed_model_1_car_low <- get_cis(get_wtp_draws(mixed_model_1_car_low_panel))
+conf_mixed_model_1_car_high <- get_cis(get_wtp_draws(mixed_model_1_car_high_panel))
+conf_mixed_model_1_suv_low <- get_cis(get_wtp_draws(mixed_model_1_suv_low_panel))
+conf_mixed_model_1_suv_high <- get_cis(get_wtp_draws(mixed_model_1_suv_high_panel))
 
 
 # ---- WTP plot: CV / HEV / BEV100 / BEV200 / BEV300 with 95% CIs ----
@@ -118,9 +118,6 @@ wtp_plot_df <- wtp_plot_df %>%
     "HEV"
   )))
 
-# Chart chrome tokens and the "minou" categorical palette, matching the
-# visual system established in buying_probability_part3.R so the paper's
-# figures read as one consistent set.
 ink_primary   <- "#0b0b0b"
 ink_secondary <- "#52514e"
 ink_muted     <- "#898781"

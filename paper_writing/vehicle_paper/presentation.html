@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>presentation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="presentation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="presentation_files/libs/quarto-html/quarto.js"></script>
+<script src="presentation_files/libs/quarto-html/popper.min.js"></script>
+<script src="presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="presentation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="presentation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="presentation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="presentation_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<!-- _class: lead -->
+<section id="consumer-preferences-in-the-used-vehicle-market" class="level1">
+<h1>Consumer Preferences in the Used Vehicle Market</h1>
+<section id="willingness-to-pay-for-powertrain-type-driving-range-vehicle-condition-and-operating-cost" class="level3">
+<h3 class="anchored" data-anchor-id="willingness-to-pay-for-powertrain-type-driving-range-vehicle-condition-and-operating-cost">Willingness to Pay for Powertrain Type, Driving Range, Vehicle Condition, and Operating Cost</h3>
+<p>Hoda, Iogansen, Gore, Kneifel, Ranganath, Helveston GWU / NIST Applied Economics Office</p>
+<!--
+15-minute talk. Introduce yourself briefly, then move fast — this deck has ~14
+slides for ~15 minutes, so keep the motivation slides short and save time for
+the results (slides 7-10), which are the core of the talk.
+-->
+<hr>
+</section>
+<section id="why-the-used-vehicle-market" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-used-vehicle-market">Why the used-vehicle market?</h2>
+<ul>
+<li>Used vehicles are <strong>~70% of all U.S. vehicle transactions</strong> — but EV research has focused almost entirely on <strong>new-vehicle buyers</strong></li>
+<li>The used-BEV market is growing fast, and it matters beyond its own transaction volume:
+<ul>
+<li>Extends vehicle and battery lifetimes, supports a circular economy</li>
+<li>Lowers the effective cost of EV ownership for lower- and middle-income households</li>
+<li>Underpins new-vehicle residual values (which affect new-EV leasing economics)</li>
+</ul></li>
+<li>Used BEVs face <strong>extra</strong> friction new EVs don’t: uncertainty about prior condition/reliability, and battery aging that odometer + age alone don’t fully signal</li>
+</ul>
+<!--
+Frame this as: everyone studies new EV adoption, almost nobody studies the
+used side, even though it's the bigger market and has its own distinct
+barriers (condition uncertainty, battery health uncertainty).
+-->
+<hr>
+</section>
+<section id="research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="research-questions">Research questions</h2>
+<p>This study estimates willingness to pay (WTP) for vehicle attributes among prospective <strong>used</strong> car/SUV buyers, and asks:</p>
+<ol type="1">
+<li><p><strong>How do WTP estimates for vehicle attributes</strong> (powertrain, range, age, mileage, operating cost) <strong>compare across vehicle segment and budget tier?</strong></p></li>
+<li><p><strong>How do existing used BEVs compete against their conventional or hybrid counterparts</strong> as vehicles age, in the real market?</p></li>
+</ol>
+<!--
+These are literally the two subsection headers in the Analysis section (Q1,
+Q2) — keep the framing identical to the paper so the audience can map talk
+structure to any handout.
+-->
+<hr>
+</section>
+<section id="survey-choice-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="survey-choice-experiment">Survey &amp; choice experiment</h2>
+<ul>
+<li>Nationally distributed online survey, <strong>2,254 respondents</strong> who intend to buy a used car or SUV within two years (Dynata + Prolific panels)</li>
+<li>Each respondent completes <strong>6 choice tasks</strong>: pick among 3 hypothetical used vehicles, or “none of these”</li>
+<li>Attributes varied: <strong>powertrain</strong> (ICEV / HEV / BEV), <strong>price</strong>, <strong>operating cost</strong>, <strong>driving range</strong> (BEV only), <strong>model year (age)</strong>, <strong>mileage</strong></li>
+<li>Four separate designs — one per <strong>vehicle body type × budget tier</strong> combination — so the price/attribute ranges shown match a plausible purchase context</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/vehicle_analysis/vehicle_choice_image.PNG" class="img-fluid figure-img"></p>
+<figcaption>bg right:38% width:95%</figcaption>
+</figure>
+</div>
+<!--
+Point at the image: this is literally what a respondent saw. Walk through one
+row to show the attribute list. Mention respondents picked their own
+budget and a vehicle image (car or SUV style) before the DCE tasks, which is
+what drove the 4-way stratification.
+-->
+<hr>
+</section>
+<section id="sample-modeling-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="sample-modeling-strategy">Sample &amp; modeling strategy</h2>
+<ul>
+<li>Six <strong>mixed logit (MXL)</strong> models estimated in <strong>willingness-to-pay space</strong>, stratified by:
+<ul>
+<li><strong>Vehicle segment</strong>: Car vs.&nbsp;SUV</li>
+<li><strong>Budget tier</strong>: Low (≤$20K) vs.&nbsp;High (&gt;$20K)</li>
+</ul></li>
+<li>Panel-corrected (6 repeated choices per respondent), 5,000 Sobol draws, 10 multi-starts per model</li>
+<li>Why mixed logit, not plain multinomial logit?
+<ul>
+<li>Avoids the implausible IIA assumption (BEV/HEV/ICEV aren’t interchangeable substitutes)</li>
+<li>Lets us test whether preferences are <strong>genuinely heterogeneous</strong> across respondents — and they are, for almost every attribute</li>
+</ul></li>
+</ul>
+<!--
+Keep this slide light on math — the audience wants the *why*, not the
+likelihood function. The key sentence to say out loud: "estimating directly
+in dollar terms lets us read willingness-to-pay off the model with no extra
+post-processing."
+-->
+<hr>
+</section>
+<section id="q1-willingness-to-pay-for-vehicle-attributes" class="level2">
+<h2 class="anchored" data-anchor-id="q1-willingness-to-pay-for-vehicle-attributes">Q1 — Willingness to pay for vehicle attributes</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/vehicle_analysis/wtp_plot_vehicle_attributes.png" class="img-fluid figure-img"></p>
+<figcaption>width:920px</figcaption>
+</figure>
+</div>
+<!--
+This is the main results figure. Walk it top to bottom for one panel (say
+CAR) before comparing to SUV. Key points to hit verbally:
+- HEV: real premium for high-budget buyers (~$4,200 car / ~$2,300 SUV),
+  no premium for low-budget buyers
+- BEV: penalty everywhere, but shrinks sharply as range rises
+- Only high-budget car buyers at 300-mile range get statistically
+  indistinguishable-from-zero BEV penalty
+-->
+<hr>
+</section>
+<section id="powertrain-findings" class="level2">
+<h2 class="anchored" data-anchor-id="powertrain-findings">Powertrain findings</h2>
+<ul>
+<li><strong>HEV</strong>: high-budget buyers place a real premium on hybrids — <strong>~$4,200</strong> (car), <strong>~$2,300</strong> (SUV) — low-budget buyers show no premium</li>
+<li><strong>BEV</strong>: penalty relative to conventional vehicles everywhere, but it <strong>narrows sharply with range</strong>:</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>100 mi range</th>
+<th>300 mi range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Car, high budget</td>
+<td>–$13,100</td>
+<td><strong>–$2,600</strong> (≈ parity)</td>
+</tr>
+<tr class="even">
+<td>Car, low budget</td>
+<td>–$8,200</td>
+<td>–$3,700</td>
+</tr>
+<tr class="odd">
+<td>SUV, high budget</td>
+<td>–$18,800</td>
+<td>–$11,700</td>
+</tr>
+<tr class="even">
+<td>SUV, low budget</td>
+<td>–$16,400</td>
+<td>–$8,200</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Added range is the single most effective lever</strong> for closing the BEV valuation gap — especially for higher-budget car buyers</li>
+</ul>
+<!--
+The "≈ parity" cell (car, high-budget, 300mi) is the one combination where
+the confidence interval spans zero — i.e. not statistically different from
+a conventional vehicle. Emphasize that this is the ONLY such combination.
+-->
+<hr>
+</section>
+<section id="condition-attributes-age-mileage-operating-cost" class="level2">
+<h2 class="anchored" data-anchor-id="condition-attributes-age-mileage-operating-cost">Condition attributes: age, mileage, operating cost</h2>
+<ul>
+<li>All three penalize used-BEV value, and <strong>penalties scale with budget tier</strong> (high-budget buyers show larger dollar penalties for the same attribute)</li>
+<li><strong>Mileage is the largest penalty</strong> of the three: –$1,000 to –$3,800 across segments/tiers</li>
+<li><strong>Vehicle age</strong>: –$300 to –$2,200</li>
+<li><strong>Operating cost</strong>: –$400 to –$1,100 (smaller than age for high-budget buyers)</li>
+<li><strong>SUV buyers show systematically larger penalties than car buyers</strong> at the same budget tier for BEV, mileage, and age — operating cost reverses at the high-budget tier (car penalty larger there)</li>
+</ul>
+<!--
+Don't over-narrate every number — the table is there to point at. The
+takeaway sentence: "the BEV gap is narrowest, and closest to parity, among
+higher-budget car buyers buying longer-range vehicles."
+-->
+<hr>
+</section>
+<section id="q2-do-real-used-bevs-compete-with-conventional-vehicles" class="level2">
+<h2 class="anchored" data-anchor-id="q2-do-real-used-bevs-compete-with-conventional-vehicles">Q2 — Do real used BEVs compete with conventional vehicles?</h2>
+<ul>
+<li>Extends the WTP estimates to a <strong>market-share simulation</strong> (Helveston et al.&nbsp;2014 approach): predicted 2-alternative choice probability between a real used BEV/HEV and its closest matched conventional counterpart, at vehicle ages 2–8 years</li>
+<li>5 matched real-market vehicle pairs (3 car, 2 SUV), using actual used-market listings for depreciation</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/vehicle_analysis/BEV_probability_age_with_depreciation.png" class="img-fluid figure-img"></p>
+<figcaption>width:820px</figcaption>
+</figure>
+</div>
+<!--
+Explain the dashed 50% line = choice parity. Two HEV pairings sit above it
+across the ENTIRE age range already. No BEV pairing gets close at any age.
+-->
+<hr>
+</section>
+<section id="market-share-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="market-share-takeaways">Market-share takeaways</h2>
+<ul>
+<li><strong>Two HEV-vs-conventional pairings already exceed 50% share at every observed age</strong>: high-budget car (~60%), high-budget SUV (~54–55%)</li>
+<li><strong>No BEV-vs-conventional pairing approaches parity</strong> at any age: 26% (car, high budget), 17–18% (car, low budget), 10–11% (SUV, low budget)</li>
+<li>Predicted share is <strong>nearly flat with vehicle age</strong> across all five pairings (≤ 2 points of movement) — faster real-market BEV/HEV price depreciation roughly offsets the age penalty from the choice model, rather than closing the gap over time</li>
+</ul>
+<p><strong>Bottom line: hybrids are already market-competitive used-vehicle substitutes; BEVs are not yet, regardless of age.</strong></p>
+<!--
+This is a good place to pause and let the finding land — it's the most
+counter-intuitive result in the paper (many would expect BEV share to climb
+with age due to steep depreciation).
+-->
+<hr>
+</section>
+<section id="policy-implications" class="level2">
+<h2 class="anchored" data-anchor-id="policy-implications">Policy implications</h2>
+<ul>
+<li>The federal used clean-vehicle credit (§25E, up to <strong>$4,000</strong>/30% of price) only closes the gap for buyers <strong>already closest to parity</strong> (high-budget car buyers, long range) — it’s a fraction of the $8K–$19K gap facing most other segments</li>
+<li>The <strong>$25,000 price cap</strong> on that credit excludes many of the 250–300-mile-range used BEVs that are closest to competitive, while subsidizing shorter-range vehicles the credit can’t make competitive anyway</li>
+<li><strong>~$15,000–$20,000</strong> of the age-related WTP gap exceeds normal depreciation — plausibly a <strong>battery state-of-health information gap</strong>, addressable via disclosure/certification/warranties rather than cash transfers</li>
+<li><strong>Segment-aware policy</strong> — and continued promotion of HEVs, which are already market-competitive — looks more efficient than uniform subsidies</li>
+</ul>
+<!--
+This slide is dense; pick 2 of the 4 bullets to actually speak to in detail
+depending on audience (policy audience → credit design bullets; industry
+audience → HEV/battery-health bullets).
+-->
+<hr>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>Driving range and vehicle age are the dominant value determinants</strong> for used BEVs — effects that swamp budget tier or vehicle segment alone</li>
+<li>Used BEVs reach price parity with conventional vehicles in <strong>only one segment</strong>: high-budget car buyers, 300-mile range</li>
+<li><strong>Hybrids are already there</strong> — matching or beating conventional vehicles in predicted market share for high-budget car/SUV buyers, at every observed age</li>
+<li>For everyone else, the used-BEV discount required is large, predictable, and currently under-served by existing incentive design</li>
+</ul>
+<!--
+This is the "if they remember one slide" slide. Say the four bullets slowly.
+-->
+<hr>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<ul>
+<li>Stated, not revealed, preferences — hypothetical bias possible (direction uncertain)</li>
+<li>Online panel sample may over-represent information-engaged consumers</li>
+<li>MXL assumes continuous normal heterogeneity — a latent-class model would test for discrete preference clusters directly</li>
+<li>Battery state-of-health was not varied in this DCE (covered in a companion battery-attribute DCE)</li>
+</ul>
+<!--
+Quick slide, ~30 seconds. Don't dwell — just show you've thought about it.
+-->
+<hr>
+<!-- _class: lead -->
+</section>
+</section>
+<section id="questions" class="level1">
+<h1>Questions?</h1>
+<p>Zain Hoda · zain.hoda@gwu.edu</p>
+<!--
+Leave this up during Q&A.
+-->
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

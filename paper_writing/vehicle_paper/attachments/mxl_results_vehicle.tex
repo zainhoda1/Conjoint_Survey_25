@@ -1,7 +1,7 @@
 \begin{landscape}
 \begin{table}[pos=H]
 \footnotesize
-\caption{Mixed logit model estimates in WTP space: by vehicle type and budget subgroups (price unit: \$10,000).}
+\caption{Mixed logit model estimates in WTP space: by vehicle type and budget subgroups.}
 \label{table:mxl_results_vehicle}
 \begin{adjustbox}{width=\linewidth, center}
 \begin{tabular}{l *{6}{>{\centering\arraybackslash}p{2.4cm}}}
@@ -11,37 +11,38 @@
  & Car & SUV & Car (Low) & Car (High) & SUV (Low) & SUV (High) \\
 \midrule
 \multicolumn{7}{l}{\textbf{\textit{Mean parameters}}} \\[1ex]
-\quad $\lambda$ (scale) & \shortstack[r]{1.733\\(0.058)***} & \shortstack[r]{1.364\\(0.045)***} & \shortstack[r]{3.649\\(0.136)***} & \shortstack[r]{1.220\\(0.063)***} & \shortstack[r]{2.452\\(0.117)***} & \shortstack[r]{1.202\\(0.050)***} \\
-\quad BEV powertrain & \shortstack[r]{-1.729\\(0.120)***} & \shortstack[r]{-2.565\\(0.197)***} & \shortstack[r]{-1.030\\(0.082)***} & \shortstack[r]{-1.858\\(0.271)***} & \shortstack[r]{-2.044\\(0.197)***} & \shortstack[r]{-2.267\\(0.297)***} \\
-\quad HEV powertrain & \shortstack[r]{0.067\\(0.047)} & \shortstack[r]{0.079\\(0.055)} & \shortstack[r]{-0.061\\(0.032).} & \shortstack[r]{0.421\\(0.101)***} & \shortstack[r]{-0.070\\(0.050)} & \shortstack[r]{0.231\\(0.081)**} \\
-\quad Electric range & \shortstack[r]{0.434\\(0.065)***} & \shortstack[r]{0.451\\(0.065)***} & \shortstack[r]{0.213\\(0.056)***} & \shortstack[r]{0.542\\(0.120)***} & \shortstack[r]{0.412\\(0.078)***} & \shortstack[r]{0.374\\(0.094)***} \\
-\quad Mileage & \shortstack[r]{-0.203\\(0.012)***} & \shortstack[r]{-0.302\\(0.016)***} & \shortstack[r]{-0.100\\(0.008)***} & \shortstack[r]{-0.314\\(0.027)***} & \shortstack[r]{-0.148\\(0.014)***} & \shortstack[r]{-0.381\\(0.025)***} \\
-\quad Vehicle age & \shortstack[r]{-0.083\\(0.007)***} & \shortstack[r]{-0.144\\(0.009)***} & \shortstack[r]{-0.028\\(0.004)***} & \shortstack[r]{-0.191\\(0.017)***} & \shortstack[r]{-0.044\\(0.007)***} & \shortstack[r]{-0.216\\(0.015)***} \\
-\quad Operating cost & \shortstack[r]{-0.749\\(0.051)***} & \shortstack[r]{-0.858\\(0.059)***} & \shortstack[r]{-0.413\\(0.033)***} & \shortstack[r]{-1.050\\(0.114)***} & \shortstack[r]{-0.582\\(0.053)***} & \shortstack[r]{-0.897\\(0.085)***} \\
-\quad No choice & \shortstack[r]{-5.756\\(0.144)***} & \shortstack[r]{-7.456\\(0.173)***} & \shortstack[r]{-3.304\\(0.084)***} & \shortstack[r]{-7.783\\(0.314)***} & \shortstack[r]{-4.676\\(0.153)***} & \shortstack[r]{-8.452\\(0.245)***} \\
+\quad $\lambda$ (scale) & \shortstack[r]{0.173\\(0.006)***} & \shortstack[r]{0.136\\(0.004)***} & \shortstack[r]{0.364\\(0.013)***} & \shortstack[r]{0.122\\(0.006)***} & \shortstack[r]{0.245\\(0.012)***} & \shortstack[r]{0.121\\(0.005)***} \\
+\quad BEV powertrain & \shortstack[r]{-17.359\\(1.209)***} & \shortstack[r]{-26.105\\(1.935)***} & \shortstack[r]{-10.375\\(0.820)***} & \shortstack[r]{-18.325\\(2.681)***} & \shortstack[r]{-20.485\\(1.982)***} & \shortstack[r]{-22.304\\(2.906)***} \\
+\quad HEV powertrain & \shortstack[r]{0.603\\(0.473)} & \shortstack[r]{0.805\\(0.553)} & \shortstack[r]{-0.577\\(0.322).} & \shortstack[r]{4.240\\(1.005)***} & \shortstack[r]{-0.731\\(0.502)} & \shortstack[r]{2.271\\(0.811)**} \\
+\quad Electric range & \shortstack[r]{4.353\\(0.642)***} & \shortstack[r]{4.708\\(0.621)***} & \shortstack[r]{2.218\\(0.568)***} & \shortstack[r]{5.234\\(1.190)***} & \shortstack[r]{4.100\\(0.784)***} & \shortstack[r]{3.536\\(0.924)***} \\
+\quad Mileage & \shortstack[r]{-2.019\\(0.122)***} & \shortstack[r]{-3.015\\(0.165)***} & \shortstack[r]{-1.003\\(0.078)***} & \shortstack[r]{-3.136\\(0.272)***} & \shortstack[r]{-1.484\\(0.139)***} & \shortstack[r]{-3.848\\(0.248)***} \\
+\quad Vehicle age & \shortstack[r]{-0.826\\(0.069)***} & \shortstack[r]{-1.450\\(0.094)***} & \shortstack[r]{-0.279\\(0.043)***} & \shortstack[r]{-1.919\\(0.175)***} & \shortstack[r]{-0.436\\(0.074)***} & \shortstack[r]{-2.174\\(0.150)***} \\
+\quad Operating cost & \shortstack[r]{-0.746\\(0.051)***} & \shortstack[r]{-0.861\\(0.059)***} & \shortstack[r]{-0.412\\(0.033)***} & \shortstack[r]{-1.054\\(0.114)***} & \shortstack[r]{-0.581\\(0.053)***} & \shortstack[r]{-0.900\\(0.085)***} \\
+\quad No choice & \shortstack[r]{-57.452\\(1.436)***} & \shortstack[r]{-74.663\\(1.736)***} & \shortstack[r]{-33.136\\(0.851)***} & \shortstack[r]{-77.831\\(3.143)***} & \shortstack[r]{-46.547\\(1.523)***} & \shortstack[r]{-84.371\\(2.442)***} \\
 \addlinespace[1.5ex]
 \multicolumn{7}{l}{\textbf{\textit{Standard deviation}}} \\[1ex]
-\quad $|\hat{\sigma}|$: BEV powertrain & \shortstack[r]{1.684\\(0.097)***} & \shortstack[r]{2.226\\(0.129)***} & \shortstack[r]{0.943\\(0.064)***} & \shortstack[r]{2.214\\(0.214)***} & \shortstack[r]{1.462\\(0.113)***} & \shortstack[r]{2.306\\(0.215)***} \\
-\quad $|\hat{\sigma}|$: HEV powertrain & \shortstack[r]{0.982\\(0.055)***} & \shortstack[r]{1.234\\(0.068)***} & \shortstack[r]{0.554\\(0.034)***} & \shortstack[r]{1.171\\(0.121)***} & \shortstack[r]{0.724\\(0.058)***} & \shortstack[r]{1.388\\(0.100)***} \\
-\quad $|\hat{\sigma}|$: Electric range & \shortstack[r]{0.454\\(0.096)***} & \shortstack[r]{0.208\\(0.120).} & \shortstack[r]{0.226\\(0.107)*} & \shortstack[r]{0.607\\(0.154)***} & \shortstack[r]{0.004\\(0.180)} & \shortstack[r]{0.330\\(0.143)*} \\
-\quad $|\hat{\sigma}|$: Mileage & \shortstack[r]{0.144\\(0.017)***} & \shortstack[r]{0.205\\(0.021)***} & \shortstack[r]{0.076\\(0.010)***} & \shortstack[r]{0.172\\(0.041)***} & \shortstack[r]{0.114\\(0.018)***} & \shortstack[r]{0.229\\(0.030)***} \\
-\quad $|\hat{\sigma}|$: Vehicle age & \shortstack[r]{0.097\\(0.010)***} & \shortstack[r]{0.130\\(0.013)***} & \shortstack[r]{0.044\\(0.007)***} & \shortstack[r]{0.168\\(0.021)***} & \shortstack[r]{0.046\\(0.014)**} & \shortstack[r]{0.174\\(0.018)***} \\
-\quad $|\hat{\sigma}|$: Operating cost & \shortstack[r]{0.556\\(0.062)***} & \shortstack[r]{0.746\\(0.067)***} & \shortstack[r]{0.305\\(0.036)***} & \shortstack[r]{0.677\\(0.147)***} & \shortstack[r]{0.422\\(0.060)***} & \shortstack[r]{0.836\\(0.097)***} \\
-\quad $|\hat{\sigma}|$: No choice & \shortstack[r]{1.389\\(0.097)***} & \shortstack[r]{1.604\\(0.122)***} & \shortstack[r]{0.495\\(0.070)***} & \shortstack[r]{1.725\\(0.217)***} & \shortstack[r]{0.899\\(0.111)***} & \shortstack[r]{1.511\\(0.173)***} \\
+\quad $|\hat{\sigma}|$: BEV powertrain & \shortstack[r]{17.017\\(0.989)***} & \shortstack[r]{22.872\\(1.172)***} & \shortstack[r]{9.498\\(0.657)***} & \shortstack[r]{21.769\\(2.119)***} & \shortstack[r]{14.543\\(1.135)***} & \shortstack[r]{22.269\\(2.211)***} \\
+\quad $|\hat{\sigma}|$: HEV powertrain & \shortstack[r]{9.846\\(0.546)***} & \shortstack[r]{12.386\\(0.685)***} & \shortstack[r]{5.518\\(0.339)***} & \shortstack[r]{11.557\\(1.194)***} & \shortstack[r]{7.254\\(0.594)***} & \shortstack[r]{14.049\\(1.006)***} \\
+\quad $|\hat{\sigma}|$: Electric range & \shortstack[r]{4.352\\(0.907)***} & \shortstack[r]{0.924\\(1.963)} & \shortstack[r]{1.897\\(1.312)} & \shortstack[r]{6.534\\(1.369)***} & \shortstack[r]{0.416\\(1.632)} & \shortstack[r]{3.803\\(1.255)**} \\
+\quad $|\hat{\sigma}|$: Mileage & \shortstack[r]{1.381\\(0.174)***} & \shortstack[r]{2.027\\(0.214)***} & \shortstack[r]{0.770\\(0.103)***} & \shortstack[r]{1.683\\(0.425)***} & \shortstack[r]{1.091\\(0.183)***} & \shortstack[r]{2.292\\(0.302)***} \\
+\quad $|\hat{\sigma}|$: Vehicle age & \shortstack[r]{0.958\\(0.103)***} & \shortstack[r]{1.300\\(0.132)***} & \shortstack[r]{0.430\\(0.066)***} & \shortstack[r]{1.690\\(0.215)***} & \shortstack[r]{0.469\\(0.137)***} & \shortstack[r]{1.772\\(0.180)***} \\
+\quad $|\hat{\sigma}|$: Operating cost & \shortstack[r]{0.550\\(0.066)***} & \shortstack[r]{0.745\\(0.069)***} & \shortstack[r]{0.308\\(0.037)***} & \shortstack[r]{0.693\\(0.149)***} & \shortstack[r]{0.425\\(0.061)***} & \shortstack[r]{0.851\\(0.092)***} \\
+\quad $|\hat{\sigma}|$: No choice & \shortstack[r]{13.665\\(1.009)***} & \shortstack[r]{15.965\\(1.212)***} & \shortstack[r]{5.152\\(0.704)***} & \shortstack[r]{17.317\\(2.153)***} & \shortstack[r]{8.669\\(1.157)***} & \shortstack[r]{15.539\\(1.775)***} \\
 \midrule
 Respondents & 1,099 & 1,155 & 657 & 442 & 441 & 714 \\
 Choice observations & 6,594 & 6,930 & 3,942 & 2,652 & 2,646 & 4,284 \\
-Log-Likelihood & -6,762.75 & -7,198.82 & -3,759.47 & -2,726.68 & -2,620.13 & -4,448.66 \\
+Log-Likelihood & -6,765.38 & -7,198.68 & -3,758.26 & -2,726.13 & -2,621.49 & -4,448.01 \\
 Null Log-Likelihood & -9,141.23 & -9,607.02 & -5,464.77 & -3,676.45 & -3,668.13 & -5,938.89 \\
-AIC & 13,555.50 & 14,427.64 & 7,548.95 & 5,483.35 & 5,270.26 & 8,927.32 \\
-BIC & 13,657.41 & 14,530.30 & 7,643.14 & 5,571.60 & 5,358.48 & 9,022.76 \\
-McFadden $R^2$ & 0.2602 & 0.2507 & 0.3121 & 0.2583 & 0.2857 & 0.2509 \\
-Adj.\ McFadden $R^2$ & 0.2586 & 0.2491 & 0.3093 & 0.2543 & 0.2816 & 0.2484 \\
+AIC & 13,560.76 & 14,427.37 & 7,546.52 & 5,482.26 & 5,272.97 & 8,926.02 \\
+BIC & 13,662.66 & 14,530.02 & 7,640.71 & 5,570.50 & 5,361.18 & 9,021.46 \\
+McFadden $R^2$ & 0.2599 & 0.2507 & 0.3123 & 0.2585 & 0.2853 & 0.2510 \\
+Adj.\ McFadden $R^2$ & 0.2583 & 0.2491 & 0.3095 & 0.2544 & 0.2812 & 0.2485 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
 \begin{minipage}{\linewidth}\vspace{4pt}\footnotesize
-Notes: WTP estimates in \$10,000 units. Significance codes: $p<0.001$ `***', $p<0.01$ `**', $p<0.05$ `*', $p<0.1$ `.'.
+Notes: mean and standard-deviation coefficients in \$1,000 units, denominated per natural attribute unit: powertrain indicators and the no-choice constant per 1 (dummy); electric range per 100 miles; mileage per 10,000 miles; vehicle age per 1 year; operating cost per 1 cent/mile. The scale parameter $\lambda$ is not a dollar-denominated WTP coefficient.
+Significance codes: $p<0.001$ `***', $p<0.01$ `**', $p<0.05$ `*', $p<0.1$ `.'.
 Standard errors in parentheses.
 \end{minipage}
 \end{table}

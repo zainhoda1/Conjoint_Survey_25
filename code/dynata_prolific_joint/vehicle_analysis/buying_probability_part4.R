@@ -134,9 +134,7 @@ ggsave(
 
 ####################################
 
-# Fixed-order categorical palette: "minou" from the ltc color-palette
-# library (https://loukesio.github.io/ltc-color-palettes/). Assigned by
-# position to whichever comparisons are present in the data.
+
 comparison_colors <- c(
   "#00798c",  # teal
   "#d1495b",  # red

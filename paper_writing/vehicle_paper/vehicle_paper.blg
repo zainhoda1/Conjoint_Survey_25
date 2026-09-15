@@ -1,21 +1,21 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
-[1] Config.pm:331> INFO - Logfile is 'vehicle_paper.blg'
-[377] biber-MSWIN64:342> INFO - === 
-[488] Biber.pm:421> INFO - Reading 'vehicle_paper.bcf'
-[862] Biber.pm:1002> INFO - Found 27 citekeys in bib section 0
-[907] Biber.pm:4487> INFO - Processing section 0
-[930] Biber.pm:4678> INFO - Looking for bibtex file 'DCE_lit_review.bib' for section 0
-[1035] bibtex.pm:1713> INFO - LaTeX decoding ...
-[1193] bibtex.pm:1519> INFO - Found BibTeX data source 'DCE_lit_review.bib'
-[1271] Biber.pm:4678> INFO - Looking for bibtex file 'Used EV.bib' for section 0
-[1364] bibtex.pm:1713> INFO - LaTeX decoding ...
-[1465] bibtex.pm:1519> INFO - Found BibTeX data source 'Used EV.bib'
-[1542] Biber.pm:4678> INFO - Looking for bibtex file 'used_EV_lit_review.bib' for section 0
-[1641] bibtex.pm:1713> INFO - LaTeX decoding ...
-[1678] bibtex.pm:1519> INFO - Found BibTeX data source 'used_EV_lit_review.bib'
-[1902] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1902] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1902] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
-[1902] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[1983] bbl.pm:676> INFO - Writing 'vehicle_paper.bbl' with encoding 'UTF-8'
-[2009] bbl.pm:779> INFO - Output to vehicle_paper.bbl
+[0] Config.pm:331> INFO - Logfile is 'vehicle_paper.blg'
+[171] biber-MSWIN64:342> INFO - === 
+[223] Biber.pm:421> INFO - Reading 'vehicle_paper.bcf'
+[458] Biber.pm:1002> INFO - Found 27 citekeys in bib section 0
+[489] Biber.pm:4487> INFO - Processing section 0
+[505] Biber.pm:4678> INFO - Looking for bibtex file 'DCE_lit_review.bib' for section 0
+[575] bibtex.pm:1713> INFO - LaTeX decoding ...
+[695] bibtex.pm:1519> INFO - Found BibTeX data source 'DCE_lit_review.bib'
+[746] Biber.pm:4678> INFO - Looking for bibtex file 'Used EV.bib' for section 0
+[815] bibtex.pm:1713> INFO - LaTeX decoding ...
+[887] bibtex.pm:1519> INFO - Found BibTeX data source 'Used EV.bib'
+[948] Biber.pm:4678> INFO - Looking for bibtex file 'used_EV_lit_review.bib' for section 0
+[1020] bibtex.pm:1713> INFO - LaTeX decoding ...
+[1051] bibtex.pm:1519> INFO - Found BibTeX data source 'used_EV_lit_review.bib'
+[1241] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1242] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1242] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[1242] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[1310] bbl.pm:676> INFO - Writing 'vehicle_paper.bbl' with encoding 'UTF-8'
+[1338] bbl.pm:779> INFO - Output to vehicle_paper.bbl
