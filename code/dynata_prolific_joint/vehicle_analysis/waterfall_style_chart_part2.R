@@ -9,21 +9,43 @@ load(here("models", "mixed_model_1_suv_low_panel.RData"))
 load(here("models", "mixed_model_1_suv_high_panel.RData"))
 
 
-all_vehicles <- read_parquet(here("data", "vehicle_listing_prices.parquet"))
+all_vehicles <- read_parquet(here("data", "vehicle_listing_prices.parquet")) |> 
+   mutate(across(where(is.character), toupper)) 
 
 vehicle_list <- data.frame(read_csv(here('data', 'vehicle_pairs_2016_2024.csv'))) |>
-  mutate(across(where(is.character), tolower))
+ mutate(across(where(is.character), toupper)) |> 
+  select(-model_years.US.)
 
-all_vehicles1 <- full_join(
+#######
+# Add code for self join here
+
+vehicle_list1 <- vehicle_list |>
+  filter(powertrain == 'CV') |> 
+  select(-bev_range, -vehicle_type, -make) |> 
+  left_join(
+    vehicle_list |> 
+      filter(powertrain != 'CV'),
+    by = "Pair_id"
+  ) |> 
+  mutate (
+    name = paste0(make , ' ', model.y, ' (', 
+      powertrain.y , ') vs ', model.x, ' (', powertrain.x, ')'),
+    powertrain = powertrain.y,
+    model = model.y
+    ) |> 
+  select(make, model, powertrain, bev_range, name, vehicle_type)
+
+######
+
+
+all_vehicles1 <- right_join(
   all_vehicles,
-  vehicle_list,
+  vehicle_list1,
   by = c('make', 'model', 'powertrain')
 ) |>
-  group_by(Pair_id) |>
-  filter(!any(is.na(count) | count < 200)
-         ,powertrain != 'cv'
-        ) |>
-  ungroup()
+  filter( count > 200)
+
+
 
 
 
@@ -50,16 +72,16 @@ wtp_coef_lookup <- list(
 vehicle_wtp <- all_vehicles1 |>
   mutate(
     budget = case_when(
-      vehicle_type == "car" & mean_price < 20000 ~ "low",
-      vehicle_type == "car" & mean_price > 20000 ~ "high",
-      vehicle_type == "suv" & mean_price < 25000 ~ "low",
-      vehicle_type == "suv" & mean_price > 25000 ~ "high"
+      vehicle_type == "CAR" & mean_price < 20000 ~ "low",
+      vehicle_type == "CAR" & mean_price > 20000 ~ "high",
+      vehicle_type == "SUV" & mean_price < 25000 ~ "low",
+      vehicle_type == "SUV" & mean_price > 25000 ~ "high"
     ),
     model_name = case_when(
-      vehicle_type == "car" & budget == "low"  ~ "mixed_model_1_car_low_panel",
-      vehicle_type == "car" & budget == "high" ~ "mixed_model_1_car_high_panel",
-      vehicle_type == "suv" & budget == "low"  ~ "mixed_model_1_suv_low_panel",
-      vehicle_type == "suv" & budget == "high" ~ "mixed_model_1_suv_high_panel"
+      vehicle_type == "CAR" & budget == "low"  ~ "mixed_model_1_car_low_panel",
+      vehicle_type == "CAR" & budget == "high" ~ "mixed_model_1_car_high_panel",
+      vehicle_type == "SUV" & budget == "low"  ~ "mixed_model_1_suv_low_panel",
+      vehicle_type == "SUV" & budget == "high" ~ "mixed_model_1_suv_high_panel"
     )
   ) |>
   filter(!is.na(model_name)) |>
@@ -73,13 +95,13 @@ vehicle_wtp <- all_vehicles1 |>
   ) |>
   ungroup() |>
   mutate(
-    powertrainbev_dummy = if_else(powertrain == "bev", 1, 0),
-    powertrainhev_dummy = if_else(powertrain == "hev", 1, 0),
+    powertrainbev_dummy = if_else(powertrain == "BEV", 1, 0),
+    powertrainhev_dummy = if_else(powertrain == "HEV", 1, 0),
     range_bev_scaled     = (bev_range * (1 - depreciation_rate) ^ fixed_age),
     mileage_scaled       = mean_mileage,
     operating_cost_scaled = case_when(
-      powertrain == "bev" ~ 0.3,
-      powertrain == "hev" ~ 0.6,
+      powertrain == "BEV" ~ 0.3,
+      powertrain == "HEV" ~ 0.6,
       .default = 1.2
     ),
 
@@ -116,20 +138,19 @@ chart_surface <- "#fcfcfb"
 strip_surface <- "#f2f1ee"
 
 waterfall_all <- vehicle_wtp |>
-  mutate(vehicle_label = paste0(str_to_title(make), " ", str_to_title(model))) |>
-  select(vehicle_label, wtp_powertrain, wtp_range, wtp_mileage, wtp_operating_cost) |>
+  mutate(vehicle_label = name) |>
+  select(vehicle_label, wtp_powertrain, wtp_range, wtp_operating_cost) |>
   pivot_longer(
-    cols = c(wtp_powertrain, wtp_range, wtp_mileage, wtp_operating_cost),
+    cols = c(wtp_powertrain, wtp_range, wtp_operating_cost),
     names_to = "attribute", values_to = "wtp"
   ) |>
   mutate(
     attribute = recode(attribute,
       wtp_powertrain     = "Powertrain",
       wtp_range          = "Range",
-      wtp_mileage        = "Mileage",
       wtp_operating_cost = "Operating cost"
     ),
-    attribute = factor(attribute, levels = c("Powertrain", "Range", "Mileage", "Operating cost"))
+    attribute = factor(attribute, levels = c("Powertrain", "Range", "Operating cost"))
   ) |>
   arrange(vehicle_label, attribute) |>
   group_by(vehicle_label) |>
@@ -150,7 +171,7 @@ bar_type_colors <- c(
 waterfall_all_plot <- waterfall_all |>
   ggplot(aes(x = attribute)) +
 
-  geom_hline(yintercept = 0, linetype = "dashed", color = baseline_ink, linewidth = 0.4) +
+  geom_hline(yintercept = 0, linetype = "solid", color = ink_primary, linewidth = 0.6) +
 
   geom_rect(
     aes(xmin = as.numeric(attribute) - 0.35,
@@ -166,7 +187,7 @@ waterfall_all_plot <- waterfall_all |>
     breaks = scales::breaks_pretty(n = 5)
   ) +
 
-  facet_wrap(~ vehicle_label, scales = "free_y", ncol = 3) +
+  facet_wrap(~ vehicle_label, ncol = 3) +
 
   labs(
     title    = "Willingness to Pay Breakdown by Attribute",
@@ -214,7 +235,7 @@ ggsave(
     'code', 'output', 'images', 'vehicle_analysis', 'waterfall_wtp_all_vehicles.png'
   ),
   plot = waterfall_all_plot,
-  width = 11,
+  width = 12,
   height = 7,
   dpi = 300,
   bg = "white"
