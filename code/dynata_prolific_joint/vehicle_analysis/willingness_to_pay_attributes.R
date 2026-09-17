@@ -166,7 +166,7 @@ wtp_plot <- ggplot(wtp_plot_df, aes(x = mean, y = attribute, color = budget)) +
   labs(
     title    = "Willingness to Pay for Vehicle Attributes",
     subtitle = "By vehicle segment and budget tier; error bars show 95% confidence intervals",
-    x = "Willingness to Pay ($ thousands)",
+    x = "Willingness to Pay ($)",
     y = NULL
   ) +
 
@@ -235,3 +235,4 @@ ggsave(
 )
 
 ##########################################
+
