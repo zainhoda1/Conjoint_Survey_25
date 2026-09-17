@@ -95,9 +95,9 @@ wtp_plot_df <- bind_rows(
   mutate(line_type = if_else(is.na(line_type), "solid", line_type)) %>%
   mutate(
     attribute = recode(attribute,
-      "BEV_100" = "BEV 100",
-      "BEV_200" = "BEV 200",
-      "BEV_300" = "BEV 300",
+      "BEV_100" = "BEV 100 mile range",
+      "BEV_200" = "BEV 200 mile range",
+      "BEV_300" = "BEV 300 mile range",
       "age_year" = "Reduce age by 1 yr",
       "mileage_10k" = "Reduce mileage by 10k mi",
       "operating_cost_mile" = "Reduce Op. Cost 1 cent / 1 mi"
@@ -112,9 +112,9 @@ wtp_plot_df <- wtp_plot_df %>%
     "Reduce Op. Cost 1 cent / 1 mi",
     "Reduce mileage by 10k mi",
     "Reduce age by 1 yr",
-    "BEV 100",
-    "BEV 200",
-    "BEV 300",
+    "BEV 100 mile range",
+    "BEV 200 mile range",
+    "BEV 300 mile range",
     "HEV"
   )))
 
