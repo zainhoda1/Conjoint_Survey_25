@@ -2,7 +2,8 @@
 source(here::here('code', 'setup.R'))
 
 
-vehicle_wtp <- read_parquet(here("data", "vehicle_wtp.parquet")) 
+vehicle_wtp <- read_parquet(here("data", "vehicle_wtp.parquet"))  |> 
+  mutate(name = paste0(vehicle_type, ' ', budget,' BUDGET')) 
 
 #############################
 
@@ -22,7 +23,8 @@ bar_type_colors <- c(
   "Negative" = "#d1495b"   # red
 )
 
-net_color <- "#1f5fa8"  # blue
+net_color       <- "#1f5fa8"  # blue
+price_diff_color <- "#ec2742"  # red
 
 # attribute_levels includes "Net" even though it is plotted as a point/error
 # bar (not a rect), so the bar data and the Net data share one discrete x scale
@@ -30,13 +32,11 @@ make_waterfall_bars <- function(pt, attribute_levels) {
   vehicle_wtp |>
     filter(powertrain == pt) |>
     mutate(
-      vehicle_label = name,
-      pair_label    = paste0(
-        if_else(vehicle_type == "CAR", "Car", "SUV"), " ",
-        str_to_title(budget), " Budget"
-      )
+      vehicle_label      = name,
+      vehicle_type_label = if_else(vehicle_type == "CAR", "Car", "SUV"),
+      budget_label       = paste0(str_to_title(budget), " Budget")
     ) |>
-    select(vehicle_label, pair_label,
+    select(vehicle_label, vehicle_type_label, budget_label,
            wtp_powertrain, wtp_range, wtp_operating_cost) |>
     pivot_longer(
       cols = c(wtp_powertrain, wtp_range, wtp_operating_cost),
@@ -67,13 +67,22 @@ make_waterfall_net <- function(pt, attribute_levels) {
   vehicle_wtp |>
     filter(powertrain == pt) |>
     mutate(
-      pair_label = paste0(
-        if_else(vehicle_type == "CAR", "Car", "SUV"), " ",
-        str_to_title(budget), " Budget"
-      ),
-      attribute = factor("Net", levels = attribute_levels)
+      vehicle_type_label = if_else(vehicle_type == "CAR", "Car", "SUV"),
+      budget_label       = paste0(str_to_title(budget), " Budget"),
+      attribute          = factor("Net", levels = attribute_levels)
     ) |>
-    select(pair_label, attribute, net_mean, net_lower, net_upper)
+    select(vehicle_type_label, budget_label, attribute, net_mean, net_lower, net_upper)
+}
+
+make_waterfall_price_ref <- function(pt) {
+  vehicle_wtp |>
+    filter(powertrain == pt) |>
+    mutate(
+      vehicle_type_label = if_else(vehicle_type == "CAR", "Car", "SUV"),
+      budget_label        = paste0(str_to_title(budget), " Budget"),
+      price_diff_label    = paste0("Mean price premium: ", scales::dollar(mean_price_diff, accuracy = 1))
+    ) |>
+    select(vehicle_type_label, budget_label, mean_price_diff, price_diff_label)
 }
 
 # Dotted horizontal connectors linking each bar's running total to the next
@@ -92,15 +101,15 @@ make_waterfall_connectors <- function(bars) {
     ) |>
     ungroup() |>
     filter(!is.na(xend)) |>
-    select(pair_label, x, xend, y, yend)
+    select(vehicle_type_label, budget_label, x, xend, y, yend)
 
   to_net <- bars |>
     arrange(vehicle_label, attribute) |>
-    group_by(vehicle_label, pair_label) |>
+    group_by(vehicle_label, vehicle_type_label, budget_label) |>
     slice_tail(n = 1) |>
     ungroup() |>
     transmute(
-      pair_label,
+      vehicle_type_label, budget_label,
       x    = as.numeric(attribute) + 0.35,
       xend = net_x,
       y    = cum_end,
@@ -110,12 +119,26 @@ make_waterfall_connectors <- function(bars) {
   bind_rows(between_bars, to_net)
 }
 
-build_waterfall_plot <- function(bars, net_data, title, subtitle) {
+build_waterfall_plot <- function(bars, net_data, price_ref_data, title, subtitle) {
   connectors <- make_waterfall_connectors(bars)
 
   ggplot(bars, aes(x = attribute)) +
 
     geom_hline(yintercept = 0, linetype = "solid", color = ink_primary, linewidth = 0.6) +
+
+    geom_hline(
+      data = price_ref_data,
+      aes(yintercept = mean_price_diff),
+      color = price_diff_color, linewidth = 0.6,
+      linetype = "dashed"
+    ) +
+
+    geom_text(
+      data = price_ref_data,
+      aes(x = Inf, y = mean_price_diff, label = price_diff_label),
+      inherit.aes = FALSE, color = price_diff_color, size = 2.8,
+      hjust = 1.55, vjust = 1.6
+    ) +
 
     geom_rect(
       aes(xmin = as.numeric(attribute) - 0.35,
@@ -150,7 +173,7 @@ build_waterfall_plot <- function(bars, net_data, title, subtitle) {
       breaks = scales::breaks_pretty(n = 5)
     ) +
 
-    facet_wrap(~ pair_label, nrow = 1) +
+    facet_grid(budget_label ~ vehicle_type_label) +
 
     labs(
       title    = stringr::str_wrap(title, width = 55),
@@ -167,7 +190,7 @@ build_waterfall_plot <- function(bars, net_data, title, subtitle) {
 
       plot.title    = element_text(face = "bold", size = 14, color = ink_primary,
                                     margin = margin(b = 3)),
-      plot.subtitle = element_text(size = 10.5, color = ink_secondary,
+      plot.subtitle = element_text(size = 8.5, color = ink_secondary,
                                     margin = margin(b = 10)),
       plot.margin   = margin(12, 14, 10, 12),
 
@@ -184,7 +207,7 @@ build_waterfall_plot <- function(bars, net_data, title, subtitle) {
       panel.grid.major.y = element_line(color = grid_hairline, linewidth = 0.35),
       panel.grid.minor    = element_blank(),
       panel.spacing        = unit(1.2, "lines"),
-      panel.border         = element_blank(),
+      panel.border         = element_rect(color = baseline_ink, fill = NA, linewidth = 0.5),
 
       legend.position  = "bottom",
       legend.text      = element_text(size = 9.5, color = ink_secondary),
@@ -195,24 +218,25 @@ build_waterfall_plot <- function(bars, net_data, title, subtitle) {
 save_waterfall_plot <- function(plot, file_name) {
   ggsave(
     filename = here::here('code', 'output', 'images', 'vehicle_analysis', file_name),
-    plot = plot, width = 9, height = 5.5, dpi = 300, bg = "white"
+    plot = plot, width = 8, height = 6, dpi = 300, bg = "white"
   )
   ggsave(
     filename = here::here('paper_writing', 'vehicle_paper', 'images', 'vehicle_analysis', file_name),
-    plot = plot, width = 9, height = 5.5, dpi = 300, bg = "white"
+    plot = plot, width = 8, height = 6, dpi = 300, bg = "white"
   )
 }
 
 # --- BEV plot: Powertrain, Range, Operating cost, Net ---
 
 bev_attribute_levels <- c("Powertrain", "Range", "Operating cost", "Net")
-waterfall_bev_bars <- make_waterfall_bars("BEV", bev_attribute_levels)
-waterfall_bev_net  <- make_waterfall_net("BEV", bev_attribute_levels)
+waterfall_bev_bars     <- make_waterfall_bars("BEV", bev_attribute_levels)
+waterfall_bev_net      <- make_waterfall_net("BEV", bev_attribute_levels)
+waterfall_bev_price_ref <- make_waterfall_price_ref("BEV")
 
 waterfall_bev_plot <- build_waterfall_plot(
-  waterfall_bev_bars, waterfall_bev_net,
+  waterfall_bev_bars, waterfall_bev_net, waterfall_bev_price_ref,
   title = "Head-to-head charts showing WTP for attributes of BEV's against their Conventional Counterparts",
-  subtitle = "BEV vs. conventional -- dollar WTP contribution by attribute, with simulated Net WTP (mean, 95% interval)"
+  subtitle = "BEV vs. conventional -- dollar WTP contribution by attribute, with simulated Net WTP (mean, 95% interval) \n dashed line = mean price premium"
 )
 
 waterfall_bev_plot
@@ -222,13 +246,14 @@ save_waterfall_plot(waterfall_bev_plot, "waterfall_wtp_bev.png")
 # --- HEV plot: Powertrain, Operating cost, Net (no Range) ---
 
 hev_attribute_levels <- c("Powertrain", "Operating cost", "Net")
-waterfall_hev_bars <- make_waterfall_bars("HEV", hev_attribute_levels)
-waterfall_hev_net  <- make_waterfall_net("HEV", hev_attribute_levels)
+waterfall_hev_bars     <- make_waterfall_bars("HEV", hev_attribute_levels)
+waterfall_hev_net      <- make_waterfall_net("HEV", hev_attribute_levels)
+waterfall_hev_price_ref <- make_waterfall_price_ref("HEV")
 
 waterfall_hev_plot <- build_waterfall_plot(
-  waterfall_hev_bars, waterfall_hev_net,
-  title = "Head-to-head charts showing WTP for attributes of HEV's against their Conventional Counterparts", 
-  subtitle = "HEV vs. conventional -- dollar WTP contribution by attribute, with simulated Net WTP (mean, 95% interval)"
+  waterfall_hev_bars, waterfall_hev_net, waterfall_hev_price_ref,
+  title = "Head-to-head charts showing WTP for attributes of HEV's against their Conventional Counterparts",
+  subtitle = "HEV vs. conventional -- dollar WTP contribution by attribute, with simulated Net WTP (mean, 95% interval) \n dashed line = mean price premium"
 )
 
 waterfall_hev_plot
