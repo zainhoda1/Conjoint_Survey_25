@@ -105,10 +105,10 @@ wtp_vcov_lookup <- list(
 vehicle_wtp <- combined_table_2 |>
   mutate(
     budget = case_when(
-      vehicle_type == "CAR" & mean_price <= 25000 ~ "LOW",
-      vehicle_type == "CAR" & mean_price > 25000 ~ "HIGH",
-      vehicle_type == "SUV" & mean_price <= 30000 ~ "LOW",
-      vehicle_type == "SUV" & mean_price > 30000 ~ "HIGH"
+      vehicle_type == "CAR" & mean_price <= 24000 ~ "LOW",  #(20% buffer in price)
+      vehicle_type == "CAR" & mean_price > 24000 ~ "HIGH",  #(20% buffer in price)
+      vehicle_type == "SUV" & mean_price <= 30000 ~ "LOW",  #(20% buffer in price)
+      vehicle_type == "SUV" & mean_price > 30000 ~ "HIGH"   #(20% buffer in price)
     ),
     model_name = case_when(
       vehicle_type == "CAR" & budget == "LOW"  ~ "mixed_model_1_car_low_panel",
