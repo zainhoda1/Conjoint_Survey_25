@@ -102,7 +102,7 @@
       \field{journaltitle}{Transportation Research Part A: Policy and Practice}
       \field{langid}{english}
       \field{month}{8}
-      \field{shortjournal}{Transportation Research Part A: Policy and Practice}
+      \field{shortjournal}{Transp. Res. Part Policy Pract.}
       \field{title}{Exploring Tourist Preference for {{Mobility-as-a-Service}} ({{MaaS}}) – {{A}} Latent Class Choice Approach}
       \field{urlday}{18}
       \field{urlmonth}{5}
@@ -124,6 +124,45 @@
       \endverb
       \verb{url}
       \verb https://linkinghub.elsevier.com/retrieve/pii/S0965856423001702
+      \endverb
+    \endentry
+    \entry{coxautomotiveinc.EVMarketMonitor2025}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=a8b3d6c340557e9d73efc799f6538a0b}{%
+           family={{Cox Automotive Inc.}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{fullhash}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{fullhashraw}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{bibnamehash}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{authorbibnamehash}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{authornamehash}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{authorfullhash}{a8b3d6c340557e9d73efc799f6538a0b}
+      \strng{authorfullhashraw}{a8b3d6c340557e9d73efc799f6538a0b}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The EV Market Monitor gauges the health of the new and used electric vehicle (EV) markets by monitoring sales, inventory and pricing.}
+      \field{langid}{american}
+      \field{title}{{{EV Market Monitor}} – {{February}} 2025}
+      \field{urlday}{30}
+      \field{urlmonth}{6}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/35G6G73J/ev-market-monitor-february-2025.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.coxautoinc.com/market-insights/ev-market-monitor-february-2025/
+      \endverb
+      \verb{url}
+      \verb https://www.coxautoinc.com/market-insights/ev-market-monitor-february-2025/
       \endverb
     \endentry
     \entry{fernandesUSUnderstandingConsumer2023}{online}{}{}
@@ -168,6 +207,69 @@
       \verb https://business.yougov.com/content/47834-us-understanding-consumer-opinion-about-used-electric-cars
       \endverb
     \endentry
+    \entry{hensherImplicationsWillingnessPay2005}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=fb8ce2f90600eb0cccb30d0cac0b3be4}{%
+           family={Hensher},
+           familyi={H\bibinitperiod},
+           given={David\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=d34acc0f7f70c248b20aa34bf0264b96}{%
+           family={Rose},
+           familyi={R\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6aeaa164d917d0657b4f141378594e78}{%
+           family={Greene},
+           familyi={G\bibinitperiod},
+           given={William\bibnamedelima H.},
+           giveni={W\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{afaf2ff61e1eb8429c5a2919d5853117}
+      \strng{fullhash}{e2ffb00a184ea37f380054e97cb8abf5}
+      \strng{fullhashraw}{e2ffb00a184ea37f380054e97cb8abf5}
+      \strng{bibnamehash}{e2ffb00a184ea37f380054e97cb8abf5}
+      \strng{authorbibnamehash}{e2ffb00a184ea37f380054e97cb8abf5}
+      \strng{authornamehash}{afaf2ff61e1eb8429c5a2919d5853117}
+      \strng{authorfullhash}{e2ffb00a184ea37f380054e97cb8abf5}
+      \strng{authorfullhashraw}{e2ffb00a184ea37f380054e97cb8abf5}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Individuals processing the information in a stated choice experiment are typically assumed to evaluate each and every attribute offered within and between alternatives, and to choose their most preferred alternative. However, it has always been thought that some attributes are ignored in this process for many reasons, including a coping strategy to handle one’s perception of the complexity of the choice task. Nonetheless, analysts typically proceed to estimate discrete choice models as if all attributes have influenced the outcome to some degree. The cognitive processes used to evaluate trade-offs are complex with boundaries often placed on the task to assist the respondent. These boundaries can include prioritising attributes and ignoring specific attributes. In this paper we investigate the implications of bounding the information processing task by attribute elimination through ignoring one or more attributes. Using a sample of car commuters in Sydney we estimate mixed logit models that assume all attributes are candidate contributors, and models that assume certain attributes are ignored, the latter based on supplementary information provided by respondents. We compare the value of travel time savings under the alternative attribute processing regimes. Assuming that all attributes are not ignored and duly processed, leads to estimates of parameters which produce significantly different willingness to pay (WTP) to that obtained when the exclusion rule is invoked.}
+      \field{day}{1}
+      \field{issn}{1572-9435}
+      \field{journaltitle}{Transportation}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{number}{3}
+      \field{title}{The Implications on Willingness to Pay of Respondents Ignoring Specific Attributes}
+      \field{urlday}{9}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{32}
+      \field{year}{2005}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{203\bibrangedash 222}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1007/s11116-004-7613-8
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/J8GRJCDL/Hensher et al. - 2005 - The implications on willingness to pay of respondents ignoring specific attributes.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s11116-004-7613-8
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s11116-004-7613-8
+      \endverb
+      \keyw{complexity,information processing,relevance,stated choice designs,willingness to pay}
+    \endentry
     \entry{marketresearchfutureUnitedStatesUsed2025}{online}{}{}
       \name{author}{1}{}{%
         {{hash=0585f4ab93b0b5191d72ce69f0a4d7bc}{%
@@ -205,6 +307,73 @@
       \endverb
       \verb{url}
       \verb https://www.marketresearchfuture.com/reports/us-used-car-market-21771
+      \endverb
+    \endentry
+    \entry{scarpaModellingAttributeNonattendance2009}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=59c4289108dd3a9da3ffa51eeb392330}{%
+           family={Scarpa},
+           familyi={S\bibinitperiod},
+           given={Riccardo},
+           giveni={R\bibinitperiod}}}%
+        {{hash=0c8d2c1954b36ab588f34b770caa65a3}{%
+           family={Gilbride},
+           familyi={G\bibinitperiod},
+           given={Timothy\bibnamedelima J.},
+           giveni={T\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=302baca3381984f37ed0b76ab81daaa1}{%
+           family={Campbell},
+           familyi={C\bibinitperiod},
+           given={Danny},
+           giveni={D\bibinitperiod}}}%
+        {{hash=fb8ce2f90600eb0cccb30d0cac0b3be4}{%
+           family={Hensher},
+           familyi={H\bibinitperiod},
+           given={David\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{1b4171e50f312c0b2f616420a4a4e6f2}
+      \strng{fullhash}{167db41d28608d9ae6673418e36acc86}
+      \strng{fullhashraw}{167db41d28608d9ae6673418e36acc86}
+      \strng{bibnamehash}{167db41d28608d9ae6673418e36acc86}
+      \strng{authorbibnamehash}{167db41d28608d9ae6673418e36acc86}
+      \strng{authornamehash}{1b4171e50f312c0b2f616420a4a4e6f2}
+      \strng{authorfullhash}{167db41d28608d9ae6673418e36acc86}
+      \strng{authorfullhashraw}{167db41d28608d9ae6673418e36acc86}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Non-market effects of agriculture are often estimated using discrete choice models from stated preference surveys. In this context we propose two ways of modelling attribute non-attendance. The first involves constraining coefficients to zero in a latent class framework, whereas the second is based on stochastic attribute selection and grounded in Bayesian estimation. Their implications are explored in the context of a stated preference survey designed to value landscapes in Ireland. Taking account of attribute non-attendance with these data improves fit and tends to involve two attributes one of which is likely to be cost, thereby leading to substantive changes in derived welfare estimates.}
+      \field{day}{1}
+      \field{issn}{0165-1587}
+      \field{journaltitle}{European Review of Agricultural Economics}
+      \field{month}{6}
+      \field{number}{2}
+      \field{shortjournal}{Eur. Rev. Agric. Econ.}
+      \field{title}{Modelling Attribute Non-Attendance in Choice Experiments for Rural Landscape Valuation}
+      \field{urlday}{9}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{36}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{151\bibrangedash 174}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1093/erae/jbp012
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/7XUT2CKE/jbp012.html
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/erae/jbp012
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/erae/jbp012
       \endverb
     \endentry
   \enddatalist

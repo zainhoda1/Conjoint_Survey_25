@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  12 JUN 2026 17:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  30 SEP 2026 12:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1019,65 +1019,76 @@ Package biblatex Info: ... file 'battery_paper_conference.bbl' found.
  (./battery_paper_conference.bbl)
 Package biblatex Info: Reference section=0 on input line 90.
 Package biblatex Info: Reference segment=0 on input line 90.
-LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 118.
+LaTeX Font Info:    Trying to load font information for LS1+stixscr on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixscr.fd
 File: ls1stixscr.fd 2015/04/17 v1.1.2-latex STIX script LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 118.
+LaTeX Font Info:    Trying to load font information for LS2+stixex on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixex.fd
 File: ls2stixex.fd 2015/04/17 v1.1.2-latex STIX extentions LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 118.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 118.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 118.
+LaTeX Font Info:    Trying to load font information for LS1+stixfrak on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixfrak.fd
 File: ls1stixfrak.fd 2015/04/17 v1.1.2-latex STIX fraktur LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 118.
+LaTeX Font Info:    Trying to load font information for LS1+stixbb on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixbb.fd
 File: ls1stixbb.fd 2015/04/17 v1.1.2-latex STIX blackboard LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 118.
+LaTeX Font Info:    Trying to load font information for LS2+stixcal on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixcal.fd
 File: ls2stixcal.fd 2015/04/17 v1.1.2-latex STIX calligraphic LS2 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 118.
+LaTeX Font Info:    Trying to load font information for LS1+stixsf on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls1stixsf.fd
 File: ls1stixsf.fd 2015/04/17 v1.1.2-latex STIX sans-serif LS1 font definitions
 )
-LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 118.
+LaTeX Font Info:    Trying to load font information for LS2+stixtt on input line 140.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/stix/ls2stixtt.fd
 File: ls2stixtt.fd 2015/04/17 v1.1.2-latex STIX typewriter LS2 font definitions
 )
 
-Package hyperref Warning: Ignoring empty anchor on input line 118.
+Package hyperref Warning: Ignoring empty anchor on input line 140.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 118.
+Package hyperref Warning: Ignoring empty anchor on input line 140.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 118.
+Package hyperref Warning: Ignoring empty anchor on input line 140.
 
 
-Underfull \hbox (badness 6592) in paragraph at lines 149--149
-[]|\T1/cmss/m/n/9 Battery re-fur-bish-ment
- []
+Package hyperref Warning: Ignoring empty anchor on input line 140.
+
+
+Package hyperref Warning: Ignoring empty anchor on input line 140.
+
+
+Package hyperref Warning: Ignoring empty anchor on input line 140.
+
+
+Package hyperref Warning: Ignoring empty anchor on input line 140.
 
 
 
 [1
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-<../../code/output/images/battery_analysis/battery-1.png, id=25, 741.77126pt x 705.63625pt>
+Underfull \hbox (badness 6592) in paragraph at lines 171--171
+[]|\T1/cmss/m/n/9 Battery re-fur-bish-ment
+ []
+
+<../../code/output/images/battery_analysis/battery-1.png, id=27, 741.77126pt x 705.63625pt>
 File: ../../code/output/images/battery_analysis/battery-1.png Graphic file (type png)
 <use ../../code/output/images/battery_analysis/battery-1.png>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/battery-1.png  used on input line 166.
+Package pdftex.def Info: ../../code/output/images/battery_analysis/battery-1.png  used on input line 188.
 (pdftex.def)             Requested size: 327.83124pt x 311.8591pt.
 
 
@@ -1086,11 +1097,11 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[2 <../../code/output/images/battery_analysis/battery-1.png>]
-<../../code/output/images/battery_analysis/latent_class/model_framework.pdf, id=39, 364.48169pt x 199.70609pt>
+[2]
+<../../code/output/images/battery_analysis/latent_class/model_framework.pdf, id=41, 364.48169pt x 199.70609pt>
 File: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf Graphic file (type pdf)
 <use ../../code/output/images/battery_analysis/latent_class/model_framework.pdf>
-Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf  used on input line 181.
+Package pdftex.def Info: ../../code/output/images/battery_analysis/latent_class/model_framework.pdf  used on input line 203.
 (pdftex.def)             Requested size: 374.66734pt x 205.29123pt.
 
 
@@ -1099,14 +1110,14 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[3 <../../code/output/images/battery_analysis/latent_class/model_framework.pdf>]
+[3 <../../code/output/images/battery_analysis/battery-1.png>]
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[4]
+[4 <../../code/output/images/battery_analysis/latent_class/model_framework.pdf>]
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -1114,11 +1125,18 @@ $[]$
  []
 
 [5]
-<../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png, id=90, 794.97pt x 614.295pt>
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+$[]$
+ []
+
+[6]
+<../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png, id=110, 1011.78pt x 614.295pt>
 File: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png Graphic file (type png)
 <use ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png>
-Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png  used on input line 246.
-(pdftex.def)             Requested size: 560.86385pt x 433.4061pt.
+Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png  used on input line 266.
+(pdftex.def)             Requested size: 560.86385pt x 340.52533pt.
 
 
 
@@ -1126,7 +1144,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 $[]$
  []
 
-[6
+[7
 
 
  <../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png>]
@@ -1146,18 +1164,18 @@ Package logreq Info: Writing requests to 'battery_paper_conference.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26354 strings out of 473190
- 447060 string characters out of 5715801
- 1275066 words of memory out of 5000000
- 49220 multiletter control sequences out of 15000+600000
+ 26391 strings out of 473190
+ 448158 string characters out of 5715801
+ 1271312 words of memory out of 5000000
+ 49252 multiletter control sequences out of 15000+600000
  652358 words of font info for 156 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,13n,93p,2235b,1856s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,13n,93p,2028b,1856s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsi0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsx0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb>
-Output written on battery_paper_conference.pdf (6 pages, 784432 bytes).
+Output written on battery_paper_conference.pdf (7 pages, 881901 bytes).
 PDF statistics:
- 151 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
+ 174 PDF objects out of 1000 (max. 8388607)
+ 131 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
