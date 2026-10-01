@@ -19,39 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
-    \entry{bts2023}{report}{}{}
-      \name{author}{1}{}{%
-        {{hash=84616a0251b0e8ad3ccf1fc18ae18f4c}{%
-           family={{Bureau of Transportation Statistics}},
-           familyi={B\bibinitperiod}}}%
-      }
-      \list{institution}{1}{%
-        {U.S. Department of Transportation, Bureau of Transportation Statistics}%
-      }
-      \strng{namehash}{84616a0251b0e8ad3ccf1fc18ae18f4c}
-      \strng{fullhash}{84616a0251b0e8ad3ccf1fc18ae18f4c}
-      \strng{fullhashraw}{84616a0251b0e8ad3ccf1fc18ae18f4c}
-      \strng{bibnamehash}{84616a0251b0e8ad3ccf1fc18ae18f4c}
-      \strng{authorbibnamehash}{84616a0251b0e8ad3ccf1fc18ae18f4c}
-      \strng{authornamehash}{84616a0251b0e8ad3ccf1fc18ae18f4c}
-      \strng{authorfullhash}{84616a0251b0e8ad3ccf1fc18ae18f4c}
-      \strng{authorfullhashraw}{84616a0251b0e8ad3ccf1fc18ae18f4c}
-      \field{sortinit}{B}
-      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{National Transportation Statistics}
-      \field{type}{techreport}
-      \field{year}{2023}
-      \verb{urlraw}
-      \verb https://www.bts.gov/topics/national-transportation-statistics
-      \endverb
-      \verb{url}
-      \verb https://www.bts.gov/topics/national-transportation-statistics
-      \endverb
-    \endentry
     \entry{coxautomotiveinc.EVMarketMonitor2025}{online}{}{}
       \name{author}{1}{}{%
         {{hash=a8b3d6c340557e9d73efc799f6538a0b}{%
