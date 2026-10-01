@@ -44,10 +44,10 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>battery_paper_conference.bcf</file>
+      <file>two_paper_summary.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>battery_paper_conference.bbl</file>
+      <file>two_paper_summary.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -66,19 +66,19 @@
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>battery_paper_conference</infile>
+      <infile>two_paper_summary</infile>
     </cmdline>
     <input>
-      <file>battery_paper_conference.bcf</file>
+      <file>two_paper_summary.bcf</file>
     </input>
     <output>
-      <file>battery_paper_conference.bbl</file>
+      <file>two_paper_summary.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>battery_paper_conference.bbl</file>
+      <file>two_paper_summary.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>battery_paper_conference.bcf</file>
+      <file>two_paper_summary.bcf</file>
     </requires>
     <requires type="editable">
       <file>../battery_paper/DCE_lit_review.bib</file>

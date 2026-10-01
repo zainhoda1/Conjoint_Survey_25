@@ -1,16 +1,16 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  30 SEP 2026 13:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  30 SEP 2026 23:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper_twopages/battery_paper_conference.tex
-(/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper_twopages/battery_paper_conference.tex
+**/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/two_paper_combined/two_paper_summary.tex
+(/Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/two_paper_combined/two_paper_summary.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/extsizes/extarticle.cls
 Document Class: extarticle 1996/10/08 v1.0 Non Standard LaTeX document class
-(/usr/local/texlive/2025/texmf-dist/tex/latex/extsizes/size9.clo
-File: size9.clo 1999/11/11 v1.4a NON-Standard LaTeX file (size option)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/base/exscale.sty
 Package: exscale 2018/09/24 v2.1i Standard LaTeX package exscale
 LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 57.
@@ -458,8 +458,12 @@ Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
 ))
 \@quotelevel=\count420
 \@quotereset=\count421
- (./battery_paper_conference.aux)
-\openout1 = `battery_paper_conference.aux'.
+ (./two_paper_summary.aux
+
+LaTeX Warning: Label `fig:lc6_class_profiles' multiply defined.
+
+)
+\openout1 = `two_paper_summary.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
 LaTeX Font Info:    ... okay on input line 38.
@@ -499,12 +503,12 @@ LaTeX Font Info:    ... okay on input line 38.
 * \topmargin=-58.05495pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=9.0pt
+* \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=65.0pt
+* \marginparwidth=35.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=8.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -534,9 +538,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring OFF on input line 38.
- (./battery_paper_conference.out) (./battery_paper_conference.out)
+ (./two_paper_summary.out) (./two_paper_summary.out)
 \@outlinefile=\write4
-\openout4 = `battery_paper_conference.out'.
+\openout4 = `two_paper_summary.out'.
 
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
@@ -546,56 +550,85 @@ File: english.lbx 2024/03/21 v3.20 biblatex localization (PK/MW)
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `battery_paper_conference.bcf'.
+\openout3 = `two_paper_summary.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'battery_paper_conference.bbl' found.
- (./battery_paper_conference.bbl)
+Package biblatex Info: ... file 'two_paper_summary.bbl' found.
+ (./two_paper_summary.bbl)
 Package biblatex Info: Reference section=0 on input line 38.
 Package biblatex Info: Reference segment=0 on input line 38.
 LaTeX Font Info:    External font `cmex7' loaded for size
-(Font)              <6> on input line 53.
+(Font)              <7> on input line 53.
 LaTeX Font Info:    External font `cmex7' loaded for size
 (Font)              <5> on input line 53.
 
 
 [1
 
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png, id=24, 1011.78pt x 614.295pt>
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png, id=16, 1011.78pt x 614.295pt>
 File: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png Graphic file (type png)
 <use ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png>
-Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png  used on input line 89.
+Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png  used on input line 65.
 (pdftex.def)             Requested size: 692.71251pt x 420.58331pt.
 
 
 [2
 
 
- <../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png>] (./battery_paper_conference.aux)
+ <../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png>]
+LaTeX Font Info:    External font `cmex7' loaded for size
+(Font)              <6> on input line 95.
+
+
+[3
+
+
+{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+Overfull \hbox (11.51643pt too wide) in paragraph at lines 111--112
+[]\OT1/cmr/bx/n/12 Class 6: Low-Engagement, At-tribute Non-Attendance Re-spon-dents ($\OML/cmm/m/it/12 n$\OT1/cmr/bx/n/12 =539, 18.5%).
+ []
+
+
+
+[4]
+File: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png Graphic file (type png)
+<use ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png>
+Package pdftex.def Info: ../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png  used on input line 129.
+(pdftex.def)             Requested size: 692.71251pt x 420.58331pt.
+
+
+[5
+
+
+] (./two_paper_summary.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `battery_paper_conference.out' has not changed.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `two_paper_summary.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package logreq Info: Writing requests to 'battery_paper_conference.run.xml'.
-\openout1 = `battery_paper_conference.run.xml'.
+Package logreq Info: Writing requests to 'two_paper_summary.run.xml'.
+\openout1 = `two_paper_summary.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 16695 strings out of 473190
- 299191 string characters out of 5715801
- 1139800 words of memory out of 5000000
- 39774 multiletter control sequences out of 15000+600000
- 563847 words of font info for 53 fonts, out of 8000000 for 9000
+ 16717 strings out of 473190
+ 299243 string characters out of 5715801
+ 1127905 words of memory out of 5000000
+ 39789 multiletter control sequences out of 15000+600000
+ 564753 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,6n,95p,816b,1464s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
-Output written on battery_paper_conference.pdf (2 pages, 604219 bytes).
+ 89i,6n,95p,805b,1464s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on two_paper_summary.pdf (5 pages, 600660 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
- 46 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
+ 92 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
+ 16 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
