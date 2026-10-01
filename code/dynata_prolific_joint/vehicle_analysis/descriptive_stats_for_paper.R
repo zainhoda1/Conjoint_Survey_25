@@ -66,6 +66,87 @@ data_raw_joined <- rbind(
 data_raw_joined <- data_raw_joined |> 
   filter(psid %in% unique(data_joint$psid) )
 
+data_raw_joined_filtered <- data_raw_joined |> 
+  group_by( next_veh_style, next_veh_budget, budget ) |> 
+  count()
+
+
+  
+######### Insert code here:
+
+# Dotted-line position per facet: right edge of the $20,000 block for Car
+# and of the $25,000 block for SUV (bars are centered on the value, 5,000 wide)
+budget_cutoffs <- data_raw_joined_filtered |>
+  ungroup() |>
+  distinct(next_veh_style) |>
+  mutate(cutoff = if_else(grepl("suv", next_veh_style, ignore.case = TRUE), 25000, 20000) + 2500)
+
+budget_dist_plot <- ggplot(data_raw_joined_filtered, aes(x = next_veh_budget, y = n)) +
+  geom_col(fill = "#52514e", color = "white", linewidth = 0.3) +
+  facet_grid(
+    next_veh_style ~ .,
+    labeller = labeller(
+      next_veh_style = function(x) ifelse(grepl("suv", x, ignore.case = TRUE), "SUV", "Car")
+    )
+  ) +
+  geom_vline(
+    data = budget_cutoffs,
+    aes(xintercept = cutoff),
+    linetype = "dotted",
+    color = "#c0392b",
+    linewidth = 1.2
+  ) +
+  scale_x_continuous(
+    breaks = scales::breaks_width(5000),
+    labels = scales::dollar_format()
+  ) +
+  scale_y_continuous(
+    labels = scales::comma_format(),
+    expand = expansion(mult = c(0, 0.08))
+  ) +
+  labs(
+    title = "Stated next-vehicle budget by vehicle style",
+    subtitle = "Dotted line marks the budget cutoff used to split low- and high-budget respondents",
+    x = "Stated budget",
+    y = "Number of respondents"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(color = "grey30", margin = margin(b = 10)),
+    panel.border = element_rect(color = "grey50", fill = NA),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(color = "grey88"),
+    panel.spacing = unit(1, "lines"),
+    strip.text = element_text(face = "bold", size = 12),
+    strip.background = element_rect(fill = "grey93", color = "grey50"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.title.x = element_text(margin = margin(t = 8)),
+    axis.title.y = element_text(margin = margin(r = 8))
+  )
+
+print(budget_dist_plot)
+
+ggsave(
+  filename = here::here(
+    'paper_writing',
+    'vehicle_paper',
+    "images",
+    "vehicle_analysis",
+    "budget_distribution_plot.png"
+  ),
+  plot = budget_dist_plot,
+  width = 8,
+  height = 6,
+  dpi = 300,
+  bg = "white"
+)
+
+##############
+  
+
+
 
 ############################################################
 # ---- Table 3: Household vehicle context & used-BEV purchase interest ----
@@ -104,7 +185,8 @@ data_raw_joined %>%
       order = match(category, c("Gasoline (ICEV)", "Hybrid (HEV)",
                                 "Plug-in hybrid (PHEV)", "Battery electric (BEV)", "Other"))
     ) %>%
-    arrange(order),
+    arrange(order)
+)
 
 data_raw_joined %>%
   group_by(neighbor_ev_info) %>%
@@ -311,4 +393,3 @@ dir.create(attach_dir, showWarnings = FALSE, recursive = TRUE)
 out_path <- file.path(attach_dir, "mxl_results_vehicle.tex")
 writeLines(tex_table, out_path)
 cat("Written to", out_path, "\n")
-

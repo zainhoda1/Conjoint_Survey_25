@@ -8,517 +8,173 @@ library(cowplot)
 
 
 # Load the estimated model
-load(here("models", "mixed_model_1_car_low.RData"))
-load(here("models", "mixed_model_1_car_high.RData"))
-load(here("models", "mixed_model_1_suv_low.RData"))
-load(here("models", "mixed_model_1_suv_high.RData"))
+
+load(here("models", "mixed_model_1_car_low_panel.RData"))
+load(here("models", "mixed_model_1_car_high_panel.RData"))
+load(here("models", "mixed_model_1_suv_low_panel.RData"))
+load(here("models", "mixed_model_1_suv_high_panel.RData"))
 
 
 
 depreciation_rate = 0.05  # Annual percentage depreciation for EVs
- 
+
 # Load Data :
 
-vehicles_comparsion_list <- read_csv(here('data', 'vehicles_comparison_list.csv'))  
+
+vehicles_comparsion_list <- read_csv(here('data', 'vehicle_pairs_2016_2024.csv')) |>
+  mutate(across(where(is.character), tolower))
+
+vehicles_comparsion_list$id <- paste0(vehicles_comparsion_list$make,'_',
+  vehicles_comparsion_list$model,'_',
+  vehicles_comparsion_list$powertrain, '_',
+  vehicles_comparsion_list$vehicle_type
+)
+
+vehicles_comparsion_list <- vehicles_comparsion_list |>
+  select (id, Pair_id, bev_range)
 
 
-vehicles_comparsion_list <- vehicles_comparsion_list |> 
+predicted_car_prices <- read_parquet(here('data', 'predicted_prices.parquet' )) |>
+  inner_join(vehicles_comparsion_list, by = c('id'))
+
+
+####################  Add code here
+
+predicted_car_prices_pairs <- predicted_car_prices |>
+  inner_join(
+    predicted_car_prices,
+    by = c("Pair_id", "age_years"),
+    suffix = c("_1", "_2"),
+    relationship = "many-to-many"
+  ) |>
+  filter(str_detect(id_1, "cv"), !str_detect(id_2, "cv")) |>
+  filter(age_years >1) |>
+  mutate(
+    vehicle_type = if_else(str_detect(id_1, "car"), "car", "suv")
+  ) |>
+  group_by(Pair_id) |>
+  mutate(
+    price_at_2 = if (any(age_years == 2)) predicted_price_1[age_years == 2] else NA_real_,
+    budget = case_when(
+      is.na(price_at_2) ~ NA_character_,
+      vehicle_type == "car" & price_at_2 < 20000 ~ "low",
+      vehicle_type == "car" & price_at_2 > 20000 ~ "high",
+      vehicle_type == "suv" & price_at_2 < 25000 ~ "low",
+      vehicle_type == "suv" & price_at_2 > 25000 ~ "high"
+    )
+  ) |>
+  ungroup() |>
+  select(-price_at_2) |>
+  mutate(
+    powertrain_2 = case_when(
+      str_detect(id_2, "bev") ~ "bev",
+      str_detect(id_2, "hev") ~ "hev"
+    )
+  ) |>
+  filter(!Pair_id %in% c(8, 9, 7, 5))
+
+
+
+##################
+
+# Data for the depreciation curves plot (part4)
+
+depreciation_curves_data <- predicted_car_prices_pairs |>
   pivot_longer(
-    cols = c(bev_vehicle, other_vehicle, bev_range, other_vehicle_range),
-    names_to = c("type", ".value"),
-    names_pattern = "(bev|other)_(.*)"
-  ) |> mutate(
-    range = coalesce(range, vehicle_range)
-  ) |> select(vehicle, range, id, comparison, vehicle_category, budget) |> 
-  rename(vehicle_grouping = id)
-
-predicted_car_prices <- read_parquet(here('data', 'predicted_prices.parquet' )) |> 
-    separate(id , into = c('model', 'make', 'powertrain', 'vehicle_type'), 
-   sep = "_", remove = FALSE)  |> 
-  left_join(vehicles_comparsion_list, by = c('id' = 'vehicle')) |> 
-  mutate(model_type = vehicle_type)
-
-
-bev_names <- predicted_car_prices  |> 
-  #filter(powertrain != 'cv') |> 
-  select(model, make, powertrain) |> 
-  distinct()
-
-depreciation_curves_plot <- predicted_car_prices |>
-  filter(
-     vehicle_grouping != 5, 
-     age_years >1
-     ) |> 
-  ggplot(aes(x = age_years, y = predicted_price,
-             group = id, color = powertrain)) +
-  #facet_wrap(~vehicle_grouping) +
-    facet_grid(budget ~ vehicle_category) +
-  # Line: 2px, series color carries identity
-  geom_line(linewidth = 0.9, lineend = "round")  +
-    # Point: white surface ring beneath a series-colored marker (>=8px)
-  geom_point(size = 3.6) +
-  geom_point(size = 2.5) 
-
-depreciation_curves_plot
-
-vehicle_pairs <- data.frame(
-  vehicle_1 = c( 
-    'leaf_nissan_bev_car',
-    'hardtop 2 door_mini_bev_car',
-    'i4_bmw_bev_car',
-    'kona ev_hyundai_bev_suv',
-    'rav4_toyota_hev_suv',
-    'camry_toyota_hev_car'
-    ),
-  vehicle_2 = c(
-    'versa sedan_nissan_cv_car',
-    'cooper_mini_cv_car',
-    '4 series_bmw_cv_car', 
-    'kona_hyundai_cv_suv',
-    'rav4_toyota_cv_suv',
-    'camry_toyota_cv_car'
-),
-  vehicle_type = c('car', 'car', 'car', 'suv', 'suv', 'suv'  ),
-  model_type = c('low', 'high', 'high', 'low', 'high', 'high'  )
-)
-
-
-
-
-
-df <- data.frame(
-  obsID = numeric(),
-  altID = numeric(),
-  powertrainhev = numeric(),
-  powertrainhev = numeric(),
-  range_bev = numeric(),
-  mileage = numeric(),
-  age = numeric(),
-  operating_cost = numeric(),
-  price = numeric(),
-  no_choice = numeric()
-)
-
-placeholder_df <- data.frame(
-  age_years = numeric(),
-  miles = numeric(),
-  vehicle1 = character(),
-  vehicle2 = character(),
-  range_v1= numeric(),
-  range_v2= numeric(),
-  v1_choice_probability = numeric(),
-  model_type = character()
-)
-
-
-#test <- get("model_car_low")
-
-predicted_car_prices <- left_join(predicted_car_prices, 
-  bev_names,
-   by = c('model', 'make', 'powertrain')) |> 
-  replace_na(list(range=0)) |> 
+    cols = c(id_1, id_2, predicted_price_1, predicted_price_2),
+    names_to = c(".value", "side"),
+    names_pattern = "(.*)_(\\d)"
+  ) |>
   mutate(
-    powertrainbev = case_when(
-    powertrain == 'bev' ~ 1,
-    .default = 0
-  ),
-    powertrainhev = case_when(
-    powertrain %in% c('phev', 'hev') ~ 1,
-    .default = 0
-  ),
-  operating_cost = case_when(
-    powertrain == 'bev' ~ 0.3,
-    powertrain %in% c('phev', 'hev') ~ 0.6,
-    .default = 1.2
-  )
-) |> mutate(
-    miles = miles /10000,
-    predicted_price = predicted_price/ 10000,
-    range=  range/100
+    powertrain_label = case_when(
+      str_detect(id, "bev") ~ "BEV",
+      str_detect(id, "hev") ~ "HEV",
+      str_detect(id, "cv")  ~ "Conventional (CV)"
+    ),
+    powertrain_label = factor(powertrain_label, levels = c("BEV", "HEV", "Conventional (CV)")),
+    budget_label = recode(budget, "low" = "Low Budget", "high" = "High Budget"),
+    budget_label = factor(budget_label, levels = c("Low Budget", "High Budget")),
+    vehicle_category_label = str_to_title(vehicle_type),
+    linetype_label = if_else(powertrain_2 == "hev", "dashed", "solid"),
+    vehicle_label = id |>
+      str_remove("_(bev|hev|cv|phev)_(car|suv)$") |>
+      str_replace_all("_", " ") |>
+      str_to_title()
   )
 
-all_cars <- unique(predicted_car_prices$id)
+write_parquet( depreciation_curves_data , here('data', 'depreciation_curves_data.parquet'))
 
-temp <- predicted_car_prices |> 
-  filter(age_years == 2)
+vehicle_label_points <- depreciation_curves_data |>
+  group_by(id) |>
+  filter(age_years == max(age_years)) |>
+  ungroup()
 
-for (i in seq(nrow(vehicle_pairs))){
+write_parquet( vehicle_label_points , here('data', 'vehicle_label_points.parquet'))
 
- #i =1 
+# BEV/HEV choice probability data, built from predicted_car_prices_pairs
 
-  print(vehicle_pairs[i,1]) 
-  current_model = case_when(
-    vehicle_pairs[i,'vehicle_type'] == 'car'  & vehicle_pairs[i,'model_type'] == 'low' ~ 'mixed_model_1_car_low',
-    vehicle_pairs[i,'vehicle_type'] == 'car'  & vehicle_pairs[i,'model_type'] == 'high' ~ 'mixed_model_1_car_high',
-    vehicle_pairs[i,'vehicle_type'] == 'suv'  & vehicle_pairs[i,'model_type'] == 'low' ~ 'mixed_model_1_suv_low',
-    .default = 'mixed_model_1_suv_high'
-  )
-
-  vehicle_type1 =  vehicle_pairs[i,'vehicle_type']
-  
-  vehicle1 <-  vehicle_pairs[i,1]   #  'fusion energi_ford_phev_car'   
-  vehicle2 <-  vehicle_pairs[i,2]   # 'fusion_ford_cv_car'
-
-  v1_data <- predicted_car_prices |>
-    filter(id == vehicle1) |> 
-    mutate (range = range * (1- depreciation_rate) ^ age_years )
-
-  v2_data <- predicted_car_prices |> 
-    filter(id == vehicle2)
-
-
-  for (i in seq(nrow(v1_data)))
-    {
-      #i = 1
-      v1 <- v1_data[i,]
-      v2 <- v2_data[i,]
-    print(v1)
-    model = current_model
-    
-      df2 <- data.frame(
-        obsID = c(1,1),
-        altID = c(1,2),
-        powertrainbev = c(v1$powertrainbev, v2$powertrainbev),
-        powertrainhev = c(v1$powertrainhev, v2$powertrainhev),
-        range_bev = c(v1$range, v2$range),
-        mileage = c(v1$miles, v2$miles),
-        age = c(v1$age_years, v2$age_years),
-        operating_cost = c(v1$operating_cost, v2$operating_cost),
-          price = c(v1$predicted_price, v2$predicted_price),
-          no_choice =c(0,0),
-        stringsAsFactors = FALSE
-      )
-
-      df2
-
-      probabilities <- predict(
-        get(model),  # model_car_low  
-        newdata = df2,
-        obsID = "obsID",
-        returnData = FALSE
-      )
-
-      probabilities
-
-      row_data <- data.frame(
-        age_years = v1$age_years,
-        miles = v1$miles,
-        vehicle1 = v1$id,
-        vehicle2 = v2$id,
-        range_v1= v1$range,
-        range_v2= v2$range,
-        v1_choice_probability = probabilities[1,2],
-        model_type = vehicle_type1 
-      )
-
-      placeholder_df <- rbind(placeholder_df, row_data)
-
-  }
-
-}
-
-
-placeholder_df <- placeholder_df |>
+bev_probability_inputs <- predicted_car_prices_pairs |>
   mutate(
-    comparisons = case_when(
-      vehicle1 == 'leaf_nissan_bev_car'          ~ 'Nissan Leaf BEV // Nissan Versa CV',
-      vehicle1 == 'hardtop 2 door_mini_bev_car'  ~ 'Mini Cooper BEV // Mini Cooper CV',
-      vehicle1 == 'i4_bmw_bev_car'               ~ 'BMW i4 BEV // BMW 4 Series CV',
-      vehicle1 == 'ioniq_hyundai_bev_car'        ~ 'Hyundai Ioniq BEV // HEV',
-      vehicle1 == 'kona ev_hyundai_bev_suv'      ~ 'Hyundai Kona BEV // CV',
-      vehicle1 == 'niro_kia_bev_suv'             ~ 'Kia Niro BEV // HEV',
-      .default = 'not found'
-    ),
-    comparisons = factor(
-      comparisons,
-      levels = c(
-        'Nissan Leaf BEV // Nissan Versa CV',
-        'Mini Cooper BEV // Mini Cooper CV',
-        'BMW i4 BEV // BMW 4 Series CV',
-        'Hyundai Ioniq BEV // HEV',
-        'Hyundai Kona BEV // CV',
-        'Kia Niro BEV // HEV'
-      )
-    ),
-    segment_label = if_else(model_type == 'car', 'Car', 'SUV')
-  )
-
-# Fixed-order categorical palette: "minou" from the ltc color-palette
-# library (https://loukesio.github.io/ltc-color-palettes/). Assigned by
-# identity, never cycled.
-comparison_colors <- c(
-  'Nissan Leaf BEV // Nissan Versa CV' = "#00798c",  # teal
-  'Mini Cooper BEV // Mini Cooper CV'  = "#d1495b",  # red
-  'BMW i4 BEV // BMW 4 Series CV'      = "#edae49",  # amber
-  'Hyundai Ioniq BEV // HEV'           = "#66a182",  # sage green
-  'Hyundai Kona BEV // CV'             = "#2e4057",  # dark navy
-  'Kia Niro BEV // HEV'                = "#8d96a3"   # gray
-)
-
-ink_primary   <- "#0b0b0b"
-ink_secondary <- "#52514e"
-ink_muted     <- "#898781"
-grid_hairline <- "#e1e0d9"
-baseline_ink  <- "#c3c2b7"
-chart_surface <- "#fcfcfb"
-strip_surface <- "#f2f1ee"
-
-bev_probability_plot <- placeholder_df |>
-  ggplot(aes(x = age_years, y = v1_choice_probability,
-             group = comparisons, color = comparisons)) +
-  facet_wrap(~segment_label) +
-
-  # 50% reference line -- choice parity with the conventional/hybrid counterpart
-  geom_hline(
-    yintercept = 0.5,
-    linetype = "dashed",
-    color = baseline_ink,
-    linewidth = 0.4
-  ) +
-
-  # Line: 2px, series color carries identity
-  geom_line(linewidth = 0.9, lineend = "round") +
-
-  # Point: white surface ring beneath a series-colored marker (>=8px)
-  geom_point(size = 3.6, color = chart_surface) +
-  geom_point(size = 2.5) +
-
-  scale_color_manual(values = comparison_colors, name = NULL) +
-
-  scale_y_continuous(
-    labels = scales::percent_format(accuracy = 1L),
-    breaks = scales::breaks_pretty(n = 6),
-    expand = expansion(mult = c(0.03, 0.06))
-  ) +
-  scale_x_continuous(
-    breaks = scales::breaks_width(1),
-    expand = expansion(mult = c(0.03, 0.06))
-  ) +
-
-  labs(
-    title = "Probability of Choosing a BEV Over Its Conventional or Hybrid Counterpart",
-    subtitle = "By vehicle age, for matched car and SUV model pairs",
-    x = "Vehicle age (years)",
-    y = "Probability of BEV choice"
-  ) +
-
-  guides(color = guide_legend(nrow = 2, byrow = TRUE,
-                               override.aes = list(linewidth = 1.6, size = 3))) +
-
-  theme_minimal(base_size = 13) +
-  theme(
-    plot.background   = element_rect(fill = chart_surface, color = NA),
-    panel.background  = element_rect(fill = chart_surface, color = NA),
-    legend.background = element_rect(fill = chart_surface, color = NA),
-
-    plot.title    = element_text(face = "bold", size = 14.5, color = ink_primary,
-                                  margin = margin(b = 3)),
-    plot.subtitle = element_text(size = 11, color = ink_secondary,
-                                  margin = margin(b = 10)),
-    plot.caption  = element_text(size = 8.5, color = ink_muted, hjust = 0,
-                                  margin = margin(t = 8)),
-    plot.margin   = margin(12, 14, 10, 12),
-
-    strip.text       = element_text(face = "bold", size = 11, color = ink_primary),
-    strip.background = element_rect(fill = strip_surface, color = NA),
-
-    axis.title = element_text(size = 10.5, color = ink_secondary),
-    axis.text  = element_text(size = 9.5, color = ink_muted),
-    axis.ticks = element_line(color = baseline_ink, linewidth = 0.3),
-    axis.line  = element_blank(),
-
-    panel.grid.major = element_line(color = grid_hairline, linewidth = 0.35),
-    panel.grid.minor = element_blank(),
-    panel.spacing    = unit(1.4, "lines"),
-
-    legend.position  = "bottom",
-    legend.text      = element_text(size = 9, color = ink_secondary),
-    legend.key       = element_rect(fill = chart_surface, color = NA),
-    legend.spacing.x = unit(6, "pt")
-  )
-
-bev_probability_plot
-
-ggsave(
-  filename = here::here(
-    'code',
-    'output',
-    "images",
-    "vehicle_analysis",
-    "BEV_probability_age_with_depreciation.png"
-  ),
-  plot = bev_probability_plot,
-  width = 10,
-  height = 6.5,
-  dpi = 300
-)
-
-ggsave(
-  filename = here::here(
-    'paper_writing',
-    'vehicle_paper',
-    "images",
-    "vehicle_analysis",
-    "BEV_probability_age_with_depreciation.png"
-  ),
-  plot = bev_probability_plot,
-  width = 10,
-  height = 6.5,
-  dpi = 300,
-  bg = "white"
-)
-
-#############################################################
-
-
-placeholder_df <- placeholder_df |>
+    obsID = row_number(),
+    model_name = case_when(
+      vehicle_type == "car" & budget == "low"  ~ "mixed_model_1_car_low_panel",
+      vehicle_type == "car" & budget == "high" ~ "mixed_model_1_car_high_panel",
+      vehicle_type == "suv" & budget == "low"  ~ "mixed_model_1_suv_low_panel",
+      vehicle_type == "suv" & budget == "high" ~ "mixed_model_1_suv_high_panel"
+    )
+  ) |>
+  filter(!is.na(model_name)) |>
+  pivot_longer(
+    cols = c(id_1, id_2, predicted_price_1, predicted_price_2,
+             miles_1, miles_2, bev_range_1, bev_range_2),
+    names_to = c(".value", "side"),
+    names_pattern = "(.*)_(\\d)"
+  ) |>
   mutate(
-    comparisons = case_when(
-      vehicle1 == 'leaf_nissan_bev_car'          ~ 'Low Budget Car - BEV vs CV',   # Nissan Versa cost - 18k
-      vehicle1 == 'hardtop 2 door_mini_bev_car'  ~ 'High Budget Car - BEV vs CV',   # Mini Cooper cost - 36k
-      vehicle1 == 'i4_bmw_bev_car'               ~ 'High Budget Car - BEV vs CV',  # BMW 4 series cost - 60k
-      vehicle1 == 'ioniq_hyundai_bev_car'        ~ 'Mid Budget Car - BEV vs HEV',  # Hyundai Ionic HEV cost - 30k
-      vehicle1 == 'kona ev_hyundai_bev_suv'      ~ 'Mid Budget SUV - BEV vs CV',   # Hyundai Kona CV cost - 27k
-      vehicle1 == 'niro_kia_bev_suv'             ~ 'High budget SUV - BEV vs HEV', # Kia Nero HEV cost - 36k
-      .default = 'not found'
+    altID = as.integer(side),
+    powertrainbev = if_else(str_detect(id, "bev"), 1, 0),
+    powertrainhev = if_else(str_detect(id, "hev"), 1, 0),
+    operating_cost = case_when(
+      str_detect(id, "bev") ~ 0.3,
+      str_detect(id, "hev") ~ 0.6,
+      .default = 1.2
     ),
-    comparisons = factor(
-      comparisons,
-      levels = c(
-        'Low Budget Car - BEV vs CV',
-        'Mid Budget Car - BEV vs CV',
-        'High Budget Car - BEV vs CV',
-        'Mid Budget Car - BEV vs HEV',
-        'Mid Budget SUV - BEV vs CV',
-        'High budget SUV - BEV vs HEV'
-      )
-    ),
-    segment_label = if_else(model_type == 'car', 'Car', 'SUV')
-  ) |> 
-  filter(vehicle1 != 'hardtop 2 door_mini_bev_car')
-
-# Fixed-order categorical palette: "minou" from the ltc color-palette
-# library (https://loukesio.github.io/ltc-color-palettes/). Assigned by
-# identity, never cycled.
-comparison_colors <- c(
-  'Low Budget Car - BEV vs CV' = "#00798c",  # teal
-  'Mid Budget Car - BEV vs CV'  = "#d1495b",  # red
-  'High Budget Car - BEV vs CV'      = "#edae49",  # amber
-  'Mid Budget Car - BEV vs HEV'           = "#66a182",  # sage green
-  'Mid Budget SUV - BEV vs CV'             = "#2e4057",  # dark navy
-  'High budget SUV - BEV vs HEV'                = "#8d96a3"   # gray
-)
-
-ink_primary   <- "#0b0b0b"
-ink_secondary <- "#52514e"
-ink_muted     <- "#898781"
-grid_hairline <- "#e1e0d9"
-baseline_ink  <- "#c3c2b7"
-chart_surface <- "#fcfcfb"
-strip_surface <- "#f2f1ee"
-
-bev_probability_plot <- placeholder_df |>
-  ggplot(aes(x = age_years, y = v1_choice_probability,
-             group = comparisons, color = comparisons)) +
-  facet_wrap(~segment_label) +
-
-  # 50% reference line -- choice parity with the conventional/hybrid counterpart
-  geom_hline(
-    yintercept = 0.5,
-    linetype = "dashed",
-    color = baseline_ink,
-    linewidth = 0.4
-  ) +
-
-  # Line: 2px, series color carries identity
-  geom_line(linewidth = 0.9, lineend = "round") +
-
-  # Point: white surface ring beneath a series-colored marker (>=8px)
-  geom_point(size = 3.6, color = chart_surface) +
-  geom_point(size = 2.5) +
-
-  scale_color_manual(values = comparison_colors, name = NULL) +
-
-  scale_y_continuous(
-    labels = scales::percent_format(accuracy = 1L),
-    breaks = scales::breaks_pretty(n = 6),
-    expand = expansion(mult = c(0.03, 0.06))
-  ) +
-  scale_x_continuous(
-    breaks = scales::breaks_width(1),
-    expand = expansion(mult = c(0.03, 0.06))
-  ) +
-
-  labs(
-    title = "Probability of Choosing a BEV Over Its Conventional or Hybrid Counterpart",
-    subtitle = "By vehicle age, for matched car and SUV model pairs",
-    x = "Vehicle age (years)",
-    y = "Probability of BEV choice"
-  ) +
-
-  guides(color = guide_legend(nrow = 2, byrow = TRUE,
-                               override.aes = list(linewidth = 1.6, size = 3))) +
-
-  theme_minimal(base_size = 13) +
-  theme(
-    plot.background   = element_rect(fill = chart_surface, color = NA),
-    panel.background  = element_rect(fill = chart_surface, color = NA),
-    legend.background = element_rect(fill = chart_surface, color = NA),
-
-    plot.title    = element_text(face = "bold", size = 14.5, color = ink_primary,
-                                  margin = margin(b = 3)),
-    plot.subtitle = element_text(size = 11, color = ink_secondary,
-                                  margin = margin(b = 10)),
-    plot.caption  = element_text(size = 8.5, color = ink_muted, hjust = 0,
-                                  margin = margin(t = 8)),
-    plot.margin   = margin(12, 14, 10, 12),
-
-    strip.text       = element_text(face = "bold", size = 11, color = ink_primary),
-    strip.background = element_rect(fill = strip_surface, color = NA),
-
-    axis.title = element_text(size = 10.5, color = ink_secondary),
-    axis.text  = element_text(size = 9.5, color = ink_muted),
-    axis.ticks = element_line(color = baseline_ink, linewidth = 0.3),
-    axis.line  = element_blank(),
-
-    panel.grid.major = element_line(color = grid_hairline, linewidth = 0.35),
-    panel.grid.minor = element_blank(),
-    panel.spacing    = unit(1.4, "lines"),
-
-    legend.position  = "bottom",
-    legend.text      = element_text(size = 9, color = ink_secondary),
-    legend.key       = element_rect(fill = chart_surface, color = NA),
-    legend.spacing.x = unit(6, "pt")
+    range_bev = (bev_range * (1 - depreciation_rate) ^ age_years) / 100,
+    mileage = miles / 10000,
+    price = predicted_price / 10000,
+    age = age_years,
+    no_choice = 0
   )
 
-bev_probability_plot
+bev_probabilities <- bev_probability_inputs |>
+  group_by(model_name) |>
+  group_split() |>
+  purrr::map_dfr(function(model_data) {
+    predict(
+      get(unique(model_data$model_name)),
+      newdata = model_data,
+      obsID = "obsID",
+      interval = "confidence",
+      level = 0.95,
+      numDrawsCI = 10000,
+      returnData = TRUE
+    )
+  })
 
-ggsave(
-  filename = here::here(
-    'code',
-    'output',
-    "images",
-    "vehicle_analysis",
-    "BEV_probability_age_with_depreciation_generic.png"
-  ),
-  plot = bev_probability_plot,
-  width = 10,
-  height = 6.5,
-  dpi = 300
-)
+bev_probability_data <- bev_probabilities |>
+  filter(altID == 2) |>
+  mutate(
+    powertrain_label = if_else(powertrainbev == 1, "BEV", "HEV"),
+    vehicle_category_label = str_to_title(vehicle_type),
+    vehicle_label = id |>
+      str_remove("_(bev|hev|cv|phev)_(car|suv)$") |>
+      str_replace_all("_", " ") |>
+      str_to_title(),
+    comparisons = paste0(vehicle_label, " ", powertrain_label, " // CV")
+  ) |>
+  mutate(
+    comparisons = factor(comparisons, levels = unique(comparisons[order(Pair_id)]))
+  )
 
-ggsave(
-  filename = here::here(
-    'paper_writing',
-    'vehicle_paper',
-    "images",
-    "vehicle_analysis",
-    "BEV_probability_age_with_depreciation_generic.png"
-  ),
-  plot = bev_probability_plot,
-  width = 10,
-  height = 6.5,
-  dpi = 300,
-  bg = "white"
-)
 
+write_parquet( bev_probability_data , here('data', 'bev_probability_data.parquet'))

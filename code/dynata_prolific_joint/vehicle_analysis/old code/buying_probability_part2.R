@@ -12,17 +12,25 @@ all_vehicles <-  read_parquet(here(
   "vehicle_listing_prices.parquet"
 ))
 
-
-vehicles_comparsion_list <- read_csv(here('data', 'vehicles_comparison_list.csv'))
-
-
-all_vehicles$id <- paste0(all_vehicles$model, '_' ,
- all_vehicles$make, '_', all_vehicles$powertrain, '_', all_vehicles$vehicle_type)
+all_vehicles_2 <- all_vehicles |> 
+  filter(age_years >=2.5 & age_years <3.5) |> 
+  collect()
 
 
-temp <- all_vehicles |> 
-  group_by(id, year) |> 
-  summarise(total_cars = n(), .groups = "drop")
+
+vehicles_comparsion_list <- read_csv(here('data', 'vehicle_pairs_2016_2024.csv')) |> 
+  mutate(across(where(is.character), tolower))
+
+
+vehicles_comparsion_list$id <- paste0(vehicles_comparsion_list$make,'_',
+  vehicles_comparsion_list$model,'_',
+  vehicles_comparsion_list$powertrain, '_',
+  vehicles_comparsion_list$vehicle_type
+)
+
+all_vehicles$id <- paste0(all_vehicles$make, '_' ,
+ all_vehicles$model, '_', all_vehicles$powertrain, '_', all_vehicles$vehicle_type)
+
 
 
 vehicle_ages <- all_vehicles |> 
@@ -44,21 +52,18 @@ vehicle_ages <- vehicle_ages |>
       TRUE ~ "CV"
     ),
     starting_year = earliest_year - round(earliest_age),
-    no_years = (latest_year - starting_year) 
+    no_years = (latest_age - earliest_age) 
   ) 
 
 
-vehicle_joint <- left_join(vehicles_comparsion_list,vehicle_ages , 
-  by = c( 'bev_vehicle'='id') ) |>  
-  select(id, bev_vehicle, other_vehicle, starting_year,
-     latest_year, no_years, bev_range, other_vehicle_range )
-
-vehicle_joint <- vehicle_joint |> 
-  pivot_longer(cols = c('bev_vehicle', 'other_vehicle'),
- names_to = 'vehicle_type', values_to = 'vehicle_names')
+vehicle_joint <- inner_join(vehicles_comparsion_list,vehicle_ages , 
+  by = c( 'id') ) |>  
+  select(id,  earliest_age,  latest_age, earliest_year,
+     latest_year, no_years, total_cars, Pair_id )
 
 
-age_list = seq(0, 8)
+
+age_list = seq(0, 9)
 
 df <- data.frame(
   age_years = age_list,
@@ -72,10 +77,9 @@ predictions <- data.frame(
 )
 
 
-run_model <- function(current_id, earliest_year, latest_year,  formula) {
+run_model <- function(current_id,   formula) { 
   data <- all_vehicles %>%
-    filter(id == current_id) |> 
-    filter(year >=  earliest_year & year  <= latest_year)
+    filter(id == current_id)
     
 
   if (nrow(data) > 0) {
@@ -87,24 +91,17 @@ run_model <- function(current_id, earliest_year, latest_year,  formula) {
 
 
 
+ids <- unique(vehicle_joint$id)
 
-ids <- unique(vehicle_joint$vehicle_names)
-
-  # data <- all_vehicles %>%
-  #   filter(id == 'versa sedan_nissan_cv')
 
 for (i in ids){
 
-  #i = 'versa sedan_nissan_cv'
-  no_years =  vehicle_joint$no_years[vehicle_joint$vehicle_names == i]
-  earliest_year =  vehicle_joint$starting_year[vehicle_joint$vehicle_names == i]
-  latest_year =  vehicle_joint$latest_year[vehicle_joint$vehicle_names == i]
+  #i = 'kia_soul_cv_car'
+  no_years =  round(vehicle_joint$no_years[vehicle_joint$id == i], 0)
   print(paste0(i, '///',   no_years))
 
     model_used_vehicle <- run_model(
       current_id = i,
-      earliest_year =  earliest_year,
-      latest_year =  latest_year,
       formula = log(price) ~
         miles +
         age_years 
