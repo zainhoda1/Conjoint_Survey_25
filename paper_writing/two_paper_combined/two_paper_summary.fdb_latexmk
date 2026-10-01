@@ -1,15 +1,15 @@
 # Fdb version 4
-["biber two_paper_summary"] 1790886990.60491 "two_paper_summary.bcf" "two_paper_summary.bbl" "two_paper_summary" 1790888110.52835 0
+["biber two_paper_summary"] 1790889987.76755 "two_paper_summary.bcf" "two_paper_summary.bbl" "two_paper_summary" 1790890073.77593 0
   "../battery_paper/DCE_lit_review.bib" 1790871111 136098 894e899e0206d2d7e0f52e958dd73c38 ""
   "../battery_paper/EV battery.bib" 1785344080 63836 40eeb4a3f770a2daeedbfb0f1dbde497 ""
   "../battery_paper/Used EV.bib" 1781209746 35736 53d5f0a285de06ce47ab83d652e93aa7 ""
   "../vehicle_paper/used_EV_lit_review.bib" 1787614318 8275 440a747f69c9c92542cc939191c10b41 ""
-  "two_paper_summary.bcf" 1790888110 109335 a9bab1de86096839e1c4166394980aa3 "pdflatex"
+  "two_paper_summary.bcf" 1790890073 109335 a9bab1de86096839e1c4166394980aa3 "pdflatex"
   (generated)
   "two_paper_summary.bbl"
   "two_paper_summary.blg"
   (rewritten before read)
-["pdflatex"] 1790888107.18642 "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/two_paper_combined/two_paper_summary.tex" "two_paper_summary.pdf" "two_paper_summary" 1790888110.52957 0
+["pdflatex"] 1790890069.09059 "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/two_paper_combined/two_paper_summary.tex" "two_paper_summary.pdf" "two_paper_summary" 1790890073.77752 0
   "../../code/output/images/vehicle_analysis/wtp_plot_vehicle_attributes.png" 1789617840 197628 ed18956305e2810c84b39a4346cb9dd4 ""
   "../../code/output/model_output/battery_analysis/apollo/0_lc6_class_profiles_no_optout.png" 1786458265 534779 5a54be6bb0c398d6fe17716f1caab360 ""
   "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1790875865 86068 ecdcc1876d169dc9a3f6be1adcfa7b6f ""
@@ -91,12 +91,12 @@
   "C:/Users/Zoha Shahabuddin/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/Zoha Shahabuddin/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1751104012 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
   "C:/Users/Zoha Shahabuddin/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/two_paper_combined/two_paper_summary.tex" 1790888106 8218 43f8d60d1352a0907ea9b7f701f7dceb ""
-  "two_paper_summary.aux" 1790888110 2030 7aefe6761b1c61c88767018ef8d6681e "pdflatex"
-  "two_paper_summary.bbl" 1790886994 5792 b599e90639330b6afe68f16e0225fcf8 "biber two_paper_summary"
-  "two_paper_summary.out" 1790888108 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "two_paper_summary.run.xml" 1790888110 2661 861d7c7c05086430ade3a607bc0086be "pdflatex"
-  "two_paper_summary.tex" 1790888106 8218 43f8d60d1352a0907ea9b7f701f7dceb ""
+  "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/two_paper_combined/two_paper_summary.tex" 1790890068 8195 6521aa2f21600416152170a37d39071f ""
+  "two_paper_summary.aux" 1790890073 2030 7aefe6761b1c61c88767018ef8d6681e "pdflatex"
+  "two_paper_summary.bbl" 1790889992 5792 b599e90639330b6afe68f16e0225fcf8 "biber two_paper_summary"
+  "two_paper_summary.out" 1790890070 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "two_paper_summary.run.xml" 1790890073 2661 861d7c7c05086430ade3a607bc0086be "pdflatex"
+  "two_paper_summary.tex" 1790890068 8195 6521aa2f21600416152170a37d39071f ""
   (generated)
   "two_paper_summary.aux"
   "two_paper_summary.bcf"
