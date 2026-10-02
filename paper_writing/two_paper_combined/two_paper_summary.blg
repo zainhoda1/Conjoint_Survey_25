@@ -1,9 +1,9 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'two_paper_summary.blg'
-[24] biber-darwin:340> INFO - === Fri Oct  2, 2026, 00:27:17
-[31] Biber.pm:420> INFO - Reading 'two_paper_summary.bcf'
-[57] Biber.pm:994> INFO - Found 0 citekeys in bib section 0
-[62] bbl.pm:676> INFO - Writing 'two_paper_summary.bbl' with encoding 'UTF-8'
-[62] bbl.pm:779> INFO - Output to two_paper_summary.bbl
-[62] Biber.pm:131> WARN - The file 'two_paper_summary.bcf' does not contain any citations!
-[62] Biber.pm:133> INFO - WARNINGS: 1
+[23] biber-darwin:340> INFO - === Fri Oct  2, 2026, 10:59:20
+[30] Biber.pm:420> INFO - Reading 'two_paper_summary.bcf'
+[54] Biber.pm:994> INFO - Found 0 citekeys in bib section 0
+[59] bbl.pm:676> INFO - Writing 'two_paper_summary.bbl' with encoding 'UTF-8'
+[59] bbl.pm:779> INFO - Output to two_paper_summary.bbl
+[59] Biber.pm:131> WARN - The file 'two_paper_summary.bcf' does not contain any citations!
+[59] Biber.pm:133> INFO - WARNINGS: 1
