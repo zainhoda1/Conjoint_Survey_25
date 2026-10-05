@@ -34,6 +34,7 @@ maxbibnames=99,
 
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{setspace}
 
 % Force floats to appear where inserted, not deferred to end of document.
 % Use [H] specifier on every \begin{figure} and \begin{table}.
@@ -45,10 +46,6 @@ maxbibnames=99,
 \setcounter{topnumber}{20}
 \setcounter{bottomnumber}{20}
 \setcounter{totalnumber}{40}
-
-% add line number
-\usepackage{lineno}
-\pagewiselinenumbers
 
 %\usepackage{titlesec}
 %\titlespacing*{\section}{0pt}{6pt}{3pt}
@@ -80,53 +77,11 @@ maxbibnames=99,
 
 %\begin{frontmatter}
 
-\title [mode = title]{Consumer Valuation of Battery Health Attributes in Used Battery Electric Vehicle Markets: A Discrete Choice Experiment
-}
-
-
-\author[1,2]{Xiatian {Iogansen}}
-\fnmark[1]
-\credit{Conceptualization, Data curation, Methodology, Software, Formal analysis, Writing - Original Draft, Writing - Review \& Editing}
-
-\author[2]{Zain {Hoda}}
-\fnmark[2]
-\credit{Conceptualization, Data curation, Methodology, Writing - Review \& Editing}
-
-\author[1]{Christina {Gore}}
-\credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Original draft preparation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
-\fnmark[3]
-\cormark[1]
-\cortext[cor1]{Corresponding author}
-
-\author[1]{Joshua D. {Kneifel}}
-\credit{Conceptualization, Data curation, Methodology, Investigation, Writing - Review \& Editing, Supervision, Project administration, Funding acquisition}
-\fnmark[4]
-
-\author[1,2]{Sindhu {Ranganath}}
-\credit{Writing - Original Draft, Writing - Review \& Editing}
-\fnmark[5]
-
-\author[2]{John P. {Helveston}}
-\credit{Conceptualization, Methodology, Writing - Review \& Editing, Supervision}
-\fnmark[6]
-
-\address[1]{Applied Economics Office, Engineering Laboratory, National Institute of Standards and Technology, Maryland, USA}
-
-\address[2]{Department of Engineering Management and Systems Engineering, George Washington University, Washington D.C., USA}
-
-
-
-\fntext[fn1]{xiatian.iogansen@gwu.edu \& xiatian.logansen@nist.gov, https://orcid.org/0000-0002-4851-1323}
-\fntext[fn2]{zain.hoda@gwu.edu, https://orcid.org/0009-0003-0958-1868}
-\fntext[fn3]{christina.gore@nist.gov, https://orcid.org/0000-0002-3586-6918}
-\fntext[fn4]{joshua.kneifel@nist.gov, https://orcid.org/0000-0002-3114-5531}
-\fntext[fn5]{sindhu.ranganath@nist.gov, https://orcid.org/0000-0001-5764-9773}
-\fntext[fn6]{jph@gwu.edu, https://orcid.org/0000-0002-2657-9191}
+\title [mode = title]{Consumer Valuation of Battery Health Attributes in Used Electric Vehicles}
 
 
 \begin{abstract}
-Buyers of used battery electric vehicles (BEVs) face substantial uncertainty about battery condition at the point of sale, even though the battery accounts for much of the vehicle's value. This study delivers the first consumer willingness to pay (WTP) estimates for battery-health attributes of used BEVs. A discrete choice experiment was administered to a national sample of 3,072 used vehicle buyers in the U.S. The DCE jointly varies price, mileage, electric range, battery state of health, and battery refurbishment history across six repeated choice tasks. A mixed logit model shows that consumers value additional range at \$11,070 per 100 miles, while each additional 10,000 miles of vehicle mileage reduces WTP by \$2,780 and and each additional percentage point of annual battery range loss reduces WTP by \$980. Consumers also assign negative values to pack- and cell-level battery refurbishment, with WTP reductions of \$4,060 and \$4,480, respectively. Each attribute shows wide dispersion around its mean, suggesting substantial heterogeneity in WTP across the sample. A latent class choice model further identifies six consumer segments, which differ substantially in their sensitivity to battery-health attributes, price, and the no-choice option. Attitudes, infrastructure access, and demographics explain much of the heterogeneity. In addition, respondents who reject all vehicle offers most often cite \textit{general BEV disinterest}, \textit{economic barriers}, and \textit{charging inconvenience}. However, providing detailed battery replacement cost and warranty information does not affect overall market engagement and choice behavior. This study assesses the potential for battery-health disclosure to serve as a market-transparency signal in used BEV transactions, which carries implications for used vehicle dealers, OEMs, and certification service providers.
-
+Buyers of used battery electric vehicles (BEVs) lack reliable information about battery condition at purchase. This study provides the first willingness-to-pay (WTP) estimates for battery-health attributes in the U.S. used BEV market, using a discrete choice experiment (DCE) with 3,072 potential used-vehicle buyers. A mixed logit model shows consumers value 100 additional miles of range at \$11,070, penalize mileage ($-$\$2,780 per 10,000 miles), battery degradation ($-$\$980 per percentage-point of annual range loss), and refurbishment at the pack or cell level ($-$\$4,060 and $-$\$4,480). A latent class choice model further identifies six consumer segments, which differ substantially in their characteristics and sensitivity to battery-health attributes. Respondents who opted out of all choice tasks most often cited \textit{general BEV disinterest}, \textit{economic barriers}, and \textit{charging inconvenience}. Providing battery replacement cost and warranty information did not affect market engagement. The findings carry implications for certification programs, used-vehicle dealers, and OEMs.
 \end{abstract}
 
 %\begin{highlights}
@@ -143,13 +98,12 @@ Battery electric vehicle \sep Used vehicle market\sep Discrete choice experiment
 \end{keywords}
 
 \maketitle
-\renewcommand{\baselinestretch}{1}\normalsize
+\doublespacing
 \section{Introduction}
 \label{section:intro}
+The used vehicle market is central to automobile ownership \parencite{marketresearchfutureUnitedStatesUsed2025}. An increasing number of used battery electric vehicles (BEVs) are entering the secondary market and the demand is also accelerating. The growth of the used BEV market extends access to middle- and lower-income households \parencite{hagmanTotalCostOwnership2016}, supports a resilient circular economy by extending vehicle and battery lifetimes \parencite{guzekElectricVehiclesOverview2024}, and underpins the residual value that make new BEV leases financially viable \parencite{bruckmannResaleAnxietyObstacle2021, limMassAdoptionElectric2015}.
 
-The used vehicle market is central to U.S. automobile ownership. Used vehicle transactions account for roughly 70\% of all passenger vehicle purchases and are projected to grow steadily through the coming decade \parencite{marketresearchfutureUnitedStatesUsed2025}. An increasing number of used battery electric vehicles (BEVs) are entering the secondary market and the demand is also accelerating: sales rose 34.2\% year-over-year through early 2025, while average days of supply fell by 21.5\% \parencite{coxautomotiveinc.EVMarketMonitor2025}. The growth of the used BEV market extends access to middle- and lower-income households \parencite{hagmanTotalCostOwnership2016}, supports a resilient circular economy by extending vehicle and battery lifetimes \parencite{guzekElectricVehiclesOverview2024}, and underpins the residual value that make new BEV leases financially viable \parencite{bruckmannResaleAnxietyObstacle2021, limMassAdoptionElectric2015}.
-
-Despite this momentum, consumer hesitation toward used BEVs remains pronounced. \textcite{fernandesUSUnderstandingConsumer2023} reports that 52\% of U.S. adults are unlikely to consider purchasing a used BEV, compared to 28\% who express openness to the idea. In the same survey, consumers most often cite \textit{uncertainty about vehicle and battery condition} (41\%) and \textit{concerns about reliability relative to new EVs} (23\%) as primary barriers. Among those who have already purchased a used BEV, over half reported pre-purchase concerns about battery longevity, even though only 5.1\% experienced substantial performance loss in practice \parencite{sheykhfardAnalyzingPurchaseIntentions2025}. 
+In the U.S. market, used BEV sales rose 34.2\% year-over-year through early 2025 \parencite{coxautomotiveinc.EVMarketMonitor2025}. Despite this momentum, consumer hesitation toward used BEVs remains pronounced. \textcite{fernandesUSUnderstandingConsumer2023} reports that 52\% of U.S. adults are unlikely to consider purchasing a used BEV, compared to 28\% who express openness to the idea. In the same survey, consumers most often cite \textit{uncertainty about vehicle and battery condition} (41\%) and \textit{concerns about reliability relative to new EVs} (23\%) as primary barriers. Among those who have already purchased a used BEV, over half reported pre-purchase concerns about battery longevity, even though only 5.1\% experienced substantial performance loss in practice \parencite{sheykhfardAnalyzingPurchaseIntentions2025}. 
 
 This gap between perceived and actual risk points to an information problem: buyers lack information about battery health at the point of sale. This is a considerable risk as the battery can account for up to 30\% of a used BEV's value \parencite{boudwayBatteriesElectricCars2020}. Unlike conventional vehicles, where odometer readings and vehicle age are reasonable proxies for overall wear, battery degradation in BEVs depends on factors such as charging history, depth of discharge cycles, thermal exposure, and driving patterns \parencite{bashashPluginHybridElectric2011, neubauerSensitivityBatteryElectric2012}. Two BEVs of identical age and mileage can differ substantially in their remaining battery capacity and projected useful life. Little of this history is visible to buyers, and some of it is unavailable even to sellers themselves. As a result, sellers cannot credibly signal battery quality and struggle to recoup the true value of their vehicles at resale, while buyers (unable to tell the difference) may undervalue well-maintained and  overpay for poorly maintained BEVs. The consequences extend beyond individual transactions: persistent market uncertainty may suppress new BEV adoption by generating ``resale anxiety'' among prospective buyers who question whether their new vehicle will hold its value \parencite{bruckmannResaleAnxietyObstacle2021}. 
 
@@ -211,37 +165,41 @@ The centerpiece of the survey is a BEV DCE, designed to examine how battery-heal
 
 The DCE incorporates several ways to increase contextual tangibility and behavioral realism \parencite{haghaniHypotheticalBiasStated2021}. First, each respondent selected a vehicle image of their preferred body type (car versus SUV) they found appealing before the choice tasks. This image was then used to depict every alternative across the six tasks, holding appearance constant so that choices reflect the listed attributes rather than styling. Second, for choice task, respondents select among three used BEVs or a ``None of the above'' option. The opt-out allows respondents to decline unattractive alternatives, which makes the stated choices closer to actual purchase decisions. Third, respondents were assigned to one of four DCE versions based on their stated budget (low, $\leq$\$20,000 versus high, $>$\$20,000) and body-type preference. 
 
-Choice profiles were generated as a random design using the \texttt{cbcTools} R package \parencite{helvestonCbcToolsDesignAnalyze2025}: for each respondent, attribute levels for each alternative were drawn at random from the level ranges of the assigned version. Unlike efficiency-optimized designs, a random design requires no prior assumptions about preference parameters and preserves the independent attribute variation needed to identify potential interaction and nonlinear effects \parencite{walker2018d}. Figure~\ref{fig:battery_dce} shows an example of one choice question. 
+Choice profiles were generated as a random design using the \texttt{cbcTools} R package \parencite{helvestonCbcToolsDesignAnalyze2025}: for each respondent, attribute levels for each alternative were drawn at random from the level ranges of the assigned version. Unlike efficiency-optimized designs, a random design requires no prior assumptions about preference parameters and preserves the independent attribute variation needed to identify potential interaction and nonlinear effects \parencite{trainDiscreteChoiceMethods2009}. Figure~\ref{fig:battery_dce} shows an example of one choice question. 
 
 Respondents were also randomly assigned to one of two information treatment conditions. The \textit{basic information} group received descriptions of electric range and battery SOH only. The \textit{extended information} group additionally received information on expected battery useful lifetime, replacement cost, and warranty coverage. This design allows us to test whether the content of battery information affects consumers' choices and their propensity to opt out. 
 
+\clearpage
+\begin{landscape}
+\begin{singlespace}
 \begin{table}[pos=H]
 \caption{BEV choice experiment attributes and levels.}
 \label{table:dce_attributes}
-\begin{adjustbox}{width=\textwidth, center}
 {\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{p{3.2cm} p{4.8cm} p{3cm} p{3cm} p{3cm} p{3cm}}
+\begin{tabular}{p{2.7cm} p{4.0cm} p{3.2cm} p{3.2cm} p{3.2cm} p{3.2cm}}
 \toprule
 \multirow{2}{*}{\textbf{Attribute}} & \multirow{2}{*}{\textbf{Definition}} & \multicolumn{4}{c}{\textbf{Levels}} \\
 \cmidrule(lr){3-6}
  & & \textbf{Low-budget} \newline ($\leq$\$20,000) Car & \textbf{High-budget} \newline ($>$\$20,000) Car & \textbf{Low-budget} \newline ($\leq$\$20,000) SUV & \textbf{High-budget} \newline ($>$\$20,000) SUV \\
 \midrule
-Mileage & The total number of miles a vehicle has traveled since manufacture. & \multicolumn{4}{p{12.5cm}}{15,000--60,000 miles, in increments of 500 miles.} \\
+Mileage & The total number of miles a vehicle has traveled since manufacture. & \multicolumn{4}{p{14cm}}{15,000--60,000 miles, in increments of 500 miles.} \\
 \addlinespace[4pt]
-Battery refurbishment history & The repair or replacement work that has been performed on the vehicle's main battery pack. & \multicolumn{4}{p{12.5cm}}{%
+Battery refurbishment history & The repair or replacement work that has been performed on the vehicle's main battery pack. & \multicolumn{4}{p{14cm}}{%
   \textit{(1) Original:} The battery remains in its factory-original condition with no repairs or replacements.\newline
   \textit{(2) Some battery cells replaced:} A portion of the battery cells has been replaced to address performance issues or extend battery life; the remaining cells are original.\newline
   \textit{(3) Entire battery pack replaced:} The full battery pack has been replaced with a new, refurbished, or used pack, typically after battery performance declined below a specified threshold.} \\
 \addlinespace[4pt]
 Electric range at delivery (Year 0) & The maximum distance the vehicle can travel on a full battery charge under typical driving conditions, as rated at the time of manufacture. & 50--150 miles \newline (50-mile increments) & 100--250 miles \newline (50-mile increments) & 150--250 miles \newline (50-mile increments) & 200--350 miles \newline (50-mile increments) \\
 \addlinespace[4pt]
-Battery annual degradation rate and state of health (SOH) & The average annual percentage loss in electric range and battery SOH. The remaining range and SOH at Year 3 (current) and Year 8 (five years from purchase) are derived from this rate. & \multicolumn{4}{p{12.5cm}}{1\%--8\%, in increments of 1\%.} \\
+Battery annual degradation rate and state of health (SOH) & The average annual percentage loss in electric range and battery SOH. The remaining range and SOH at Year 3 (current) and Year 8 (five years from purchase) are derived from this rate. & \multicolumn{4}{p{14cm}}{1\%--8\%, in increments of 1\%.} \\
 \addlinespace[4pt]
 Purchase price & The total cost of the vehicle in dollars, including down payment, monthly payments, taxes, and fees. & \$10,000--\$20,000 \newline (\$2,000 increments) & \$20,000--\$40,000 \newline (\$5,000 increments) & \$15,000--\$25,000 \newline (\$2,000 increments) & \$25,000--\$45,000 \newline (\$5,000 increments) \\
 \bottomrule
 \end{tabular}}
-\end{adjustbox}
 \end{table}
+\end{singlespace}
+\end{landscape}
+\clearpage
 
 \begin{figure}[pos=H]
     \centering
@@ -269,7 +227,9 @@ The initial sample comprised 3,657 respondents from across the U.S. We identifie
 
 Because no official population distribution exists for consumers intending to purchase a used vehicle, we compare the sample's demographic profile with ACS 2020--2024 five-year estimates (Table~\ref{table:sample_profile}). The sample aligns closely with the national adult population on housing type and on lower- and middle-income shares. It skews younger (5.4\% aged 65 and older versus 22.0\% nationally), more female (60.7\% versus 51.0\%), and more educated (54.1\% hold a bachelor's degree or higher versus 35.7\% of adults 25 and older). Renters are over-represented (46.7\% versus 34.8\%), while households earning \$150,000 or more (13.4\% versus 23.0\%) and Hispanic adults (11.4\% versus 17.4\%) are under-represented. Some of these deviations are consistent with findings from prior studies of used-vehicle buyers (e.g., skew younger and lower-income than the general population). Without the population benchmark, we decided not to weight the data, and all analyses below are unweighted.
 
+\begin{singlespace}
 \input{attachments/sample_vs_acs.tex}
+\end{singlespace}
 
 \section{Method}
 \label{section:method}
@@ -305,7 +265,7 @@ The WTP-space utility for respondent $n$ choosing alternative $i$ in choice scen
 \vspace{\baselineskip}
 \noindent \textbf{Model Framework} \par
 
-The MXL results reveal substantial preference heterogeneity across respondents. To explore whether this heterogeneity reflects discrete consumer segments with systematically different preferences, we estimate a latent class choice model (LCCM) using the \textit{Apollo} R package \parencite{hess2019apollo}. The LCCM assumes that individuals can be assigned to a finite number of unobserved groups (classes) within which preferences are homogeneous, but across which they differ \parencite{kamakuraProbabilisticChoiceModel1989, greeneLatentClassModel2003}. This structure is well suited to the situations where consumers may differ in their attitudes toward battery health risk, their familiarity with BEV technology, and their price sensitivity. The model is estimated on a subsample obtained after excluding cases with missing data on covariates (2,916 respondents, 17,496 choice observations).
+The MXL results reveal substantial preference heterogeneity across respondents. To explore whether this heterogeneity reflects discrete consumer segments with systematically different preferences, we estimate a latent class choice model (LCCM) using the \textit{Apollo} R package \parencite{hessApolloFlexiblePowerful2019}. The LCCM assumes that individuals can be assigned to a finite number of unobserved groups (classes) within which preferences are homogeneous, but across which they differ \parencite{kamakuraProbabilisticChoiceModel1989, greeneLatentClassModel2003}. This structure is well suited to the situations where consumers may differ in their attitudes toward battery health risk, their familiarity with BEV technology, and their price sensitivity. The model is estimated on a subsample obtained after excluding cases with missing data on covariates (2,916 respondents, 17,496 choice observations).
 
 As illustrated in Figure~\ref{fig:model_framework}, the LCCM consists of two simultaneously estimated components. The \textit{class membership model} assigns each respondent probabilistically to a latent class as a function of observable individual characteristics. The \textit{class-specific choice model} then estimates the conditional probability of each vehicle choice within each class. In addition, a set of \textit{inactive indicators} excluded from estimation for  collinearity or theoretical reasons is used to characterize the classes descriptively after estimation. The formal model structure follows the notation of \textcite{chenExploringTouristPreference2023}.
 
@@ -393,14 +353,18 @@ Table~\ref{table:mxl_results} presents the MXL model estimates. All mean WTP par
 
 The standard deviation estimates show substantial preference heterogeneity across respondents. Range at Year~3 exhibits the widest dispersion in absolute terms (SD = \$13,950 relative to a mean of \$11,070), with the distribution of simulated WTP draws spanning from \$1,660 at the first quartile to \$20,470 at the third quartile. This indicates that while most respondents positively value range, a non-trivial share places little weight on it. Heterogeneity in the refurbishment parameters is also pronounced: the standard deviations for pack replacement (\$7,300) and cell replacement (\$6,720) are both larger in magnitude than their respective means, and the upper quartiles of the simulated draws are positive (\$850 and \$70, respectively). This implies that roughly one quarter of consumers view battery refurbishment neutrally or even as a positive quality signal, potentially because a replaced battery is perceived as newer or more cost-effective than the original. Mileage dispersion is also substantial: approximately one quarter of the simulated draws are positive. In contrast, range-loss rate is the most uniformly penalized attribute; its standard deviation is small relative to the mean, and the distribution remains negative throughout nearly the entire sample. Together, these results suggest that consumer valuations of battery-related attributes are heterogeneous in both sign and magnitude. This motivates the segment-level analysis that follows.
 
+\begin{singlespace}
 \input{attachments/mxl_results}
+\end{singlespace}
 
 \subsection{Results of Latent Class Choice Model}
 \subsubsection{Model Selection}
 
 To determine the optimal number of latent classes, we estimated models with one through eight classes (Table~\ref{table:model_fit_comparison}). Model fit was evaluated using log-likelihood ($LL$), the $\rho^2$ measure relative to the null model, Akaike Information Criterion ($AIC$), Bayesian Information Criterion ($BIC$), adjusted $\rho^2$, and entropy, where smaller $AIC$ and $BIC$ values and larger adjusted $\rho^2$ and entropy indicate better fit and class separation \parencite{nylundDecidingNumberClasses2007}. We selected a six-class solution based on model fit and interpretability. Class membership ranges from 8.7\% to 22.7\% of the sample. The improvement in BIC diminishes substantially beyond six classes. Moreover, in the seven- and eight-class solutions, one class consistently accounted for fewer than 6\% of the sample, reducing robustness for segment-level analysis. 
 
+\begin{singlespace}
 \input{attachments/lc_fit_index_comparison}
+\end{singlespace}
 
 \subsubsection{WTP and Class Profiles}
 
@@ -462,7 +426,9 @@ The most prominent feature of this class is that it has the price coefficient cl
 \end{figure}
 \end{landscape}
 
+\begin{singlespace}
 \input{attachments/model_summary_6c.tex}
+\end{singlespace}
 
 
 
@@ -524,26 +490,36 @@ Beyond the choice models, the thematic analysis among respondents who opted out 
 
 This study has several limitations. The analysis relies on stated preferences from a DCE, which may not fully replicate the decision-making dynamics of real vehicle purchases, particularly for consumers with limited prior BEV experience. Stated-preference estimates may also overstate market valuations. Our aggregate range estimate (\$11,070/100mi) sits above new-vehicle benchmarks (see Section \ref{section:lit_review}). The gap is consistent with the high marginal value of range in a short-range used fleet, and Class~3's range valuations in particular should be read with this caution. The large no-choice penalty (-\$51,300) may imply a stronger compulsion to transact than real purchase behavior, a potential stated-preference artifact. Moreover, the sample is restricted to individuals who expressed an intention to purchase a used vehicle within two years, which excludes passive or uninterested populations. The LCCM assumes a finite number of discrete classes, so unobserved heterogeneity within each class remains. Future research can examine how these preferences evolve as used BEV supply increases and battery health reporting becomes more standardized, and whether incentive programs aimed at improving information quality in the secondary market translate into measurable shifts in demand.
 
-\section{Acknowledgments and Disclaimers}
-
-This study was funded by the National Institute of Standards and Technology (NIST). The NIST Research Protections Office and the Office of Human Research of George Washington University determined this project meets the criteria for exempt human subjects research.
- 
-Certain equipment, instruments, software, or materials, commercial or non-commercial, are identified in this paper in order to specify the experimental procedure adequately. Such identification does not imply recommendation or endorsement of any product or service by NIST, nor does it imply that the materials or equipment identified are necessarily the best available for the purpose.
- 
-
 \section{Appendix}
 \label{section:appendix}
+\renewcommand{\thetable}{A.\arabic{table}}
+\setcounter{table}{0}
 
+\setstretch{1}
 \input{attachments/table_lc6_profile_main.tex}
+\setstretch{2}
 
+\setstretch{1}
 \input{attachments/table_lc6_metadata.tex}
+\setstretch{2}
 
+\setstretch{1}
 \input{attachments/wtp_pairwise_tests.tex}
+\setstretch{2}
 
+\begin{singlespace}
 \input{attachments/wtp_lit_summary.tex}
+\end{singlespace}
 
-\printcredits
+\section{Acknowledgments and Disclaimers}
 
+This study was funded by the National Institute of Standards and Technology (NIST) [grant number:70NANB25H110-0]. The NIST Research Protections Office and the Office of Human Research of George Washington University determined this project meets the criteria for exempt human subjects research.
+
+Certain equipment, instruments, software, or materials, commercial or non-commercial, are identified in this paper in order to specify the experimental procedure adequately. Such identification does not imply recommendation or endorsement of any product or service by NIST, nor does it imply that the materials or equipment identified are necessarily the best available for the purpose.
+
+\section*{Declaration of Generative AI and AI-Assisted Technologies in the Manuscript Preparation Process}
+
+During the preparation of this work the authors used Claude (Anthropic) in order to assist with grammar checking, language improvement, and table formatting. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article.
 
 \printbibliography
 

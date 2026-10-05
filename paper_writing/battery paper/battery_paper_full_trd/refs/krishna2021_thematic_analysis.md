@@ -1,0 +1,616 @@
+TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+ContentslistsavailableatScienceDirect
+Transportation Research Interdisciplinary Perspectives
+journal homepage: www.elsevier.com/locate/trip
+Understanding and identifying barriers to electric vehicle adoption through
+thematic analysis
+G. Krishna
+SymbiosisInstituteofInternationalBusiness,SymbiosisInternational(DeemedUniversity),Pune,Maharashtra,India
+A R T I C L E I N F O A B S T R A C T
+Keywords: Thestudyaimstounderstandthegeneralperceptionofelectricvehiclesamongconsumersandthebarriersto
+Electricvehicles theirwidespreadadoption.Thestudyfocusesonidentifyingandunderstandingthefactorsinvolvedintheir
+Barriers purchase with a wider range of expression using thematic analysis unlike traditional survey techniques.
+Consumerperception Further,theroleofemotionsisalsoconsideredinthestudywhichisnormallyoverlooked.eWOMisused
+eWOM
+asdataforthestudyasitisrelevantforelectricvehiclesaspeoplemajorlyuseinternetmediumstofreelyshare
+theirthoughts.Thismethodhelpsinfindingallgaps(tangibleandintangible)presentintheoffering(EVs)and
+expectationsofaconsumer.Thisstudyalsoprovidesuswithinformationonrelationshipsamongstthesebar-
+rierswhichhasanegativecascadingeffectonoveralladoption.
+1.Introduction the consumers opinion of this technology which acts as a barrier,
+ratherthanevaluatethetechnologyitself.
+Transportation sector is a critical part of modern civilization. It
+plays an important role in the development of economies, provision 1.1.Motivationandimportanceofthestudy
+of living wages to masses, along with generation of multiple micro
+andmacro‐economicbenefits.AccordingtoTheWorldBank,transport
+Multiple pieces of research have been carried out to identify the
+sectorisresponsibleforalmost64%oftheglobaloilconsumptionand barriers to adoption. The popular method used by these researchers
+23%oftheenergyrelatedCO2emissions.Thishighemissionsfigure
+toidentifybarriersisthroughsurvey.Onesuchstudycarriedoutby
+hasincreasedtheneedforanalternativetechnologywithsimilarout- EgbueandLong(2012)includedquestionstoranktheadoptionfac-
+putcharacteristics.Atpresent,themostviableandpopularsuccedent torsandconcludedthatrange,cost,infrastructureandsafetyarethe
+is electricitybased propulsion, commonly known as electric vehicles primaryconcernsofrespondentsandpricetobemuchimportantthan
+(EV).Electricvehicleswerefirstintroducedinthe19thcenturybutcit- environmental benefits. Essentially helping us realise that practical
+ingthesuperioreaseandconvenienceofinternalcombustionengine issuesandpriceplaysabiggerroleincarpurchasedecisionthanenvi-
+(ICE), electric vehicles remained unpopular. But now, this transition ronmentalbenefits.Also,analysisamongstcarconsumersstatedthat
+from ICE to EVs has been tricky. According to the IEA’s sustainable thesentimenttowardselectricvehicletechnologytobepredominantly
+developmentscenario,theglobalelectricvehiclesmarketsharetarget negative (Jena, 2020). These studies help us in understanding that
+is30%(excludingtwowheelers).Atpresent(2020),themarketshare electricvehicleadoptionisdependentonfactorsbeyondenvironmen-
+is 2.6% worldwide (estimated 3% at the end of 2020). Sustainable talbenefitsandper‐kmrunningcosts.
+transportationrequirescomprehensiveplanningwhileaccountingfor Allthesurvey‐basedstudieshavefocusedonlyonidentifyingtan-
+economic, social and environmental fields (Litman and Burwell, gible factors such as price, range, environmental benefits, safetyetc.
+2006).Asapartofthisplanning,itisimportanttounderstandthecon- Theyfailtorecognizetheroleofintangiblefactorssuchasemotions
+sumerperceptiontowardselectricvehiclesinordertomeettheambi- and desirability. Sheller (2004) argues that driving can be included
+tiousmarketsharetargetsandcreateaworthyalternativetoexisting asacorporealengagementwhichprovidesmultipledispositions,pro-
+ICE technology. Understanding the nature of barrier to the adoption ducingfeelingsofhappiness,excitement,oranticipation.Shefurther
+ofelectricvehicleswouldleadtobetterinsightsoftheadoptionpro- states that emotional responses and feelings are crucial to car pur-
+cessandconsumerrequirements.Thisstudyonlytriestounderstand chases. Cars have evolved from a utilitarian entity to a congenial
+entity. Hence, consumers consider such factors in addition to the
+E-mailaddress:g.krishna2019@siib.ac.in
+https://doi.org/10.1016/j.trip.2021.100364
+Received3January2021;Revised16March2021;Accepted1April2021
+2590-1982/©2021TheAuthor.PublishedbyElsevierLtd.
+ThisisanopenaccessarticleundertheCCBY-NC-NDlicense(http://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+G.Krishna TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+tangible factors during a purchase. Automotive giants like BMW, research objective. A total of 70 forums and articles with comments
+Dodge,Porsche,Ferrarietc.havebeenwidelypopularduetotheseval- were identified, with twenty‐nine of the sets from DriveTribe, thirty
+uestheyprovidetoconsumers.ItisworthnotingthatBMW’smarket- from Reddit, and eleven from TeamBHP. Similarly, comments were
+ingsloganis“Sheerdrivingpleasure”indicatingtheimportanceofthis minedfromsevenYouTubevideos(atotalof1559comments)using
+factor(pleasure).Yet,studiesdonotfocusonunderstandingthecon- theMaxQDAsoftware,whichcollectscommentswithahighnumber
+sumermindsetindetail.Survey‐basedstudieshavetriedtoanswerthe of replies and likes. Similarly, the previously identified forums were
+problemofadoptionbyrestrictingtherespondentstoonlyfewfactors. importedto the MaxQDAsoftware for thematic coding. Asaturation
+Thisleadstoamisunderstandingintheconsumer’sexpectationfrom in themes was sensed, indicating the identification of all the major
+the product. Studies only suggest changes which may improve the themes. Hence indicating the data in hand was sufficient to carry
+technologybutmaynotnecessarilymakeitmoredesirable.Thisunde- outthestudy.
+sirabilitymaybeabarriertooverallmassadoption,whichisvitalin Thematic analysis is a step‐by‐step process of analysing and con-
+the case of electric vehicles considering ICE vehicles desirability vertingtherawdataintothemesofdata.Themajorstepsinathematic
+offerings. analysis are familiarising with the data, generating the initial codes,
+However,suchfactorsarenotexperiencedfirst‐handbyallpoten- searchingforthemes,reviewingtheidentifiedthemes,andproducing
+tialconsumers.PotentialconsumersresorttoWOM,whereexperience the manuscripts (Kiger and Varpio, 2020). Generating initial codes
+sharedbythecustomerswhohaveexperiencedtheintangiblefactors. refers to the process of labelling and organising the text data into
+In recenttimes, WOMalsopropagatesthroughonlinemediumsthey groups, to identify the underlying themes in the data. These codes
+aretermedaseWOM.CarconsumerstypicallyresorttoeWOMmedi- could be phrases or words which are of relevance/importance. With
+umssuchasdedicatedonlineforumsandpersonalblogmediums(so- thisbasicorganisation,thedataisthereviewedfurthertoformglobal
+cialmedia)astheirsource.eWOMisparticularlyinterestingbecause themesandbasic‐levelthemeswhichfallunderthoseglobalthemes.
+the potential customers (or target audience) of electric vehicles are This gives us a hierarchical structure of the data, which helps us in
+millennials. Internet usage amongst millennials is remarkably high, understandingthedatabetterbyenablingcreationofathematicnet-
+andhenceeWOMcanbeamajorsourceofWOM(usefulforthestudy work.Athematicnetworkisatool/visualaidtoenablebettersynthe-
+in question). With the rise of internet, purchase decisions and beha- sis and systematisation of the collected data (Attride‐Stirling, 2001).
+viourhasbeen significantlyimpacted.Consumersareheavilyreliant The network highlights the relationships amongstthemes in the col-
+ononlineplatformsandeWOMmediumstojudgetheproduct’svalue lected data. This network can further help us in understanding the
+provision.Usingthissourceofinformationcanprovidewithinsights direct,indirect,andcascadingeffectsofathemeonadoption.
+toconsumer’sperceptionandpurchasebehaviour.Henceaqualitative The study was conducted while trying to fulfil the guidelines of
+studyofthiseWOMcanhelpusunderstandthebarrierstoadoption credibility and trustworthiness according to Lincoln and Guba
+whiletakingintangiblefactorsintoconsiderationaswell.Thismethod (1986). They state a few techniques such as persistent observation,
+isalsoadvantageousastherespondentisnotrestrictedtoaspecificset prolongedengagement,andpeerdebriefingtoensurethiscredibility
+ofissues,butratherisallowedtoexpresstheirthoughtsfreelyunlikea of a study. To ensure this, a code was only identified after multiple
+survey. observations, i.e., persistent observation of the code in the collected
+data.Thedatawasalsocollectedfromvariousmediumstoenablepos-
+sible triangulation of the data. In addition, a prolonged engagement
+2.Methodology withtheforumswasensuredbeforethecodingprocesstoenablebet-
+teridentificationofrelevant/importantcodes.Toensuretransferabil-
+Thisstudyusesthematicanalysistoachievetheresearchobjective ity of the study, thick description of the data‐derived code was
+of understanding the barriers to adoption rather than a survey. This provided wherever required. Confirmability was prioritized by only
+methodispreferredasitwillprovideawiderangeofexpressionfrom thematizingissuesthatwerefoundinthedataratherthanproviding
+consumers which help in finding factors that are overlooked/missed the researcher’s opinion. The data was not modified to fit the study
+and provide us information on the relationships/patterns that exists rather, the study projected the codes that were found in the data.
+amongthethemes.Togetthewiderangeofexpression,eWOMisgath- Hence,reducinginterferenceinthemedepiction,andprovidingwith
+eredfrommajorforumsandsocialmedia,findingvarioussignificant the user’s comprehension of the technology regardless of its correct-
+themesthatarise.Itisessentialtonotethatelectricvehiclesaresub- ness.Suchinstancesarediscussedinthediscussionsectiontoevaluate
+jecttovariousstereotypesbasedontheperformance,looksandother thecorrectnessofthecomprehension.
+characteristics(Burgessetal.,2013).Thesestereotypesandopinions
+traverseacrossvariousonlineplatformsaseWOM.Theopinionsgen-
+3.Themes
+erated by users on online discussion forums/social media are much
+moretrustedandfelttobereliablebypeoplethantheopinionsgener-
+atedbyfirms.Itcaninfluenceapotentialconsumertowardsanopin- 3.1.Salesconversioninability
+ionwithoutanyfurthervalidationoftheuserwhostatedtheopinion
+Thisthemediscussesthebarrierswhichareduetotheinabilityof
+(KudeshiaandKumar,2017).Utilisingthissocialmediadatacanhelp
+companiestoconvertpotentialconsumerstoactualconsumers.These
+ingettingdeeperinsightsduetotheemotionalengagementandelicit
+factorsarenotcontrolledbythebuyer,makingthemhelpless.Thisfac-
+attentioninvolved(Devendorfetal.,2020).Multiplepiecesofresearch
+torisnotspecificallyduetotheelectricvehicletechnology,henceis
+havealsousedonlineforumsasdatasourceforqualitativestudies.Lai
+andTo(2015)statethatforumscanprovidepeople’sthoughtswithout notuniquetothiselectricvehicletechnologyandinmostcasesavoid-
+ablealtogether.Thistendstobeahindrancetoadoption,considering
+interference;Hence,providingusneutralandtransparentopinionsfor
+thatthisproblemisfacedbypeoplewhoarereadytoadapttothenew
+analysis.Theonlineforumsareshortlistedandcollectedbyreplicating
+technology.Thissectionofpeoplewhounderstandthetechnology,all
+amethodadoptedbySanteretal.(2017).Thismethodshortliststhe
+forumsdependingon‘definedexclusion’criteriabysearchingforums itsadvantagesandissues.Henceittendstodriveawayapotentialcus-
+for keywords “Electric AND vehicles AND opinions OR adoption OR tomerwhoisinthelatterstagesofpurchase.
+barrier”. Websites which contained forums of automotive discussion
+such as “DriveTribe”, “Reddit”, and “TeamBHP” were selected. The 3.1.1.Supplyandchoiceofvehicles
+keywordswereenteredinthesearchengineofwebsites,anditsresults Itiscommoninthecarindustryforcarmanufacturerstoprovide
+were evaluated and excluded if the results are not relevant to the customers with the product after a “waiting period” due to the
+2
+
+G.Krishna TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+manufacturingandsupplychainmodels.Waitingperiodsaresubject also stated that such public distrust due to malfunctions and failure
+to change due to various micro and macro‐environmental reasons. arewellknown.Theyconcludedthatadaptingwithotherroadusers
+Highdemandwithlowsupplycanleadtoanextendedwaitingperiod. and sorting legal matters are critical issues for future developments.
+Thiswaitingperiodcanfrustrateconsumersandcouldmakethemcan- However, they also believe there are multiple personal and societal
+celtheirbooking.Peoplefindthiswaitingperiodparticularlyhighfor benefitstoautonomousdriving.Withthedevelopmentofthistechnol-
+electricvehiclescomparedtonormalICEvehicles,whichcouldfurther ogyintermsdataencryptionandreliability,itcouldgathermoretrust.
+driveawaypeoplefrombuyinganelectricvehicle.Peopleexpectthe Ontheotherhand,itisimportantformanufacturerstorightlydepict
+product to be readily available. Further, they believe the inventory autonomousdrivingasanaddedfeatureofelectricvehiclesnotitssole
+ofelectricvehiclestobeextremelylowwhichcouldanswerthelong valueprovision.Thiscouldincreasetrustamongpeoplethattheypos-
+waitingperiods. sesstheoverallcontrolofthevehicle.
+Inadditiontopurchasingnewcars,consumersalsodependonthe
+usedmarketforvehiclepurchase.Manypurchasevehiclesonlyfrom
+theusedmarketduetoitsfinancialviability.However,totheirdisap- 3.2.2.Unsafe
+pointmentconsumersstatethelowavailabilityofelectricvehiclesin Peoplefindtechnologyinvolvingbatteriestobeunsafe,duetothe
+theusedmarket.Inadditiontothesupplyfactor,peoplefindavoid natureofpartsandcomponentsthatexistinthem.Theprimaryfearof
+inthechoiceofelectricvehiclesinthemarketandexpectawidervari- safety amongst people is the nature of battery to explode during an
+ety of offerings. Conventional car (ICE) market consists of multiple accident/impact or extreme weather conditions causing fire and
+“segments” of products to carter to different audiences. Lutsey et al. requiredifferentapproachinextinguishingthefire.Themostcommon
+(2016) argued that electric vehicle model choice would help in typeofbatteriesusedinEVstodayistheLithium‐Ionbattery,which
+expandingthemarketshare(i.e.,higheradoption).Thislackofchoice hasatendencytoexplodegeneratingalotofheatifthebatteryitself
+also forces customers to depend on one market dominant company. is punctured or damaged. This generated heat can damage adjacent
+Existingaversiontowardsthatdominantcompanyleadsoverallaver- cellscausingachainreaction,whichisknownas“thermalrunaway”.
+siontowardstheEVtechnology. Anothersafety‐relatedissuecitedisthelackofnoise.Electricvehicles
+are comparatively “silent” than conventional vehicles during opera-
+3.1.2.Dealers tion.Thissilenceisfeltunsafebyusers,asthedriverdoesnotrealise
+Dealers play an essential and important role in the purchase of a the vehicle’s speed unless the driver looks at the speedometer. It is
+vehicle. Dealerships can influence the purchase decision since they worthnotingthatdriverstendtojudgespeedusingtheenginenoise
+havedirecteffectoncustomerexperience.Itwasnotedthatmanycon- aslookingatthespeedometerisparticularlydistracting.
+sumers found them reluctant to sell an electric vehicle, highlighting
+theissuesthatareassociatedwithelectricvehicletechnologyanddis-
+missive of the technology’s existence. They misinformed consumers 3.2.3.Notenvironmentallyfriendly
+andportrayedelectricvehiclesasaninferiortechnologyduetopolicy Thepointofdifferentiationbetweenelectricvehiclesandconven-
+and other issues (de Rubens et al., 2018). People feel they show no tionalvehiclesistheenvironmentallyfriendlynatureofelectricvehi-
+interestinsellinganelectricvehicle,astheycannotmakesubstantial cles.Thisisduetotheabsenceoftailpipeemissions.Incontrary,afew
+profitsfromelectricvehiclesascomparedtoconventionalvehiclesin have stated that the technology is not environmentally friendly as
+theformofaftersalesservice. claimed,andthattobeareasonfornotpurchasinganelectricvehicle.
+Multiplecompanieshavesetup“online”dealershipstoavoidsuch Theystatemultipleotherenvironmentalfactorstobelievethattech-
+issues and enable online vehicle booking as the potential consumers nology is not environmentally friendly. One primary reason for this
+aretechsavvyandreliantoninternet.However,fewhavestatedthis beliefisduetotherequirementofminingformanufacturingbattery
+alternative to be strange and unnerving. Molesworth and Suortti and other related components. People question the emissions from
+(2002)statedthat peoplepreferonlineexperienceforproductinfor- the mining operations of battery components such as lithium. They
+mation,butnotfornegotiationandpayment.Consideringtherateof alsofeartheexistenceofa“blooddiamond”likescenariowherethe
+development in FinTech, it is safe to assume that online dealerships miningactivitiesdonotfollowthehumanrightslawsandinvolveille-
+wouldgrowwithtime. galactivitiesduringthemining,astheydon’tgetenoughinformation
+onsupplier’spractices.Theyfurtherbelievethereisnegativeenviron-
+3.2.Lackoftrustintechnology mentalimpactduetothetoxicityofthematerialsusedinmakingthe
+battery,and that this technology merely changes the nature of envi-
+Asignificantthemeidentifiedinthedataislackoftrustinthetech- ronmentalimpactanddoesnotreducetheimpact.Thelackofoptions
+nology.Thislackoftrustisduetoseveralsignificantreasonsthatare torecyclebatteryandtheircomponentsatitsendoflifealsoconcerns
+discussedfurther.Thetechnologyisstillnotconsideredreadyfordaily people.
+usage due to multiple reasons which are discussed in the upcoming Inaddition,peoplebelievethatemissionsarepresentintheelec-
+sections. tricity production phase instead of tailpipe emissions, hence making
+itnobetterthanICEvehicles.Electricityproductionisstilldependent
+3.2.1.Autonomousdriving onnon‐renewablesourcesofenergyinmanycountries,whichrelease
+Althoughthetermautonomyandelectricvehiclesareentirelyinde- greenhousegasemissions.Hencestillindirectlycreatingatmospheric
+pendentofeachother,peopletendtobelievethatelectricvehiclesand pollution.Theybelieveitisessentialtofirstmakethetransitionfrom
+autonomygohandinhand.Theybelievethisfurtherduetotheasso- non‐renewabletorenewablesourcesofenergybeforeadoptingelectric
+ciationofthefuturewithautonomyandelectricvehicles.Thisassoci- vehicles.Theyquestiontheefficiencyofthistechnologymodelwhich
+ation further leads to perceptions amongst people which acts as a requiresmultipleenergyconversionsbeforeusingitforpoweringelec-
+barrier.Theyfeelthatelectricvehiclesarevulnerabletohackingand tricvehiclesandtheoverallcarbonfootprintoftheprocess.Another
+loss of control. They believe vulnerability to hacking leads to easier interestingperspectivefoundwastheroleofvehiclelifespanonenvi-
+theft of the vehicle, theft of data such as destination, place of resi- ronmentaleffect.Peoplestatedthattheywouldonlypurchaseanycar
+dence, and timings of travel (also the vulnerability of house theft). aftertheirpresentcarhascometoitsendoflife,andincaseofelectric
+They believe this loss of control could allow technology companies vehiclesthisvehiclelifespanisshort.Thisshortlifespanwouldrequire
+tohavehighercontrolovertheiractionsandexposetheirdata.This consumerstoreplacevehiclesfrequently,henceincreasingtheoverall
+is perceived as “Orwellian” and unsettling. Eugensson et al. (2013) environmentalimpactduringtheconsumer’slifetime.
+3
+
+G.Krishna TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+3.2.4.Unreliability totheirlifestyle.Mainly,theissuesarefeltasusersareusedtoasetof
+Peoplebelievethisunreliabilityisduetothecharacteristicsofthe characteristicsinvehicles,andtheyfinditdifficulttoredefineandrea-
+technology and their acclimatization with the standards of conven- ligntheconceptofvehicleswithrespecttoelectrictechnology.Dueto
+tionalvehicles.Peoplearedoubtfulaboutthebatteriesanditsdegra- thewidevarietyofusage,EVtechnologyfindsitdifficulttocaterto
+dationwith time. They feelthis degradationcannotbe calculatedor theneedsofallaudienceandcreatea“onesizefitsall”technologylike
+beunderstoodasitcouldbeduetonumerousreasons.Thisdegrada- conventionalvehicles.
+tion could further lead to a drop in the performance and range of
+thebattery,implyingtheycannotusethevehiclethesamewaythey
+used it when the vehicle was new. They must be mentally prepared
+for a different range and performance figures through different life 3.3.1.Costofpurchaseandownership
+stagesofthevehicleandcouldfurtherchangewiththeexposuretodif- Themostpopularandfrequentlymentionedthemethroughoutthe
+ferentweatherconditions. datasetwasthecostofpurchaseinvolvedwithelectricvehicles.Itis
+Inadditiontodegradation,ancillarycomponentsofthecarcould worthnotingthattheaveragecostofelectricvehiclesishigherthan
+drainthebatteryduringusage.Ancillarycomponentsarethedevices the average cost of conventional ICE‐powered vehicles. This cost‐
+thataredependentonthevehicle'sprimarysourceofenergyfortheir related issue is sensed and mentioned throughout the data sample.
+working,suchaswipers,headlights,andindicators.Thiscouldbepar- Majorityoftheusersmentionedthattheupfrontcostinvolvedinthe
+ticularly tricky as a natural phenomenon like rain or snow is unpre- purchaseofanelectricvehicleistheirbarriertoadoption.Tounder-
+dictable and leaves no choice to the driver but use the ancillary stand the gravity of the concern, a study by Adepetu and Keshav
+componentsanddrainthebatteryreducingrange.Thisoverallexperi- (2015)concludedthatcostcompetitionisamuchmoresignificantbar-
+ence is felt to be complicated and alien compared to conventional rierthanrangeanxiety(whichisalsoasignificantbarrier).Peopleter-
+vehicles. med this “sticker shock” to primarily affect their decision of
+Unreliabilityisfurtherfeltwhenitisnecessaryforuserstocalcu- purchasing an electric vehicle. Montian et al. (2019) stated in their
+late thetrip beforehandas theymust bepreparedwith thecharging studythatonlyaround33%oftherespondentswerereadytobuyan
+timeandlocationofchargingpointsbeforehand.Theyfindthispartic- electric vehicle at its lowest price figure (around 20,000 US dollars)
+ularly challenging as the charging infrastructure is different across indicating even the cheapest offering to be expensive. They believe
+locationsandinmanycasesunreliable.Thechargingpointscouldturn that the technology is overpriced and highly taxed considering the
+out to be out‐of‐order forcing detour or the charging point could be specificationsandbuildqualityofthevehicles.Peopleexpect“incen-
+equippedwithalow‐capacitychargerwhichcouldtakealongertime tives”forchoosingelectricvehicles.Theyfindbuyinganelectricvehi-
+torecharge, hence finishingthetrip later than expected. This occur- cleandpayingtaxunjustifiablewhentheycanbuyaconventionalcar
+renceisoverallsensedasunreliability.Theyalsostatethatthecharg- withthetaxes.Ontheotherhand,wherecountriesprovidetaxgrants
+ing points installed at home are unreliable as they face blackouts tobuyers,theystillfindtheproducttobeexpensiveasitbarelymakes
+frequentlyandunpredictably. a difference. Data also states that electric vehicles are expensive to
+maintain and repair, unlike a conventional vehicle and hence the
+3.2.5.Immaturityoftechnology insurancecostsofthesevehiclesarealsohigh.Itisalsoworthnoting
+People believe this technology to still be in its primary stages of thattherunningcostsarehighlydependentontheelectricitycostsof
+development and are reluctant to adapt to a technology that needs thelocality.Graham‐Roweetal.(2012)alsoidentifiedthesamewhen
+improvement.Theydonotwanttobethe“guineapigs”ofthistechnol- theirrespondentsfoundthepriceunjustifiable.
+ogy.Fewstatedthattheyarenotexactlyaversivetowardsthetechnol- Inadditiontotheinitialcostsofpurchase,theyalsofindthedepre-
+ogy,butmerelyarenotreadytoadoptyetduetomultiplereasons.The ciation of electric vehicles particularly discouraging as they believe
+technology requires further innovation and development to inspire they might incur losses while selling the vehicle. Electric vehicles
+confidenceas analternativeto conventional ICEtechnology. It lacks are portrayed as cheap motoring, considering the running and fuel
+different approaches in the drivetrain (such as four‐wheel drive, all‐ costsinvolved.Thisportrayaliscounteredbypeoplestatingthatsim-
+wheeldrive)andbodytypes(likesedans,hatchbacks,pickuptrucks). ilarlowercostscanbeachievedbyusingtheICEvehiclesintheright
+Theyalsobelievethistobeparticularlychallengingasthetechnology conditions.Byrightconditions,theyrefertodrivingthecaratapre-
+cannotprovidethesameutilitariansenseasaconventionalICEvehi- scribedeconomicway(lowrpm,lowspeedfluctuations).Hence,they
+cle.Asitmayrequirecharacteristicsbeyonditscapability.Forexam- believeitisnotnecessarytopurchaseanelectricvehicletosaverun-
+ple, in one instance a user stated that it is just not possible to ning costs. Electric vehicles are extremely popular with the younger
+overland (adventure traveling), go on off‐road expeditions or go on audience and costs are the major if not the only barrier to them
+roadtrips.Theuseralsostatedthatthetechnologyishighlyrestrictive towardsadoption,consideringtheirpriorcommitmentstootherfinan-
+and is not built to fulfil such needs. The user also added that they cial liabilities like student loans. Families with lower income and
+mightadapttotechnologyonlywhenitiscapableofdoingso.Simi- financial liabilities found it unviable to purchase an electric vehicle,
+larly,peoplealsofelttheabsenceofemergency(suchasacompletely hence the technology is perceived as a luxury product. Sierzchula
+drainedbattery,batteryoverheating,puncturedtires)servicesdiscour- etal.(2014)alsonotedthatincomewasabadpredictorofadoption
+aging.Itisworthnotingthatanelectricvehiclehasrestrictionsintow- levelsintheirstudy.
+ing,changingtiresetc.hencerequiringspecialserviceslikeacomplete Anothersignificantpatternidentifiedwastheaversiontowardsbat-
+breakdownassistancewhicharehardtofindduringanemergency. teryleasingpoliciesofcompanies.TheystatethatthePCP(personal
+contractpurchase)ofelectricvehiclesisunfriendlyandaddstothedif-
+3.3.Livingwiththetechnology ficultyofmanagingcosts.Theyfindthistobeparticularlyunfriendly
+asthePCPaffectstheircreditscoreirreversibly.
+Thistheme deals with usageof this technologyevery dayand its Tobuyvehiclesatalowerprice,itiscommonamongstpeopleto
+corresponding issues. Users expect similar output and performance approach the used market. People state that used electric vehicles
+ofconventionalICEvehiclesfromelectricvehicles.Thesefactorsare areeitherscarceintheusedmarketorstillexpensivecomparedtoa
+typicallysensedafterthepurchaseofthevehicle.Theseissuescompro- usedICEvehicle.Peoplewhoaredependentonvehiclestoearn(such
+misetheoverallpracticalityofthevehicle.Anothersignificanttheme astransporters,taxidrivers)findthistechnologycostlyandharmfulto
+identifiedwasthelack ofcargospacein thesevehicles.Peoplehave their business. They state that the profit per trip measure is meagre
+statedthatthisimpracticalnatureofelectricvehiclesaddsextrastress comparedwithelectricvehiclesimpactingtheirearnings.
+4
+
+G.Krishna TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+3.3.2.Infrastructure the ideal charging time would be under five minutes. Range and
+Electric vehicles are highly dependent on infrastructure for their recharge duration seesaws, bigger batteries take a longer time to
+working.Infrastructurerelatedissuesariseduetothelackofcharging recharge while smaller batteries have a lower range. This problem
+pointsandtheinabilitytoretrofitexistinginfrastructure.Manypeople howevercanbesolvedwithfastchargers.Yetthereareissuesrelated
+parktheirvehiclesovernightatdriveways,duetotheabsenceofagar- to fast charging. Manufacturers have started to charge extra for fast
+ageorallocatedparkingspace.Thislackofspaceposesamajorchal- charging feature, discouraging people to pay. They also state that
+lenge for home charging solutions. It is not possible for people who thefast‐chargingstationsarescarce,anditmaybesubjecttocrowding
+parktheircarsinthestreetordrivewaytochargetheircarsovernight duringpeakhours.Peopleexpecttofinishtheirjourneyassoonaspos-
+duetofearofcartheftorvandalization(includingunpluggingcharg- sible,andcrowdingcouldadverselyaffecttheoveralljourneytime.As
+ingcars).Residentsofapartmentsfacesimilarissueswherethereisa wecansee,thereexistsarelationbetweenthemes,whichwillbedis-
+shortageofparkingspaces.Residentsofrentedapartmentsfinditdif- cussedindetailintheupcomingsections.
+ficulttoinstallhomechargersduetothenon‐approvalfromtheirland-
+lords.They findit easiertoavoidbuyingelectricvehiclesaltogether 3.4.Desirability
+thangetapprovaltoinstallhomechargers.
+Householdswithmultiplecarsfacetheissueofchargingpriorities Desirablecharacteristicspersuadeaconsumertopreferonevehicle
+(which car to charge first) since they cannot afford multiple home over another. Several such characteristics are found desirable in a
+chargers. Also, to avoid higher electricity bills they might have to vehicle. This theme encapsulates such characteristics that are not
+depend on installing solar panels which adds to the existing upfront strictlyessentialforthevehicle’sworking(likerange,infrastructure)
+costs. Many also believe that owing an electric vehicle makes sense but are essential to make a vehicle preferable. These characteristics
+only if they have access to such cheap home charging solutions. On aremajorlyintangibleandcannotbemeasuredorcomparedonastan-
+theotherhand,consideringcommonpublicinfrastructure,peoplefind dardscale.Thisthemefindswhatarethosecharacteristicsandtherea-
+thistobemuchmoreproblematic.Peoplestatethattheoverallavail- sonbehindthem.
+ability and existence of charging points is deficient. They also state
+that the few charging points that exist, are located in the city, and 3.4.1.Soulandcharacterofthevehicle
+rural/suburbanareashavealownumberofchargingpoints,making Peoplefindvehiclestobe“soulful”duetomultiplereasons.They
+this only viable for city drivers and increasing overall range anxiety statethereisaconnectionbetweentheuserandthevehicle,andthey
+amongstrural users. This lowernumber of chargingpoints also lead claimthesevehiclestobemorethanjustamachinebutanentitywith
+to the issue of long waiting times as they might get forced to wait soul.Theybelievethesesoulfulcharacteristicsarisefromquirkssuch
+forothercarstogetchargedbeforegettingtheircarcharged,inaddi- asvibrationsandsoundswhichconnectsthecarandthedriver.They
+tiontothealreadylongchargingduration(whichisdiscussedinthe feel that every car/model is unique due to multiple reasons such as
+upcoming sections). Further, people also expect the infrastructure to theirpowercurve,inductionsystems,sounds,feeletc.Thesearefound
+be as reliable and prevalent like fuel stations, including presence in charming and characterful. They feel that cars inspire 'love' towards
+remote areas. They believe this higher accessibility in remote areas driving and owning them due to such characteristics, and every car
+couldevenfulfiltheirneedofgoingonroadtripstoremoteareas.It should possess an evident personality. Driving is said to be a de‐
+isworthnotingthatpeoplefindroadtripsandcarexpeditionsdelight- stressingtherapywheretheyindulge in aworldof engagementcon-
+fulandextensivelyspendtimeandmoneyonthesame. nectingthedriverandvehicleemotionallycreatingaromance.They
+findthisromancetobeabsentin electricvehiclescreatingavoidin
+3.3.3.Range between the car and driver. They find driving these vehicles similar
+Rangereferstothedistancethattheelectricvehiclecantravelin to operating an 'appliance' (by which they mean very monotonous).
+onesinglechargeofbattery.Althoughtheexpectationsofidealrange Onespecificuserstatedthatthistechnologyis'sterile'andontheother
+differedfromusertouser,thenotionofhigherrangerequirementwas hand,conventionalvehiclesareimperfectwhichmakesitdesirableto
+feltthroughoutthedata.Thisanxietywasdemonstratedbyauserwho them. It is worth noting that companies thrive on producing such
+statedthatrangeis“scary”asitcouldleadtoasituationwherethereis desirable cars, as they drastically affect the image of the company
+nochargingstation,andtheusermightbeleftstranded. anditsproducts.
+Rangeisverydependentonsizeandconditionofthebattery.With
+degradation of battery range could decrease. Hence, the range can 3.4.2.Repair
+never be comparable to that of a conventional ICE vehicle, or even Repairingandworkingonvehicleswereidentifiedtobeverypop-
+acrossitslife stages. Rangeis alsodependentonthedrivingstyle of ularamongstpeople.Theylikerepairingcarsontheirownasitpro-
+thedriverandtheusageofancillarycomponents.Asdiscussedearlier, videsthemasenseofsatisfactionandisahobbyformany.Theyfeel
+this dependency could provide different value across masses. Few thatitissimplertorepairaconventionalICEvehiclethananelectric
+mightfinditsufficientwhiletherestmaynot.Further,rangeismainly vehicle. They prefer buying cars which they can repair avoiding
+seenasaproblemforpeoplewhoresideinruralareas.Theystatethat dependence on service centres. Owners believe they have the right
+peopleinruralareasdrivelongerdistancetogettowork,whichisnot torepairtheirvehicles,contrarytofewelectricvehiclemanufacturers.
+possiblewithelectricvehicles.Moreover,sincedrivingdistancevaries Theyfeelthis'anti‐repair'mentalityiscreatedtoincreasedependence
+with the situation, it is inconvenient for them to calculate range at onservicecentresandchurnprofitskillingtheconceptofDIY(doit
+eachpoint.Forpeoplewhodependondrivinglongermileswhilehaul- yourself).Itispopularamongstpeopletobuyasecondarycarinaddi-
+ingtrailerandpassengers,theyfeelthatitisnotpossibletoreplicate tiontothedailydriverandmodifyitaccordingtotheirinterestsand
+the same utility with electric vehicles (as hauling loads affect the hobbies.Theyviewthisastheirlifestyle.Withsuchanti‐repairterms,
+range). theybelievetheirlifestyleisatriskcreatinganegativeimageamongst
+thatsectionofpeople.
+3.3.4.Rechargeduration
+Another major theme identified across the data set was the 3.4.3.Culture
+rechargedurationinvolvedwiththeelectricvehicles.Peopleareused Carindustryisintimatelyinvolvedinaculturesinceitsinception.
+torefuellingconventionalvehiclesveryquickly,thisisparticularlya This culture is of significant importance to people who see cars as a
+problemastheymustwaitsignificantlylongertorechargetheircars, lifestyle.It isparticularlyhardforsuchpeople toignorethis culture
+which they are not used to. In multiple instances, people state that andadopt.Thiscultureinembracesvehiclesanddrivingasawayof
+5
+
+G.Krishna TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+liferatherthanjusttransportationfromonepointtoanother.Hence, Peoplestatethattheyprefercarswhichareloudeveniftheyarenot
+they find this technology to be hugely different and even 'offensive' goodperformers.Itisworthnotingthatsoundisstronglyassociated
+tothem.Theydonotconsiderthistechnologytobeaworthyalterna- with the culture of cars and enthusiasts. This states the importance
+tive.Therearemultiplereasonstothisfeeling,andmajorlytheyfind of sound as a factor in a purchase decision. They state sound gives
+electric vehicles technology to be very millennial opposed to old themauralpleasure,anditcannotbereplacedwithanyotherfactor.
+schoolculture.Thestatethelackof'heritage'behindthistechnology OEM and aftermarket manufacturers extensively design exhausts to
+is particularly uninspiring to them. They feel electric vehicles could caterthishugemarket.Inadditiontotheexhaustnote,turbowhistles,
+disruptandkilltermslikedriving,modification,andDIY. redlining, pops and crackles were also found to be very desirable
+Multipleusersinthesamplealsostatedthatmodificationisapart amongstpeople.Soundisbelievedtoengagedriversintotheexperi-
+oftheirlivesandisofhighimportancetothem.Electricvehicletech- enceofdrivingandcreatingasenseofexcitementintheoverallexpe-
+nologydoesnotallowthemodificationofvehiclesandcannotsupport rience.Andthislackofsoundinelectricvehiclesissaidtocreatethe
+theirhobbies(discussedintheupcomingsection)andhencearejust lacklustre‘appliance‐like’experience.
+notafitforthem.Thesamplehasalsoindicatedthatadifferentculture
+maynotbeverywelcome. 3.4.8.Emotionalattachment
+Emotional attachment towards the conventional ICE technology
+3.4.4.Lackoffun wassignificantlystatedandsensedthroughoutthedatasample.Con-
+Asmentionedearliervehiclesarecentredtomultiplehobbiesand ventionalvehiclesappealtopeopleasasymbolof“freedom”andelec-
+interests, one such significant interest is driving for recreation/joy tricvehicletechnologystripsthemoffreedomduetothenatureofits
+whichisfelttobe‘therapeutic’.Peoplehoweverfeelthatelectricvehi-
+working.Theemotionalattachmentmentionedaboveisduetomulti-
+clesareboringandnotfuncomparedtoconventionalICEtechnology. plereasonsitcanbespecifictoanindividual. Thereasoningbehind
+They lack depth in experience, unlike a conventional vehicle. For this barrier was identified, rather than the unique perspectives. One
+example,thelackofgearshiftinginelectricvehiclesmakespeopleless commonidentificationwasthattheterm“petrolhead”isinextremis.
+engagedwithdriving.Theystatethatthisfeelingisfurtherduetothe They feel that the industry will eventually become autonomous due
+lackofmanualtransmission.Althoughmanyconventionalvehiclesare totheintroductionofelectricvehiclestechnology,andautonomywill
+alsoequippedwithautomatictransmission,manualgearboxconfigu-
+killcarculture.Multipleclubsandsocietiesarebased/formedonthis
+rationcanbechosen.Thisisnotpossibleinelectricvehicles.Several worldwideculture.Thebelieveconventionaltechnologyembracesthe
+such characteristics were cited which cannot be fulfilled by electric 'innerchild'intheuserandhenceisseentobefullofreminiscences.
+vehicles.Theyquestiontheignoranceoffunasafactorinelectriccars. Theyfeelthatadoptingthistechnologyisa'dishonour'astheyarelet-
+They feelthat every vehicleshould befun todrive andown. People tingtherightsidedownandisan“antithesistotheirbelief”.Theyalso
+look forward toowning anddrivingfun cars, andterm it to bevery questionitsnecessityofimmediateimplementation,astheyfeelother
+essentialintheirpurchasedecision. technologiesshouldbetransformedgreenfirst.
+3.4.5.Badlooksandfuturisticconcept
+3.4.9.Badimage
+Looks and beauty are in the eye of the beholder. However, it is
+Amajorreasonfortheemotionallychargedaversivereactionofthe
+essentialtonotethatmultiplepointsinthedatastatesimilarnotion
+peopleisduetotheimagerelatedtotheownersandsupportersofthe
+thatelectricvehiclesare'fugly'.Theybelievethatallelectricvehicles electricvehicle.Theystatethatthetechnologyisnotforthe“common
+possess a similar design language, which is not very desirable. They man”.Theyfindthatthecultureassociatedwithelectricvehiclesalien
+findthislanguagetobe'wacky'and'cheap'.Theypreferconventional
+andundesirable.Theyfindtheculturetobe'hipster'.Byhipster,they
+stylingregardlessofthetypeoftechnologyemployed.Theyfindthis
+refertoaculturethatlacksauthenticityandchangestodifferentstyles
+designlanguagetobeahardefforttolookfuturistic.Theyfeelitlacks
+dependingonthetrendofthings.Theyfeelthetechnologyisjustto
+the overall 'presence' and is unimaginative. It is worth noting that
+makeastatementorcreatepropaganda,notofanyutility.Thetechnol-
+looks and design are highly regarded in the car industry and could
+ogywasfoundtobeverydisrespectfultothecarasanidea,asitdoes
+actasasignificantfactorofadoption.
+notembracethesamevaluesandprinciplesofconventionalvehicles.
+3.4.6.Performance
+Performanceofavehicleisjudgeddependingonmultiplefactors 4.Interdependencyamongstbarriers
+such as top speed, acceleration, and handling. Performance plays a
+vitalroleinthepurchasedecisionofvehicles.Peoplebelievethatelec- Thisstudyalsoemphasizesontherelationshipsthatexistsbetween
+tricvehicleshavepoorperformanceandare“one‐trickponies”.Elec- themes.Itisespeciallyimportanttounderstandtheserelationshipsas
+tricvehiclesgeneratehightorqueinstantlyhenceprovidingexcellent they have a cascading effect on other barriers and hence the overall
+accelerationperformance.Peoplestatethistobetheironlystrongsuit, adoption process as well. This is particularly interesting for product
+not an all‐round performer. They state that these vehicles are heavy design and marketing departments of manufacturers as it provides
+(duetobatteries)anddonotcorner(handle)well,topspeedperfor- withtheroot causeforaseriesofevents.Focusingonone issuecan
+mance is felt inferior to that of a conventional vehicle. They believe
+potentiallyresolvemultipleotherissues.Therelationshipisidentified
+that this technology cannot replicate the all‐round performance of a when a user explicitly mentions a relation between the themes or
+conventional vehicle regardless of future innovations. However, it is whentheysuggestapracticalsolutiontoanissue,implicitlyindicating
+worth noting that multiple such performance technology existing in arelationship.Multiplesuchrelationswerefoundinthestudyandis
+ICEvehiclehavetrickleddownfrommotorsports.Withtheriseofe‐ discussedinthesubsections.
+motorsportsitisverypossiblethatseveralperformance‐orientedtech-
+nologiescantrickledowntoEVs.Hencewithtime,itispossiblethat 4.1.Range-infrastructure-rechargeduration
+EVscanhavecomparableperformance.
+Therelationshipbetweenrange,infrastructure,andrechargedura-
+3.4.7.Sound tionwassignificantlysensedinthedataasshowninFig.1.Peoplesta-
+One of the most popular and significant themes identified in the tedthatanimprovementinrangecouldessentiallyreducetheirneed
+dataissound.Peoplestatemultiplesourcesofsoundthatmakeacar to recharge frequently. This reduction in recharge frequency would
+desirable. The dominant desirable sound stated is the exhaust note. reducethedependenceonpublicchargingpoints,aswiththeextended
+6
+
+G.Krishna TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+|     |     |     |     | Fig.1. | Interdependencymapofthefactors. |     |     |     |     |     |     |     |
+| --- | --- | --- | --- | ------ | ------------------------------- | --- | --- | --- | --- | --- | --- | --- |
+range the user might complete the trip and recharge at home. And When multiple users cultivate such attachments, a desirable culture
+since the user is recharging at home, they may not mind higher couldemerge.Hencetheoveralldesirabilityoutlookcanbemadepos-
+recharge duration. It is worth noting the user’s range anxiety could itiveensuringasmoothertransition/adoption.
+alsobereduced.Ontheotherhand,iftheuserisprovidedwithsupe-
+riorinfrastructure(i.e.,prevalent,fastandvacuouschargingpoints),
+5.Discussion
+| users might | not mind recharging | frequently | and | fast chargers | would |     |     |     |     |     |     |     |
+| ----------- | ------------------- | ---------- | --- | ------------- | ----- | --- | --- | --- | --- | --- | --- | --- |
+alsosolvetheissueoflongrechargedurations.Hence,animprovement
+Theresearchobjectivewastounderstandtheconsumerperception
+intheanyoneofthesethemes,couldreducethenegativeimpactofthe
+andbarrierstoadoptionofelectricvehiclesamongstconsumersbyuti-
+othertwothemes,hencesolvingthreemajorissueswithonesolution.
+|     |     |     |     |     |     | lizing eWOM. | To         | achieve       | this basic | understanding | and         | rationality |
+| --- | --- | --- | --- | --- | --- | ------------ | ---------- | ------------- | ---------- | ------------- | ----------- | ----------- |
+|     |     |     |     |     |     | behind the   | perception | of consumers, |            | opinions      | and reasons | stated by   |
+4.2.Range-infrastructure-unreliability-lackoftrust consumerswerecollected.Thisdatawasparticularlyusefulasitdeliv-
+eredtherequiredinformationwithlowinterference/adulteration.The
+Asdiscussedpreviously,anincreaseintherangecouldreducethe
+datawasfreeofpaidWOM.ThisisfurtherstrengthenedbyLaiandTo
+stressoninfrastructuralrequirements.Thisreducedstresscouldelim-
+(2015)whobelievethatsuchdatasourceshaveminimalinterference.
+inate the unreliability factors associated with charging points. For Thematicanalysiswasusedtofindthesalientthemespresentinthe
+| example, | it was seen in the | theme ‘Infrastructure’ |     | where | users men- |     |     |     |     |     |     |     |
+| -------- | ------------------ | ---------------------- | --- | ----- | ---------- | --- | --- | --- | --- | --- | --- | --- |
+data.Thethemesdiscussedearlier,gavedeepinsightsonthethoughts,
+tionedtheissueofunpredictablecrowdingandwaitinginlines.With
+andthethoughtprocessinvolved.
+| the reduction   | of stress on infrastructure, |     | these     | issues could   | possibly |         |        |            |           |        |             |          |
+| --------------- | ---------------------------- | --- | --------- | -------------- | -------- | ------- | ------ | ---------- | --------- | ------ | ----------- | -------- |
+|                 |                              |     |           |                |          | Several | points | of concern | that were | stated | in the data | had been |
+| reduce, thereby | increasing trust.            | In  | addition, | this reduction | can in   |         |        |            |           |        |             |          |
+studiedbymanyresearchers.
+return reduce the necessity to plan trips, map out charging points Theyhavealsostatedpossiblesolutionstotheseconcerns.Inone
+etc. The overall unreliability is reduced, and since the unreliability instance, consumers questioned the safety of electric vehicles due to
+was one reason for the lack of trust in the technology, this change the lack of sound produced by these vehicles. However, the issue
+canaffectboththefactorspositively.
+|     |     |     |     |     |     | raised by | the data | may not | stand entirely | true. | Bräunl (2012) | stated |
+| --- | --- | --- | --- | --- | --- | --------- | -------- | ------- | -------------- | ----- | ------------- | ------ |
+inhisstudythatthenoiserequiredtoensureattentionexistsinelectric
+4.3.Performance-lackoffun-soul/character-emotionalattachment-culture vehicles.Thecomparisonofsoundlevelsbetweenelectricvehiclesand
+|     |     |     |     |     |     | conventional | ICE | vehicles at | high speeds | were | indistinguishable. | He  |
+| --- | --- | --- | --- | --- | --- | ------------ | --- | ----------- | ----------- | ---- | ------------------ | --- |
+Through tactical performance improvements such as better han- furtheremphasisedthatelectricvehiclesrequirenoiseasasafetymea-
+dling, desirable/unique power, and torque delivery electric vehicles sure only at low speeds. Another safety concern raised by the con-
+can be made ‘fun’ as stated by the users. As seen in the study, this sumers was explosion of batteries during an impact. As a solution,
+‘fun’ character could be perceived to be soulful. This soul plays an Kukreja et al. (2016) suggested placing batteries in a specially
+importantroleindevelopinganemotionalattachmentwiththeuser. designed secondary safe zone in their study. This can reduce the
+7
+
+G.Krishna TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+impacttobatteryandpreventhazards.Italsoadditionallysolvesthe toovercometheconcernsposedbytheseconsumers.Andtoovercome
+cargospaceissuewhichwasmentionedinthe‘Livingwiththetechnol- these,organisationsandmanufacturerscaneithercreateadifferentset
+ogy’theme. ofdesirablecharacteristicsratherthanreplicatetheexistingfactorsor
+Consumers also downplayed the importance of tailpipe emissions try to replicate the existing desirable characteristics. Creating new
+stating that the emissions are merely shifted to energy production desirabilityfactorsmightacceleratetheadoptiontothehighrequired
+defined
+phaseinsteadofthepresentpostusagephase.However,tailpipeemis- acceptance rates. But to make this newly desirability wide-
+sionscannotbeignored.Suchpostusagephasepollutionincreasesthe spread, it might take time and fall short of the deadlines expected.
+overallemissionsconcentrationinaregion.Essentiallytheseregions Ontheotherhand,replicatingfewofthementionedexistingdesirabil-
+are cities and other places with high presence of humans (users and ityfactorsaretechnicallynotpossible.Companieshavetriedtorepli-
+non‐users).Varioushealthhazardscanbeattributedtothispollution. cate these factors with varying degrees of success. For instance, few
+This‘emissionshift’isenvironmentallybeneficialtothelocalpollution electricvehiclesgenerateICEsoundthroughthemultimediasystems
+figures(Hollandetal.,2016).Ontheotherhand,thisshiftcanalsonot incar.Althoughtheyarenotwelcomed,itshowstheeffortmadeby
+be overstated. Barter et al. (2013) argued in their study that overall companies to acknowledge these desirability factors. One of the
+useful greenhouse gasemissions reductionfrom vehicles wouldonly themesmentionedtheneedforauthenticityandheritageintechnol-
+non‐
+be realised when the source of electricity transitions from ogy.Itisimportanttonotethat,suchfactorscanonlydevelopthrough
+‘desirability’
+renewableenergysourcestorenewableenergysources.Thisoverstate- time and widespread adoption. The organizing theme
+mentcanbreakfaithamongsttheusers.Publiccanbecomecynicalof demonstratesthehighweightageincarsaconsumerproduct.Incorpo-
+thetechnology.Thiswassensedinthe‘EmotionalAttachment’theme
+ratingdesirabilityinproducts,particularlycarsisvitalforwidespread
+| where the | public | questioned | the | necessity | to adopt | to  | cleaner | trans- | adoption. |     |     |     |     |     |     |
+| --------- | ------ | ---------- | --- | --------- | -------- | --- | ------- | ------ | --------- | --- | --- | --- | --- | --- | --- |
+portation.Theirdoubtsinthetechnologyaddswiththiscynicalnature The interdependency of barriers delineates the adoption process
+andstrengthensthebarriertoadoption. further. It provided insights on the interdependency of the barrier.
+Theyhavealsoquestionedtheoverallaffordabilityofthetechnol- Inadditionitalsoindicatesthecomplexityinvolvedinprovidingsolu-
+ogy.Electricvehiclesareportrayedascheapandgreenmotoringcost- tions to such barriers. For example, low range can be bettered by
+inglessperkilometreofusage.Usersstatedthatsuchcheapratesdo employinglargerbatterieswhichcouldalsosolvetherechargedura-
+notconsidermaintenanceandrepairs.Itisalsobelievedthatbattery tion and frequency issues. However, a larger battery also increases
+degradation might occur unpredictably. Harsh weather conditions thecostoftheoverallvehicle(whichisalreadyfelttobehigh),com-
+and extensive usage can accelerate battery degradation. This is an plexity and weight of the vehicle (possibly reducing performance
+importantissueasitincreasestheoverallcostofownershipsincebat- levels).Hence,thisconceptualizationofinterdependentbarrierscould
+teriesareexpensivetoreplace.Thefearofbatterydegradationisfur- leadtoinnovationofthoroughsolutions.
+thervalidatedbyPelletieretal.(2017)whosestudystatedthathealth
+ofbatteriesdependsonstorageandoperatingconditions.Thisstates
+6.Conclusion
+theimportanceofweatherandgeographyofusageareaonadoption.
+Furthermore,Gerssen‐GondelachandFaaij(2012)statedintheirstudy
+|     |     |     |     |     |     |     |     |     | Multiple | barriers | through | opinions | have traversed | through | audi- |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | -------- | -------- | ------- | -------- | -------------- | ------- | ----- |
+thatelectricvehiclescouldcompetewithrunningcostsofICEvehicles
+enceregardlessoftheirvalidity.Multiplepiecesofresearchhavesta-
+onlyifthebatterycostsarereduced(whiledrivingatrangelesserthan
+tedtheimportanceofearlyadopters.Astheycouldenableacceleration
+| two hundred | kilometres). |     | This | context | validates | the ‘immaturity |     | of  |              |          |           |         |           |           |       |
+| ----------- | ------------ | --- | ---- | ------- | --------- | --------------- | --- | --- | ------------ | -------- | --------- | ------- | --------- | --------- | ----- |
+|             |              |     |      |         |           |                 |     |     | of adoption. | However, | hesitance | amongst | the users | to become | early |
+technology’theme.
+adopterswasalsonoticed.Intangiblefactorsarestillamatterofcon-
+Theadoptionisfurtherchallengedbyinfrastructure.DeLuchietal. cern.Duetothetechnologicalinabilitytosatisfythoseneeds.Fewof
+(1989)statedintheirstudythatelectricvehiclesarelimitedtotherole these factors may eventually fade away after mass adoption as ICE
+ofasecondorthirdvehicleiftheyrelyontheovernighthomecharg- mayescapeone’smemory.Nevertheless,electricvehiclesmustinherit
+| ing methods | only. | Slowik | and Lutsey | (2017) | also | argue | that | public |     |     |     |     |     |     |     |
+| ----------- | ----- | ------ | ---------- | ------ | ---- | ----- | ---- | ------ | --- | --- | --- | --- | --- | --- | --- |
+someoftheseintangiblefactorstocorrelatewithcarsasanentity.Itis
+chargingandworkplacechargingaffectselectricvehicleuptakesignif-
+worthnotingfromthethematicnetworkthattheseintangiblefactors
+| icantly. Considering |     | the | timeline | between | these | studies | the | overall |     |     |     |     |     |     |     |
+| -------------------- | --- | --- | -------- | ------- | ----- | ------- | --- | ------- | --- | --- | --- | --- | --- | --- | --- |
+mightgetinheritedwiththedevelopmentsinregionslikespeed,range
+| development | of  | charging | infrastructure |     | has been | debatable. | In  | addi- |     |     |     |     |     |     |     |
+| ----------- | --- | -------- | -------------- | --- | -------- | ---------- | --- | ----- | --- | --- | --- | --- | --- | --- | --- |
+etc.Technologicallyfocusedpiecesofresearchhavecreatedsolutions
+tiontothescarcityissue,vehicle‐to‐refuellingindexisalsoakeycon-
+tomultiplebarriersandmaybeseeninthefuture.Thethematicnet-
+| cern. Users | stated | the issue     | of    | long waiting |       | time to | just use | the   |                |      |     |            |                     |     |         |
+| ----------- | ------ | ------------- | ----- | ------------ | ----- | ------- | -------- | ----- | -------------- | ---- | --- | ---------- | ------------------- | --- | ------- |
+|             |        |               |       |              |       |         |          |       | work generated | from | the | data helps | us in understanding | the | pattern |
+| chargers.   | Gnann  | et al. (2018) | state | in their     | study | the     | role of  | lower |                |      |     |            |                     |     |         |
+ofconsumerthoughtprocess.Itextensivelyshowsthepatternofbar-
+vehicle‐to‐refuellingindexasitcauseshigheroccupationoffastcharg-
+rierspilingupduringthebuyingdecision.This‘pile‐up’createsaper-
+ers. It will eventually decrease with the development of battery size ceptionofbeingtootroublesome.Apositivechangeinanyofthepoint
+andtechnology.But,tillsuchtechnologyisdevelopedoverpopulation ofinterdependentnetworkcanbreakthepile‐up.Andtheotherissues
+ofchargerswillremainasasignificantissue.Thesituationisparticu-
+maygetnormalized.Inadditiontothetechnologicalproblem,thecon-
+larlytrickysincemultiplefactorsareinterdependentasdiscussedear-
+|     |     |     |     |     |     |     |     |     | sumers are | also posed | with | misinformation. | Many | data points | with |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | ---------- | ---------- | ---- | --------------- | ---- | ----------- | ---- |
+lier.TonoteFrankeetal.(2012)intheirstudythatrangeisprimarilya
+|               |          |          |            |           |           |                |     |        | exaggeration | and                                              | lack of | validity | were also noticed. | This | states the |
+| ------------- | -------- | -------- | ---------- | --------- | --------- | -------------- | --- | ------ | ------------ | ------------------------------------------------ | ------- | -------- | ------------------ | ---- | ---------- |
+| psychological | barrier, | and      | research   | must      | be rather | focused        |     | on the |              |                                                  |         |          |                    |      |            |
+|               |          |          |            |           |           |                |     |        | necessityof  | adiligentstrategytoconveythistechnologytothecon- |         |          |                    |      |            |
+| usable range  | in       | addition | to battery | capacity. |           | Also, Neubauer |     | and    |              |                                                  |         |          |                    |      |            |
+sumersastheywouldprefer.
+| Wood (2014) | believe | that     | only     | widespread    | accessibility |               | of charging |     |     |     |     |     |     |     |     |
+| ----------- | ------- | -------- | -------- | ------------- | ------------- | ------------- | ----------- | --- | --- | --- | --- | --- | --- | --- | --- |
+| points can  | reduce  | therange | anxiety. | Hence,battery |               | capacityplays |             | a   |     |     |     |     |     |     |     |
+DeclarationofCompetingInterest
+crucialroleinnotjustrange,butoverloadofcharginginfrastructure.
+thetechnicaldifficulties,thetechnologyisalsoposed
+Apartfrom Theauthorsdeclarethattheyhavenoknowncompetingfinancial
+withmultipleintangiblefactorsasdiscussedearlier.Manyoftheintan- influ-
+|     |     |     |     |     |     |     |     |     | interests or | personal | relationships |     | that could have | appeared | to  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | ------------ | -------- | ------------- | --- | --------------- | -------- | --- |
+giblefactorswereirreplaceableinnature,buteffortsmustbemadeto
+encetheworkreportedinthispaper.
+closethegapbetweenexpectationandpossibilityofvalueprovision.
+Thesedesirabilityfactorsareparticularlyinterestingastheconsumers
+References
+| were much      | firmer | in these           | beliefs. | Consumers |      | showed | exceptionally |     |     |     |     |     |     |     |     |
+| -------------- | ------ | ------------------ | -------- | --------- | ---- | ------ | ------------- | --- | --- | --- | --- | --- | --- | --- | --- |
+| low acceptance |        | of the technology. |          | Although  | such | low    | acceptance    | is  |     |     |     |     |     |     |     |
+Bräunl,T.,2012.Syntheticenginenoisegenerationforimprovingelectricvehiclesafety.
+common in the introductory stages of a technology, it is importance Int.J.Veh.Saf.6(1),1–8.
+8
+
+G.Krishna TransportationResearchInterdisciplinaryPerspectives10(2021)100364
+Burgess, M., King, N., Harris, M., Lewis, E., 2013. Electric vehicle drivers' reported Kukreja,J.,Nguyen,T.,Siegmund,T.,Chen,W.,Tsutsui,W.,Balakrishnan,K.,Liao,H.,
+interactionswiththepublic:drivingstereotypechange?.Transp.Res.PartF:Traffic Parab, N., 2016. Crash analysis of a conceptual electric vehicle with a damage
+Psychol.Behav.17,33–44. tolerantbatterypack.ExtremeMech.Lett.9,371–378.
+deRubens,G.Z.,Noel,L.,Sovacool,B.K.,2018.Dismissiveanddeceptivecardealerships Lai,L.S.,To,W.M.,2015.Contentanalysisofsocialmedia:agroundedtheoryapproach.
+createbarrierstoelectricvehicleadoptionatthepointofsale.Nat.Energy3(6), J.Electron.CommerceRes.16(2),138.
+501–507. Lincoln,Y.S.,Guba,E.G.,1986.Butisitrigorous?Trustworthinessandauthenticityin
+DeLuchi, M.,Wang,Q., Sperling,D.,1989. Electricvehicles: performance,life-cycle naturalisticevaluation.NewDirectionsProgramEval.1986(30),73–84.
+costs,emissions,andrechargingrequirements.Transp.Res.PartA:General23(3), Litman,T.,Burwell,D.,2006.Issuesinsustainabletransportation.Int.J.GlobalEnviron.
+255–278. Issues6(4),331–347.
+Devendorf,A.,Bender,A.,Rottenberg,J.,2020.Depressionpresentations,stigma,and Lutsey,N.,Slowik,P.,Jin,L.,2016.SustainingelectricvehiclemarketgrowthinUS
+mental health literacy: a critical review and YouTube content analysis. Clinical cities.Int.CouncilCleanTransp..
+Psychol.Rev.101843. Molesworth,M.,Suortti,J.P.,2002.Buyingcarsonline:theadoptionofthewebfor
+Egbue, O., Long, S., 2012. Barriers to widespread adoption of electric vehicles: an high-involvement, high-cost purchases. J. Consum. Behav.: Int. Res. Rev. 2 (2),
+analysisofconsumerattitudesandperceptions.EnergyPolicy48,717–729. 155–168.
+Franke,T.,Neumann,I.,Bühler,F.,Cocron,P.,Krems,J.F.,2012.Experiencingrangein Montian,K.,Suthikarnnarunai,N.andRattanwong,W.,2019.AnEmpiricalStudyof
+an electric vehicle: understanding psychological barriers. Appl. Psychol. 61 (3), KeyFactorsInfluencingConsumer'sPurchaseIntentionTowardsElectricVehiclein
+368–391. BangkokMetropolis,Thailand.Thailand(August28,2019).
+Gerssen-Gondelach,S.J.,Faaij,A.P.,2012.Performanceofbatteriesforelectricvehicles Neubauer,J.,Wood,E.,2014.Theimpactofrangeanxietyandhome,workplace,and
+onshortandlongerterm.J.PowerSources212,111–129. publiccharginginfrastructureonsimulatedbatteryelectricvehiclelifetimeutility.
+Gnann, T., Funke, S., Jakobsson, N., Plötz, P., Sprei, F., Bennehag, A., 2018. Fast J.PowerSources257,12–20.
+charging infrastructure for electric vehicles: today's situation and future needs. Pelletier, S., Jabali, O., Laporte, G., Veneroni, M., 2017. Battery degradation and
+Transp.Res.PartD:Transp.Environ.62,314–329. behaviourforelectricvehicles:reviewandnumericalanalysesofseveralmodels.
+Graham-Rowe, E., Gardner,B.,Abraham, C.,Skippon, S.,Dittmar, H., Hutchins,R., Transp.Res.PartB:Methodol.103,158–187.
+Stannard,J.,2012.Mainstreamconsumersdrivingplug-inbattery-electricandplug- Santer, M., Chandler, D., Lown, M., Francis, N.A., Muller, I., 2017. Views of oral
+inhybridelectriccars:aqualitativeanalysisofresponsesandevaluations.Transp. antibioticsandadviceseekingaboutacne:aqualitativestudyofonlinediscussion
+Res.PartA:PolicyPractice46,(1)140153. forums.Br.J.Dermatol.177(3),751–757.
+Holland,S.P.,Mansur,E.T.,Muller,N.Z.,Yates,A.J.,2016.Arethereenvironmental Sheller,M.,2004.Automotiveemotions:feelingthecar.Theory,Cult.Society21(4–5),
+benefitsfromdrivingelectricvehicles?Theimportanceoflocalfactors.Am.Econ. 221–242.
+Rev.106(12),37003729. Sierzchula, W., Bakker, S., Maat, K., Van Wee, B., 2014. The influence of financial
+Jena,R.,2020.AnempiricalcasestudyonIndianconsumers'sentimenttowardselectric incentivesandothersocio-economicfactorsonelectricvehicleadoption.Energy
+vehicles:abigdataanalyticsapproach.Ind.Mark.Manage.. Policy68,183–194.
+Kiger,M.E.andVarpio,L.,2020.Thematicanalysisofqualitativedata:AMEEGuideNo. Slowik,P.,Lutsey,N.,2017.ExpandingtheelectricvehiclemarketinUScities.Int.
+131.MedicalTeacher,pp.1-9. CouncilCleanTransp.(ICCT).
+Kudeshia, C., Kumar, A.,2017. Social eWOM: does it affect the brand attitude and
+purchaseintentionofbrands?.Manage.Res.Rev..
+9

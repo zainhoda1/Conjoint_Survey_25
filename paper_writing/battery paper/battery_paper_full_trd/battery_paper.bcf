@@ -2378,11 +2378,11 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1" intorder="1">marketresearchfutureUnitedStatesUsed2025</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">coxautomotiveinc.EVMarketMonitor2025</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">hagmanTotalCostOwnership2016</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">guzekElectricVehiclesOverview2024</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">bruckmannResaleAnxietyObstacle2021</bcf:citekey>
-    <bcf:citekey order="5" intorder="2">limMassAdoptionElectric2015</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">hagmanTotalCostOwnership2016</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">guzekElectricVehiclesOverview2024</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">bruckmannResaleAnxietyObstacle2021</bcf:citekey>
+    <bcf:citekey order="4" intorder="2">limMassAdoptionElectric2015</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">coxautomotiveinc.EVMarketMonitor2025</bcf:citekey>
     <bcf:citekey order="6" intorder="1">fernandesUSUnderstandingConsumer2023</bcf:citekey>
     <bcf:citekey order="7" intorder="1">fernandesUSUnderstandingConsumer2023</bcf:citekey>
     <bcf:citekey order="8" intorder="1">sheykhfardAnalyzingPurchaseIntentions2025</bcf:citekey>
@@ -2458,7 +2458,7 @@
     <bcf:citekey order="60" intorder="1">goreDCIConsumerValuation2025</bcf:citekey>
     <bcf:citekey order="61" intorder="1">haghaniHypotheticalBiasStated2021</bcf:citekey>
     <bcf:citekey order="62" intorder="1">helvestonCbcToolsDesignAnalyze2025</bcf:citekey>
-    <bcf:citekey order="63" intorder="1">walker2018d</bcf:citekey>
+    <bcf:citekey order="63" intorder="1">trainDiscreteChoiceMethods2009</bcf:citekey>
     <bcf:citekey order="64" intorder="1">helvestonLogitrFastEstimation2023</bcf:citekey>
     <bcf:citekey order="65" intorder="1">mcfaddenMixedMNLModels2000</bcf:citekey>
     <bcf:citekey order="65" intorder="2">trainDiscreteChoiceMethods2009</bcf:citekey>
@@ -2466,7 +2466,7 @@
     <bcf:citekey order="67" intorder="1">helvestonPoolingStatedRevealed2018</bcf:citekey>
     <bcf:citekey order="68" intorder="1">helvestonLogitrFastEstimation2023</bcf:citekey>
     <bcf:citekey order="69" intorder="1">helvestonLogitrFastEstimation2023</bcf:citekey>
-    <bcf:citekey order="70" intorder="1">hess2019apollo</bcf:citekey>
+    <bcf:citekey order="70" intorder="1">hessApolloFlexiblePowerful2019</bcf:citekey>
     <bcf:citekey order="71" intorder="1">kamakuraProbabilisticChoiceModel1989</bcf:citekey>
     <bcf:citekey order="71" intorder="2">greeneLatentClassModel2003</bcf:citekey>
     <bcf:citekey order="72" intorder="1">chenExploringTouristPreference2023</bcf:citekey>

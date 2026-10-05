@@ -1,0 +1,27 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[0] Config.pm:311> INFO - Logfile is 'battery_paper.blg'
+[25] biber-darwin:340> INFO - === Fri Oct  2, 2026, 14:49:17
+[32] Biber.pm:420> INFO - Reading 'battery_paper.bcf'
+[64] Biber.pm:994> INFO - Found 65 citekeys in bib section 0
+[70] Biber.pm:4463> INFO - Processing section 0
+[74] Biber.pm:4654> INFO - Looking for bibtex file 'DCE_lit_review.bib' for section 0
+[79] bibtex.pm:1713> INFO - LaTeX decoding ...
+[124] bibtex.pm:1519> INFO - Found BibTeX data source 'DCE_lit_review.bib'
+[209] Biber.pm:4654> INFO - Looking for bibtex file 'Used EV.bib' for section 0
+[211] bibtex.pm:1713> INFO - LaTeX decoding ...
+[223] bibtex.pm:1519> INFO - Found BibTeX data source 'Used EV.bib'
+[259] Biber.pm:4654> INFO - Looking for bibtex file 'EV battery.bib' for section 0
+[262] bibtex.pm:1713> INFO - LaTeX decoding ...
+[282] bibtex.pm:1519> INFO - Found BibTeX data source 'EV battery.bib'
+[317] Biber.pm:4654> INFO - Looking for bibtex file 'manual_refs.bib' for section 0
+[317] bibtex.pm:1713> INFO - LaTeX decoding ...
+[318] bibtex.pm:1519> INFO - Found BibTeX data source 'manual_refs.bib'
+[360] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[360] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[360] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[360] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[396] bbl.pm:676> INFO - Writing 'battery_paper.bbl' with encoding 'UTF-8'
+[412] bbl.pm:779> INFO - Output to battery_paper.bbl
+[412] Biber.pm:131> WARN - Duplicate entry key: 'englerCausalEffectReligious2019' in file 'EV battery.bib', skipping ...
+[412] Biber.pm:131> WARN - Duplicate entry key: 'prietoUsingHedonicPrice2015' in file 'EV battery.bib', skipping ...
+[412] Biber.pm:133> INFO - WARNINGS: 2
