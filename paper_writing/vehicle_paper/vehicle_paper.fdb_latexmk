@@ -1,15 +1,15 @@
 # Fdb version 4
-["biber vehicle_paper"] 1789832883.43023 "vehicle_paper.bcf" "vehicle_paper.bbl" "vehicle_paper" 1789956423.317 0
+["biber vehicle_paper"] 1791437623.11009 "vehicle_paper.bcf" "vehicle_paper.bbl" "vehicle_paper" 1791437648.95152 0
   "DCE_lit_review.bib" 1779348841 66967 a216a887f1a03425f6252c88eb54cc5b ""
   "Used EV.bib" 1778790434 38706 5ed5a61c99f115b5c0893068fededfbb ""
-  "used_EV_lit_review.bib" 1787614318 8275 440a747f69c9c92542cc939191c10b41 ""
-  "vehicle_paper.bcf" 1789956422 112319 89929f730f0d4ad6a17f531e63789b10 "pdflatex"
+  "used_EV_lit_review.bib" 1791406715 8500 a4a6085eeb927de0b647148f761227c3 ""
+  "vehicle_paper.bcf" 1791437647 113011 5d87159dc80d5132f5e56e5362eb062f "pdflatex"
   (generated)
   "vehicle_paper.bbl"
   "vehicle_paper.blg"
   (rewritten before read)
-["pdflatex"] 1789956418.13244 "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" "vehicle_paper.pdf" "vehicle_paper" 1789956423.31812 0
-  "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1789061857 84470 1b03f303430b1250744b51ca4bdbdd0b ""
+["pdflatex"] 1791437638.3806 "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" "vehicle_paper.pdf" "vehicle_paper" 1791437648.95384 0
+  "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1791392917 86068 ecdcc1876d169dc9a3f6be1adcfa7b6f ""
   "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi375/ecss0800.pk" 1778175205 10028 1840d44416893ea035cefda749e4476b ""
   "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecsi0900.pk" 1778790639 22084 6a533c2400043c85dfe3c3d90ddf0e7c ""
   "C:/Users/Zoha Shahabuddin/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecso0800.pk" 1787251133 21224 dcff2c88bda17268734884dde3dab32c ""
@@ -188,17 +188,17 @@
   "attachments/household_context_vehicle.tex" 1789019988 1639 bc4faf6c9c8436affe1708b93a7b1521 ""
   "attachments/mxl_results_vehicle.tex" 1789437125 5653 244c5bdc18ed3af74ad3400cadeec208 ""
   "attachments/sample_vs_acs_vehicle.tex" 1786458265 2511 bd555f8325ca2bb5161182eb07d5d259 ""
-  "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" 1789956417 58648 6d0e14569c5fdbb00cb1dfd65ae2f27a ""
+  "d:/Time Periods/Spring 2025/Conjoint_Survey_25/paper_writing/vehicle_paper/vehicle_paper.tex" 1791437603 58088 45a984a4370220b8d9e5d6b982f628f7 ""
   "images/vehicle_analysis/vehicle_choice_image.png" 1786458265 111513 34bf4340cb300126df47440889f356c3 ""
-  "images/vehicle_analysis/waterfall_wtp_bev.png" 1789951249 215596 b7e65e22d1305de651a4244806da1d37 ""
+  "images/vehicle_analysis/waterfall_wtp_bev.png" 1790617072 215596 b7e65e22d1305de651a4244806da1d37 ""
   "images/vehicle_analysis/waterfall_wtp_hev.png" 1789951251 162986 73c189a808d036b4848bd5c38b8cbff2 ""
   "images/vehicle_analysis/wtp_plot_vehicle_attributes.png" 1789617842 197628 ed18956305e2810c84b39a4346cb9dd4 ""
-  "vehicle_paper.abs" 1789956420 2132 78eb7dd4a84e2e2919774b15034c6135 "pdflatex"
-  "vehicle_paper.aux" 1789956422 25910 ce3f5b2c1ca6887b587d768c2a454635 "pdflatex"
-  "vehicle_paper.bbl" 1789832887 61804 5dbc73c383fe0dfefc2a0473c18e16ef "biber vehicle_paper"
-  "vehicle_paper.out" 1789956420 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "vehicle_paper.run.xml" 1789956422 2531 e968a0989c885b2b1262b7e0b03a7680 "pdflatex"
-  "vehicle_paper.tex" 1789956417 58648 6d0e14569c5fdbb00cb1dfd65ae2f27a ""
+  "vehicle_paper.abs" 1791437644 2073 724d94a33e975f1a8e25535a6547b61f "pdflatex"
+  "vehicle_paper.aux" 1791437647 27297 2ed09ef4cc31dc7ba82646a820959230 "pdflatex"
+  "vehicle_paper.bbl" 1791437629 77412 587e7c79d36d1e73d080e6f0c6c179c6 "biber vehicle_paper"
+  "vehicle_paper.out" 1791437643 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "vehicle_paper.run.xml" 1791437647 2531 e968a0989c885b2b1262b7e0b03a7680 "pdflatex"
+  "vehicle_paper.tex" 1791437603 58088 45a984a4370220b8d9e5d6b982f628f7 ""
   (generated)
   "vehicle_paper.abs"
   "vehicle_paper.aux"

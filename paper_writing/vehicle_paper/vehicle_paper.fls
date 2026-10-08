@@ -376,6 +376,7 @@ INPUT .\vehicle_paper.abs
 INPUT vehicle_paper.abs
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecss0900.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
@@ -448,7 +449,6 @@ INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen
 INPUT .\attachments\household_context_vehicle.tex
 INPUT .\attachments\household_context_vehicle.tex
 INPUT attachments\household_context_vehicle.tex
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-italic.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
 INPUT .\attachments\mxl_results_vehicle.tex
 INPUT .\attachments\mxl_results_vehicle.tex
@@ -476,7 +476,6 @@ INPUT .\images\vehicle_analysis\waterfall_wtp_hev.png
 INPUT .\images\vehicle_analysis\waterfall_wtp_hev.png
 INPUT .\images\vehicle_analysis\waterfall_wtp_hev.png
 INPUT .\images\vehicle_analysis\waterfall_wtp_hev.png
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneralsc.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt0800.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\vf\public\stix\t1-stixgeneralsc.vf

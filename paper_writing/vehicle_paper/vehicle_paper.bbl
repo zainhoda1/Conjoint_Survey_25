@@ -19,36 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global/global}
-    \entry{sd2024usedEV_demographics1}{article}{}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{journaltitle}{Transportation Research Part D: Transport and Environment}
-      \field{note}{Used-EV owner demographics: disproportionately male, middle-aged, well-educated, higher-income}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S1361920924000439
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S1361920924000439
-      \endverb
-    \endentry
-    \entry{sd2024usedEV_demographics2}{article}{}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{journaltitle}{Transportation Research Part D: Transport and Environment}
-      \field{note}{High-income, full-time-employed owners with private parking more likely to buy used EVs; charging infrastructure and price concerns as barriers}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S1361920924005121
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S1361920924005121
-      \endverb
-    \endentry
     \entry{bruckmannResaleAnxietyObstacle2021}{article}{}{}
       \name{author}{3}{}{%
         {{hash=d13e603b07a4ec47c6bde112c8e29751}{%
@@ -176,6 +146,68 @@
       \verb{url}
       \verb https://c-4analytics.com/insights/2025-automotive-consumer-price-sensitivity
       \endverb
+    \endentry
+    \entry{canepaEarlyLookPlugin2019}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=6f8003df67d9c47b8d3219d984e89fbe}{%
+           family={Canepa},
+           familyi={C\bibinitperiod},
+           given={Kathryn},
+           giveni={K\bibinitperiod}}}%
+        {{hash=a77b67b3eb19f6501ce1705f00ad52c4}{%
+           family={Hardman},
+           familyi={H\bibinitperiod},
+           given={Scott},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2b5b3396bb2958902705304056a61182}{%
+           family={Tal},
+           familyi={T\bibinitperiod},
+           given={Gil},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{b2b2ca24633de99a2c159c5dbdbeb19c}
+      \strng{fullhash}{c70601a17c2965f3ec2e1e481cdf6f6d}
+      \strng{fullhashraw}{c70601a17c2965f3ec2e1e481cdf6f6d}
+      \strng{bibnamehash}{c70601a17c2965f3ec2e1e481cdf6f6d}
+      \strng{authorbibnamehash}{c70601a17c2965f3ec2e1e481cdf6f6d}
+      \strng{authornamehash}{b2b2ca24633de99a2c159c5dbdbeb19c}
+      \strng{authorfullhash}{c70601a17c2965f3ec2e1e481cdf6f6d}
+      \strng{authorfullhashraw}{c70601a17c2965f3ec2e1e481cdf6f6d}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Prior research on plug-in electric vehicle (PEV) adoption has revealed that early adopters tend to be wealthy consumers, this may mean that the benefits of PEVs are not being equitably distributed. Extensive research has shown that low-income and minority commutes are disproportionately impacted by environmental and transportation injustice. PEVs can contribute to importing air quality and could provide lower cost and more reliable transportation to low-income and minority communities if they are deployed there. This paper takes an early quantitative look at PEV adoption in disadvantaged communities (DACs), which are census tracts in California that suffer from a combination of economic barriers and environmental burden. We use six datasets to examine PEV market share, socioeconomic characteristics of PEV owners, and PEV charging infrastructure. Analysis confirms that adoption of both new and used PEVs in DACs occurs at very low rates - 5.7\% and 8.7\% of all PEV sales, respectively - that are disproportionate with the number of households that reside in these areas. Owners of new or used PEVs in DACs have slightly lower incomes than PEV owners in non-disadvantaged communities. However, as a group they have higher incomes, are higher educated, and fewer are home-renters than the DAC average, indicating that they are not representative of their surrounding community. Encouragingly, charging infrastructure is present in DAC census tracts, suggesting that further PEV adoption could be supported. Additionally, there are higher proportions of used PEVs in DACs than new PEVs, which may indicate potential for adoption of these lower-priced vehicles, however rates of adoption are still low. Despite the considerable benefits that PEVs could offer in DACs, there are still substantial barriers to PEV. Key barriers for policy-makers to continually address are the prohibitive price of the technology, lack of knowledge about or ease of accessing PEV incentives, and lack of access to public or private charging infrastructure located near multi-unit housing.}
+      \field{day}{1}
+      \field{issn}{0967-070X}
+      \field{journaltitle}{Transport Policy}
+      \field{month}{6}
+      \field{shortjournal}{Transport Policy}
+      \field{title}{An Early Look at Plug-in Electric Vehicle Adoption in Disadvantaged Communities in {{California}}}
+      \field{urlday}{1}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{volume}{78}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{19\bibrangedash 30}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.tranpol.2019.03.009
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/9TW7QMPR/Canepa et al. - 2019 - An early look at plug-in electric vehicle adoption in disadvantaged communities in California.pdf;/Users/xnw17/Zotero/storage/XWPIFDZP/S0967070X18303524.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0967070X18303524
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0967070X18303524
+      \endverb
+      \keyw{Disadvantaged communities,Electric vehicles,Environmental justice,Used vehicles}
     \endentry
     \entry{consumerreports_usedcar}{misc}{}{}
       \name{author}{1}{}{%
@@ -473,6 +505,7 @@
       \strng{authornamehash}{34ccec075d79a08d006be85dc5784b87}
       \strng{authorfullhash}{34ccec075d79a08d006be85dc5784b87}
       \strng{authorfullhashraw}{34ccec075d79a08d006be85dc5784b87}
+      \field{extraname}{1}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{extradatescope}{labelyear}
@@ -497,6 +530,60 @@
       \verb{url}
       \verb https://cran.r-project.org/web/packages/cbcTools/index.html
       \endverb
+    \endentry
+    \entry{helvestonLogitrFastEstimation2023}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=9817d5f69c3b5815283345d5deaf3adb}{%
+           family={Helveston},
+           familyi={H\bibinitperiod},
+           given={John\bibnamedelima Paul},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{fullhash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{fullhashraw}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{bibnamehash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{authorbibnamehash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{authornamehash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{authorfullhash}{9817d5f69c3b5815283345d5deaf3adb}
+      \strng{authorfullhashraw}{9817d5f69c3b5815283345d5deaf3adb}
+      \field{extraname}{2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This paper introduces the logitr R package for fast maximum likelihood estimation of multinomial logit and mixed logit models with unobserved heterogeneity across individuals, which is modeled by allowing parameters to vary randomly over individuals according to a chosen distribution. The package is faster than other similar packages such as mlogit, gmnl, mixl, and apollo, and it supports utility models specified with \&ldquo;preference space\&rdquo; or \&ldquo;willingness-to-pay (WTP) space\&rdquo; parameterizations, allowing for the direct estimation of marginal WTP. The typical procedure of computing WTP post-estimation using a preference space model can lead to unreasonable distributions of WTP across the population in mixed logit models. The paper provides a discussion of some of the implications of each utility parameterization for WTP estimates. It also highlights some of the design features that enable logitr's performant estimation speed and includes a benchmarking exercise with similar packages. Finally, the paper highlights additional features that are designed specifically for WTP space models, including a consistent user interface for specifying models in either space and a parallelized multi-start optimization loop, which is particularly useful for searching the solution space for different local minima when estimating models with non-convex log-likelihood functions.}
+      \field{day}{7}
+      \field{issn}{1548-7660}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{langid}{english}
+      \field{month}{2}
+      \field{shorttitle}{Logitr}
+      \field{title}{Logitr: {{Fast Estimation}} of {{Multinomial}} and {{Mixed Logit Models}} with {{Preference Space}} and {{Willingness-to-Pay Space Utility Parameterizations}}}
+      \field{urlday}{24}
+      \field{urlmonth}{6}
+      \field{urlyear}{2025}
+      \field{volume}{105}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 37}
+      \range{pages}{37}
+      \verb{doi}
+      \verb 10.18637/jss.v105.i10
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/PIZXEP78/Helveston - 2023 - logitr Fast Estimation of Multinomial and Mixed Logit Models with Preference Space and Willingness-.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.18637/jss.v105.i10
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.18637/jss.v105.i10
+      \endverb
+      \keyw{discrete choice models,logit,maximum likelihood estimation,preference,R,utility,willingness to pay}
     \endentry
     \entry{helveston2014ChinaUSPreferences}{inproceedings}{}{}
       \name{author}{6}{}{%
@@ -1087,6 +1174,82 @@
       \verb https://doi.org/10.1016/j.trd.2024.104342
       \endverb
     \endentry
+    \entry{shaikhSystemDynamicsCosting2023}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=afef1bcb06532e291dc7e4efa4afdff2}{%
+           family={Shaikh},
+           familyi={S\bibinitperiod},
+           given={Waleed\bibnamedelima Ahmed},
+           giveni={W\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=1d46484c178421db3e914cc8d411e556}{%
+           family={Kalwar},
+           familyi={K\bibinitperiod},
+           given={Muhammad\bibnamedelima Ahmed},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=d0728b018f15c0ab5b52a9a5d57ffe2a}{%
+           family={Khan},
+           familyi={K\bibinitperiod},
+           given={Muhammad\bibnamedelima Ali},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=18fffee2e1168461997cb15b27e453e3}{%
+           family={Wassan},
+           familyi={W\bibinitperiod},
+           given={Asif\bibnamedelima Nawaz},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=d3ba3f498f3cbb73c00c4a6aa225a226}{%
+           family={Wadho},
+           familyi={W\bibinitperiod},
+           given={Muzamil\bibnamedelima Hussain},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=37f58f1863c0a00f723e8f3b46ab0f18}{%
+           family={Shahzad},
+           familyi={S\bibinitperiod},
+           given={Muhammad\bibnamedelima Faisal},
+           giveni={M\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{437df0095b9121e49d6ca4ff479fdd8c}
+      \strng{fullhash}{ecc91a6ca1e1a7c8fa2cd925814643ea}
+      \strng{fullhashraw}{ecc91a6ca1e1a7c8fa2cd925814643ea}
+      \strng{bibnamehash}{ecc91a6ca1e1a7c8fa2cd925814643ea}
+      \strng{authorbibnamehash}{ecc91a6ca1e1a7c8fa2cd925814643ea}
+      \strng{authornamehash}{437df0095b9121e49d6ca4ff479fdd8c}
+      \strng{authorfullhash}{ecc91a6ca1e1a7c8fa2cd925814643ea}
+      \strng{authorfullhashraw}{ecc91a6ca1e1a7c8fa2cd925814643ea}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Electric vehicle batteries (EVBs) are produced from rare earth metals and they get retired from electric vehicles in just 8 years, there are several options for them to be reused as their useful life can be extended for a couple of years. This research presents an opportunity for businesspersons to carry out the business of refurbishing EVBs and selling them. The present research was conducted to develop a system dynamics model to assess the dynamic behavior of various variables involved in the refurbishment of Electric vehicle batteries (EVBs).To serve this purpose, data was collected by conducting an in-depth literature review and the system dynamics model was developed in Anylogic PLE version. The model was then initialized by using collected secondary data and analysis was conducted in three scenarios; scenario1 (EVBs` sales locally), scenario2 (EVBs` sales regionally), and scenario3 (EVBs` sales nationally). After the simulation of the model, its output was downloaded in Microsoft Excel 2016 from Anylogic. Origins softwarewas used for plotting the graphs. It was concluded that therefurbishing cost of batteries per kWh was \$59.82, \$55.47, and \$76.67 in scenarios 1, 2, and 3 respectively, which was still affordable when compared to other new batteries. Estimation of required capital investment and EVB recycling are still unexplored areas. Moreover, this research provides a detailed business model to investors along with a comprehensive feasibility analysis.}
+      \field{issn}{1995-6665, 1995-6665}
+      \field{journaltitle}{Jordan Journal of Mechanical and Industrial Engineering}
+      \field{langid}{english}
+      \field{number}{01}
+      \field{shortjournal}{jjmie}
+      \field{title}{A {{System Dynamics Costing Model}} for {{The Refurbishment}} of {{Electric Vehicle Batteries}}}
+      \field{urlday}{2}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{volume}{17}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{15\bibrangedash 32}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.59038/jjmie/170102
+      \endverb
+      \verb{file}
+      \verb /Users/xnw17/Zotero/storage/ZDJBF5P3/2023 - A System Dynamics Costing Model for The Refurbishment of Electric Vehicle Batteries.pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://jjmie.hu.edu.jo/vol17/vol17-1/02.htm
+      \endverb
+      \verb{url}
+      \verb http://jjmie.hu.edu.jo/vol17/vol17-1/02.htm
+      \endverb
+    \endentry
     \entry{sheykhfardAnalyzingPurchaseIntentions2025}{article}{}{}
       \name{author}{4}{}{%
         {{hash=73e2f72d09d3499d8eaa84b5891d03cc}{%
@@ -1155,6 +1318,39 @@
       \endverb
       \keyw{Consumer behavior,Electric vehicles,EV experience,Structural equation modeling,Sustainable transportation}
     \endentry
+    \entry{sd2024usedEV_demographics2}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=21ecab64a7db6e7ed2e2af486a83d747}{%
+           family={Sk.\bibnamedelimi Md.\bibnamedelimi Mashrur},
+           familyi={S\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Moataz\bibnamedelima Mohamed},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{21ecab64a7db6e7ed2e2af486a83d747}
+      \strng{fullhash}{21ecab64a7db6e7ed2e2af486a83d747}
+      \strng{fullhashraw}{21ecab64a7db6e7ed2e2af486a83d747}
+      \strng{bibnamehash}{21ecab64a7db6e7ed2e2af486a83d747}
+      \strng{authorbibnamehash}{21ecab64a7db6e7ed2e2af486a83d747}
+      \strng{authornamehash}{21ecab64a7db6e7ed2e2af486a83d747}
+      \strng{authorfullhash}{21ecab64a7db6e7ed2e2af486a83d747}
+      \strng{authorfullhashraw}{21ecab64a7db6e7ed2e2af486a83d747}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Research Part D: Transport and Environment}
+      \field{note}{High-income, full-time-employed owners with private parking more likely to buy used EVs; charging infrastructure and price concerns as barriers}
+      \field{title}{Uncovering factors affecting consumers’ decisions for pre-owned electric vehicles}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920924005121
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920924005121
+      \endverb
+    \endentry
     \entry{epa_usedvehicle}{report}{}{}
       \name{author}{1}{}{%
         {{hash=8233d83a5e663161d707a62961f8f66f}{%
@@ -1187,6 +1383,39 @@
       \endverb
       \verb{url}
       \verb https://cfpub.epa.gov/si/si_public_file_download.cfm?Lab=OTAQ&p_download_id=499454
+      \endverb
+    \endentry
+    \entry{sd2024usedEV_demographics1}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=aa23cb143f224a1759afe4daf3285399}{%
+           family={Wei\bibnamedelimb San\bibnamedelima Loh},
+           familyi={W\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Robert\bibnamedelimb B.\bibnamedelimi Noland},
+           giveni={R\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{aa23cb143f224a1759afe4daf3285399}
+      \strng{fullhash}{aa23cb143f224a1759afe4daf3285399}
+      \strng{fullhashraw}{aa23cb143f224a1759afe4daf3285399}
+      \strng{bibnamehash}{aa23cb143f224a1759afe4daf3285399}
+      \strng{authorbibnamehash}{aa23cb143f224a1759afe4daf3285399}
+      \strng{authornamehash}{aa23cb143f224a1759afe4daf3285399}
+      \strng{authorfullhash}{aa23cb143f224a1759afe4daf3285399}
+      \strng{authorfullhashraw}{aa23cb143f224a1759afe4daf3285399}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Research Part D: Transport and Environment}
+      \field{note}{Used-EV owner demographics: disproportionately male, middle-aged, well-educated, higher-income}
+      \field{title}{Concerns expressed by used electric vehicle owners based on surveying social media}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920924000439
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1361920924000439
       \endverb
     \endentry
     \entry{sagepub2020EVattributes}{article}{}{}
@@ -1239,6 +1468,9 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{husterConsumersWantReconditioned2024}
+  \missing{mcfaddenMixedMNLModels2000}
+  \missing{trainDiscreteChoiceMethods2009}
 \endrefsection
 \endinput
 
