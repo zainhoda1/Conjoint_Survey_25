@@ -3,7 +3,8 @@ source(here::here('code', 'setup.R'))
 
 
 vehicle_wtp <- read_parquet(here("data", "vehicle_wtp.parquet"))  |> 
-  mutate(name = paste0(vehicle_type, ' ', budget,' BUDGET'))  
+  mutate(name = paste0(vehicle_type, ' ', budget,' BUDGET'))  |>
+  filter(name == 'CAR HIGH BUDGET')
 
 #############################
 
@@ -249,23 +250,6 @@ waterfall_bev_plot <- build_waterfall_plot(
 
 waterfall_bev_plot
 
-save_waterfall_plot(waterfall_bev_plot, "waterfall_wtp_bev.png")
-
-# --- HEV plot: Powertrain, Operating cost, Net (no Range) ---
-
-hev_attribute_levels <- c("Powertrain", "Operating cost", "Net")
-waterfall_hev_bars     <- make_waterfall_bars("HEV", hev_attribute_levels)
-waterfall_hev_net      <- make_waterfall_net("HEV", hev_attribute_levels)
-waterfall_hev_price_ref <- make_waterfall_price_ref("HEV")
-
-waterfall_hev_plot <- build_waterfall_plot(
-  waterfall_hev_bars, waterfall_hev_net, waterfall_hev_price_ref,
-  title = "Head-to-head charts showing WTP for attributes of HEV's against their Conventional Counterparts",
-  subtitle = "HEV vs. conventional -- dollar WTP contribution by attribute, \n with simulated Net WTP (mean, 95% interval),  dashed line = mean price premium"
-)
-
-waterfall_hev_plot
-
-save_waterfall_plot(waterfall_hev_plot, "waterfall_wtp_hev.png")
+save_waterfall_plot(waterfall_bev_plot, "waterfall_wtp_bev1.png")
 
 

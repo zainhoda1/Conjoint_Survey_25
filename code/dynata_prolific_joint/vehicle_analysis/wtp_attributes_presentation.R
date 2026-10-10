@@ -182,7 +182,7 @@ make_wtp_plot <- function(df) {
     
     annotate(
       "text", x = 0, y = Inf, label = "Baseline: CV",
-      vjust = 1.6, hjust = -0.15, size = 3.1, color = ink_muted
+      vjust = 1.3, hjust = -0.10, size = 4, color = ink_muted
     ) +
     
     scale_color_manual(values = budget_colors, name = NULL) +
@@ -202,7 +202,7 @@ make_wtp_plot <- function(df) {
     
     labs(
       title    = "Willingness to Pay for Vehicle Attributes",
-      subtitle = "By vehicle segment and budget tier; error bars show 95% confidence intervals",
+      subtitle = "By vehicle segment and budget tier; \n (Error bars show 95% confidence intervals)",
       x = "Willingness to Pay ($)",
       y = NULL
     ) +
@@ -213,19 +213,19 @@ make_wtp_plot <- function(df) {
       panel.background  = element_rect(fill = chart_surface, color = NA),
       legend.background = element_rect(fill = chart_surface, color = NA),
       
-      plot.title    = element_text(face = "bold", size = 14.5, color = ink_primary,
+      plot.title    = element_text(face = "bold", size = 18, color = ink_primary,
                                     margin = margin(b = 3)),
-      plot.subtitle = element_text(size = 10.5, color = ink_secondary,
+      plot.subtitle = element_text(size = 13, color = ink_secondary,
                                     margin = margin(b = 10)),
       plot.margin   = margin(12, 14, 10, 12),
       
       # Grey band behind the "CAR" / "SUV" facet labels
-      strip.text       = element_text(face = "bold", size = 11, color = ink_primary),
+      strip.text       = element_text(face = "bold", size = 14, color = ink_primary),
       strip.background = element_rect(fill = strip_surface, color = NA),
       
-      axis.title  = element_text(size = 10.5, color = ink_secondary),
-      axis.text.x = element_text(size = 9.5, color = ink_muted),
-      axis.text.y = element_text(size = 10, color = ink_primary, face = "bold"),
+      axis.title  = element_text(size = 13, color = ink_secondary),
+      axis.text.x = element_text(size = 12, color = ink_muted),
+      axis.text.y = element_text(size = 13, color = ink_primary, face = "bold"),
       axis.ticks  = element_line(color = baseline_ink, linewidth = 0.3),
       
       panel.grid.major = element_line(color = grid_hairline, linewidth = 0.35),
@@ -235,7 +235,7 @@ make_wtp_plot <- function(df) {
       
       legend.position = "bottom",
       legend.box      = "vertical",
-      legend.text     = element_text(size = 9.5, color = ink_secondary),
+      legend.text     = element_text(size = 12, color = ink_secondary),
       legend.key      = element_rect(fill = chart_surface, color = NA)
     )
   
