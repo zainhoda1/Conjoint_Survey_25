@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>vehicle_operating_costs</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="vehicle_operating_costs_files/libs/clipboard/clipboard.min.js"></script>
+<script src="vehicle_operating_costs_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="vehicle_operating_costs_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="vehicle_operating_costs_files/libs/quarto-html/popper.min.js"></script>
+<script src="vehicle_operating_costs_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="vehicle_operating_costs_files/libs/quarto-html/anchor.min.js"></script>
+<link href="vehicle_operating_costs_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="vehicle_operating_costs_files/libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="vehicle_operating_costs_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="vehicle_operating_costs_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="vehicle_operating_costs_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="vehicle-operating-costs-cents-per-mile-for-combined_table-vehicles" class="level1">
+<h1>Vehicle operating costs (cents per mile) for <code>combined_table</code> vehicles</h1>
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">Goal</h2>
+<p>For each make / model / powertrain in <code>combined_table</code> (built in <code>waterfall_style_chart_part2.R</code> from <code>vehicle_listing_prices.parquet</code> and <code>vehicle_pairs_2016_2024.csv</code>), get an operating cost in cents per mile for a vehicle that is <strong>3 years old</strong>.</p>
+</section>
+<section id="source" class="level2">
+<h2 class="anchored" data-anchor-id="source">Source</h2>
+<p><strong>U.S. EPA / U.S. DOE, fueleconomy.gov</strong> (Fuel Economy Guide data and public web service). - Web service: <a href="https://www.fueleconomy.gov/ws/rest/" class="uri">https://www.fueleconomy.gov/ws/rest/</a> (endpoints <code>vehicle/menu/options</code>, <code>vehicle/{id}</code>, <code>fuelprices</code>) - Documentation: <a href="https://www.fueleconomy.gov/feg/ws/" class="uri">https://www.fueleconomy.gov/feg/ws/</a></p>
+<p>Why this source: it is the official EPA-certified rating for every model year and trim (combined MPG / MPGe, kWh per 100 miles), and the same dataset behind the window sticker. It is public and reproducible through an API.</p>
+</section>
+<section id="what-operating-cost-means-here" class="level2">
+<h2 class="anchored" data-anchor-id="what-operating-cost-means-here">What “operating cost” means here</h2>
+<p><strong>Energy/fuel cost only</strong> (gasoline or electricity). It excludes insurance, maintenance, repairs, tires, depreciation and registration. If the survey attribute was meant to be a full per-mile cost, a different source (AAA <em>Your Driving Costs</em> or Edmunds True Cost to Own) would be needed. These are only available by size class or on a 5-year, new-vehicle basis.</p>
+</section>
+<section id="method" class="level2">
+<h2 class="anchored" data-anchor-id="method">Method</h2>
+<ol type="1">
+<li>Read <code>combined_table</code>, which gives 18 vehicles in 9 matched pairs: Pair 3 and 7 are filtered out later in the script, but I kept them here.</li>
+<li><strong>Age 3 → model year 2022.</strong> This follows the paper’s convention (<code>model year = 2025 − age</code>).</li>
+<li>For each vehicle, query fueleconomy.gov for all 2022 trims of that model (see the table for exact EPA model names). I excluded performance trims (TRD, N, M, JCW, Nismo) and non-matching body styles (Corolla Hatchback, Corolla Cross, Cooper Countryman, etc.).</li>
+<li>Compute cents per mile for each trim, then average across trims (simple mean). The min and max across trims are in the CSV.
+<ul>
+<li>Gasoline: <code>100 × price per gallon ÷ combined MPG</code></li>
+<li>Electricity: <code>kWh per 100 mi ÷ 100 × price per kWh × 100</code></li>
+</ul></li>
+<li>Prices are the current EPA assumptions returned by the <code>fuelprices</code> endpoint on 2026-10-14: regular $4.47/gal, premium $5.48/gal, electricity $0.15/kWh. Using the same prices for every vehicle keeps the comparison consistent. The EPA <code>fuelCost08</code> field (annual cost at 15,000 mi) gives nearly identical per-mile values for the gasoline cars (e.g.&nbsp;Soul: $2,275 ÷ 15,000 = 15.2 ¢/mi).</li>
+</ol>
+<p>Code: <code>fetch_operating_costs.py</code> (same folder). Output: <code>data/vehicle_operating_costs.csv</code>.</p>
+</section>
+<section id="results-model-year-2022-3-years-old" class="level2">
+<h2 class="anchored" data-anchor-id="results-model-year-2022-3-years-old">Results (model year 2022, 3 years old)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pair</th>
+<th>Make</th>
+<th>Model</th>
+<th>Powertrain</th>
+<th>EPA model yr</th>
+<th>Trims averaged</th>
+<th>Fuel</th>
+<th>Combined MPG / MPGe</th>
+<th>kWh/100 mi</th>
+<th><strong>Cents per mile</strong></th>
+<th>Range across trims</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>KIA</td>
+<td>SOUL</td>
+<td>CV</td>
+<td>2022</td>
+<td>2</td>
+<td>Regular</td>
+<td>29.5</td>
+<td>–</td>
+<td><strong>15.16</strong></td>
+<td>14.90–15.41</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>KIA</td>
+<td>SOUL</td>
+<td>BEV</td>
+<td><strong>2020</strong></td>
+<td>1</td>
+<td>Electricity</td>
+<td>114.0</td>
+<td>29.2</td>
+<td><strong>4.38</strong></td>
+<td>4.38</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>HYUNDAI</td>
+<td>KONA</td>
+<td>CV</td>
+<td>2022</td>
+<td>4</td>
+<td>Regular</td>
+<td>30.8</td>
+<td>–</td>
+<td><strong>14.56</strong></td>
+<td>13.97–15.41</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>HYUNDAI</td>
+<td>KONA EV</td>
+<td>BEV</td>
+<td>2022</td>
+<td>1</td>
+<td>Electricity</td>
+<td>120.0</td>
+<td>28.0</td>
+<td><strong>4.20</strong></td>
+<td>4.20</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>MINI</td>
+<td>COOPER</td>
+<td>CV</td>
+<td>2022</td>
+<td>4</td>
+<td>Premium</td>
+<td>30.2</td>
+<td>–</td>
+<td><strong>18.19</strong></td>
+<td>17.12–20.30</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>MINI</td>
+<td>HARDTOP 2 DOOR</td>
+<td>BEV</td>
+<td>2022</td>
+<td>1</td>
+<td>Electricity</td>
+<td>110.0</td>
+<td>30.7</td>
+<td><strong>4.61</strong></td>
+<td>4.61</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>TOYOTA</td>
+<td>CAMRY</td>
+<td>CV</td>
+<td>2022</td>
+<td>5</td>
+<td>Regular</td>
+<td>29.2</td>
+<td>–</td>
+<td><strong>15.39</strong></td>
+<td>13.97–17.19</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>TOYOTA</td>
+<td>CAMRY</td>
+<td>HEV</td>
+<td>2022</td>
+<td>2</td>
+<td>Regular</td>
+<td>49.0</td>
+<td>–</td>
+<td><strong>9.16</strong></td>
+<td>8.60–9.72</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>TOYOTA</td>
+<td>COROLLA</td>
+<td>CV</td>
+<td>2022</td>
+<td>6</td>
+<td>Regular</td>
+<td>33.0</td>
+<td>–</td>
+<td><strong>13.55</strong></td>
+<td>13.15–13.97</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>TOYOTA</td>
+<td>COROLLA</td>
+<td>HEV</td>
+<td>2022</td>
+<td>1</td>
+<td>Regular</td>
+<td>52.0</td>
+<td>–</td>
+<td><strong>8.60</strong></td>
+<td>8.60</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>TOYOTA</td>
+<td>RAV4</td>
+<td>CV</td>
+<td>2022</td>
+<td>5</td>
+<td>Regular</td>
+<td>29.4</td>
+<td>–</td>
+<td><strong>15.22</strong></td>
+<td>14.90–15.96</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>TOYOTA</td>
+<td>RAV4</td>
+<td>HEV</td>
+<td>2022</td>
+<td>1</td>
+<td>Regular</td>
+<td>40.0</td>
+<td>–</td>
+<td><strong>11.18</strong></td>
+<td>11.18</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>FORD</td>
+<td>ESCAPE</td>
+<td>CV</td>
+<td>2022</td>
+<td>3</td>
+<td>Regular</td>
+<td>28.0</td>
+<td>–</td>
+<td><strong>16.02</strong></td>
+<td>14.90–17.19</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>FORD</td>
+<td>ESCAPE</td>
+<td>HEV</td>
+<td>2022</td>
+<td>2</td>
+<td>Regular</td>
+<td>40.5</td>
+<td>–</td>
+<td><strong>11.04</strong></td>
+<td>10.90–11.18</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>NISSAN</td>
+<td>VERSA NOTE</td>
+<td>CV</td>
+<td>2022</td>
+<td>2</td>
+<td>Regular</td>
+<td>32.5</td>
+<td>–</td>
+<td><strong>13.84</strong></td>
+<td>12.77–14.90</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>NISSAN</td>
+<td>LEAF</td>
+<td>BEV</td>
+<td>2022</td>
+<td>3</td>
+<td>Electricity</td>
+<td>107.7</td>
+<td>31.3</td>
+<td><strong>4.70</strong></td>
+<td>4.56–4.84</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>BMW</td>
+<td>4 SERIES</td>
+<td>CV</td>
+<td>2022</td>
+<td>3</td>
+<td>Premium</td>
+<td>27.7</td>
+<td>–</td>
+<td><strong>19.81</strong></td>
+<td>19.57–20.30</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>BMW</td>
+<td>I4</td>
+<td>BEV</td>
+<td>2022</td>
+<td>2</td>
+<td>Electricity</td>
+<td>104.0</td>
+<td>32.4</td>
+<td><strong>4.87</strong></td>
+<td>4.64–5.09</td>
+</tr>
+</tbody>
+</table>
+<p>(The “Trims averaged” counts are EPA configurations, such as FWD/AWD and engine/transmission variants, under the model names listed in <code>fetch_operating_costs.py</code>.)</p>
+</section>
+<section id="caveats-and-judgment-calls" class="level2">
+<h2 class="anchored" data-anchor-id="caveats-and-judgment-calls">Caveats and judgment calls</h2>
+<ul>
+<li><strong>Kia Soul BEV:</strong> The Soul EV was not sold in the U.S. after 2020 (the CSV lists 2016–2020), so there is no 2022 model. I used the latest available year, <strong>2020</strong> (the 2022 vehicle would be 2 years older than the 3-year target).</li>
+<li><strong>Nissan Versa Note:</strong> Nissan dropped the Versa Note hatchback after the 2019 U.S. model year, although the CSV lists 2006–2025. EPA’s 2022 entries are listed under “Versa” (the sedan). I used those as a proxy, so treat this row as approximate.</li>
+<li><strong>MINI:</strong> The CV “Cooper” row averages Cooper and Cooper S Hardtop 2-door (both premium fuel). The BEV is the Cooper SE Hardtop 2-door, the only electric MINI hardtop.</li>
+<li><strong>BMW 4 Series:</strong> Averages 430i Coupe, 430i xDrive Coupe and 430i Gran Coupe. The M4 and M440i trims are excluded.</li>
+<li><strong>Trim mix:</strong> The listings in <code>vehicle_listing_prices.parquet</code> do not break out trim, so the cents-per-mile figure is an unweighted average of EPA configurations, not a sales-weighted one.</li>
+<li><strong>Price sensitivity:</strong> Gasoline cost scales with the pump price, so the CV and HEV values will move with the gas price used. Electricity is at the national EPA average ($0.15/kWh), and home electricity prices vary a lot by state.</li>
+<li><strong>Units vs.&nbsp;the survey:</strong> The survey’s <code>operating_cost</code> attribute is described in <code>CLAUDE.md</code> as 0.3–2.5 “cents per mile”. These values (4–20 ¢/mi) are much larger. Before merging, check how that attribute was scaled in the survey and in <code>willingness_to_pay_attributes.R</code> (the open <code>operating_cost</code> scaling question already flagged in the script comments).</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

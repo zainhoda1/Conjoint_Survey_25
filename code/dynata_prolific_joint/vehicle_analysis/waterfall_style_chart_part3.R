@@ -19,12 +19,12 @@ chart_surface <- "#fcfcfb"
 strip_surface <- "#f2f1ee"
 
 bar_type_colors <- c(
-  "Positive" = "#009E73",  # bright green
-  "Negative" = "#d1495b"   # red
+  "Positive" = "#56B4E9",  # light blue (colour-blind-safe pair with orange)
+  "Negative" = "#E69F00"   # orange
 )
 
 net_color       <- "#1f5fa8"  # blue
-price_diff_color <- "#ec2742"  # red
+price_diff_color <- "#CC79A7"  # reddish purple (colour-blind-safe)
 
 # attribute_levels includes "Net" even though it is plotted as a point/error
 # bar (not a rect), so the bar data and the Net data share one discrete x scale
@@ -82,7 +82,15 @@ make_waterfall_price_ref <- function(pt) {
       budget_label        = paste0(str_to_title(budget), " Budget"),
       price_diff_label    = paste0("Mean price premium: ", scales::dollar(mean_price_diff, accuracy = 1))
     ) |>
-    select(vehicle_type_label, budget_label, mean_price_diff, price_diff_label)
+    mutate(
+      # label placement: left-aligned when the premium is ~0 (right side holds the Net
+      # marker), below the line when it sits at the top edge of the panel
+      lab_x = if_else(abs(mean_price_diff) < 500, -Inf, Inf),
+      lab_h = if_else(abs(mean_price_diff) < 500, -0.02, 1.02),
+      lab_v = if_else(mean_price_diff > 8000, 1.25, -0.35)
+    ) |>
+    select(vehicle_type_label, budget_label, mean_price_diff, price_diff_label,
+           lab_x, lab_h, lab_v)
 }
 
 # Dotted horizontal connectors linking each bar's running total to the next
@@ -149,10 +157,10 @@ build_waterfall_plot <- function(bars, net_data, price_ref_data, title, subtitle
 
     geom_label(
       data = price_ref_data,
-      aes(x = Inf, y = mean_price_diff, label = price_diff_label),
-      inherit.aes = FALSE, color = net_color, fill = chart_surface,
-      size = 4, label.size = 0, alpha = 0.6,
-      hjust = 1.35, vjust = 1.2
+      aes(x = lab_x, y = mean_price_diff, label = price_diff_label,
+          hjust = lab_h, vjust = lab_v),
+      inherit.aes = FALSE, color = ink_primary, fill = chart_surface,
+      size = 3.4, label.size = 0, alpha = 0.9
     ) +
 
     geom_errorbar(
@@ -184,8 +192,8 @@ build_waterfall_plot <- function(bars, net_data, price_ref_data, title, subtitle
     facet_grid(budget_label ~ vehicle_type_label) +
 
     labs(
-      title    = stringr::str_wrap(title, width = 55),
-      subtitle = subtitle,
+      title    = NULL,     # title/description belong in the manuscript caption (TRD)
+      subtitle = NULL,
       x = NULL,
       y = "WTP ($)"
     ) +

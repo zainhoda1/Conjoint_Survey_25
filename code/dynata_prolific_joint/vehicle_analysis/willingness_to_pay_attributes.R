@@ -1,6 +1,8 @@
 source(here::here('code', 'setup.R'))
 
 
+set.seed(123)  # reproducible simulation draws
+
 # Load the estimated model
 load(here("models", "mixed_model_1_car_low_panel.RData"))
 load(here("models", "mixed_model_1_car_high_panel.RData"))
@@ -127,8 +129,8 @@ chart_surface <- "#fcfcfb"
 strip_surface <- "#f2f1ee"
 
 budget_colors <- c(
-  "Low Budget"  = "#00798c",  # teal
-  "High Budget" = "#d1495b"   # red
+  "Low Budget"  = "#E69F00",  # orange (colour-blind-safe pair)
+  "High Budget" = "#0072B2"   # blue
 )
 
 wtp_plot <- ggplot(wtp_plot_df, aes(x = mean, y = attribute, color = budget)) +
@@ -164,8 +166,8 @@ wtp_plot <- ggplot(wtp_plot_df, aes(x = mean, y = attribute, color = budget)) +
   facet_wrap(~ vehicle_type, ncol = 1) +
 
   labs(
-    title    = "Willingness to Pay for Vehicle Attributes",
-    subtitle = "By vehicle segment and budget tier; error bars show 95% confidence intervals",
+    title    = NULL,  # title and interval description belong in the manuscript caption (TRD)
+    subtitle = NULL,
     x = "Willingness to Pay ($)",
     y = NULL
   ) +
@@ -236,3 +238,59 @@ ggsave(
 
 ##########################################
 
+
+##########################################
+# Table of WTP values with 95% simulation intervals (rounded to nearest $100);
+# a dagger marks BEV values extrapolated beyond the segment's design range.
+
+fmt_d <- function(x) {
+  x <- round(x, -2)
+  paste0(if_else(x < 0, "$-$", ""), "\\$", formatC(abs(x), format = "d", big.mark = ","))
+}
+
+wtp_table_df <- wtp_plot_df %>%
+  mutate(
+    cell  = paste(vehicle_type, budget),
+    dag   = if_else(line_type == "dashed", "$^{\\dagger}$", ""),
+    entry = paste0(fmt_d(mean), dag, " [", fmt_d(lower), ", ", fmt_d(upper), "]")
+  ) %>%
+  select(attribute, cell, entry) %>%
+  pivot_wider(names_from = cell, values_from = entry)
+
+row_order <- c("HEV", "BEV 100 mile range", "BEV 200 mile range", "BEV 300 mile range",
+               "Reduce age by 1 yr", "Reduce mileage by 10k mi", "Reduce Op. Cost 1 cent / 1 mi")
+row_labels <- c("HEV (vs. conventional)", "BEV, 100-mile range", "BEV, 200-mile range",
+                "BEV, 300-mile range", "Vehicle age, 1 year newer",
+                "Mileage, 10,000 miles lower", "Operating cost, 1 cent/mile lower")
+wtp_table_df <- wtp_table_df[match(row_order, as.character(wtp_table_df$attribute)), ]
+
+tex_rows <- vapply(seq_len(nrow(wtp_table_df)), function(i) {
+  paste0(row_labels[i], " & ",
+         paste(wtp_table_df[["CAR Low Budget"]][i], wtp_table_df[["CAR High Budget"]][i],
+               wtp_table_df[["SUV Low Budget"]][i], wtp_table_df[["SUV High Budget"]][i], sep = " & "),
+         " \\\\")
+}, character(1))
+
+tex <- c(
+  "\\begin{table}[pos=H]",
+  "\\footnotesize",
+  "\\caption{Willingness to pay (WTP) by vehicle segment and budget tier, relative to a conventional vehicle.}",
+  "\\label{table:wtp_vehicle_attributes}",
+  "\\begin{adjustbox}{width=\\textwidth, center}",
+  "\\begin{tabular}{l cccc}",
+  "\\toprule",
+  " & \\textbf{Car, low budget} & \\textbf{Car, high budget} & \\textbf{SUV, low budget} & \\textbf{SUV, high budget} \\\\",
+  "\\midrule",
+  tex_rows[1:4],
+  "\\addlinespace[4pt]",
+  tex_rows[5:7],
+  "\\bottomrule",
+  "\\end{tabular}",
+  "\\end{adjustbox}",
+  "\\par\\smallskip",
+  "\\begin{minipage}{\\textwidth}",
+  "\\footnotesize Notes: mean WTP in dollars, rounded to the nearest \\$100, with 95\\% simulation intervals in brackets (10,000 draws from the estimated coefficient distribution). BEV values combine the BEV powertrain and range coefficients and hold vehicle age, mileage, and operating cost equal to the conventional vehicle. $^{\\dagger}$ Extrapolated beyond the electric range shown to that segment in the choice experiment.",
+  "\\end{minipage}",
+  "\\end{table}"
+)
+writeLines(tex, here::here('paper_writing', 'vehicle_paper', 'attachments', 'wtp_vehicle_attributes.tex'))

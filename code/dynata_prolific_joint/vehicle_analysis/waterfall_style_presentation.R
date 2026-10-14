@@ -20,12 +20,12 @@ chart_surface <- "#fcfcfb"
 strip_surface <- "#f2f1ee"
 
 bar_type_colors <- c(
-  "Positive" = "#009E73",  # bright green
-  "Negative" = "#d1495b"   # red
+  "Positive" = "#56B4E9",  # light blue (colour-blind-safe pair with orange)
+  "Negative" = "#E69F00"   # orange
 )
 
 net_color       <- "#1f5fa8"  # blue
-price_diff_color <- "#ec2742"  # red
+price_diff_color <- "#CC79A7"  # reddish purple (colour-blind-safe)
 
 # attribute_levels includes "Net" even though it is plotted as a point/error
 # bar (not a rect), so the bar data and the Net data share one discrete x scale

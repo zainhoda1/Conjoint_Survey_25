@@ -158,8 +158,8 @@ chart_surface <- "#fcfcfb"
 strip_surface <- "#f2f1ee"
 
 budget_colors <- c(
-  "Low Budget"  = "#00798c",  # teal
-  "High Budget" = "#d1495b"   # red
+  "Low Budget"  = "#E69F00",  # orange
+  "High Budget" = "#56B4E9"   # light blue
 )
 
 

@@ -18,9 +18,14 @@ vehicle_list <- data.frame(read_csv(here('data', 'vehicle_pairs_2016_2024.csv'))
   #filter(Pair_id != 7) |> 
   select(-model_years.US.) 
 
+vehicle_operating_costs <- read_csv(here('data', 'vehicle_operating_costs.csv')) |>
+  mutate(across(where(is.character), toupper)) |>
+  select(make, model, powertrain, operating_cost_cpm = cents_per_mile)
+
 combined_table <- full_join(all_vehicles,
    vehicle_list,
-    by = c('make', 'model', 'powertrain' ))
+    by = c('make', 'model', 'powertrain' )) |>
+  left_join(vehicle_operating_costs, by = c('make', 'model', 'powertrain'))
 
 combined_table_2 <- combined_table |> 
   filter(powertrain == 'CV') |>
@@ -33,7 +38,8 @@ combined_table_2 <- combined_table |>
   ) |> 
   mutate(
     mean_price_diff  = mean_price.y - mean_price.x,
-    mean_price = mean_price.y
+    mean_price = mean_price.y,
+    operating_cost_cpm_diff = operating_cost_cpm.y - operating_cost_cpm.x
   ) |> 
   select(-mean_price.x, -mean_price.y) |>
   filter( 
@@ -130,11 +136,8 @@ vehicle_wtp <- combined_table_2 |>
     powertrainbev_dummy = if_else(powertrain == "BEV", 1, 0),
     powertrainhev_dummy = if_else(powertrain == "HEV", 1, 0),
     range_bev_scaled     = (bev_range * (1 - depreciation_rate) ^ fixed_age),
-    operating_cost_scaled = case_when(
-      powertrain == "BEV" ~ -0.9,  # 0.3 - 1.2
-      powertrain == "HEV" ~ -0.6,  # 0.6 - 1.2
-      .default = 1.2
-    ),
+    # EPA-based cents/mile differential (alt - CV); model variable is operating_cost / 10
+    operating_cost_scaled = operating_cost_cpm_diff,
 
     # Per-attribute dollar WTP, broken out separately
     wtp_powertrain = 1000 * (
