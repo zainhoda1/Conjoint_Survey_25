@@ -1,8 +1,8 @@
-PWD /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery_paper
+PWD /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery paper/battery_paper_full_origin
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT battery_paper.tex
+INPUT /Users/xnw17/Documents/GitHub/Conjoint_Survey_25/paper_writing/battery paper/battery_paper_full_origin/battery_paper.tex
 OUTPUT battery_paper.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-sc.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-sc.cls
