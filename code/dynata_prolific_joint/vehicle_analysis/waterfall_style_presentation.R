@@ -120,8 +120,9 @@ make_waterfall_connectors <- function(bars) {
   bind_rows(between_bars, to_net)
 }
 
-build_waterfall_plot <- function(bars, net_data, price_ref_data, title, subtitle) {
+build_waterfall_plot <- function(bars, net_data, price_ref_data, title, subtitle, show_net = TRUE) {
   connectors <- make_waterfall_connectors(bars)
+  if (!show_net) connectors <- filter(connectors, xend < nlevels(bars$attribute))
 
   ggplot(bars, aes(x = attribute)) +
 
@@ -151,9 +152,9 @@ build_waterfall_plot <- function(bars, net_data, price_ref_data, title, subtitle
     geom_label(
       data = price_ref_data,
       aes(x = Inf, y = mean_price_diff, label = price_diff_label),
-      inherit.aes = FALSE, color = net_color, fill = chart_surface,
+      inherit.aes = FALSE, color = ink_primary, fill = chart_surface,
       size = 4, label.size = 0, alpha = 0.6,
-      hjust = 1.35, vjust = 1.2
+      hjust = 2.0, vjust = -0.5
     ) +
 
     geom_errorbar(
@@ -242,14 +243,54 @@ waterfall_bev_bars     <- make_waterfall_bars("BEV", bev_attribute_levels)
 waterfall_bev_net      <- make_waterfall_net("BEV", bev_attribute_levels)
 waterfall_bev_price_ref <- make_waterfall_price_ref("BEV")
 
-waterfall_bev_plot <- build_waterfall_plot(
+bev_plot_title    <- "Head-to-head charts showing WTP for attributes of BEV's against their Conventional Counterparts"
+bev_plot_subtitle <- "BEV vs. conventional -- dollar WTP contribution by attribute,\n with simulated Net WTP (mean, 95% interval) , dashed line = mean price premium"
+
+# Progressive build: bars appear step by step, layout identical to the full plot (04)
+waterfall_wtp_bev_plot_04 <- build_waterfall_plot(
   waterfall_bev_bars, waterfall_bev_net, waterfall_bev_price_ref,
-  title = "Head-to-head charts showing WTP for attributes of BEV's against their Conventional Counterparts",
-  subtitle = "BEV vs. conventional -- dollar WTP contribution by attribute,\n with simulated Net WTP (mean, 95% interval) , dashed line = mean price premium"
+  title = bev_plot_title, subtitle = bev_plot_subtitle
 )
 
-waterfall_bev_plot
+# Lock x categories, y-axis range and legend entries to those of the full plot
+bev_y_range <- ggplot_build(waterfall_wtp_bev_plot_04)$layout$panel_scales_y[[1]]$range$range
 
-save_waterfall_plot(waterfall_bev_plot, "waterfall_wtp_bev1.png")
+match_full_layout <- function(p) {
+  suppressMessages(
+    p +
+      scale_x_discrete(drop = FALSE) +
+      scale_fill_manual(values = bar_type_colors, name = NULL,
+                        limits = names(bar_type_colors), drop = FALSE) +
+      coord_cartesian(ylim = bev_y_range)
+  )
+}
+
+waterfall_wtp_bev_plot_01 <- build_waterfall_plot(
+  filter(waterfall_bev_bars, attribute %in% c("Powertrain")),
+  waterfall_bev_net[0, ], waterfall_bev_price_ref,
+  title = bev_plot_title, subtitle = bev_plot_subtitle, show_net = FALSE
+) |> match_full_layout()
+
+waterfall_wtp_bev_plot_02 <- build_waterfall_plot(
+  filter(waterfall_bev_bars, attribute %in% c("Powertrain", "Range")),
+  waterfall_bev_net[0, ], waterfall_bev_price_ref,
+  title = bev_plot_title, subtitle = bev_plot_subtitle, show_net = FALSE
+) |> match_full_layout()
+
+waterfall_wtp_bev_plot_03 <- build_waterfall_plot(
+  filter(waterfall_bev_bars, attribute %in% c("Powertrain", "Range", "Operating cost")),
+  waterfall_bev_net[0, ], waterfall_bev_price_ref,
+  title = bev_plot_title, subtitle = bev_plot_subtitle, show_net = FALSE
+) |> match_full_layout()
+
+waterfall_wtp_bev_plot_01
+waterfall_wtp_bev_plot_02
+waterfall_wtp_bev_plot_03
+waterfall_wtp_bev_plot_04
+
+save_waterfall_plot(waterfall_wtp_bev_plot_01, "waterfall_wtp_bev_plot_01.png")
+save_waterfall_plot(waterfall_wtp_bev_plot_02, "waterfall_wtp_bev_plot_02.png")
+save_waterfall_plot(waterfall_wtp_bev_plot_03, "waterfall_wtp_bev_plot_03.png")
+save_waterfall_plot(waterfall_wtp_bev_plot_04, "waterfall_wtp_bev_plot_04.png")
 
 

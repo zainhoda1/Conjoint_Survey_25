@@ -103,7 +103,7 @@ make_waterfall_price_ref <- function(pt) {
       # marker), below the line when it sits at the top edge of the panel
       lab_x = if_else(abs(mean_price_diff) < 500, -Inf, Inf),
       lab_h = if_else(abs(mean_price_diff) < 500, -0.02, 1.02),
-      lab_v = if_else(mean_price_diff > 8000, 1.25, -0.35)
+      lab_v = if_else(mean_price_diff > 5500, 1.25, -0.35)
     ) |>
     select(
       vehicle_type_label,
@@ -250,8 +250,8 @@ build_waterfall_plot <- function(
     facet_grid(budget_label ~ vehicle_type_label) +
 
     labs(
-      title = NULL, # title/description belong in the manuscript caption (TRD)
-      subtitle = NULL,
+      title = title, # title/description belong in the manuscript caption (TRD)
+      subtitle = subtitle,
       x = NULL,
       y = "WTP ($)"
     ) +
@@ -350,7 +350,7 @@ waterfall_bev_plot <- build_waterfall_plot(
   waterfall_bev_bars,
   waterfall_bev_net,
   waterfall_bev_price_ref,
-  title = "Head-to-head charts showing WTP for attributes of BEV's against their Conventional Counterparts",
+  title = "Head-to-head charts showing WTP for attributes of BEV's \n against their Conventional Counterparts",
   subtitle = "BEV vs. conventional -- dollar WTP contribution by attribute,\n with simulated Net WTP (mean, 95% interval) , dashed line = mean price premium"
 )
 
@@ -369,7 +369,7 @@ waterfall_hev_plot <- build_waterfall_plot(
   waterfall_hev_bars,
   waterfall_hev_net,
   waterfall_hev_price_ref,
-  title = "Head-to-head charts showing WTP for attributes of HEV's against their Conventional Counterparts",
+  title = "Head-to-head charts showing WTP for attributes of HEV's \n against their Conventional Counterparts",
   subtitle = "HEV vs. conventional -- dollar WTP contribution by attribute, \n with simulated Net WTP (mean, 95% interval),  dashed line = mean price premium"
 )
 

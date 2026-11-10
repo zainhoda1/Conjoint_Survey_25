@@ -82,8 +82,9 @@
     </requires>
     <requires type="editable">
       <file>DCE_lit_review.bib</file>
-      <file>Used EV.bib</file>
       <file>used_EV_lit_review.bib</file>
+      <file>Used EV.bib</file>
+      <file>EV battery.bib</file>
     </requires>
   </external>
 </requests>

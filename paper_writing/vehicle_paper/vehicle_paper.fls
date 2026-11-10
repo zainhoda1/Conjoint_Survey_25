@@ -235,8 +235,8 @@ INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\biblatex
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\blx-case-expl3.sty
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\tools\bm.sty
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\tools\bm.sty
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\lineno\lineno.sty
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\lineno\lineno.sty
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\setspace\setspace.sty
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\setspace\setspace.sty
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\stix\t1stix.fd
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\stix\t1stix.fd
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\stix\t1stix.fd
@@ -278,10 +278,17 @@ INPUT .\vehicle_paper.bbl
 INPUT vehicle_paper.bbl
 OUTPUT vehicle_paper.abs
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\stix\ts1stix.fd
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\stix\ts1stix.fd
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\tex\latex\stix\ts1stix.fd
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\ts1-stixgeneral.tfm
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-italic.tfm
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\stix\stix-t1.enc
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\stix\stix-ts1.enc
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecss0800.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathrm.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathrm.tfm
@@ -375,14 +382,8 @@ INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\s
 INPUT .\vehicle_paper.abs
 INPUT vehicle_paper.abs
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecss0900.tfm
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\stix\stix-t1.enc
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecss1000.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathrm.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathrm.tfm
@@ -414,6 +415,7 @@ INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\s
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathtt.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathit-bold.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\stix-mathit-bold.tfm
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1000.tfm
 INPUT .\attachments\dce_attributes.tex
 INPUT .\attachments\dce_attributes.tex
@@ -449,12 +451,15 @@ INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen
 INPUT .\attachments\household_context_vehicle.tex
 INPUT .\attachments\household_context_vehicle.tex
 INPUT attachments\household_context_vehicle.tex
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
 INPUT .\attachments\mxl_results_vehicle.tex
 INPUT .\attachments\mxl_results_vehicle.tex
 INPUT attachments\mxl_results_vehicle.tex
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecsx0800.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecso0800.tfm
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral.tfm
+INPUT .\attachments\wtp_vehicle_attributes.tex
+INPUT .\attachments\wtp_vehicle_attributes.tex
+INPUT attachments\wtp_vehicle_attributes.tex
 INPUT .\images\vehicle_analysis\wtp_plot_vehicle_attributes.png
 INPUT .\images\vehicle_analysis\wtp_plot_vehicle_attributes.png
 INPUT .\images\vehicle_analysis\wtp_plot_vehicle_attributes.png
@@ -476,6 +481,21 @@ INPUT .\images\vehicle_analysis\waterfall_wtp_hev.png
 INPUT .\images\vehicle_analysis\waterfall_wtp_hev.png
 INPUT .\images\vehicle_analysis\waterfall_wtp_hev.png
 INPUT .\images\vehicle_analysis\waterfall_wtp_hev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_bev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_bev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_bev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_bev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_bev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_bev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_bev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_hev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_hev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_hev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_hev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_hev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_hev.png
+INPUT .\images\vehicle_analysis\gas_price_sensitivity_hev.png
+INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneral-bold.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\stix\t1-stixgeneralsc.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt0800.tfm
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\vf\public\stix\t1-stixgeneralsc.vf
@@ -501,8 +521,6 @@ INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1000.pk
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecss0900.pk
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecss0900.pk
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi375\ecss0800.pk
-INPUT C:\Users\Zoha Shahabuddin\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi375\ecss0800.pk
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\type1\public\stix\STIXGeneral-Bold.pfb
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\type1\public\stix\STIXGeneral-Bold.pfb
 INPUT C:\Users\Zoha Shahabuddin\AppData\Local\Programs\MiKTeX\fonts\type1\public\stix\STIXGeneral-Italic.pfb

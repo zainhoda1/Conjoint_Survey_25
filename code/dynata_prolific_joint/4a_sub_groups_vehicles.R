@@ -68,60 +68,8 @@ data_raw_joined <- data_raw_joined |>
 
 
 
-#########
 
-# run_model <- function(data) {
-#   model <- logitr(
-#     data = data,
-#     outcome = "choice",
-#     obsID = "obsID",
-#     pars = c(
-#       "powertrainbev",
-#       "powertrainhev",
-#       "range_bev",
-#       "mileage",
-#       "age",
-#       "operating_cost",
-#       "price",
-#       "no_choice"
-#     )
-#   )
-#   cat('n =', length(unique(data$respID)))
-#   return(model)
-# }
 
-# run_mixed_model_1 <- function(data) {
-  
-#   model <- logitr(
-#     data = data,
-#     outcome = "choice",
-#     obsID = "obsID",
-#     panelID = "respID",
-#     pars = c(
-#       "powertrainbev",
-#       "powertrainhev",
-#       "range_bev",
-#       "mileage",
-#       "age",
-#       "operating_cost",
-#       "no_choice"
-#     ),
-#     randPars = c(powertrainbev = 'n',
-#                  powertrainhev = 'n',
-#                  range_bev = 'n',
-#                  mileage = 'n',
-#                  age = 'n',
-#                  operating_cost = 'n',
-#                  no_choice = 'n'
-#     ),
-#     scalePar = 'price',
-#     drawType = 'sobol',
-#     numDraws = 5000,
-#     numMultiStarts = 10
-#   )
-#   cat('n =', length(unique(data$respID)))
-#   return(model)
-# }
 
 encoding <- function(data) {
   data <- cbc_encode(

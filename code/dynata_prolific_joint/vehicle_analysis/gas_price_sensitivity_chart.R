@@ -153,13 +153,13 @@ make_premium_ref <- function(sens_data) {
       lab_v = if_else(
         mean_price_diff > y_max - 0.1 * (y_max - y_min) |
           abs(mean_price_diff) < 1000,
-        1.3,
+        1.9,
         -0.4
       )
     )
 }
 
-build_sensitivity_plot <- function(sens_data) {
+build_sensitivity_plot <- function(sens_data, title, subtitle) {
   premium_ref <- make_premium_ref(sens_data)
 
   ggplot(sens_data, aes(x = price_gas, y = net_mean)) +
@@ -218,8 +218,8 @@ build_sensitivity_plot <- function(sens_data) {
     facet_grid(budget_label ~ vehicle_type_label) +
 
     labs(
-      title = NULL, # title/description belong in the manuscript caption (TRD)
-      subtitle = NULL,
+      title = title, # title/description belong in the manuscript caption (TRD)
+      subtitle = subtitle,
       x = "Gasoline price ($/gallon)",
       y = "Net WTP ($)"
     ) +
@@ -251,6 +251,12 @@ build_sensitivity_plot <- function(sens_data) {
         color = baseline_ink,
         fill = NA,
         linewidth = 0.5
+      ),
+      plot.title = element_text(
+        face = "bold",
+        size = 18,
+        color = "black",
+        margin = margin(b = 3)
       ),
 
       legend.position = "none"
@@ -291,7 +297,9 @@ save_sensitivity_plot <- function(plot, file_name) {
 # --- BEV plot ---
 
 sensitivity_bev_plot <- build_sensitivity_plot(
-  sensitivity_wtp |> filter(powertrain == "BEV")
+  sensitivity_wtp |> filter(powertrain == "BEV"),
+  title =  'Willingness to Pay for BEVs based on Gas prices',
+  subtitle =  NULL
 )
 
 sensitivity_bev_plot
@@ -301,7 +309,9 @@ save_sensitivity_plot(sensitivity_bev_plot, "gas_price_sensitivity_bev.png")
 # --- HEV plot ---
 
 sensitivity_hev_plot <- build_sensitivity_plot(
-  sensitivity_wtp |> filter(powertrain == "HEV")
+  sensitivity_wtp |> filter(powertrain == "HEV"),
+    title =  'Willingness to Pay for HEVs based on Gas prices',
+  subtitle =  NULL
 )
 
 sensitivity_hev_plot
